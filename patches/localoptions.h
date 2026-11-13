@@ -43,6 +43,11 @@
  * module's stable bin dir, where vddropbear.sh symlinks the bundled tools
  * (scp, rsync, sftp-server) for the running ABI - so scp/rsync work remotely. */
 #define DEFAULT_PATH "/data/adb/vddropbear/bin:/system/bin:/system/xbin:/data/adb/ksu/bin:/sbin"
+/* Root logins use DEFAULT_ROOT_PATH, not DEFAULT_PATH - and on this module every
+ * login is root, so this is the one that actually applies. Without it the session
+ * keeps upstream's /usr/sbin:/usr/bin:... (nonexistent on Android) and scp/rsync
+ * are not found. */
+#define DEFAULT_ROOT_PATH "/data/adb/vddropbear/bin:/system/bin:/system/xbin:/data/adb/ksu/bin:/sbin"
 
 /* SFTP (and sftp-based scp) use an external sftp-server. bionic has no
  * /usr/libexec, so point it at the same stable symlink. */
