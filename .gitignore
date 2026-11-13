@@ -63,6 +63,11 @@ TODO.local*
 /module/bin/*/rsync
 /module/bin/*/toybox
 
+# --- Notices copied into the module at build time (shipped in the zip, not tracked here) ---
+/module/LICENSE
+/module/NOTICE
+/module/THIRD-PARTY-NOTICES.md
+
 # --- Editor / OS noise ---
 *~
 *.swp

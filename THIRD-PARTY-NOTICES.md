@@ -35,6 +35,7 @@ listed here; the full license texts ship alongside the binaries (in `module/lice
 | **Dropbear** (`dropbear`, `dropbearkey`) | the SSH server | MIT-style | <https://github.com/mkj/dropbear> |
 | libtomcrypt, libtommath | crypto, used by Dropbear | public domain / Unlicense | (vendored in Dropbear) |
 | **sftp-server**, **scp** | file transfer (OpenSSH) | BSD-style | <https://github.com/openssh/openssh-portable> |
+| zlib | compression, used by the OpenSSH tools | zlib license | <https://github.com/madler/zlib> |
 | **rsync** | file sync over SSH | **GPL-3.0-or-later** | <https://github.com/RsyncProject/rsync> |
 
 ## GPL compliance (rsync)

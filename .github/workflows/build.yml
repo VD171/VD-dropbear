@@ -70,13 +70,16 @@ jobs:
         env:
           NDK: ${{ steps.ndk.outputs.ndk-path }}
         run: bash scripts/build.sh
-      - name: Build the bundled tools: sftp-server, scp, rsync (all ABIs)
+      - name: Build the bundled tools (sftp-server, scp, rsync, all ABIs)
         env:
           NDK: ${{ steps.ndk.outputs.ndk-path }}
         run: bash scripts/build-bundles.sh
       - name: Assemble module zip
         id: pack
         run: |
+          # Ship the notices inside the flashable module (the zip is module/ only),
+          # so the GPL-3.0 rsync binary travels with its license texts in module/licenses/.
+          cp LICENSE NOTICE THIRD-PARTY-NOTICES.md module/
           ver="$(sed -n 's/^version=//p' module/module.prop)"
           ( cd module && zip -r -X "../VD-dropbear-${ver}.zip" . -x '*/.gitkeep' )
           sha256sum VD-dropbear-*.zip
@@ -100,7 +103,7 @@ jobs:
           {
             echo "Standalone, fully configurable rooted SSH server for KernelSU, APatch and Magisk, with a WebUI."
             echo
-            echo "> **Every authenticated connection receives a root shell.** Prefer keys over passwords, bind only to networks you trust, and keep the port off the open Internet."
+            echo "> **An authenticated login defaults to a root shell.** Prefer keys over passwords, bind only to networks you trust, and keep the port off the open Internet."
             echo
             echo "### Install"
             echo "Flash \`${zip}\` in the KernelSU / APatch / Magisk manager (or \`ksud module install\` / \`apd module install\`), open its **WebUI** to set the port and add your keys, then reboot."

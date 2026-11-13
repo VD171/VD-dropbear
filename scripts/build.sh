@@ -23,7 +23,7 @@
 # ======================================================================
 #
 # Fetches upstream Dropbear at the tag in ../UPSTREAM_VERSION, applies the
-# auditable patch set in ../patches/, and cross-compiles a STATIC `dropbear`
+# auditable patch set in ../patches/, and cross-compiles a DYNAMIC `dropbear`
 # and `dropbearkey` for all four Android ABIs:
 #     arm64-v8a  armeabi-v7a  x86  x86_64
 # Outputs land in ../module/bin/<abi>/ as `vddropbear` and `dropbearkey`.
@@ -71,7 +71,7 @@ done
 
 for ABI in $ABIS; do
   TGT="$(triple "$ABI")"
-  echo "==> building $ABI ($TGT, API $API, static)"
+  echo "==> building $ABI ($TGT, API $API, dynamic)"
   export CC="$TOOLCHAIN/${TGT}${API}-clang"
   export AR="$TOOLCHAIN/llvm-ar" RANLIB="$TOOLCHAIN/llvm-ranlib" STRIP="$TOOLCHAIN/llvm-strip"
   ( cd "$SRC"
