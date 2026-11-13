@@ -1,0 +1,50 @@
+<p><i>(Para quem fala PORTUGU&Ecirc;S, o pr&oacute;ximo post est&aacute; totalmente traduzido!)</i></p>
+
+<h2>VD Dropbear</h2>
+<p><i>A standalone, fully configurable rooted SSH server for KernelSU / Magisk.</i></p>
+
+<blockquote><b>&#9888; Every connection that authenticates receives a ROOT shell.</b> Treat it like the keys to your device: prefer public keys over passwords, and keep the port off the public Internet.</blockquote>
+
+<p>Most people get an on-device SSH server by piggy-backing on a bigger root-hiding module. That couples the SSH daemon to that module: if its Zygisk part is disabled or fails, the SSH daemon never starts, and you lose remote access for a reason that has nothing to do with SSH. <b>VD Dropbear is a single-purpose module</b>, so the daemon's uptime depends only on the daemon.</p>
+
+<h3>Features</h3>
+<ul>
+<li><b>One daemon, always</b> - start / restart at boot or from the manager's Action button; never more than one instance.</li>
+<li><b>Everything is configurable</b> from the WebUI: port; bind to loopback / all / IPv4 / IPv6 / specific addresses; public-key and/or password auth; max auth tries; login user, shell, HOME, extra environment; idle timeout, keepalive; local / remote port forwarding and gateway ports (all off by default); host-key type (ed25519 / rsa / ecdsa).</li>
+<li><b>Hidden version banner</b> - the SSH protocol requires a banner, so it cannot be removed, but VD Dropbear replaces it with an uninformative one, so scanners cannot fingerprint the exact server or version and aim known-version attacks at it.</li>
+<li><b>Bring your own credentials</b> - add sets of user + key and user + password; the WebUI enforces a minimum password strength and never stores a password in clear text.</li>
+<li><b>Every device and emulator</b> - arm64-v8a, armeabi-v7a, x86 and x86_64.</li>
+</ul>
+
+<h3>What's included</h3>
+<p>The SSH server (<b>Dropbear</b>), plus <b>sftp-server</b>, <b>scp</b> and <b>rsync</b>, so you can transfer and synchronise files over the same connection (SFTP, sshfs, GUI clients, backups).</p>
+
+<h3>Security model</h3>
+<ul>
+<li><b>Where secrets live.</b> By default the host key, authorized_keys and password hashes live on credential-encrypted storage, which Android keeps encrypted until you unlock the device. An optional "start before first unlock" mode lets you SSH in before unlock (for example, to unlock the device remotely); its secrets then live on device-encrypted storage, readable pre-unlock - a documented trade-off you opt into only if you need it.</li>
+<li><b>Passwords off by default</b> - because every login is root, keys are far safer.</li>
+<li><b>No telemetry, no network calls of its own, no analytics.</b> It runs entirely on your device, and it is open source (MIT) - built from upstream Dropbear with a small, auditable patch set.</li>
+</ul>
+
+<h3>Install &amp; configure</h3>
+<p>Flash the module in the KernelSU or Magisk manager, open its <b>WebUI</b> to set the port and add your keys, then reboot (or press Action to start it now).</p>
+
+<h3>Download</h3>
+<p>The first public release and the full source are being finalised. The download will be posted here and on GitHub - <b>watch this thread</b>. Source and releases: <a href="https://github.com/VD171/VD-dropbear">github.com/VD171/VD-dropbear</a></p>
+
+<h3>See also</h3>
+<p>Sibling projects by the same author:</p>
+<ul>
+<li><b>VDInfos</b> - a device method debugger that reads each item through every method that can read it and compares them side by side.</li>
+<li><b>VDGoogle</b> - your Google services (RCS, Wallet, Play Integrity attestations), read on your device with no internet.</li>
+<li><b>VDBackup</b> - full app and data backup and restore as root, driven entirely from a WebUI.</li>
+<li><b>COPG-VD</b> - a global device fingerprint and build spoofer.</li>
+</ul>
+
+<h3>Contacts</h3>
+<ul>
+<li>Telegram: <a href="https://t.me/VD_Priv8">@VD_Priv8</a> &middot; Channel: <a href="https://t.me/Priv8_VD">@Priv8_VD</a></li>
+<li>GitHub: <a href="https://github.com/VD171">@VD171</a> &middot; E-mail: vd.priv8@pm.me</li>
+</ul>
+
+<p><i>VD Dropbear is independent and unofficial. It bundles Dropbear by Matt Johnston and the OpenSSH/rsync tools under their own licenses. Every connection that authenticates gets root - secure it accordingly.</i></p>
