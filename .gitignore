@@ -1,13 +1,55 @@
-# Build artifacts and fetched upstream (the workflow pulls dropbear fresh)
+# ======================================================================
+#  VD Dropbear - .gitignore
+#  This is a PUBLIC repository. Never commit secrets, credentials, device
+#  configuration, or internal development notes.
+# ======================================================================
+
+# --- Secrets / credentials / keys (NEVER commit) ---
+.env
+.env.*
+*.key
+*.pem
+id_rsa*
+id_ecdsa*
+id_ed25519*
+hostkey*
+authorized_keys
+known_hosts
+passwd
+shadow
+*.cookie
+*token*
+*secret*
+
+# --- Internal development notes (not part of the public project) ---
+CLAUDE.md
+.docs/
+.notes/
+TODO.local*
+
+# --- Fetched upstream source + build artifacts (CI builds these fresh) ---
 /build/
 /src/dropbear/
+/src/openssh/
+/src/rsync/
 *.o
 *.a
+*.so
 *.zip
-# Binaries are produced by CI, not committed by hand
+*.tar.*
+
+# --- CI-produced binaries (never committed by hand) ---
 /module/bin/*/vddropbear
 /module/bin/*/dropbearkey
+/module/bin/*/sftp-server
+/module/bin/*/scp
+/module/bin/*/rsync
 /module/bin/*/toybox
-# Editor/OS noise
+
+# --- Editor / OS noise ---
 *~
+*.swp
+*.bak
 .DS_Store
+.idea/
+.vscode/

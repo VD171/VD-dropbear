@@ -4,6 +4,10 @@
   https://github.com/VD171/VD-dropbear
 -->
 
+<p align="center">
+  <img src="module/webroot/assets/logo-wordmark.svg" alt="VD Dropbear" width="540">
+</p>
+
 # VD Dropbear
 
 <p>
