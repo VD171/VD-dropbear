@@ -147,6 +147,45 @@ Interactive PTY sessions use `openpty()`, which bionic provides but Dropbear's c
 not always detect. The planned `0004-android-openpty.patch` (or a `config.h` override in the build)
 forces it on. Non-interactive use (exec, SFTP, rsync, port-forwarding) does not depend on it.
 
+## Bundled tools: sftp-server, scp, rsync
+
+`scripts/build-bundles.sh` cross-compiles the file-transfer tools as static-PIE
+binaries into `module/bin/<abi>/`. CI runs it right after `build.sh`.
+
+- **rsync** (with bundled popt + zlib) builds cleanly once you tell its configure
+  that bionic has no `lutimes` (`ac_cv_func_lutimes=no`).
+- **sftp-server** and **scp** come from **OpenSSH portable**, built
+  `--without-openssl` (OpenSSH's built-in crypto is enough for these two), with a
+  small static **zlib** this script builds first.
+
+OpenSSH on Android is as finicky as the crypt() story above, because its
+`configure` mis-detects several libc functions when cross-compiling. The script
+encodes the fix; for the record, the pieces are:
+
+1. **A cache seed of functions bionic lacks** but configure thinks it has, so the
+   compat versions get compiled instead: `recallocarray`, `close_range`,
+   `getentropy`, `getrandom`, `nl_langinfo`, `setpwent`/`getpwent`/`endpwent`,
+   `crypt`, `futimes`, `lutimes`, `strtonum`, `pledge`, `explicit_bzero`.
+2. **`-DHAVE_ATTRIBUTE__SENTINEL__=1 -DHAVE_ATTRIBUTE__NONNULL__=1`.** Without
+   these, OpenSSH's `defines.h` does `#define __sentinel__` (empty) - which then
+   mangles bionic's own `__attribute__((__sentinel__(1)))` in `<unistd.h>` and
+   every compile fails with `expected ')'`.
+3. **An `explicit_bzero` compat that uses `memset`.** bionic's `bzero` is a
+   function-like macro (not a real symbol), so OpenSSH's default compat - which
+   takes `&bzero` as a function pointer - does not compile. bionic has no
+   `explicit_bzero` of its own.
+4. **Dropping `xcrypt.o` and `getrrsetbyname.o`** from the compat library.
+   `xcrypt.c` calls `getpwent()`/`crypt()` unconditionally (bionic has neither),
+   and `getrrsetbyname.c` uses resolver internals bionic doesn't expose. Neither
+   is used by `sftp-server` or `scp`.
+5. **`-Wl,--allow-multiple-definition`.** `reallocarray` is the mirror image of
+   the functions in (1): bionic doesn't *declare* it at API 24, so OpenSSH
+   compiles its own compat - but the **symbol** does exist in `libc.a`, so the
+   two collide at link time. Allowing the duplicate takes bionic's, which is fine.
+
+Pinned versions live at the top of `scripts/build-bundles.sh`
+(`ZLIB_VERSION`, `RSYNC_VERSION`, `OPENSSH_VERSION`).
+
 ## Reproducing a single ABI by hand
 
 ```sh

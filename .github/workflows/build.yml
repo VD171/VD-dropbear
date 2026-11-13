@@ -26,7 +26,7 @@ name: build
 on:
   push:
     branches: [main, master]
-    paths: ["patches/**", "scripts/build.sh", "UPSTREAM_VERSION", "module/**", ".github/workflows/build.yml"]
+    paths: ["patches/**", "scripts/build.sh", "scripts/build-bundles.sh", "UPSTREAM_VERSION", "module/**", ".github/workflows/build.yml"]
   workflow_dispatch:
   schedule:
     - cron: "0 6 * * *"   # daily: pick up new upstream Dropbear releases
@@ -66,10 +66,14 @@ jobs:
         uses: nttld/setup-ndk@v1
         with:
           ndk-version: r27c
-      - name: Build binaries (all ABIs)
+      - name: Build the daemon (all ABIs)
         env:
           NDK: ${{ steps.ndk.outputs.ndk-path }}
         run: bash scripts/build.sh
+      - name: Build the bundled tools - sftp-server, scp, rsync (all ABIs)
+        env:
+          NDK: ${{ steps.ndk.outputs.ndk-path }}
+        run: bash scripts/build-bundles.sh
       - name: Assemble module zip
         run: |
           ver="$(sed -n 's/^version=//p' module/module.prop)"
