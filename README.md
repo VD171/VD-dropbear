@@ -59,10 +59,11 @@ globally-readable "I am being debugged" flag that anything on the device can rea
 
 ## Features
 
-- **One daemon, always.** Start / restart at boot or from the manager's **Action** button; never
-  more than one instance.
+- **One daemon, always.** It starts at boot and from the manager's **Action** button, and you can
+  **start / stop / restart** it from the WebUI at any time; never more than one instance.
 - **Everything is configurable** from the WebUI (or `/data/adb/vddropbear/config`):
   - port, and bind to loopback / all / IPv4 / IPv6 / specific addresses
+  - **start before first unlock (BFU) or only after it (AFU)** - a single toggle
   - public-key and/or password authentication, max auth tries
   - login user, shell, `HOME`, extra environment
   - idle timeout, keepalive, receive window
@@ -77,6 +78,28 @@ globally-readable "I am being debugged" flag that anything on the device can rea
 - **File transfer and sync built in.** The bundle ships `sftp-server`, `scp` and `rsync`, so SFTP,
   sshfs, GUI clients and backups all work over the same connection.
 - **Every device and emulator.** `arm64-v8a`, `armeabi-v7a`, `x86`, `x86_64`.
+
+## AI agents on your device
+
+A standing SSH endpoint turns your phone into something an **autonomous AI agent can operate
+directly**. Any agent that can drive a shell or an SSH connection - Claude Code, aider, an
+LLM-in-the-loop script, your own automation - gets a real root session on the device, over the
+network, with no USB tether and none of ADB's self-exposing debug flags. The agent sees a normal
+Linux-like shell and can:
+
+- read and edit files, flip settings, and manage modules, packages and services;
+- triage logs, pull artifacts, and run diagnostics or forensics on demand;
+- move and sync files both ways over `scp` / `sftp` / `rsync`, for backups, migrations or provisioning;
+- drive a whole fleet of rooted devices from one place, each reachable by its own key.
+
+Because the project is built to be **AI-friendly** - a documented configuration file, an explicit
+runtime [env contract](patches/README.md), predictable paths and plain-text status - an agent can
+discover how to use it without guesswork.
+
+> **This is root, so treat it like root.** Every authenticated connection lands as root (see the
+> warning below). When you hand access to an agent, give it a **dedicated user and key**, scope the
+> binds to the networks you trust (loopback or a VPN rather than the open internet), keep password
+> auth off, and remember you can revoke a key or stop the daemon at any time from the WebUI.
 
 ## Install
 
