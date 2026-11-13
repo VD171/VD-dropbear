@@ -37,8 +37,8 @@ patch - these patches only make the server **able** to be configured on Android.
 |-------|--------------|-----|
 | `0001-neutral-configurable-ident.patch` | Default the SSH identity banner to a neutral string, overridable at runtime via `DROPBEAR_IDENT`. | The SSH protocol requires a banner; this one reveals no product or version, so scanners cannot fingerprint and target a known version. |
 | `0002-authorized-keys-path.patch` | Read `authorized_keys` from `DROPBEAR_AUTHKEYS` when set (falls back to the account default). | Lets the module place keys on credential-encrypted (CE) or device-encrypted (DE) storage, independent of Android's account model. |
-| `0003-password-file.patch` | Verify passwords against a hash file given by `DROPBEAR_PASSWD_FILE`, using a bundled standard hash, instead of the system shadow. | Android's bionic has no usable `crypt()`/shadow; this is a clean, documented replacement (no obfuscation). |
-| `0004-android-openpty.patch` | Use `openpty()` for PTY allocation. | Bionic exposes `openpty()`; without this, interactive PTY sessions fail on Android. |
+| `0003-password-file.patch` | Verify passwords against a hash file given by `DROPBEAR_PASSWD_FILE` using **PBKDF2-HMAC-SHA256** (Dropbear's own libtomcrypt), instead of the system shadow. | Android's bionic has no usable `crypt()`/shadow; this is a clean, documented replacement - a public, standard KDF, **no obfuscation**. |
+| `0004-android-openpty.patch` *(planned)* | Use `openpty()` for PTY allocation. | Bionic exposes `openpty()`; without this, interactive PTY sessions fail on Android. |
 
 ## Build options
 
@@ -55,3 +55,25 @@ The module's `common/vddropbear.sh` sets these before launching the daemon:
 
 Port, binds, auth toggles, forwarding, timeouts and the host key are passed as ordinary command-line
 options, so they need no patches at all.
+
+## Password file format (`DROPBEAR_PASSWD_FILE`)
+
+Password auth (`0003`) reads a small, shadow-like file. One account per line:
+
+```
+<user>:pbkdf2-sha256$<iterations>$<salt_hex>$<hash_hex>
+```
+
+- the hash is `PBKDF2-HMAC-SHA256(password, salt, iterations)`, lower-case hex;
+- the salt is random, lower-case hex (16 bytes is plenty);
+- `iterations` is a decimal integer (the WebUI uses a high default);
+- blank lines and lines starting with `#` are ignored;
+- the password itself is **never** stored - only its hash.
+
+This is a public, interoperable format: any standard PBKDF2 implementation produces the same hash.
+The **WebUI** creates these lines in the browser with the WebCrypto API
+(`crypto.subtle.deriveBits` + `crypto.getRandomValues`), so the clear-text password never leaves the
+page, and writes the file into the secret store (CE by default, DE when `START_IN_BFU=1`).
+
+> Note: like public-key auth in Dropbear, password auth only applies to an account the system can
+> resolve (typically `root`). Set `LOGIN_USER` accordingly.

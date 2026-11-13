@@ -28,11 +28,12 @@
 #define DROPBEAR_CLIENT 0
 
 /* Public-key auth is the secure default. Password auth is provided by the
- * config-file password patch (DROPBEAR_PASSWD_FILE) - which also removes the
- * system crypt()/shadow dependency that Android lacks - and is enabled together
- * with that patch; until then it stays off so the tree builds cleanly. */
+ * 0003 password-file patch (DROPBEAR_PASSWD_FILE + PBKDF2-HMAC-SHA256), which
+ * replaces the system crypt()/shadow dependency that Android lacks. PAM stays
+ * off (Android has no PAM). Password auth is OFF at runtime by default anyway
+ * (PASSWORD_AUTH in the config), so a user opts in before any password is set. */
 #define DROPBEAR_SVR_PUBKEY_AUTH   1
-#define DROPBEAR_SVR_PASSWORD_AUTH 0
+#define DROPBEAR_SVR_PASSWORD_AUTH 1
 #define DROPBEAR_SVR_PAM_AUTH      0
 
 /* authorized_keys options (from/command/…) are honoured. */
