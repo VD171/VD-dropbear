@@ -1,0 +1,46 @@
+# VD Dropbear - mirror docs/ into the GitHub project Wiki on every docs change.
+# Copyright (C) 2026 VD171 - SPDX-License-Identifier: Apache-2.0
+#
+# docs/ is the source of truth; .github/scripts/gen_wiki.py renders the pages and
+# this pushes them into the separate VD-dropbear.wiki.git repo. The wiki must be
+# initialized once (create any page in the web UI) before the first run.
+name: Wiki sync
+
+on:
+  push:
+    branches: [main, master]
+    paths:
+      - 'docs/**'
+      - '.github/scripts/gen_wiki.py'
+      - '.github/workflows/wiki-sync.yml'
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: wiki-sync
+  cancel-in-progress: true
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Render docs/ into the wiki
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -e
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git clone "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.wiki.git" wiki
+          python3 .github/scripts/gen_wiki.py docs wiki
+          cd wiki
+          git add -A
+          if git diff --cached --quiet; then
+            echo "wiki already up to date"
+          else
+            git commit -m "docs: sync from docs/ @ ${GITHUB_SHA}"
+            git push
+          fi

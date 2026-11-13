@@ -31,6 +31,10 @@ module (`module.prop`) and on GitHub Releases.
 
 ## [Unreleased]
 
+## [v1.00] - 2026-11-13
+
+First public release.
+
 ### Added
 - Initial module scaffold - a config-driven, single-daemon launcher, independent of any other module.
 - Core library (`common/vddropbear.sh`): configuration load with safe built-in defaults; secret-store
