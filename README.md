@@ -1,7 +1,7 @@
 <!--
   ======================================================================
    VD Dropbear  ::  standalone, configurable rooted SSH daemon
-   A private SSH server for KernelSU/Magisk - no invasive ADB exposure.
+   A private SSH server for KernelSU/APatch/Magisk - no invasive ADB exposure.
 
    Copyright (C) 2026  VD171
    SPDX-License-Identifier: Apache-2.0
@@ -103,7 +103,8 @@ discover how to use it without guesswork.
 
 ## Install
 
-Flash the module zip in the KernelSU or Magisk manager (or `ksud module install`), open the module's
+Flash the module zip in the KernelSU, APatch or Magisk manager (or from the command line with
+`ksud module install` / `apd module install`), open the module's
 **WebUI** to set the port and add your keys, then reboot (or press **Action** to start it now).
 
 ## Security model

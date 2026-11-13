@@ -1,7 +1,7 @@
 #!/system/bin/sh
 # ======================================================================
 #  VD Dropbear  ::  standalone, configurable rooted SSH daemon
-#  A private SSH server for KernelSU/Magisk - no invasive ADB exposure.
+#  A private SSH server for KernelSU/APatch/Magisk - no invasive ADB exposure.
 #  Uninstall hook - stop the running daemon.
 #
 #  Copyright (C) 2026  VD171

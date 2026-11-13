@@ -1,6 +1,6 @@
 /* ======================================================================
  *  VD Dropbear  ::  standalone, configurable rooted SSH daemon
- *  A private SSH server for KernelSU/Magisk - no invasive ADB exposure.
+ *  A private SSH server for KernelSU/APatch/Magisk - no invasive ADB exposure.
  *  Build options - overrides the upstream default_options.h.
  *  Kept minimal and auditable (see patches/README.md). Runtime behaviour
  *  (port, binds, auth toggles, paths, identity) is configuration, not a build option.
