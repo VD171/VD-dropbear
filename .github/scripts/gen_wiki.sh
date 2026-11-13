@@ -208,10 +208,14 @@ for _c in $NAV_LANGS; do write_home "$_c"; done
 } > "$WIKI/Languages.md"
 
 doc_body() {
+  # Strip the source doc's own "> **Languages:**" switcher and the "---" that
+  # follows it, wherever it sits (these docs carry an SPDX banner first, so the
+  # switcher is not on line 1). The wiki gets a fresh switcher from prepend_nav;
+  # leaving the source one in would render a second, broken language line.
   awk '
-    NR==1 && $0 ~ /^> \*\*Languages:\*\*/ { drop=1; next }
-    drop==1 { if ($0 ~ /^---[[:space:]]*$/) { drop=2 } next }
-    drop==2 { if ($0 ~ /^[[:space:]]*$/ && !started) next; started=1; print; next }
+    !seen && $0 ~ /^> \*\*Languages:\*\*/ { seen=1; drop=1; next }
+    drop && $0 ~ /^---[[:space:]]*$/ { drop=0; next }
+    drop { next }
     { print }
   ' "$1"
 }
