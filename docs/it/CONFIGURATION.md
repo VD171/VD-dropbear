@@ -74,7 +74,6 @@ Ogni accesso autenticato è **root**. Le chiavi sono il default; le password son
 | `PUBKEY_AUTH` | `1` | Consenti l'accesso con chiave pubblica (legge le authorized keys nel secret store). |
 | `PASSWORD_AUTH` | `0` | Consenti l'accesso con password. Quando è disattivato, il daemon viene avviato con l'autenticazione password disabilitata. |
 | `MAX_AUTH_TRIES` | `3` | Numero massimo di tentativi di autenticazione per connessione. |
-| `LOGIN_USER` | `root` | L'account con cui accedere. Deve essere uno che il sistema riconosce (di solito `root`). |
 
 ## Sessione / environment
 

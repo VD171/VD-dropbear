@@ -69,7 +69,6 @@ Elke geauthenticeerde login is **root**. Sleutels zijn de standaard; wachtwoorde
 | `PUBKEY_AUTH` | `1` | Sta login met publieke sleutel toe (leest de authorized keys in de geheimenopslag). |
 | `PASSWORD_AUTH` | `0` | Sta wachtwoordlogin toe. Als dit uit staat, wordt de daemon gestart met wachtwoordauthenticatie uitgeschakeld. |
 | `MAX_AUTH_TRIES` | `3` | Maximaal aantal authenticatiepogingen per verbinding. |
-| `LOGIN_USER` | `root` | Het account om mee in te loggen. Moet er een zijn die het systeem herkent (meestal `root`). |
 
 ## Sessie / omgeving
 

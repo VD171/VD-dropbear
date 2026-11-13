@@ -96,7 +96,6 @@ vddb_defaults() {
     PASSWORD_AUTH=0             # every login is ROOT: keys are strongly preferred
     PUBKEY_AUTH=1
     MAX_AUTH_TRIES=3
-    LOGIN_USER="root"
     LOGIN_SHELL=""
     HOME_DIR=""
     EXTRA_ENV=""
@@ -115,7 +114,6 @@ vddb_load_config() {
     [ -f "$VDDB_CONFIG" ] && . "$VDDB_CONFIG"
     # Normalise a couple of things the daemon depends on.
     [ "$PORT" -gt 0 ] 2>/dev/null || PORT=2222
-    case "$LOGIN_USER" in ""|*[!a-zA-Z0-9_]*) LOGIN_USER="root";; esac
 }
 
 # Resolve the active secret directory for the CURRENT boot stage + mode.

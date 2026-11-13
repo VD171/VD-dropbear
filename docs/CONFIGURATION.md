@@ -73,7 +73,6 @@ Every authenticated login is **root**. Keys are the default; passwords are opt-i
 | `PUBKEY_AUTH` | `1` | Allow public-key login (reads the authorized keys in the secret store). |
 | `PASSWORD_AUTH` | `0` | Allow password login. When off, the daemon is started with password auth disabled. |
 | `MAX_AUTH_TRIES` | `3` | Maximum authentication attempts per connection. |
-| `LOGIN_USER` | `root` | The account to log in as. Must be one the system resolves (usually `root`). |
 
 ## Session / environment
 

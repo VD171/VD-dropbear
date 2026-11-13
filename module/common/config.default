@@ -79,7 +79,6 @@ PASSWORD_AUTH=0
 MAX_AUTH_TRIES=3
 
 # --- Session ---------------------------------------------------------------
-LOGIN_USER=root
 LOGIN_SHELL=
 HOME_DIR=
 EXTRA_ENV=

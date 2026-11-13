@@ -75,7 +75,6 @@ opcionales.
 | `PUBKEY_AUTH` | `1` | Permite el inicio de sesión por clave pública (lee las claves autorizadas del almacén de secretos). |
 | `PASSWORD_AUTH` | `0` | Permite el inicio de sesión por contraseña. Cuando está desactivado, el daemon se inicia con la autenticación por contraseña deshabilitada. |
 | `MAX_AUTH_TRIES` | `3` | Número máximo de intentos de autenticación por conexión. |
-| `LOGIN_USER` | `root` | La cuenta con la que iniciar sesión. Debe ser una que el sistema resuelva (normalmente `root`). |
 
 ## Sesión / entorno
 

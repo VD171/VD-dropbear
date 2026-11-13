@@ -74,7 +74,6 @@ Każde uwierzytelnione logowanie to **root**. Klucze są domyślne; hasła są o
 | `PUBKEY_AUTH` | `1` | Zezwól na logowanie kluczem publicznym (odczytuje autoryzowane klucze w magazynie sekretów). |
 | `PASSWORD_AUTH` | `0` | Zezwól na logowanie hasłem. Gdy wyłączone, demon jest uruchamiany z wyłączonym uwierzytelnianiem hasłem. |
 | `MAX_AUTH_TRIES` | `3` | Maksymalna liczba prób uwierzytelnienia na połączenie. |
-| `LOGIN_USER` | `root` | Konto, na które następuje logowanie. Musi być takie, które system rozpoznaje (zwykle `root`). |
 
 ## Sesja / środowisko
 

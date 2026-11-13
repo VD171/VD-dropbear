@@ -76,7 +76,6 @@ optionnels.
 | `PUBKEY_AUTH` | `1` | Autorise la connexion par clé publique (lit les clés autorisées dans le magasin de secrets). |
 | `PASSWORD_AUTH` | `0` | Autorise la connexion par mot de passe. Désactivé, le démon démarre avec l'authentification par mot de passe désactivée. |
 | `MAX_AUTH_TRIES` | `3` | Nombre maximal de tentatives d'authentification par connexion. |
-| `LOGIN_USER` | `root` | Le compte avec lequel se connecter. Doit être un compte que le système résout (généralement `root`). |
 
 ## Session / environnement
 

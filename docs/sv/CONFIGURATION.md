@@ -74,7 +74,6 @@ Varje autentiserad inloggning är **root**. Nycklar är standard; lösenord är 
 | `PUBKEY_AUTH` | `1` | Tillåt inloggning med publik nyckel (läser de auktoriserade nycklarna i hemlighetslagret). |
 | `PASSWORD_AUTH` | `0` | Tillåt inloggning med lösenord. När den är av startas daemonen med lösenordsautentisering inaktiverad. |
 | `MAX_AUTH_TRIES` | `3` | Högsta antal autentiseringsförsök per anslutning. |
-| `LOGIN_USER` | `root` | Kontot att logga in som. Måste vara ett som systemet kan slå upp (vanligtvis `root`). |
 
 ## Session / miljö
 

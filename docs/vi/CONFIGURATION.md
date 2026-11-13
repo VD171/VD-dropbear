@@ -74,7 +74,6 @@ Mọi lần đăng nhập đã xác thực đều là **root**. Khóa là mặc 
 | `PUBKEY_AUTH` | `1` | Cho phép đăng nhập bằng khóa công khai (đọc các authorized keys trong kho secret). |
 | `PASSWORD_AUTH` | `0` | Cho phép đăng nhập bằng mật khẩu. Khi tắt, daemon được khởi động với xác thực mật khẩu bị vô hiệu hóa. |
 | `MAX_AUTH_TRIES` | `3` | Số lần thử xác thực tối đa trên mỗi kết nối. |
-| `LOGIN_USER` | `root` | Tài khoản để đăng nhập. Phải là tài khoản mà hệ thống phân giải được (thường là `root`). |
 
 ## Phiên / môi trường
 

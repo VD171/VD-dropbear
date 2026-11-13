@@ -75,7 +75,6 @@ Jede authentifizierte Anmeldung ist **root**. Schlüssel sind der Standard; Pass
 | `PUBKEY_AUTH` | `1` | Anmeldung per öffentlichem Schlüssel erlauben (liest die autorisierten Schlüssel im Geheimnisspeicher). |
 | `PASSWORD_AUTH` | `0` | Anmeldung per Passwort erlauben. Wenn aus, wird der Daemon mit deaktivierter Passwort-Authentifizierung gestartet. |
 | `MAX_AUTH_TRIES` | `3` | Maximale Anzahl an Authentifizierungsversuchen pro Verbindung. |
-| `LOGIN_USER` | `root` | Das Konto, mit dem angemeldet wird. Muss eines sein, das das System auflöst (gewöhnlich `root`). |
 
 ## Sitzung / Umgebung
 

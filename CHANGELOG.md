@@ -35,8 +35,13 @@ module (`module.prop`) and on GitHub Releases.
 - **WebUI: simpler, safer credential forms.** The PBKDF2 iteration count is no longer a user field - it
   is fixed at a safe 600000 (OWASP 2023 floor for PBKDF2-HMAC-SHA256), computed in the page as before;
   older hashes keep verifying because the server reads the iteration count stored in each hash. The
-  **User** inputs (password account and `LOGIN_USER`) are now a dropdown of the accounts Android resolves
-  (`root`, `shell`, `system`, default `root`) instead of free text.
+  password-account **User** is now a dropdown of the accounts Android resolves (`root`, `shell`, `system`,
+  default `root`) instead of free text.
+
+### Removed
+- **`LOGIN_USER` setting.** It never reached the daemon (the session account follows the SSH login name
+  the client presents, resolved via `getpwnam`), so it was a no-op knob. Removed from the config, the
+  WebUI and the docs; the account is set by the password/key entry and the username on connection.
 
 ## [v1.01] - 2026-11-13
 

@@ -74,7 +74,6 @@ Každé ověřené přihlášení je **root**. Klíče jsou výchozí; hesla jso
 | `PUBKEY_AUTH` | `1` | Povolit přihlášení veřejným klíčem (čte autorizované klíče v úložišti tajemství). |
 | `PASSWORD_AUTH` | `0` | Povolit přihlášení heslem. Když je vypnuto, démon se spouští s vypnutým ověřováním heslem. |
 | `MAX_AUTH_TRIES` | `3` | Maximální počet pokusů o ověření na jedno spojení. |
-| `LOGIN_USER` | `root` | Účet, pod kterým se přihlásit. Musí to být účet, který systém rozpozná (obvykle `root`). |
 
 ## Relace / prostředí
 

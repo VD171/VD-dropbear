@@ -72,7 +72,6 @@
 | `PUBKEY_AUTH` | `1` | 允许公钥登录（读取 secret 存储中的 authorized keys）。 |
 | `PASSWORD_AUTH` | `0` | 允许密码登录。关闭时，守护进程将在禁用密码认证的情况下启动。 |
 | `MAX_AUTH_TRIES` | `3` | 每个连接的最大认证尝试次数。 |
-| `LOGIN_USER` | `root` | 用于登录的账户。必须是系统能够解析的账户（通常是 `root`）。 |
 
 ## 会话 / 环境
 

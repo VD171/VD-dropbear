@@ -74,7 +74,6 @@ Setiap login yang terautentikasi adalah **root**. Kunci adalah default; kata san
 | `PUBKEY_AUTH` | `1` | Izinkan login kunci publik (membaca authorized keys di secret store). |
 | `PASSWORD_AUTH` | `0` | Izinkan login kata sandi. Saat mati, daemon dimulai dengan autentikasi kata sandi dinonaktifkan. |
 | `MAX_AUTH_TRIES` | `3` | Jumlah maksimum percobaan autentikasi per koneksi. |
-| `LOGIN_USER` | `root` | Akun untuk login. Harus akun yang dapat dikenali sistem (biasanya `root`). |
 
 ## Sesi / environment
 

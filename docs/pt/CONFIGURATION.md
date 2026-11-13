@@ -74,7 +74,6 @@ Todo login autenticado é **root**. As chaves são o padrão; as senhas são opc
 | `PUBKEY_AUTH` | `1` | Permite login por chave pública (lê as chaves autorizadas no cofre de segredos). |
 | `PASSWORD_AUTH` | `0` | Permite login por senha. Quando desativado, o daemon é iniciado com a autenticação por senha desabilitada. |
 | `MAX_AUTH_TRIES` | `3` | Número máximo de tentativas de autenticação por conexão. |
-| `LOGIN_USER` | `root` | A conta com a qual se faz login. Deve ser uma que o sistema resolva (geralmente `root`). |
 
 ## Sessão / ambiente
 

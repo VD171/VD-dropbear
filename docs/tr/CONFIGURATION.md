@@ -74,7 +74,6 @@ Her kimlik doğrulanmış oturum açma **root**'tur. Anahtarlar varsayılandır;
 | `PUBKEY_AUTH` | `1` | Genel anahtarla oturum açmaya izin ver (sır deposundaki authorized key'leri okur). |
 | `PASSWORD_AUTH` | `0` | Parolayla oturum açmaya izin ver. Kapalıyken daemon, parola kimlik doğrulaması devre dışı olarak başlatılır. |
 | `MAX_AUTH_TRIES` | `3` | Bağlantı başına en fazla kimlik doğrulama denemesi. |
-| `LOGIN_USER` | `root` | Oturum açılacak hesap. Sistemin çözümleyebileceği bir hesap olmalı (genellikle `root`). |
 
 ## Oturum / ortam
 
