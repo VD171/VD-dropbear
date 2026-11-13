@@ -39,8 +39,15 @@
 /* authorized_keys options (from/command/…) are honoured. */
 #define DROPBEAR_SVR_PUBKEY_OPTIONS 1
 
-/* A sane default PATH for the login shell on Android. */
-#define DEFAULT_PATH "/system/bin:/system/xbin:/data/adb/ksu/bin:/sbin"
+/* A sane default PATH for the login shell on Android. The first entry is the
+ * module's stable bin dir, where vddropbear.sh symlinks the bundled tools
+ * (scp, rsync, sftp-server) for the running ABI - so scp/rsync work remotely. */
+#define DEFAULT_PATH "/data/adb/vddropbear/bin:/system/bin:/system/xbin:/data/adb/ksu/bin:/sbin"
+
+/* SFTP (and sftp-based scp) use an external sftp-server. bionic has no
+ * /usr/libexec, so point it at the same stable symlink. */
+#define DROPBEAR_SFTPSERVER 1
+#define SFTPSERVER_PATH "/data/adb/vddropbear/bin/sftp-server"
 
 /* openpty() is forced on at build time (build.sh / CI) because the
  * cross-compile configure cannot probe the Android target for it; bionic

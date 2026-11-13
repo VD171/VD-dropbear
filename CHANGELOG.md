@@ -31,6 +31,13 @@ module (`module.prop`) and on GitHub Releases.
 
 ## [Unreleased]
 
+### Fixed
+- **SFTP, sftp-based scp and rsync now work over the connection.** The server pointed its SFTP
+  subsystem at `/usr/libexec/sftp-server` (which does not exist on Android), and the bundled tools were
+  not on the session `PATH`, so `scp`/`sftp` failed. The build now compiles `SFTPSERVER_PATH` and a
+  `DEFAULT_PATH` entry under the module's own `bin` dir, and the launcher symlinks the ABI's
+  `sftp-server`/`scp`/`rsync` there at start.
+
 ## [v1.00] - 2026-11-13
 
 First public release.

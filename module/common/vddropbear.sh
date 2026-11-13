@@ -193,6 +193,8 @@ vddb_build_args() {
 vddb_export_env() {
     _sdir="$(vddb_secret_dir)"
     export HOME="${HOME_DIR:-$MODDIR}"
+    # the bundled tools (scp/rsync/sftp-server) live under the module's stable bin dir
+    export PATH="$VDDB_DATA/bin:${PATH:-/system/bin:/system/xbin}"
     export DROPBEAR_AUTHKEYS="$_sdir/authorized_keys"   # honoured by the VD patch
     export DROPBEAR_PASSWD_FILE="$_sdir/passwd"         # honoured by the VD patch
     [ "$HIDE_IDENT" = "1" ] && export DROPBEAR_IDENT="${IDENT_STRING:-SSH-2.0-}"
@@ -233,11 +235,22 @@ vddb_spawn() {
 }
 
 # Full (re)start: ensure one instance, secrets present, then spawn.
+# Expose the bundled file-transfer tools at a stable, ABI-correct path so the SFTP
+# subsystem (SFTPSERVER_PATH) and the login PATH (DEFAULT_PATH) find them - this is
+# what makes sftp, sftp-based scp and rsync work over the connection.
+vddb_link_tools() {
+    mkdir -p "$VDDB_DATA/bin" 2>/dev/null
+    for _t in sftp-server scp rsync dropbearconvert; do
+        [ -e "$VDDB_BIN_DIR/$_t" ] && ln -sf "$VDDB_BIN_DIR/$_t" "$VDDB_DATA/bin/$_t" 2>/dev/null
+    done
+}
+
 vddb_start() {
     vddb_load_config
     [ "$ENABLED" = "1" ] || { vddb_log "disabled (ENABLED=0), not starting"; return 0; }
     vddb_stop
     vddb_ensure_hostkey || { vddb_log "FATAL: no host key, aborting"; return 1; }
+    vddb_link_tools
     vddb_spawn
 }
 
