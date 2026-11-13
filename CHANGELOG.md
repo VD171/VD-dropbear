@@ -29,7 +29,7 @@ All notable, real and significant changes to **VD Dropbear** are recorded here.
 The format follows [Keep a Changelog](https://keepachangelog.com/); versions are tagged in the
 module (`module.prop`) and on GitHub Releases.
 
-## [Unreleased]
+## [v1.01] - 2026-11-13
 
 ### Fixed
 - **SFTP, sftp-based scp and rsync now work over the connection.** The server pointed its SFTP
@@ -57,9 +57,10 @@ First public release.
   `SECURITY.md`, `CONTRIBUTING.md`, and an SPDX header on every file.
 - **Four-ABI support** - `arm64-v8a`, `armeabi-v7a`, `x86`, `x86_64` - covering every device and
   emulator.
-- Build pipeline: `scripts/build.sh` (fetches the pinned upstream Dropbear, applies the patch set,
-  cross-compiles static binaries for all ABIs) and a CI workflow that rebuilds, assembles the module
-  zip, and tracks upstream for new releases. The auditable patch set is documented in `patches/`.
+- Build pipeline: `scripts/build.sh` and `scripts/build-bundles.sh` cross-compile **dynamic** binaries
+  (linked against bionic) for all ABIs; a CI workflow rebuilds, packages the module zip, names the
+  artifact with the version, publishes a GitHub Release on a `v*` tag (with a per-file sha256 list),
+  and tracks upstream. The auditable patch set is documented in `patches/`.
 - **Composable listen/bind model** - loopback, all interfaces, IPv4/IPv6 family filters and specific
   addresses (each with an optional per-bind port) can be mixed freely; a safety net binds loopback
   rather than every interface if the user clears all options.
@@ -82,6 +83,9 @@ First public release.
 - **AI-agents use case** documented: a standing SSH root endpoint lets an autonomous agent operate the
   device over the network, with none of ADB's tether or self-exposing debug flags.
 - Project logos (`webroot/assets/logo-{icon,wordmark}.svg`).
+- **Documentation**: a `docs/` set (User guide, Configuration, Architecture, File structure, AI agents,
+  Building), a Code of Conduct and GitHub issue/PR templates; the README and docs are translated into
+  **21 languages**, and the project wiki is kept in sync from `docs/` automatically.
 
 ### Security
 - Password login is disabled at runtime by default; keys are the default. When enabled, only a salted,
@@ -89,15 +93,9 @@ First public release.
 - Secrets default to credential-encrypted storage; the device-encrypted fallback is opt-in (BFU) and
   documented as an exposure trade-off.
 
-- **Documentation set** under `docs/` (User guide, Configuration, Architecture, File structure,
-  AI agents, Building) plus a Code of Conduct and GitHub issue/PR templates; the README and the docs
-  are translated into 21 languages.
-- **Build validated on a real device**: the daemon cross-compiles (dynamic, linked against bionic) for
-  all four ABIs, and password login was verified end-to-end on an arm64 phone. Interactive PTYs need no
-  patch - `openpty` is detected automatically. (Static-PIE binaries SIGSEGV on-device, so the build is
-  dynamic; and `-E` is dropped since the server is built `--disable-syslog`.)
-
 ### Notes
 - Runs on KernelSU, APatch and Magisk.
-- Still in progress: the first tagged release (CI-built binaries + bundled tools for all four ABIs)
-  and an on-device runtime smoke test.
+- Binaries are **dynamic** (linked against bionic); static-PIE binaries SIGSEGV on-device. Interactive
+  PTYs need no patch (`openpty` is auto-detected), and the `-E` flag is dropped (the server is built
+  `--disable-syslog`). Validated end-to-end on a real arm64 device: password login succeeds and a wrong
+  password is rejected.
