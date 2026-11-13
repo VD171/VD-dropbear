@@ -43,9 +43,10 @@ ABIS="arm64-v8a" ./scripts/build.sh
 ```
 
 `scripts/build.sh` clones the pinned upstream tag, applies `patches/*.patch` and `localoptions.h`,
-then cross-compiles **static** `vddropbear` and `dropbearkey` into `module/bin/<abi>/`. The output is
-a **static-PIE** ELF (`file` reports `static-pie executable, ARM aarch64 … for Android 24`), which is
-the form Android's bionic accepts for a standalone root binary.
+then cross-compiles `vddropbear` and `dropbearkey` into `module/bin/<abi>/`. The output is a
+**dynamic** ELF (`file` reports `dynamically linked, interpreter /system/bin/linker64 … for Android
+24`), linked against the bionic libc that every Android device already has. libtomcrypt stays bundled
+inside the binary; only the C library is dynamic. See [Dynamic, not static-PIE](#dynamic-not-static-pie).
 
 The binaries are **not committed** - they are built by CI on every tag and attached to the release.
 See [`.gitignore`](../.gitignore).
@@ -128,18 +129,32 @@ implementation.
 
 ---
 
-## static-PIE, bionic, and why you can't smoke-test with qemu-user
+## Dynamic, not static-PIE
 
-The release binary is **static-PIE**. Two things are worth knowing:
+The binaries are **dynamic** (linked against the system bionic via `/system/bin/linker64`), not static.
+This matters, and it was learned the hard way - **on a real device**, not in CI:
 
-- A **static, non-PIE** build is rejected by bionic at exec time:
-  `executable's TLS segment is underaligned … needs to be at least 64 for ARM64 Bionic`. Static-PIE
-  is the correct form, and what `build.sh` produces.
-- **`qemu-aarch64` (qemu-user) cannot run these binaries.** It segfaults on Android static-PIE
-  executables (a known qemu-user limitation), and the static non-PIE variant is refused by bionic as
-  above. So a host-side `qemu-user` smoke test is not meaningful - **run the binary on a real arm64
-  Android device or a full system emulator** instead. The build itself (compile + link + correct ELF
-  type) is validated in CI.
+- A **static-PIE** build *looks* fine (`file` reports a clean `static-pie executable`) and links without
+  error, but it **SIGSEGVs the instant it runs on-device** (verified on an arm64 Android 16 phone,
+  exit 139, no useful tombstone). Static executables on Android are fragile; the reliable form is a
+  normal dynamic binary, which is also how every long-standing Android dropbear ships.
+- A **static, non-PIE** build does not even start: bionic rejects it with
+  `executable's TLS segment is underaligned … needs to be at least 64 for ARM64 Bionic`.
+- So the build is **dynamic** (`make` without `STATIC=1`; `-pie`), linking only bionic libc - present on
+  every device. libtomcrypt is still statically bundled into the binary, so there is no extra library to
+  ship.
+
+Lesson for testing: **`qemu-aarch64` (qemu-user) is not a valid smoke test** here (it also segfaults on
+these binaries), and neither is a successful compile+link. **Run the binary on a real arm64 Android
+device.** (The migration that put this binary into VDAntiRoot was validated exactly this way: the daemon
+was launched on an alternate port on a live device and a password login was confirmed to succeed, with a
+wrong password rejected.)
+
+## No `-E` flag
+
+The server is built `--disable-syslog`, so it always logs to stderr and the upstream `-E`
+("log to stderr") option **does not exist** in this binary - passing it prints `Invalid option -E` and
+the daemon never starts. The module's argument builder therefore does not pass `-E`.
 
 ## openpty
 
@@ -150,7 +165,7 @@ not depend on it anyway.)
 
 ## Bundled tools: sftp-server, scp, rsync
 
-`scripts/build-bundles.sh` cross-compiles the file-transfer tools as static-PIE
+`scripts/build-bundles.sh` cross-compiles the file-transfer tools as dynamic
 binaries into `module/bin/<abi>/`. CI runs it right after `build.sh`.
 
 - **rsync** (with bundled popt + zlib) builds cleanly once you tell its configure
@@ -197,6 +212,6 @@ cd /tmp/db
 TC="$NDK/toolchains/llvm/prebuilt/linux-x86_64/bin"
 ./configure --host=aarch64-linux-android --disable-zlib --disable-syslog \
     CC="$TC/aarch64-linux-android24-clang"
-make PROGRAMS="dropbear dropbearkey" STATIC=1 -j"$(nproc)"
-file ./dropbear   # -> static-pie executable, ARM aarch64, for Android 24
+make PROGRAMS="dropbear dropbearkey" -j"$(nproc)"
+file ./dropbear   # -> dynamically linked, interpreter /system/bin/linker64, for Android 24
 ```

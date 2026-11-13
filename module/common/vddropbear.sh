@@ -175,7 +175,7 @@ vddb_build_args() {
     # letting dropbear fall back to listening on every interface.
     [ "$_bound" = "1" ] || printf '%s\n' -p "127.0.0.1:$PORT"
     # foreground + log to stderr (captured by service.sh); no pid file in the module dir
-    printf '%s\n' -F -E -P /dev/null
+    printf '%s\n' -F -P /dev/null
     # auth policy
     [ "$PASSWORD_AUTH" = "1" ] || printf '%s\n' -s          # -s disables password auth
     [ "$MAX_AUTH_TRIES" -gt 0 ] 2>/dev/null && printf '%s\n' -T "$MAX_AUTH_TRIES"

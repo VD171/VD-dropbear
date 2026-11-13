@@ -77,7 +77,9 @@ for ABI in $ABIS; do
   ( cd "$SRC"
     make clean >/dev/null 2>&1 || true
     ./configure --host="$TGT" --disable-zlib --disable-syslog CC="$CC" >/dev/null
-    make -j"$(nproc)" PROGRAMS="$PROGRAMS" STATIC=1 >/dev/null
+    # DYNAMIC build (links /system/bin/linker64 + bionic): static-PIE binaries
+    # SIGSEGV on-device (verified on a real arm64 Android 16). See docs/BUILDING.md.
+    make -j"$(nproc)" PROGRAMS="$PROGRAMS" >/dev/null
     "$STRIP" dropbear dropbearkey
   )
   OUT="$ROOT/module/bin/$ABI"; mkdir -p "$OUT"

@@ -81,9 +81,10 @@ module (`module.prop`) and on GitHub Releases.
 - **Documentation set** under `docs/` (User guide, Configuration, Architecture, File structure,
   AI agents, Building) plus a Code of Conduct and GitHub issue/PR templates; the README and the docs
   are translated into 21 languages.
-- **Build validated**: the daemon cross-compiles as static-PIE for all four ABIs, and the bundled
-  tools are validated on arm64 with a reproducible `scripts/build-bundles.sh`. Interactive PTYs need
-  no patch - `openpty` is detected automatically.
+- **Build validated on a real device**: the daemon cross-compiles (dynamic, linked against bionic) for
+  all four ABIs, and password login was verified end-to-end on an arm64 phone. Interactive PTYs need no
+  patch - `openpty` is detected automatically. (Static-PIE binaries SIGSEGV on-device, so the build is
+  dynamic; and `-E` is dropped since the server is built `--disable-syslog`.)
 
 ### Notes
 - Runs on KernelSU, APatch and Magisk.

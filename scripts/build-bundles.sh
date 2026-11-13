@@ -22,7 +22,7 @@
 #  E-mail         : vd.priv8@pm.me
 # ======================================================================
 #
-# Cross-compiles the bundled tools as STATIC-PIE binaries for every Android ABI:
+# Cross-compiles the bundled tools as DYNAMIC (linker64 + bionic) binaries for every Android ABI:
 #     arm64-v8a  armeabi-v7a  x86  x86_64
 # Outputs land in ../module/bin/<abi>/ as `sftp-server`, `scp` and `rsync`.
 #
@@ -41,7 +41,10 @@ set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 : "${NDK:?set NDK to your Android NDK path}"
-: "${API:=24}"
+# API 28: dynamic linking exposes only functions available at the target API, and OpenSSH's compat
+# macro-redefines some that are missing (e.g. mblen/nl_langinfo), which breaks bionic's headers. API 28
+# has them, so the compat stays out of the way. (The daemon has no such deps and stays at its own API.)
+: "${API:=28}"
 ABIS="${ABIS:-arm64-v8a armeabi-v7a x86 x86_64}"
 
 ZLIB_VERSION="${ZLIB_VERSION:-1.3.1}"
@@ -82,9 +85,6 @@ write_openssh_cache() {
 ac_cv_func_recallocarray=no
 ac_cv_func_reallocarray=no
 ac_cv_func_close_range=no
-ac_cv_func_getentropy=no
-ac_cv_func_getrandom=no
-ac_cv_func_nl_langinfo=no
 ac_cv_func_setpwent=no
 ac_cv_func_getpwent=no
 ac_cv_func_endpwent=no
@@ -120,7 +120,7 @@ for ABI in $ABIS; do
   STRIP="$TOOLCHAIN/llvm-strip"
   ABIWORK="$WORK/$ABI"; mkdir -p "$ABIWORK"
   OUT="$ROOT/module/bin/$ABI"; mkdir -p "$OUT"
-  echo "==> building bundles for $ABI ($TGT, API $API, static-pie)"
+  echo "==> building bundles for $ABI ($TGT, API $API, dynamic)"
 
   # --- zlib (static, for OpenSSH) ---
   ZSRC="$ABIWORK/zlib"; ZPREFIX="$ABIWORK/zlib-prefix"
@@ -139,7 +139,7 @@ for ABI in $ABIS; do
       --disable-md2man --disable-roll-simd --disable-roll-asm \
       --with-included-popt --with-included-zlib \
       ac_cv_func_lutimes=no ac_cv_func_utimensat=yes \
-      CFLAGS="-O2 -fPIE" LDFLAGS="-static-pie" >/dev/null
+      CFLAGS="-O2 -fPIE" LDFLAGS="-pie" >/dev/null
     make -j"$(nproc)" >/dev/null
     "$STRIP" rsync )
   cp "$RSRC/rsync" "$OUT/rsync"
@@ -155,7 +155,7 @@ for ABI in $ABIS; do
       --without-libedit --disable-utmp --disable-wtmp --disable-lastlog \
       --with-zlib="$ZPREFIX" --cache-file="$ABIWORK/openssh.cache" \
       CFLAGS="-O2 -fPIE -DHAVE_ATTRIBUTE__SENTINEL__=1 -DHAVE_ATTRIBUTE__NONNULL__=1" \
-      LDFLAGS="-static-pie -L$ZPREFIX/lib -Wl,--allow-multiple-definition" >/dev/null
+      LDFLAGS="-pie -L$ZPREFIX/lib -Wl,--allow-multiple-definition" >/dev/null
     make -j"$(nproc)" sftp-server scp >/dev/null
     "$STRIP" sftp-server scp )
   cp "$OSRC/sftp-server" "$OUT/sftp-server"
