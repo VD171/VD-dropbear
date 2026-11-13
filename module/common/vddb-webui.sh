@@ -139,6 +139,7 @@ case "$1" in
     _d="$(_secret_ready)" || die "secret dir"
     _f="$_d/authorized_keys"
     _key="$(unb64)"
+    _key="$(printf '%s' "$_key" | sed -n '1{p;q}')"   # one key per line: drop anything past the first
     case "$_key" in
       ssh-ed25519\ *|ssh-rsa\ *|ecdsa-sha2-*\ *|sk-ssh-*\ *|sk-ecdsa-*\ *) : ;;
       *) die "not a public key" ;;

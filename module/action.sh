@@ -36,7 +36,7 @@ if vddb_is_running; then
     echo "OK, running"
     echo "  pid    : $(vddb_pid)"
     echo "  port   : $PORT"
-    echo "  listen : $LISTEN"
+    echo "  listen : $(vddb_listen_summary)"
     echo "  mode   : $([ "$START_IN_BFU" = 1 ] && echo 'BFU (secrets on DE storage)' || echo 'AFU (secrets on CE storage)')"
 else
     echo "FAILED: the daemon is not running."

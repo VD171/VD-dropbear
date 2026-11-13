@@ -93,7 +93,7 @@ vddb_defaults() {
     LISTEN_ADDRESSES=""        # extra specific binds: "addr" (uses PORT) or "addr:port", comma-separated
     HIDE_IDENT=1
     IDENT_STRING=""             # empty => neutral built-in (set by the patched binary)
-    PASSWORD_AUTH=0             # every login is ROOT: keys are strongly preferred
+    PASSWORD_AUTH=0             # a login defaults to ROOT: keys are strongly preferred
     PUBKEY_AUTH=1
     MAX_AUTH_TRIES=3
     LOGIN_SHELL=""
@@ -112,8 +112,10 @@ vddb_load_config() {
     vddb_defaults
     # shellcheck disable=SC1090
     [ -f "$VDDB_CONFIG" ] && . "$VDDB_CONFIG"
-    # Normalise a couple of things the daemon depends on.
+    # Normalise the values that flow unquoted into the daemon argv.
     [ "$PORT" -gt 0 ] 2>/dev/null || PORT=2222
+    case "$HOSTKEY_TYPE" in ed25519|rsa|ecdsa) ;; *) HOSTKEY_TYPE=ed25519 ;; esac
+    case "$RECEIVE_WINDOW" in *[!0-9]*) RECEIVE_WINDOW= ;; esac
 }
 
 # Resolve the active secret directory for the CURRENT boot stage + mode.
@@ -193,7 +195,13 @@ vddb_export_env() {
     export HOME="${HOME_DIR:-$MODDIR}"
     # the bundled tools (scp/rsync/sftp-server) live under the module's stable bin dir
     export PATH="$VDDB_DATA/bin:${PATH:-/system/bin:/system/xbin}"
-    export DROPBEAR_AUTHKEYS="$_sdir/authorized_keys"   # honoured by the VD patch
+    # Public-key auth: point dropbear at the keys file only when the toggle is on.
+    # With it off, no authorized_keys is exported, so no key authenticates.
+    if [ "$PUBKEY_AUTH" = "1" ]; then
+        export DROPBEAR_AUTHKEYS="$_sdir/authorized_keys"   # honoured by the VD patch
+    else
+        unset DROPBEAR_AUTHKEYS
+    fi
     export DROPBEAR_PASSWD_FILE="$_sdir/passwd"         # honoured by the VD patch
     [ "$HIDE_IDENT" = "1" ] && export DROPBEAR_IDENT="${IDENT_STRING:-SSH-2.0-}"
     [ -n "$LOGIN_SHELL" ] && export SHELL="$LOGIN_SHELL"
@@ -222,14 +230,28 @@ vddb_stop() {
 
 # Launch the single daemon in its own session (so the KSU manager's action.sh
 # does not block waiting for the process group to drain), detached from stdio.
+# A short human summary of where the daemon listens, for logs and the manager.
+vddb_listen_summary() {
+    _ls=""
+    if [ "$LISTEN_ALL" = "1" ]; then
+        _ls="all-interfaces"
+    elif [ "$LISTEN_LOOPBACK" = "1" ]; then
+        _ls="loopback"
+    fi
+    [ -n "$LISTEN_ADDRESSES" ] && _ls="${_ls:+$_ls,}$LISTEN_ADDRESSES"
+    [ -n "$_ls" ] || _ls="loopback"
+    printf '%s port %s' "$_ls" "$PORT"
+}
+
 vddb_spawn() {
     mkdir -p "$VDDB_STATE" 2>/dev/null
     vddb_export_env
-    # Word-splitting here is intentional and safe: no argument token contains
-    # whitespace (binds are addr:port, the host-key path has none).
+    # Word-splitting here is intentional: every token is a flag or a normalised
+    # value (PORT, HOSTKEY_TYPE and RECEIVE_WINDOW are validated in
+    # vddb_load_config; binds are addr:port), none of which contain whitespace.
     set -- $(vddb_build_args | tr '\n' ' ')
     "$VDDB_TOYBOX" setsid "$VDDB_DROPBEAR" "$@" </dev/null >>"$VDDB_LOG" 2>&1 &
-    vddb_log "spawned daemon (port $PORT, listen $LISTEN, mode $([ "$START_IN_BFU" = 1 ] && echo BFU || echo AFU))"
+    vddb_log "spawned daemon (port $PORT, listen $(vddb_listen_summary), mode $([ "$START_IN_BFU" = 1 ] && echo BFU || echo AFU))"
 }
 
 # Full (re)start: ensure one instance, secrets present, then spawn.
