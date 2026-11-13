@@ -86,25 +86,37 @@ jobs:
           name: VD-dropbear-${{ steps.pack.outputs.ver }}
           path: VD-dropbear-*.zip
       - name: Write release notes (tags only)
+        # House rules (do NOT change without the owner): the body ends with the
+        # canonical @Priv8_VD banner VERBATIM, carries a per-file sha256 block, and
+        # NEVER includes a "Generated with Claude" footer (that is for docs/wiki only).
         if: startsWith(github.ref, 'refs/tags/')
         run: |
           ver="${{ steps.pack.outputs.ver }}"
-          cat > RELEASE-BODY.md <<EOF
-          **VD Dropbear ${ver}** - a standalone, fully configurable rooted SSH server for KernelSU, APatch and Magisk, with a WebUI.
-
-          > **Every authenticated connection receives a root shell.** Prefer keys over passwords, bind only to networks you trust, and keep the port off the open Internet.
-
-          ### Install
-          Flash \`VD-dropbear-${ver}.zip\` in the KernelSU / APatch / Magisk manager (or \`ksud module install\` / \`apd module install\`), open the module's **WebUI** to set the port and add your keys, then reboot.
-
-          ### Documentation
-          Full guide and reference: https://github.com/VD171/VD-dropbear/wiki
-
-          ---
-          📣 Join [@Priv8_VD](https://t.me/Priv8_VD)
-
-          _Generated with Claude._
-          EOF
+          zip="VD-dropbear-${ver}.zip"
+          tmp="$(mktemp -d)"; unzip -q "$zip" -d "$tmp"
+          # sha256 of the zip, then of every file inside it
+          sums="$( sha256sum "$zip"; ( cd "$tmp" && find . -type f | sed 's#^\./##' | LC_ALL=C sort | while IFS= read -r f; do sha256sum "$f"; done ) )"
+          rm -rf "$tmp"
+          {
+            echo "Standalone, fully configurable rooted SSH server for KernelSU, APatch and Magisk, with a WebUI."
+            echo
+            echo "> **Every authenticated connection receives a root shell.** Prefer keys over passwords, bind only to networks you trust, and keep the port off the open Internet."
+            echo
+            echo "### Install"
+            echo "Flash \`${zip}\` in the KernelSU / APatch / Magisk manager (or \`ksud module install\` / \`apd module install\`), open its **WebUI** to set the port and add your keys, then reboot."
+            echo
+            echo "### Documentation"
+            echo "Full guide and reference: https://github.com/VD171/VD-dropbear/wiki"
+            echo
+            echo "### Checksums (sha256)"
+            echo
+            echo '```'
+            echo "$sums"
+            echo '```'
+            echo
+            echo "---"
+            echo "📣 **Join the channel for updates:** @Priv8_VD https://t.me/Priv8_VD"
+          } > RELEASE-BODY.md
       - name: Publish release (tags only)
         if: startsWith(github.ref, 'refs/tags/')
         uses: softprops/action-gh-release@v2
