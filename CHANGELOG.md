@@ -22,8 +22,14 @@ module (`module.prop`) and on GitHub Releases.
 - `action.sh`: manager "Action" (re)launch that never blocks on stdin and spawns the daemon in its own
   session so the manager returns.
 - Installer (`customize.sh` + `META-INF`), `uninstall.sh`, and a fully documented default config.
-- Public-repository scaffolding: family-format `README`, `MIT` `LICENSE`, this changelog.
+- Public-repository scaffolding: family-format `README`, `MIT` `LICENSE`, this changelog,
+  `SECURITY.md`, `CONTRIBUTING.md`, and an SPDX header on every file.
+- **Four-ABI support** - `arm64-v8a`, `armeabi-v7a`, `x86`, `x86_64` - covering every device and
+  emulator.
+- Build pipeline: `scripts/build.sh` (fetches the pinned upstream Dropbear, applies the patch set,
+  cross-compiles static binaries for all ABIs) and a CI workflow that rebuilds, assembles the module
+  zip, and tracks upstream for new releases. The auditable patch set is documented in `patches/`.
 
 ### Notes
-- The server binary (upstream Dropbear + an auditable patch set), the WebUI, and the CI build workflow
+- The patch set source (`patches/*.patch`, `localoptions.h`), the WebUI and the first built release
   are in progress.

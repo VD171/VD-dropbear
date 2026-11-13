@@ -27,7 +27,12 @@ VDDB_PROC="vddropbear"          # argv[0] the daemon runs under (status/stop mat
 # --- locations -------------------------------------------------------------
 # MODDIR is passed by the caller when known; fall back to the standard module path.
 [ -n "$MODDIR" ] || MODDIR="/data/adb/modules/$VDDB_NAME"
-VDDB_BIN_DIR="$MODDIR/bin/$(getprop ro.product.cpu.abi 2>/dev/null | grep -q 'arm64' && echo arm64-v8a || echo armeabi-v7a)"
+# Pick the binary dir for this device/emulator ABI. ro.product.cpu.abi already
+# reports one of arm64-v8a / armeabi-v7a / x86_64 / x86, which are exactly our dir
+# names; fall back to armeabi-v7a if that ABI was not shipped.
+VDDB_ABI="$(getprop ro.product.cpu.abi 2>/dev/null)"
+[ -d "$MODDIR/bin/$VDDB_ABI" ] || VDDB_ABI="armeabi-v7a"
+VDDB_BIN_DIR="$MODDIR/bin/$VDDB_ABI"
 # The server binary is shipped under the name "vddropbear" so its process name
 # (comm) is exactly that - mksh has no `exec -a`, so this is how pgrep -x matches it.
 VDDB_DROPBEAR="$VDDB_BIN_DIR/vddropbear"

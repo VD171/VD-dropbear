@@ -1,0 +1,66 @@
+# VD Dropbear - build the binaries, assemble the module, track upstream.
+# Copyright (C) 2026 VD171 - SPDX-License-Identifier: MIT
+name: build
+
+on:
+  push:
+    branches: [main, master]
+    paths: ["patches/**", "scripts/build.sh", "UPSTREAM_VERSION", "module/**", ".github/workflows/build.yml"]
+  workflow_dispatch:
+  schedule:
+    - cron: "0 6 * * *"   # daily: pick up new upstream Dropbear releases
+
+permissions:
+  contents: write
+
+jobs:
+  # Bump UPSTREAM_VERSION when upstream Dropbear tags a newer release; the push
+  # it makes triggers the build job below.
+  track-upstream:
+    if: github.event_name == 'schedule'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check upstream for a newer tag
+        run: |
+          cur="$(tr -d ' \n' < UPSTREAM_VERSION)"
+          latest="$(git ls-remote --tags --refs https://github.com/mkj/dropbear \
+                    | sed -E 's#.*refs/tags/##' | grep -E '^DROPBEAR_[0-9]' | sort -V | tail -1)"
+          echo "current=$cur latest=$latest"
+          if [ -n "$latest" ] && [ "$latest" != "$cur" ]; then
+            echo "$latest" > UPSTREAM_VERSION
+            git config user.name "VD \$ VD171 @ Priv8"
+            git config user.email "80125987+VD171@users.noreply.github.com"
+            git commit -am "upstream: track $latest"
+            git push
+          fi
+
+  build:
+    if: github.event_name != 'schedule'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Android NDK
+        id: ndk
+        uses: nttld/setup-ndk@v1
+        with:
+          ndk-version: r27c
+      - name: Build binaries (all ABIs)
+        env:
+          NDK: ${{ steps.ndk.outputs.ndk-path }}
+        run: bash scripts/build.sh
+      - name: Assemble module zip
+        run: |
+          ver="$(sed -n 's/^version=//p' module/module.prop)"
+          ( cd module && zip -r -X "../VD-dropbear-${ver}.zip" . -x '*/.gitkeep' )
+          sha256sum VD-dropbear-*.zip
+      - uses: actions/upload-artifact@v4
+        with:
+          name: VD-dropbear-module
+          path: VD-dropbear-*.zip
+      - name: Publish release (tags only)
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: VD-dropbear-*.zip
+          body_path: RELEASE-BODY.md
