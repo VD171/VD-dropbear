@@ -1,7 +1,7 @@
 <!--
   ======================================================================
    VD Dropbear  ::  standalone, configurable rooted SSH daemon
-   A private SSH server for KernelSU/APatch/Magisk - no invasive ADB exposure.
+   A private SSH server for KernelSU/APatch/Magisk. No invasive ADB exposure.
    AI agents on your device.
 
    Copyright (C) 2026  VD171
@@ -30,8 +30,8 @@
 # AI agents on your device
 
 A standing SSH endpoint turns your phone into something an **autonomous AI agent can operate
-directly**. Any agent that can drive a shell or an SSH connection - Claude Code, aider, an
-LLM-in-the-loop script, your own automation - gets a real root session on the device, over the
+directly**. Any agent that can drive a shell or an SSH connection (Claude Code, aider, an
+LLM-in-the-loop script, your own automation) gets a real root session on the device, over the
 network, with no USB tether and none of ADB's self-exposing debug flags.
 
 This page expands on the idea introduced in the README.
@@ -41,7 +41,7 @@ This page expands on the idea introduced in the README.
 ADB announces itself: `adb_enabled` and `development_settings_enabled` are world-readable, the
 connection is logged, and there is no supported way to hide that debugging is (or was) on. An agent
 working over ADB leaves that trail on the device for any app or anti-fraud SDK to read. VD Dropbear is
-the private alternative - a normal SSH login, with credentials you control and a banner that reveals
+the private alternative: a normal SSH login, with credentials you control and a banner that reveals
 nothing.
 
 ## What an agent can do
@@ -50,11 +50,11 @@ Over one connection, an agent sees a normal Linux-like shell and can:
 
 - read and edit files, flip settings, and manage modules, packages and services;
 - triage logs, pull artifacts, and run diagnostics or forensics on demand;
-- move and sync files both ways over `scp` / `sftp` / `rsync` - backups, migrations, provisioning;
+- move and sync files both ways over `scp` / `sftp` / `rsync`, for backups, migrations, provisioning;
 - drive a whole fleet of rooted devices from one place, each reachable by its own key.
 
-Because the project is built to be **AI-friendly** - a documented configuration file, an explicit
-runtime [env contract](../patches/README.md), predictable paths and plain-text status - an agent can
+Because the project is built to be **AI-friendly**, with a documented configuration file, an explicit
+runtime [env contract](../patches/README.md), predictable paths and plain-text status, an agent can
 discover how to use it without guesswork.
 
 ## Doing it safely
@@ -62,11 +62,11 @@ discover how to use it without guesswork.
 This is root, so treat it like root:
 
 - give the agent a **dedicated user and key**, not your personal one;
-- scope the binds to networks you trust - loopback or a VPN rather than the open Internet
+- scope the binds to networks you trust: loopback or a VPN rather than the open Internet
   (see [Configuration](CONFIGURATION.md));
 - keep password auth off; a key is revocable and never typed;
 - you can revoke a key or stop the daemon at any time from the WebUI;
-- remember every connection is a full root session - give the agent only the reach it needs.
+- remember every connection is a full root session: give the agent only the reach it needs.
 
 ## A minimal setup
 

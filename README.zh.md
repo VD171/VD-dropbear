@@ -1,7 +1,7 @@
 <!--
   ======================================================================
    VD Dropbear  ::  standalone, configurable rooted SSH daemon
-   A private SSH server for KernelSU/APatch/Magisk - no invasive ADB exposure.
+   A private SSH server for KernelSU/APatch/Magisk. No invasive ADB exposure.
 
    Copyright (C) 2026  VD171
    SPDX-License-Identifier: Apache-2.0
@@ -48,12 +48,12 @@ Languages: English · [العربية](README.ar.md) · [Čeština](README.cs.md
 ## 为什么
 
 Android 内置的、在自己手机上获得 shell 的方式是 ADB（USB 调试），而开启它既具侵入性又会暴露自己。
-`adb_enabled` 和 `development_settings_enabled` 是所有程序都可读取的设置 - 任何应用、SDK 或反欺诈 /
+`adb_enabled` 和 `development_settings_enabled` 是所有程序都可读取的设置：任何应用、SDK 或反欺诈 /
 RASP 库都能读到它们，连接会被记录，而且没有受支持的办法可以隐藏 ADB 正在开启、或曾经开启过。即便在一台
 原厂、未 root 的手机上，这种暴露也如影随形：要想获得 shell，你就不得不昭告天下。
 
-VD Dropbear 是私密的替代方案。在已 root 的设备上，它为你提供一个真正的 SSH 服务器 - 通过网络访问的 root
-shell、SFTP 和 rsync - 没有 `adb_enabled` 这一破绽，没有 USB 调试标志，版本横幅什么也不透露，而且凭据由
+VD Dropbear 是私密的替代方案。在已 root 的设备上，它为你提供一个真正的 SSH 服务器：通过网络访问的 root
+shell、SFTP 和 rsync，没有 `adb_enabled` 这一破绽，没有 USB 调试标志，版本横幅什么也不透露，而且凭据由
 你掌控。你的访问权始终属于你自己，而不是一面全局可读、设备上任何东西都能读到的「我正在被调试」的旗帜。
 
 ## 功能
@@ -62,7 +62,7 @@ shell、SFTP 和 rsync - 没有 `adb_enabled` 这一破绽，没有 USB 调试�
   **启动 / 停止 / 重启**它；绝不会有超过一个实例。
 - **一切皆可配置**，在 WebUI 中（或 `/data/adb/vddropbear/config`）：
   - 端口，以及绑定到 loopback / 全部 / IPv4 / IPv6 / 指定地址
-  - **在首次解锁前启动（BFU）还是仅在其后启动（AFU）** - 一个开关搞定
+  - **在首次解锁前启动（BFU）还是仅在其后启动（AFU）**，一个开关搞定
   - 公钥和/或密码身份验证，最大验证尝试次数
   - 登录用户、shell、`HOME`、额外的环境变量
   - 空闲超时、keepalive、接收窗口
@@ -80,7 +80,7 @@ shell、SFTP 和 rsync - 没有 `adb_enabled` 这一破绽，没有 USB 调试�
 ## 你设备上的 AI 智能体
 
 一个常驻的 SSH 端点，会把你的手机变成**自主 AI 智能体可以直接操作**的东西。任何能够驱动 shell 或 SSH
-连接的智能体 - Claude Code、aider、循环中带有 LLM 的脚本、你自己的自动化 - 都能通过网络在设备上获得一个
+连接的智能体（Claude Code、aider、循环中带有 LLM 的脚本、你自己的自动化）都能通过网络在设备上获得一个
 真正的 root 会话，无需 USB 连线，也没有 ADB 那些会暴露自己的调试标志。智能体看到的是一个普通的类 Linux
 shell，并且可以：
 
@@ -89,8 +89,8 @@ shell，并且可以：
 - 通过 `scp` / `sftp` / `rsync` 双向移动和同步文件，用于备份、迁移或初始配置；
 - 从同一个地方驱动整支已 root 的设备机群，每一台都可用各自的密钥访问。
 
-由于本项目在构建时就力求**对 AI 友好** - 一个有文档的配置文件、一份明确的运行时[环境契约](patches/README.md)、
-可预测的路径以及纯文本的状态 - 智能体无需靠猜就能弄清如何使用它。
+由于本项目在构建时就力求**对 AI 友好**（一个有文档的配置文件、一份明确的运行时[环境契约](patches/README.md)、
+可预测的路径以及纯文本的状态），智能体无需靠猜就能弄清如何使用它。
 
 > **这是 root，所以请把它当作 root 来对待。** 每一个通过身份验证的连接都以 root 身份落地（见下方警告）。
 > 当你把访问权交给某个智能体时，为它配一个**专用的用户和密钥**，把绑定限制在你信任的网络内（loopback 或
@@ -155,14 +155,14 @@ shell，并且可以：
 * **Discord：** @VD.Priv8 https://discord.com/users/1296831918989639721
 * **邮箱：** vd.priv8@pm.me
 * **XDA-Developers：** @VD171 https://xdaforums.com/m/vd171.4699873/
-* **XDA 主题：** _(占位符 - 将在首次公开发布时添加)_
+* **XDA 主题：** _(占位符，将在首次公开发布时添加)_
 * **GitHub：** @VD171 https://github.com/VD171
 
 ## 许可证
 
-VD Dropbear 自身的代码采用 **Apache-2.0** - 见 [LICENSE](LICENSE)。该模块还捆绑了第三方二进制文件 - 
+VD Dropbear 自身的代码采用 **Apache-2.0**，见 [LICENSE](LICENSE)。该模块还捆绑了第三方二进制文件：
 [Dropbear](https://matt.ucc.asn.au/dropbear/)（MIT 风格）、OpenSSH 的 `sftp-server` 和 `scp`（BSD），
-以及 `rsync`（GPL-3.0） - 各自遵循其自身的许可证；见 [THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md)，
+以及 `rsync`（GPL-3.0），各自遵循其自身的许可证；见 [THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md)，
 其中包括我们如何为 rsync 遵守 GPL。我们的 Apache-2.0 代码不受影响（GPL 二进制文件只是聚合在一起，并未链接）。
 
 ## 商标

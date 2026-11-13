@@ -1,7 +1,7 @@
 <!--
   ======================================================================
    VD Dropbear  ::  standalone, configurable rooted SSH daemon
-   A private SSH server for KernelSU/APatch/Magisk - no invasive ADB exposure.
+   A private SSH server for KernelSU/APatch/Magisk. No invasive ADB exposure.
 
    Copyright (C) 2026  VD171
    SPDX-License-Identifier: Apache-2.0
@@ -50,14 +50,14 @@ Languages: English · [العربية](README.ar.md) · [Čeština](README.cs.md
 
 Androids eingebauter Weg, eine Shell auf dem eigenen Telefon zu bekommen, ist ADB (USB-Debugging),
 und es einzuschalten ist invasiv und verrät dich selbst. `adb_enabled` und
-`development_settings_enabled` sind von jedem lesbare Einstellungen - jede App, jedes SDK oder jede
+`development_settings_enabled` sind von jedem lesbare Einstellungen: jede App, jedes SDK oder jede
 Betrugs- bzw. RASP-Bibliothek kann sie auslesen, die Verbindung wird protokolliert, und es gibt keinen
 unterstützten Weg zu verbergen, dass ADB aktiviert ist oder je war. Diese Preisgabe verfolgt dich
 sogar auf einem werkseitigen, nicht gerooteten Telefon: Um eine Shell zu bekommen, musst du es
 ankündigen.
 
 VD Dropbear ist die private Alternative. Auf einem gerooteten Gerät gibt es dir einen echten
-SSH-Server - Root-Shell, SFTP und rsync über das Netzwerk - ohne verräterisches `adb_enabled`, ohne
+SSH-Server: Root-Shell, SFTP und rsync über das Netzwerk, ohne verräterisches `adb_enabled`, ohne
 USB-Debugging-Flag, mit einem Versionsbanner, das nichts preisgibt, und mit Anmeldedaten, die du
 kontrollierst. Dein Zugang bleibt deiner, statt eines global lesbaren „Ich werde debuggt"-Flags, das
 alles auf dem Gerät auslesen kann.
@@ -69,7 +69,7 @@ alles auf dem Gerät auslesen kann.
   Instanz.
 - **Alles ist konfigurierbar** über die WebUI (oder `/data/adb/vddropbear/config`):
   - Port sowie Bindung an loopback / alle / IPv4 / IPv6 / bestimmte Adressen
-  - **Start vor der ersten Entsperrung (BFU) oder erst danach (AFU)** - ein einziger Schalter
+  - **Start vor der ersten Entsperrung (BFU) oder erst danach (AFU)**, ein einziger Schalter
   - Authentifizierung per Public Key und/oder Passwort, maximale Anzahl Authentifizierungsversuche
   - Login-Benutzer, Shell, `HOME`, zusätzliche Umgebung
   - Leerlauf-Timeout, Keepalive, Empfangsfenster
@@ -89,8 +89,8 @@ alles auf dem Gerät auslesen kann.
 ## KI-Agenten auf deinem Gerät
 
 Ein dauerhafter SSH-Endpunkt verwandelt dein Telefon in etwas, das ein **autonomer KI-Agent direkt
-bedienen kann**. Jeder Agent, der eine Shell oder eine SSH-Verbindung steuern kann - Claude Code,
-aider, ein Skript mit LLM in der Schleife, deine eigene Automatisierung - bekommt eine echte
+bedienen kann**. Jeder Agent, der eine Shell oder eine SSH-Verbindung steuern kann (Claude Code,
+aider, ein Skript mit LLM in der Schleife, deine eigene Automatisierung) bekommt eine echte
 Root-Sitzung auf dem Gerät, über das Netzwerk, ohne USB-Kabel und ohne eines der verräterischen
 Debug-Flags von ADB. Der Agent sieht eine normale, Linux-ähnliche Shell und kann:
 
@@ -99,9 +99,9 @@ Debug-Flags von ADB. Der Agent sieht eine normale, Linux-ähnliche Shell und kan
 - Dateien in beide Richtungen über `scp` / `sftp` / `rsync` verschieben und synchronisieren, für Backups, Migrationen oder Provisionierung;
 - eine ganze Flotte gerooteter Geräte von einem Ort aus steuern, jedes über seinen eigenen Schlüssel erreichbar.
 
-Weil das Projekt **KI-freundlich** aufgebaut ist - eine dokumentierte Konfigurationsdatei, ein
+Weil das Projekt **KI-freundlich** aufgebaut ist (eine dokumentierte Konfigurationsdatei, ein
 expliziter [Umgebungs-Vertrag](patches/README.md) zur Laufzeit, vorhersehbare Pfade und Status im
-Klartext - kann ein Agent ohne Rätselraten herausfinden, wie er es benutzt.
+Klartext), kann ein Agent ohne Rätselraten herausfinden, wie er es benutzt.
 
 > **Das ist Root, also behandle es wie Root.** Jede authentifizierte Verbindung landet als Root (siehe
 > Warnung unten). Wenn du einem Agenten Zugang gibst, gib ihm einen **eigenen Benutzer und Schlüssel**,
@@ -130,7 +130,7 @@ entsperrt (After First Unlock).
   funktioniert erst, nachdem das Gerät seit dem Booten einmal entsperrt wurde.
 - **BFU-Modus (`START_IN_BFU=1`):** Der Daemon startet vor der Entsperrung, damit du dich früh per SSH
   einwählen kannst (zum Beispiel, um das Gerät aus der Ferne zu entsperren). Seine Geheimnisse liegen
-  dann im DE-Speicher und sind vor der Entsperrung lesbar - ein bewusster und dokumentierter
+  dann im DE-Speicher und sind vor der Entsperrung lesbar, ein bewusster und dokumentierter
   Kompromiss. Aktiviere ihn nur, wenn du SSH vor der Entsperrung brauchst.
 
 Wir fügen bewusst **keine** eigene Verschlüsselung über CE hinzu: Es ist bereits mit den Anmeldedaten
@@ -179,14 +179,14 @@ Verwandte Projekte desselben Autors:
 * **Discord:** @VD.Priv8 https://discord.com/users/1296831918989639721
 * **E-mail:** vd.priv8@pm.me
 * **XDA-Developers:** @VD171 https://xdaforums.com/m/vd171.4699873/
-* **XDA thread:** _(Platzhalter - wird bei der ersten öffentlichen Veröffentlichung ergänzt)_
+* **XDA thread:** _(Platzhalter, wird bei der ersten öffentlichen Veröffentlichung ergänzt)_
 * **GitHub:** @VD171 https://github.com/VD171
 
 ## Lizenz
 
-Der eigene Code von VD Dropbear steht unter **Apache-2.0** - siehe [LICENSE](LICENSE). Das Modul bündelt
-außerdem Binärdateien von Drittanbietern - [Dropbear](https://matt.ucc.asn.au/dropbear/) (MIT-artig),
-OpenSSHs `sftp-server` und `scp` (BSD) und `rsync` (GPL-3.0) - jede unter ihrer eigenen Lizenz; siehe
+Der eigene Code von VD Dropbear steht unter **Apache-2.0**; siehe [LICENSE](LICENSE). Das Modul bündelt
+außerdem Binärdateien von Drittanbietern: [Dropbear](https://matt.ucc.asn.au/dropbear/) (MIT-artig),
+OpenSSHs `sftp-server` und `scp` (BSD) und `rsync` (GPL-3.0), jede unter ihrer eigenen Lizenz; siehe
 [THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md), einschließlich der Art, wie wir für rsync die GPL
 einhalten. Unser Apache-2.0-Code ist davon unberührt (die GPL-Binärdatei ist lediglich aggregiert, nicht
 gelinkt).

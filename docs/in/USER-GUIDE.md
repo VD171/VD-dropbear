@@ -1,7 +1,7 @@
 <!--
   ======================================================================
    VD Dropbear  ::  standalone, configurable rooted SSH daemon
-   A private SSH server for KernelSU/APatch/Magisk - no invasive ADB exposure.
+   A private SSH server for KernelSU/APatch/Magisk. No invasive ADB exposure.
    User guide.
 
    Copyright (C) 2026  VD171
@@ -82,8 +82,8 @@ berfungsi lewat koneksi yang sama.
 ## 6. Sebelum first unlock (BFU)
 
 Secara default daemon hanya mulai **setelah** Anda membuka kunci perangkat sekali (AFU), karena
-secret-nya berada di penyimpanan credential-encrypted. Jika Anda butuh SSH **sebelum** first unlock -
-misalnya untuk membuka kunci perangkat dari jarak jauh setelah reboot - nyalakan **Start before first
+secret-nya berada di penyimpanan credential-encrypted. Jika Anda butuh SSH **sebelum** first unlock
+(misalnya untuk membuka kunci perangkat dari jarak jauh setelah reboot), nyalakan **Start before first
 unlock (BFU)**. Secret kemudian berpindah ke penyimpanan device-encrypted, yang dapat dibaca sebelum
 unlock: sebuah trade-off yang disengaja dan terdokumentasi. Lihat [Security model](#) di README.
 
@@ -99,7 +99,7 @@ unlock: sebuah trade-off yang disengaja dan terdokumentasi. Lihat [Security mode
   dan sebuah host key dapat dibuat.
 - **Kunci ditolak.** Pastikan baris kunci publik persis seperti yang ditawarkan klien Anda, dan bahwa
   pengguna login adalah yang dapat dikenali sistem (biasanya `root`).
-- **Tidak bisa tersambung dari mesin lain.** Anda mungkin masih melakukan bind hanya ke loopback -
+- **Tidak bisa tersambung dari mesin lain.** Anda mungkin masih melakukan bind hanya ke loopback:
   aktifkan antarmuka yang Anda perlukan dan mulai ulang.
 - **SFTP/scp gagal tetapi shell berfungsi.** Pastikan `sftp-server` yang disertakan dikirim untuk ABI
   Anda; status WebUI menampilkan ABI yang terdeteksi.

@@ -1,7 +1,7 @@
 <!--
   ======================================================================
    VD Dropbear  ::  standalone, configurable rooted SSH daemon
-   A private SSH server for KernelSU/APatch/Magisk - no invasive ADB exposure.
+   A private SSH server for KernelSU/APatch/Magisk. No invasive ADB exposure.
 
    Copyright (C) 2026  VD171
    SPDX-License-Identifier: Apache-2.0
@@ -49,12 +49,12 @@ Languages: English · [العربية](README.ar.md) · [Čeština](README.cs.md
 
 De ingebouwde manier van Android om een shell op je eigen telefoon te krijgen is ADB (USB-debugging), en
 dat aanzetten is ingrijpend en verraadt je. `adb_enabled` en `development_settings_enabled` zijn instellingen
-die iedereen kan lezen - elke app, SDK of antifraude-/RASP-bibliotheek kan ze uitlezen, de verbinding wordt
+die iedereen kan lezen: elke app, SDK of antifraude-/RASP-bibliotheek kan ze uitlezen, de verbinding wordt
 gelogd, en er is geen ondersteunde manier om te verbergen dat ADB aan is, of ooit aan is geweest. Die
 blootstelling volgt je zelfs op een stock, niet-geroote telefoon: om een shell te krijgen moet je het aankondigen.
 
-VD Dropbear is het private alternatief. Op een geroot toestel geeft het je een echte SSH-server - root-shell,
-SFTP en rsync over het netwerk - zonder `adb_enabled`-spoor, zonder USB-debug-vlag, met een versiebanner die
+VD Dropbear is het private alternatief. Op een geroot toestel geeft het je een echte SSH-server: root-shell,
+SFTP en rsync over het netwerk, zonder `adb_enabled`-spoor, zonder USB-debug-vlag, met een versiebanner die
 niets prijsgeeft en met inloggegevens die jij beheert. Jouw toegang blijft van jou, in plaats van een
 wereldwijd leesbare "ik word gedebugd"-vlag die alles op het toestel kan uitlezen.
 
@@ -64,7 +64,7 @@ wereldwijd leesbare "ik word gedebugd"-vlag die alles op het toestel kan uitleze
   hem op elk moment **starten / stoppen / herstarten** vanuit de WebUI; nooit meer dan één instantie.
 - **Alles is configureerbaar** vanuit de WebUI (of `/data/adb/vddropbear/config`):
   - poort, en bind op loopback / all / IPv4 / IPv6 / specifieke adressen
-  - **starten vóór de eerste ontgrendeling (BFU) of pas erna (AFU)** - één enkele schakelaar
+  - **starten vóór de eerste ontgrendeling (BFU) of pas erna (AFU)**, één enkele schakelaar
   - authenticatie met publieke sleutel en/of wachtwoord, maximaal aantal auth-pogingen
   - inloggebruiker, shell, `HOME`, extra environment
   - idle timeout, keepalive, receive window
@@ -83,8 +83,8 @@ wereldwijd leesbare "ik word gedebugd"-vlag die alles op het toestel kan uitleze
 ## AI-agents op je toestel
 
 Een permanent SSH-eindpunt maakt van je telefoon iets wat een **autonome AI-agent rechtstreeks kan bedienen**.
-Elke agent die een shell of SSH-verbinding kan aansturen - Claude Code, aider, een script met een LLM in de lus,
-je eigen automatisering - krijgt een echte root-sessie op het toestel, over het netwerk, zonder USB-kabel en
+Elke agent die een shell of SSH-verbinding kan aansturen (Claude Code, aider, een script met een LLM in de lus,
+je eigen automatisering) krijgt een echte root-sessie op het toestel, over het netwerk, zonder USB-kabel en
 zonder een van ADB's zelfverradende debugvlaggen. De agent ziet een normale Linux-achtige shell en kan:
 
 - bestanden lezen en bewerken, instellingen omzetten, en modules, pakketten en services beheren;
@@ -92,8 +92,8 @@ zonder een van ADB's zelfverradende debugvlaggen. De agent ziet een normale Linu
 - bestanden beide kanten op verplaatsen en synchroniseren via `scp` / `sftp` / `rsync`, voor back-ups, migraties of provisioning;
 - een hele vloot geroote toestellen vanaf één plek aansturen, elk bereikbaar met zijn eigen sleutel.
 
-Omdat het project **AI-vriendelijk** is gebouwd - een gedocumenteerd configuratiebestand, een expliciet
-runtime-[env-contract](patches/README.md), voorspelbare paden en status in platte tekst - kan een agent
+Omdat het project **AI-vriendelijk** is gebouwd (een gedocumenteerd configuratiebestand, een expliciet
+runtime-[env-contract](patches/README.md), voorspelbare paden en status in platte tekst), kan een agent
 ontdekken hoe hij het gebruikt zonder te gissen.
 
 > **Dit is root, dus behandel het als root.** Elke geauthenticeerde verbinding komt binnen als root (zie de
@@ -167,14 +167,14 @@ Zusterprojecten van dezelfde auteur:
 * **Discord:** @VD.Priv8 https://discord.com/users/1296831918989639721
 * **E-mail:** vd.priv8@pm.me
 * **XDA-Developers:** @VD171 https://xdaforums.com/m/vd171.4699873/
-* **XDA thread:** _(placeholder - toegevoegd bij de eerste publieke release)_
+* **XDA thread:** _(placeholder, toegevoegd bij de eerste publieke release)_
 * **GitHub:** @VD171 https://github.com/VD171
 
 ## Licentie
 
-De eigen code van VD Dropbear is **Apache-2.0** - zie [LICENSE](LICENSE). De module bundelt ook binaries van
-derden - [Dropbear](https://matt.ucc.asn.au/dropbear/) (MIT-stijl), OpenSSH's `sftp-server` en `scp` (BSD), en
-`rsync` (GPL-3.0) - elk onder zijn eigen licentie; zie [THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md), inclusief
+De eigen code van VD Dropbear is **Apache-2.0**; zie [LICENSE](LICENSE). De module bundelt ook binaries van
+derden: [Dropbear](https://matt.ucc.asn.au/dropbear/) (MIT-stijl), OpenSSH's `sftp-server` en `scp` (BSD), en
+`rsync` (GPL-3.0), elk onder zijn eigen licentie; zie [THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md), inclusief
 hoe we voor rsync aan de GPL voldoen. Onze Apache-2.0-code blijft hierdoor onaangetast (de GPL-binary wordt enkel
 geaggregeerd, niet gelinkt).
 

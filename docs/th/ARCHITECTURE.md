@@ -1,7 +1,7 @@
 <!--
   ======================================================================
    VD Dropbear  ::  standalone, configurable rooted SSH daemon
-   A private SSH server for KernelSU/APatch/Magisk - no invasive ADB exposure.
+   A private SSH server for KernelSU/APatch/Magisk. No invasive ADB exposure.
    Architecture.
 
    Copyright (C) 2026  VD171
@@ -35,28 +35,28 @@ VD Dropbear เป็นโมดูล KernelSU / APatch / Magisk ที่ร�
 
 ## ส่วนประกอบ
 
-- `module/common/vddropbear.sh` - ไลบรารีแกนหลัก: โหลดการกำหนดค่า (พร้อมค่าเริ่มต้นในตัวที่ปลอดภัย)
+- `module/common/vddropbear.sh`: ไลบรารีแกนหลัก: โหลดการกำหนดค่า (พร้อมค่าเริ่มต้นในตัวที่ปลอดภัย)
   ระบุที่เก็บความลับ รับประกันว่ามี host key สร้าง argument vector ของ Dropbear
   และจัดการ daemon เพียงอินสแตนซ์เดียว (start / stop / status / restart)
-- `module/service.sh` - จุดเริ่มต้นเมื่อบูต ทำตามนโยบายการเริ่ม BFU/AFU; ในโหมด AFU
+- `module/service.sh`: จุดเริ่มต้นเมื่อบูต ทำตามนโยบายการเริ่ม BFU/AFU; ในโหมด AFU
   มันจะรอให้ที่เก็บแบบ credential-encrypted ปลดล็อกโดยไม่ทำให้การบูตค้าง
-- `module/action.sh` - ปุ่ม **Action** ของตัวจัดการ: (เริ่มใหม่) daemon มันไม่อ่าน stdin เลย
+- `module/action.sh`: ปุ่ม **Action** ของตัวจัดการ: (เริ่มใหม่) daemon มันไม่อ่าน stdin เลย
   และแยก daemon ออกไปเป็นเซสชันของตัวเอง ดังนั้นตัวจัดการจึงไม่ค้าง
-- `module/common/vddb-webui.sh` + `module/webroot/index.html` - แบ็กเอนด์และหน้าของ WebUI
-- `patches/` - แพตช์ขนาดเล็กที่ตรวจสอบได้ ซึ่งนำไปใช้กับ upstream Dropbear ขณะบิลด์
-- `scripts/build.sh`, `scripts/build-bundles.sh`, `.github/workflows/build.yml` - การบิลด์
+- `module/common/vddb-webui.sh` + `module/webroot/index.html`: แบ็กเอนด์และหน้าของ WebUI
+- `patches/`: แพตช์ขนาดเล็กที่ตรวจสอบได้ ซึ่งนำไปใช้กับ upstream Dropbear ขณะบิลด์
+- `scripts/build.sh`, `scripts/build-bundles.sh`, `.github/workflows/build.yml`: การบิลด์
 
 ## วงจรชีวิตของ daemon (อินสแตนซ์เดียว)
 
 `vddb_start` โหลดการกำหนดค่า หยุดอินสแตนซ์ใดก็ตามที่กำลังรันอยู่ รับประกันว่ามี host key อยู่
 จากนั้นจึงเรียก daemon ขึ้นมาหนึ่งตัว ไบนารีถูกส่งมาในชื่อ `vddropbear` ดังนั้นชื่อโปรเซสของมันจึงตรงกับ
-`pgrep -x` พอดี (`mksh` ของ Android ไม่มี `exec -a`) มันถูกเรียกใช้ด้วย `setsid` เพื่อให้แยกออกจากกลุ่มโปรเซสของผู้เรียก -
+`pgrep -x` พอดี (`mksh` ของ Android ไม่มี `exec -a`) มันถูกเรียกใช้ด้วย `setsid` เพื่อให้แยกออกจากกลุ่มโปรเซสของผู้เรียก:
 นั่นคือสิ่งที่ทำให้ Action ของตัวจัดการไม่ถูกบล็อก
 
 ## ที่เก็บความลับ (CE กับ DE, BFU กับ AFU)
 
 การตั้งค่าไม่ใช่ความลับและอยู่บนที่เก็บแบบ device-encrypted (`/data/adb/vddropbear`) ซึ่งอ่านได้ตอนบูต
-ความลับ - host key, `authorized_keys`, แฮชรหัสผ่าน - โดยค่าเริ่มต้นจะอยู่บนที่เก็บแบบ **credential-encrypted**
+ความลับ (host key, `authorized_keys`, แฮชรหัสผ่าน) โดยค่าเริ่มต้นจะอยู่บนที่เก็บแบบ **credential-encrypted**
 (`/data/misc_ce/0/vddropbear`) ซึ่งจะปลดล็อกหลังจากผู้ใช้ยืนยันตัวตนแล้วเท่านั้น การเปิด `START_IN_BFU`
 จะย้ายความลับไปยังที่เก็บแบบ device-encrypted เพื่อให้ daemon สามารถรันก่อนการปลดล็อกครั้งแรกได้
 โดยแลกกับการที่ความลับเหล่านั้นอ่านได้เร็วขึ้น โมดูลจะคำนวณว่าจะใช้ที่เก็บใดในแต่ละขั้นตอนของการบูต

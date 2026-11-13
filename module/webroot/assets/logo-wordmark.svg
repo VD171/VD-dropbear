@@ -2,7 +2,7 @@
 <!--
   ======================================================================
    VD DROPBEAR  ::  standalone, configurable rooted SSH daemon
-   A private SSH server for KernelSU/APatch/Magisk - no invasive ADB exposure.
+   A private SSH server for KernelSU/APatch/Magisk. No invasive ADB exposure.
 
    Copyright (C) 2026  VD171
    SPDX-License-Identifier: Apache-2.0
@@ -56,6 +56,6 @@
     <tspan fill="url(#green)">VD</tspan><tspan fill="url(#silver)"> Dropbear</tspan>
   </text>
   <text x="253" y="162" font-family="'Segoe UI','DejaVu Sans',Arial,sans-serif" font-size="23" font-weight="500" fill="#9aa4b2">
-    private rooted SSH - no ADB exposure
+    private rooted SSH, no ADB exposure
   </text>
 </svg>

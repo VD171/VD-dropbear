@@ -1,7 +1,7 @@
 <!--
   ======================================================================
    VD Dropbear  ::  standalone, configurable rooted SSH daemon
-   A private SSH server for KernelSU/APatch/Magisk - no invasive ADB exposure.
+   A private SSH server for KernelSU/APatch/Magisk. No invasive ADB exposure.
    Security policy.
 
    Copyright (C) 2026  VD171
@@ -34,7 +34,7 @@
 VD Dropbear는 SSH 서버를 시작하며, **인증에 성공한 모든 연결은 root 셸을 받습니다**. 따라서 여러분 기기의 보안은 이 서버의 설정과 자격 증명의 보안과 같습니다. 부디:
 
 - **비밀번호보다 공개 키를 우선하십시오.** 비밀번호 로그인은 기본적으로 꺼져 있습니다.
-- 꼭 비밀번호를 써야 한다면 강력한 것을 쓰십시오 - WebUI는 최소 길이를 강제하고 해시만 저장합니다.
+- 꼭 비밀번호를 써야 한다면 강력한 것을 쓰십시오. WebUI는 최소 길이를 강제하고 해시만 저장합니다.
 - **포트를 공개 인터넷에 노출하지 마십시오.** 루프백이나 신뢰하는 LAN에 바인드하거나, VPN/터널로 접근하십시오.
 - **BFU 트레이드오프** 를 이해하십시오: 잠금 해제 전 시작을 켜면 호스트 키와 자격 증명이 기기 암호화 저장소에 놓여, 기기 잠금 해제 전에 읽을 수 있게 됩니다. 잠금 해제 전 SSH가 필요하지 않다면 꺼 두십시오.
 - 필요하지 않으면 포워딩을 꺼 두십시오(기본적으로 꺼져 있습니다).

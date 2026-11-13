@@ -1,7 +1,7 @@
 <!--
   ======================================================================
    VD Dropbear  ::  standalone, configurable rooted SSH daemon
-   A private SSH server for KernelSU/APatch/Magisk - no invasive ADB exposure.
+   A private SSH server for KernelSU/APatch/Magisk. No invasive ADB exposure.
    Architecture.
 
    Copyright (C) 2026  VD171
@@ -35,28 +35,28 @@ specific is runtime config or a secret.
 
 ## Pieces
 
-- `module/common/vddropbear.sh` - the core library: load config (with safe built-in defaults),
+- `module/common/vddropbear.sh` is the core library: load config (with safe built-in defaults),
   resolve the secret store, ensure a host key, build the Dropbear argument vector, and manage a single
   daemon instance (start / stop / status / restart).
-- `module/service.sh` - boot entry. Honours the BFU/AFU start policy; in AFU mode it waits for
+- `module/service.sh`: boot entry. Honours the BFU/AFU start policy; in AFU mode it waits for
   credential-encrypted storage to unlock without stalling boot.
-- `module/action.sh` - the manager's **Action** button: (re)launch the daemon. It never reads stdin
+- `module/action.sh` is the manager's **Action** button: (re)launch the daemon. It never reads stdin
   and detaches the daemon into its own session, so the manager does not hang.
-- `module/common/vddb-webui.sh` + `module/webroot/index.html` - the WebUI backend and page.
-- `patches/` - small, auditable patches applied to upstream Dropbear at build time.
-- `scripts/build.sh`, `scripts/build-bundles.sh`, `.github/workflows/build.yml` - the build.
+- `module/common/vddb-webui.sh` + `module/webroot/index.html`: the WebUI backend and page.
+- `patches/`: small, auditable patches applied to upstream Dropbear at build time.
+- `scripts/build.sh`, `scripts/build-bundles.sh`, `.github/workflows/build.yml`: the build.
 
 ## Daemon lifecycle (single instance)
 
 `vddb_start` loads the config, stops any running instance, ensures a host key exists, then spawns one
 daemon. The binary is shipped as `vddropbear`, so its process name matches `pgrep -x` exactly (Android
-`mksh` has no `exec -a`). It is launched with `setsid` so it detaches from the caller's process group -
-that is what keeps the manager's Action from blocking.
+`mksh` has no `exec -a`). It is launched with `setsid` so it detaches from the caller's process group,
+which is what keeps the manager's Action from blocking.
 
 ## The secret store (CE vs DE, BFU vs AFU)
 
 Settings are not secret and live on device-encrypted storage (`/data/adb/vddropbear`), readable at
-boot. Secrets - host key, `authorized_keys`, password hashes - default to **credential-encrypted**
+boot. Secrets (host key, `authorized_keys`, password hashes) default to **credential-encrypted**
 storage (`/data/misc_ce/0/vddropbear`), which only unlocks after the user authenticates. Turning on
 `START_IN_BFU` moves the secrets to device-encrypted storage so the daemon can run before first
 unlock, at the cost of those secrets being readable earlier. The module computes which store to use at

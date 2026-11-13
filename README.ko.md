@@ -1,7 +1,7 @@
 <!--
   ======================================================================
    VD Dropbear  ::  standalone, configurable rooted SSH daemon
-   A private SSH server for KernelSU/APatch/Magisk - no invasive ADB exposure.
+   A private SSH server for KernelSU/APatch/Magisk. No invasive ADB exposure.
 
    Copyright (C) 2026  VD171
    SPDX-License-Identifier: Apache-2.0
@@ -53,7 +53,7 @@ Languages: English · [العربية](README.ar.md) · [Čeština](README.cs.md
 공식적인 방법은 없습니다. 이 노출은 루팅하지 않은 순정 휴대폰에서도 따라다닙니다. 셸을 얻으려면 그 사실을
 드러내야만 합니다.
 
-VD Dropbear는 프라이빗한 대안입니다. 루팅된 기기에서 진짜 SSH 서버 - 루트 셸, 네트워크를 통한 SFTP와 rsync -
+VD Dropbear는 프라이빗한 대안입니다. 루팅된 기기에서 진짜 SSH 서버(루트 셸, 네트워크를 통한 SFTP와 rsync)
 를 제공하며, `adb_enabled` 흔적도, USB 디버깅 플래그도 없고, 아무것도 드러내지 않는 버전 배너와 당신이 통제하는
 자격 증명을 갖추고 있습니다. 당신의 접근 권한은 당신의 것으로 남습니다. 기기의 무엇이든 읽을 수 있는, 전역으로
 읽히는 "나는 디버깅 중입니다"라는 플래그가 아닙니다.
@@ -64,7 +64,7 @@ VD Dropbear는 프라이빗한 대안입니다. 루팅된 기기에서 진짜 SS
   **start / stop / restart** 할 수 있습니다. 인스턴스가 둘 이상이 되는 일은 결코 없습니다.
 - **모든 것이 WebUI에서 설정 가능**(또는 `/data/adb/vddropbear/config`):
   - 포트, 그리고 loopback / all / IPv4 / IPv6 / 특정 주소로의 bind
-  - **첫 잠금 해제 전(BFU)에 시작할지, 그 이후에만(AFU) 시작할지** - 단일 토글
+  - **첫 잠금 해제 전(BFU)에 시작할지, 그 이후에만(AFU) 시작할지**, 단일 토글
   - 공개 키 및/또는 비밀번호 인증, 최대 인증 시도 횟수
   - 로그인 사용자, 셸, `HOME`, 추가 environment
   - idle timeout, keepalive, receive window
@@ -160,14 +160,14 @@ upstream을 추적하여 다시 빌드하므로 모듈은 항상 최신 상태�
 * **Discord:** @VD.Priv8 https://discord.com/users/1296831918989639721
 * **E-mail:** vd.priv8@pm.me
 * **XDA-Developers:** @VD171 https://xdaforums.com/m/vd171.4699873/
-* **XDA thread:** _(placeholder - 첫 공개 릴리스 때 추가됨)_
+* **XDA thread:** _(placeholder, 첫 공개 릴리스 때 추가됨)_
 * **GitHub:** @VD171 https://github.com/VD171
 
 ## 라이선스
 
-VD Dropbear 자체 코드는 **Apache-2.0**입니다 - [LICENSE](LICENSE)를 참조하세요. 모듈은 서드파티 바이너리도 함께
-포함합니다 - [Dropbear](https://matt.ucc.asn.au/dropbear/)(MIT 계열), OpenSSH의 `sftp-server`와 `scp`(BSD),
-그리고 `rsync`(GPL-3.0) - 각각 자체 라이선스를 따릅니다. [THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md)를
+VD Dropbear 자체 코드는 **Apache-2.0**입니다. [LICENSE](LICENSE)를 참조하세요. 모듈은 서드파티 바이너리도 함께
+포함합니다: [Dropbear](https://matt.ucc.asn.au/dropbear/)(MIT 계열), OpenSSH의 `sftp-server`와 `scp`(BSD),
+그리고 `rsync`(GPL-3.0), 각각 자체 라이선스를 따릅니다. [THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md)를
 참조하세요. rsync에 대해 GPL을 어떻게 준수하는지도 포함되어 있습니다. 우리의 Apache-2.0 코드는 영향을 받지 않습니다
 (GPL 바이너리는 단지 집합되어 있을 뿐 링크되지 않습니다).
 

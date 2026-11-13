@@ -1,7 +1,7 @@
 <!--
   ======================================================================
    VD Dropbear  ::  standalone, configurable rooted SSH daemon
-   A private SSH server for KernelSU/APatch/Magisk - no invasive ADB exposure.
+   A private SSH server for KernelSU/APatch/Magisk. No invasive ADB exposure.
    Configuration reference.
 
    Copyright (C) 2026  VD171
@@ -48,7 +48,7 @@ Elke combinatie is toegestaan; de gekozen binds worden samengevoegd. Als je alle
 | Key | Default | Betekenis |
 |-----|---------|---------|
 | `LISTEN_LOOPBACK` | `1` | Luister alleen op `127.0.0.1` / `::1`. |
-| `LISTEN_ALL` | `0` | Luister op elke interface (`0.0.0.0` / `::`) - stelt het toestel bloot. |
+| `LISTEN_ALL` | `0` | Luister op elke interface (`0.0.0.0` / `::`); stelt het toestel bloot. |
 | `LISTEN_IPV4` | `1` | Neem IPv4-binds op. |
 | `LISTEN_IPV6` | `1` | Neem IPv6-binds op. |
 | `LISTEN_ADDRESSES` | `""` | Extra specifieke binds, door komma's gescheiden: `addr` (gebruikt `PORT`) of `addr:port`, IPv4 of IPv6. |
@@ -97,9 +97,9 @@ Elke geauthenticeerde login is **root**. Sleutels zijn de standaard; wachtwoorde
 
 ## De geheimenopslag
 
-Hier niet geconfigureerd - afgeleid van `START_IN_BFU`:
+Hier niet geconfigureerd, afgeleid van `START_IN_BFU`:
 
-- **AFU (standaard):** `/data/misc_ce/0/vddropbear/secret` - credential-encrypted, alleen beschikbaar nadat je het toestel ontgrendelt.
-- **BFU:** `/data/adb/vddropbear/secret` - device-encrypted, leesbaar vóór de eerste ontgrendeling.
+- **AFU (standaard):** `/data/misc_ce/0/vddropbear/secret`: credential-encrypted, alleen beschikbaar nadat je het toestel ontgrendelt.
+- **BFU:** `/data/adb/vddropbear/secret`: device-encrypted, leesbaar vóór de eerste ontgrendeling.
 
 Die bevat de hostsleutel, `authorized_keys`, en het `passwd`-hashbestand. Zie [BUILDING.md](../BUILDING.md) voor het formaat van de wachtwoordhash.

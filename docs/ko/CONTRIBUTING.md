@@ -1,7 +1,7 @@
 <!--
   ======================================================================
    VD Dropbear  ::  standalone, configurable rooted SSH daemon
-   A private SSH server for KernelSU/APatch/Magisk - no invasive ADB exposure.
+   A private SSH server for KernelSU/APatch/Magisk. No invasive ADB exposure.
    Contributing guide.
 
    Copyright (C) 2026  VD171
@@ -56,7 +56,7 @@ scripts/build.sh            # fetches the tracked upstream, applies patches, bui
 
 - PR 하나에 논리적 변경 하나; 동기와 보안 영향을 설명하십시오.
 - 기존 셸 스타일에 맞추십시오(POSIX `sh` / Android `mksh`; bashism 금지).
-- 모든 파일에 짧은 SPDX 헤더가 있습니다 - 그대로 유지하십시오.
+- 모든 파일에 짧은 SPDX 헤더가 있습니다. 그대로 유지하십시오.
 - 실제로 사용자에게 보이는 변경은 [`CHANGELOG.md`](../../CHANGELOG.md) 의 `[Unreleased]` 아래에 갱신하십시오.
 - PR을 제출함으로써, 귀하의 기여를 프로젝트의 [Apache-2.0](../../LICENSE) 라이선스로 제공하는 데 동의하게 됩니다.
 

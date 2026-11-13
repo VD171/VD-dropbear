@@ -1,7 +1,7 @@
 <!--
   ======================================================================
    VD Dropbear  ::  standalone, configurable rooted SSH daemon
-   A private SSH server for KernelSU/APatch/Magisk - no invasive ADB exposure.
+   A private SSH server for KernelSU/APatch/Magisk. No invasive ADB exposure.
    AI agents on your device.
 
    Copyright (C) 2026  VD171
@@ -29,13 +29,13 @@
 
 # AI-agents op je toestel
 
-Een permanent draaiend SSH-eindpunt maakt van je telefoon iets wat een **autonome AI-agent rechtstreeks kan bedienen**. Elke agent die een shell of een SSH-verbinding kan aansturen - Claude Code, aider, een script met een LLM in de lus, je eigen automatisering - krijgt een echte root-sessie op het toestel, via het netwerk, zonder USB-kabel en zonder de zelfonthullende debugvlaggen van ADB.
+Een permanent draaiend SSH-eindpunt maakt van je telefoon iets wat een **autonome AI-agent rechtstreeks kan bedienen**. Elke agent die een shell of een SSH-verbinding kan aansturen (Claude Code, aider, een script met een LLM in de lus, je eigen automatisering) krijgt een echte root-sessie op het toestel, via het netwerk, zonder USB-kabel en zonder de zelfonthullende debugvlaggen van ADB.
 
 Deze pagina werkt het idee uit dat in de README is geïntroduceerd.
 
 ## Waarom SSH en niet ADB voor agents
 
-ADB kondigt zichzelf aan: `adb_enabled` en `development_settings_enabled` zijn door iedereen leesbaar, de verbinding wordt gelogd, en er is geen ondersteunde manier om te verbergen dat debuggen aan staat (of aan heeft gestaan). Een agent die over ADB werkt, laat dat spoor op het toestel achter voor elke app of antifraude-SDK om te lezen. VD Dropbear is het private alternatief - een gewone SSH-login, met inloggegevens die jij beheert en een banner die niets prijsgeeft.
+ADB kondigt zichzelf aan: `adb_enabled` en `development_settings_enabled` zijn door iedereen leesbaar, de verbinding wordt gelogd, en er is geen ondersteunde manier om te verbergen dat debuggen aan staat (of aan heeft gestaan). Een agent die over ADB werkt, laat dat spoor op het toestel achter voor elke app of antifraude-SDK om te lezen. VD Dropbear is het private alternatief: een gewone SSH-login, met inloggegevens die jij beheert en een banner die niets prijsgeeft.
 
 ## Wat een agent kan doen
 
@@ -43,20 +43,20 @@ Over één verbinding ziet een agent een normale Linux-achtige shell en kan die:
 
 - bestanden lezen en bewerken, instellingen omzetten, en modules, pakketten en services beheren;
 - logs uitpluizen, artefacten ophalen, en op aanvraag diagnoses of forensisch onderzoek uitvoeren;
-- bestanden beide kanten op verplaatsen en synchroniseren via `scp` / `sftp` / `rsync` - back-ups, migraties, provisioning;
+- bestanden beide kanten op verplaatsen en synchroniseren via `scp` / `sftp` / `rsync`: back-ups, migraties, provisioning;
 - een hele vloot van geroote toestellen vanaf één plek aansturen, elk bereikbaar met een eigen sleutel.
 
-Omdat het project **AI-vriendelijk** is gebouwd - een gedocumenteerd configuratiebestand, een expliciet runtime [env contract](../../patches/README.md), voorspelbare paden en status in platte tekst - kan een agent zonder giswerk ontdekken hoe die het moet gebruiken.
+Omdat het project **AI-vriendelijk** is gebouwd (een gedocumenteerd configuratiebestand, een expliciet runtime [env contract](../../patches/README.md), voorspelbare paden en status in platte tekst) kan een agent zonder giswerk ontdekken hoe die het moet gebruiken.
 
 ## Het veilig doen
 
 Dit is root, dus behandel het als root:
 
 - geef de agent een **eigen gebruiker en sleutel**, niet die van jou;
-- beperk de binds tot netwerken die je vertrouwt - loopback of een VPN in plaats van het open internet (zie [Configuration](CONFIGURATION.md));
+- beperk de binds tot netwerken die je vertrouwt: loopback of een VPN in plaats van het open internet (zie [Configuration](CONFIGURATION.md));
 - houd wachtwoordauthenticatie uit; een sleutel is intrekbaar en wordt nooit ingetypt;
 - je kunt op elk moment een sleutel intrekken of de daemon stoppen vanuit de WebUI;
-- onthoud dat elke verbinding een volledige root-sessie is - geef de agent alleen de reikwijdte die die nodig heeft.
+- onthoud dat elke verbinding een volledige root-sessie is. Geef de agent alleen de reikwijdte die die nodig heeft.
 
 ## Een minimale opzet
 

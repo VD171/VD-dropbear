@@ -1,7 +1,7 @@
 <!--
   ======================================================================
    VD Dropbear  ::  standalone, configurable rooted SSH daemon
-   A private SSH server for KernelSU/APatch/Magisk - no invasive ADB exposure.
+   A private SSH server for KernelSU/APatch/Magisk. No invasive ADB exposure.
    Configuration reference.
 
    Copyright (C) 2026  VD171
@@ -52,7 +52,7 @@
 | Key | Default | Meaning |
 |-----|---------|---------|
 | `LISTEN_LOOPBACK` | `1` | ฟังเฉพาะบน `127.0.0.1` / `::1` เท่านั้น |
-| `LISTEN_ALL` | `0` | ฟังบนทุกอินเทอร์เฟซ (`0.0.0.0` / `::`) - เปิดเผยอุปกรณ์ |
+| `LISTEN_ALL` | `0` | ฟังบนทุกอินเทอร์เฟซ (`0.0.0.0` / `::`); เปิดเผยอุปกรณ์ |
 | `LISTEN_IPV4` | `1` | รวมการ bind แบบ IPv4 |
 | `LISTEN_IPV6` | `1` | รวมการ bind แบบ IPv6 |
 | `LISTEN_ADDRESSES` | `""` | การ bind เฉพาะเพิ่มเติม คั่นด้วยจุลภาค: `addr` (ใช้ `PORT`) หรือ `addr:port` ทั้ง IPv4 หรือ IPv6 |
@@ -101,11 +101,11 @@
 
 ## ที่เก็บความลับ
 
-ไม่ได้กำหนดค่าที่นี่ - ถูกระบุจาก `START_IN_BFU`:
+ไม่ได้กำหนดค่าที่นี่ ถูกระบุจาก `START_IN_BFU`:
 
-- **AFU (ค่าเริ่มต้น):** `/data/misc_ce/0/vddropbear/secret` - credential-encrypted ใช้งานได้หลังจากที่
+- **AFU (ค่าเริ่มต้น):** `/data/misc_ce/0/vddropbear/secret`: credential-encrypted ใช้งานได้หลังจากที่
   คุณปลดล็อกอุปกรณ์แล้วเท่านั้น
-- **BFU:** `/data/adb/vddropbear/secret` - device-encrypted อ่านได้ก่อนการปลดล็อกครั้งแรก
+- **BFU:** `/data/adb/vddropbear/secret`: device-encrypted อ่านได้ก่อนการปลดล็อกครั้งแรก
 
 มันเก็บ host key, `authorized_keys` และไฟล์แฮช `passwd` ดู
 [BUILDING.md](../BUILDING.md) สำหรับรูปแบบแฮชรหัสผ่าน

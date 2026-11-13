@@ -1,7 +1,7 @@
 <!--
   ======================================================================
    VD Dropbear  ::  standalone, configurable rooted SSH daemon
-   A private SSH server for KernelSU/APatch/Magisk - no invasive ADB exposure.
+   A private SSH server for KernelSU/APatch/Magisk. No invasive ADB exposure.
    Architecture.
 
    Copyright (C) 2026  VD171
@@ -34,28 +34,28 @@ VD Dropbear هو وحدة KernelSU / APatch / Magisk تشغّل خادم Dropbea
 
 ## المكوّنات
 
-- `module/common/vddropbear.sh` - المكتبة الأساسية: تحميل الإعدادات (مع قيم افتراضية مدمجة آمنة)،
+- `module/common/vddropbear.sh`، المكتبة الأساسية: تحميل الإعدادات (مع قيم افتراضية مدمجة آمنة)،
   وتحديد مخزن الأسرار، وضمان وجود مفتاح مضيف، وبناء متجه وسائط Dropbear، وإدارة نسخة واحدة من الخادم
   الخفي (تشغيل / إيقاف / حالة / إعادة تشغيل).
-- `module/service.sh` - مدخل الإقلاع. يحترم سياسة بدء التشغيل BFU/AFU؛ وفي وضع AFU ينتظر فتح التخزين
+- `module/service.sh`: مدخل الإقلاع. يحترم سياسة بدء التشغيل BFU/AFU؛ وفي وضع AFU ينتظر فتح التخزين
   المشفَّر ببيانات الاعتماد دون تعطيل الإقلاع.
-- `module/action.sh` - زر **Action** في المدير: (إعادة) تشغيل الخادم الخفي. لا يقرأ stdin أبداً
+- `module/action.sh`، زر **Action** في المدير: (إعادة) تشغيل الخادم الخفي. لا يقرأ stdin أبداً
   ويفصل الخادم الخفي إلى جلسته الخاصة، فلا يتجمّد المدير.
-- `module/common/vddb-webui.sh` + `module/webroot/index.html` - الواجهة الخلفية لـ WebUI وصفحتها.
-- `patches/` - تصحيحات صغيرة قابلة للتدقيق تُطبَّق على Dropbear الأصلي وقت البناء.
-- `scripts/build.sh` و`scripts/build-bundles.sh` و`.github/workflows/build.yml` - عملية البناء.
+- `module/common/vddb-webui.sh` + `module/webroot/index.html`: الواجهة الخلفية لـ WebUI وصفحتها.
+- `patches/`: تصحيحات صغيرة قابلة للتدقيق تُطبَّق على Dropbear الأصلي وقت البناء.
+- `scripts/build.sh` و`scripts/build-bundles.sh` و`.github/workflows/build.yml`: عملية البناء.
 
 ## دورة حياة الخادم الخفي (نسخة واحدة)
 
 يحمّل `vddb_start` الإعدادات، ويوقف أي نسخة قيد التشغيل، ويضمن وجود مفتاح مضيف، ثم يطلق خادماً خفياً
 واحداً. يُشحَن الملف الثنائي باسم `vddropbear`، فيطابق اسم عمليته `pgrep -x` تماماً (لا يملك `mksh`
-في أندرويد الخيار `exec -a`). يُطلَق بـ `setsid` كي ينفصل عن مجموعة عمليات المُستدعي - وهذا ما يمنع
+في أندرويد الخيار `exec -a`). يُطلَق بـ `setsid` كي ينفصل عن مجموعة عمليات المُستدعي: وهذا ما يمنع
 زر Action في المدير من التوقف.
 
 ## مخزن الأسرار (CE مقابل DE، BFU مقابل AFU)
 
 الإعدادات ليست سرّية وتقيم على التخزين المشفَّر بالجهاز (`/data/adb/vddropbear`)، وهي قابلة للقراءة
-عند الإقلاع. أما الأسرار - مفتاح المضيف و`authorized_keys` وبصمات كلمات المرور - فتكون افتراضياً على
+عند الإقلاع. أما الأسرار (مفتاح المضيف و`authorized_keys` وبصمات كلمات المرور) فتكون افتراضياً على
 التخزين **المشفَّر ببيانات الاعتماد** (`/data/misc_ce/0/vddropbear`)، الذي لا يُفتَح إلا بعد مصادقة
 المستخدم. تفعيل `START_IN_BFU` ينقل الأسرار إلى التخزين المشفَّر بالجهاز كي يستطيع الخادم الخفي العمل
 قبل أول فتح، على حساب أن تصبح تلك الأسرار قابلة للقراءة في وقت أبكر. تحسب الوحدة أي مخزن تستخدم في كل

@@ -1,7 +1,7 @@
 <!--
   ======================================================================
    VD Dropbear  ::  standalone, configurable rooted SSH daemon
-   A private SSH server for KernelSU/APatch/Magisk - no invasive ADB exposure.
+   A private SSH server for KernelSU/APatch/Magisk. No invasive ADB exposure.
    Architecture.
 
    Copyright (C) 2026  VD171
@@ -34,26 +34,26 @@ VD Dropbear 是一个 KernelSU / APatch / Magisk 模块，仅运行一个 Dropbe
 
 ## 组成部分
 
-- `module/common/vddropbear.sh` - 核心库：加载配置（带安全的内置默认值）、解析 secret 存储、确保存在 host key、
+- `module/common/vddropbear.sh`：核心库：加载配置（带安全的内置默认值）、解析 secret 存储、确保存在 host key、
   构建 Dropbear 参数向量，以及管理单个守护进程实例（start / stop / status / restart）。
-- `module/service.sh` - 启动入口。遵循 BFU/AFU 启动策略；在 AFU 模式下，它等待 credential-encrypted 存储解锁，
+- `module/service.sh`：启动入口。遵循 BFU/AFU 启动策略；在 AFU 模式下，它等待 credential-encrypted 存储解锁，
   而不会拖慢启动。
-- `module/action.sh` - 管理器的 **Action** 按钮：（重新）启动守护进程。它从不读取 stdin，并将守护进程分离到自己
+- `module/action.sh`：管理器的 **Action** 按钮：（重新）启动守护进程。它从不读取 stdin，并将守护进程分离到自己
   的会话中，因此管理器不会卡住。
-- `module/common/vddb-webui.sh` + `module/webroot/index.html` - WebUI 的后端和页面。
-- `patches/` - 在构建时应用到 upstream Dropbear 上的小而可审计的补丁。
-- `scripts/build.sh`、`scripts/build-bundles.sh`、`.github/workflows/build.yml` - 构建。
+- `module/common/vddb-webui.sh` + `module/webroot/index.html`：WebUI 的后端和页面。
+- `patches/`：在构建时应用到 upstream Dropbear 上的小而可审计的补丁。
+- `scripts/build.sh`、`scripts/build-bundles.sh`、`.github/workflows/build.yml`：构建。
 
 ## 守护进程生命周期（单实例）
 
 `vddb_start` 加载配置、停止任何正在运行的实例、确保 host key 存在，然后生成一个守护进程。二进制文件以
 `vddropbear` 名称发布，因此其进程名与 `pgrep -x` 完全匹配（Android `mksh` 没有 `exec -a`）。它以 `setsid`
-启动，从而脱离调用者的进程组 - 这正是让管理器的 Action 不被阻塞的原因。
+启动，从而脱离调用者的进程组：这正是让管理器的 Action 不被阻塞的原因。
 
 ## secret 存储（CE 与 DE，BFU 与 AFU）
 
-设置并非 secret，存放在 device-encrypted 存储（`/data/adb/vddropbear`）中，启动时即可读取。secret - host key、
-`authorized_keys`、密码哈希 - 默认存放在 **credential-encrypted** 存储（`/data/misc_ce/0/vddropbear`）中，只有在
+设置并非 secret，存放在 device-encrypted 存储（`/data/adb/vddropbear`）中，启动时即可读取。secret（host key、
+`authorized_keys`、密码哈希）默认存放在 **credential-encrypted** 存储（`/data/misc_ce/0/vddropbear`）中，只有在
 用户完成认证后才会解锁。开启 `START_IN_BFU` 会把这些 secret 移到 device-encrypted 存储，使守护进程能在首次解锁
 之前运行，代价是这些 secret 会更早可读。模块会在每个启动阶段计算应使用哪个存储。
 

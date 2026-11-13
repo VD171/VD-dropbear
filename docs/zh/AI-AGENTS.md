@@ -1,7 +1,7 @@
 <!--
   ======================================================================
    VD Dropbear  ::  standalone, configurable rooted SSH daemon
-   A private SSH server for KernelSU/APatch/Magisk - no invasive ADB exposure.
+   A private SSH server for KernelSU/APatch/Magisk. No invasive ADB exposure.
    AI agents on your device.
 
    Copyright (C) 2026  VD171
@@ -30,7 +30,7 @@
 # 设备上的 AI 代理
 
 一个常驻的 SSH 端点会把你的手机变成**自主 AI 代理可以直接操作**的对象。任何能够驱动 shell 或 SSH 连接的代理
-- Claude Code、aider、带有 LLM 回路的脚本、你自己的自动化 - 都能通过网络获得设备上真正的 root 会话，无需 USB
+（Claude Code、aider、带有 LLM 回路的脚本、你自己的自动化）都能通过网络获得设备上真正的 root 会话，无需 USB
 连线，也没有 ADB 那种自我暴露的调试标志。
 
 本页对 README 中引入的想法作了进一步展开。
@@ -39,7 +39,7 @@
 
 ADB 会暴露自身：`adb_enabled` 和 `development_settings_enabled` 任何人都可读，连接会被记录，而且没有受支持的办法
 隐藏调试已经（或曾经）开启这一事实。通过 ADB 工作的代理会在设备上留下这一痕迹，任何应用或反欺诈 SDK 都能读取。
-VD Dropbear 是私密的替代方案 - 一次普通的 SSH 登录，凭据由你掌控，横幅不透露任何信息。
+VD Dropbear 是私密的替代方案：一次普通的 SSH 登录，凭据由你掌控，横幅不透露任何信息。
 
 ## 代理能做什么
 
@@ -47,22 +47,22 @@ VD Dropbear 是私密的替代方案 - 一次普通的 SSH 登录，凭据由你
 
 - 读取和编辑文件、切换设置，以及管理模块、软件包和服务；
 - 分类日志、拉取构件，并按需运行诊断或取证；
-- 通过 `scp` / `sftp` / `rsync` 双向移动和同步文件 - 备份、迁移、置备；
+- 通过 `scp` / `sftp` / `rsync` 双向移动和同步文件：备份、迁移、置备；
 - 从一个地方驱动整支 root 设备机群，每台都可用各自的密钥访问。
 
-由于本项目被构建为**对 AI 友好**的 - 带文档的配置文件、明确的运行时
-[env 契约](../../patches/README.md)、可预测的路径以及纯文本状态 - 代理无需猜测即可发现如何使用它。
+由于本项目被构建为**对 AI 友好**的（带文档的配置文件、明确的运行时
+[env 契约](../../patches/README.md)、可预测的路径以及纯文本状态）代理无需猜测即可发现如何使用它。
 
 ## 安全地进行
 
 这是 root，所以要把它当作 root 对待：
 
 - 给代理一个**专用的用户和密钥**，而不是你个人的那套；
-- 把绑定范围限定在你信任的网络 - loopback 或 VPN，而非开放的互联网
+- 把绑定范围限定在你信任的网络：loopback 或 VPN，而非开放的互联网
   （见[配置](CONFIGURATION.md)）；
 - 保持密码认证关闭；密钥可撤销且从不需要键入；
 - 你可以随时从 WebUI 撤销密钥或停止守护进程；
-- 记住每个连接都是一次完整的 root 会话 - 只给代理它所需的触及范围。
+- 记住每个连接都是一次完整的 root 会话：只给代理它所需的触及范围。
 
 ## 一套最小配置
 

@@ -1,7 +1,7 @@
 <!--
   ======================================================================
    VD Dropbear  ::  standalone, configurable rooted SSH daemon
-   A private SSH server for KernelSU/APatch/Magisk - no invasive ADB exposure.
+   A private SSH server for KernelSU/APatch/Magisk. No invasive ADB exposure.
    Architecture.
 
    Copyright (C) 2026  VD171
@@ -35,28 +35,28 @@ satu perangkat; semua yang spesifik berupa konfigurasi runtime atau sebuah secre
 
 ## Bagian-bagian
 
-- `module/common/vddropbear.sh` - pustaka inti: memuat konfigurasi (dengan default bawaan yang aman),
+- `module/common/vddropbear.sh`, pustaka inti: memuat konfigurasi (dengan default bawaan yang aman),
   menentukan secret store, memastikan ada host key, menyusun vektor argumen Dropbear, dan mengelola
   satu instance daemon tunggal (start / stop / status / restart).
-- `module/service.sh` - titik masuk boot. Mematuhi kebijakan start BFU/AFU; dalam mode AFU ia menunggu
+- `module/service.sh`: titik masuk boot. Mematuhi kebijakan start BFU/AFU; dalam mode AFU ia menunggu
   penyimpanan credential-encrypted terbuka tanpa menahan proses boot.
-- `module/action.sh` - tombol **Action** pada manajer: (men)jalankan ulang daemon. Ia tidak pernah
+- `module/action.sh`, tombol **Action** pada manajer: (men)jalankan ulang daemon. Ia tidak pernah
   membaca stdin dan melepaskan daemon ke sesinya sendiri, sehingga manajer tidak menggantung.
-- `module/common/vddb-webui.sh` + `module/webroot/index.html` - backend dan halaman WebUI.
-- `patches/` - patch kecil yang dapat diaudit, diterapkan ke Dropbear upstream saat build.
-- `scripts/build.sh`, `scripts/build-bundles.sh`, `.github/workflows/build.yml` - proses build.
+- `module/common/vddb-webui.sh` + `module/webroot/index.html`: backend dan halaman WebUI.
+- `patches/`: patch kecil yang dapat diaudit, diterapkan ke Dropbear upstream saat build.
+- `scripts/build.sh`, `scripts/build-bundles.sh`, `.github/workflows/build.yml`: proses build.
 
 ## Siklus hidup daemon (instance tunggal)
 
 `vddb_start` memuat konfigurasi, menghentikan instance yang sedang berjalan, memastikan ada host key,
 lalu menelurkan satu daemon. Binary dikirim sebagai `vddropbear`, sehingga nama prosesnya cocok persis
 dengan `pgrep -x` (`mksh` Android tidak punya `exec -a`). Ia dijalankan dengan `setsid` agar terlepas
-dari grup proses pemanggil - itulah yang membuat tombol Action manajer tidak terblokir.
+dari grup proses pemanggil: itulah yang membuat tombol Action manajer tidak terblokir.
 
 ## Secret store (CE vs DE, BFU vs AFU)
 
 Pengaturan bukanlah secret dan berada di penyimpanan device-encrypted (`/data/adb/vddropbear`), yang
-dapat dibaca saat boot. Secret - host key, `authorized_keys`, hash kata sandi - secara default berada
+dapat dibaca saat boot. Secret (host key, `authorized_keys`, hash kata sandi) secara default berada
 di penyimpanan **credential-encrypted** (`/data/misc_ce/0/vddropbear`), yang baru terbuka setelah
 pengguna terautentikasi. Mengaktifkan `START_IN_BFU` memindahkan secret ke penyimpanan device-encrypted
 agar daemon dapat berjalan sebelum first unlock, dengan konsekuensi secret tersebut dapat dibaca lebih

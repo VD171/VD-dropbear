@@ -1,7 +1,7 @@
 <!--
   ======================================================================
    VD Dropbear  ::  standalone, configurable rooted SSH daemon
-   A private SSH server for KernelSU/APatch/Magisk - no invasive ADB exposure.
+   A private SSH server for KernelSU/APatch/Magisk. No invasive ADB exposure.
    Code of Conduct.
 
    Copyright (C) 2026  VD171
@@ -54,8 +54,8 @@
 
 ## Сфера действия
 
-Этот Кодекс поведения действует во всех пространствах проекта - в репозитории, issue, pull request'ах и
-на любом официальном канале, перечисленном в README, - а также когда кто-либо представляет проект
+Этот Кодекс поведения действует во всех пространствах проекта (в репозитории, issue, pull request'ах и
+на любом официальном канале, перечисленном в README) а также когда кто-либо представляет проект
 публично.
 
 ## Применение

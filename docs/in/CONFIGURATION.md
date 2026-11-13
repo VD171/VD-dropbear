@@ -1,7 +1,7 @@
 <!--
   ======================================================================
    VD Dropbear  ::  standalone, configurable rooted SSH daemon
-   A private SSH server for KernelSU/APatch/Magisk - no invasive ADB exposure.
+   A private SSH server for KernelSU/APatch/Magisk. No invasive ADB exposure.
    Configuration reference.
 
    Copyright (C) 2026  VD171
@@ -53,7 +53,7 @@ Dropbear melakukan bind ke loopback alih-alih setiap antarmuka.
 | Key | Default | Makna |
 |-----|---------|---------|
 | `LISTEN_LOOPBACK` | `1` | Dengarkan hanya di `127.0.0.1` / `::1`. |
-| `LISTEN_ALL` | `0` | Dengarkan di setiap antarmuka (`0.0.0.0` / `::`) - memaparkan perangkat. |
+| `LISTEN_ALL` | `0` | Dengarkan di setiap antarmuka (`0.0.0.0` / `::`); memaparkan perangkat. |
 | `LISTEN_IPV4` | `1` | Sertakan bind IPv4. |
 | `LISTEN_IPV6` | `1` | Sertakan bind IPv6. |
 | `LISTEN_ADDRESSES` | `""` | Bind spesifik tambahan, dipisah koma: `addr` (memakai `PORT`) atau `addr:port`, IPv4 atau IPv6. |
@@ -102,11 +102,11 @@ Setiap login yang terautentikasi adalah **root**. Kunci adalah default; kata san
 
 ## Secret store
 
-Tidak dikonfigurasi di sini - ditentukan dari `START_IN_BFU`:
+Tidak dikonfigurasi di sini, ditentukan dari `START_IN_BFU`:
 
-- **AFU (default):** `/data/misc_ce/0/vddropbear/secret` - credential-encrypted, hanya tersedia setelah
+- **AFU (default):** `/data/misc_ce/0/vddropbear/secret`: credential-encrypted, hanya tersedia setelah
   Anda membuka kunci perangkat.
-- **BFU:** `/data/adb/vddropbear/secret` - device-encrypted, dapat dibaca sebelum first unlock.
+- **BFU:** `/data/adb/vddropbear/secret`: device-encrypted, dapat dibaca sebelum first unlock.
 
 Store ini menyimpan host key, `authorized_keys`, dan berkas hash `passwd`. Lihat
 [BUILDING.md](../BUILDING.md) untuk format hash kata sandi.

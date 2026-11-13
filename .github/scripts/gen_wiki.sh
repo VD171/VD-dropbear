@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # ======================================================================
 #  VD Dropbear  ::  standalone, configurable rooted SSH daemon
-#  A private SSH server for KernelSU/APatch/Magisk - no invasive ADB exposure.
+#  A private SSH server for KernelSU/APatch/Magisk. No invasive ADB exposure.
 #  Render docs/ into the GitHub project Wiki: one tree per language, a
 #  per-page language switcher, and the attribution footer on every page.
 #

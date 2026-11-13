@@ -1,6 +1,6 @@
 # ======================================================================
 #  VD Dropbear  ::  standalone, configurable rooted SSH daemon
-#  A private SSH server for KernelSU/APatch/Magisk - no invasive ADB exposure.
+#  A private SSH server for KernelSU/APatch/Magisk. No invasive ADB exposure.
 #  Shipped default configuration (copied to the live config on first boot).
 #
 #  Copyright (C) 2026  VD171
@@ -30,7 +30,7 @@
 #
 # It is sourced as a shell script: KEY=value, no spaces around '='.
 # It holds SETTINGS ONLY. Secrets (host keys, authorized_keys, password hashes)
-# never live here - see the "secret store" note at the bottom.
+# never live here; see the "secret store" note at the bottom.
 #
 # ---------------------------------------------------------------------------
 # !! SECURITY !! Every connection that authenticates receives a ROOT shell.
@@ -46,12 +46,12 @@ ENABLED=1
 #   1 = start in BFU: lets you SSH in before unlock (e.g. to unlock remotely),
 #       but the host key + authorized_keys + password hash then live on
 #       device-encrypted storage (/data/adb), readable before unlock. This is a
-#       deliberate exposure trade-off - only enable it if you need pre-unlock SSH.
+#       deliberate exposure trade-off; only enable it if you need pre-unlock SSH.
 START_IN_BFU=0
 
 # --- Network ---------------------------------------------------------------
 PORT=2222
-# Listening is composable - mix any of these freely; they merge into one set of
+# Listening is composable: mix any of these freely; they merge into one set of
 # binds. IPV4/IPV6 filter the family of the loopback/all binds; specific
 # addresses carry their own family and may carry their own ":port".
 LISTEN_LOOPBACK=1      # localhost only (127.0.0.1 / ::1)  -> "local only"
@@ -68,7 +68,7 @@ LISTEN_ADDRESSES=
 # --- Identity / stealth ----------------------------------------------------
 # Replace the SSH version banner so scanners cannot fingerprint the exact
 # server/version (the SSH protocol requires *some* banner, so it cannot be
-# removed entirely - only made uninformative).
+# removed entirely, only made uninformative).
 HIDE_IDENT=1
 # Custom banner. Empty = a neutral "SSH-2.0-" with no product or version.
 IDENT_STRING=

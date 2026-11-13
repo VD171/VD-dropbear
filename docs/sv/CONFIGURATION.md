@@ -1,7 +1,7 @@
 <!--
   ======================================================================
    VD Dropbear  ::  standalone, configurable rooted SSH daemon
-   A private SSH server for KernelSU/APatch/Magisk - no invasive ADB exposure.
+   A private SSH server for KernelSU/APatch/Magisk. No invasive ADB exposure.
    Configuration reference.
 
    Copyright (C) 2026  VD171
@@ -53,7 +53,7 @@ VD Dropbear loopback i stället för varje gränssnitt.
 | Key | Default | Meaning |
 |-----|---------|---------|
 | `LISTEN_LOOPBACK` | `1` | Lyssna endast på `127.0.0.1` / `::1`. |
-| `LISTEN_ALL` | `0` | Lyssna på varje gränssnitt (`0.0.0.0` / `::`) - exponerar enheten. |
+| `LISTEN_ALL` | `0` | Lyssna på varje gränssnitt (`0.0.0.0` / `::`); exponerar enheten. |
 | `LISTEN_IPV4` | `1` | Inkludera IPv4-bindningar. |
 | `LISTEN_IPV6` | `1` | Inkludera IPv6-bindningar. |
 | `LISTEN_ADDRESSES` | `""` | Extra specifika bindningar, kommaseparerade: `addr` (använder `PORT`) eller `addr:port`, IPv4 eller IPv6. |
@@ -102,11 +102,11 @@ Varje autentiserad inloggning är **root**. Nycklar är standard; lösenord är 
 
 ## Hemlighetslagret
 
-Konfigureras inte här - löses upp utifrån `START_IN_BFU`:
+Konfigureras inte här, löses upp utifrån `START_IN_BFU`:
 
-- **AFU (standard):** `/data/misc_ce/0/vddropbear/secret` - credential-encrypted, tillgänglig först
+- **AFU (standard):** `/data/misc_ce/0/vddropbear/secret`: credential-encrypted, tillgänglig först
   efter att du låst upp enheten.
-- **BFU:** `/data/adb/vddropbear/secret` - device-encrypted, läsbar före första upplåsningen.
+- **BFU:** `/data/adb/vddropbear/secret`: device-encrypted, läsbar före första upplåsningen.
 
 Det innehåller värdnyckeln, `authorized_keys` och `passwd`-hashfilen. Se
 [BUILDING.md](../BUILDING.md) för lösenordshashens format.

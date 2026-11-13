@@ -1,7 +1,7 @@
 <!--
   ======================================================================
    VD Dropbear  ::  standalone, configurable rooted SSH daemon
-   A private SSH server for KernelSU/APatch/Magisk - no invasive ADB exposure.
+   A private SSH server for KernelSU/APatch/Magisk. No invasive ADB exposure.
    Architecture.
 
    Copyright (C) 2026  VD171
@@ -33,20 +33,20 @@ VD Dropbearは、ちょうど1つのDropbear SSHデーモンを実行するKerne
 
 ## 構成要素
 
-- `module/common/vddropbear.sh` - 中核となるライブラリ：設定の読み込み（安全な組み込みの既定値付き）、シークレットストアの解決、ホスト鍵の確保、Dropbearの引数ベクタの構築、そして単一のデーモンインスタンスの管理（start / stop / status / restart）。
-- `module/service.sh` - 起動エントリ。BFU/AFUの起動ポリシーを尊重し、AFUモードでは起動を止めることなく、認証情報で暗号化されたストレージのアンロックを待ちます。
-- `module/action.sh` - マネージャの **Action** ボタン：デーモンを（再）起動します。stdinを一切読まず、デーモンを自身のセッションへ切り離すため、マネージャがハングしません。
-- `module/common/vddb-webui.sh` + `module/webroot/index.html` - WebUIのバックエンドとページ。
-- `patches/` - ビルド時にupstreamのDropbearへ適用される、小さく監査可能なパッチ。
-- `scripts/build.sh`、`scripts/build-bundles.sh`、`.github/workflows/build.yml` - ビルド。
+- `module/common/vddropbear.sh`：中核となるライブラリ。設定の読み込み（安全な組み込みの既定値付き）、シークレットストアの解決、ホスト鍵の確保、Dropbearの引数ベクタの構築、そして単一のデーモンインスタンスの管理（start / stop / status / restart）。
+- `module/service.sh`：起動エントリ。BFU/AFUの起動ポリシーを尊重し、AFUモードでは起動を止めることなく、認証情報で暗号化されたストレージのアンロックを待ちます。
+- `module/action.sh`：マネージャの **Action** ボタン。デーモンを（再）起動します。stdinを一切読まず、デーモンを自身のセッションへ切り離すため、マネージャがハングしません。
+- `module/common/vddb-webui.sh` + `module/webroot/index.html`：WebUIのバックエンドとページ。
+- `patches/`：ビルド時にupstreamのDropbearへ適用される、小さく監査可能なパッチ。
+- `scripts/build.sh`、`scripts/build-bundles.sh`、`.github/workflows/build.yml`：ビルド。
 
 ## デーモンのライフサイクル（単一インスタンス）
 
-`vddb_start` は設定を読み込み、実行中のインスタンスがあれば停止し、ホスト鍵の存在を確保したうえで、1つのデーモンを起動します。バイナリは `vddropbear` として配布されるため、そのプロセス名は `pgrep -x` と完全に一致します（Androidの `mksh` には `exec -a` がありません）。`setsid` で起動され、呼び出し元のプロセスグループから切り離されます - これがマネージャのActionをブロックさせない仕組みです。
+`vddb_start` は設定を読み込み、実行中のインスタンスがあれば停止し、ホスト鍵の存在を確保したうえで、1つのデーモンを起動します。バイナリは `vddropbear` として配布されるため、そのプロセス名は `pgrep -x` と完全に一致します（Androidの `mksh` には `exec -a` がありません）。`setsid` で起動され、呼び出し元のプロセスグループから切り離されます。これがマネージャのActionをブロックさせない仕組みです。
 
 ## シークレットストア（CE対DE、BFU対AFU）
 
-設定はシークレットではなく、デバイス暗号化ストレージ（`/data/adb/vddropbear`）に置かれ、起動時に読み取れます。シークレット - ホスト鍵、`authorized_keys`、パスワードハッシュ - は既定で **認証情報暗号化（credential-encrypted）** ストレージ（`/data/misc_ce/0/vddropbear`）に置かれ、これはユーザーが認証したあとにのみアンロックされます。`START_IN_BFU` を有効にするとシークレットはデバイス暗号化ストレージへ移り、デーモンは最初のアンロック前に実行できるようになりますが、その代わりにシークレットがより早い段階で読み取れるようになります。モジュールは各起動ステージでどのストアを使うかを計算します。
+設定はシークレットではなく、デバイス暗号化ストレージ（`/data/adb/vddropbear`）に置かれ、起動時に読み取れます。シークレット（ホスト鍵、`authorized_keys`、パスワードハッシュ）は既定で **認証情報暗号化（credential-encrypted）** ストレージ（`/data/misc_ce/0/vddropbear`）に置かれ、これはユーザーが認証したあとにのみアンロックされます。`START_IN_BFU` を有効にするとシークレットはデバイス暗号化ストレージへ移り、デーモンは最初のアンロック前に実行できるようになりますが、その代わりにシークレットがより早い段階で読み取れるようになります。モジュールは各起動ステージでどのストアを使うかを計算します。
 
 ## パッチセット
 

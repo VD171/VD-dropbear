@@ -1,7 +1,7 @@
 <!--
   ======================================================================
    VD Dropbear  ::  standalone, configurable rooted SSH daemon
-   A private SSH server for KernelSU/APatch/Magisk - no invasive ADB exposure.
+   A private SSH server for KernelSU/APatch/Magisk. No invasive ADB exposure.
    Configuration reference.
 
    Copyright (C) 2026  VD171
@@ -51,7 +51,7 @@
 | Key | Default | Meaning |
 |-----|---------|---------|
 | `LISTEN_LOOPBACK` | `1` | 仅监听 `127.0.0.1` / `::1`。 |
-| `LISTEN_ALL` | `0` | 在每个接口上监听（`0.0.0.0` / `::`） - 会暴露设备。 |
+| `LISTEN_ALL` | `0` | 在每个接口上监听（`0.0.0.0` / `::`）；会暴露设备。 |
 | `LISTEN_IPV4` | `1` | 包含 IPv4 绑定。 |
 | `LISTEN_IPV6` | `1` | 包含 IPv6 绑定。 |
 | `LISTEN_ADDRESSES` | `""` | 额外的特定绑定，以逗号分隔：`addr`（使用 `PORT`）或 `addr:port`，IPv4 或 IPv6。 |
@@ -100,10 +100,10 @@
 
 ## secret 存储
 
-此处不作配置 - 由 `START_IN_BFU` 决定：
+此处不作配置，由 `START_IN_BFU` 决定：
 
-- **AFU（默认）：** `/data/misc_ce/0/vddropbear/secret` - credential-encrypted，仅在你解锁设备后才可用。
-- **BFU：** `/data/adb/vddropbear/secret` - device-encrypted，首次解锁前即可读取。
+- **AFU（默认）：** `/data/misc_ce/0/vddropbear/secret`：credential-encrypted，仅在你解锁设备后才可用。
+- **BFU：** `/data/adb/vddropbear/secret`：device-encrypted，首次解锁前即可读取。
 
 它保存 host key、`authorized_keys` 以及 `passwd` 哈希文件。密码哈希格式见
 [BUILDING.md](../BUILDING.md)。

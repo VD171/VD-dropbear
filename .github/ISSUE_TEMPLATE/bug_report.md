@@ -24,7 +24,7 @@ What you thought would happen instead.
 - Auth used (public key / password):
 
 **Logs**
-Relevant lines from `/data/adb/vddropbear/state/daemon.log` (redact anything private - IPs, keys,
+Relevant lines from `/data/adb/vddropbear/state/daemon.log` (redact anything private: IPs, keys,
 hostnames). Never paste a private key or a password.
 
 **Anything else**

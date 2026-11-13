@@ -1,7 +1,7 @@
 <!--
   ======================================================================
    VD Dropbear  ::  standalone, configurable rooted SSH daemon
-   A private SSH server for KernelSU/APatch/Magisk - no invasive ADB exposure.
+   A private SSH server for KernelSU/APatch/Magisk. No invasive ADB exposure.
    Architecture.
 
    Copyright (C) 2026  VD171
@@ -35,32 +35,32 @@ verdrahtet; alles Spezifische ist Laufzeitkonfiguration oder ein Geheimnis.
 
 ## Bestandteile
 
-- `module/common/vddropbear.sh` - die Kernbibliothek: Konfiguration laden (mit sicheren eingebauten
+- `module/common/vddropbear.sh`, die Kernbibliothek: Konfiguration laden (mit sicheren eingebauten
   Standardwerten), den Geheimnisspeicher auflösen, einen Host-Schlüssel sicherstellen, den
   Argumentvektor für Dropbear bauen und eine einzelne Daemon-Instanz verwalten (Start / Stopp /
   Status / Neustart).
-- `module/service.sh` - Einstiegspunkt beim Booten. Befolgt die BFU/AFU-Startrichtlinie; im
+- `module/service.sh`: Einstiegspunkt beim Booten. Befolgt die BFU/AFU-Startrichtlinie; im
   AFU-Modus wartet er darauf, dass der mit Zugangsdaten verschlüsselte Speicher entsperrt wird, ohne
   den Bootvorgang aufzuhalten.
-- `module/action.sh` - die **Action**-Schaltfläche des Managers: den Daemon (neu) starten. Er liest
+- `module/action.sh`, die **Action**-Schaltfläche des Managers: den Daemon (neu) starten. Er liest
   nie stdin und löst den Daemon in eine eigene Sitzung ab, sodass der Manager nicht hängen bleibt.
-- `module/common/vddb-webui.sh` + `module/webroot/index.html` - das WebUI-Backend und die Seite.
-- `patches/` - kleine, prüfbare Patches, die zur Buildzeit auf das Upstream-Dropbear angewendet werden.
-- `scripts/build.sh`, `scripts/build-bundles.sh`, `.github/workflows/build.yml` - der Build.
+- `module/common/vddb-webui.sh` + `module/webroot/index.html`: das WebUI-Backend und die Seite.
+- `patches/`: kleine, prüfbare Patches, die zur Buildzeit auf das Upstream-Dropbear angewendet werden.
+- `scripts/build.sh`, `scripts/build-bundles.sh`, `.github/workflows/build.yml`: der Build.
 
 ## Daemon-Lebenszyklus (eine einzige Instanz)
 
 `vddb_start` lädt die Konfiguration, stoppt jede laufende Instanz, stellt sicher, dass ein
 Host-Schlüssel existiert, und startet dann einen Daemon. Die Binärdatei wird als `vddropbear`
 ausgeliefert, sodass ihr Prozessname genau zu `pgrep -x` passt (Androids `mksh` kennt kein
-`exec -a`). Sie wird mit `setsid` gestartet, damit sie sich von der Prozessgruppe des Aufrufers löst -
+`exec -a`). Sie wird mit `setsid` gestartet, damit sie sich von der Prozessgruppe des Aufrufers löst:
 genau das verhindert, dass die Action des Managers blockiert.
 
 ## Der Geheimnisspeicher (CE vs. DE, BFU vs. AFU)
 
 Einstellungen sind nicht geheim und liegen auf gerätverschlüsseltem Speicher
-(`/data/adb/vddropbear`), der beim Booten lesbar ist. Geheimnisse - Host-Schlüssel,
-`authorized_keys`, Passwort-Hashes - liegen standardmäßig auf **mit Zugangsdaten verschlüsseltem**
+(`/data/adb/vddropbear`), der beim Booten lesbar ist. Geheimnisse (Host-Schlüssel,
+`authorized_keys`, Passwort-Hashes) liegen standardmäßig auf **mit Zugangsdaten verschlüsseltem**
 Speicher (`/data/misc_ce/0/vddropbear`), der erst nach der Authentifizierung des Nutzers entsperrt
 wird. Das Einschalten von `START_IN_BFU` verschiebt die Geheimnisse auf gerätverschlüsselten
 Speicher, damit der Daemon vor der ersten Entsperrung laufen kann, um den Preis, dass diese

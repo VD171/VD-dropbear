@@ -1,7 +1,7 @@
 <!--
   ======================================================================
    VD Dropbear  ::  standalone, configurable rooted SSH daemon
-   A private SSH server for KernelSU/APatch/Magisk - no invasive ADB exposure.
+   A private SSH server for KernelSU/APatch/Magisk. No invasive ADB exposure.
    User guide.
 
    Copyright (C) 2026  VD171
@@ -78,7 +78,7 @@ rsync -e 'ssh -p 2222' -av ./dir/ root@<device-ip>:/sdcard/dir/
 ## 6. 首次解锁前（BFU）
 
 默认情况下，守护进程只在你解锁设备一次**之后**（AFU）才启动，因为它的 secret 存放在 credential-encrypted 存储
-上。如果你需要在首次解锁**之前**使用 SSH - 例如在重启后远程解锁一台设备 - 请打开
+上。如果你需要在首次解锁**之前**使用 SSH（例如在重启后远程解锁一台设备）请打开
 **Start before first unlock (BFU)**。于是这些 secret 会移到 device-encrypted 存储上，在解锁前即可读取：这是一个
 有意的、有文档记录的权衡。参见 README 中的[安全模型](#)。
 
@@ -93,5 +93,5 @@ rsync -e 'ssh -p 2222' -av ./dir/ root@<device-ip>:/sdcard/dir/
 - **它无法启动。** 检查 `/data/adb/vddropbear/state/daemon.log`。确认 **Enabled** 已开启，并且 host key 能够被
   生成。
 - **密钥被拒绝。** 确认公钥那一行与你的客户端所提供的完全一致，并且登录用户是系统能够解析的（通常是 `root`）。
-- **无法从另一台机器连接。** 你多半仍然只绑定到了 loopback - 请启用你需要的接口并重启。
+- **无法从另一台机器连接。** 你多半仍然只绑定到了 loopback，请启用你需要的接口并重启。
 - **SFTP/scp 失败但 shell 正常。** 确认随附的 `sftp-server` 已为你的 ABI 发布；WebUI 状态会显示检测到的 ABI。

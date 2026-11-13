@@ -1,7 +1,7 @@
 <!--
   ======================================================================
    VD Dropbear  ::  standalone, configurable rooted SSH daemon
-   A private SSH server for KernelSU/APatch/Magisk - no invasive ADB exposure.
+   A private SSH server for KernelSU/APatch/Magisk. No invasive ADB exposure.
    Third-party notices and GPL compliance.
 
    Copyright (C) 2026  VD171
@@ -26,7 +26,7 @@
 # Third-party notices
 
 VD Dropbear's own code (the module scripts, WebUI, patches and configuration) is licensed under
-**Apache-2.0** - see [`LICENSE`](LICENSE). The module distribution also bundles the third-party binaries
+**Apache-2.0**: see [`LICENSE`](LICENSE). The module distribution also bundles the third-party binaries
 below, each under its own license. Those licenses, and the compliance obligations they carry, are
 listed here; the full license texts ship alongside the binaries (in `module/licenses/`).
 

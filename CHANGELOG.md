@@ -1,7 +1,7 @@
 <!--
   ======================================================================
    VD Dropbear  ::  standalone, configurable rooted SSH daemon
-   A private SSH server for KernelSU/APatch/Magisk - no invasive ADB exposure.
+   A private SSH server for KernelSU/APatch/Magisk. No invasive ADB exposure.
    Changelog.
 
    Copyright (C) 2026  VD171
@@ -39,7 +39,7 @@ module (`module.prop`) and on GitHub Releases.
   `pwcopy()` to null-coalesce `pw_gecos`.
 
 ### Changed
-- **WebUI: simpler, safer credential forms.** The PBKDF2 iteration count is no longer a user field - it
+- **WebUI: simpler, safer credential forms.** The PBKDF2 iteration count is no longer a user field. It
   is fixed at a safe 600000 (OWASP 2023 floor for PBKDF2-HMAC-SHA256), computed in the page as before;
   older hashes keep verifying because the server reads the iteration count stored in each hash. The
   password-account **User** is now a dropdown of the accounts Android resolves (`root`, `shell`, `system`,
@@ -50,7 +50,7 @@ module (`module.prop`) and on GitHub Releases.
   the client presents, resolved via `getpwnam`), so it was a no-op knob. Removed from the config, the
   WebUI and the docs; the account is set by the password/key entry and the username on connection.
 
-## [v1.01] - 2026-11-13
+## [v1.01] (2026-11-13)
 
 ### Fixed
 - **SFTP, sftp-based scp and rsync now work over the connection.** The server pointed its SFTP
@@ -60,12 +60,12 @@ module (`module.prop`) and on GitHub Releases.
   so the root path is the one that applies), and the launcher symlinks the ABI's
   `sftp-server`/`scp`/`rsync` there at start.
 
-## [v1.00] - 2026-11-13
+## [v1.00] (2026-11-13)
 
 First public release.
 
 ### Added
-- Initial module scaffold - a config-driven, single-daemon launcher, independent of any other module.
+- Initial module scaffold: a config-driven, single-daemon launcher, independent of any other module.
 - Core library (`common/vddropbear.sh`): configuration load with safe built-in defaults; secret-store
   resolution (credential-encrypted `/data/misc_ce` by default, device-encrypted `/data/adb` only in the
   opt-in BFU mode); single-instance daemon lifecycle (start / stop / status / restart); and a Dropbear
@@ -77,30 +77,30 @@ First public release.
 - Installer (`customize.sh` + `META-INF`), `uninstall.sh`, and a fully documented default config.
 - Public-repository scaffolding: family-format `README`, Apache-2.0 `LICENSE`, this changelog,
   `SECURITY.md`, `CONTRIBUTING.md`, and an SPDX header on every file.
-- **Four-ABI support** - `arm64-v8a`, `armeabi-v7a`, `x86`, `x86_64` - covering every device and
+- **Four-ABI support**: `arm64-v8a`, `armeabi-v7a`, `x86`, `x86_64`, covering every device and
   emulator.
 - Build pipeline: `scripts/build.sh` and `scripts/build-bundles.sh` cross-compile **dynamic** binaries
   (linked against bionic) for all ABIs; a CI workflow rebuilds, packages the module zip, names the
   artifact with the version, publishes a GitHub Release on a `v*` tag (with a per-file sha256 list),
   and tracks upstream. The auditable patch set is documented in `patches/`.
-- **Composable listen/bind model** - loopback, all interfaces, IPv4/IPv6 family filters and specific
+- **Composable listen/bind model**: loopback, all interfaces, IPv4/IPv6 family filters and specific
   addresses (each with an optional per-bind port) can be mixed freely; a safety net binds loopback
   rather than every interface if the user clears all options.
-- **Bundled file-transfer tools** - `sftp-server`, `scp` and `rsync`, so SFTP, sshfs, GUI clients and
+- **Bundled file-transfer tools**: `sftp-server`, `scp` and `rsync`, so SFTP, sshfs, GUI clients and
   backups work over the same connection.
 - `THIRD-PARTY-NOTICES.md` documenting every bundled component's license and the GPL-3.0 compliance
   for rsync (mere aggregation: the Apache-2.0 module is unaffected).
 - **Auditable patch set** against upstream Dropbear:
-  - `0001` - neutral, configurable SSH identity (`DROPBEAR_IDENT`), so scanners cannot fingerprint the
+  - `0001`: neutral, configurable SSH identity (`DROPBEAR_IDENT`), so scanners cannot fingerprint the
     exact server or version.
-  - `0002` - read `authorized_keys` from `DROPBEAR_AUTHKEYS`, decoupling keys from Android's account
+  - `0002`: read `authorized_keys` from `DROPBEAR_AUTHKEYS`, decoupling keys from Android's account
     model and letting them live on CE or DE storage.
-  - `0003` - password auth against a hash file (`DROPBEAR_PASSWD_FILE`) using **PBKDF2-HMAC-SHA256**
-    (Dropbear's own libtomcrypt), replacing the system `crypt()`/shadow that bionic lacks - a public,
+  - `0003`: password auth against a hash file (`DROPBEAR_PASSWD_FILE`) using **PBKDF2-HMAC-SHA256**
+    (Dropbear's own libtomcrypt), replacing the system `crypt()`/shadow that bionic lacks, a public,
     documented format with no obfuscation.
 - **WebUI** (`module/webroot/index.html` + `common/vddb-webui.sh` backend): live status and daemon
   **start / stop / restart**, the **BFU/AFU start toggle**, every setting, authorized-key management,
-  and password accounts whose PBKDF2 hashes are computed in the page with WebCrypto - the clear-text
+  and password accounts whose PBKDF2 hashes are computed in the page with WebCrypto; the clear-text
   password never leaves the browser. Data crosses the `ksu.exec` bridge base64-encoded.
 - **AI-agents use case** documented: a standing SSH root endpoint lets an autonomous agent operate the
   device over the network, with none of ADB's tether or self-exposing debug flags.
@@ -111,7 +111,7 @@ First public release.
 
 ### Security
 - Password login is disabled at runtime by default; keys are the default. When enabled, only a salted,
-  high-iteration PBKDF2 hash is stored - never the password.
+  high-iteration PBKDF2 hash is stored, never the password.
 - Secrets default to credential-encrypted storage; the device-encrypted fallback is opt-in (BFU) and
   documented as an exposure trade-off.
 

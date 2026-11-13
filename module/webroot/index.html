@@ -2,8 +2,8 @@
 <!--
   ======================================================================
    VD Dropbear  ::  standalone, configurable rooted SSH daemon
-   A private SSH server for KernelSU/APatch/Magisk - no invasive ADB exposure.
-   WebUI - configure the daemon, manage keys and passwords, control the service.
+   A private SSH server for KernelSU/APatch/Magisk. No invasive ADB exposure.
+   WebUI: configure the daemon, manage keys and passwords, control the service.
 
    Copyright (C) 2026  VD171
    SPDX-License-Identifier: Apache-2.0
@@ -250,7 +250,7 @@ function hex(u8){ return Array.from(u8).map(b=>b.toString(16).padStart(2,"0")).j
 /* ---- config schema ---- */
 const TOGGLES = [
   ["ENABLED","Enabled at boot",""],
-  ["START_IN_BFU","Start before first unlock (BFU)","Off: start only after you unlock (AFU) - secrets stay on encrypted CE storage. On: also run before unlock - secrets move to DE storage, readable before unlock."],
+  ["START_IN_BFU","Start before first unlock (BFU)","Off: start only after you unlock (AFU); secrets stay on encrypted CE storage. On: also run before unlock; secrets move to DE storage, readable before unlock."],
   ["LISTEN_LOOPBACK","Listen on loopback","127.0.0.1 / ::1 only."],
   ["LISTEN_ALL","Listen on all interfaces","Exposes the device on every network it is on."],
   ["LISTEN_IPV4","IPv4",""],

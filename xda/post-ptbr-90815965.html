@@ -1,8 +1,8 @@
 <!--
   ======================================================================
    VD Dropbear  ::  standalone, configurable rooted SSH daemon
-   A private SSH server for KernelSU/APatch/Magisk - no invasive ADB exposure.
-   XDA release post - source (froala HTML, pt-BR).
+   A private SSH server for KernelSU/APatch/Magisk. No invasive ADB exposure.
+   XDA release post, source (froala HTML, pt-BR).
 
    Copyright (C) 2026  VD171
    SPDX-License-Identifier: Apache-2.0
@@ -30,16 +30,16 @@
 
 <blockquote><b>&#9888; Toda conexão que autentica recebe um shell ROOT.</b> Trate como as chaves do seu aparelho: prefira chaves públicas a senhas, e mantenha a porta fora da Internet pública.</blockquote>
 
-<p>O jeito nativo do Android de ter um shell no seu próprio aparelho é o ADB (depuração USB), e ligá-lo é <b>invasivo e auto-expositor</b>. <code>adb_enabled</code> e <code>development_settings_enabled</code> são settings legíveis por qualquer um - qualquer app, SDK ou biblioteca anti-fraude/RASP lê, a conexão fica logada, e não há forma suportada de esconder que o ADB está, ou esteve, ligado. A exposição te segue até num aparelho de fábrica, não-rooted: pra ter um shell, você tem que se anunciar.</p>
-<p><b>O VD Dropbear é a alternativa privada.</b> Num aparelho rooted ele te dá um servidor SSH de verdade - shell root, SFTP e rsync pela rede - sem o tell do <code>adb_enabled</code>, sem o flag de depuração USB, com um banner de versão que não revela nada, e credenciais que você controla. Seu acesso continua seu, em vez de um flag "estou sendo depurado" que qualquer coisa no aparelho lê.</p>
+<p>O jeito nativo do Android de ter um shell no seu próprio aparelho é o ADB (depuração USB), e ligá-lo é <b>invasivo e auto-expositor</b>. <code>adb_enabled</code> e <code>development_settings_enabled</code> são settings legíveis por qualquer um; qualquer app, SDK ou biblioteca anti-fraude/RASP lê, a conexão fica logada, e não há forma suportada de esconder que o ADB está, ou esteve, ligado. A exposição te segue até num aparelho de fábrica, não-rooted: pra ter um shell, você tem que se anunciar.</p>
+<p><b>O VD Dropbear é a alternativa privada.</b> Num aparelho rooted ele te dá um servidor SSH de verdade (shell root, SFTP e rsync pela rede) sem o tell do <code>adb_enabled</code>, sem o flag de depuração USB, com um banner de versão que não revela nada, e credenciais que você controla. Seu acesso continua seu, em vez de um flag "estou sendo depurado" que qualquer coisa no aparelho lê.</p>
 
 <h3>Recursos</h3>
 <ul>
-<li><b>Um daemon, sempre</b> - inicia / reinicia no boot ou pelo botão Action do manager; nunca mais de uma instância.</li>
+<li><b>Um daemon, sempre</b>: inicia / reinicia no boot ou pelo botão Action do manager; nunca mais de uma instância.</li>
 <li><b>Tudo configurável</b> pela WebUI: porta; bind em loopback / tudo / IPv4 / IPv6 / endereços específicos; autenticação por chave e/ou senha; máximo de tentativas; usuário de login, shell, HOME, ambiente extra; idle timeout, keepalive; port forwarding local / remoto e gateway ports (tudo desligado por padrão); tipo de host key (ed25519 / rsa / ecdsa).</li>
-<li><b>Banner de versão escondido</b> - o protocolo SSH exige um banner, então não dá pra removê-lo, mas o VD Dropbear o troca por um sem informação, pra que scanners não identifiquem o servidor/versão exatos e mirem ataques de versão conhecida.</li>
-<li><b>Traga suas credenciais</b> - adicione conjuntos usuário + chave e usuário + senha; a WebUI exige uma força mínima de senha e nunca guarda senha em texto puro.</li>
-<li><b>Todo aparelho e emulador</b> - arm64-v8a, armeabi-v7a, x86 e x86_64.</li>
+<li><b>Banner de versão escondido</b>: o protocolo SSH exige um banner, então não dá pra removê-lo, mas o VD Dropbear o troca por um sem informação, pra que scanners não identifiquem o servidor/versão exatos e mirem ataques de versão conhecida.</li>
+<li><b>Traga suas credenciais</b>: adicione conjuntos usuário + chave e usuário + senha; a WebUI exige uma força mínima de senha e nunca guarda senha em texto puro.</li>
+<li><b>Todo aparelho e emulador</b>: arm64-v8a, armeabi-v7a, x86 e x86_64.</li>
 </ul>
 
 <h3>O que vem junto</h3>
@@ -47,24 +47,24 @@
 
 <h3>Modelo de segurança</h3>
 <ul>
-<li><b>Onde os segredos moram.</b> Por padrão a host key, o authorized_keys e os hashes de senha ficam no armazenamento credential-encrypted, que o Android mantém encriptado até você desbloquear o aparelho. Um modo opcional "iniciar antes do primeiro desbloqueio" deixa você entrar por SSH antes do unlock (por exemplo, pra desbloquear o aparelho remotamente); os segredos dele passam a morar no armazenamento device-encrypted, legível antes do unlock - um trade-off documentado que você ativa só se precisar.</li>
-<li><b>Senha desligada por padrão</b> - como todo login é root, chaves são bem mais seguras.</li>
-<li><b>Sem telemetria, sem chamadas de rede próprias, sem analytics.</b> Roda inteiramente no seu aparelho, e é open source (Apache-2.0) - compilado do Dropbear upstream com um conjunto de patches pequeno e auditável.</li>
+<li><b>Onde os segredos moram.</b> Por padrão a host key, o authorized_keys e os hashes de senha ficam no armazenamento credential-encrypted, que o Android mantém encriptado até você desbloquear o aparelho. Um modo opcional "iniciar antes do primeiro desbloqueio" deixa você entrar por SSH antes do unlock (por exemplo, pra desbloquear o aparelho remotamente); os segredos dele passam a morar no armazenamento device-encrypted, legível antes do unlock, um trade-off documentado que você ativa só se precisar.</li>
+<li><b>Senha desligada por padrão</b>: como todo login é root, chaves são bem mais seguras.</li>
+<li><b>Sem telemetria, sem chamadas de rede próprias, sem analytics.</b> Roda inteiramente no seu aparelho, e é open source (Apache-2.0), compilado do Dropbear upstream com um conjunto de patches pequeno e auditável.</li>
 </ul>
 
 <h3>Instalar e configurar</h3>
 <p>Flashe o módulo no manager do KernelSU ou Magisk, abra a <b>WebUI</b> pra definir a porta e adicionar suas chaves, e reinicie (ou aperte Action pra subir agora).</p>
 
 <h3>Download</h3>
-<p>O primeiro release público e o código-fonte completo estão sendo finalizados. O download vai ser postado aqui e no GitHub - <b>acompanhe este tópico</b>. Fonte e releases: <a href="https://github.com/VD171/VD-dropbear">github.com/VD171/VD-dropbear</a></p>
+<p>O primeiro release público e o código-fonte completo estão sendo finalizados. O download vai ser postado aqui e no GitHub; <b>acompanhe este tópico</b>. Fonte e releases: <a href="https://github.com/VD171/VD-dropbear">github.com/VD171/VD-dropbear</a></p>
 
 <h3>Veja também</h3>
 <p>Projetos irmãos do mesmo autor:</p>
 <ul>
-<li><b>VDInfos</b> - um debugger de métodos do aparelho que lê cada item por todos os métodos que conseguem lê-lo e compara lado a lado.</li>
-<li><b>VDGoogle</b> - seus serviços Google (RCS, Wallet, atestações do Play Integrity), lidos no seu aparelho sem internet.</li>
-<li><b>VDBackup</b> - backup e restauração completos de apps e dados como root, tudo por uma WebUI.</li>
-<li><b>COPG-VD</b> - um spoofer global de fingerprint e build do aparelho.</li>
+<li><b>VDInfos</b>: um debugger de métodos do aparelho que lê cada item por todos os métodos que conseguem lê-lo e compara lado a lado.</li>
+<li><b>VDGoogle</b>: seus serviços Google (RCS, Wallet, atestações do Play Integrity), lidos no seu aparelho sem internet.</li>
+<li><b>VDBackup</b>: backup e restauração completos de apps e dados como root, tudo por uma WebUI.</li>
+<li><b>COPG-VD</b>: um spoofer global de fingerprint e build do aparelho.</li>
 </ul>
 
 <h3>Contatos</h3>
@@ -73,4 +73,4 @@
 <li>GitHub: <a href="https://github.com/VD171">@VD171</a> &middot; E-mail: vd.priv8@pm.me</li>
 </ul>
 
-<p><i>O VD Dropbear é independente e não-oficial. Ele empacota o Dropbear do Matt Johnston e as ferramentas OpenSSH/rsync sob as licenças próprias delas. Toda conexão que autentica recebe root - proteja de acordo.</i></p>
+<p><i>O VD Dropbear é independente e não-oficial. Ele empacota o Dropbear do Matt Johnston e as ferramentas OpenSSH/rsync sob as licenças próprias delas. Toda conexão que autentica recebe root; proteja de acordo.</i></p>

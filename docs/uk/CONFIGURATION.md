@@ -1,7 +1,7 @@
 <!--
   ======================================================================
    VD Dropbear  ::  standalone, configurable rooted SSH daemon
-   A private SSH server for KernelSU/APatch/Magisk - no invasive ADB exposure.
+   A private SSH server for KernelSU/APatch/Magisk. No invasive ADB exposure.
    Configuration reference.
 
    Copyright (C) 2026  VD171
@@ -53,7 +53,7 @@
 | Key | Default | Meaning |
 |-----|---------|---------|
 | `LISTEN_LOOPBACK` | `1` | Прослуховувати лише `127.0.0.1` / `::1`. |
-| `LISTEN_ALL` | `0` | Прослуховувати на кожному інтерфейсі (`0.0.0.0` / `::`) - відкриває пристрій. |
+| `LISTEN_ALL` | `0` | Прослуховувати на кожному інтерфейсі (`0.0.0.0` / `::`); відкриває пристрій. |
 | `LISTEN_IPV4` | `1` | Включати IPv4-прив'язки. |
 | `LISTEN_IPV6` | `1` | Включати IPv6-прив'язки. |
 | `LISTEN_ADDRESSES` | `""` | Додаткові конкретні прив'язки через кому: `addr` (використовує `PORT`) або `addr:port`, IPv4 чи IPv6. |
@@ -67,7 +67,7 @@
 
 ## Автентифікація
 
-Кожен автентифікований вхід - це **root**. Ключі - це варіант за замовчуванням; паролі вмикаються за
+Кожен автентифікований вхід дає **root**. Ключі є варіантом за замовчуванням; паролі вмикаються за
 бажанням.
 
 | Key | Default | Meaning |
@@ -103,11 +103,11 @@
 
 ## Сховище секретів
 
-Не налаштовується тут - визначається з `START_IN_BFU`:
+Не налаштовується тут, визначається з `START_IN_BFU`:
 
-- **AFU (за замовчуванням):** `/data/misc_ce/0/vddropbear/secret` - credential-encrypted, доступне лише
+- **AFU (за замовчуванням):** `/data/misc_ce/0/vddropbear/secret`: credential-encrypted, доступне лише
   після того, як ви розблокуєте пристрій.
-- **BFU:** `/data/adb/vddropbear/secret` - device-encrypted, доступне до першого розблокування.
+- **BFU:** `/data/adb/vddropbear/secret`: device-encrypted, доступне до першого розблокування.
 
 Воно містить host key, `authorized_keys` та файл хешів `passwd`. Формат хешу пароля див. у
 [BUILDING.md](../BUILDING.md).

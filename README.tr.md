@@ -1,7 +1,7 @@
 <!--
   ======================================================================
    VD Dropbear  ::  standalone, configurable rooted SSH daemon
-   A private SSH server for KernelSU/APatch/Magisk - no invasive ADB exposure.
+   A private SSH server for KernelSU/APatch/Magisk. No invasive ADB exposure.
 
    Copyright (C) 2026  VD171
    SPDX-License-Identifier: Apache-2.0
@@ -55,7 +55,7 @@ açık olduğunu ya da bir zamanlar açık olduğunu gizlemenin desteklenen bir 
 root'suz, stok bir telefonda bile peşinizi bırakmaz: bir kabuk elde etmek için bunu ilan etmeniz gerekir.
 
 VD Dropbear, gizli alternatiftir. Root'lu bir cihazda size gerçek bir SSH sunucusu verir; ağ
-üzerinden root kabuğu, SFTP ve rsync - `adb_enabled` izi olmadan, USB hata ayıklama bayrağı olmadan,
+üzerinden root kabuğu, SFTP ve rsync, `adb_enabled` izi olmadan, USB hata ayıklama bayrağı olmadan,
 hiçbir şey ele vermeyen bir sürüm başlığıyla ve sizin denetlediğiniz kimlik bilgileriyle. Erişiminiz
 size ait kalır; cihazdaki herhangi bir şeyin okuyabileceği, herkese açık "hata ayıklanıyorum"
 bayrağına dönüşmez.
@@ -67,7 +67,7 @@ bayrağına dönüşmez.
   birden fazla örnek olmaz.
 - **Her şey yapılandırılabilir**, WebUI üzerinden (ya da `/data/adb/vddropbear/config`):
   - bağlantı noktası ve loopback / tümü / IPv4 / IPv6 / belirli adreslere bağlama
-  - **ilk kilit açmadan önce (BFU) ya da yalnızca ondan sonra (AFU) başlatma** - tek bir anahtar
+  - **ilk kilit açmadan önce (BFU) ya da yalnızca ondan sonra (AFU) başlatma**, tek bir anahtar
   - açık anahtar ve/veya parola ile kimlik doğrulama, en fazla kimlik doğrulama denemesi
   - oturum açma kullanıcısı, shell, `HOME`, ek ortam değişkenleri
   - boşta kalma zaman aşımı, keepalive, alım penceresi
@@ -88,18 +88,18 @@ bayrağına dönüşmez.
 
 Sürekli açık bir SSH uç noktası, telefonunuzu **özerk bir yapay zeka ajanının doğrudan
 çalıştırabileceği** bir şeye dönüştürür. Bir kabuğu ya da bir SSH bağlantısını yönetebilen herhangi
-bir ajan - Claude Code, aider, döngüde bir LLM bulunan bir betik, kendi otomasyonunuz - cihazda ağ
+bir ajan (Claude Code, aider, döngüde bir LLM bulunan bir betik, kendi otomasyonunuz) cihazda ağ
 üzerinden gerçek bir root oturumu elde eder; USB kablosu olmadan ve ADB'nin kendini ele veren hata
 ayıklama bayraklarının hiçbiri olmadan. Ajan, sıradan, Linux benzeri bir kabuk görür ve şunları yapabilir:
 
 - dosyaları okuyup düzenleyebilir, ayarları değiştirebilir, modülleri, paketleri ve hizmetleri yönetebilir;
 - günlükleri eleyebilir, çıktıları çekebilir ve istendiğinde tanılama ya da adli inceleme çalıştırabilir;
-- `scp` / `sftp` / `rsync` üzerinden dosyaları her iki yönde taşıyıp eşitleyebilir - yedeklemeler, geçişler ya da ilk kurulum için;
+- `scp` / `sftp` / `rsync` üzerinden dosyaları her iki yönde taşıyıp eşitleyebilir (yedeklemeler, geçişler ya da ilk kurulum için);
 - root'lu bir cihaz filosunun tamamını tek bir yerden yönetebilir; her birine kendi anahtarıyla erişilir.
 
-Proje **yapay zeka dostu** olacak biçimde kurulduğu için - belgelenmiş bir yapılandırma dosyası,
+Proje **yapay zeka dostu** olacak biçimde kurulduğu için (belgelenmiş bir yapılandırma dosyası,
 açık bir çalışma zamanı [ortam sözleşmesi](patches/README.md), öngörülebilir yollar ve düz metin
-durum bilgisi - bir ajan, tahminde bulunmadan nasıl kullanılacağını kendi keşfedebilir.
+durum bilgisi) bir ajan, tahminde bulunmadan nasıl kullanılacağını kendi keşfedebilir.
 
 > **Bu root'tur, o yüzden ona root gibi davranın.** Kimliği doğrulanan her bağlantı root olarak
 > iner (aşağıdaki uyarıya bakın). Bir ajana erişim verdiğinizde ona **ayrı bir kullanıcı ve anahtar**
@@ -176,14 +176,14 @@ Aynı geliştiricinin kardeş projeleri:
 * **Discord:** @VD.Priv8 https://discord.com/users/1296831918989639721
 * **E-posta:** vd.priv8@pm.me
 * **XDA-Developers:** @VD171 https://xdaforums.com/m/vd171.4699873/
-* **XDA konusu:** _(yer tutucu - ilk herkese açık sürümde eklenecek)_
+* **XDA konusu:** _(yer tutucu, ilk herkese açık sürümde eklenecek)_
 * **GitHub:** @VD171 https://github.com/VD171
 
 ## Lisans
 
-VD Dropbear'ın kendi kodu **Apache-2.0**'dır - bkz. [LICENSE](LICENSE). Modül ayrıca üçüncü taraf
-ikili dosyalarını da paketler - [Dropbear](https://matt.ucc.asn.au/dropbear/) (MIT tarzı), OpenSSH'in
-`sftp-server` ve `scp`'si (BSD) ve `rsync` (GPL-3.0) - her biri kendi lisansı altındadır; rsync için
+VD Dropbear'ın kendi kodu **Apache-2.0**'dır; bkz. [LICENSE](LICENSE). Modül ayrıca üçüncü taraf
+ikili dosyalarını da paketler: [Dropbear](https://matt.ucc.asn.au/dropbear/) (MIT tarzı), OpenSSH'in
+`sftp-server` ve `scp`'si (BSD) ve `rsync` (GPL-3.0), her biri kendi lisansı altındadır; rsync için
 GPL'ye nasıl uyduğumuz dahil, bkz. [THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md). Apache-2.0
 kodumuz bundan etkilenmez (GPL ikili dosyası yalnızca bir araya getirilmiştir, bağlanmamıştır).
 

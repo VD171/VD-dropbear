@@ -1,7 +1,7 @@
 <!--
   ======================================================================
    VD Dropbear  ::  standalone, configurable rooted SSH daemon
-   A private SSH server for KernelSU/APatch/Magisk - no invasive ADB exposure.
+   A private SSH server for KernelSU/APatch/Magisk. No invasive ADB exposure.
    AI agents on your device.
 
    Copyright (C) 2026  VD171
@@ -30,8 +30,8 @@
 # AI-agenter på din enhet
 
 En ständigt aktiv SSH-slutpunkt gör din telefon till något som en **autonom AI-agent kan styra
-direkt**. Vilken agent som helst som kan köra ett skal eller en SSH-anslutning - Claude Code, aider,
-ett LLM-i-loopen-skript, din egen automatisering - får en riktig root-session på enheten, över
+direkt**. Vilken agent som helst som kan köra ett skal eller en SSH-anslutning (Claude Code, aider,
+ett LLM-i-loopen-skript, din egen automatisering) får en riktig root-session på enheten, över
 nätverket, utan USB-kabel och utan någon av ADB:s självavslöjande felsökningsflaggor.
 
 Den här sidan bygger vidare på idén som introduceras i README.
@@ -41,7 +41,7 @@ Den här sidan bygger vidare på idén som introduceras i README.
 ADB tillkännager sig självt: `adb_enabled` och `development_settings_enabled` är läsbara för alla,
 anslutningen loggas, och det finns inget stödt sätt att dölja att felsökning är (eller har varit) på.
 En agent som arbetar över ADB lämnar det spåret på enheten för vilken app eller anti-bedrägeri-SDK som
-helst att läsa. VD Dropbear är det privata alternativet - en vanlig SSH-inloggning, med
+helst att läsa. VD Dropbear är det privata alternativet: en vanlig SSH-inloggning, med
 inloggningsuppgifter du styr och en banner som inte avslöjar något.
 
 ## Vad en agent kan göra
@@ -50,23 +50,23 @@ inloggningsuppgifter du styr och en banner som inte avslöjar något.
 
 - läsa och redigera filer, ändra inställningar och hantera moduler, paket och tjänster;
 - sortera loggar, hämta artefakter och köra diagnostik eller forensik på begäran;
-- flytta och synkronisera filer åt båda hållen över `scp` / `sftp` / `rsync` - säkerhetskopior, migreringar, provisionering;
+- flytta och synkronisera filer åt båda hållen över `scp` / `sftp` / `rsync`: säkerhetskopior, migreringar, provisionering;
 - styra en hel flotta av root-enheter från ett ställe, var och en nåbar med sin egen nyckel.
 
-Eftersom projektet är byggt för att vara **AI-vänligt** - en dokumenterad konfigurationsfil, ett
+Eftersom projektet är byggt för att vara **AI-vänligt** (en dokumenterad konfigurationsfil, ett
 uttryckligt [env-kontrakt](../../patches/README.md) vid körning, förutsägbara sökvägar och status i
-klartext - kan en agent lista ut hur den ska användas utan gissningar.
+klartext) kan en agent lista ut hur den ska användas utan gissningar.
 
 ## Att göra det säkert
 
 Det här är root, så behandla det som root:
 
 - ge agenten en **dedikerad användare och nyckel**, inte din personliga;
-- begränsa bindningarna till nätverk du litar på - loopback eller ett VPN snarare än det öppna
+- begränsa bindningarna till nätverk du litar på: loopback eller ett VPN snarare än det öppna
   internet (se [Konfiguration](CONFIGURATION.md));
 - håll lösenordsautentisering avstängd; en nyckel går att återkalla och skrivs aldrig in;
 - du kan återkalla en nyckel eller stoppa daemonen när som helst från WebUI;
-- kom ihåg att varje anslutning är en fullständig root-session - ge agenten bara den räckvidd den behöver.
+- kom ihåg att varje anslutning är en fullständig root-session. Ge agenten bara den räckvidd den behöver.
 
 ## En minimal uppsättning
 

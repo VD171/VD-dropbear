@@ -1,7 +1,7 @@
 <!--
   ======================================================================
    VD Dropbear  ::  standalone, configurable rooted SSH daemon
-   A private SSH server for KernelSU/APatch/Magisk - no invasive ADB exposure.
+   A private SSH server for KernelSU/APatch/Magisk. No invasive ADB exposure.
 
    Copyright (C) 2026  VD171
    SPDX-License-Identifier: Apache-2.0
@@ -49,13 +49,13 @@ Languages: English · [العربية](README.ar.md) · [Čeština](README.cs.md
 
 Cara bawaan Android untuk mendapatkan shell di ponsel Anda sendiri adalah ADB (USB debugging), dan
 mengaktifkannya bersifat invasif serta membuka diri. `adb_enabled` dan `development_settings_enabled`
-adalah pengaturan yang dapat dibaca oleh siapa saja - aplikasi, SDK, atau pustaka anti-penipuan / RASP
+adalah pengaturan yang dapat dibaca oleh siapa saja: aplikasi, SDK, atau pustaka anti-penipuan / RASP
 apa pun bisa membacanya, koneksinya tercatat, dan tidak ada cara resmi untuk menyembunyikan bahwa ADB
 sedang, atau pernah, diaktifkan. Keterpaparan itu mengikuti Anda bahkan di ponsel stok yang tidak di-root:
 untuk mendapatkan shell, Anda harus mengumumkannya.
 
 VD Dropbear adalah alternatif yang privat. Pada perangkat yang di-root, ia memberi Anda server SSH yang
-sesungguhnya - shell root, SFTP, dan rsync melalui jaringan - tanpa jejak `adb_enabled`, tanpa flag
+sesungguhnya: shell root, SFTP, dan rsync melalui jaringan, tanpa jejak `adb_enabled`, tanpa flag
 USB-debugging, banner versi yang tidak mengungkap apa pun, dan kredensial yang Anda kendalikan. Akses Anda
 tetap milik Anda, bukan sebuah flag "saya sedang di-debug" yang dapat dibaca secara global oleh apa pun di perangkat.
 
@@ -65,7 +65,7 @@ tetap milik Anda, bukan sebuah flag "saya sedang di-debug" yang dapat dibaca sec
   **start / stop / restart** dari WebUI kapan saja; tidak pernah lebih dari satu instance.
 - **Semuanya dapat dikonfigurasi** dari WebUI (atau `/data/adb/vddropbear/config`):
   - port, dan bind ke loopback / all / IPv4 / IPv6 / alamat tertentu
-  - **mulai sebelum first unlock (BFU) atau hanya setelahnya (AFU)** - satu sakelar saja
+  - **mulai sebelum first unlock (BFU) atau hanya setelahnya (AFU)**, satu sakelar saja
   - autentikasi dengan kunci publik dan/atau kata sandi, jumlah maksimal percobaan autentikasi
   - pengguna login, shell, `HOME`, environment tambahan
   - idle timeout, keepalive, receive window
@@ -84,8 +84,8 @@ tetap milik Anda, bukan sebuah flag "saya sedang di-debug" yang dapat dibaca sec
 ## Agen AI di perangkat Anda
 
 Sebuah endpoint SSH yang selalu siap mengubah ponsel Anda menjadi sesuatu yang **dapat dioperasikan
-langsung oleh agen AI otonom**. Agen apa pun yang bisa menjalankan shell atau koneksi SSH - Claude Code,
-aider, skrip LLM-in-the-loop, otomasi buatan Anda sendiri - mendapatkan sesi root sungguhan di perangkat,
+langsung oleh agen AI otonom**. Agen apa pun yang bisa menjalankan shell atau koneksi SSH (Claude Code,
+aider, skrip LLM-in-the-loop, otomasi buatan Anda sendiri) mendapatkan sesi root sungguhan di perangkat,
 melalui jaringan, tanpa tether USB dan tanpa satu pun flag debug ADB yang membuka diri. Agen melihat
 shell mirip Linux yang normal dan dapat:
 
@@ -94,9 +94,9 @@ shell mirip Linux yang normal dan dapat:
 - memindahkan dan menyinkronkan file dua arah melalui `scp` / `sftp` / `rsync`, untuk pencadangan, migrasi, atau provisioning;
 - menggerakkan seluruh armada perangkat yang di-root dari satu tempat, masing-masing dapat dijangkau dengan kuncinya sendiri.
 
-Karena proyek ini dibangun agar **ramah AI** - berkas konfigurasi yang terdokumentasi, sebuah
+Karena proyek ini dibangun agar **ramah AI** (berkas konfigurasi yang terdokumentasi, sebuah
 [kontrak env](patches/README.md) runtime yang eksplisit, jalur yang dapat diprediksi, dan status
-teks-biasa - sebuah agen dapat menemukan cara memakainya tanpa menebak-nebak.
+teks-biasa), sebuah agen dapat menemukan cara memakainya tanpa menebak-nebak.
 
 > **Ini adalah root, jadi perlakukan seperti root.** Setiap koneksi yang terautentikasi masuk sebagai
 > root (lihat peringatan di bawah). Ketika Anda menyerahkan akses kepada sebuah agen, berikan
@@ -171,14 +171,14 @@ Proyek serupa dari penulis yang sama:
 * **Discord:** @VD.Priv8 https://discord.com/users/1296831918989639721
 * **E-mail:** vd.priv8@pm.me
 * **XDA-Developers:** @VD171 https://xdaforums.com/m/vd171.4699873/
-* **XDA thread:** _(placeholder - ditambahkan pada rilis publik pertama)_
+* **XDA thread:** _(placeholder, ditambahkan pada rilis publik pertama)_
 * **GitHub:** @VD171 https://github.com/VD171
 
 ## Lisensi
 
-Kode milik VD Dropbear sendiri adalah **Apache-2.0** - lihat [LICENSE](LICENSE). Modul ini juga
-menyertakan biner pihak ketiga - [Dropbear](https://matt.ucc.asn.au/dropbear/) (gaya MIT), `sftp-server`
-dan `scp` dari OpenSSH (BSD), serta `rsync` (GPL-3.0) - masing-masing di bawah lisensinya sendiri; lihat
+Kode milik VD Dropbear sendiri adalah **Apache-2.0**; lihat [LICENSE](LICENSE). Modul ini juga
+menyertakan biner pihak ketiga: [Dropbear](https://matt.ucc.asn.au/dropbear/) (gaya MIT), `sftp-server`
+dan `scp` dari OpenSSH (BSD), serta `rsync` (GPL-3.0), masing-masing di bawah lisensinya sendiri; lihat
 [THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md), termasuk bagaimana kami mematuhi GPL untuk rsync. Kode
 Apache-2.0 kami tidak terpengaruh (biner GPL hanya diagregasi, bukan di-link).
 

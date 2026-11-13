@@ -1,7 +1,7 @@
 <!--
   ======================================================================
    VD Dropbear  ::  standalone, configurable rooted SSH daemon
-   A private SSH server for KernelSU/APatch/Magisk - no invasive ADB exposure.
+   A private SSH server for KernelSU/APatch/Magisk. No invasive ADB exposure.
 
    Copyright (C) 2026  VD171
    SPDX-License-Identifier: Apache-2.0
@@ -49,13 +49,13 @@ Languages: English · [العربية](README.ar.md) · [Čeština](README.cs.md
 
 Androids inbyggda sätt att få ett skal på din egen telefon är ADB (USB-felsökning), och att slå på
 det är påträngande och avslöjar dig själv. `adb_enabled` och `development_settings_enabled` är
-inställningar som alla kan läsa - vilken app, SDK eller bedrägeri- / RASP-bibliotek som helst kan
+inställningar som alla kan läsa: vilken app, SDK eller bedrägeri- / RASP-bibliotek som helst kan
 läsa dem, anslutningen loggas, och det finns inget understött sätt att dölja att ADB är, eller
 någonsin har varit, påslaget. Exponeringen följer med dig även på en orörd telefon utan root: för
 att få ett skal måste du tillkännage det.
 
-VD Dropbear är det privata alternativet. På en enhet med root ger den dig en riktig SSH-server -
-root-skal, SFTP och rsync över nätverket - utan att `adb_enabled` avslöjar något, utan flagga för
+VD Dropbear är det privata alternativet. På en enhet med root ger den dig en riktig SSH-server:
+root-skal, SFTP och rsync över nätverket, utan att `adb_enabled` avslöjar något, utan flagga för
 USB-felsökning, med en versionsbanner som inte röjer något, och med inloggningsuppgifter som du
 styr över. Din åtkomst förblir din, i stället för en globalt läsbar flagga av typen "jag felsöks"
 som vad som helst på enheten kan läsa.
@@ -66,7 +66,7 @@ som vad som helst på enheten kan läsa.
   kan när som helst **starta / stoppa / starta om** den från WebUI:et; aldrig mer än en instans.
 - **Allt är konfigurerbart** från WebUI:et (eller `/data/adb/vddropbear/config`):
   - port, och bindning till loopback / alla / IPv4 / IPv6 / specifika adresser
-  - **starta före första upplåsningen (BFU) eller först efter den (AFU)** - en enda växel
+  - **starta före första upplåsningen (BFU) eller först efter den (AFU)**, en enda växel
   - autentisering med publik nyckel och/eller lösenord, max antal autentiseringsförsök
   - inloggningsanvändare, shell, `HOME`, extra miljövariabler
   - tidsgräns vid inaktivitet, keepalive, mottagningsfönster
@@ -85,8 +85,8 @@ som vad som helst på enheten kan läsa.
 ## AI-agenter på din enhet
 
 En stående SSH-ändpunkt gör din telefon till något som en **autonom AI-agent kan styra direkt**.
-Vilken agent som helst som kan driva ett skal eller en SSH-anslutning - Claude Code, aider, ett
-skript med en LLM i loopen, din egen automatisering - får en riktig root-session på enheten, över
+Vilken agent som helst som kan driva ett skal eller en SSH-anslutning (Claude Code, aider, ett
+skript med en LLM i loopen, din egen automatisering) får en riktig root-session på enheten, över
 nätverket, utan USB-sladd och utan ADB:s självavslöjande felsökningsflaggor. Agenten ser ett vanligt
 Linux-liknande skal och kan:
 
@@ -95,9 +95,9 @@ Linux-liknande skal och kan:
 - flytta och synka filer åt båda håll via `scp` / `sftp` / `rsync`, för säkerhetskopior, migreringar eller provisionering;
 - styra en hel flotta av enheter med root från ett enda ställe, där var och en nås med sin egen nyckel.
 
-Eftersom projektet är byggt för att vara **AI-vänligt** - en dokumenterad konfigurationsfil, ett
+Eftersom projektet är byggt för att vara **AI-vänligt** (en dokumenterad konfigurationsfil, ett
 uttryckligt [miljökontrakt](patches/README.md) vid körning, förutsägbara sökvägar och status i
-klartext - kan en agent själv komma underfund med hur den används, utan gissningar.
+klartext), kan en agent själv komma underfund med hur den används, utan gissningar.
 
 > **Det här är root, så behandla det som root.** Varje autentiserad anslutning landar som root (se
 > varningen nedan). När du överlämnar åtkomst till en agent, ge den en **egen användare och nyckel**,
@@ -173,14 +173,14 @@ Systerprojekt av samma upphovsperson:
 * **Discord:** @VD.Priv8 https://discord.com/users/1296831918989639721
 * **E-post:** vd.priv8@pm.me
 * **XDA-Developers:** @VD171 https://xdaforums.com/m/vd171.4699873/
-* **XDA-tråd:** _(platshållare - läggs till vid första publika släppet)_
+* **XDA-tråd:** _(platshållare, läggs till vid första publika släppet)_
 * **GitHub:** @VD171 https://github.com/VD171
 
 ## Licens
 
-VD Dropbears egen kod är **Apache-2.0** - se [LICENSE](LICENSE). Modulen paketerar även
-tredjepartsbinärer - [Dropbear](https://matt.ucc.asn.au/dropbear/) (MIT-liknande), OpenSSH:s
-`sftp-server` och `scp` (BSD), samt `rsync` (GPL-3.0) - var och en under sin egen licens; se
+VD Dropbears egen kod är **Apache-2.0**; se [LICENSE](LICENSE). Modulen paketerar även
+tredjepartsbinärer: [Dropbear](https://matt.ucc.asn.au/dropbear/) (MIT-liknande), OpenSSH:s
+`sftp-server` och `scp` (BSD), samt `rsync` (GPL-3.0), var och en under sin egen licens; se
 [THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md), inklusive hur vi följer GPL för rsync. Vår
 Apache-2.0-kod påverkas inte (GPL-binären är bara aggregerad, inte länkad).
 

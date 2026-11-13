@@ -1,7 +1,7 @@
 <!--
   ======================================================================
    VD Dropbear  ::  standalone, configurable rooted SSH daemon
-   A private SSH server for KernelSU/APatch/Magisk - no invasive ADB exposure.
+   A private SSH server for KernelSU/APatch/Magisk. No invasive ADB exposure.
    Configuration reference.
 
    Copyright (C) 2026  VD171
@@ -53,7 +53,7 @@ loopback místo každého rozhraní.
 | Klíč | Výchozí | Význam |
 |-----|---------|---------|
 | `LISTEN_LOOPBACK` | `1` | Naslouchat jen na `127.0.0.1` / `::1`. |
-| `LISTEN_ALL` | `0` | Naslouchat na každém rozhraní (`0.0.0.0` / `::`) - vystaví zařízení. |
+| `LISTEN_ALL` | `0` | Naslouchat na každém rozhraní (`0.0.0.0` / `::`); vystaví zařízení. |
 | `LISTEN_IPV4` | `1` | Zahrnout vazby IPv4. |
 | `LISTEN_IPV6` | `1` | Zahrnout vazby IPv6. |
 | `LISTEN_ADDRESSES` | `""` | Další konkrétní vazby oddělené čárkami: `addr` (použije `PORT`) nebo `addr:port`, IPv4 nebo IPv6. |
@@ -102,11 +102,11 @@ Každé ověřené přihlášení je **root**. Klíče jsou výchozí; hesla jso
 
 ## Úložiště tajemství
 
-Nekonfiguruje se zde - určuje se z `START_IN_BFU`:
+Nekonfiguruje se zde, určuje se z `START_IN_BFU`:
 
-- **AFU (výchozí):** `/data/misc_ce/0/vddropbear/secret` - šifrováno přihlašovacími údaji, dostupné
+- **AFU (výchozí):** `/data/misc_ce/0/vddropbear/secret`: šifrováno přihlašovacími údaji, dostupné
   až po odemčení zařízení.
-- **BFU:** `/data/adb/vddropbear/secret` - šifrováno zařízením, čitelné před prvním odemčením.
+- **BFU:** `/data/adb/vddropbear/secret`: šifrováno zařízením, čitelné před prvním odemčením.
 
 Obsahuje hostitelský klíč, `authorized_keys` a soubor otisků `passwd`. Formát otisku hesla viz
 [BUILDING.md](../BUILDING.md).

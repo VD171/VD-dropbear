@@ -1,7 +1,7 @@
 <!--
   ======================================================================
    VD Dropbear  ::  standalone, configurable rooted SSH daemon
-   A private SSH server for KernelSU/APatch/Magisk - no invasive ADB exposure.
+   A private SSH server for KernelSU/APatch/Magisk. No invasive ADB exposure.
 
    Copyright (C) 2026  VD171
    SPDX-License-Identifier: Apache-2.0
@@ -49,12 +49,12 @@ Languages: English · [العربية](README.ar.md) · [Čeština](README.cs.md
 
 Android's built-in way to get a shell on your own phone is ADB (USB debugging), and turning it on is
 invasive and self-exposing. `adb_enabled` and `development_settings_enabled` are world-readable
-settings - any app, SDK or anti-fraud / RASP library can read them, the connection is logged, and
+settings; any app, SDK or anti-fraud / RASP library can read them, the connection is logged, and
 there is no supported way to hide that ADB is, or ever was, enabled. The exposure follows you even on
 a stock, non-rooted phone: to get a shell, you have to announce it.
 
-VD Dropbear is the private alternative. On a rooted device it gives you a real SSH server - root
-shell, SFTP and rsync over the network - with no `adb_enabled` tell, no USB-debugging flag, a version
+VD Dropbear is the private alternative. On a rooted device it gives you a real SSH server (root
+shell, SFTP and rsync over the network) with no `adb_enabled` tell, no USB-debugging flag, a version
 banner that reveals nothing, and credentials you control. Your access stays yours, instead of a
 globally-readable "I am being debugged" flag that anything on the device can read.
 
@@ -64,7 +64,7 @@ globally-readable "I am being debugged" flag that anything on the device can rea
   **start / stop / restart** it from the WebUI at any time; never more than one instance.
 - **Everything is configurable** from the WebUI (or `/data/adb/vddropbear/config`):
   - port, and bind to loopback / all / IPv4 / IPv6 / specific addresses
-  - **start before first unlock (BFU) or only after it (AFU)** - a single toggle
+  - **start before first unlock (BFU) or only after it (AFU)**, a single toggle
   - public-key and/or password authentication, max auth tries
   - login user, shell, `HOME`, extra environment
   - idle timeout, keepalive, receive window
@@ -83,8 +83,8 @@ globally-readable "I am being debugged" flag that anything on the device can rea
 ## AI agents on your device
 
 A standing SSH endpoint turns your phone into something an **autonomous AI agent can operate
-directly**. Any agent that can drive a shell or an SSH connection - Claude Code, aider, an
-LLM-in-the-loop script, your own automation - gets a real root session on the device, over the
+directly**. Any agent that can drive a shell or an SSH connection (Claude Code, aider, an
+LLM-in-the-loop script, your own automation) gets a real root session on the device, over the
 network, with no USB tether and none of ADB's self-exposing debug flags. The agent sees a normal
 Linux-like shell and can:
 
@@ -93,8 +93,8 @@ Linux-like shell and can:
 - move and sync files both ways over `scp` / `sftp` / `rsync`, for backups, migrations or provisioning;
 - drive a whole fleet of rooted devices from one place, each reachable by its own key.
 
-Because the project is built to be **AI-friendly** - a documented configuration file, an explicit
-runtime [env contract](patches/README.md), predictable paths and plain-text status - an agent can
+Because the project is built to be **AI-friendly**, with a documented configuration file, an explicit
+runtime [env contract](patches/README.md), predictable paths and plain-text status, an agent can
 discover how to use it without guesswork.
 
 > **This is root, so treat it like root.** Every authenticated connection lands as root (see the
@@ -147,12 +147,12 @@ interactive PTYs. A scheduled workflow tracks upstream and rebuilds, so the modu
 Full documentation lives under [`docs/`](docs/) (and mirrors to the
 [wiki](https://github.com/VD171/VD-dropbear/wiki)):
 
-- [User guide](docs/USER-GUIDE.md) - install, keys, passwords, connecting, file transfer, BFU/AFU.
-- [Configuration](docs/CONFIGURATION.md) - every setting, with defaults.
-- [Architecture](docs/ARCHITECTURE.md) - how the module and daemon work.
-- [File structure](docs/FILE-STRUCTURE.md) - what lives where, in the repo and at runtime.
-- [AI agents on your device](docs/AI-AGENTS.md) - using an autonomous agent over SSH, safely.
-- [Building](docs/BUILDING.md) - the build, and the Android crypt()/cross-compile story.
+- [User guide](docs/USER-GUIDE.md): install, keys, passwords, connecting, file transfer, BFU/AFU.
+- [Configuration](docs/CONFIGURATION.md): every setting, with defaults.
+- [Architecture](docs/ARCHITECTURE.md): how the module and daemon work.
+- [File structure](docs/FILE-STRUCTURE.md): what lives where, in the repo and at runtime.
+- [AI agents on your device](docs/AI-AGENTS.md): using an autonomous agent over SSH, safely.
+- [Building](docs/BUILDING.md): the build, and the Android crypt()/cross-compile story.
 
 Each page is also translated into every language in the switcher above.
 <!-- /vd-docs -->
@@ -175,14 +175,14 @@ Sibling projects by the same author:
 * **Discord:** @VD.Priv8 https://discord.com/users/1296831918989639721
 * **E-mail:** vd.priv8@pm.me
 * **XDA-Developers:** @VD171 https://xdaforums.com/m/vd171.4699873/
-* **XDA thread:** _(placeholder - added on first public release)_
+* **XDA thread:** _(placeholder, added on first public release)_
 * **GitHub:** @VD171 https://github.com/VD171
 
 ## License
 
-VD Dropbear's own code is **Apache-2.0** - see [LICENSE](LICENSE). The module also bundles third-party
-binaries - [Dropbear](https://matt.ucc.asn.au/dropbear/) (MIT-style), OpenSSH's `sftp-server` and
-`scp` (BSD), and `rsync` (GPL-3.0) - each under its own license; see
+VD Dropbear's own code is **Apache-2.0**; see [LICENSE](LICENSE). The module also bundles third-party
+binaries: [Dropbear](https://matt.ucc.asn.au/dropbear/) (MIT-style), OpenSSH's `sftp-server` and
+`scp` (BSD), and `rsync` (GPL-3.0), each under its own license; see
 [THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md), including how we comply with the GPL for rsync. Our
 Apache-2.0 code is unaffected (the GPL binary is merely aggregated, not linked).
 

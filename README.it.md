@@ -1,7 +1,7 @@
 <!--
   ======================================================================
    VD Dropbear  ::  standalone, configurable rooted SSH daemon
-   A private SSH server for KernelSU/APatch/Magisk - no invasive ADB exposure.
+   A private SSH server for KernelSU/APatch/Magisk. No invasive ADB exposure.
 
    Copyright (C) 2026  VD171
    SPDX-License-Identifier: Apache-2.0
@@ -49,12 +49,12 @@ Languages: English · [العربية](README.ar.md) · [Čeština](README.cs.md
 
 Il modo nativo di Android per ottenere una shell sul proprio telefono è ADB (debug USB), e attivarlo è
 invasivo e ti espone. `adb_enabled` e `development_settings_enabled` sono impostazioni leggibili da
-chiunque - qualsiasi app, SDK o libreria antifrode / RASP può leggerle, la connessione viene registrata e
+chiunque: qualsiasi app, SDK o libreria antifrode / RASP può leggerle, la connessione viene registrata e
 non esiste un modo supportato per nascondere che ADB è, o è mai stato, attivo. L'esposizione ti segue
 anche su un telefono stock e non rootato: per ottenere una shell devi dichiararlo.
 
-VD Dropbear è l'alternativa privata. Su un dispositivo rootato ti dà un vero server SSH - shell root,
-SFTP e rsync sulla rete - senza la traccia `adb_enabled`, senza il flag di debug USB, con un banner di
+VD Dropbear è l'alternativa privata. Su un dispositivo rootato ti dà un vero server SSH: shell root,
+SFTP e rsync sulla rete, senza la traccia `adb_enabled`, senza il flag di debug USB, con un banner di
 versione che non rivela nulla e con credenziali che controlli tu. Il tuo accesso resta tuo, invece di un
 flag "sto venendo sottoposto a debug" leggibile a livello globale che qualunque cosa sul dispositivo può leggere.
 
@@ -64,7 +64,7 @@ flag "sto venendo sottoposto a debug" leggibile a livello globale che qualunque 
   **avviarlo / fermarlo / riavviarlo** dalla WebUI in qualsiasi momento; mai più di un'istanza.
 - **Tutto è configurabile** dalla WebUI (o da `/data/adb/vddropbear/config`):
   - porta, e bind su loopback / all / IPv4 / IPv6 / indirizzi specifici
-  - **avvio prima del primo sblocco (BFU) o solo dopo di esso (AFU)** - un singolo interruttore
+  - **avvio prima del primo sblocco (BFU) o solo dopo di esso (AFU)**, un singolo interruttore
   - autenticazione a chiave pubblica e/o a password, numero massimo di tentativi di autenticazione
   - utente di login, shell, `HOME`, environment aggiuntivo
   - idle timeout, keepalive, receive window
@@ -83,8 +83,8 @@ flag "sto venendo sottoposto a debug" leggibile a livello globale che qualunque 
 ## Agenti AI sul tuo dispositivo
 
 Un endpoint SSH sempre attivo trasforma il tuo telefono in qualcosa che un **agente AI autonomo può
-operare direttamente**. Qualsiasi agente in grado di guidare una shell o una connessione SSH - Claude
-Code, aider, uno script con un LLM nel loop, la tua automazione - ottiene una vera sessione root sul
+operare direttamente**. Qualsiasi agente in grado di guidare una shell o una connessione SSH (Claude
+Code, aider, uno script con un LLM nel loop, la tua automazione) ottiene una vera sessione root sul
 dispositivo, sulla rete, senza cavo USB e senza nessuno dei flag di debug di ADB che ti espongono.
 L'agente vede una normale shell in stile Linux e può:
 
@@ -93,8 +93,8 @@ L'agente vede una normale shell in stile Linux e può:
 - spostare e sincronizzare file in entrambe le direzioni tramite `scp` / `sftp` / `rsync`, per backup, migrazioni o provisioning;
 - gestire da un unico posto un'intera flotta di dispositivi rootati, ciascuno raggiungibile con la propria chiave.
 
-Poiché il progetto è pensato per essere **AI-friendly** - un file di configurazione documentato, un
-esplicito [contratto env](patches/README.md) di runtime, percorsi prevedibili e stato in testo semplice -
+Poiché il progetto è pensato per essere **AI-friendly** (un file di configurazione documentato, un
+esplicito [contratto env](patches/README.md) di runtime, percorsi prevedibili e stato in testo semplice),
 un agente può scoprire come usarlo senza tirare a indovinare.
 
 > **Questo è root, quindi trattalo come root.** Ogni connessione autenticata entra come root (vedi
@@ -171,14 +171,14 @@ Progetti affini dello stesso autore:
 * **Discord:** @VD.Priv8 https://discord.com/users/1296831918989639721
 * **E-mail:** vd.priv8@pm.me
 * **XDA-Developers:** @VD171 https://xdaforums.com/m/vd171.4699873/
-* **XDA thread:** _(placeholder - aggiunto alla prima release pubblica)_
+* **XDA thread:** _(placeholder, aggiunto alla prima release pubblica)_
 * **GitHub:** @VD171 https://github.com/VD171
 
 ## Licenza
 
-Il codice proprio di VD Dropbear è **Apache-2.0** - vedi [LICENSE](LICENSE). Il modulo include anche
-binari di terze parti - [Dropbear](https://matt.ucc.asn.au/dropbear/) (stile MIT), `sftp-server` e `scp`
-di OpenSSH (BSD) e `rsync` (GPL-3.0) - ciascuno sotto la propria licenza; vedi
+Il codice proprio di VD Dropbear è **Apache-2.0**; vedi [LICENSE](LICENSE). Il modulo include anche
+binari di terze parti: [Dropbear](https://matt.ucc.asn.au/dropbear/) (stile MIT), `sftp-server` e `scp`
+di OpenSSH (BSD) e `rsync` (GPL-3.0), ciascuno sotto la propria licenza; vedi
 [THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md), incluso come rispettiamo la GPL per rsync. Il nostro
 codice Apache-2.0 non ne è influenzato (il binario GPL è semplicemente aggregato, non linkato).
 

@@ -1,7 +1,7 @@
 <!--
   ======================================================================
    VD Dropbear  ::  standalone, configurable rooted SSH daemon
-   A private SSH server for KernelSU/APatch/Magisk - no invasive ADB exposure.
+   A private SSH server for KernelSU/APatch/Magisk. No invasive ADB exposure.
    Architecture.
 
    Copyright (C) 2026  VD171
@@ -35,31 +35,31 @@ tout ce qui est spécifique est de la configuration à l'exécution ou un secret
 
 ## Les pièces
 
-- `module/common/vddropbear.sh` - la bibliothèque centrale : charger la configuration (avec des valeurs
+- `module/common/vddropbear.sh`, la bibliothèque centrale : charger la configuration (avec des valeurs
   par défaut intégrées et sûres), résoudre le magasin de secrets, garantir une host key, construire le
   vecteur d'arguments de Dropbear et gérer une unique instance du démon (start / stop / status /
   restart).
-- `module/service.sh` - point d'entrée au démarrage. Respecte la politique de démarrage BFU/AFU ; en
+- `module/service.sh` : point d'entrée au démarrage. Respecte la politique de démarrage BFU/AFU ; en
   mode AFU, il attend que le stockage chiffré par identifiants se déverrouille sans bloquer le démarrage.
-- `module/action.sh` - le bouton **Action** du gestionnaire : (re)lancer le démon. Il ne lit jamais
+- `module/action.sh`, le bouton **Action** du gestionnaire : (re)lancer le démon. Il ne lit jamais
   stdin et détache le démon dans sa propre session, de sorte que le gestionnaire ne se fige pas.
-- `module/common/vddb-webui.sh` + `module/webroot/index.html` - le backend et la page de la WebUI.
-- `patches/` - de petits correctifs auditables appliqués à Dropbear upstream au moment de la compilation.
-- `scripts/build.sh`, `scripts/build-bundles.sh`, `.github/workflows/build.yml` - la compilation.
+- `module/common/vddb-webui.sh` + `module/webroot/index.html` : le backend et la page de la WebUI.
+- `patches/` : de petits correctifs auditables appliqués à Dropbear upstream au moment de la compilation.
+- `scripts/build.sh`, `scripts/build-bundles.sh`, `.github/workflows/build.yml` : la compilation.
 
 ## Cycle de vie du démon (instance unique)
 
 `vddb_start` charge la configuration, arrête toute instance en cours, garantit l'existence d'une host key,
 puis lance un unique démon. Le binaire est livré sous le nom `vddropbear`, de sorte que son nom de
 processus correspond exactement à `pgrep -x` (le `mksh` d'Android n'a pas `exec -a`). Il est lancé avec
-`setsid` pour se détacher du groupe de processus de l'appelant - c'est ce qui empêche l'Action du
+`setsid` pour se détacher du groupe de processus de l'appelant : c'est ce qui empêche l'Action du
 gestionnaire de se bloquer.
 
 ## Le magasin de secrets (CE vs DE, BFU vs AFU)
 
 Les réglages ne sont pas secrets et résident dans un stockage chiffré par appareil
-(`/data/adb/vddropbear`), lisible au démarrage. Les secrets - host key, `authorized_keys`, hachages de
-mots de passe - résident par défaut dans un stockage **chiffré par identifiants**
+(`/data/adb/vddropbear`), lisible au démarrage. Les secrets (host key, `authorized_keys`, hachages de
+mots de passe) résident par défaut dans un stockage **chiffré par identifiants**
 (`/data/misc_ce/0/vddropbear`), qui ne se déverrouille qu'après authentification de l'utilisateur.
 Activer `START_IN_BFU` déplace les secrets vers le stockage chiffré par appareil afin que le démon puisse
 s'exécuter avant le premier déverrouillage, au prix de secrets lisibles plus tôt. Le module calcule quel

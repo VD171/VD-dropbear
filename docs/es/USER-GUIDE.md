@@ -1,7 +1,7 @@
 <!--
   ======================================================================
    VD Dropbear  ::  standalone, configurable rooted SSH daemon
-   A private SSH server for KernelSU/APatch/Magisk - no invasive ADB exposure.
+   A private SSH server for KernelSU/APatch/Magisk. No invasive ADB exposure.
    User guide.
 
    Copyright (C) 2026  VD171
@@ -84,7 +84,7 @@ copias de seguridad funcionan todos sobre la misma conexión.
 
 Por defecto el daemon se inicia solo **después** de que desbloquees el dispositivo una vez (AFU), porque
 sus secretos residen en almacenamiento cifrado por credenciales. Si necesitas SSH **antes** del primer
-desbloqueo - por ejemplo, para desbloquear un dispositivo de forma remota tras un reinicio - activa
+desbloqueo (por ejemplo, para desbloquear un dispositivo de forma remota tras un reinicio), activa
 **Start before first unlock (BFU)**. Los secretos se mueven entonces a almacenamiento cifrado por
 dispositivo, que es legible antes del desbloqueo: un compromiso deliberado y documentado. Consulta
 [Modelo de seguridad](#) en el README.
@@ -102,7 +102,7 @@ dispositivo, que es legible antes del desbloqueo: un compromiso deliberado y doc
   activado y de que se haya podido generar una host key.
 - **Clave rechazada.** Confirma que la línea de la clave pública es exactamente la que ofrece tu cliente,
   y que el usuario de inicio de sesión es uno que el sistema resuelva (normalmente `root`).
-- **No puedo conectar desde otra máquina.** Probablemente sigues con el bind solo a loopback - habilita
+- **No puedo conectar desde otra máquina.** Probablemente sigues con el bind solo a loopback: habilita
   la interfaz que necesites y reinicia.
 - **SFTP/scp falla pero la shell funciona.** Asegúrate de que el `sftp-server` incluido se distribuyó
   para tu ABI; el estado de la WebUI muestra la ABI detectada.

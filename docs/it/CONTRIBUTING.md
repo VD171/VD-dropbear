@@ -1,7 +1,7 @@
 <!--
   ======================================================================
    VD Dropbear  ::  standalone, configurable rooted SSH daemon
-   A private SSH server for KernelSU/APatch/Magisk - no invasive ADB exposure.
+   A private SSH server for KernelSU/APatch/Magisk. No invasive ADB exposure.
    Contributing guide.
 
    Copyright (C) 2026  VD171
@@ -61,7 +61,7 @@ giustificate nella PR.
 
 - Una modifica logica per PR; descrivi la motivazione e l'impatto sulla sicurezza.
 - Rispetta lo stile shell esistente (POSIX `sh` / `mksh` di Android; niente bashism).
-- Ogni file reca un breve header SPDX - mantienilo.
+- Ogni file reca un breve header SPDX. Mantienilo.
 - Aggiorna [`CHANGELOG.md`](../../CHANGELOG.md) sotto `[Unreleased]` per ogni modifica reale e visibile all'utente.
 - Inviando una PR accetti di licenziare il tuo contributo sotto la licenza [Apache-2.0](../../LICENSE) del progetto.
 

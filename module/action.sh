@@ -1,7 +1,7 @@
 #!/system/bin/sh
 # ======================================================================
 #  VD Dropbear  ::  standalone, configurable rooted SSH daemon
-#  A private SSH server for KernelSU/APatch/Magisk - no invasive ADB exposure.
+#  A private SSH server for KernelSU/APatch/Magisk. No invasive ADB exposure.
 #  Manager "Action" button: (re)launch the single daemon.
 #
 #  Copyright (C) 2026  VD171
@@ -28,17 +28,17 @@ exec 0</dev/null
 MODDIR=${0%/*}
 . "$MODDIR/common/vddropbear.sh"
 
-echo "VD Dropbear - (re)launching the daemon..."
+echo "VD Dropbear: (re)launching the daemon..."
 vddb_restart
 
 vddb_load_config
 if vddb_is_running; then
-    echo "OK - running"
+    echo "OK, running"
     echo "  pid    : $(vddb_pid)"
     echo "  port   : $PORT"
     echo "  listen : $LISTEN"
     echo "  mode   : $([ "$START_IN_BFU" = 1 ] && echo 'BFU (secrets on DE storage)' || echo 'AFU (secrets on CE storage)')"
 else
-    echo "FAILED - the daemon is not running."
+    echo "FAILED: the daemon is not running."
     echo "  see the log: $VDDB_LOG"
 fi

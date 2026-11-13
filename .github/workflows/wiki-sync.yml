@@ -1,5 +1,5 @@
-# VD Dropbear - mirror docs/ into the GitHub project Wiki on every docs change.
-# Copyright (C) 2026 VD171 - SPDX-License-Identifier: Apache-2.0
+# VD Dropbear: mirror docs/ into the GitHub project Wiki on every docs change.
+# Copyright (C) 2026 VD171. SPDX-License-Identifier: Apache-2.0
 #
 # docs/ is the source of truth; .github/scripts/gen_wiki.sh renders the pages
 # (one tree per language, a per-page language switcher and the attribution footer)

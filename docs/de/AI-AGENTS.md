@@ -1,7 +1,7 @@
 <!--
   ======================================================================
    VD Dropbear  ::  standalone, configurable rooted SSH daemon
-   A private SSH server for KernelSU/APatch/Magisk - no invasive ADB exposure.
+   A private SSH server for KernelSU/APatch/Magisk. No invasive ADB exposure.
    AI agents on your device.
 
    Copyright (C) 2026  VD171
@@ -30,8 +30,8 @@
 # KI-Agenten auf deinem Gerät
 
 Ein ständig laufender SSH-Endpunkt macht dein Telefon zu etwas, das ein **autonomer KI-Agent direkt
-bedienen kann**. Jeder Agent, der eine Shell oder eine SSH-Verbindung steuern kann - Claude Code,
-aider, ein Skript mit einem LLM in der Schleife, deine eigene Automatisierung - erhält eine echte
+bedienen kann**. Jeder Agent, der eine Shell oder eine SSH-Verbindung steuern kann (Claude Code,
+aider, ein Skript mit einem LLM in der Schleife, deine eigene Automatisierung) erhält eine echte
 Root-Sitzung auf dem Gerät, über das Netzwerk, ohne USB-Kabel und ohne die sich selbst verratenden
 Debug-Flags von ADB.
 
@@ -42,7 +42,7 @@ Diese Seite vertieft die Idee, die in der README vorgestellt wird.
 ADB macht sich bemerkbar: `adb_enabled` und `development_settings_enabled` sind für alle lesbar, die
 Verbindung wird protokolliert, und es gibt keinen unterstützten Weg, zu verbergen, dass Debugging
 aktiv ist (oder war). Ein Agent, der über ADB arbeitet, hinterlässt diese Spur auf dem Gerät, die
-jede App oder jedes Anti-Betrugs-SDK auslesen kann. VD Dropbear ist die private Alternative - eine
+jede App oder jedes Anti-Betrugs-SDK auslesen kann. VD Dropbear ist die private Alternative: eine
 normale SSH-Anmeldung, mit Zugangsdaten, die du kontrollierst, und einem Banner, das nichts verrät.
 
 ## Was ein Agent tun kann
@@ -51,12 +51,12 @@ normale SSH-Anmeldung, mit Zugangsdaten, die du kontrollierst, und einem Banner,
 
 - Dateien lesen und bearbeiten, Einstellungen umschalten sowie Module, Pakete und Dienste verwalten;
 - Logs sichten, Artefakte abrufen und bei Bedarf Diagnosen oder Forensik ausführen;
-- Dateien in beide Richtungen über `scp` / `sftp` / `rsync` verschieben und synchronisieren - Backups, Migrationen, Provisionierung;
+- Dateien in beide Richtungen über `scp` / `sftp` / `rsync` verschieben und synchronisieren: Backups, Migrationen, Provisionierung;
 - eine ganze Flotte gerooteter Geräte von einem Ort aus steuern, jedes über seinen eigenen Schlüssel erreichbar.
 
-Weil das Projekt darauf ausgelegt ist, **KI-freundlich** zu sein - eine dokumentierte
+Weil das Projekt darauf ausgelegt ist, **KI-freundlich** zu sein (eine dokumentierte
 Konfigurationsdatei, ein expliziter [Env-Vertrag](../../patches/README.md) zur Laufzeit,
-vorhersehbare Pfade und Status im Klartext - kann ein Agent ohne Raten herausfinden, wie er es
+vorhersehbare Pfade und Status im Klartext), kann ein Agent ohne Raten herausfinden, wie er es
 benutzt.
 
 ## Sicher vorgehen
@@ -64,11 +64,11 @@ benutzt.
 Das ist Root, also behandle es wie Root:
 
 - gib dem Agenten einen **eigenen Benutzer und Schlüssel**, nicht deinen persönlichen;
-- beschränke die Bindungen auf Netzwerke, denen du vertraust - Loopback oder ein VPN statt des
+- beschränke die Bindungen auf Netzwerke, denen du vertraust: Loopback oder ein VPN statt des
   offenen Internets (siehe [Konfiguration](CONFIGURATION.md));
 - lass die Passwort-Authentifizierung aus; ein Schlüssel ist widerrufbar und wird nie eingetippt;
 - du kannst einen Schlüssel jederzeit widerrufen oder den Daemon über die WebUI stoppen;
-- denk daran, dass jede Verbindung eine vollständige Root-Sitzung ist - gib dem Agenten nur die Reichweite, die er braucht.
+- denk daran, dass jede Verbindung eine vollständige Root-Sitzung ist: gib dem Agenten nur die Reichweite, die er braucht.
 
 ## Eine minimale Einrichtung
 

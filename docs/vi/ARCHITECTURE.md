@@ -1,7 +1,7 @@
 <!--
   ======================================================================
    VD Dropbear  ::  standalone, configurable rooted SSH daemon
-   A private SSH server for KernelSU/APatch/Magisk - no invasive ADB exposure.
+   A private SSH server for KernelSU/APatch/Magisk. No invasive ADB exposure.
    Architecture.
 
    Copyright (C) 2026  VD171
@@ -35,28 +35,28 @@ riêng biệt đều là cấu hình thời gian chạy hoặc một secret.
 
 ## Các thành phần
 
-- `module/common/vddropbear.sh` - thư viện lõi: tải cấu hình (với các giá trị mặc định tích hợp an
+- `module/common/vddropbear.sh`: thư viện lõi: tải cấu hình (với các giá trị mặc định tích hợp an
   toàn), xác định kho secret, bảo đảm có host key, dựng vector đối số của Dropbear, và quản lý một thực
   thể daemon duy nhất (start / stop / status / restart).
-- `module/service.sh` - điểm vào khi khởi động. Tuân theo chính sách khởi động BFU/AFU; ở chế độ AFU nó
+- `module/service.sh`: điểm vào khi khởi động. Tuân theo chính sách khởi động BFU/AFU; ở chế độ AFU nó
   chờ kho credential-encrypted được mở khóa mà không làm nghẽn quá trình khởi động.
-- `module/action.sh` - nút **Action** của trình quản lý: (tái) khởi chạy daemon. Nó không bao giờ đọc
+- `module/action.sh`: nút **Action** của trình quản lý: (tái) khởi chạy daemon. Nó không bao giờ đọc
   stdin và tách daemon ra phiên riêng của nó, nên trình quản lý không bị treo.
-- `module/common/vddb-webui.sh` + `module/webroot/index.html` - backend và trang của WebUI.
-- `patches/` - các bản vá nhỏ, có thể kiểm tra, được áp dụng lên Dropbear upstream khi build.
-- `scripts/build.sh`, `scripts/build-bundles.sh`, `.github/workflows/build.yml` - quá trình build.
+- `module/common/vddb-webui.sh` + `module/webroot/index.html`: backend và trang của WebUI.
+- `patches/`: các bản vá nhỏ, có thể kiểm tra, được áp dụng lên Dropbear upstream khi build.
+- `scripts/build.sh`, `scripts/build-bundles.sh`, `.github/workflows/build.yml`: quá trình build.
 
 ## Vòng đời của daemon (một thực thể duy nhất)
 
 `vddb_start` tải cấu hình, dừng mọi thực thể đang chạy, bảo đảm host key tồn tại, rồi sinh ra một
 daemon. Tệp nhị phân được phát hành dưới tên `vddropbear`, nên tên tiến trình của nó khớp chính xác với
 `pgrep -x` (Android `mksh` không có `exec -a`). Nó được khởi chạy bằng `setsid` để tách khỏi nhóm tiến
-trình của bên gọi - đó là điều giữ cho nút Action của trình quản lý không bị chặn.
+trình của bên gọi: đó là điều giữ cho nút Action của trình quản lý không bị chặn.
 
 ## Kho secret (CE so với DE, BFU so với AFU)
 
 Các thiết lập không phải là secret và nằm trên kho device-encrypted (`/data/adb/vddropbear`), đọc được
-khi khởi động. Các secret - host key, `authorized_keys`, các hash mật khẩu - mặc định nằm trên kho
+khi khởi động. Các secret (host key, `authorized_keys`, các hash mật khẩu) mặc định nằm trên kho
 **credential-encrypted** (`/data/misc_ce/0/vddropbear`), chỉ mở khóa sau khi người dùng xác thực. Bật
 `START_IN_BFU` chuyển các secret sang kho device-encrypted để daemon có thể chạy trước lần mở khóa đầu
 tiên, với cái giá là các secret đó đọc được sớm hơn. Mô-đun tính toán kho nào sẽ dùng ở mỗi giai đoạn

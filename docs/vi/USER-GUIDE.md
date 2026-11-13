@@ -1,7 +1,7 @@
 <!--
   ======================================================================
    VD Dropbear  ::  standalone, configurable rooted SSH daemon
-   A private SSH server for KernelSU/APatch/Magisk - no invasive ADB exposure.
+   A private SSH server for KernelSU/APatch/Magisk. No invasive ADB exposure.
    User guide.
 
    Copyright (C) 2026  VD171
@@ -82,8 +82,8 @@ rsync -e 'ssh -p 2222' -av ./dir/ root@<device-ip>:/sdcard/dir/
 ## 6. Before first unlock (BFU)
 
 Theo mặc định, daemon chỉ khởi động **sau** khi bạn mở khóa thiết bị một lần (AFU), vì các secret của
-nó nằm trên kho credential-encrypted. Nếu bạn cần SSH **trước** lần mở khóa đầu tiên - ví dụ để mở khóa
-một thiết bị từ xa sau khi khởi động lại - hãy bật **Start before first unlock (BFU)**. Các secret khi
+nó nằm trên kho credential-encrypted. Nếu bạn cần SSH **trước** lần mở khóa đầu tiên (ví dụ để mở khóa
+một thiết bị từ xa sau khi khởi động lại) hãy bật **Start before first unlock (BFU)**. Các secret khi
 đó chuyển sang kho device-encrypted, vốn đọc được trước khi mở khóa: một sự đánh đổi có chủ đích, có tài
 liệu. Xem [Mô hình bảo mật](#) trong README.
 
@@ -100,7 +100,7 @@ liệu. Xem [Mô hình bảo mật](#) trong README.
   đang bật và một host key có thể được tạo.
 - **Khóa bị từ chối.** Xác nhận dòng khóa công khai đúng y như client của bạn cung cấp, và rằng người
   dùng đăng nhập là một người mà hệ thống phân giải được (thường là `root`).
-- **Không thể kết nối từ máy khác.** Có lẽ bạn vẫn chỉ đang bind vào loopback - hãy bật giao diện bạn
+- **Không thể kết nối từ máy khác.** Có lẽ bạn vẫn chỉ đang bind vào loopback. Hãy bật giao diện bạn
   cần và khởi động lại.
 - **SFTP/scp thất bại nhưng shell hoạt động.** Hãy chắc chắn `sftp-server` đóng gói kèm theo đã được
   phát hành cho ABI của bạn; trạng thái WebUI hiển thị ABI được phát hiện.

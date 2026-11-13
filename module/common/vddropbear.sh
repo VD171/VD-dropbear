@@ -1,8 +1,8 @@
 #!/system/bin/sh
 # ======================================================================
 #  VD Dropbear  ::  standalone, configurable rooted SSH daemon
-#  A private SSH server for KernelSU/APatch/Magisk - no invasive ADB exposure.
-#  Core library - config, secret-store resolution, daemon lifecycle, argv builder.
+#  A private SSH server for KernelSU/APatch/Magisk. No invasive ADB exposure.
+#  Core library: config, secret-store resolution, daemon lifecycle, argv builder.
 #
 #  Copyright (C) 2026  VD171
 #  SPDX-License-Identifier: Apache-2.0
@@ -35,7 +35,7 @@
 #   - secrets (host keys, authorized_keys, password hashes) live on CE storage
 #     (/data/misc_ce, unlocked only after the user unlocks the device) UNLESS the user
 #     opts into START_IN_BFU, in which case they live on DE storage and are readable
-#     before first unlock - a deliberate, documented exposure trade-off.
+#     before first unlock, a deliberate, documented exposure trade-off.
 
 VDDB_NAME="vddropbear"
 VDDB_PROC="vddropbear"          # argv[0] the daemon runs under (status/stop match this exactly)
@@ -50,7 +50,7 @@ VDDB_ABI="$(getprop ro.product.cpu.abi 2>/dev/null)"
 [ -d "$MODDIR/bin/$VDDB_ABI" ] || VDDB_ABI="armeabi-v7a"
 VDDB_BIN_DIR="$MODDIR/bin/$VDDB_ABI"
 # The server binary is shipped under the name "vddropbear" so its process name
-# (comm) is exactly that - mksh has no `exec -a`, so this is how pgrep -x matches it.
+# (comm) is exactly that: mksh has no `exec -a`, so this is how pgrep -x matches it.
 VDDB_DROPBEAR="$VDDB_BIN_DIR/vddropbear"
 VDDB_KEYGEN="$VDDB_BIN_DIR/dropbearkey"
 # setsid puts the daemon in its own session so the KSU manager's Action does not
@@ -87,7 +87,7 @@ vddb_defaults() {
     # of the loopback/all binds; specific addresses carry their own family and may
     # carry their own ":port". If nothing is selected we fall back to loopback.
     LISTEN_LOOPBACK=1           # localhost only (127.0.0.1 / ::1)
-    LISTEN_ALL=0               # every interface (0.0.0.0 / ::) - exposes the device
+    LISTEN_ALL=0               # every interface (0.0.0.0 / ::), exposes the device
     LISTEN_IPV4=1
     LISTEN_IPV6=1
     LISTEN_ADDRESSES=""        # extra specific binds: "addr" (uses PORT) or "addr:port", comma-separated
@@ -149,7 +149,7 @@ vddb_build_args() {
     _sdir="$(vddb_secret_dir)"
     # host key
     printf '%s\n' -r "$(vddb_hostkey_path)"
-    # composable listen binds - any mix of all / loopback / specific, filtered by family
+    # composable listen binds: any mix of all / loopback / specific, filtered by family
     _bound=0
     if [ "$LISTEN_ALL" = "1" ]; then
         [ "$LISTEN_IPV4" = "1" ] && { printf '%s\n' -p "0.0.0.0:$PORT"; _bound=1; }
@@ -234,7 +234,7 @@ vddb_spawn() {
 
 # Full (re)start: ensure one instance, secrets present, then spawn.
 # Expose the bundled file-transfer tools at a stable, ABI-correct path so the SFTP
-# subsystem (SFTPSERVER_PATH) and the login PATH (DEFAULT_PATH) find them - this is
+# subsystem (SFTPSERVER_PATH) and the login PATH (DEFAULT_PATH) find them. This is
 # what makes sftp, sftp-based scp and rsync work over the connection.
 vddb_link_tools() {
     mkdir -p "$VDDB_DATA/bin" 2>/dev/null

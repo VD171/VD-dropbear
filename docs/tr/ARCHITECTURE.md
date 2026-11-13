@@ -1,7 +1,7 @@
 <!--
   ======================================================================
    VD Dropbear  ::  standalone, configurable rooted SSH daemon
-   A private SSH server for KernelSU/APatch/Magisk - no invasive ADB exposure.
+   A private SSH server for KernelSU/APatch/Magisk. No invasive ADB exposure.
    Architecture.
 
    Copyright (C) 2026  VD171
@@ -35,29 +35,29 @@ kodlanmamıştır; özgül olan her şey çalışma zamanı yapılandırması ve
 
 ## Parçalar
 
-- `module/common/vddropbear.sh` - çekirdek kitaplık: yapılandırmayı yükler (güvenli yerleşik
+- `module/common/vddropbear.sh`: çekirdek kitaplık: yapılandırmayı yükler (güvenli yerleşik
   varsayılanlarla), sır deposunu çözümler, bir host key'in var olmasını sağlar, Dropbear argüman
   vektörünü oluşturur ve tek bir daemon örneğini yönetir (başlat / durdur / durum / yeniden başlat).
-- `module/service.sh` - önyükleme girişi. BFU/AFU başlatma politikasına uyar; AFU modunda, önyüklemeyi
+- `module/service.sh`: önyükleme girişi. BFU/AFU başlatma politikasına uyar; AFU modunda, önyüklemeyi
   tıkamadan credential-encrypted deposunun kilidinin açılmasını bekler.
-- `module/action.sh` - yöneticinin **Action** düğmesi: daemon'u (yeniden) başlatır. Asla stdin okumaz
+- `module/action.sh`: yöneticinin **Action** düğmesi: daemon'u (yeniden) başlatır. Asla stdin okumaz
   ve daemon'u kendi oturumuna ayırır, böylece yönetici takılmaz.
-- `module/common/vddb-webui.sh` + `module/webroot/index.html` - WebUI arka ucu ve sayfası.
-- `patches/` - derleme sırasında upstream Dropbear'a uygulanan küçük, denetlenebilir yamalar.
-- `scripts/build.sh`, `scripts/build-bundles.sh`, `.github/workflows/build.yml` - derleme.
+- `module/common/vddb-webui.sh` + `module/webroot/index.html`: WebUI arka ucu ve sayfası.
+- `patches/`: derleme sırasında upstream Dropbear'a uygulanan küçük, denetlenebilir yamalar.
+- `scripts/build.sh`, `scripts/build-bundles.sh`, `.github/workflows/build.yml`: derleme.
 
 ## Daemon yaşam döngüsü (tek örnek)
 
 `vddb_start` yapılandırmayı yükler, çalışan her örneği durdurur, bir host key'in var olduğundan emin
 olur, sonra tek bir daemon başlatır. İkili dosya `vddropbear` olarak gönderilir, böylece işlem adı
 `pgrep -x` ile tam olarak eşleşir (Android'in `mksh` kabuğunda `exec -a` yoktur). `setsid` ile
-başlatılır, böylece çağıranın işlem grubundan ayrılır - yöneticinin Action'ının bloke olmasını
+başlatılır, böylece çağıranın işlem grubundan ayrılır: yöneticinin Action'ının bloke olmasını
 engelleyen şey budur.
 
 ## Sır deposu (CE'ye karşı DE, BFU'ya karşı AFU)
 
 Ayarlar sır değildir ve önyüklemede okunabilen device-encrypted depoda (`/data/adb/vddropbear`)
-bulunur. Sırlar - host key, `authorized_keys`, parola karmaları - varsayılan olarak yalnızca kullanıcı
+bulunur. Sırlar (host key, `authorized_keys`, parola karmaları) varsayılan olarak yalnızca kullanıcı
 kimlik doğruladıktan sonra kilidi açılan **credential-encrypted** depoda
 (`/data/misc_ce/0/vddropbear`) bulunur. `START_IN_BFU`'yu açmak, daemon'un ilk kilit açılışından önce
 çalışabilmesi için sırları device-encrypted depoya taşır; bunun bedeli, o sırların daha erken

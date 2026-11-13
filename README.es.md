@@ -1,7 +1,7 @@
 <!--
   ======================================================================
    VD Dropbear  ::  standalone, configurable rooted SSH daemon
-   A private SSH server for KernelSU/APatch/Magisk - no invasive ADB exposure.
+   A private SSH server for KernelSU/APatch/Magisk. No invasive ADB exposure.
 
    Copyright (C) 2026  VD171
    SPDX-License-Identifier: Apache-2.0
@@ -55,8 +55,8 @@ antifraude / RASP puede leerlos, la conexión queda registrada y no hay forma ad
 ADB está, o estuvo alguna vez, activado. La exposición te sigue incluso en un teléfono de fábrica y sin
 root: para conseguir una shell, tienes que anunciarlo.
 
-VD Dropbear es la alternativa privada. En un dispositivo con root te da un servidor SSH de verdad -
-shell de root, SFTP y rsync por la red - sin el delator `adb_enabled`, sin la bandera de depuración por
+VD Dropbear es la alternativa privada. En un dispositivo con root te da un servidor SSH de verdad:
+shell de root, SFTP y rsync por la red, sin el delator `adb_enabled`, sin la bandera de depuración por
 USB, con un banner de versión que no revela nada y con credenciales que tú controlas. Tu acceso sigue
 siendo tuyo, en lugar de una bandera de "me están depurando" legible globalmente que cualquier cosa en
 el dispositivo puede leer.
@@ -68,7 +68,7 @@ el dispositivo puede leer.
   instancia.
 - **Todo es configurable** desde la WebUI (o `/data/adb/vddropbear/config`):
   - puerto, y enlace a loopback / todos / IPv4 / IPv6 / direcciones concretas
-  - **iniciar antes del primer desbloqueo (BFU) o solo después (AFU)** - un único interruptor
+  - **iniciar antes del primer desbloqueo (BFU) o solo después (AFU)**, un único interruptor
   - autenticación por clave pública y/o contraseña, intentos máximos de autenticación
   - usuario de inicio de sesión, shell, `HOME`, entorno adicional
   - tiempo de inactividad, keepalive, ventana de recepción
@@ -88,8 +88,8 @@ el dispositivo puede leer.
 ## Agentes de IA en tu dispositivo
 
 Un punto de acceso SSH permanente convierte tu teléfono en algo que un **agente de IA autónomo puede
-operar directamente**. Cualquier agente capaz de manejar una shell o una conexión SSH - Claude Code,
-aider, un script con un LLM en el bucle, tu propia automatización - obtiene una sesión de root real en
+operar directamente**. Cualquier agente capaz de manejar una shell o una conexión SSH (Claude Code,
+aider, un script con un LLM en el bucle, tu propia automatización) obtiene una sesión de root real en
 el dispositivo, por la red, sin cable USB y sin ninguna de las banderas de depuración delatoras de ADB.
 El agente ve una shell normal, al estilo de Linux, y puede:
 
@@ -98,9 +98,9 @@ El agente ve una shell normal, al estilo de Linux, y puede:
 - mover y sincronizar archivos en ambos sentidos por `scp` / `sftp` / `rsync`, para copias de seguridad, migraciones o aprovisionamiento;
 - gobernar toda una flota de dispositivos con root desde un solo lugar, cada uno accesible por su propia clave.
 
-Como el proyecto está construido para ser **compatible con la IA** - un archivo de configuración
+Como el proyecto está construido para ser **compatible con la IA** (un archivo de configuración
 documentado, un [contrato de entorno](patches/README.md) explícito en tiempo de ejecución, rutas
-predecibles y estado en texto plano - un agente puede descubrir cómo usarlo sin adivinar.
+predecibles y estado en texto plano), un agente puede descubrir cómo usarlo sin adivinar.
 
 > **Esto es root, así que trátalo como root.** Toda conexión autenticada entra como root (consulta la
 > advertencia de abajo). Cuando entregues el acceso a un agente, dale un **usuario y una clave
@@ -176,14 +176,14 @@ Proyectos hermanos del mismo autor:
 * **Discord:** @VD.Priv8 https://discord.com/users/1296831918989639721
 * **E-mail:** vd.priv8@pm.me
 * **XDA-Developers:** @VD171 https://xdaforums.com/m/vd171.4699873/
-* **XDA thread:** _(marcador de posición - se añadirá en el primer lanzamiento público)_
+* **XDA thread:** _(marcador de posición, se añadirá en el primer lanzamiento público)_
 * **GitHub:** @VD171 https://github.com/VD171
 
 ## Licencia
 
-El código propio de VD Dropbear es **Apache-2.0** - consulta [LICENSE](LICENSE). El módulo también
-incluye binarios de terceros - [Dropbear](https://matt.ucc.asn.au/dropbear/) (estilo MIT), el
-`sftp-server` y `scp` de OpenSSH (BSD), y `rsync` (GPL-3.0) - cada uno bajo su propia licencia;
+El código propio de VD Dropbear es **Apache-2.0**; consulta [LICENSE](LICENSE). El módulo también
+incluye binarios de terceros: [Dropbear](https://matt.ucc.asn.au/dropbear/) (estilo MIT), el
+`sftp-server` y `scp` de OpenSSH (BSD), y `rsync` (GPL-3.0), cada uno bajo su propia licencia;
 consulta [THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md), incluido cómo cumplimos la GPL para rsync.
 Nuestro código Apache-2.0 no se ve afectado (el binario GPL está meramente agregado, no enlazado).
 

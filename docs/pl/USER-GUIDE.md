@@ -1,7 +1,7 @@
 <!--
   ======================================================================
    VD Dropbear  ::  standalone, configurable rooted SSH daemon
-   A private SSH server for KernelSU/APatch/Magisk - no invasive ADB exposure.
+   A private SSH server for KernelSU/APatch/Magisk. No invasive ADB exposure.
    User guide.
 
    Copyright (C) 2026  VD171
@@ -85,7 +85,7 @@ działają przez to samo połączenie.
 
 Domyślnie demon uruchamia się dopiero **po** jednokrotnym odblokowaniu urządzenia (AFU), ponieważ jego
 sekrety znajdują się w magazynie szyfrowanym poświadczeniami. Jeśli potrzebujesz SSH **przed** pierwszym
-odblokowaniem - na przykład po to, by zdalnie odblokować urządzenie po restarcie - włącz **Start before
+odblokowaniem (na przykład po to, by zdalnie odblokować urządzenie po restarcie) włącz **Start before
 first unlock (BFU)**. Sekrety trafiają wtedy do magazynu szyfrowanego na poziomie urządzenia,
 który jest czytelny przed odblokowaniem: to celowy, udokumentowany kompromis. Zobacz
 [Model bezpieczeństwa](#) w README.
@@ -104,6 +104,6 @@ który jest czytelny przed odblokowaniem: to celowy, udokumentowany kompromis. Z
 - **Klucz odrzucony.** Potwierdź, że linia klucza publicznego jest dokładnie taka, jaką oferuje Twój
   klient, oraz że użytkownik logowania jest tym, którego system rozpoznaje (zwykle `root`).
 - **Nie można połączyć się z innego komputera.** Prawdopodobnie wciąż jesteś powiązany tylko z
-  loopbackiem - włącz potrzebny interfejs i uruchom ponownie.
+  loopbackiem. Włącz potrzebny interfejs i uruchom ponownie.
 - **SFTP/scp zawodzi, ale powłoka działa.** Upewnij się, że dołączony `sftp-server` został dostarczony
   dla Twojego ABI; status WebUI pokazuje wykryte ABI.

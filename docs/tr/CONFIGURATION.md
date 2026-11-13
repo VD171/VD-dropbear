@@ -1,7 +1,7 @@
 <!--
   ======================================================================
    VD Dropbear  ::  standalone, configurable rooted SSH daemon
-   A private SSH server for KernelSU/APatch/Magisk - no invasive ADB exposure.
+   A private SSH server for KernelSU/APatch/Magisk. No invasive ADB exposure.
    Configuration reference.
 
    Copyright (C) 2026  VD171
@@ -53,7 +53,7 @@ Dropbear her arabirim yerine loopback'e bağlanır.
 | Key | Default | Meaning |
 |-----|---------|---------|
 | `LISTEN_LOOPBACK` | `1` | Yalnızca `127.0.0.1` / `::1` üzerinde dinle. |
-| `LISTEN_ALL` | `0` | Her arabirimde dinle (`0.0.0.0` / `::`) - cihazı açığa çıkarır. |
+| `LISTEN_ALL` | `0` | Her arabirimde dinle (`0.0.0.0` / `::`); cihazı açığa çıkarır. |
 | `LISTEN_IPV4` | `1` | IPv4 bağlamalarını dahil et. |
 | `LISTEN_IPV6` | `1` | IPv6 bağlamalarını dahil et. |
 | `LISTEN_ADDRESSES` | `""` | Ek belirli bağlamalar, virgülle ayrılmış: `addr` (`PORT` kullanır) veya `addr:port`, IPv4 ya da IPv6. |
@@ -102,11 +102,11 @@ Her kimlik doğrulanmış oturum açma **root**'tur. Anahtarlar varsayılandır;
 
 ## Sır deposu
 
-Burada yapılandırılmaz - `START_IN_BFU`'dan çözümlenir:
+Burada yapılandırılmaz, `START_IN_BFU`'dan çözümlenir:
 
-- **AFU (varsayılan):** `/data/misc_ce/0/vddropbear/secret` - credential-encrypted, yalnızca cihazın
+- **AFU (varsayılan):** `/data/misc_ce/0/vddropbear/secret`: credential-encrypted, yalnızca cihazın
   kilidini açtıktan sonra kullanılabilir.
-- **BFU:** `/data/adb/vddropbear/secret` - device-encrypted, ilk kilit açılışından önce okunabilir.
+- **BFU:** `/data/adb/vddropbear/secret`: device-encrypted, ilk kilit açılışından önce okunabilir.
 
 Host key'i, `authorized_keys`'i ve `passwd` karma dosyasını barındırır. Parola karma biçimi için bkz.
 [BUILDING.md](../BUILDING.md).

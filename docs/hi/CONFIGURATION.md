@@ -1,7 +1,7 @@
 <!--
   ======================================================================
    VD Dropbear  ::  standalone, configurable rooted SSH daemon
-   A private SSH server for KernelSU/APatch/Magisk - no invasive ADB exposure.
+   A private SSH server for KernelSU/APatch/Magisk. No invasive ADB exposure.
    Configuration reference.
 
    Copyright (C) 2026  VD171
@@ -53,7 +53,7 @@
 | Key | Default | अर्थ |
 |-----|---------|---------|
 | `LISTEN_LOOPBACK` | `1` | केवल `127.0.0.1` / `::1` पर सुनें। |
-| `LISTEN_ALL` | `0` | हर इंटरफ़ेस (`0.0.0.0` / `::`) पर सुनें - डिवाइस को उजागर करता है। |
+| `LISTEN_ALL` | `0` | हर इंटरफ़ेस (`0.0.0.0` / `::`) पर सुनें; डिवाइस को उजागर करता है। |
 | `LISTEN_IPV4` | `1` | IPv4 बाइंड शामिल करें। |
 | `LISTEN_IPV6` | `1` | IPv6 बाइंड शामिल करें। |
 | `LISTEN_ADDRESSES` | `""` | अतिरिक्त विशिष्ट बाइंड, अल्पविराम से अलग: `addr` (`PORT` का उपयोग करता है) या `addr:port`, IPv4 या IPv6। |
@@ -102,11 +102,11 @@
 
 ## सीक्रेट स्टोर
 
-यहाँ कॉन्फ़िगर नहीं किया जाता - `START_IN_BFU` से तय होता है:
+यहाँ कॉन्फ़िगर नहीं किया जाता, `START_IN_BFU` से तय होता है:
 
-- **AFU (डिफ़ॉल्ट):** `/data/misc_ce/0/vddropbear/secret` - क्रेडेंशियल-एन्क्रिप्टेड, केवल तभी उपलब्ध जब
+- **AFU (डिफ़ॉल्ट):** `/data/misc_ce/0/vddropbear/secret`: क्रेडेंशियल-एन्क्रिप्टेड, केवल तभी उपलब्ध जब
   आप डिवाइस अनलॉक करते हैं।
-- **BFU:** `/data/adb/vddropbear/secret` - डिवाइस-एन्क्रिप्टेड, पहले अनलॉक से पहले पठनीय।
+- **BFU:** `/data/adb/vddropbear/secret`: डिवाइस-एन्क्रिप्टेड, पहले अनलॉक से पहले पठनीय।
 
 इसमें होस्ट कुंजी, `authorized_keys`, और `passwd` हैश फ़ाइल होती है। पासवर्ड हैश प्रारूप के लिए
 [BUILDING.md](../BUILDING.md) देखें।

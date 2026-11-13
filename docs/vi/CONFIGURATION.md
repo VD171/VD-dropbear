@@ -1,7 +1,7 @@
 <!--
   ======================================================================
    VD Dropbear  ::  standalone, configurable rooted SSH daemon
-   A private SSH server for KernelSU/APatch/Magisk - no invasive ADB exposure.
+   A private SSH server for KernelSU/APatch/Magisk. No invasive ADB exposure.
    Configuration reference.
 
    Copyright (C) 2026  VD171
@@ -53,7 +53,7 @@ loopback thay vì mọi giao diện.
 | Key | Default | Meaning |
 |-----|---------|---------|
 | `LISTEN_LOOPBACK` | `1` | Chỉ lắng nghe trên `127.0.0.1` / `::1`. |
-| `LISTEN_ALL` | `0` | Lắng nghe trên mọi giao diện (`0.0.0.0` / `::`) - phơi bày thiết bị. |
+| `LISTEN_ALL` | `0` | Lắng nghe trên mọi giao diện (`0.0.0.0` / `::`); phơi bày thiết bị. |
 | `LISTEN_IPV4` | `1` | Bao gồm các bind IPv4. |
 | `LISTEN_IPV6` | `1` | Bao gồm các bind IPv6. |
 | `LISTEN_ADDRESSES` | `""` | Các bind cụ thể bổ sung, phân tách bằng dấu phẩy: `addr` (dùng `PORT`) hoặc `addr:port`, IPv4 hoặc IPv6. |
@@ -102,11 +102,11 @@ Mọi lần đăng nhập đã xác thực đều là **root**. Khóa là mặc 
 
 ## Kho secret
 
-Không được cấu hình ở đây - được xác định từ `START_IN_BFU`:
+Không được cấu hình ở đây, được xác định từ `START_IN_BFU`:
 
-- **AFU (mặc định):** `/data/misc_ce/0/vddropbear/secret` - credential-encrypted, chỉ khả dụng sau khi
+- **AFU (mặc định):** `/data/misc_ce/0/vddropbear/secret`: credential-encrypted, chỉ khả dụng sau khi
   bạn mở khóa thiết bị.
-- **BFU:** `/data/adb/vddropbear/secret` - device-encrypted, đọc được trước lần mở khóa đầu tiên.
+- **BFU:** `/data/adb/vddropbear/secret`: device-encrypted, đọc được trước lần mở khóa đầu tiên.
 
 Nó chứa host key, `authorized_keys`, và tệp hash `passwd`. Xem [BUILDING.md](../BUILDING.md) để biết
 định dạng hash mật khẩu.

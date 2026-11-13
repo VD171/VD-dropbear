@@ -1,7 +1,7 @@
 <!--
   ======================================================================
    VD Dropbear  ::  standalone, configurable rooted SSH daemon
-   A private SSH server for KernelSU/APatch/Magisk - no invasive ADB exposure.
+   A private SSH server for KernelSU/APatch/Magisk. No invasive ADB exposure.
    Building the binaries, and the Android crypto/crypt() story.
 
    Copyright (C) 2026  VD171
@@ -25,8 +25,8 @@
 
 # Building VD Dropbear
 
-VD Dropbear ships **upstream [Dropbear](https://github.com/mkj/dropbear)** - the tag pinned in
-[`UPSTREAM_VERSION`](../UPSTREAM_VERSION) - plus the small, auditable patch set in
+VD Dropbear ships **upstream [Dropbear](https://github.com/mkj/dropbear)** (the tag pinned in
+[`UPSTREAM_VERSION`](../UPSTREAM_VERSION)) plus the small, auditable patch set in
 [`patches/`](../patches/). CI builds it; you can reproduce it locally.
 
 ## Quick start
@@ -48,7 +48,7 @@ then cross-compiles `vddropbear` and `dropbearkey` into `module/bin/<abi>/`. The
 24`), linked against the bionic libc that every Android device already has. libtomcrypt stays bundled
 inside the binary; only the C library is dynamic. See [Dynamic, not static-PIE](#dynamic-not-static-pie).
 
-The binaries are **not committed** - they are built by CI on every tag and attached to the release.
+The binaries are **not committed**; they are built by CI on every tag and attached to the release.
 See [`.gitignore`](../.gitignore).
 
 ---
@@ -65,8 +65,8 @@ runtime.
 ### 1. bionic has no usable `crypt()`
 
 Android's C library (bionic) does not provide `crypt()`, `crypt_r()`, or a shadow database. The NDK
-exposes no `<crypt.h>`. So the stock Dropbear password path - which calls `crypt(password, salt)` and
-compares against `/etc/shadow` - simply cannot be built or run on Android. There is also no
+exposes no `<crypt.h>`. So the stock Dropbear password path, which calls `crypt(password, salt)` and
+compares against `/etc/shadow`, simply cannot be built or run on Android. There is also no
 `libcrypt` to link against, and pulling in OpenSSL's `libcrypto` just for a password hash would be a
 large, awkward dependency for a static binary.
 
@@ -99,7 +99,7 @@ reasons:
   declaration is invisible and the compiler errors with *implicit function declaration*.
 - **The symbol does not exist.** Worse, the *body* of `pkcs_5_alg2` is itself behind `#ifdef
   LTC_PKCS_5`. Dropbear's libtomcrypt build does not define it, so `pkcs_5_2.o` compiles to an
-  **empty object** - it is in `libtomcrypt.a`, but it contains no `pkcs_5_alg2` symbol. The link
+  **empty object**: it is in `libtomcrypt.a`, but it contains no `pkcs_5_alg2` symbol. The link
   fails with `undefined symbol: pkcs_5_alg2`.
 
 You can see this for yourself:
@@ -120,7 +120,7 @@ PBKDF2-HMAC-SHA256 directly (RFC 2898; a single 32-byte output block, since `dkL
 SHA-256). We declare `hmac_memory` ourselves (same hidden-prototype issue as above) and the object is
 pulled from `libtomcrypt.a` at link time. The result is standard PBKDF2 and therefore interoperable:
 the hash the WebUI computes with the browser's **WebCrypto** `deriveBits` is byte-identical to what
-the server computes - verified against Python's `hashlib.pbkdf2_hmac` as a third, independent
+the server computes, verified against Python's `hashlib.pbkdf2_hmac` as a third, independent
 implementation.
 
 > **In short:** Android gives you no `crypt()`, and Dropbear's bundled PBKDF2 is compiled to nothing.
@@ -132,7 +132,7 @@ implementation.
 ## Dynamic, not static-PIE
 
 The binaries are **dynamic** (linked against the system bionic via `/system/bin/linker64`), not static.
-This matters, and it was learned the hard way - **on a real device**, not in CI:
+This matters, and it was learned the hard way, **on a real device**, not in CI:
 
 - A **static-PIE** build *looks* fine (`file` reports a clean `static-pie executable`) and links without
   error, but it **SIGSEGVs the instant it runs on-device** (verified on an arm64 Android 16 phone,
@@ -140,7 +140,7 @@ This matters, and it was learned the hard way - **on a real device**, not in CI:
   normal dynamic binary, which is also how every long-standing Android dropbear ships.
 - A **static, non-PIE** build does not even start: bionic rejects it with
   `executable's TLS segment is underaligned … needs to be at least 64 for ARM64 Bionic`.
-- So the build is **dynamic** (`make` without `STATIC=1`; `-pie`), linking only bionic libc - present on
+- So the build is **dynamic** (`make` without `STATIC=1`; `-pie`), linking only bionic libc, present on
   every device. libtomcrypt is still statically bundled into the binary, so there is no extra library to
   ship.
 
@@ -153,14 +153,14 @@ wrong password rejected.)
 ## No `-E` flag
 
 The server is built `--disable-syslog`, so it always logs to stderr and the upstream `-E`
-("log to stderr") option **does not exist** in this binary - passing it prints `Invalid option -E` and
+("log to stderr") option **does not exist** in this binary; passing it prints `Invalid option -E` and
 the daemon never starts. The module's argument builder therefore does not pass `-E`.
 
 ## openpty
 
 Interactive PTY sessions use `openpty()`. bionic declares it in `<pty.h>`, and Dropbear's
 cross-`configure` detects it with the NDK (`HAVE_OPENPTY` is set, `HAVE_PTY_H 1`), so **no patch is
-needed** - PTYs work out of the box. (Non-interactive use - exec, SFTP, rsync, port-forwarding - does
+needed**; PTYs work out of the box. (Non-interactive use such as exec, SFTP, rsync and port-forwarding does
 not depend on it anyway.)
 
 ## Bundled tools: sftp-server, scp, rsync
@@ -183,12 +183,12 @@ encodes the fix; for the record, the pieces are:
    `getentropy`, `getrandom`, `nl_langinfo`, `setpwent`/`getpwent`/`endpwent`,
    `crypt`, `futimes`, `lutimes`, `strtonum`, `pledge`, `explicit_bzero`.
 2. **`-DHAVE_ATTRIBUTE__SENTINEL__=1 -DHAVE_ATTRIBUTE__NONNULL__=1`.** Without
-   these, OpenSSH's `defines.h` does `#define __sentinel__` (empty) - which then
+   these, OpenSSH's `defines.h` does `#define __sentinel__` (empty), which then
    mangles bionic's own `__attribute__((__sentinel__(1)))` in `<unistd.h>` and
    every compile fails with `expected ')'`.
 3. **An `explicit_bzero` compat that uses `memset`.** bionic's `bzero` is a
-   function-like macro (not a real symbol), so OpenSSH's default compat - which
-   takes `&bzero` as a function pointer - does not compile. bionic has no
+   function-like macro (not a real symbol), so OpenSSH's default compat, which
+   takes `&bzero` as a function pointer, does not compile. bionic has no
    `explicit_bzero` of its own.
 4. **Dropping `xcrypt.o` and `getrrsetbyname.o`** from the compat library.
    `xcrypt.c` calls `getpwent()`/`crypt()` unconditionally (bionic has neither),
@@ -196,7 +196,7 @@ encodes the fix; for the record, the pieces are:
    is used by `sftp-server` or `scp`.
 5. **`-Wl,--allow-multiple-definition`.** `reallocarray` is the mirror image of
    the functions in (1): bionic doesn't *declare* it at API 24, so OpenSSH
-   compiles its own compat - but the **symbol** does exist in `libc.a`, so the
+   compiles its own compat, but the **symbol** does exist in `libc.a`, so the
    two collide at link time. Allowing the duplicate takes bionic's, which is fine.
 6. **NULL-guarding `pw_gecos` in `pwcopy()`.** bionic's `getpwuid()` returns a
    `NULL` `pw_gecos` (Android keeps no GECOS field). OpenSSH's `pwcopy()` guards

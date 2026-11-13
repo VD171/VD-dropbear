@@ -1,7 +1,7 @@
 <!--
   ======================================================================
    VD Dropbear  ::  standalone, configurable rooted SSH daemon
-   A private SSH server for KernelSU/APatch/Magisk - no invasive ADB exposure.
+   A private SSH server for KernelSU/APatch/Magisk. No invasive ADB exposure.
    Configuration reference.
 
    Copyright (C) 2026  VD171
@@ -48,7 +48,7 @@
 | Key | Default | 意味 |
 |-----|---------|---------|
 | `LISTEN_LOOPBACK` | `1` | `127.0.0.1` / `::1` のみでリッスンします。 |
-| `LISTEN_ALL` | `0` | すべてのインターフェース（`0.0.0.0` / `::`）でリッスンします - デバイスを露出させます。 |
+| `LISTEN_ALL` | `0` | すべてのインターフェース（`0.0.0.0` / `::`）でリッスンします；デバイスを露出させます。 |
 | `LISTEN_IPV4` | `1` | IPv4のバインドを含めます。 |
 | `LISTEN_IPV6` | `1` | IPv6のバインドを含めます。 |
 | `LISTEN_ADDRESSES` | `""` | 追加の具体的なバインド、カンマ区切り：`addr`（`PORT` を使用）または `addr:port`、IPv4またはIPv6。 |
@@ -97,9 +97,9 @@
 
 ## シークレットストア
 
-ここでは設定しません - `START_IN_BFU` から解決されます：
+ここでは設定しません。`START_IN_BFU` から解決されます：
 
-- **AFU（既定）：** `/data/misc_ce/0/vddropbear/secret` - 認証情報暗号化で、デバイスをアンロックしたあとにのみ利用できます。
-- **BFU：** `/data/adb/vddropbear/secret` - デバイス暗号化で、最初のアンロック前に読み取れます。
+- **AFU（既定）：** `/data/misc_ce/0/vddropbear/secret`：認証情報暗号化で、デバイスをアンロックしたあとにのみ利用できます。
+- **BFU：** `/data/adb/vddropbear/secret`：デバイス暗号化で、最初のアンロック前に読み取れます。
 
 ここにはホスト鍵、`authorized_keys`、`passwd` ハッシュファイルが入ります。パスワードハッシュの形式については [BUILDING.md](../BUILDING.md) を参照してください。

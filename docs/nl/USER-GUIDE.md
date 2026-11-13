@@ -1,7 +1,7 @@
 <!--
   ======================================================================
    VD Dropbear  ::  standalone, configurable rooted SSH daemon
-   A private SSH server for KernelSU/APatch/Magisk - no invasive ADB exposure.
+   A private SSH server for KernelSU/APatch/Magisk. No invasive ADB exposure.
    User guide.
 
    Copyright (C) 2026  VD171
@@ -71,7 +71,7 @@ rsync -e 'ssh -p 2222' -av ./dir/ root@<device-ip>:/sdcard/dir/
 
 ## 6. Before first unlock (BFU)
 
-Standaard start de daemon pas **nadat** je het toestel één keer ontgrendelt (AFU), omdat de geheimen op credential-encrypted opslag staan. Als je SSH **voor** de eerste ontgrendeling nodig hebt - bijvoorbeeld om een toestel na een herstart op afstand te ontgrendelen - zet dan **Start before first unlock (BFU)** aan. De geheimen verhuizen dan naar device-encrypted opslag, die leesbaar is vóór ontgrendeling: een bewuste, gedocumenteerde afweging. Zie [Security model](#) in de README.
+Standaard start de daemon pas **nadat** je het toestel één keer ontgrendelt (AFU), omdat de geheimen op credential-encrypted opslag staan. Als je SSH **voor** de eerste ontgrendeling nodig hebt (bijvoorbeeld om een toestel na een herstart op afstand te ontgrendelen) zet dan **Start before first unlock (BFU)** aan. De geheimen verhuizen dan naar device-encrypted opslag, die leesbaar is vóór ontgrendeling: een bewuste, gedocumenteerde afweging. Zie [Security model](#) in de README.
 
 ## 7. De daemon besturen
 
@@ -83,5 +83,5 @@ Standaard start de daemon pas **nadat** je het toestel één keer ontgrendelt (A
 
 - **Het start niet.** Controleer `/data/adb/vddropbear/state/daemon.log`. Zorg dat **Enabled** aan staat en dat er een hostsleutel gegenereerd kon worden.
 - **Sleutel geweigerd.** Bevestig dat de regel met de publieke sleutel exact is zoals je client die aanbiedt, en dat de logingebruiker er een is die het systeem herkent (meestal `root`).
-- **Kan niet verbinden vanaf een andere machine.** Je bent waarschijnlijk nog alleen aan loopback gebonden - schakel de interface in die je nodig hebt en herstart.
+- **Kan niet verbinden vanaf een andere machine.** Je bent waarschijnlijk nog alleen aan loopback gebonden. Schakel de interface in die je nodig hebt en herstart.
 - **SFTP/scp mislukt maar de shell werkt.** Zorg dat de meegeleverde `sftp-server` voor jouw ABI is uitgeleverd; de WebUI-status toont de gedetecteerde ABI.

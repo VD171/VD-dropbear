@@ -1,7 +1,7 @@
 <!--
   ======================================================================
    VD Dropbear  ::  standalone, configurable rooted SSH daemon
-   A private SSH server for KernelSU/APatch/Magisk - no invasive ADB exposure.
+   A private SSH server for KernelSU/APatch/Magisk. No invasive ADB exposure.
 
    Copyright (C) 2026  VD171
    SPDX-License-Identifier: Apache-2.0
@@ -64,7 +64,7 @@ SFTP と rsync）を提供します。`adb_enabled` の痕跡も、USB デバッ
   **start / stop / restart** できます。インスタンスが 2 つ以上になることは決してありません。
 - **すべてが WebUI から設定可能**（または `/data/adb/vddropbear/config`）:
   - ポート、および loopback / all / IPv4 / IPv6 / 特定アドレスへのバインド
-  - **最初のアンロック前（BFU）に起動するか、その後にのみ（AFU）起動するか** - 単一のトグル
+  - **最初のアンロック前（BFU）に起動するか、その後にのみ（AFU）起動するか**、単一のトグル
   - 公開鍵認証および／またはパスワード認証、最大認証試行回数
   - ログインユーザー、シェル、`HOME`、追加の environment
   - idle timeout、keepalive、receive window
@@ -162,14 +162,14 @@ CE を再実装するだけです）。それは偽りの安心感を買うだ�
 * **Discord:** @VD.Priv8 https://discord.com/users/1296831918989639721
 * **E-mail:** vd.priv8@pm.me
 * **XDA-Developers:** @VD171 https://xdaforums.com/m/vd171.4699873/
-* **XDA thread:** _(placeholder - 最初の公開リリース時に追加)_
+* **XDA thread:** _(placeholder、最初の公開リリース時に追加)_
 * **GitHub:** @VD171 https://github.com/VD171
 
 ## ライセンス
 
-VD Dropbear 自身のコードは **Apache-2.0** です - [LICENSE](LICENSE) を参照してください。モジュールはサードパーティの
-バイナリも同梱しています - [Dropbear](https://matt.ucc.asn.au/dropbear/)（MIT 系）、OpenSSH の `sftp-server` と
-`scp`（BSD）、`rsync`（GPL-3.0）- それぞれが独自のライセンスの下にあります。[THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md)
+VD Dropbear 自身のコードは **Apache-2.0** です。[LICENSE](LICENSE) を参照してください。モジュールはサードパーティの
+バイナリも同梱しています：[Dropbear](https://matt.ucc.asn.au/dropbear/)（MIT 系）、OpenSSH の `sftp-server` と
+`scp`（BSD）、`rsync`（GPL-3.0）、それぞれが独自のライセンスの下にあります。[THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md)
 を参照してください。rsync の GPL をどのように遵守しているかも含まれます。私たちの Apache-2.0 コードは影響を受けません
 （GPL バイナリは単に集積されているだけで、リンクされてはいません）。
 

@@ -1,7 +1,7 @@
 <!--
   ======================================================================
    VD Dropbear  ::  standalone, configurable rooted SSH daemon
-   A private SSH server for KernelSU/APatch/Magisk - no invasive ADB exposure.
+   A private SSH server for KernelSU/APatch/Magisk. No invasive ADB exposure.
    Configuration reference.
 
    Copyright (C) 2026  VD171
@@ -52,7 +52,7 @@
 | المفتاح | الافتراضي | المعنى |
 |-----|---------|---------|
 | `LISTEN_LOOPBACK` | `1` | الاستماع على `127.0.0.1` / `::1` فقط. |
-| `LISTEN_ALL` | `0` | الاستماع على كل واجهة (`0.0.0.0` / `::`) - يُعرّض الجهاز. |
+| `LISTEN_ALL` | `0` | الاستماع على كل واجهة (`0.0.0.0` / `::`)؛ يُعرّض الجهاز. |
 | `LISTEN_IPV4` | `1` | تضمين روابط IPv4. |
 | `LISTEN_IPV6` | `1` | تضمين روابط IPv6. |
 | `LISTEN_ADDRESSES` | `""` | روابط محدَّدة إضافية، مفصولة بفواصل: `addr` (يستخدم `PORT`) أو `addr:port`، IPv4 أو IPv6. |
@@ -101,11 +101,11 @@
 
 ## مخزن الأسرار
 
-لا يُضبَط هنا - يُحدَّد من `START_IN_BFU`:
+لا يُضبَط هنا، يُحدَّد من `START_IN_BFU`:
 
-- **AFU (الافتراضي):** `/data/misc_ce/0/vddropbear/secret` - مشفَّر ببيانات الاعتماد، متاح فقط بعد أن
+- **AFU (الافتراضي):** `/data/misc_ce/0/vddropbear/secret`: مشفَّر ببيانات الاعتماد، متاح فقط بعد أن
   تفتح الجهاز.
-- **BFU:** `/data/adb/vddropbear/secret` - مشفَّر بالجهاز، قابل للقراءة قبل أول فتح.
+- **BFU:** `/data/adb/vddropbear/secret`: مشفَّر بالجهاز، قابل للقراءة قبل أول فتح.
 
 يحتوي على مفتاح المضيف و`authorized_keys` وملف بصمات `passwd`. انظر
 [BUILDING.md](../BUILDING.md) لمعرفة صيغة بصمة كلمة المرور.

@@ -1,7 +1,7 @@
 <!--
   ======================================================================
    VD Dropbear  ::  standalone, configurable rooted SSH daemon
-   A private SSH server for KernelSU/APatch/Magisk - no invasive ADB exposure.
+   A private SSH server for KernelSU/APatch/Magisk. No invasive ADB exposure.
    Configuration reference.
 
    Copyright (C) 2026  VD171
@@ -48,7 +48,7 @@
 | Key | Default | 의미 |
 |-----|---------|---------|
 | `LISTEN_LOOPBACK` | `1` | `127.0.0.1` / `::1` 에서만 수신합니다. |
-| `LISTEN_ALL` | `0` | 모든 인터페이스(`0.0.0.0` / `::`)에서 수신합니다 - 기기를 노출합니다. |
+| `LISTEN_ALL` | `0` | 모든 인터페이스(`0.0.0.0` / `::`)에서 수신합니다；기기를 노출합니다. |
 | `LISTEN_IPV4` | `1` | IPv4 바인드를 포함합니다. |
 | `LISTEN_IPV6` | `1` | IPv6 바인드를 포함합니다. |
 | `LISTEN_ADDRESSES` | `""` | 추가의 구체적 바인드, 쉼표로 구분: `addr`(`PORT` 사용) 또는 `addr:port`, IPv4 또는 IPv6. |
@@ -97,9 +97,9 @@
 
 ## 시크릿 저장소
 
-여기서 설정하지 않습니다 - `START_IN_BFU` 에서 결정됩니다:
+여기서 설정하지 않습니다. `START_IN_BFU` 에서 결정됩니다:
 
-- **AFU(기본):** `/data/misc_ce/0/vddropbear/secret` - 자격 증명 암호화이며, 기기를 잠금 해제한 뒤에만 사용할 수 있습니다.
-- **BFU:** `/data/adb/vddropbear/secret` - 기기 암호화이며, 첫 잠금 해제 전에 읽을 수 있습니다.
+- **AFU(기본):** `/data/misc_ce/0/vddropbear/secret`: 자격 증명 암호화이며, 기기를 잠금 해제한 뒤에만 사용할 수 있습니다.
+- **BFU:** `/data/adb/vddropbear/secret`: 기기 암호화이며, 첫 잠금 해제 전에 읽을 수 있습니다.
 
 여기에는 호스트 키, `authorized_keys`, `passwd` 해시 파일이 들어갑니다. 비밀번호 해시 형식은 [BUILDING.md](../BUILDING.md) 를 참고하십시오.

@@ -1,7 +1,7 @@
 /* ======================================================================
  *  VD Dropbear  ::  standalone, configurable rooted SSH daemon
- *  A private SSH server for KernelSU/APatch/Magisk - no invasive ADB exposure.
- *  Build options - overrides the upstream default_options.h.
+ *  A private SSH server for KernelSU/APatch/Magisk. No invasive ADB exposure.
+ *  Build options: overrides the upstream default_options.h.
  *  Kept minimal and auditable (see patches/README.md). Runtime behaviour
  *  (port, binds, auth toggles, paths, identity) is configuration, not a build option.
  *
@@ -41,9 +41,9 @@
 
 /* A sane default PATH for the login shell on Android. The first entry is the
  * module's stable bin dir, where vddropbear.sh symlinks the bundled tools
- * (scp, rsync, sftp-server) for the running ABI - so scp/rsync work remotely. */
+ * (scp, rsync, sftp-server) for the running ABI, so scp/rsync work remotely. */
 #define DEFAULT_PATH "/data/adb/vddropbear/bin:/system/bin:/system/xbin:/data/adb/ksu/bin:/sbin"
-/* Root logins use DEFAULT_ROOT_PATH, not DEFAULT_PATH - and on this module every
+/* Root logins use DEFAULT_ROOT_PATH, not DEFAULT_PATH, and on this module every
  * login is root, so this is the one that actually applies. Without it the session
  * keeps upstream's /usr/sbin:/usr/bin:... (nonexistent on Android) and scp/rsync
  * are not found. */

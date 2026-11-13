@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # ======================================================================
 #  VD Dropbear  ::  standalone, configurable rooted SSH daemon
-#  A private SSH server for KernelSU/APatch/Magisk - no invasive ADB exposure.
+#  A private SSH server for KernelSU/APatch/Magisk. No invasive ADB exposure.
 #  Render docs/ into GitHub Wiki pages (used by .github/workflows/wiki-sync.yml).
 #
 #  Copyright (C) 2026  VD171
@@ -68,7 +68,7 @@ for src, page in PAGES:
 
 home = """# VD Dropbear
 
-A standalone, fully configurable **rooted SSH server** for KernelSU, APatch and Magisk - a private SSH
+A standalone, fully configurable **rooted SSH server** for KernelSU, APatch and Magisk: a private SSH
 daemon with a WebUI, with none of ADB's invasive, self-exposing debug flags.
 
 > **Every authenticated connection receives a root shell.** Prefer keys over passwords, bind only to

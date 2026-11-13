@@ -1,7 +1,7 @@
 <!--
   ======================================================================
    VD Dropbear  ::  standalone, configurable rooted SSH daemon
-   A private SSH server for KernelSU/APatch/Magisk - no invasive ADB exposure.
+   A private SSH server for KernelSU/APatch/Magisk. No invasive ADB exposure.
    User guide.
 
    Copyright (C) 2026  VD171
@@ -71,7 +71,7 @@ rsync -e 'ssh -p 2222' -av ./dir/ root@<device-ip>:/sdcard/dir/
 
 ## 6. 첫 잠금 해제 전(BFU)
 
-기본적으로 데몬은 기기를 한 번 잠금 해제한 **뒤**(AFU)에만 시작합니다. 시크릿이 자격 증명 암호화 저장소에 있기 때문입니다. 첫 잠금 해제 **전** 에 SSH가 필요하다면 - 예를 들어 재부팅 후 기기를 원격으로 잠금 해제하기 위해 - **Start before first unlock (BFU)** 를 켜십시오. 그러면 시크릿이 기기 암호화 저장소로 옮겨져 잠금 해제 전에 읽을 수 있게 됩니다: 의도적이고 문서화된 트레이드오프입니다. README의 [Security model](#) 을 참고하십시오.
+기본적으로 데몬은 기기를 한 번 잠금 해제한 **뒤**(AFU)에만 시작합니다. 시크릿이 자격 증명 암호화 저장소에 있기 때문입니다. 첫 잠금 해제 **전** 에 SSH가 필요하다면(예를 들어 재부팅 후 기기를 원격으로 잠금 해제하기 위해) **Start before first unlock (BFU)** 를 켜십시오. 그러면 시크릿이 기기 암호화 저장소로 옮겨져 잠금 해제 전에 읽을 수 있게 됩니다: 의도적이고 문서화된 트레이드오프입니다. README의 [Security model](#) 을 참고하십시오.
 
 ## 7. 데몬 제어
 
@@ -83,5 +83,5 @@ rsync -e 'ssh -p 2222' -av ./dir/ root@<device-ip>:/sdcard/dir/
 
 - **시작되지 않음.** `/data/adb/vddropbear/state/daemon.log` 를 확인하십시오. **Enabled** 가 켜져 있고 호스트 키가 생성될 수 있었는지 확인하십시오.
 - **키 거부됨.** 공개 키 줄이 클라이언트가 제시하는 것과 정확히 같은지, 그리고 로그인 사용자가 시스템이 해석하는 것(보통 `root`)인지 확인하십시오.
-- **다른 기기에서 연결할 수 없음.** 아마 아직 루프백에만 바인드되어 있을 것입니다 - 필요한 인터페이스를 켜고 재시작하십시오.
+- **다른 기기에서 연결할 수 없음.** 아마 아직 루프백에만 바인드되어 있을 것입니다. 필요한 인터페이스를 켜고 재시작하십시오.
 - **SFTP/scp는 실패하지만 셸은 동작함.** 함께 제공되는 `sftp-server` 가 여러분의 ABI용으로 배포되었는지 확인하십시오; WebUI 상태에 감지된 ABI가 표시됩니다.

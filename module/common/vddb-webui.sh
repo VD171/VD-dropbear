@@ -1,8 +1,8 @@
 #!/system/bin/sh
 # ======================================================================
 #  VD Dropbear  ::  standalone, configurable rooted SSH daemon
-#  A private SSH server for KernelSU/APatch/Magisk - no invasive ADB exposure.
-#  WebUI backend - the verbs index.html drives through ksu.exec().
+#  A private SSH server for KernelSU/APatch/Magisk. No invasive ADB exposure.
+#  WebUI backend: the verbs index.html drives through ksu.exec().
 #
 #  Copyright (C) 2026  VD171
 #  SPDX-License-Identifier: Apache-2.0
@@ -102,7 +102,7 @@ case "$1" in
     _new="$VDDB_DATA/config.new.$$"
     mkdir -p "$VDDB_DATA" 2>/dev/null
     {
-      echo "# VD Dropbear configuration - written by the WebUI. KEY='value'."
+      echo "# VD Dropbear configuration, written by the WebUI. KEY='value'."
       # Read KEY=VALUE pairs (one per line) from the base64 stdin payload.
       unb64 | while IFS= read -r _line; do
         case "$_line" in *=*) : ;; *) continue ;; esac

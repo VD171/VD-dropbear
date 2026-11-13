@@ -1,7 +1,7 @@
 <!--
   ======================================================================
    VD Dropbear  ::  standalone, configurable rooted SSH daemon
-   A private SSH server for KernelSU/APatch/Magisk - no invasive ADB exposure.
+   A private SSH server for KernelSU/APatch/Magisk. No invasive ADB exposure.
    Configuration reference.
 
    Copyright (C) 2026  VD171
@@ -53,7 +53,7 @@ il bind su loopback anziché su ogni interfaccia.
 | Key | Default | Significato |
 |-----|---------|---------|
 | `LISTEN_LOOPBACK` | `1` | Ascolta solo su `127.0.0.1` / `::1`. |
-| `LISTEN_ALL` | `0` | Ascolta su ogni interfaccia (`0.0.0.0` / `::`) - espone il dispositivo. |
+| `LISTEN_ALL` | `0` | Ascolta su ogni interfaccia (`0.0.0.0` / `::`); espone il dispositivo. |
 | `LISTEN_IPV4` | `1` | Includi i bind IPv4. |
 | `LISTEN_IPV6` | `1` | Includi i bind IPv6. |
 | `LISTEN_ADDRESSES` | `""` | Bind specifici aggiuntivi, separati da virgola: `addr` (usa `PORT`) o `addr:port`, IPv4 o IPv6. |
@@ -102,11 +102,11 @@ Ogni accesso autenticato è **root**. Le chiavi sono il default; le password son
 
 ## Il secret store
 
-Non configurato qui - risolto da `START_IN_BFU`:
+Non configurato qui, risolto da `START_IN_BFU`:
 
-- **AFU (default):** `/data/misc_ce/0/vddropbear/secret` - credential-encrypted, disponibile solo dopo
+- **AFU (default):** `/data/misc_ce/0/vddropbear/secret`: credential-encrypted, disponibile solo dopo
   che sblocchi il dispositivo.
-- **BFU:** `/data/adb/vddropbear/secret` - device-encrypted, leggibile prima del primo sblocco.
+- **BFU:** `/data/adb/vddropbear/secret`: device-encrypted, leggibile prima del primo sblocco.
 
 Contiene la host key, `authorized_keys` e il file di hash `passwd`. Vedi
 [BUILDING.md](../BUILDING.md) per il formato dell'hash delle password.

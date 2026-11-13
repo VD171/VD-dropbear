@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # ======================================================================
 #  VD Dropbear  ::  standalone, configurable rooted SSH daemon
-#  A private SSH server for KernelSU/APatch/Magisk - no invasive ADB exposure.
+#  A private SSH server for KernelSU/APatch/Magisk. No invasive ADB exposure.
 #  Build the bundled file-transfer tools (sftp-server, scp, rsync) per ABI.
 #
 #  Copyright (C) 2026  VD171
@@ -105,7 +105,7 @@ EOF
 #  - explicit_bzero compat uses memset (bionic's bzero is a macro, unusable as a
 #    function pointer, and it has no explicit_bzero of its own);
 #  - drop xcrypt.o (needs getpwent/crypt, which bionic lacks) and getrrsetbyname.o
-#    (DNSSEC resolver internals) - neither is used by sftp-server or scp.
+#    (DNSSEC resolver internals); neither is used by sftp-server or scp.
 patch_openssh() {
   local src="$1"
   perl -0pi -e 's/static void \(\* volatile ssh_bzero\)\(void \*, size_t\) = bzero;/static void vddb_memzero(void *p, size_t n) { (void)memset(p, 0, n); }\nstatic void (* volatile ssh_bzero)(void *, size_t) = vddb_memzero;/' \

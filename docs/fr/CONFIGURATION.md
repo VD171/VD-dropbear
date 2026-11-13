@@ -1,7 +1,7 @@
 <!--
   ======================================================================
    VD Dropbear  ::  standalone, configurable rooted SSH daemon
-   A private SSH server for KernelSU/APatch/Magisk - no invasive ADB exposure.
+   A private SSH server for KernelSU/APatch/Magisk. No invasive ADB exposure.
    Configuration reference.
 
    Copyright (C) 2026  VD171
@@ -54,7 +54,7 @@ fait le bind sur loopback plutôt que sur chaque interface.
 | Key | Default | Signification |
 |-----|---------|---------|
 | `LISTEN_LOOPBACK` | `1` | Écoute uniquement sur `127.0.0.1` / `::1`. |
-| `LISTEN_ALL` | `0` | Écoute sur chaque interface (`0.0.0.0` / `::`) - expose l'appareil. |
+| `LISTEN_ALL` | `0` | Écoute sur chaque interface (`0.0.0.0` / `::`); expose l'appareil. |
 | `LISTEN_IPV4` | `1` | Inclut les binds IPv4. |
 | `LISTEN_IPV6` | `1` | Inclut les binds IPv6. |
 | `LISTEN_ADDRESSES` | `""` | Binds spécifiques supplémentaires, séparés par des virgules : `addr` (utilise `PORT`) ou `addr:port`, IPv4 ou IPv6. |
@@ -104,11 +104,11 @@ optionnels.
 
 ## Le magasin de secrets
 
-Non configuré ici - résolu à partir de `START_IN_BFU` :
+Non configuré ici, résolu à partir de `START_IN_BFU` :
 
-- **AFU (par défaut) :** `/data/misc_ce/0/vddropbear/secret` - chiffré par identifiants, disponible
+- **AFU (par défaut) :** `/data/misc_ce/0/vddropbear/secret` : chiffré par identifiants, disponible
   uniquement après que vous déverrouillez l'appareil.
-- **BFU :** `/data/adb/vddropbear/secret` - chiffré par appareil, lisible avant le premier déverrouillage.
+- **BFU :** `/data/adb/vddropbear/secret` : chiffré par appareil, lisible avant le premier déverrouillage.
 
 Il contient la host key, `authorized_keys` et le fichier de hachages `passwd`. Voir
 [BUILDING.md](../BUILDING.md) pour le format du hachage de mot de passe.

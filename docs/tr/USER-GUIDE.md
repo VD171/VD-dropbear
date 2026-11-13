@@ -1,7 +1,7 @@
 <!--
   ======================================================================
    VD Dropbear  ::  standalone, configurable rooted SSH daemon
-   A private SSH server for KernelSU/APatch/Magisk - no invasive ADB exposure.
+   A private SSH server for KernelSU/APatch/Magisk. No invasive ADB exposure.
    User guide.
 
    Copyright (C) 2026  VD171
@@ -83,8 +83,8 @@ yedeklemeler aynı bağlantı üzerinden çalışır.
 ## 6. İlk kilit açılışından önce (BFU)
 
 Varsayılan olarak daemon, sırları credential-encrypted depoda bulunduğu için yalnızca cihazın kilidini
-bir kez açtıktan **sonra** başlar (AFU). İlk kilit açılışından **önce** SSH'ye ihtiyacınız varsa -
-örneğin bir yeniden başlatmadan sonra bir cihazın kilidini uzaktan açmak için - **Start before first
+bir kez açtıktan **sonra** başlar (AFU). İlk kilit açılışından **önce** SSH'ye ihtiyacınız varsa
+(örneğin bir yeniden başlatmadan sonra bir cihazın kilidini uzaktan açmak için) **Start before first
 unlock (BFU)**'yu açın. Sırlar o zaman, kilit açılmadan önce okunabilen device-encrypted depoya taşınır:
 bilinçli, belgelenmiş bir takas. README'deki [Güvenlik modeli](#) bölümüne bakın.
 
@@ -100,7 +100,7 @@ bilinçli, belgelenmiş bir takas. README'deki [Güvenlik modeli](#) bölümüne
   olduğundan ve bir host key oluşturulabildiğinden emin olun.
 - **Anahtar reddedildi.** Genel anahtar satırının istemcinizin sunduğu gibi tam olarak aynı olduğunu ve
   oturum açma kullanıcısının sistemin çözümleyebileceği biri olduğunu (genellikle `root`) doğrulayın.
-- **Başka bir makineden bağlanamıyorum.** Muhtemelen hâlâ yalnızca loopback'e bağlısınız - ihtiyacınız
+- **Başka bir makineden bağlanamıyorum.** Muhtemelen hâlâ yalnızca loopback'e bağlısınız. İhtiyacınız
   olan arabirimi etkinleştirin ve yeniden başlatın.
 - **SFTP/scp başarısız oluyor ama kabuk çalışıyor.** Paket içindeki `sftp-server`'ın ABI'niz için
   gönderildiğinden emin olun; WebUI durumu algılanan ABI'yi gösterir.

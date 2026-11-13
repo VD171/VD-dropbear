@@ -1,7 +1,7 @@
 <!--
   ======================================================================
    VD Dropbear  ::  standalone, configurable rooted SSH daemon
-   A private SSH server for KernelSU/APatch/Magisk - no invasive ADB exposure.
+   A private SSH server for KernelSU/APatch/Magisk. No invasive ADB exposure.
 
    Copyright (C) 2026  VD171
    SPDX-License-Identifier: Apache-2.0
@@ -49,13 +49,13 @@ Languages: English · [العربية](README.ar.md) · [Čeština](README.cs.md
 
 Cách tích hợp sẵn của Android để có được một shell trên chính điện thoại của bạn là ADB (gỡ lỗi
 USB), và việc bật nó lên vừa xâm phạm vừa tự phơi bày bản thân. `adb_enabled` và
-`development_settings_enabled` là những cài đặt mà ai cũng đọc được - bất kỳ ứng dụng, SDK hay thư
+`development_settings_enabled` là những cài đặt mà ai cũng đọc được: bất kỳ ứng dụng, SDK hay thư
 viện chống gian lận / RASP nào cũng đọc được chúng, kết nối thì bị ghi log, và không có cách nào được
 hỗ trợ để che giấu việc ADB đang bật, hoặc từng được bật. Sự phơi bày này bám theo bạn ngay cả trên
 một chiếc điện thoại nguyên gốc, chưa root: để có một shell, bạn buộc phải tuyên bố điều đó.
 
-VD Dropbear là lựa chọn riêng tư. Trên một thiết bị đã root, nó cho bạn một máy chủ SSH thực thụ -
-shell root, SFTP và rsync qua mạng - không có dấu vết `adb_enabled`, không có cờ gỡ lỗi USB, một
+VD Dropbear là lựa chọn riêng tư. Trên một thiết bị đã root, nó cho bạn một máy chủ SSH thực thụ:
+shell root, SFTP và rsync qua mạng, không có dấu vết `adb_enabled`, không có cờ gỡ lỗi USB, một
 banner phiên bản chẳng để lộ gì, và thông tin đăng nhập do bạn kiểm soát. Quyền truy cập của bạn vẫn
 là của bạn, thay vì một lá cờ "tôi đang bị gỡ lỗi" mà bất cứ thứ gì trên thiết bị cũng đọc được.
 
@@ -65,7 +65,7 @@ là của bạn, thay vì một lá cờ "tôi đang bị gỡ lỗi" mà bất 
   thể **khởi động / dừng / khởi động lại** nó từ WebUI bất cứ lúc nào; không bao giờ có quá một thể hiện.
 - **Mọi thứ đều có thể cấu hình** từ WebUI (hoặc `/data/adb/vddropbear/config`):
   - cổng, và gắn vào loopback / tất cả / IPv4 / IPv6 / các địa chỉ cụ thể
-  - **khởi động trước lần mở khóa đầu tiên (BFU) hoặc chỉ sau đó (AFU)** - chỉ một công tắc
+  - **khởi động trước lần mở khóa đầu tiên (BFU) hoặc chỉ sau đó (AFU)**, chỉ một công tắc
   - xác thực bằng khóa công khai và/hoặc mật khẩu, số lần thử xác thực tối đa
   - người dùng đăng nhập, shell, `HOME`, biến môi trường bổ sung
   - thời gian chờ khi nhàn rỗi, keepalive, cửa sổ nhận
@@ -84,8 +84,8 @@ là của bạn, thay vì một lá cờ "tôi đang bị gỡ lỗi" mà bất 
 ## Tác nhân AI trên thiết bị của bạn
 
 Một điểm cuối SSH luôn thường trực biến điện thoại của bạn thành thứ mà **một tác nhân AI tự động có
-thể vận hành trực tiếp**. Bất kỳ tác nhân nào có thể điều khiển một shell hay một kết nối SSH -
-Claude Code, aider, một script có LLM trong vòng lặp, hệ thống tự động hóa của riêng bạn - đều có được
+thể vận hành trực tiếp**. Bất kỳ tác nhân nào có thể điều khiển một shell hay một kết nối SSH
+(Claude Code, aider, một script có LLM trong vòng lặp, hệ thống tự động hóa của riêng bạn) đều có được
 một phiên root thực sự trên thiết bị, qua mạng, không cần dây USB và không có cờ gỡ lỗi tự phơi bày
 nào của ADB. Tác nhân thấy một shell kiểu Linux bình thường và có thể:
 
@@ -94,9 +94,9 @@ nào của ADB. Tác nhân thấy một shell kiểu Linux bình thường và c
 - di chuyển và đồng bộ tệp theo cả hai chiều qua `scp` / `sftp` / `rsync`, để sao lưu, di chuyển hoặc thiết lập ban đầu;
 - điều khiển cả một đội thiết bị đã root từ một nơi duy nhất, mỗi thiết bị truy cập được bằng khóa riêng của nó.
 
-Vì dự án được xây dựng để **thân thiện với AI** - một tệp cấu hình có tài liệu, một
+Vì dự án được xây dựng để **thân thiện với AI** (một tệp cấu hình có tài liệu, một
 [hợp đồng biến môi trường](patches/README.md) lúc chạy rõ ràng, các đường dẫn dễ đoán và trạng thái
-dạng văn bản thuần - một tác nhân có thể tự khám phá cách dùng mà không cần đoán mò.
+dạng văn bản thuần), một tác nhân có thể tự khám phá cách dùng mà không cần đoán mò.
 
 > **Đây là root, nên hãy đối xử với nó như root.** Mọi kết nối đã xác thực đều vào với quyền root
 > (xem cảnh báo bên dưới). Khi trao quyền truy cập cho một tác nhân, hãy cấp cho nó một **người dùng
@@ -171,14 +171,14 @@ Các dự án cùng tác giả:
 * **Discord:** @VD.Priv8 https://discord.com/users/1296831918989639721
 * **E-mail:** vd.priv8@pm.me
 * **XDA-Developers:** @VD171 https://xdaforums.com/m/vd171.4699873/
-* **Chủ đề XDA:** _(chỗ giữ sẵn - sẽ thêm ở bản phát hành công khai đầu tiên)_
+* **Chủ đề XDA:** _(chỗ giữ sẵn, sẽ thêm ở bản phát hành công khai đầu tiên)_
 * **GitHub:** @VD171 https://github.com/VD171
 
 ## Giấy phép
 
-Mã của riêng VD Dropbear theo **Apache-2.0** - xem [LICENSE](LICENSE). Mô-đun cũng đóng gói các tệp
-nhị phân của bên thứ ba - [Dropbear](https://matt.ucc.asn.au/dropbear/) (kiểu MIT), `sftp-server` và
-`scp` của OpenSSH (BSD), và `rsync` (GPL-3.0) - mỗi thứ theo giấy phép riêng của nó; xem
+Mã của riêng VD Dropbear theo **Apache-2.0**; xem [LICENSE](LICENSE). Mô-đun cũng đóng gói các tệp
+nhị phân của bên thứ ba: [Dropbear](https://matt.ucc.asn.au/dropbear/) (kiểu MIT), `sftp-server` và
+`scp` của OpenSSH (BSD), và `rsync` (GPL-3.0), mỗi thứ theo giấy phép riêng của nó; xem
 [THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md), bao gồm cả cách chúng tôi tuân thủ GPL cho rsync. Mã
 Apache-2.0 của chúng tôi không bị ảnh hưởng (tệp nhị phân GPL chỉ được gộp chung, chứ không liên kết).
 

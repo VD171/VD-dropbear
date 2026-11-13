@@ -1,7 +1,7 @@
 <!--
   ======================================================================
    VD Dropbear  ::  standalone, configurable rooted SSH daemon
-   A private SSH server for KernelSU/APatch/Magisk - no invasive ADB exposure.
+   A private SSH server for KernelSU/APatch/Magisk. No invasive ADB exposure.
    User guide.
 
    Copyright (C) 2026  VD171
@@ -82,8 +82,8 @@ fungerar alla över samma anslutning.
 ## 6. Före första upplåsning (BFU)
 
 Som standard startar daemonen först **efter** att du har låst upp enheten en gång (AFU), eftersom dess
-hemligheter ligger på credential-encrypted lagring. Om du behöver SSH **före** första upplåsningen -
-till exempel för att låsa upp en enhet på distans efter en omstart - slå på **Start before first
+hemligheter ligger på credential-encrypted lagring. Om du behöver SSH **före** första upplåsningen
+(till exempel för att låsa upp en enhet på distans efter en omstart) slå på **Start before first
 unlock (BFU)**. Hemligheterna flyttas då till device-encrypted lagring, som är läsbar före upplåsning:
 en medveten, dokumenterad avvägning. Se [Säkerhetsmodell](#) i README.
 
@@ -99,7 +99,7 @@ en medveten, dokumenterad avvägning. Se [Säkerhetsmodell](#) i README.
   på och att en värdnyckel kunde genereras.
 - **Nyckel avvisad.** Bekräfta att raden med den publika nyckeln är exakt som din klient erbjuder den,
   och att inloggningsanvändaren är en som systemet kan slå upp (vanligtvis `root`).
-- **Kan inte ansluta från en annan dator.** Du är troligen fortfarande bunden endast till loopback -
-  aktivera det gränssnitt du behöver och starta om.
+- **Kan inte ansluta från en annan dator.** Du är troligen fortfarande bunden endast till loopback.
+  Aktivera det gränssnitt du behöver och starta om.
 - **SFTP/scp misslyckas men skalet fungerar.** Se till att den medföljande `sftp-server` levererades
   för din ABI; WebUI:ns status visar den upptäckta ABI:n.

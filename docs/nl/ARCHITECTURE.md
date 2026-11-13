@@ -1,7 +1,7 @@
 <!--
   ======================================================================
    VD Dropbear  ::  standalone, configurable rooted SSH daemon
-   A private SSH server for KernelSU/APatch/Magisk - no invasive ADB exposure.
+   A private SSH server for KernelSU/APatch/Magisk. No invasive ADB exposure.
    Architecture.
 
    Copyright (C) 2026  VD171
@@ -33,20 +33,20 @@ VD Dropbear is een KernelSU / APatch / Magisk-module die precies één Dropbear 
 
 ## Onderdelen
 
-- `module/common/vddropbear.sh` - de kernbibliotheek: config laden (met veilige ingebouwde standaardwaarden), de geheimenopslag bepalen, een hostsleutel verzekeren, de Dropbear-argumentvector opbouwen, en één enkele daemon-instantie beheren (start / stop / status / restart).
-- `module/service.sh` - opstartingang. Respecteert het BFU/AFU-startbeleid; in AFU-modus wacht die op het ontgrendelen van credential-encrypted opslag zonder het opstarten op te houden.
-- `module/action.sh` - de **Action**-knop van de manager: de daemon (opnieuw) starten. Die leest nooit stdin en maakt de daemon los in zijn eigen sessie, zodat de manager niet blijft hangen.
-- `module/common/vddb-webui.sh` + `module/webroot/index.html` - de WebUI-backend en de pagina.
-- `patches/` - kleine, controleerbare patches die bij het bouwen op upstream Dropbear worden toegepast.
-- `scripts/build.sh`, `scripts/build-bundles.sh`, `.github/workflows/build.yml` - de build.
+- `module/common/vddropbear.sh`: de kernbibliotheek: config laden (met veilige ingebouwde standaardwaarden), de geheimenopslag bepalen, een hostsleutel verzekeren, de Dropbear-argumentvector opbouwen, en één enkele daemon-instantie beheren (start / stop / status / restart).
+- `module/service.sh`: opstartingang. Respecteert het BFU/AFU-startbeleid; in AFU-modus wacht die op het ontgrendelen van credential-encrypted opslag zonder het opstarten op te houden.
+- `module/action.sh`: de **Action**-knop van de manager: de daemon (opnieuw) starten. Die leest nooit stdin en maakt de daemon los in zijn eigen sessie, zodat de manager niet blijft hangen.
+- `module/common/vddb-webui.sh` + `module/webroot/index.html`: de WebUI-backend en de pagina.
+- `patches/`: kleine, controleerbare patches die bij het bouwen op upstream Dropbear worden toegepast.
+- `scripts/build.sh`, `scripts/build-bundles.sh`, `.github/workflows/build.yml`: de build.
 
 ## Levenscyclus van de daemon (één instantie)
 
-`vddb_start` laadt de config, stopt een eventueel draaiende instantie, verzekert dat er een hostsleutel bestaat, en start dan één daemon. De binary wordt geleverd als `vddropbear`, zodat de procesnaam precies overeenkomt met `pgrep -x` (Android `mksh` heeft geen `exec -a`). Die wordt gestart met `setsid`, zodat die loskomt van de procesgroep van de aanroeper - dat is wat de Action van de manager niet laat blokkeren.
+`vddb_start` laadt de config, stopt een eventueel draaiende instantie, verzekert dat er een hostsleutel bestaat, en start dan één daemon. De binary wordt geleverd als `vddropbear`, zodat de procesnaam precies overeenkomt met `pgrep -x` (Android `mksh` heeft geen `exec -a`). Die wordt gestart met `setsid`, zodat die loskomt van de procesgroep van de aanroeper: dat is wat de Action van de manager niet laat blokkeren.
 
 ## De geheimenopslag (CE versus DE, BFU versus AFU)
 
-Instellingen zijn niet geheim en staan op device-encrypted opslag (`/data/adb/vddropbear`), leesbaar bij het opstarten. Geheimen - hostsleutel, `authorized_keys`, wachtwoordhashes - staan standaard op **credential-encrypted** opslag (`/data/misc_ce/0/vddropbear`), die pas ontgrendelt nadat de gebruiker zich heeft geauthenticeerd. Door `START_IN_BFU` aan te zetten verplaatsen de geheimen naar device-encrypted opslag, zodat de daemon kan draaien vóór de eerste ontgrendeling, ten koste van het feit dat die geheimen eerder leesbaar zijn. De module berekent bij elke opstartfase welke opslag te gebruiken.
+Instellingen zijn niet geheim en staan op device-encrypted opslag (`/data/adb/vddropbear`), leesbaar bij het opstarten. Geheimen (hostsleutel, `authorized_keys`, wachtwoordhashes) staan standaard op **credential-encrypted** opslag (`/data/misc_ce/0/vddropbear`), die pas ontgrendelt nadat de gebruiker zich heeft geauthenticeerd. Door `START_IN_BFU` aan te zetten verplaatsen de geheimen naar device-encrypted opslag, zodat de daemon kan draaien vóór de eerste ontgrendeling, ten koste van het feit dat die geheimen eerder leesbaar zijn. De module berekent bij elke opstartfase welke opslag te gebruiken.
 
 ## De patchset
 

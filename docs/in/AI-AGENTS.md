@@ -1,7 +1,7 @@
 <!--
   ======================================================================
    VD Dropbear  ::  standalone, configurable rooted SSH daemon
-   A private SSH server for KernelSU/APatch/Magisk - no invasive ADB exposure.
+   A private SSH server for KernelSU/APatch/Magisk. No invasive ADB exposure.
    AI agents on your device.
 
    Copyright (C) 2026  VD171
@@ -30,8 +30,8 @@
 # Agen AI di perangkat Anda
 
 Sebuah endpoint SSH yang selalu aktif mengubah ponsel Anda menjadi sesuatu yang **dapat dioperasikan
-langsung oleh agen AI otonom**. Agen apa pun yang bisa menjalankan shell atau koneksi SSH - Claude
-Code, aider, skrip LLM-in-the-loop, otomatisasi buatan Anda sendiri - mendapatkan sesi root sungguhan
+langsung oleh agen AI otonom**. Agen apa pun yang bisa menjalankan shell atau koneksi SSH (Claude
+Code, aider, skrip LLM-in-the-loop, otomatisasi buatan Anda sendiri) mendapatkan sesi root sungguhan
 di perangkat, melalui jaringan, tanpa kabel USB dan tanpa satu pun flag debug ADB yang membongkar
 dirinya sendiri.
 
@@ -42,7 +42,7 @@ Halaman ini memperluas gagasan yang diperkenalkan di README.
 ADB mengumumkan dirinya sendiri: `adb_enabled` dan `development_settings_enabled` dapat dibaca oleh
 siapa saja, koneksinya tercatat, dan tidak ada cara yang didukung untuk menyembunyikan bahwa debugging
 sedang (atau pernah) aktif. Agen yang bekerja melalui ADB meninggalkan jejak itu di perangkat untuk
-dibaca oleh aplikasi atau SDK anti-penipuan mana pun. VD Dropbear adalah alternatif privat - login SSH
+dibaca oleh aplikasi atau SDK anti-penipuan mana pun. VD Dropbear adalah alternatif privat: login SSH
 biasa, dengan kredensial yang Anda kendalikan dan banner yang tidak mengungkap apa pun.
 
 ## Apa yang bisa dilakukan agen
@@ -51,23 +51,23 @@ Melalui satu koneksi, agen melihat shell mirip Linux yang biasa dan dapat:
 
 - membaca dan mengedit berkas, mengubah pengaturan, serta mengelola modul, paket, dan layanan;
 - memilah log, menarik artefak, dan menjalankan diagnostik atau forensik sesuai permintaan;
-- memindahkan dan menyinkronkan berkas dua arah melalui `scp` / `sftp` / `rsync` - pencadangan, migrasi, penyediaan;
+- memindahkan dan menyinkronkan berkas dua arah melalui `scp` / `sftp` / `rsync`: pencadangan, migrasi, penyediaan;
 - mengendalikan seluruh armada perangkat ter-root dari satu tempat, masing-masing dapat dijangkau dengan kuncinya sendiri.
 
-Karena proyek ini dibangun agar **ramah AI** - berkas konfigurasi yang terdokumentasi, sebuah
+Karena proyek ini dibangun agar **ramah AI** (berkas konfigurasi yang terdokumentasi, sebuah
 [env contract](../../patches/README.md) runtime yang eksplisit, jalur yang dapat diprediksi, dan status
-dalam teks biasa - sebuah agen dapat menemukan cara menggunakannya tanpa menebak-nebak.
+dalam teks biasa), sebuah agen dapat menemukan cara menggunakannya tanpa menebak-nebak.
 
 ## Melakukannya dengan aman
 
 Ini adalah root, jadi perlakukan seperti root:
 
 - berikan agen **pengguna dan kunci khusus**, bukan milik pribadi Anda;
-- batasi bind hanya ke jaringan yang Anda percayai - loopback atau VPN alih-alih Internet terbuka
+- batasi bind hanya ke jaringan yang Anda percayai: loopback atau VPN alih-alih Internet terbuka
   (lihat [Configuration](CONFIGURATION.md));
 - biarkan autentikasi kata sandi tetap mati; sebuah kunci dapat dicabut dan tidak pernah diketik;
 - Anda dapat mencabut kunci atau menghentikan daemon kapan saja dari WebUI;
-- ingat setiap koneksi adalah sesi root penuh - berikan agen hanya jangkauan yang ia butuhkan.
+- ingat setiap koneksi adalah sesi root penuh: berikan agen hanya jangkauan yang ia butuhkan.
 
 ## Pengaturan minimal
 

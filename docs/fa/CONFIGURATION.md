@@ -1,7 +1,7 @@
 <!--
   ======================================================================
    VD Dropbear  ::  standalone, configurable rooted SSH daemon
-   A private SSH server for KernelSU/APatch/Magisk - no invasive ADB exposure.
+   A private SSH server for KernelSU/APatch/Magisk. No invasive ADB exposure.
    Configuration reference.
 
    Copyright (C) 2026  VD171
@@ -53,7 +53,7 @@ loopback باند می‌شود.
 | Key | Default | معنی |
 |-----|---------|---------|
 | `LISTEN_LOOPBACK` | `1` | فقط روی `127.0.0.1` / `::1` گوش می‌دهد. |
-| `LISTEN_ALL` | `0` | روی هر رابط (`0.0.0.0` / `::`) گوش می‌دهد - دستگاه را در معرض دید قرار می‌دهد. |
+| `LISTEN_ALL` | `0` | روی هر رابط (`0.0.0.0` / `::`) گوش می‌دهد؛ دستگاه را در معرض دید قرار می‌دهد. |
 | `LISTEN_IPV4` | `1` | باندهای IPv4 را شامل می‌شود. |
 | `LISTEN_IPV6` | `1` | باندهای IPv6 را شامل می‌شود. |
 | `LISTEN_ADDRESSES` | `""` | باندهای خاص اضافی، جداشده با کاما: `addr` (از `PORT` استفاده می‌کند) یا `addr:port`، IPv4 یا IPv6. |
@@ -102,11 +102,11 @@ loopback باند می‌شود.
 
 ## انبار راز
 
-اینجا پیکربندی نمی‌شود - از `START_IN_BFU` تعیین می‌شود:
+اینجا پیکربندی نمی‌شود، از `START_IN_BFU` تعیین می‌شود:
 
-- **AFU (پیش‌فرض):** `/data/misc_ce/0/vddropbear/secret` - رمزنگاری‌شده با اعتبارنامه، فقط پس از اینکه
+- **AFU (پیش‌فرض):** `/data/misc_ce/0/vddropbear/secret`: رمزنگاری‌شده با اعتبارنامه، فقط پس از اینکه
   دستگاه را باز کنید در دسترس است.
-- **BFU:** `/data/adb/vddropbear/secret` - رمزنگاری‌شده با دستگاه، پیش از نخستین بازگشایی خواندنی است.
+- **BFU:** `/data/adb/vddropbear/secret`: رمزنگاری‌شده با دستگاه، پیش از نخستین بازگشایی خواندنی است.
 
 این انبار host key، `authorized_keys` و فایل هش `passwd` را نگه می‌دارد. برای قالب هش رمز عبور به
 [BUILDING.md](../BUILDING.md) نگاه کنید.

@@ -1,7 +1,7 @@
 <!--
   ======================================================================
    VD Dropbear  ::  standalone, configurable rooted SSH daemon
-   A private SSH server for KernelSU/APatch/Magisk - no invasive ADB exposure.
+   A private SSH server for KernelSU/APatch/Magisk. No invasive ADB exposure.
 
    Copyright (C) 2026  VD171
    SPDX-License-Identifier: Apache-2.0
@@ -49,13 +49,13 @@ Languages: English · [العربية](README.ar.md) · [Čeština](README.cs.md
 
 Vestavěný způsob, jak v Androidu získat shell na vlastním telefonu, je ADB (ladění přes USB), a jeho
 zapnutí je invazivní a samo tě prozradí. Nastavení `adb_enabled` a `development_settings_enabled`
-jsou čitelná pro kohokoli - může je přečíst jakákoli aplikace, SDK nebo protipodvodová / RASP
+jsou čitelná pro kohokoli: může je přečíst jakákoli aplikace, SDK nebo protipodvodová / RASP
 knihovna, připojení se loguje a neexistuje podporovaný způsob, jak skrýt, že ADB je nebo někdy bylo
 zapnuté. Toto odhalení tě pronásleduje i na továrním, neroubnutém telefonu: abys získal shell, musíš
 to oznámit.
 
-VD Dropbear je soukromá alternativa. Na rootnutém zařízení ti dá skutečný SSH server - root shell,
-SFTP a rsync přes síť - bez prozrazujícího `adb_enabled`, bez příznaku ladění přes USB, s verzovým
+VD Dropbear je soukromá alternativa. Na rootnutém zařízení ti dá skutečný SSH server: root shell,
+SFTP a rsync přes síť, bez prozrazujícího `adb_enabled`, bez příznaku ladění přes USB, s verzovým
 bannerem, který nic neprozradí, a s přihlašovacími údaji, které máš pod kontrolou. Tvůj přístup
 zůstává tvůj, místo globálně čitelného příznaku „jsem laděn", který může přečíst cokoli na zařízení.
 
@@ -65,7 +65,7 @@ zůstává tvůj, místo globálně čitelného příznaku „jsem laděn", kter
   **spustit / zastavit / restartovat** z WebUI; nikdy neběží víc než jedna instance.
 - **Vše je konfigurovatelné** z WebUI (nebo `/data/adb/vddropbear/config`):
   - port a vazba na loopback / vše / IPv4 / IPv6 / konkrétní adresy
-  - **start před prvním odemčením (BFU), nebo až po něm (AFU)** - jediný přepínač
+  - **start před prvním odemčením (BFU), nebo až po něm (AFU)**, jediný přepínač
   - ověřování veřejným klíčem a/nebo heslem, maximální počet pokusů o ověření
   - přihlašovací uživatel, shell, `HOME`, další proměnné prostředí
   - časový limit nečinnosti, keepalive, přijímací okno
@@ -84,8 +84,8 @@ zůstává tvůj, místo globálně čitelného příznaku „jsem laděn", kter
 ## AI agenti na tvém zařízení
 
 Stálý SSH endpoint promění tvůj telefon v něco, co může **autonomní AI agent řídit přímo**. Jakýkoli
-agent schopný ovládat shell nebo SSH připojení - Claude Code, aider, skript se smyčkou LLM, tvoje
-vlastní automatizace - získá skutečnou root relaci na zařízení, přes síť, bez USB kabelu a bez
+agent schopný ovládat shell nebo SSH připojení (Claude Code, aider, skript se smyčkou LLM, tvoje
+vlastní automatizace) získá skutečnou root relaci na zařízení, přes síť, bez USB kabelu a bez
 jakýchkoli prozrazujících ladicích příznaků ADB. Agent vidí běžný shell podobný Linuxu a může:
 
 - číst a upravovat soubory, přepínat nastavení a spravovat moduly, balíčky a služby;
@@ -93,9 +93,9 @@ jakýchkoli prozrazujících ladicích příznaků ADB. Agent vidí běžný she
 - přesouvat a synchronizovat soubory oběma směry přes `scp` / `sftp` / `rsync`, pro zálohy, migrace nebo nasazení;
 - řídit celou flotilu rootnutých zařízení z jednoho místa, každé dostupné svým vlastním klíčem.
 
-Protože je projekt postavený tak, aby byl **přátelský k AI** - zdokumentovaný konfigurační soubor,
+Protože je projekt postavený tak, aby byl **přátelský k AI** (zdokumentovaný konfigurační soubor,
 explicitní [kontrakt prostředí](patches/README.md) za běhu, předvídatelné cesty a stav v otevřeném
-textu - agent dokáže zjistit, jak jej používat, bez dohadů.
+textu), agent dokáže zjistit, jak jej používat, bez dohadů.
 
 > **Tohle je root, tak s tím zacházej jako s rootem.** Každé ověřené připojení přistane jako root
 > (viz varování níže). Když předáváš přístup agentovi, dej mu **vyhrazeného uživatele a klíč**, omez
@@ -169,14 +169,14 @@ Příbuzné projekty téhož autora:
 * **Discord:** @VD.Priv8 https://discord.com/users/1296831918989639721
 * **E-mail:** vd.priv8@pm.me
 * **XDA-Developers:** @VD171 https://xdaforums.com/m/vd171.4699873/
-* **XDA thread:** _(zástupný text - doplní se při prvním veřejném vydání)_
+* **XDA thread:** _(zástupný text, doplní se při prvním veřejném vydání)_
 * **GitHub:** @VD171 https://github.com/VD171
 
 ## Licence
 
-Vlastní kód VD Dropbear je pod **Apache-2.0** - viz [LICENSE](LICENSE). Modul rovněž přibaluje binárky
-třetích stran - [Dropbear](https://matt.ucc.asn.au/dropbear/) (styl MIT), `sftp-server` a `scp` z
-OpenSSH (BSD) a `rsync` (GPL-3.0) - každou pod vlastní licencí; viz
+Vlastní kód VD Dropbear je pod **Apache-2.0**; viz [LICENSE](LICENSE). Modul rovněž přibaluje binárky
+třetích stran: [Dropbear](https://matt.ucc.asn.au/dropbear/) (styl MIT), `sftp-server` a `scp` z
+OpenSSH (BSD) a `rsync` (GPL-3.0), každou pod vlastní licencí; viz
 [THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md), včetně toho, jak u rsync dodržujeme GPL. Náš kód pod
 Apache-2.0 tím není dotčen (binárka pod GPL je jen agregovaná, nikoli linkovaná).
 

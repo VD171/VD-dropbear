@@ -1,7 +1,7 @@
 <!--
   ======================================================================
    VD Dropbear  ::  standalone, configurable rooted SSH daemon
-   A private SSH server for KernelSU/APatch/Magisk - no invasive ADB exposure.
+   A private SSH server for KernelSU/APatch/Magisk. No invasive ADB exposure.
    Architecture.
 
    Copyright (C) 2026  VD171
@@ -35,28 +35,28 @@ VD Dropbear یک ماژول KernelSU / APatch / Magisk است که دقیقاً 
 
 ## اجزا
 
-- `module/common/vddropbear.sh` - کتابخانهٔ هسته‌ای: بارگذاری پیکربندی (با مقادیر پیش‌فرض داخلی و ایمن)،
+- `module/common/vddropbear.sh`، کتابخانهٔ هسته‌ای: بارگذاری پیکربندی (با مقادیر پیش‌فرض داخلی و ایمن)،
   یافتن انبار راز، تضمین وجود یک host key، ساختن بردار آرگومان‌های Dropbear و مدیریت یک نمونهٔ واحد از دیمون
   (start / stop / status / restart).
-- `module/service.sh` - نقطهٔ ورود در بوت. سیاست شروع BFU/AFU را رعایت می‌کند؛ در حالت AFU منتظر می‌ماند تا
+- `module/service.sh`: نقطهٔ ورود در بوت. سیاست شروع BFU/AFU را رعایت می‌کند؛ در حالت AFU منتظر می‌ماند تا
   فضای ذخیره‌سازی رمزنگاری‌شده با اعتبارنامه باز شود، بدون اینکه بوت را متوقف کند.
-- `module/action.sh` - دکمهٔ **Action** مدیر: دیمون را (دوباره) راه‌اندازی می‌کند. هرگز stdin را نمی‌خواند و
+- `module/action.sh`، دکمهٔ **Action** مدیر: دیمون را (دوباره) راه‌اندازی می‌کند. هرگز stdin را نمی‌خواند و
   دیمون را به نشست خودش جدا می‌کند، بنابراین مدیر معلق نمی‌ماند.
-- `module/common/vddb-webui.sh` + `module/webroot/index.html` - بک‌اند و صفحهٔ WebUI.
-- `patches/` - وصله‌های کوچک و قابل‌ممیزی که در زمان ساخت روی Dropbear upstream اعمال می‌شوند.
-- `scripts/build.sh`، `scripts/build-bundles.sh`، `.github/workflows/build.yml` - ساخت.
+- `module/common/vddb-webui.sh` + `module/webroot/index.html`: بک‌اند و صفحهٔ WebUI.
+- `patches/`: وصله‌های کوچک و قابل‌ممیزی که در زمان ساخت روی Dropbear upstream اعمال می‌شوند.
+- `scripts/build.sh`، `scripts/build-bundles.sh`، `.github/workflows/build.yml`: ساخت.
 
 ## چرخهٔ عمر دیمون (نمونهٔ واحد)
 
 `vddb_start` پیکربندی را بارگذاری می‌کند، هر نمونهٔ در حال اجرا را متوقف می‌کند، وجود یک host key را تضمین
 می‌کند و سپس یک دیمون واحد را به‌راه می‌اندازد. باینری با نام `vddropbear` عرضه می‌شود، بنابراین نام
 فرایندش دقیقاً با `pgrep -x` مطابقت دارد (`mksh` اندروید `exec -a` ندارد). با `setsid` راه‌اندازی می‌شود تا
-از گروه فرایند فراخوان جدا شود - همین است که Action مدیر را از مسدودشدن باز می‌دارد.
+از گروه فرایند فراخوان جدا شود: همین است که Action مدیر را از مسدودشدن باز می‌دارد.
 
 ## انبار راز (CE در برابر DE، BFU در برابر AFU)
 
 تنظیمات راز نیستند و روی فضای ذخیره‌سازی رمزنگاری‌شده با دستگاه (`/data/adb/vddropbear`) قرار دارند که در
-بوت خواندنی است. رازها - host key، `authorized_keys`، هش‌های رمز عبور - به‌طور پیش‌فرض روی فضای
+بوت خواندنی است. رازها (host key، `authorized_keys`، هش‌های رمز عبور) به‌طور پیش‌فرض روی فضای
 **رمزنگاری‌شده با اعتبارنامه** (`/data/misc_ce/0/vddropbear`) قرار دارند که فقط پس از احراز هویت کاربر باز
 می‌شود. روشن‌کردن `START_IN_BFU` رازها را به فضای ذخیره‌سازی رمزنگاری‌شده با دستگاه منتقل می‌کند تا دیمون
 بتواند پیش از نخستین بازگشایی اجرا شود، به بهای اینکه آن رازها زودتر خواندنی می‌شوند. ماژول در هر مرحله از

@@ -1,8 +1,8 @@
 <!--
   ======================================================================
    VD Dropbear  ::  standalone, configurable rooted SSH daemon
-   A private SSH server for KernelSU/APatch/Magisk - no invasive ADB exposure.
-   XDA release post - source (froala HTML, English).
+   A private SSH server for KernelSU/APatch/Magisk. No invasive ADB exposure.
+   XDA release post, source (froala HTML, English).
 
    Copyright (C) 2026  VD171
    SPDX-License-Identifier: Apache-2.0
@@ -30,16 +30,16 @@
 
 <blockquote><b>&#9888; Every connection that authenticates receives a ROOT shell.</b> Treat it like the keys to your device: prefer public keys over passwords, and keep the port off the public Internet.</blockquote>
 
-<p>Android's built-in way to get a shell on your own phone is ADB (USB debugging), and turning it on is <b>invasive and self-exposing</b>. <code>adb_enabled</code> and <code>development_settings_enabled</code> are world-readable settings - any app, SDK or anti-fraud/RASP library can read them, the connection is logged, and there is no supported way to hide that ADB is, or ever was, enabled. The exposure follows you even on a stock, non-rooted phone: to get a shell, you have to announce it.</p>
-<p><b>VD Dropbear is the private alternative.</b> On a rooted device it gives you a real SSH server - root shell, SFTP and rsync over the network - with no <code>adb_enabled</code> tell, no USB-debugging flag, a version banner that reveals nothing, and credentials you control. Your access stays yours, instead of a globally-readable "I am being debugged" flag that anything on the device can read.</p>
+<p>Android's built-in way to get a shell on your own phone is ADB (USB debugging), and turning it on is <b>invasive and self-exposing</b>. <code>adb_enabled</code> and <code>development_settings_enabled</code> are world-readable settings; any app, SDK or anti-fraud/RASP library can read them, the connection is logged, and there is no supported way to hide that ADB is, or ever was, enabled. The exposure follows you even on a stock, non-rooted phone: to get a shell, you have to announce it.</p>
+<p><b>VD Dropbear is the private alternative.</b> On a rooted device it gives you a real SSH server (root shell, SFTP and rsync over the network) with no <code>adb_enabled</code> tell, no USB-debugging flag, a version banner that reveals nothing, and credentials you control. Your access stays yours, instead of a globally-readable "I am being debugged" flag that anything on the device can read.</p>
 
 <h3>Features</h3>
 <ul>
-<li><b>One daemon, always</b> - start / restart at boot or from the manager's Action button; never more than one instance.</li>
+<li><b>One daemon, always</b>: start / restart at boot or from the manager's Action button; never more than one instance.</li>
 <li><b>Everything is configurable</b> from the WebUI: port; bind to loopback / all / IPv4 / IPv6 / specific addresses; public-key and/or password auth; max auth tries; login user, shell, HOME, extra environment; idle timeout, keepalive; local / remote port forwarding and gateway ports (all off by default); host-key type (ed25519 / rsa / ecdsa).</li>
-<li><b>Hidden version banner</b> - the SSH protocol requires a banner, so it cannot be removed, but VD Dropbear replaces it with an uninformative one, so scanners cannot fingerprint the exact server or version and aim known-version attacks at it.</li>
-<li><b>Bring your own credentials</b> - add sets of user + key and user + password; the WebUI enforces a minimum password strength and never stores a password in clear text.</li>
-<li><b>Every device and emulator</b> - arm64-v8a, armeabi-v7a, x86 and x86_64.</li>
+<li><b>Hidden version banner</b>: the SSH protocol requires a banner, so it cannot be removed, but VD Dropbear replaces it with an uninformative one, so scanners cannot fingerprint the exact server or version and aim known-version attacks at it.</li>
+<li><b>Bring your own credentials</b>: add sets of user + key and user + password; the WebUI enforces a minimum password strength and never stores a password in clear text.</li>
+<li><b>Every device and emulator</b>: arm64-v8a, armeabi-v7a, x86 and x86_64.</li>
 </ul>
 
 <h3>What's included</h3>
@@ -47,24 +47,24 @@
 
 <h3>Security model</h3>
 <ul>
-<li><b>Where secrets live.</b> By default the host key, authorized_keys and password hashes live on credential-encrypted storage, which Android keeps encrypted until you unlock the device. An optional "start before first unlock" mode lets you SSH in before unlock (for example, to unlock the device remotely); its secrets then live on device-encrypted storage, readable pre-unlock - a documented trade-off you opt into only if you need it.</li>
-<li><b>Passwords off by default</b> - because every login is root, keys are far safer.</li>
-<li><b>No telemetry, no network calls of its own, no analytics.</b> It runs entirely on your device, and it is open source (Apache-2.0) - built from upstream Dropbear with a small, auditable patch set.</li>
+<li><b>Where secrets live.</b> By default the host key, authorized_keys and password hashes live on credential-encrypted storage, which Android keeps encrypted until you unlock the device. An optional "start before first unlock" mode lets you SSH in before unlock (for example, to unlock the device remotely); its secrets then live on device-encrypted storage, readable pre-unlock, a documented trade-off you opt into only if you need it.</li>
+<li><b>Passwords off by default</b>: because every login is root, keys are far safer.</li>
+<li><b>No telemetry, no network calls of its own, no analytics.</b> It runs entirely on your device, and it is open source (Apache-2.0), built from upstream Dropbear with a small, auditable patch set.</li>
 </ul>
 
 <h3>Install &amp; configure</h3>
 <p>Flash the module in the KernelSU, APatch or Magisk manager, open its <b>WebUI</b> to set the port and add your keys, then reboot (or press Action to start it now).</p>
 
 <h3>Download</h3>
-<p>The first public release and the full source are being finalised. The download will be posted here and on GitHub - <b>watch this thread</b>. Source and releases: <a href="https://github.com/VD171/VD-dropbear">github.com/VD171/VD-dropbear</a></p>
+<p>The first public release and the full source are being finalised. The download will be posted here and on GitHub; <b>watch this thread</b>. Source and releases: <a href="https://github.com/VD171/VD-dropbear">github.com/VD171/VD-dropbear</a></p>
 
 <h3>See also</h3>
 <p>Sibling projects by the same author:</p>
 <ul>
-<li><b>VDInfos</b> - a device method debugger that reads each item through every method that can read it and compares them side by side.</li>
-<li><b>VDGoogle</b> - your Google services (RCS, Wallet, Play Integrity attestations), read on your device with no internet.</li>
-<li><b>VDBackup</b> - full app and data backup and restore as root, driven entirely from a WebUI.</li>
-<li><b>COPG-VD</b> - a global device fingerprint and build spoofer.</li>
+<li><b>VDInfos</b>: a device method debugger that reads each item through every method that can read it and compares them side by side.</li>
+<li><b>VDGoogle</b>: your Google services (RCS, Wallet, Play Integrity attestations), read on your device with no internet.</li>
+<li><b>VDBackup</b>: full app and data backup and restore as root, driven entirely from a WebUI.</li>
+<li><b>COPG-VD</b>: a global device fingerprint and build spoofer.</li>
 </ul>
 
 <h3>Contacts</h3>
@@ -73,4 +73,4 @@
 <li>GitHub: <a href="https://github.com/VD171">@VD171</a> &middot; E-mail: vd.priv8@pm.me</li>
 </ul>
 
-<p><i>VD Dropbear is independent and unofficial. It bundles Dropbear by Matt Johnston and the OpenSSH/rsync tools under their own licenses. Every connection that authenticates gets root - secure it accordingly.</i></p>
+<p><i>VD Dropbear is independent and unofficial. It bundles Dropbear by Matt Johnston and the OpenSSH/rsync tools under their own licenses. Every connection that authenticates gets root; secure it accordingly.</i></p>

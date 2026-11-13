@@ -1,7 +1,7 @@
 <!--
   ======================================================================
    VD Dropbear  ::  standalone, configurable rooted SSH daemon
-   A private SSH server for KernelSU/APatch/Magisk - no invasive ADB exposure.
+   A private SSH server for KernelSU/APatch/Magisk. No invasive ADB exposure.
    Architecture.
 
    Copyright (C) 2026  VD171
@@ -35,30 +35,30 @@ dispositivo; tudo o que é específico é configuração de execução ou um seg
 
 ## Peças
 
-- `module/common/vddropbear.sh` - a biblioteca central: carregar a configuração (com padrões internos
+- `module/common/vddropbear.sh`: a biblioteca central: carregar a configuração (com padrões internos
   seguros), resolver o cofre de segredos, garantir uma chave de host, montar o vetor de argumentos do
   Dropbear e gerenciar uma única instância do daemon (start / stop / status / restart).
-- `module/service.sh` - entrada de boot. Respeita a política de início BFU/AFU; no modo AFU, aguarda o
+- `module/service.sh`: entrada de boot. Respeita a política de início BFU/AFU; no modo AFU, aguarda o
   armazenamento criptografado por credencial desbloquear sem travar o boot.
-- `module/action.sh` - o botão **Action** do gerenciador: (re)iniciar o daemon. Ele nunca lê o stdin e
+- `module/action.sh`: o botão **Action** do gerenciador: (re)iniciar o daemon. Ele nunca lê o stdin e
   desacopla o daemon em sua própria sessão, para que o gerenciador não trave.
-- `module/common/vddb-webui.sh` + `module/webroot/index.html` - o backend e a página da WebUI.
-- `patches/` - patches pequenos e auditáveis aplicados ao Dropbear upstream no momento da compilação.
-- `scripts/build.sh`, `scripts/build-bundles.sh`, `.github/workflows/build.yml` - a compilação.
+- `module/common/vddb-webui.sh` + `module/webroot/index.html`: o backend e a página da WebUI.
+- `patches/`: patches pequenos e auditáveis aplicados ao Dropbear upstream no momento da compilação.
+- `scripts/build.sh`, `scripts/build-bundles.sh`, `.github/workflows/build.yml`: a compilação.
 
 ## Ciclo de vida do daemon (instância única)
 
 `vddb_start` carrega a configuração, para qualquer instância em execução, garante que exista uma chave
 de host e então inicia um daemon. O binário é distribuído como `vddropbear`, de modo que seu nome de
 processo corresponde exatamente a `pgrep -x` (o `mksh` do Android não tem `exec -a`). Ele é iniciado
-com `setsid` para se desacoplar do grupo de processos do chamador - é isso que impede que o botão
+com `setsid` para se desacoplar do grupo de processos do chamador: é isso que impede que o botão
 Action do gerenciador bloqueie.
 
 ## O cofre de segredos (CE vs DE, BFU vs AFU)
 
 As configurações não são segredo e ficam no armazenamento criptografado por dispositivo
-(`/data/adb/vddropbear`), legível no boot. Os segredos - chave de host, `authorized_keys`, hashes de
-senha - por padrão vão para o armazenamento **criptografado por credencial**
+(`/data/adb/vddropbear`), legível no boot. Os segredos (chave de host, `authorized_keys`, hashes de
+senha) por padrão vão para o armazenamento **criptografado por credencial**
 (`/data/misc_ce/0/vddropbear`), que só desbloqueia depois que o usuário se autentica. Ativar
 `START_IN_BFU` move os segredos para o armazenamento criptografado por dispositivo, para que o daemon
 possa rodar antes do primeiro desbloqueio, ao custo de esses segredos ficarem legíveis mais cedo. O

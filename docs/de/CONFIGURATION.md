@@ -1,7 +1,7 @@
 <!--
   ======================================================================
    VD Dropbear  ::  standalone, configurable rooted SSH daemon
-   A private SSH server for KernelSU/APatch/Magisk - no invasive ADB exposure.
+   A private SSH server for KernelSU/APatch/Magisk. No invasive ADB exposure.
    Configuration reference.
 
    Copyright (C) 2026  VD171
@@ -54,7 +54,7 @@ leerst, bindet VD Dropbear an Loopback statt an jede Schnittstelle.
 | Schlüssel | Standard | Bedeutung |
 |-----|---------|---------|
 | `LISTEN_LOOPBACK` | `1` | Nur auf `127.0.0.1` / `::1` lauschen. |
-| `LISTEN_ALL` | `0` | Auf jeder Schnittstelle lauschen (`0.0.0.0` / `::`) - macht das Gerät angreifbar. |
+| `LISTEN_ALL` | `0` | Auf jeder Schnittstelle lauschen (`0.0.0.0` / `::`); macht das Gerät angreifbar. |
 | `LISTEN_IPV4` | `1` | IPv4-Bindungen einbeziehen. |
 | `LISTEN_IPV6` | `1` | IPv6-Bindungen einbeziehen. |
 | `LISTEN_ADDRESSES` | `""` | Zusätzliche konkrete Bindungen, durch Kommas getrennt: `addr` (nutzt `PORT`) oder `addr:port`, IPv4 oder IPv6. |
@@ -103,11 +103,11 @@ Jede authentifizierte Anmeldung ist **root**. Schlüssel sind der Standard; Pass
 
 ## Der Geheimnisspeicher
 
-Wird nicht hier konfiguriert - wird aus `START_IN_BFU` abgeleitet:
+Wird nicht hier konfiguriert, wird aus `START_IN_BFU` abgeleitet:
 
-- **AFU (Standard):** `/data/misc_ce/0/vddropbear/secret` - mit Zugangsdaten verschlüsselt, erst
+- **AFU (Standard):** `/data/misc_ce/0/vddropbear/secret`: mit Zugangsdaten verschlüsselt, erst
   verfügbar, nachdem du das Gerät entsperrt hast.
-- **BFU:** `/data/adb/vddropbear/secret` - gerätverschlüsselt, lesbar vor der ersten Entsperrung.
+- **BFU:** `/data/adb/vddropbear/secret`: gerätverschlüsselt, lesbar vor der ersten Entsperrung.
 
 Er enthält den Host-Schlüssel, `authorized_keys` und die `passwd`-Hash-Datei. Zum Format des
 Passwort-Hashes siehe [BUILDING.md](../BUILDING.md).

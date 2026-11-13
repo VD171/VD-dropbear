@@ -1,7 +1,7 @@
 <!--
   ======================================================================
    VD Dropbear  ::  standalone, configurable rooted SSH daemon
-   A private SSH server for KernelSU/APatch/Magisk - no invasive ADB exposure.
+   A private SSH server for KernelSU/APatch/Magisk. No invasive ADB exposure.
    Architecture.
 
    Copyright (C) 2026  VD171
@@ -35,28 +35,28 @@ körtidskonfiguration eller en hemlighet.
 
 ## Delar
 
-- `module/common/vddropbear.sh` - kärnbiblioteket: läser in konfigurationen (med säkra inbyggda
+- `module/common/vddropbear.sh`: kärnbiblioteket: läser in konfigurationen (med säkra inbyggda
   standardvärden), löser upp hemlighetslagret, säkerställer en värdnyckel, bygger Dropbears
   argumentvektor och hanterar en enda daemon-instans (start / stopp / status / omstart).
-- `module/service.sh` - uppstartsingång. Följer BFU/AFU-startpolicyn; i AFU-läge väntar den på att det
+- `module/service.sh`: uppstartsingång. Följer BFU/AFU-startpolicyn; i AFU-läge väntar den på att det
   credential-encrypted lagret ska låsas upp utan att bromsa uppstarten.
-- `module/action.sh` - hanterarens **Action**-knapp: (åter)starta daemonen. Den läser aldrig stdin och
+- `module/action.sh`: hanterarens **Action**-knapp: (åter)starta daemonen. Den läser aldrig stdin och
   kopplar loss daemonen till sin egen session, så hanteraren hänger sig inte.
-- `module/common/vddb-webui.sh` + `module/webroot/index.html` - WebUI:ns backend och sida.
-- `patches/` - små, granskningsbara patchar som appliceras på upstream Dropbear vid byggtid.
-- `scripts/build.sh`, `scripts/build-bundles.sh`, `.github/workflows/build.yml` - bygget.
+- `module/common/vddb-webui.sh` + `module/webroot/index.html`: WebUI:ns backend och sida.
+- `patches/`: små, granskningsbara patchar som appliceras på upstream Dropbear vid byggtid.
+- `scripts/build.sh`, `scripts/build-bundles.sh`, `.github/workflows/build.yml`: bygget.
 
 ## Daemonens livscykel (en instans)
 
 `vddb_start` läser in konfigurationen, stoppar varje körande instans, säkerställer att en värdnyckel
 finns och startar sedan en daemon. Binären levereras som `vddropbear`, så dess processnamn matchar
 `pgrep -x` exakt (Androids `mksh` saknar `exec -a`). Den startas med `setsid` så att den kopplas loss
-från anroparens processgrupp - det är det som gör att hanterarens Action inte blockerar.
+från anroparens processgrupp: det är det som gör att hanterarens Action inte blockerar.
 
 ## Hemlighetslagret (CE kontra DE, BFU kontra AFU)
 
 Inställningar är inte hemliga och ligger på device-encrypted lagring (`/data/adb/vddropbear`), läsbar
-vid uppstart. Hemligheter - värdnyckel, `authorized_keys`, lösenordshashar - hamnar som standard på
+vid uppstart. Hemligheter (värdnyckel, `authorized_keys`, lösenordshashar) hamnar som standard på
 **credential-encrypted** lagring (`/data/misc_ce/0/vddropbear`), som bara låses upp efter att
 användaren autentiserat sig. Att slå på `START_IN_BFU` flyttar hemligheterna till device-encrypted
 lagring så att daemonen kan köra före första upplåsningen, till priset av att dessa hemligheter blir

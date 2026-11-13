@@ -1,7 +1,7 @@
 <!--
   ======================================================================
    VD Dropbear  ::  standalone, configurable rooted SSH daemon
-   A private SSH server for KernelSU/APatch/Magisk - no invasive ADB exposure.
+   A private SSH server for KernelSU/APatch/Magisk. No invasive ADB exposure.
    Security policy.
 
    Copyright (C) 2026  VD171
@@ -37,7 +37,7 @@ credenciales de este servidor. Por favor:
 
 - **Prefiere las claves públicas a las contraseñas.** El inicio de sesión por contraseña está desactivado
   por defecto.
-- Si debes usar una contraseña, usa una fuerte - la WebUI exige un mínimo y solo almacena un hash.
+- Si debes usar una contraseña, usa una fuerte. La WebUI exige un mínimo y solo almacena un hash.
 - **No expongas el puerto a la Internet pública.** Haz el bind a loopback o a una LAN de confianza, o
   llega a él a través de una VPN / túnel.
 - Comprende el **compromiso del modo BFU**: activar el inicio antes del desbloqueo coloca la host key y

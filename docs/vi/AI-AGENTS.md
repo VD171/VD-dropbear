@@ -1,7 +1,7 @@
 <!--
   ======================================================================
    VD Dropbear  ::  standalone, configurable rooted SSH daemon
-   A private SSH server for KernelSU/APatch/Magisk - no invasive ADB exposure.
+   A private SSH server for KernelSU/APatch/Magisk. No invasive ADB exposure.
    AI agents on your device.
 
    Copyright (C) 2026  VD171
@@ -30,8 +30,8 @@
 # Các tác nhân AI trên thiết bị của bạn
 
 Một điểm cuối SSH thường trực biến điện thoại của bạn thành thứ mà **một tác nhân AI tự động có thể vận
-hành trực tiếp**. Bất kỳ tác nhân nào có thể điều khiển một shell hoặc một kết nối SSH - Claude Code,
-aider, một script có LLM trong vòng lặp, quy trình tự động của riêng bạn - đều có được một phiên root
+hành trực tiếp**. Bất kỳ tác nhân nào có thể điều khiển một shell hoặc một kết nối SSH (Claude Code,
+aider, một script có LLM trong vòng lặp, quy trình tự động của riêng bạn) đều có được một phiên root
 thực sự trên thiết bị, qua mạng, không cần cáp USB và không có cờ gỡ lỗi tự phơi bày nào của ADB.
 
 Trang này mở rộng ý tưởng đã được giới thiệu trong README.
@@ -41,7 +41,7 @@ Trang này mở rộng ý tưởng đã được giới thiệu trong README.
 ADB tự thông báo về mình: `adb_enabled` và `development_settings_enabled` ai cũng đọc được, kết nối
 được ghi nhật ký, và không có cách nào được hỗ trợ để che giấu việc gỡ lỗi đang (hoặc đã) được bật. Một
 tác nhân làm việc qua ADB để lại dấu vết đó trên thiết bị cho bất kỳ ứng dụng hoặc SDK chống gian lận
-nào đọc được. VD Dropbear là lựa chọn riêng tư thay thế - một lần đăng nhập SSH bình thường, với thông
+nào đọc được. VD Dropbear là lựa chọn riêng tư thay thế: một lần đăng nhập SSH bình thường, với thông
 tin xác thực do bạn kiểm soát và một banner không tiết lộ điều gì.
 
 ## Những gì một tác nhân có thể làm
@@ -50,23 +50,23 @@ Qua một kết nối, tác nhân thấy một shell kiểu Linux bình thườn
 
 - đọc và sửa tệp, thay đổi thiết lập, và quản lý mô-đun, gói và dịch vụ;
 - phân loại nhật ký, kéo về các artifact, và chạy chẩn đoán hoặc điều tra pháp y theo nhu cầu;
-- di chuyển và đồng bộ tệp theo cả hai chiều qua `scp` / `sftp` / `rsync` - sao lưu, di trú, cấp phát;
+- di chuyển và đồng bộ tệp theo cả hai chiều qua `scp` / `sftp` / `rsync`: sao lưu, di trú, cấp phát;
 - điều khiển cả một đội thiết bị đã root từ một nơi, mỗi thiết bị truy cập được bằng khóa riêng của nó.
 
-Vì dự án được xây dựng để **thân thiện với AI** - một tệp cấu hình có tài liệu, một
+Vì dự án được xây dựng để **thân thiện với AI** (một tệp cấu hình có tài liệu, một
 [hợp đồng env](../../patches/README.md) thời gian chạy rõ ràng, các đường dẫn có thể đoán trước và
-trạng thái ở dạng văn bản thuần - một tác nhân có thể tự tìm ra cách dùng nó mà không cần phỏng đoán.
+trạng thái ở dạng văn bản thuần) một tác nhân có thể tự tìm ra cách dùng nó mà không cần phỏng đoán.
 
 ## Làm điều đó một cách an toàn
 
 Đây là root, nên hãy đối xử với nó như root:
 
 - cấp cho tác nhân một **người dùng và khóa riêng**, không phải của cá nhân bạn;
-- giới hạn các bind vào những mạng bạn tin cậy - loopback hoặc một VPN thay vì Internet mở
+- giới hạn các bind vào những mạng bạn tin cậy: loopback hoặc một VPN thay vì Internet mở
   (xem [Cấu hình](CONFIGURATION.md));
 - giữ xác thực bằng mật khẩu tắt; một khóa có thể thu hồi và không bao giờ phải gõ ra;
 - bạn có thể thu hồi một khóa hoặc dừng daemon bất cứ lúc nào từ WebUI;
-- hãy nhớ mỗi kết nối là một phiên root đầy đủ - chỉ trao cho tác nhân phạm vi mà nó cần.
+- hãy nhớ mỗi kết nối là một phiên root đầy đủ. Chỉ trao cho tác nhân phạm vi mà nó cần.
 
 ## Một thiết lập tối thiểu
 

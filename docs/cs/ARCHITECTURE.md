@@ -1,7 +1,7 @@
 <!--
   ======================================================================
    VD Dropbear  ::  standalone, configurable rooted SSH daemon
-   A private SSH server for KernelSU/APatch/Magisk - no invasive ADB exposure.
+   A private SSH server for KernelSU/APatch/Magisk. No invasive ADB exposure.
    Architecture.
 
    Copyright (C) 2026  VD171
@@ -35,28 +35,28 @@ specifické je buď běhová konfigurace, nebo tajemství.
 
 ## Součásti
 
-- `module/common/vddropbear.sh` - základní knihovna: načte konfiguraci (s bezpečnými vestavěnými
+- `module/common/vddropbear.sh`, základní knihovna: načte konfiguraci (s bezpečnými vestavěnými
   výchozími hodnotami), určí úložiště tajemství, zajistí hostitelský klíč, sestaví vektor argumentů
   Dropbearu a spravuje jedinou instanci démona (start / stop / stav / restart).
-- `module/service.sh` - vstupní bod při startu. Respektuje politiku spuštění BFU/AFU; v režimu AFU
+- `module/service.sh`: vstupní bod při startu. Respektuje politiku spuštění BFU/AFU; v režimu AFU
   čeká na odemčení úložiště šifrovaného přihlašovacími údaji, aniž by blokoval start.
-- `module/action.sh` - tlačítko **Action** ve správci: (znovu)spustí démona. Nikdy nečte stdin
+- `module/action.sh`, tlačítko **Action** ve správci: (znovu)spustí démona. Nikdy nečte stdin
   a odpojí démona do vlastní relace, takže se správce nezasekne.
-- `module/common/vddb-webui.sh` + `module/webroot/index.html` - backend WebUI a jeho stránka.
-- `patches/` - malé, auditovatelné záplaty aplikované na upstreamový Dropbear při sestavení.
-- `scripts/build.sh`, `scripts/build-bundles.sh`, `.github/workflows/build.yml` - sestavení.
+- `module/common/vddb-webui.sh` + `module/webroot/index.html`: backend WebUI a jeho stránka.
+- `patches/`: malé, auditovatelné záplaty aplikované na upstreamový Dropbear při sestavení.
+- `scripts/build.sh`, `scripts/build-bundles.sh`, `.github/workflows/build.yml`: sestavení.
 
 ## Životní cyklus démona (jediná instance)
 
 `vddb_start` načte konfiguraci, zastaví případnou běžící instanci, zajistí existenci hostitelského
 klíče a poté spustí jednoho démona. Binárka se dodává jako `vddropbear`, takže název jejího procesu
 přesně odpovídá `pgrep -x` (Android `mksh` nemá `exec -a`). Spouští se přes `setsid`, aby se odpojila
-od skupiny procesů volajícího - právě to brání tomu, aby se tlačítko Action ve správci zablokovalo.
+od skupiny procesů volajícího: právě to brání tomu, aby se tlačítko Action ve správci zablokovalo.
 
 ## Úložiště tajemství (CE vs DE, BFU vs AFU)
 
 Nastavení nejsou tajná a leží na úložišti šifrovaném zařízením (`/data/adb/vddropbear`), čitelném při
-startu. Tajemství - hostitelský klíč, `authorized_keys`, otisky hesel - jsou ve výchozím nastavení na
+startu. Tajemství (hostitelský klíč, `authorized_keys`, otisky hesel) jsou ve výchozím nastavení na
 úložišti **šifrovaném přihlašovacími údaji** (`/data/misc_ce/0/vddropbear`), které se odemkne až po
 ověření uživatele. Zapnutí `START_IN_BFU` přesune tajemství na úložiště šifrované zařízením, aby mohl
 démon běžet před prvním odemčením, za cenu toho, že jsou tato tajemství čitelná dříve. Modul při každé

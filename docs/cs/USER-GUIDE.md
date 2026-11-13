@@ -1,7 +1,7 @@
 <!--
   ======================================================================
    VD Dropbear  ::  standalone, configurable rooted SSH daemon
-   A private SSH server for KernelSU/APatch/Magisk - no invasive ADB exposure.
+   A private SSH server for KernelSU/APatch/Magisk. No invasive ADB exposure.
    User guide.
 
    Copyright (C) 2026  VD171
@@ -83,7 +83,7 @@ přes totéž spojení.
 
 Ve výchozím stavu démon startuje až **poté**, co jednou odemkneš zařízení (AFU), protože jeho
 tajemství leží na úložišti šifrovaném přihlašovacími údaji. Pokud potřebuješ SSH **před** prvním
-odemčením - například abys zařízení po restartu odemkl na dálku - zapni
+odemčením (například abys zařízení po restartu odemkl na dálku), zapni
 **Start before first unlock (BFU)**. Tajemství se pak přesunou na úložiště šifrované zařízením,
 čitelné před odemčením: záměrný, zdokumentovaný kompromis. Viz [Bezpečnostní model](#) v README.
 
@@ -99,7 +99,7 @@ odemčením - například abys zařízení po restartu odemkl na dálku - zapni
   **Enabled** zapnuto a že se podařilo vygenerovat hostitelský klíč.
 - **Klíč odmítnut.** Ověř, že řádek veřejného klíče je přesně takový, jaký nabízí tvůj klient, a že
   je přihlašovací uživatel takový, jaký systém rozpozná (obvykle `root`).
-- **Nejde se připojit z jiného stroje.** Nejspíš jsi stále navázán jen na loopback - povol potřebné
+- **Nejde se připojit z jiného stroje.** Nejspíš jsi stále navázán jen na loopback: povol potřebné
   rozhraní a restartuj.
 - **SFTP/scp selhává, ale shell funguje.** Ujisti se, že přibalený `sftp-server` byl dodán pro tvou
   ABI; stav ve WebUI ukazuje zjištěnou ABI.

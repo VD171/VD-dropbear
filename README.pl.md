@@ -1,7 +1,7 @@
 <!--
   ======================================================================
    VD Dropbear  ::  standalone, configurable rooted SSH daemon
-   A private SSH server for KernelSU/APatch/Magisk - no invasive ADB exposure.
+   A private SSH server for KernelSU/APatch/Magisk. No invasive ADB exposure.
 
    Copyright (C) 2026  VD171
    SPDX-License-Identifier: Apache-2.0
@@ -49,13 +49,13 @@ Languages: English · [العربية](README.ar.md) · [Čeština](README.cs.md
 
 Wbudowany sposób Androida na uzyskanie powłoki we własnym telefonie to ADB (debugowanie USB), a jego
 włączenie jest inwazyjne i zdradza użytkownika. `adb_enabled` i `development_settings_enabled` to ustawienia
-odczytywalne przez wszystkich - każda aplikacja, SDK czy biblioteka antyfraudowa / RASP może je odczytać,
+odczytywalne przez wszystkich: każda aplikacja, SDK czy biblioteka antyfraudowa / RASP może je odczytać,
 połączenie jest logowane, a nie ma wspieranego sposobu, aby ukryć, że ADB jest, lub kiedykolwiek było,
 włączone. To ujawnienie towarzyszy ci nawet na fabrycznym, nierootowanym telefonie: aby uzyskać powłokę,
 musisz to ogłosić.
 
-VD Dropbear to prywatna alternatywa. Na zrootowanym urządzeniu daje prawdziwy serwer SSH - powłokę root,
-SFTP i rsync przez sieć - bez śladu `adb_enabled`, bez flagi debugowania USB, z banerem wersji, który niczego
+VD Dropbear to prywatna alternatywa. Na zrootowanym urządzeniu daje prawdziwy serwer SSH: powłokę root,
+SFTP i rsync przez sieć, bez śladu `adb_enabled`, bez flagi debugowania USB, z banerem wersji, który niczego
 nie ujawnia, i z poświadczeniami, które kontrolujesz. Twój dostęp pozostaje twój, zamiast globalnie
 odczytywalnej flagi „jestem debugowany", którą może przeczytać cokolwiek na urządzeniu.
 
@@ -65,7 +65,7 @@ odczytywalnej flagi „jestem debugowany", którą może przeczytać cokolwiek n
   poziomu WebUI możesz go w dowolnej chwili **uruchomić / zatrzymać / zrestartować**; nigdy więcej niż jedna instancja.
 - **Wszystko jest konfigurowalne** z WebUI (lub `/data/adb/vddropbear/config`):
   - port oraz bind na loopback / all / IPv4 / IPv6 / konkretne adresy
-  - **start przed pierwszym odblokowaniem (BFU) lub dopiero po nim (AFU)** - jeden przełącznik
+  - **start przed pierwszym odblokowaniem (BFU) lub dopiero po nim (AFU)**, jeden przełącznik
   - uwierzytelnianie kluczem publicznym i/lub hasłem, maksymalna liczba prób uwierzytelnienia
   - użytkownik logowania, powłoka, `HOME`, dodatkowe environment
   - idle timeout, keepalive, receive window
@@ -78,14 +78,14 @@ odczytywalnej flagi „jestem debugowany", którą może przeczytać cokolwiek n
 - **Przynieś własne poświadczenia.** Dodawaj zestawy `user + key` oraz `user + password`; WebUI wymusza
   minimalną siłę hasła i nigdy nie przechowuje hasła jako zwykłego tekstu.
 - **Wbudowany transfer i synchronizacja plików.** Pakiet zawiera `sftp-server`, `scp` i `rsync`, więc SFTP,
-  sshfs, klienci graficzni oraz kopie zapasowe - wszystko działa przez to samo połączenie.
+  sshfs, klienci graficzni oraz kopie zapasowe, wszystko działa przez to samo połączenie.
 - **Każde urządzenie i emulator.** `arm64-v8a`, `armeabi-v7a`, `x86`, `x86_64`.
 
 ## Agenci AI na twoim urządzeniu
 
 Stały punkt końcowy SSH zmienia twój telefon w coś, czym **autonomiczny agent AI może sterować bezpośrednio**.
-Każdy agent potrafiący obsługiwać powłokę lub połączenie SSH - Claude Code, aider, skrypt z LLM w pętli, twoja
-własna automatyzacja - otrzymuje prawdziwą sesję root na urządzeniu, przez sieć, bez kabla USB i bez żadnej z
+Każdy agent potrafiący obsługiwać powłokę lub połączenie SSH (Claude Code, aider, skrypt z LLM w pętli, twoja
+własna automatyzacja) otrzymuje prawdziwą sesję root na urządzeniu, przez sieć, bez kabla USB i bez żadnej z
 samozdradzających flag debugowania ADB. Agent widzi normalną powłokę w stylu Linuksa i może:
 
 - czytać i edytować pliki, przełączać ustawienia oraz zarządzać modułami, pakietami i usługami;
@@ -93,9 +93,9 @@ samozdradzających flag debugowania ADB. Agent widzi normalną powłokę w stylu
 - przenosić i synchronizować pliki w obie strony przez `scp` / `sftp` / `rsync`, do kopii zapasowych, migracji lub provisioningu;
 - sterować całą flotą zrootowanych urządzeń z jednego miejsca, przy czym każde jest osiągalne za pomocą własnego klucza.
 
-Ponieważ projekt jest zbudowany tak, aby był **przyjazny dla AI** - udokumentowany plik konfiguracyjny, jawny
-[kontrakt env](patches/README.md) środowiska uruchomieniowego, przewidywalne ścieżki i status w zwykłym tekście
-- agent może odkryć sposób jego użycia bez zgadywania.
+Ponieważ projekt jest zbudowany tak, aby był **przyjazny dla AI**: udokumentowany plik konfiguracyjny, jawny
+[kontrakt env](patches/README.md) środowiska uruchomieniowego, przewidywalne ścieżki i status w zwykłym tekście,
+agent może odkryć sposób jego użycia bez zgadywania.
 
 > **To jest root, więc traktuj to jak root.** Każde uwierzytelnione połączenie ląduje jako root (zobacz
 > ostrzeżenie poniżej). Przekazując dostęp agentowi, daj mu **dedykowanego użytkownika i klucz**, ogranicz bindy
@@ -121,7 +121,7 @@ to **credential-encrypted (CE)**: Android utrzymuje ją zaszyfrowaną, dopóki u
   zostanie odblokowane co najmniej raz od uruchomienia.
 - **Tryb BFU (`START_IN_BFU=1`):** demon startuje przed odblokowaniem, dzięki czemu możesz zalogować się przez SSH
   wcześnie (na przykład, aby zdalnie odblokować urządzenie). Jego sekrety znajdują się wtedy w pamięci DE i są
-  odczytywalne przed odblokowaniem - to celowy i udokumentowany kompromis. Włączaj go tylko, jeśli potrzebujesz
+  odczytywalne przed odblokowaniem, to celowy i udokumentowany kompromis. Włączaj go tylko, jeśli potrzebujesz
   SSH przed odblokowaniem.
 
 Celowo **nie** dodajemy własnego szyfrowania na wierzchu CE: jest już zaszyfrowane poświadczeniem użytkownika, a
@@ -167,14 +167,14 @@ Siostrzane projekty tego samego autora:
 * **Discord:** @VD.Priv8 https://discord.com/users/1296831918989639721
 * **E-mail:** vd.priv8@pm.me
 * **XDA-Developers:** @VD171 https://xdaforums.com/m/vd171.4699873/
-* **XDA thread:** _(placeholder - dodany przy pierwszym publicznym wydaniu)_
+* **XDA thread:** _(placeholder, dodany przy pierwszym publicznym wydaniu)_
 * **GitHub:** @VD171 https://github.com/VD171
 
 ## Licencja
 
-Własny kod VD Dropbear jest na licencji **Apache-2.0** - zobacz [LICENSE](LICENSE). Moduł dołącza także binarki
-osób trzecich - [Dropbear](https://matt.ucc.asn.au/dropbear/) (styl MIT), `sftp-server` i `scp` z OpenSSH (BSD)
-oraz `rsync` (GPL-3.0) - każda na własnej licencji; zobacz [THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md), w tym
+Własny kod VD Dropbear jest na licencji **Apache-2.0**; zobacz [LICENSE](LICENSE). Moduł dołącza także binarki
+osób trzecich: [Dropbear](https://matt.ucc.asn.au/dropbear/) (styl MIT), `sftp-server` i `scp` z OpenSSH (BSD)
+oraz `rsync` (GPL-3.0), każda na własnej licencji; zobacz [THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md), w tym
 jak przestrzegamy GPL dla rsync. Nasz kod Apache-2.0 pozostaje nienaruszony (binarka GPL jest jedynie agregowana,
 nie linkowana).
 
