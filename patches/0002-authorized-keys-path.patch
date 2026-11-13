@@ -1,0 +1,19 @@
+--- a/src/svr-authpubkey.c	2026-11-12 23:32:47.519680735 -0300
++++ b/src/svr-authpubkey.c	2026-11-12 23:32:47.518200319 -0300
+@@ -465,6 +465,16 @@
+ 	char *pathname = NULL, *dir = NULL;
+ 	const char *filename = "authorized_keys";
+ 
++	/* VD Dropbear: honour an absolute $DROPBEAR_AUTHKEYS path so the keys can
++	   live on credential- or device-encrypted storage, independent of the
++	   Android account/home model. The file is still ownership/perm-checked. */
++	{
++		const char *vd_ak = getenv("DROPBEAR_AUTHKEYS");
++		if (vd_ak != NULL && vd_ak[0] == '/') {
++			return m_strdup(vd_ak);
++		}
++	}
++
+ 	dir = expand_homedir_path_home(svr_opts.authorized_keys_dir,
+ 				       ses.authstate.pw_dir);
+ 
