@@ -198,6 +198,12 @@ encodes the fix; for the record, the pieces are:
    the functions in (1): bionic doesn't *declare* it at API 24, so OpenSSH
    compiles its own compat - but the **symbol** does exist in `libc.a`, so the
    two collide at link time. Allowing the duplicate takes bionic's, which is fine.
+6. **NULL-guarding `pw_gecos` in `pwcopy()`.** bionic's `getpwuid()` returns a
+   `NULL` `pw_gecos` (Android keeps no GECOS field). OpenSSH's `pwcopy()` guards
+   `pw_passwd` against `NULL` but not `pw_gecos`, so `sftp-server` reaches
+   `xstrdup(NULL)` and SIGSEGVs at startup, the instant a session opens.
+   (`scp` over the legacy protocol never calls `pwcopy`, which is why it worked
+   while SFTP did not.) The build patches `pwcopy()` to coalesce `pw_gecos` to `""`.
 
 Pinned versions live at the top of `scripts/build-bundles.sh`
 (`ZLIB_VERSION`, `RSYNC_VERSION`, `OPENSSH_VERSION`).

@@ -31,6 +31,13 @@ module (`module.prop`) and on GitHub Releases.
 
 ## [Unreleased]
 
+### Fixed
+- **SFTP no longer crashes the session (the bundled `sftp-server` SIGSEGV'd at startup).** On Android,
+  bionic's `getpwuid()` returns a `NULL` `pw_gecos`, and OpenSSH's `pwcopy()` guards `pw_passwd` but
+  not `pw_gecos`, so `sftp-server` hit `xstrdup(NULL)` the moment a session opened. (`scp` over the
+  legacy protocol was unaffected: its path never calls `pwcopy`.) The bundle build now patches
+  `pwcopy()` to null-coalesce `pw_gecos`.
+
 ### Changed
 - **WebUI: simpler, safer credential forms.** The PBKDF2 iteration count is no longer a user field - it
   is fixed at a safe 600000 (OWASP 2023 floor for PBKDF2-HMAC-SHA256), computed in the page as before;

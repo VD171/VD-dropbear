@@ -111,6 +111,11 @@ patch_openssh() {
   perl -0pi -e 's/static void \(\* volatile ssh_bzero\)\(void \*, size_t\) = bzero;/static void vddb_memzero(void *p, size_t n) { (void)memset(p, 0, n); }\nstatic void (* volatile ssh_bzero)(void *, size_t) = vddb_memzero;/' \
     "$src/openbsd-compat/explicit_bzero.c"
   perl -0pi -e 's/\bxcrypt\.o\b//g; s/\bgetrrsetbyname\.o\b//g' "$src/openbsd-compat/Makefile.in"
+  # bionic's getpwuid() leaves pw_gecos == NULL (Android has no GECOS field).
+  # pwcopy() NULL-guards pw_passwd but not pw_gecos, so sftp-server SIGSEGVs at
+  # startup (getpwuid => pwcopy => xstrdup(NULL)); scp survives because its
+  # -t/-f path never calls pwcopy. Guard pw_gecos the same way pw_passwd is.
+  perl -0pi -e 's/copy->pw_gecos = xstrdup\(pw->pw_gecos\);/copy->pw_gecos = xstrdup(pw->pw_gecos == NULL ? "" : pw->pw_gecos);/' "$src/misc.c"
 }
 
 for ABI in $ABIS; do
