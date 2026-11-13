@@ -31,13 +31,14 @@
 <p>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-Apache--2.0-1a7f37" alt="License"></a>
   <img src="https://img.shields.io/badge/KernelSU-%E2%9C%94-635bff" alt="KernelSU">
+  <img src="https://img.shields.io/badge/APatch-%E2%9C%94-ff7043" alt="APatch">
   <img src="https://img.shields.io/badge/Magisk-%E2%9C%94-00af9c" alt="Magisk">
   <a href="https://github.com/VD171/VD-dropbear/stargazers"><img src="https://img.shields.io/github/stars/VD171/VD-dropbear?color=d29922" alt="Stars"></a>
   <a href="https://github.com/VD171/VD-dropbear/releases"><img src="https://img.shields.io/github/v/release/VD171/VD-dropbear?color=1a7f37" alt="Release"></a>
 </p>
 
 A **standalone, fully configurable [Dropbear](https://matt.ucc.asn.au/dropbear/) SSH server**
-packaged as a KernelSU / Magisk module. It launches on its own and depends on no other module.
+packaged as a KernelSU / APatch / Magisk module. It launches on its own and depends on no other module.
 
 > ⚠️ **Every connection that authenticates receives a ROOT shell.** Treat this like the keys to
 > the device: prefer public keys over passwords, and keep the port off the public Internet.

@@ -31,7 +31,7 @@ are reviewed with that in mind.
 ## Repository layout
 
 ```
-module/     the installable KernelSU / Magisk module (scripts, WebUI, config, installer)
+module/     the installable KernelSU / APatch / Magisk module (scripts, WebUI, config, installer)
 patches/    the patch set applied on top of upstream Dropbear (the only changes to the SSH server)
 src/        where CI unpacks upstream Dropbear to build (not committed)
 scripts/    build and maintenance helpers
