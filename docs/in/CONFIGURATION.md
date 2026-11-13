@@ -67,7 +67,7 @@ Dropbear melakukan bind ke loopback alih-alih setiap antarmuka.
 
 ## Autentikasi
 
-Setiap login yang terautentikasi adalah **root**. Kunci adalah default; kata sandi bersifat opsional.
+Sebuah login berjalan sebagai akun yang Anda gunakan untuk autentikasi: **root** secara default, atau akun dengan privilese lebih rendah (`shell`, `system`). Kunci adalah default; kata sandi bersifat opsional.
 
 | Key | Default | Makna |
 |-----|---------|---------|

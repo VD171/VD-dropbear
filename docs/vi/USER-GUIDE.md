@@ -32,7 +32,7 @@
 VD Dropbear mang lại cho thiết bị đã root của bạn một máy chủ SSH riêng tư. Hướng dẫn này đưa bạn từ cài
 đặt đến một kết nối hoạt động, bao gồm cả truyền tệp và chế độ before-first-unlock (BFU).
 
-> **Mọi kết nối đã xác thực đều nhận được một root shell.** Hãy ưu tiên khóa hơn mật khẩu, chỉ bind vào
+> **Một lần đăng nhập mặc định cho một root shell đầy đủ.** Hãy ưu tiên khóa hơn mật khẩu, chỉ bind vào
 > những mạng bạn tin cậy, và không bao giờ phơi bày cổng ra Internet mở mà không có lý do.
 
 ## 1. Cài đặt
@@ -54,7 +54,7 @@ cat ~/.ssh/id_ed25519.pub     # paste this into the WebUI
 
 ## 3. Hoặc đặt một mật khẩu
 
-Đăng nhập bằng mật khẩu tắt theo mặc định (mọi lần đăng nhập đều là root, nên khóa được ưu tiên). Để
+Đăng nhập bằng mật khẩu tắt theo mặc định (một lần đăng nhập mặc định là root, nên khóa được ưu tiên). Để
 bật nó, hãy bật **Password login** trong thiết lập, rồi dưới mục **Password accounts** đặt một mật khẩu
 cho người dùng đăng nhập. Hash được tính trong trình duyệt của bạn bằng PBKDF2; bản thân mật khẩu không
 bao giờ rời khỏi trang.
@@ -98,8 +98,8 @@ liệu. Xem [Mô hình bảo mật](#) trong README.
 
 - **Nó không khởi động.** Kiểm tra `/data/adb/vddropbear/state/daemon.log`. Hãy chắc chắn **Enabled**
   đang bật và một host key có thể được tạo.
-- **Khóa bị từ chối.** Xác nhận dòng khóa công khai đúng y như client của bạn cung cấp, và rằng người
-  dùng đăng nhập là một người mà hệ thống phân giải được (thường là `root`).
+- **Khóa bị từ chối.** Xác nhận dòng khóa công khai đúng y như client của bạn cung cấp, và rằng tên người dùng bạn
+  đăng nhập là một cái tên mà hệ thống phân giải được (thường là `root`).
 - **Không thể kết nối từ máy khác.** Có lẽ bạn vẫn chỉ đang bind vào loopback. Hãy bật giao diện bạn
   cần và khởi động lại.
 - **SFTP/scp thất bại nhưng shell hoạt động.** Hãy chắc chắn `sftp-server` đóng gói kèm theo đã được

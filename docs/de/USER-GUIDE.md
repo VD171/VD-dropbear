@@ -33,7 +33,7 @@ VD Dropbear gibt deinem gerooteten Gerät einen privaten SSH-Server. Dieses Hand
 der Installation bis zu einer funktionierenden Verbindung, einschließlich Dateiübertragung und des
 Modus vor der ersten Entsperrung (BFU).
 
-> **Jede authentifizierte Verbindung erhält eine Root-Shell.** Bevorzuge Schlüssel gegenüber
+> **Eine Anmeldung ist standardmäßig eine vollständige Root-Shell.** Bevorzuge Schlüssel gegenüber
 > Passwörtern, binde nur an Netzwerke, denen du vertraust, und gib den Port niemals ohne Grund ins
 > offene Internet frei.
 
@@ -57,7 +57,7 @@ cat ~/.ssh/id_ed25519.pub     # paste this into the WebUI
 
 ## 3. Oder ein Passwort setzen
 
-Die Passwortanmeldung ist standardmäßig aus (jede Anmeldung ist root, daher werden Schlüssel
+Die Passwortanmeldung ist standardmäßig aus (eine Anmeldung ist standardmäßig root, daher werden Schlüssel
 bevorzugt). Zum Aktivieren schalte in den Einstellungen **Password login** ein und setze dann unter
 **Password accounts** ein Passwort für den Anmeldebenutzer. Der Hash wird in deinem Browser mit
 PBKDF2 berechnet; das Passwort selbst verlässt die Seite nie.
@@ -103,7 +103,7 @@ Kompromiss. Siehe [Sicherheitsmodell](#) in der README.
 - **Er startet nicht.** Prüfe `/data/adb/vddropbear/state/daemon.log`. Stelle sicher, dass
   **Enabled** an ist und ein Host-Schlüssel erzeugt werden konnte.
 - **Schlüssel abgelehnt.** Vergewissere dich, dass die Zeile des öffentlichen Schlüssels genau so
-  ist, wie dein Client sie anbietet, und dass der Anmeldebenutzer einer ist, den das System auflöst
+  ist, wie dein Client sie anbietet, und dass der Benutzername, mit dem du dich anmeldest, einer ist, den das System auflöst
   (gewöhnlich `root`).
 - **Keine Verbindung von einem anderen Rechner.** Wahrscheinlich bist du noch nur an Loopback
   gebunden: aktiviere die benötigte Schnittstelle und starte neu.

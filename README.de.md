@@ -40,7 +40,7 @@
 **Ein eigenständiger, voll konfigurierbarer SSH-Server auf Basis von [Dropbear](https://matt.ucc.asn.au/dropbear/)**,
 verpackt als Modul für KernelSU / APatch / Magisk. Er startet von allein und hängt von keinem anderen Modul ab.
 
-> ⚠️ **Jede Verbindung, die sich authentifiziert, erhält eine ROOT-Shell.** Behandle das wie die
+> ⚠️ **Eine Anmeldung ergibt standardmäßig eine vollständige ROOT-Shell.** Behandle das wie die
 > Schlüssel zum Gerät: Bevorzuge öffentliche Schlüssel gegenüber Passwörtern und halte den Port vom
 > öffentlichen Internet fern.
 
@@ -71,7 +71,7 @@ alles auf dem Gerät auslesen kann.
   - Port sowie Bindung an loopback / alle / IPv4 / IPv6 / bestimmte Adressen
   - **Start vor der ersten Entsperrung (BFU) oder erst danach (AFU)**, ein einziger Schalter
   - Authentifizierung per Public Key und/oder Passwort, maximale Anzahl Authentifizierungsversuche
-  - Login-Benutzer, Shell, `HOME`, zusätzliche Umgebung
+  - Login-Shell, `HOME`, zusätzliche Umgebung
   - Leerlauf-Timeout, Keepalive, Empfangsfenster
   - lokale / entfernte Portweiterleitung und Gateway-Ports (standardmäßig alle **aus**)
   - Typ des Host-Schlüssels (ed25519 / rsa / ecdsa)
@@ -80,8 +80,10 @@ alles auf dem Gerät auslesen kann.
   oder die genaue Version nicht per Fingerprint bestimmen und keine auf diese Version gemünzten
   Angriffe darauf richten können.
 - **Geheimnisse sinnvoll gespeichert** (siehe [Sicherheitsmodell](#security-model)).
-- **Bring deine eigenen Anmeldedaten mit.** Füge Sätze aus `user + key` und `user + password` hinzu;
-  die WebUI erzwingt eine Mindest-Passwortstärke und speichert ein Passwort nie im Klartext.
+- **Bring deine eigenen Anmeldedaten mit.** Füge autorisierte Schlüssel und Passwort-Konten hinzu. Eine
+  Anmeldung läuft als das Konto, mit dem du dich authentifizierst: **root** standardmäßig oder ein
+  Android-Konto mit geringeren Rechten (`shell`, `system`). Die WebUI erzwingt eine
+  Mindest-Passwortstärke und speichert ein Passwort nie im Klartext.
 - **Dateiübertragung und Synchronisierung eingebaut.** Das Paket liefert `sftp-server`, `scp` und
   `rsync` mit, sodass SFTP, sshfs, GUI-Clients und Backups alle über dieselbe Verbindung laufen.
 - **Jedes Gerät und jeder Emulator.** `arm64-v8a`, `armeabi-v7a`, `x86`, `x86_64`.
@@ -103,9 +105,11 @@ Weil das Projekt **KI-freundlich** aufgebaut ist (eine dokumentierte Konfigurati
 expliziter [Umgebungs-Vertrag](patches/README.md) zur Laufzeit, vorhersehbare Pfade und Status im
 Klartext), kann ein Agent ohne Rätselraten herausfinden, wie er es benutzt.
 
-> **Das ist Root, also behandle es wie Root.** Jede authentifizierte Verbindung landet als Root (siehe
-> Warnung unten). Wenn du einem Agenten Zugang gibst, gib ihm einen **eigenen Benutzer und Schlüssel**,
-> beschränke die Bindungen auf Netzwerke, denen du vertraust (loopback oder ein VPN statt des offenen
+> **Standardmäßig Root, also behandle es wie Root.** Eine Standard-Anmeldung landet als Root, und du
+> kannst dich auch mit einem Konto mit geringeren Rechten (`shell`, `system`) anmelden; siehe Warnung
+> unten. Wenn du einem Agenten Zugang gibst, gib ihm seine eigenen Anmeldedaten (nicht deinen
+> persönlichen Schlüssel), richte ihn auf ein Konto mit geringeren Rechten wie `shell`, wenn du seine
+> Reichweite begrenzen willst, beschränke die Bindungen auf Netzwerke, denen du vertraust (loopback oder ein VPN statt des offenen
 > Internets), lass die Passwort-Authentifizierung aus und denke daran, dass du einen Schlüssel jederzeit
 > widerrufen oder den Daemon über die WebUI stoppen kannst.
 
@@ -141,7 +145,7 @@ echten Schutz.
 
 ### Passwörter
 
-Die Passwort-Anmeldung ist **standardmäßig aus**, weil jede Anmeldung Root ist und Schlüssel weit
+Die Passwort-Anmeldung ist **standardmäßig aus**, weil eine Anmeldung standardmäßig Root ist und Schlüssel weit
 sicherer sind. Wenn du doch ein Passwort setzt, erzwingt die WebUI eine Mindeststärke und speichert nur
 einen Hash, nie Klartext.
 
@@ -179,7 +183,7 @@ Verwandte Projekte desselben Autors:
 * **Discord:** @VD.Priv8 https://discord.com/users/1296831918989639721
 * **E-mail:** vd.priv8@pm.me
 * **XDA-Developers:** @VD171 https://xdaforums.com/m/vd171.4699873/
-* **XDA thread:** _(Platzhalter, wird bei der ersten öffentlichen Veröffentlichung ergänzt)_
+* **XDA thread:** <https://xdaforums.com/t/VD-Dropbear.4808524/>
 * **GitHub:** @VD171 https://github.com/VD171
 
 ## Lizenz

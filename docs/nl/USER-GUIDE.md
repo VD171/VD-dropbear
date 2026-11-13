@@ -31,7 +31,7 @@
 
 VD Dropbear geeft je geroote toestel een private SSH-server. Deze handleiding neemt je mee van installatie tot een werkende verbinding, inclusief bestandsoverdracht en de before-first-unlock (BFU) modus.
 
-> **Elke geauthenticeerde verbinding krijgt een root-shell.** Geef de voorkeur aan sleutels boven wachtwoorden, bind alleen aan netwerken die je vertrouwt, en stel de poort nooit zonder reden bloot aan het open internet.
+> **Een login geeft standaard een volledige root-shell.** Geef de voorkeur aan sleutels boven wachtwoorden, bind alleen aan netwerken die je vertrouwt, en stel de poort nooit zonder reden bloot aan het open internet.
 
 ## 1. Installeren
 
@@ -50,7 +50,7 @@ cat ~/.ssh/id_ed25519.pub     # paste this into the WebUI
 
 ## 3. Of stel een wachtwoord in
 
-Wachtwoordlogin staat standaard uit (elke login is root, dus sleutels verdienen de voorkeur). Om het aan te zetten, zet **Password login** aan in de instellingen, en stel dan onder **Password accounts** een wachtwoord in voor de logingebruiker. De hash wordt in je browser berekend met PBKDF2; het wachtwoord zelf verlaat de pagina nooit.
+Wachtwoordlogin staat standaard uit (een login is standaard root, dus sleutels verdienen de voorkeur). Om het aan te zetten, zet **Password login** aan in de instellingen, en stel dan onder **Password accounts** een wachtwoord in voor de logingebruiker. De hash wordt in je browser berekend met PBKDF2; het wachtwoord zelf verlaat de pagina nooit.
 
 ## 4. Kies een poort en waar te luisteren
 
@@ -82,6 +82,6 @@ Standaard start de daemon pas **nadat** je het toestel één keer ontgrendelt (A
 ## Problemen oplossen
 
 - **Het start niet.** Controleer `/data/adb/vddropbear/state/daemon.log`. Zorg dat **Enabled** aan staat en dat er een hostsleutel gegenereerd kon worden.
-- **Sleutel geweigerd.** Bevestig dat de regel met de publieke sleutel exact is zoals je client die aanbiedt, en dat de logingebruiker er een is die het systeem herkent (meestal `root`).
+- **Sleutel geweigerd.** Bevestig dat de regel met de publieke sleutel exact is zoals je client die aanbiedt, en dat de gebruikersnaam waarmee je inlogt er een is die het systeem herkent (meestal `root`).
 - **Kan niet verbinden vanaf een andere machine.** Je bent waarschijnlijk nog alleen aan loopback gebonden. Schakel de interface in die je nodig hebt en herstart.
 - **SFTP/scp mislukt maar de shell werkt.** Zorg dat de meegeleverde `sftp-server` voor jouw ABI is uitgeleverd; de WebUI-status toont de gedetecteerde ABI.

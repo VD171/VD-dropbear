@@ -67,7 +67,7 @@ loopback thay vì mọi giao diện.
 
 ## Xác thực
 
-Mọi lần đăng nhập đã xác thực đều là **root**. Khóa là mặc định; mật khẩu là tùy chọn bật thêm.
+Một lần đăng nhập chạy dưới tài khoản mà bạn xác thực: mặc định là **root**, hoặc một tài khoản có đặc quyền thấp hơn (`shell`, `system`). Khóa là mặc định; mật khẩu là tùy chọn bật thêm.
 
 | Key | Default | Meaning |
 |-----|---------|---------|

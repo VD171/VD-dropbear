@@ -33,7 +33,7 @@ VD Dropbear le da a tu dispositivo rooteado un servidor SSH privado. Esta guía 
 instalación hasta una conexión en funcionamiento, incluida la transferencia de archivos y el modo antes
 del primer desbloqueo (BFU).
 
-> **Cada conexión autenticada obtiene una shell root.** Prefiere las claves a las contraseñas, haz el
+> **Un inicio de sesión es por defecto una shell root completa.** Prefiere las claves a las contraseñas, haz el
 > bind solo a redes en las que confíes y nunca expongas el puerto a la Internet abierta sin un motivo.
 
 ## 1. Instalar
@@ -55,7 +55,7 @@ cat ~/.ssh/id_ed25519.pub     # paste this into the WebUI
 
 ## 3. O establecer una contraseña
 
-El inicio de sesión por contraseña está desactivado por defecto (cada inicio de sesión es root, así que
+El inicio de sesión por contraseña está desactivado por defecto (un inicio de sesión es root por defecto, así que
 se prefieren las claves). Para activarlo, enciende **Password login** en los ajustes, luego bajo
 **Password accounts** establece una contraseña para el usuario de inicio de sesión. El hash se calcula
 en tu navegador con PBKDF2; la contraseña en sí nunca sale de la página.
@@ -101,7 +101,7 @@ dispositivo, que es legible antes del desbloqueo: un compromiso deliberado y doc
 - **No arranca.** Revisa `/data/adb/vddropbear/state/daemon.log`. Asegúrate de que **Enabled** esté
   activado y de que se haya podido generar una host key.
 - **Clave rechazada.** Confirma que la línea de la clave pública es exactamente la que ofrece tu cliente,
-  y que el usuario de inicio de sesión es uno que el sistema resuelva (normalmente `root`).
+  y que el nombre de usuario con el que inicias sesión es uno que el sistema resuelva (normalmente `root`).
 - **No puedo conectar desde otra máquina.** Probablemente sigues con el bind solo a loopback: habilita
   la interfaz que necesites y reinicia.
 - **SFTP/scp falla pero la shell funciona.** Asegúrate de que el `sftp-server` incluido se distribuyó

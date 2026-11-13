@@ -67,7 +67,7 @@ loopback místo každého rozhraní.
 
 ## Ověřování
 
-Každé ověřené přihlášení je **root**. Klíče jsou výchozí; hesla jsou volitelná.
+Přihlášení běží pod účtem, kterým se ověříš: ve výchozím nastavení **root**, nebo účet s nižšími oprávněními (`shell`, `system`). Klíče jsou výchozí; hesla jsou volitelná.
 
 | Klíč | Výchozí | Význam |
 |-----|---------|---------|

@@ -67,7 +67,7 @@ VD Dropbear loopback i stället för varje gränssnitt.
 
 ## Autentisering
 
-Varje autentiserad inloggning är **root**. Nycklar är standard; lösenord är tillval.
+En inloggning körs som det konto du autentiserar dig som: **root** som standard, eller ett konto med lägre behörighet (`shell`, `system`). Nycklar är standard; lösenord är tillval.
 
 | Key | Default | Meaning |
 |-----|---------|---------|

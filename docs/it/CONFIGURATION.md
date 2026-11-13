@@ -67,7 +67,7 @@ il bind su loopback anziché su ogni interfaccia.
 
 ## Autenticazione
 
-Ogni accesso autenticato è **root**. Le chiavi sono il default; le password sono opzionali.
+Un accesso viene eseguito con l'account con cui ti autentichi: **root** per impostazione predefinita, oppure un account con privilegi inferiori (`shell`, `system`). Le chiavi sono il default; le password sono opzionali.
 
 | Key | Default | Significato |
 |-----|---------|---------|

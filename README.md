@@ -40,7 +40,7 @@
 A **standalone, fully configurable [Dropbear](https://matt.ucc.asn.au/dropbear/) SSH server**
 packaged as a KernelSU / APatch / Magisk module. It launches on its own and depends on no other module.
 
-> ⚠️ **Every connection that authenticates receives a ROOT shell.** Treat this like the keys to
+> ⚠️ **A login defaults to a full ROOT shell.** Treat this like the keys to
 > the device: prefer public keys over passwords, and keep the port off the public Internet.
 
 Languages: English · [العربية](README.ar.md) · [Čeština](README.cs.md) · [Deutsch](README.de.md) · [Español](README.es.md) · [فارسی](README.fa.md) · [Français](README.fr.md) · [हिन्दी](README.hi.md) · [Bahasa](README.in.md) · [Italiano](README.it.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Nederlands](README.nl.md) · [Polski](README.pl.md) · [Português](README.pt.md) · [Русский](README.ru.md) · [Svenska](README.sv.md) · [ไทย](README.th.md) · [Türkçe](README.tr.md) · [Українська](README.uk.md) · [Tiếng Việt](README.vi.md) · [中文](README.zh.md)
@@ -66,7 +66,7 @@ globally-readable "I am being debugged" flag that anything on the device can rea
   - port, and bind to loopback / all / IPv4 / IPv6 / specific addresses
   - **start before first unlock (BFU) or only after it (AFU)**, a single toggle
   - public-key and/or password authentication, max auth tries
-  - login user, shell, `HOME`, extra environment
+  - login shell, `HOME`, extra environment
   - idle timeout, keepalive, receive window
   - local / remote port forwarding and gateway ports (all **off** by default)
   - host-key type (ed25519 / rsa / ecdsa)
@@ -74,8 +74,9 @@ globally-readable "I am being debugged" flag that anything on the device can rea
   Dropbear replaces it with an uninformative one so scanners cannot fingerprint the exact server or
   version and aim known-version attacks at it.
 - **Secrets stored sensibly** (see [Security model](#security-model)).
-- **Bring your own credentials.** Add sets of `user + key` and `user + password`; the WebUI enforces
-  a minimum password strength and never stores a password in clear text.
+- **Bring your own credentials.** Add authorized keys and password accounts. A login runs as the
+  account you authenticate as: **root** by default, or a lower-privilege Android account (`shell`,
+  `system`). The WebUI enforces a minimum password strength and never stores a password in clear text.
 - **File transfer and sync built in.** The bundle ships `sftp-server`, `scp` and `rsync`, so SFTP,
   sshfs, GUI clients and backups all work over the same connection.
 - **Every device and emulator.** `arm64-v8a`, `armeabi-v7a`, `x86`, `x86_64`.
@@ -97,8 +98,10 @@ Because the project is built to be **AI-friendly**, with a documented configurat
 runtime [env contract](patches/README.md), predictable paths and plain-text status, an agent can
 discover how to use it without guesswork.
 
-> **This is root, so treat it like root.** Every authenticated connection lands as root (see the
-> warning below). When you hand access to an agent, give it a **dedicated user and key**, scope the
+> **Root by default, so treat it like root.** A default login lands as root, and you can also log in
+> as a lower-privilege account (`shell`, `system`); see the warning below. When you hand access to an
+> agent, give it its own credential (not your personal key), point it at a lower-privilege account like
+> `shell` if you want to limit its reach, scope the
 > binds to the networks you trust (loopback or a VPN rather than the open internet), keep password
 > auth off, and remember you can revoke a key or stop the daemon at any time from the WebUI.
 
@@ -130,7 +133,7 @@ sense of security, not real protection.
 
 ### Passwords
 
-Password login is **off by default**, because every login is root and keys are far safer. When you do
+Password login is **off by default**, because a login defaults to root and keys are far safer. When you do
 set a password, the WebUI enforces a minimum strength and stores only a hash, never clear text.
 
 ## Build
@@ -175,7 +178,7 @@ Sibling projects by the same author:
 * **Discord:** @VD.Priv8 https://discord.com/users/1296831918989639721
 * **E-mail:** vd.priv8@pm.me
 * **XDA-Developers:** @VD171 https://xdaforums.com/m/vd171.4699873/
-* **XDA thread:** _(placeholder, added on first public release)_
+* **XDA thread:** <https://xdaforums.com/t/VD-Dropbear.4808524/>
 * **GitHub:** @VD171 https://github.com/VD171
 
 ## License

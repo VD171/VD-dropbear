@@ -40,7 +40,7 @@
 **KernelSU / APatch / Magisk modülü olarak paketlenmiş, bağımsız ve tamamen yapılandırılabilir bir
 [Dropbear](https://matt.ucc.asn.au/dropbear/) SSH sunucusu.** Kendi başına çalışır ve başka hiçbir modüle bağlı değildir.
 
-> ⚠️ **Kimliği doğrulanan her bağlantı bir ROOT kabuğu alır.** Buna cihazın anahtarları gibi davranın:
+> ⚠️ **Bir oturum varsayılan olarak tam bir ROOT kabuğu açar.** Buna cihazın anahtarları gibi davranın:
 > parolalar yerine açık anahtarları tercih edin ve bağlantı noktasını açık İnternet'ten uzak tutun.
 
 Languages: English · [العربية](README.ar.md) · [Čeština](README.cs.md) · [Deutsch](README.de.md) · [Español](README.es.md) · [فارسی](README.fa.md) · [Français](README.fr.md) · [हिन्दी](README.hi.md) · [Bahasa](README.in.md) · [Italiano](README.it.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Nederlands](README.nl.md) · [Polski](README.pl.md) · [Português](README.pt.md) · [Русский](README.ru.md) · [Svenska](README.sv.md) · [ไทย](README.th.md) · [Türkçe](README.tr.md) · [Українська](README.uk.md) · [Tiếng Việt](README.vi.md) · [中文](README.zh.md)
@@ -69,7 +69,7 @@ bayrağına dönüşmez.
   - bağlantı noktası ve loopback / tümü / IPv4 / IPv6 / belirli adreslere bağlama
   - **ilk kilit açmadan önce (BFU) ya da yalnızca ondan sonra (AFU) başlatma**, tek bir anahtar
   - açık anahtar ve/veya parola ile kimlik doğrulama, en fazla kimlik doğrulama denemesi
-  - oturum açma kullanıcısı, shell, `HOME`, ek ortam değişkenleri
+  - oturum açma kabuğu, `HOME`, ek ortam değişkenleri
   - boşta kalma zaman aşımı, keepalive, alım penceresi
   - yerel / uzak bağlantı noktası yönlendirme ve gateway bağlantı noktaları (tümü varsayılan olarak **kapalı**)
   - ana makine anahtarı türü (ed25519 / rsa / ecdsa)
@@ -77,7 +77,9 @@ bayrağına dönüşmez.
   VD Dropbear onu bilgi vermeyen bir başlıkla değiştirir; böylece tarayıcılar sunucunun ya da sürümün
   tam olarak ne olduğunu belirleyip ona bilinen sürüme özgü saldırılar yöneltemez.
 - **Sırlar makul biçimde saklanır** (bkz. [Güvenlik modeli](#security-model)).
-- **Kendi kimlik bilgilerinizi getirin.** `user + key` ve `user + password` kümeleri ekleyin; WebUI
+- **Kendi kimlik bilgilerinizi getirin.** Yetkili anahtarlar ve parolalı hesaplar ekleyin. Bir oturum,
+  kimlik doğrulaması yaptığınız hesap olarak çalışır: varsayılan olarak **root** ya da daha düşük
+  ayrıcalıklı bir Android hesabı (`shell`, `system`). WebUI
   asgari bir parola gücü dayatır ve parolayı asla düz metin olarak saklamaz.
 - **Dosya aktarımı ve eşitleme yerleşik olarak gelir.** Paket `sftp-server`, `scp` ve `rsync`
   içerir; böylece SFTP, sshfs, grafik arayüzlü istemciler ve yedeklemelerin hepsi aynı bağlantı
@@ -101,9 +103,11 @@ Proje **yapay zeka dostu** olacak biçimde kurulduğu için (belgelenmiş bir ya
 açık bir çalışma zamanı [ortam sözleşmesi](patches/README.md), öngörülebilir yollar ve düz metin
 durum bilgisi) bir ajan, tahminde bulunmadan nasıl kullanılacağını kendi keşfedebilir.
 
-> **Bu root'tur, o yüzden ona root gibi davranın.** Kimliği doğrulanan her bağlantı root olarak
-> iner (aşağıdaki uyarıya bakın). Bir ajana erişim verdiğinizde ona **ayrı bir kullanıcı ve anahtar**
-> tanımlayın, bağlamaları güvendiğiniz ağlarla (açık internet yerine loopback ya da bir VPN)
+> **Varsayılan olarak root'tur, o yüzden ona root gibi davranın.** Varsayılan bir oturum root olarak
+> iner, ancak daha düşük ayrıcalıklı bir hesap (`shell`, `system`) ile de oturum açabilirsiniz
+> (aşağıdaki uyarıya bakın). Bir ajana erişim verdiğinizde ona kendi kimlik bilgisini verin (kişisel
+> anahtarınızı değil), erişimini sınırlamak isterseniz onu `shell` gibi daha düşük ayrıcalıklı bir
+> hesaba yönlendirin, bağlamaları güvendiğiniz ağlarla (açık internet yerine loopback ya da bir VPN)
 > sınırlayın, parola ile kimlik doğrulamayı kapalı tutun ve bir anahtarı iptal edebileceğinizi ya da
 > arka plan hizmetini istediğiniz an WebUI üzerinden durdurabileceğinizi unutmayın.
 
@@ -138,7 +142,7 @@ yeniden uygulamak olurdu). Bu, gerçek bir koruma değil, yanlış bir güvenlik
 
 ### Parolalar
 
-Parolayla oturum açma **varsayılan olarak kapalıdır**, çünkü her oturum root'tur ve anahtarlar çok
+Parolayla oturum açma **varsayılan olarak kapalıdır**, çünkü bir oturum varsayılan olarak root'tur ve anahtarlar çok
 daha güvenlidir. Bir parola belirlediğinizde WebUI asgari bir güç dayatır ve yalnızca bir özet
 saklar, asla düz metin değil.
 
@@ -176,7 +180,7 @@ Aynı geliştiricinin kardeş projeleri:
 * **Discord:** @VD.Priv8 https://discord.com/users/1296831918989639721
 * **E-posta:** vd.priv8@pm.me
 * **XDA-Developers:** @VD171 https://xdaforums.com/m/vd171.4699873/
-* **XDA konusu:** _(yer tutucu, ilk herkese açık sürümde eklenecek)_
+* **XDA konusu:** <https://xdaforums.com/t/VD-Dropbear.4808524/>
 * **GitHub:** @VD171 https://github.com/VD171
 
 ## Lisans

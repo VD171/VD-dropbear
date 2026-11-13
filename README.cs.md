@@ -40,7 +40,7 @@
 **Samostatný, plně konfigurovatelný SSH server [Dropbear](https://matt.ucc.asn.au/dropbear/)**
 zabalený jako modul pro KernelSU / APatch / Magisk. Spouští se sám a nezávisí na žádném jiném modulu.
 
-> ⚠️ **Každé úspěšně ověřené připojení dostane ROOT shell.** Ber to jako klíče od zařízení:
+> ⚠️ **Přihlášení ve výchozím nastavení dává plný ROOT shell.** Ber to jako klíče od zařízení:
 > dávej přednost veřejným klíčům před hesly a nenech port vystavený do veřejného internetu.
 
 Languages: English · [العربية](README.ar.md) · [Čeština](README.cs.md) · [Deutsch](README.de.md) · [Español](README.es.md) · [فارسی](README.fa.md) · [Français](README.fr.md) · [हिन्दी](README.hi.md) · [Bahasa](README.in.md) · [Italiano](README.it.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Nederlands](README.nl.md) · [Polski](README.pl.md) · [Português](README.pt.md) · [Русский](README.ru.md) · [Svenska](README.sv.md) · [ไทย](README.th.md) · [Türkçe](README.tr.md) · [Українська](README.uk.md) · [Tiếng Việt](README.vi.md) · [中文](README.zh.md)
@@ -67,7 +67,7 @@ zůstává tvůj, místo globálně čitelného příznaku „jsem laděn", kter
   - port a vazba na loopback / vše / IPv4 / IPv6 / konkrétní adresy
   - **start před prvním odemčením (BFU), nebo až po něm (AFU)**, jediný přepínač
   - ověřování veřejným klíčem a/nebo heslem, maximální počet pokusů o ověření
-  - přihlašovací uživatel, shell, `HOME`, další proměnné prostředí
+  - přihlašovací shell, `HOME`, další proměnné prostředí
   - časový limit nečinnosti, keepalive, přijímací okno
   - lokální / vzdálené přesměrování portů a gateway porty (vše ve výchozím stavu **vypnuto**)
   - typ hostitelského klíče (ed25519 / rsa / ecdsa)
@@ -75,7 +75,9 @@ zůstává tvůj, místo globálně čitelného příznaku „jsem laděn", kter
   Dropbear jej nahradí ničím neříkajícím, aby skenery nemohly přesně identifikovat server či verzi a
   zacílit na něj útoky na známou verzi.
 - **Tajné údaje uložené rozumně** (viz [Bezpečnostní model](#security-model)).
-- **Přines si vlastní přihlašovací údaje.** Přidej sady `user + key` a `user + password`; WebUI
+- **Přines si vlastní přihlašovací údaje.** Přidej autorizované klíče a účty s heslem. Přihlášení běží
+  jako účet, pod kterým se ověříš: ve výchozím nastavení **root**, nebo účet Androidu s nižšími
+  oprávněními (`shell`, `system`). WebUI
   vynucuje minimální sílu hesla a nikdy neukládá heslo v otevřené podobě.
 - **Přenos souborů a synchronizace vestavěné.** Balíček obsahuje `sftp-server`, `scp` a `rsync`,
   takže SFTP, sshfs, grafičtí klienti i zálohy fungují přes totéž připojení.
@@ -97,8 +99,10 @@ Protože je projekt postavený tak, aby byl **přátelský k AI** (zdokumentovan
 explicitní [kontrakt prostředí](patches/README.md) za běhu, předvídatelné cesty a stav v otevřeném
 textu), agent dokáže zjistit, jak jej používat, bez dohadů.
 
-> **Tohle je root, tak s tím zacházej jako s rootem.** Každé ověřené připojení přistane jako root
-> (viz varování níže). Když předáváš přístup agentovi, dej mu **vyhrazeného uživatele a klíč**, omez
+> **Ve výchozím nastavení root, tak s tím zacházej jako s rootem.** Výchozí přihlášení přistane jako
+> root, ale přihlásit se můžeš i pod účtem s nižšími oprávněními (`shell`, `system`); viz varování
+> níže. Když předáváš přístup agentovi, dej mu vlastní přihlašovací údaje (ne svůj osobní klíč),
+> nasměruj ho na účet s nižšími oprávněními, například `shell`, pokud chceš omezit jeho dosah, omez
 > vazby na sítě, kterým důvěřuješ (loopback nebo VPN místo otevřeného internetu), nech ověřování
 > heslem vypnuté a pamatuj, že klíč můžeš kdykoli zneplatnit nebo démona zastavit z WebUI.
 
@@ -132,7 +136,7 @@ pocit bezpečí, ne skutečnou ochranu.
 
 ### Hesla
 
-Přihlášení heslem je **ve výchozím stavu vypnuté**, protože každé přihlášení je root a klíče jsou
+Přihlášení heslem je **ve výchozím stavu vypnuté**, protože přihlášení je ve výchozím nastavení root a klíče jsou
 mnohem bezpečnější. Když už heslo nastavíš, WebUI vynutí minimální sílu a uloží jen hash, nikdy
 otevřený text.
 
@@ -169,7 +173,7 @@ Příbuzné projekty téhož autora:
 * **Discord:** @VD.Priv8 https://discord.com/users/1296831918989639721
 * **E-mail:** vd.priv8@pm.me
 * **XDA-Developers:** @VD171 https://xdaforums.com/m/vd171.4699873/
-* **XDA thread:** _(zástupný text, doplní se při prvním veřejném vydání)_
+* **XDA thread:** <https://xdaforums.com/t/VD-Dropbear.4808524/>
 * **GitHub:** @VD171 https://github.com/VD171
 
 ## Licence

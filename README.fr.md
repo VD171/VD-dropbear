@@ -40,7 +40,7 @@
 **Un serveur SSH [Dropbear](https://matt.ucc.asn.au/dropbear/) autonome et entièrement configurable**,
 empaqueté comme module KernelSU / APatch / Magisk. Il démarre tout seul et ne dépend d'aucun autre module.
 
-> ⚠️ **Toute connexion qui s'authentifie obtient un shell ROOT.** Traite cela comme les clés de
+> ⚠️ **Par défaut, une connexion ouvre un shell ROOT complet.** Traite cela comme les clés de
 > l'appareil : préfère les clés publiques aux mots de passe, et garde le port hors de l'Internet public.
 
 Languages: English · [العربية](README.ar.md) · [Čeština](README.cs.md) · [Deutsch](README.de.md) · [Español](README.es.md) · [فارسی](README.fa.md) · [Français](README.fr.md) · [हिन्दी](README.hi.md) · [Bahasa](README.in.md) · [Italiano](README.it.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Nederlands](README.nl.md) · [Polski](README.pl.md) · [Português](README.pt.md) · [Русский](README.ru.md) · [Svenska](README.sv.md) · [ไทย](README.th.md) · [Türkçe](README.tr.md) · [Українська](README.uk.md) · [Tiếng Việt](README.vi.md) · [中文](README.zh.md)
@@ -70,7 +70,7 @@ que tout ce qui se trouve sur l'appareil peut lire.
   - **démarrer avant le premier déverrouillage (BFU) ou seulement après (AFU)**, un unique
     interrupteur
   - authentification par clé publique et/ou mot de passe, nombre maximal de tentatives d'authentification
-  - utilisateur de connexion, shell, `HOME`, environnement supplémentaire
+  - shell de connexion, `HOME`, environnement supplémentaire
   - délai d'inactivité, keepalive, fenêtre de réception
   - redirection de ports locale / distante et gateway ports (tout **désactivé** par défaut)
   - type de clé d'hôte (ed25519 / rsa / ecdsa)
@@ -79,8 +79,10 @@ que tout ce qui se trouve sur l'appareil peut lire.
   puissent pas identifier précisément le serveur ou la version et lui lancer des attaques ciblant une
   version connue.
 - **Secrets stockés judicieusement** (voir [Modèle de sécurité](#security-model)).
-- **Apporte tes propres identifiants.** Ajoute des ensembles `user + key` et `user + password` ; la
-  WebUI impose une force minimale de mot de passe et ne stocke jamais un mot de passe en clair.
+- **Apporte tes propres identifiants.** Ajoute des clés autorisées et des comptes à mot de passe. Une
+  connexion s'exécute en tant que le compte avec lequel tu t'authentifies : **root** par défaut, ou un
+  compte Android de moindre privilège (`shell`, `system`). La WebUI impose une force minimale de mot de
+  passe et ne stocke jamais un mot de passe en clair.
 - **Transfert et synchronisation de fichiers intégrés.** Le paquet livre `sftp-server`, `scp` et
   `rsync`, de sorte que SFTP, sshfs, les clients graphiques et les sauvegardes fonctionnent tous par
   la même connexion.
@@ -103,9 +105,11 @@ Parce que le projet est conçu pour être **compatible avec l'IA** (un fichier d
 documenté, un [contrat d'environnement](patches/README.md) d'exécution explicite, des chemins
 prévisibles et un état en texte clair), un agent peut découvrir comment l'utiliser sans deviner.
 
-> **C'est du root, alors traite-le comme du root.** Toute connexion authentifiée arrive en root (voir
-> l'avertissement ci-dessous). Quand tu confies l'accès à un agent, donne-lui un **utilisateur et une
-> clé dédiés**, limite les liaisons aux réseaux auxquels tu fais confiance (loopback ou un VPN plutôt
+> **Root par défaut, alors traite-le comme du root.** Une connexion par défaut arrive en root, et tu
+> peux aussi te connecter avec un compte de moindre privilège (`shell`, `system`) ; voir
+> l'avertissement ci-dessous. Quand tu confies l'accès à un agent, donne-lui son propre identifiant
+> (pas ta clé personnelle), pointe-le vers un compte de moindre privilège comme `shell` si tu veux
+> limiter sa portée, limite les liaisons aux réseaux auxquels tu fais confiance (loopback ou un VPN plutôt
 > que l'internet ouvert), laisse l'authentification par mot de passe désactivée, et souviens-toi que
 > tu peux révoquer une clé ou arrêter le démon à tout moment depuis la WebUI.
 
@@ -139,7 +143,7 @@ que réimplémenter CE). Cela donnerait un faux sentiment de sécurité, pas une
 
 ### Mots de passe
 
-La connexion par mot de passe est **désactivée par défaut**, car chaque connexion est root et les clés
+La connexion par mot de passe est **désactivée par défaut**, car une connexion est root par défaut et les clés
 sont bien plus sûres. Quand tu définis malgré tout un mot de passe, la WebUI impose une force minimale
 et ne stocke qu'une empreinte, jamais de texte en clair.
 
@@ -178,7 +182,7 @@ Projets frères du même auteur :
 * **Discord:** @VD.Priv8 https://discord.com/users/1296831918989639721
 * **E-mail:** vd.priv8@pm.me
 * **XDA-Developers:** @VD171 https://xdaforums.com/m/vd171.4699873/
-* **XDA thread:** _(espace réservé, ajouté lors de la première publication publique)_
+* **XDA thread:** <https://xdaforums.com/t/VD-Dropbear.4808524/>
 * **GitHub:** @VD171 https://github.com/VD171
 
 ## Licence

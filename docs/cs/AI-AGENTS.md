@@ -62,12 +62,12 @@ cesty a stav v prostém textu), může agent zjistit, jak jej používat, bez h�
 
 Tohle je root, tak s tím zacházej jako s rootem:
 
-- dej agentovi **vyhrazeného uživatele a klíč**, ne ten svůj osobní;
+- dej agentovi **vlastní přihlašovací údaj**, ne ten svůj osobní, a nasměruj ho na účet s nižšími oprávněními (`shell`), pokud chceš omezit jeho dosah;
 - omez vazby na sítě, kterým důvěřuješ: loopback nebo VPN místo otevřeného internetu
   (viz [Konfigurace](CONFIGURATION.md));
 - nech ověřování heslem vypnuté; klíč lze odvolat a nikdy se nepíše;
 - klíč můžeš kdykoli odvolat nebo démona zastavit z WebUI;
-- pamatuj, že každé spojení je plná root relace: dej agentovi jen takový dosah, jaký potřebuje.
+- pamatuj, že výchozí spojení je plná root relace: dej agentovi jen takový dosah, jaký potřebuje.
 
 ## Minimální nastavení
 

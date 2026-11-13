@@ -40,7 +40,7 @@
 **Samodzielny, w pełni konfigurowalny serwer SSH [Dropbear](https://matt.ucc.asn.au/dropbear/)**,
 dostarczany jako moduł KernelSU / APatch / Magisk. Uruchamia się samodzielnie i nie zależy od żadnego innego modułu.
 
-> ⚠️ **Każde połączenie, które się uwierzytelni, otrzymuje powłokę ROOT.** Traktuj to jak klucze do
+> ⚠️ **Logowanie domyślnie daje pełną powłokę ROOT.** Traktuj to jak klucze do
 > urządzenia: preferuj klucze publiczne zamiast haseł i trzymaj port z dala od publicznego internetu.
 
 Languages: English · [العربية](README.ar.md) · [Čeština](README.cs.md) · [Deutsch](README.de.md) · [Español](README.es.md) · [فارسی](README.fa.md) · [Français](README.fr.md) · [हिन्दी](README.hi.md) · [Bahasa](README.in.md) · [Italiano](README.it.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Nederlands](README.nl.md) · [Polski](README.pl.md) · [Português](README.pt.md) · [Русский](README.ru.md) · [Svenska](README.sv.md) · [ไทย](README.th.md) · [Türkçe](README.tr.md) · [Українська](README.uk.md) · [Tiếng Việt](README.vi.md) · [中文](README.zh.md)
@@ -67,7 +67,7 @@ odczytywalnej flagi „jestem debugowany", którą może przeczytać cokolwiek n
   - port oraz bind na loopback / all / IPv4 / IPv6 / konkretne adresy
   - **start przed pierwszym odblokowaniem (BFU) lub dopiero po nim (AFU)**, jeden przełącznik
   - uwierzytelnianie kluczem publicznym i/lub hasłem, maksymalna liczba prób uwierzytelnienia
-  - użytkownik logowania, powłoka, `HOME`, dodatkowe environment
+  - powłoka logowania, `HOME`, dodatkowe environment
   - idle timeout, keepalive, receive window
   - lokalne / zdalne przekierowanie portów oraz gateway ports (wszystko domyślnie **wyłączone**)
   - typ host-key (ed25519 / rsa / ecdsa)
@@ -75,7 +75,9 @@ odczytywalnej flagi „jestem debugowany", którą może przeczytać cokolwiek n
   zastępuje go nieinformatywnym, dzięki czemu skanery nie mogą zidentyfikować dokładnego serwera ani wersji
   i wycelować w niego ataków na znane wersje.
 - **Sekrety przechowywane rozsądnie** (zobacz [Model bezpieczeństwa](#security-model)).
-- **Przynieś własne poświadczenia.** Dodawaj zestawy `user + key` oraz `user + password`; WebUI wymusza
+- **Przynieś własne poświadczenia.** Dodawaj autoryzowane klucze i konta z hasłem. Logowanie działa jako konto,
+  którym się uwierzytelniasz: domyślnie **root** albo konto Androida o niższych uprawnieniach (`shell`,
+  `system`). WebUI wymusza
   minimalną siłę hasła i nigdy nie przechowuje hasła jako zwykłego tekstu.
 - **Wbudowany transfer i synchronizacja plików.** Pakiet zawiera `sftp-server`, `scp` i `rsync`, więc SFTP,
   sshfs, klienci graficzni oraz kopie zapasowe, wszystko działa przez to samo połączenie.
@@ -97,8 +99,10 @@ Ponieważ projekt jest zbudowany tak, aby był **przyjazny dla AI**: udokumentow
 [kontrakt env](patches/README.md) środowiska uruchomieniowego, przewidywalne ścieżki i status w zwykłym tekście,
 agent może odkryć sposób jego użycia bez zgadywania.
 
-> **To jest root, więc traktuj to jak root.** Każde uwierzytelnione połączenie ląduje jako root (zobacz
-> ostrzeżenie poniżej). Przekazując dostęp agentowi, daj mu **dedykowanego użytkownika i klucz**, ogranicz bindy
+> **Domyślnie root, więc traktuj to jak root.** Domyślne logowanie ląduje jako root, a możesz też zalogować się
+> na konto o niższych uprawnieniach (`shell`, `system`); zobacz
+> ostrzeżenie poniżej. Przekazując dostęp agentowi, daj mu własne poświadczenia (nie swój osobisty klucz),
+> skieruj go na konto o niższych uprawnieniach, takie jak `shell`, jeśli chcesz ograniczyć jego zasięg, ogranicz bindy
 > do zaufanych sieci (loopback lub VPN zamiast otwartego internetu), pozostaw uwierzytelnianie hasłem wyłączone i
 > pamiętaj, że w dowolnej chwili możesz z poziomu WebUI unieważnić klucz lub zatrzymać demona.
 
@@ -131,7 +135,7 @@ bezpieczeństwa, a nie prawdziwą ochronę.
 
 ### Hasła
 
-Logowanie hasłem jest **domyślnie wyłączone**, ponieważ każde logowanie to root, a klucze są o wiele bezpieczniejsze.
+Logowanie hasłem jest **domyślnie wyłączone**, ponieważ logowanie domyślnie to root, a klucze są o wiele bezpieczniejsze.
 Gdy jednak ustawisz hasło, WebUI wymusza minimalną siłę i przechowuje wyłącznie hash, nigdy zwykły tekst.
 
 ## Build
@@ -167,7 +171,7 @@ Siostrzane projekty tego samego autora:
 * **Discord:** @VD.Priv8 https://discord.com/users/1296831918989639721
 * **E-mail:** vd.priv8@pm.me
 * **XDA-Developers:** @VD171 https://xdaforums.com/m/vd171.4699873/
-* **XDA thread:** _(placeholder, dodany przy pierwszym publicznym wydaniu)_
+* **XDA thread:** <https://xdaforums.com/t/VD-Dropbear.4808524/>
 * **GitHub:** @VD171 https://github.com/VD171
 
 ## Licencja

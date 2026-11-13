@@ -40,7 +40,7 @@
 Um **servidor SSH [Dropbear](https://matt.ucc.asn.au/dropbear/) independente e totalmente configurável**,
 empacotado como módulo KernelSU / APatch / Magisk. Ele sobe por conta própria e não depende de nenhum outro módulo.
 
-> ⚠️ **Toda conexão que se autentica recebe um shell ROOT.** Trate isso como as chaves do
+> ⚠️ **Por padrão, um login dá um shell ROOT completo.** Trate isso como as chaves do
 > aparelho: prefira chaves públicas a senhas e mantenha a porta fora da Internet pública.
 
 Languages: English · [العربية](README.ar.md) · [Čeština](README.cs.md) · [Deutsch](README.de.md) · [Español](README.es.md) · [فارسی](README.fa.md) · [Français](README.fr.md) · [हिन्दी](README.hi.md) · [Bahasa](README.in.md) · [Italiano](README.it.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Nederlands](README.nl.md) · [Polski](README.pl.md) · [Português](README.pt.md) · [Русский](README.ru.md) · [Svenska](README.sv.md) · [ไทย](README.th.md) · [Türkçe](README.tr.md) · [Українська](README.uk.md) · [Tiếng Việt](README.vi.md) · [中文](README.zh.md)
@@ -66,7 +66,7 @@ flag "estou sendo depurado", legível globalmente, que qualquer coisa no aparelh
   - porta, e bind em loopback / all / IPv4 / IPv6 / endereços específicos
   - **iniciar antes do primeiro desbloqueio (BFU) ou só depois dele (AFU)**, um único botão
   - autenticação por chave pública e/ou senha, número máximo de tentativas de autenticação
-  - usuário de login, shell, `HOME`, environment extra
+  - shell de login, `HOME`, environment extra
   - idle timeout, keepalive, receive window
   - encaminhamento de portas local / remoto e gateway ports (tudo **desligado** por padrão)
   - tipo de host-key (ed25519 / rsa / ecdsa)
@@ -74,8 +74,9 @@ flag "estou sendo depurado", legível globalmente, que qualquer coisa no aparelh
   Dropbear o substitui por um banner sem informação, de modo que scanners não conseguem identificar o servidor
   ou a versão exatos e mirar nele ataques voltados a versões conhecidas.
 - **Segredos armazenados com bom senso** (veja [Modelo de segurança](#security-model)).
-- **Traga suas próprias credenciais.** Adicione conjuntos de `user + key` e `user + password`; a WebUI impõe
-  uma força mínima de senha e nunca armazena a senha em texto puro.
+- **Traga suas próprias credenciais.** Adicione chaves autorizadas e contas com senha. Um login roda como a
+  conta com que você se autentica: **root** por padrão, ou uma conta Android de menor privilégio (`shell`,
+  `system`). A WebUI impõe uma força mínima de senha e nunca armazena a senha em texto puro.
 - **Transferência e sincronização de arquivos embutidas.** O pacote inclui `sftp-server`, `scp` e `rsync`,
   então SFTP, sshfs, clientes gráficos e backups funcionam todos pela mesma conexão.
 - **Todo aparelho e emulador.** `arm64-v8a`, `armeabi-v7a`, `x86`, `x86_64`.
@@ -97,8 +98,10 @@ Como o projeto é feito para ser **amigável a IA** (um arquivo de configuraçã
 [contrato de env](patches/README.md) de runtime explícito, caminhos previsíveis e status em texto puro), um
 agente consegue descobrir como usá-lo sem ter que adivinhar.
 
-> **Isto é root, então trate como root.** Toda conexão autenticada entra como root (veja o aviso abaixo).
-> Quando entregar o acesso a um agente, dê a ele um **usuário e uma chave dedicados**, restrinja os binds às
+> **Root por padrão, então trate como root.** Um login padrão entra como root, e você também pode entrar como
+> uma conta de menor privilégio (`shell`, `system`); veja o aviso abaixo. Quando entregar o acesso a um agente,
+> dê a ele uma credencial própria (não a sua chave pessoal), aponte-o para uma conta de menor privilégio como
+> `shell` se quiser limitar seu alcance, restrinja os binds às
 > redes em que você confia (loopback ou uma VPN, em vez da internet aberta), mantenha a autenticação por senha
 > desligada e lembre-se de que você pode revogar uma chave ou parar o daemon a qualquer momento pela WebUI.
 
@@ -131,7 +134,7 @@ de segurança, não proteção de verdade.
 
 ### Senhas
 
-O login por senha vem **desligado por padrão**, porque todo login é root e as chaves são muito mais seguras.
+O login por senha vem **desligado por padrão**, porque um login, por padrão, é root e as chaves são muito mais seguras.
 Quando você define uma senha, a WebUI impõe uma força mínima e armazena apenas um hash, nunca texto puro.
 
 ## Build
@@ -168,7 +171,7 @@ Projetos irmãos do mesmo autor:
 * **Discord:** @VD.Priv8 https://discord.com/users/1296831918989639721
 * **E-mail:** vd.priv8@pm.me
 * **XDA-Developers:** @VD171 https://xdaforums.com/m/vd171.4699873/
-* **XDA thread:** _(placeholder, adicionado no primeiro lançamento público)_
+* **XDA thread:** <https://xdaforums.com/t/VD-Dropbear.4808524/>
 * **GitHub:** @VD171 https://github.com/VD171
 
 ## Licença

@@ -52,11 +52,11 @@ Omdat het project **AI-vriendelijk** is gebouwd (een gedocumenteerd configuratie
 
 Dit is root, dus behandel het als root:
 
-- geef de agent een **eigen gebruiker en sleutel**, niet die van jou;
+- geef de agent zijn **eigen credential**, niet die van jou, en wijs het naar een account met minder rechten (`shell`) als je het bereik wilt beperken;
 - beperk de binds tot netwerken die je vertrouwt: loopback of een VPN in plaats van het open internet (zie [Configuration](CONFIGURATION.md));
 - houd wachtwoordauthenticatie uit; een sleutel is intrekbaar en wordt nooit ingetypt;
 - je kunt op elk moment een sleutel intrekken of de daemon stoppen vanuit de WebUI;
-- onthoud dat elke verbinding een volledige root-sessie is. Geef de agent alleen de reikwijdte die die nodig heeft.
+- onthoud dat een standaardverbinding een volledige root-sessie is. Geef de agent alleen de reikwijdte die die nodig heeft.
 
 ## Een minimale opzet
 

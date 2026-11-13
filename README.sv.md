@@ -40,7 +40,7 @@
 **En fristående, helt konfigurerbar [Dropbear](https://matt.ucc.asn.au/dropbear/) SSH-server**
 paketerad som en KernelSU- / APatch- / Magisk-modul. Den startar på egen hand och är inte beroende av någon annan modul.
 
-> ⚠️ **Varje anslutning som autentiseras får ett ROOT-skal.** Behandla det som nycklarna till
+> ⚠️ **En inloggning ger som standard ett fullständigt ROOT-skal.** Behandla det som nycklarna till
 > enheten: föredra publika nycklar framför lösenord och håll porten borta från det öppna internet.
 
 Languages: English · [العربية](README.ar.md) · [Čeština](README.cs.md) · [Deutsch](README.de.md) · [Español](README.es.md) · [فارسی](README.fa.md) · [Français](README.fr.md) · [हिन्दी](README.hi.md) · [Bahasa](README.in.md) · [Italiano](README.it.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Nederlands](README.nl.md) · [Polski](README.pl.md) · [Português](README.pt.md) · [Русский](README.ru.md) · [Svenska](README.sv.md) · [ไทย](README.th.md) · [Türkçe](README.tr.md) · [Українська](README.uk.md) · [Tiếng Việt](README.vi.md) · [中文](README.zh.md)
@@ -68,7 +68,7 @@ som vad som helst på enheten kan läsa.
   - port, och bindning till loopback / alla / IPv4 / IPv6 / specifika adresser
   - **starta före första upplåsningen (BFU) eller först efter den (AFU)**, en enda växel
   - autentisering med publik nyckel och/eller lösenord, max antal autentiseringsförsök
-  - inloggningsanvändare, shell, `HOME`, extra miljövariabler
+  - inloggningsskal, `HOME`, extra miljövariabler
   - tidsgräns vid inaktivitet, keepalive, mottagningsfönster
   - lokal / fjärr-portvidarebefordran och gateway-portar (allt **avstängt** som standard)
   - typ av värdnyckel (ed25519 / rsa / ecdsa)
@@ -76,8 +76,9 @@ som vad som helst på enheten kan läsa.
   Dropbear byter ut den mot en intetsägande, så att skannrar inte kan fingeravtrycka exakt vilken
   server eller version det är och rikta kända versionsangrepp mot den.
 - **Hemligheter lagras förnuftigt** (se [Säkerhetsmodell](#security-model)).
-- **Ta med egna inloggningsuppgifter.** Lägg till uppsättningar av `user + key` och
-  `user + password`; WebUI:et kräver en lägsta lösenordsstyrka och lagrar aldrig ett lösenord i klartext.
+- **Ta med egna inloggningsuppgifter.** Lägg till auktoriserade nycklar och lösenordskonton. En
+  inloggning körs som det konto du autentiserar dig som: **root** som standard, eller ett Android-konto
+  med lägre behörighet (`shell`, `system`). WebUI:et kräver en lägsta lösenordsstyrka och lagrar aldrig ett lösenord i klartext.
 - **Filöverföring och synkning inbyggt.** Paketet innehåller `sftp-server`, `scp` och `rsync`, så
   SFTP, sshfs, grafiska klienter och säkerhetskopior fungerar alla över samma anslutning.
 - **Varje enhet och emulator.** `arm64-v8a`, `armeabi-v7a`, `x86`, `x86_64`.
@@ -99,9 +100,11 @@ Eftersom projektet är byggt för att vara **AI-vänligt** (en dokumenterad konf
 uttryckligt [miljökontrakt](patches/README.md) vid körning, förutsägbara sökvägar och status i
 klartext), kan en agent själv komma underfund med hur den används, utan gissningar.
 
-> **Det här är root, så behandla det som root.** Varje autentiserad anslutning landar som root (se
-> varningen nedan). När du överlämnar åtkomst till en agent, ge den en **egen användare och nyckel**,
-> begränsa bindningarna till de nätverk du litar på (loopback eller ett VPN snarare än det öppna
+> **Root som standard, så behandla det som root.** En standardinloggning landar som root, och du kan
+> även logga in med ett konto med lägre behörighet (`shell`, `system`); se
+> varningen nedan. När du överlämnar åtkomst till en agent, ge den egna inloggningsuppgifter (inte din
+> personliga nyckel), peka den mot ett konto med lägre behörighet som `shell` om du vill begränsa dess
+> räckvidd, begränsa bindningarna till de nätverk du litar på (loopback eller ett VPN snarare än det öppna
 > internet), håll lösenordsautentisering avstängd och kom ihåg att du när som helst kan återkalla en
 > nyckel eller stoppa daemonen från WebUI:et.
 
@@ -135,7 +138,7 @@ bara att återimplementera CE). Det skulle ge en falsk känsla av säkerhet, int
 
 ### Lösenord
 
-Lösenordsinloggning är **avstängd som standard**, eftersom varje inloggning är root och nycklar är
+Lösenordsinloggning är **avstängd som standard**, eftersom en inloggning som standard är root och nycklar är
 långt mycket säkrare. När du väl sätter ett lösenord kräver WebUI:et en lägsta styrka och lagrar bara
 en hash, aldrig klartext.
 
@@ -173,7 +176,7 @@ Systerprojekt av samma upphovsperson:
 * **Discord:** @VD.Priv8 https://discord.com/users/1296831918989639721
 * **E-post:** vd.priv8@pm.me
 * **XDA-Developers:** @VD171 https://xdaforums.com/m/vd171.4699873/
-* **XDA-tråd:** _(platshållare, läggs till vid första publika släppet)_
+* **XDA-tråd:** <https://xdaforums.com/t/VD-Dropbear.4808524/>
 * **GitHub:** @VD171 https://github.com/VD171
 
 ## Licens

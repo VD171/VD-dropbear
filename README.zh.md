@@ -40,7 +40,7 @@
 **一个独立、完全可配置的 [Dropbear](https://matt.ucc.asn.au/dropbear/) SSH 服务器**，以 KernelSU /
 APatch / Magisk 模块的形式打包。它独立启动，不依赖任何其他模块。
 
-> ⚠️ **每一个通过身份验证的连接都会得到一个 ROOT shell。** 请把它当作设备的钥匙来对待：优先使用公钥而非
+> ⚠️ **登录默认会得到一个完整的 ROOT shell。** 请把它当作设备的钥匙来对待：优先使用公钥而非
 > 密码，并让端口远离公网。
 
 Languages: English · [العربية](README.ar.md) · [Čeština](README.cs.md) · [Deutsch](README.de.md) · [Español](README.es.md) · [فارسی](README.fa.md) · [Français](README.fr.md) · [हिन्दी](README.hi.md) · [Bahasa](README.in.md) · [Italiano](README.it.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Nederlands](README.nl.md) · [Polski](README.pl.md) · [Português](README.pt.md) · [Русский](README.ru.md) · [Svenska](README.sv.md) · [ไทย](README.th.md) · [Türkçe](README.tr.md) · [Українська](README.uk.md) · [Tiếng Việt](README.vi.md) · [中文](README.zh.md)
@@ -64,14 +64,15 @@ shell、SFTP 和 rsync，没有 `adb_enabled` 这一破绽，没有 USB 调试�
   - 端口，以及绑定到 loopback / 全部 / IPv4 / IPv6 / 指定地址
   - **在首次解锁前启动（BFU）还是仅在其后启动（AFU）**，一个开关搞定
   - 公钥和/或密码身份验证，最大验证尝试次数
-  - 登录用户、shell、`HOME`、额外的环境变量
+  - 登录 shell、`HOME`、额外的环境变量
   - 空闲超时、keepalive、接收窗口
   - 本地 / 远程端口转发和 gateway 端口（默认全部**关闭**）
   - 主机密钥类型（ed25519 / rsa / ecdsa）
 - **隐藏的版本横幅。** SSH 协议要求必须有*一个*横幅，因此无法将其移除，但 VD Dropbear 将其替换为一条毫无
   信息量的横幅，这样扫描器就无法指纹识别出确切的服务器或版本，从而对其发动针对已知版本的攻击。
 - **以合理方式存储机密**（见[安全模型](#security-model)）。
-- **自带你自己的凭据。** 添加 `user + key` 和 `user + password` 组合；WebUI 会强制要求最低密码强度，并且
+- **自带你自己的凭据。** 添加授权密钥和密码账户。登录会以你用来认证的账户身份运行：默认是 **root**，也可以是
+  权限更低的 Android 账户（`shell`、`system`）。WebUI 会强制要求最低密码强度，并且
   绝不以明文存储密码。
 - **内置文件传输与同步。** 该套件附带 `sftp-server`、`scp` 和 `rsync`，因此 SFTP、sshfs、图形界面客户端和
   备份都能在同一个连接上运行。
@@ -92,8 +93,9 @@ shell，并且可以：
 由于本项目在构建时就力求**对 AI 友好**（一个有文档的配置文件、一份明确的运行时[环境契约](patches/README.md)、
 可预测的路径以及纯文本的状态），智能体无需靠猜就能弄清如何使用它。
 
-> **这是 root，所以请把它当作 root 来对待。** 每一个通过身份验证的连接都以 root 身份落地（见下方警告）。
-> 当你把访问权交给某个智能体时，为它配一个**专用的用户和密钥**，把绑定限制在你信任的网络内（loopback 或
+> **默认即 root，所以请把它当作 root 来对待。** 默认登录会以 root 身份落地，你也可以用权限更低的账户（`shell`、
+> `system`）登录（见下方警告）。当你把访问权交给某个智能体时，为它配一份它自己的凭据（而非你的个人密钥），
+> 如果想限制它的触及范围，就让它使用像 `shell` 这样权限更低的账户，把绑定限制在你信任的网络内（loopback 或
 > VPN，而非开放的互联网），让密码验证保持关闭，并记住你随时都能在 WebUI 中吊销某个密钥或停止守护进程。
 
 ## 安装
@@ -121,7 +123,7 @@ shell，并且可以：
 
 ### 密码
 
-密码登录**默认关闭**，因为每一次登录都是 root，而密钥要安全得多。当你确实要设置密码时，WebUI 会强制要求最低
+密码登录**默认关闭**，因为登录默认即 root，而密钥要安全得多。当你确实要设置密码时，WebUI 会强制要求最低
 强度，并且只存储一个哈希，绝不存明文。
 
 ## 构建
@@ -155,7 +157,7 @@ shell，并且可以：
 * **Discord：** @VD.Priv8 https://discord.com/users/1296831918989639721
 * **邮箱：** vd.priv8@pm.me
 * **XDA-Developers：** @VD171 https://xdaforums.com/m/vd171.4699873/
-* **XDA 主题：** _(占位符，将在首次公开发布时添加)_
+* **XDA 主题：** <https://xdaforums.com/t/VD-Dropbear.4808524/>
 * **GitHub：** @VD171 https://github.com/VD171
 
 ## 许可证

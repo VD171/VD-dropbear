@@ -32,7 +32,7 @@
 VD Dropbear ger din root-enhet en privat SSH-server. Den här guiden tar dig från installation till en
 fungerande anslutning, inklusive filöverföring och läget före första upplåsning (BFU).
 
-> **Varje autentiserad anslutning får ett root-skal.** Föredra nycklar framför lösenord, bind bara till
+> **En inloggning ger som standard ett fullständigt root-skal.** Föredra nycklar framför lösenord, bind bara till
 > nätverk du litar på, och exponera aldrig porten mot det öppna internet utan skäl.
 
 ## 1. Installera
@@ -54,7 +54,7 @@ cat ~/.ssh/id_ed25519.pub     # paste this into the WebUI
 
 ## 3. Eller ange ett lösenord
 
-Lösenordsinloggning är av som standard (varje inloggning är root, så nycklar är att föredra). För att
+Lösenordsinloggning är av som standard (en inloggning är som standard root, så nycklar är att föredra). För att
 aktivera den, slå på **Password login** i inställningarna, ange sedan under **Password accounts** ett
 lösenord för inloggningsanvändaren. Hashen beräknas i din webbläsare med PBKDF2; själva lösenordet
 lämnar aldrig sidan.
@@ -98,7 +98,7 @@ en medveten, dokumenterad avvägning. Se [Säkerhetsmodell](#) i README.
 - **Den startar inte.** Kontrollera `/data/adb/vddropbear/state/daemon.log`. Se till att **Enabled** är
   på och att en värdnyckel kunde genereras.
 - **Nyckel avvisad.** Bekräfta att raden med den publika nyckeln är exakt som din klient erbjuder den,
-  och att inloggningsanvändaren är en som systemet kan slå upp (vanligtvis `root`).
+  och att användarnamnet du loggar in som är ett som systemet kan slå upp (vanligtvis `root`).
 - **Kan inte ansluta från en annan dator.** Du är troligen fortfarande bunden endast till loopback.
   Aktivera det gränssnitt du behöver och starta om.
 - **SFTP/scp misslyckas men skalet fungerar.** Se till att den medföljande `sftp-server` levererades

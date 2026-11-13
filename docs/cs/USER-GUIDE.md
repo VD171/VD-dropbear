@@ -32,7 +32,7 @@
 VD Dropbear dává tvému rootnutému zařízení soukromý server SSH. Tato příručka tě provede od instalace
 po funkční spojení, včetně přenosu souborů a režimu před prvním odemčením (BFU).
 
-> **Každé ověřené spojení dostane root shell.** Upřednostňuj klíče před hesly, naváž jen na sítě,
+> **Přihlášení je ve výchozím nastavení plný root shell.** Upřednostňuj klíče před hesly, naváž jen na sítě,
 > kterým důvěřuješ, a nikdy nevystavuj port do otevřeného internetu bez důvodu.
 
 ## 1. Instalace
@@ -54,7 +54,7 @@ cat ~/.ssh/id_ed25519.pub     # paste this into the WebUI
 
 ## 3. Nebo nastav heslo
 
-Přihlášení heslem je ve výchozím stavu vypnuté (každé přihlášení je root, takže se upřednostňují
+Přihlášení heslem je ve výchozím stavu vypnuté (přihlášení je ve výchozím nastavení root, takže se upřednostňují
 klíče). Chceš-li jej zapnout, zapni v nastavení **Password login** a poté pod **Password accounts**
 nastav heslo pro přihlašovacího uživatele. Otisk se počítá v tvém prohlížeči pomocí PBKDF2; samotné
 heslo nikdy stránku neopustí.
@@ -98,7 +98,7 @@ odemčením (například abys zařízení po restartu odemkl na dálku), zapni
 - **Nechce nastartovat.** Zkontroluj `/data/adb/vddropbear/state/daemon.log`. Ujisti se, že je
   **Enabled** zapnuto a že se podařilo vygenerovat hostitelský klíč.
 - **Klíč odmítnut.** Ověř, že řádek veřejného klíče je přesně takový, jaký nabízí tvůj klient, a že
-  je přihlašovací uživatel takový, jaký systém rozpozná (obvykle `root`).
+  je uživatelské jméno, pod kterým se přihlašuješ, takové, které systém rozpozná (obvykle `root`).
 - **Nejde se připojit z jiného stroje.** Nejspíš jsi stále navázán jen na loopback: povol potřebné
   rozhraní a restartuj.
 - **SFTP/scp selhává, ale shell funguje.** Ujisti se, že přibalený `sftp-server` byl dodán pro tvou

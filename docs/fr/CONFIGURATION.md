@@ -68,8 +68,7 @@ fait le bind sur loopback plutôt que sur chaque interface.
 
 ## Authentification
 
-Chaque connexion authentifiée est **root**. Les clés sont la valeur par défaut ; les mots de passe sont
-optionnels.
+Une connexion s'exécute sous le compte avec lequel vous vous authentifiez : **root** par défaut, ou un compte à privilèges réduits (`shell`, `system`). Les clés sont la valeur par défaut ; les mots de passe sont optionnels.
 
 | Key | Default | Signification |
 |-----|---------|---------|

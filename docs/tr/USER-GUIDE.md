@@ -32,7 +32,7 @@
 VD Dropbear, root'lu cihazınıza özel bir SSH sunucusu verir. Bu kılavuz, dosya aktarımı ve ilk kilit
 açılışı öncesi (BFU) modu dahil olmak üzere sizi kurulumdan çalışan bir bağlantıya götürür.
 
-> **Kimlik doğrulanmış her bağlantı bir root kabuğu alır.** Parolalar yerine anahtarları tercih edin,
+> **Oturum açma varsayılan olarak tam bir root kabuğu verir.** Parolalar yerine anahtarları tercih edin,
 > yalnızca güvendiğiniz ağlara bağlayın ve bağlantı noktasını bir neden olmadan asla açık internete
 > açmayın.
 
@@ -55,7 +55,7 @@ cat ~/.ssh/id_ed25519.pub     # paste this into the WebUI
 
 ## 3. Ya da bir parola belirle
 
-Parolayla oturum açma varsayılan olarak kapalıdır (her oturum açma root'tur, bu yüzden anahtarlar
+Parolayla oturum açma varsayılan olarak kapalıdır (oturum açma varsayılan olarak root'tur, bu yüzden anahtarlar
 tercih edilir). Etkinleştirmek için ayarlarda **Password login**'i açın, sonra **Password accounts**
 altında oturum açma kullanıcısı için bir parola belirleyin. Karma, tarayıcınızda PBKDF2 ile hesaplanır;
 parolanın kendisi asla sayfadan çıkmaz.
@@ -99,7 +99,7 @@ bilinçli, belgelenmiş bir takas. README'deki [Güvenlik modeli](#) bölümüne
 - **Başlamıyor.** `/data/adb/vddropbear/state/daemon.log`'u kontrol edin. **Enabled**'ın açık
   olduğundan ve bir host key oluşturulabildiğinden emin olun.
 - **Anahtar reddedildi.** Genel anahtar satırının istemcinizin sunduğu gibi tam olarak aynı olduğunu ve
-  oturum açma kullanıcısının sistemin çözümleyebileceği biri olduğunu (genellikle `root`) doğrulayın.
+  oturum açtığınız kullanıcı adının sistemin çözümleyebileceği biri olduğunu (genellikle `root`) doğrulayın.
 - **Başka bir makineden bağlanamıyorum.** Muhtemelen hâlâ yalnızca loopback'e bağlısınız. İhtiyacınız
   olan arabirimi etkinleştirin ve yeniden başlatın.
 - **SFTP/scp başarısız oluyor ama kabuk çalışıyor.** Paket içindeki `sftp-server`'ın ABI'niz için

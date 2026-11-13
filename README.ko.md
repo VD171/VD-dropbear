@@ -40,7 +40,7 @@
 KernelSU / APatch / Magisk 모듈로 패키징된 **독립 실행형이며 완전히 설정 가능한
 [Dropbear](https://matt.ucc.asn.au/dropbear/) SSH 서버**입니다. 스스로 실행되며 다른 어떤 모듈에도 의존하지 않습니다.
 
-> ⚠️ **인증에 성공하는 모든 연결은 ROOT 셸을 받습니다.** 이것을 기기의 열쇠처럼 다루세요.
+> ⚠️ **로그인은 기본적으로 완전한 ROOT 셸이 됩니다.** 이것을 기기의 열쇠처럼 다루세요.
 > 비밀번호보다 공개 키를 우선하고, 포트를 공개 인터넷에 노출하지 마세요.
 
 Languages: English · [العربية](README.ar.md) · [Čeština](README.cs.md) · [Deutsch](README.de.md) · [Español](README.es.md) · [فارسی](README.fa.md) · [Français](README.fr.md) · [हिन्दी](README.hi.md) · [Bahasa](README.in.md) · [Italiano](README.it.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Nederlands](README.nl.md) · [Polski](README.pl.md) · [Português](README.pt.md) · [Русский](README.ru.md) · [Svenska](README.sv.md) · [ไทย](README.th.md) · [Türkçe](README.tr.md) · [Українська](README.uk.md) · [Tiếng Việt](README.vi.md) · [中文](README.zh.md)
@@ -66,7 +66,7 @@ VD Dropbear는 프라이빗한 대안입니다. 루팅된 기기에서 진짜 SS
   - 포트, 그리고 loopback / all / IPv4 / IPv6 / 특정 주소로의 bind
   - **첫 잠금 해제 전(BFU)에 시작할지, 그 이후에만(AFU) 시작할지**, 단일 토글
   - 공개 키 및/또는 비밀번호 인증, 최대 인증 시도 횟수
-  - 로그인 사용자, 셸, `HOME`, 추가 environment
+  - 로그인 셸, `HOME`, 추가 environment
   - idle timeout, keepalive, receive window
   - 로컬 / 원격 포트 포워딩과 gateway ports(모두 기본적으로 **꺼짐**)
   - host-key 유형(ed25519 / rsa / ecdsa)
@@ -74,8 +74,9 @@ VD Dropbear는 프라이빗한 대안입니다. 루팅된 기기에서 진짜 SS
   정보도 주지 않는 것으로 교체합니다. 그래서 스캐너가 정확한 서버나 버전을 식별하여 알려진 버전을 겨냥한 공격을
   들이댈 수 없습니다.
 - **비밀 정보는 합리적으로 저장**([보안 모델](#security-model) 참조).
-- **자신의 자격 증명을 가져오기.** `user + key`와 `user + password` 세트를 추가하세요. WebUI는 최소 비밀번호
-  강도를 강제하며 비밀번호를 평문으로 저장하는 일이 결코 없습니다.
+- **자신의 자격 증명을 가져오기.** 승인된 키와 비밀번호 계정을 추가하세요. 로그인은 인증에 사용한 계정으로
+  실행됩니다. 기본값은 **root**이며, 권한이 낮은 Android 계정(`shell`, `system`)으로도 로그인할 수 있습니다.
+  WebUI는 최소 비밀번호 강도를 강제하며 비밀번호를 평문으로 저장하는 일이 결코 없습니다.
 - **파일 전송과 동기화 내장.** 번들에는 `sftp-server`, `scp`, `rsync`가 포함되어 있어 SFTP, sshfs, GUI 클라이언트,
   백업이 모두 같은 연결 위에서 동작합니다.
 - **모든 기기와 에뮬레이터.** `arm64-v8a`, `armeabi-v7a`, `x86`, `x86_64`.
@@ -95,8 +96,10 @@ SSH 연결을 다룰 수 있는 에이전트(Claude Code, aider, LLM을 루프�
 이 프로젝트는 **AI 친화적**으로 만들어졌기에(문서화된 설정 파일, 명시적인 런타임 [env 계약](patches/README.md),
 예측 가능한 경로, 평문 상태) 에이전트는 추측 없이 사용법을 찾아낼 수 있습니다.
 
-> **이것은 루트이므로 루트처럼 다루세요.** 인증된 모든 연결은 루트로 접속됩니다(아래 경고 참조). 에이전트에게
-> 접근 권한을 넘길 때는 **전용 사용자와 키**를 주고, bind를 신뢰하는 네트워크(열린 인터넷이 아니라 loopback이나 VPN)로
+> **기본적으로 루트이므로 루트처럼 다루세요.** 기본 로그인은 루트로 접속되며, 권한이 낮은 계정(`shell`, `system`)으로
+> 로그인할 수도 있습니다(아래 경고 참조). 에이전트에게
+> 접근 권한을 넘길 때는 (당신 개인 키가 아니라) 전용 자격 증명을 주고, 도달 범위를 제한하려면 `shell` 같은 권한이
+> 낮은 계정을 가리키게 하고, bind를 신뢰하는 네트워크(열린 인터넷이 아니라 loopback이나 VPN)로
 > 한정하고, 비밀번호 인증은 꺼둔 채로 두며, WebUI에서 언제든지 키를 취소하거나 데몬을 멈출 수 있다는 점을 기억하세요.
 
 ## 설치
@@ -125,7 +128,7 @@ KernelSU, APatch 또는 Magisk 매니저에서 모듈 zip을 플래시하거나(
 
 ### 비밀번호
 
-비밀번호 로그인은 **기본적으로 꺼져 있습니다**. 모든 로그인이 루트이며 키가 훨씬 안전하기 때문입니다. 비밀번호를
+비밀번호 로그인은 **기본적으로 꺼져 있습니다**. 로그인이 기본적으로 루트이며 키가 훨씬 안전하기 때문입니다. 비밀번호를
 설정할 때 WebUI는 최소 강도를 강제하고 해시만 저장하며, 평문은 결코 저장하지 않습니다.
 
 ## 빌드
@@ -160,7 +163,7 @@ upstream을 추적하여 다시 빌드하므로 모듈은 항상 최신 상태�
 * **Discord:** @VD.Priv8 https://discord.com/users/1296831918989639721
 * **E-mail:** vd.priv8@pm.me
 * **XDA-Developers:** @VD171 https://xdaforums.com/m/vd171.4699873/
-* **XDA thread:** _(placeholder, 첫 공개 릴리스 때 추가됨)_
+* **XDA thread:** <https://xdaforums.com/t/VD-Dropbear.4808524/>
 * **GitHub:** @VD171 https://github.com/VD171
 
 ## 라이선스

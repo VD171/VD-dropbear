@@ -33,7 +33,7 @@ O VD Dropbear dá ao seu dispositivo com root um servidor SSH privado. Este guia
 até uma conexão funcionando, incluindo transferência de arquivos e o modo antes do primeiro desbloqueio
 (BFU).
 
-> **Toda conexão autenticada ganha um shell root.** Prefira chaves a senhas, faça bind apenas em redes
+> **Um login resulta, por padrão, em um shell root completo.** Prefira chaves a senhas, faça bind apenas em redes
 > em que você confia e nunca exponha a porta à Internet aberta sem motivo.
 
 ## 1. Instalar
@@ -55,7 +55,7 @@ cat ~/.ssh/id_ed25519.pub     # paste this into the WebUI
 
 ## 3. Ou definir uma senha
 
-O login por senha é desativado por padrão (todo login é root, então as chaves são preferíveis). Para
+O login por senha é desativado por padrão (um login é root por padrão, então as chaves são preferíveis). Para
 ativá-lo, ligue **Password login** nas configurações e, em **Password accounts**, defina uma senha para
 o usuário de login. O hash é calculado no seu navegador com PBKDF2; a senha em si nunca sai da página.
 
@@ -100,7 +100,7 @@ documentado. Veja [Modelo de segurança](#) no README.
 - **Não inicia.** Verifique `/data/adb/vddropbear/state/daemon.log`. Certifique-se de que **Enabled**
   está ligado e de que uma chave de host pôde ser gerada.
 - **Chave rejeitada.** Confirme que a linha da chave pública está exatamente como o seu cliente a
-  oferece e que o usuário de login é um que o sistema resolve (geralmente `root`).
+  oferece e que o nome de usuário com que você faz login é um que o sistema resolve (geralmente `root`).
 - **Não consigo conectar de outra máquina.** Você provavelmente ainda está vinculado apenas ao loopback.
   Habilite a interface de que precisa e reinicie.
 - **SFTP/scp falha, mas o shell funciona.** Verifique se o `sftp-server` incluído foi distribuído para

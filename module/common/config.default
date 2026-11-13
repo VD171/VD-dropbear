@@ -33,7 +33,7 @@
 # never live here; see the "secret store" note at the bottom.
 #
 # ---------------------------------------------------------------------------
-# !! SECURITY !! Every connection that authenticates receives a ROOT shell.
+# !! SECURITY !! A login defaults to a full ROOT shell.
 #    Prefer public keys over passwords. Keep the port off the public internet.
 # ---------------------------------------------------------------------------
 

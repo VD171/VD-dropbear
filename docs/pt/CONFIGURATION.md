@@ -67,7 +67,7 @@ Dropbear faz bind no loopback em vez de em todas as interfaces.
 
 ## Autenticação
 
-Todo login autenticado é **root**. As chaves são o padrão; as senhas são opcionais.
+Um login é executado como a conta com a qual você se autentica: **root** por padrão, ou uma conta de menor privilégio (`shell`, `system`). As chaves são o padrão; as senhas são opcionais.
 
 | Key | Default | Meaning |
 |-----|---------|---------|

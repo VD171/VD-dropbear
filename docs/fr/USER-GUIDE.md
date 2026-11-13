@@ -33,7 +33,7 @@ VD Dropbear donne à votre appareil rooté un serveur SSH privé. Ce guide vous 
 connexion fonctionnelle, y compris le transfert de fichiers et le mode avant le premier déverrouillage
 (BFU).
 
-> **Chaque connexion authentifiée obtient un shell root.** Préférez les clés aux mots de passe, faites le
+> **Une connexion est par défaut un shell root complet.** Préférez les clés aux mots de passe, faites le
 > bind uniquement sur des réseaux de confiance, et n'exposez jamais le port à l'Internet ouvert sans
 > raison.
 
@@ -56,7 +56,7 @@ cat ~/.ssh/id_ed25519.pub     # paste this into the WebUI
 
 ## 3. Ou définir un mot de passe
 
-La connexion par mot de passe est désactivée par défaut (chaque connexion est root, donc les clés sont
+La connexion par mot de passe est désactivée par défaut (une connexion est root par défaut, donc les clés sont
 préférées). Pour l'activer, activez **Password login** dans les réglages, puis sous **Password accounts**
 définissez un mot de passe pour l'utilisateur de connexion. Le hachage est calculé dans votre navigateur
 avec PBKDF2 ; le mot de passe lui-même ne quitte jamais la page.
@@ -102,7 +102,7 @@ appareil, lisible avant le déverrouillage : un compromis délibéré et documen
 - **Il ne démarre pas.** Vérifiez `/data/adb/vddropbear/state/daemon.log`. Assurez-vous que **Enabled**
   est activé et qu'une host key a pu être générée.
 - **Clé rejetée.** Confirmez que la ligne de la clé publique est exactement celle que propose votre
-  client, et que l'utilisateur de connexion est un compte que le système résout (généralement `root`).
+  client, et que le nom d'utilisateur avec lequel vous vous connectez est un compte que le système résout (généralement `root`).
 - **Impossible de se connecter depuis une autre machine.** Vous êtes probablement encore en bind
   uniquement sur loopback : activez l'interface voulue et redémarrez.
 - **SFTP/scp échoue mais le shell fonctionne.** Assurez-vous que le `sftp-server` inclus a été livré pour

@@ -67,7 +67,7 @@ Dropbear powiąże się z loopbackiem zamiast z każdym interfejsem.
 
 ## Uwierzytelnianie
 
-Każde uwierzytelnione logowanie to **root**. Klucze są domyślne; hasła są opcjonalne.
+Logowanie działa na koncie, którym się uwierzytelniasz: domyślnie **root** lub konto o niższych uprawnieniach (`shell`, `system`). Klucze są domyślne; hasła są opcjonalne.
 
 | Key | Default | Meaning |
 |-----|---------|---------|

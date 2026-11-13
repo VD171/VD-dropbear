@@ -61,12 +61,12 @@ klartext) kan en agent lista ut hur den ska användas utan gissningar.
 
 Det här är root, så behandla det som root:
 
-- ge agenten en **dedikerad användare och nyckel**, inte din personliga;
+- ge agenten sin **egen autentiseringsuppgift**, inte din personliga, och peka den mot ett konto med lägre behörighet (`shell`) om du vill begränsa dess räckvidd;
 - begränsa bindningarna till nätverk du litar på: loopback eller ett VPN snarare än det öppna
   internet (se [Konfiguration](CONFIGURATION.md));
 - håll lösenordsautentisering avstängd; en nyckel går att återkalla och skrivs aldrig in;
 - du kan återkalla en nyckel eller stoppa daemonen när som helst från WebUI;
-- kom ihåg att varje anslutning är en fullständig root-session. Ge agenten bara den räckvidd den behöver.
+- kom ihåg att en standardanslutning är en fullständig root-session. Ge agenten bara den räckvidd den behöver.
 
 ## En minimal uppsättning
 

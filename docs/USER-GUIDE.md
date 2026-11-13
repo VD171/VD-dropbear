@@ -32,7 +32,7 @@
 VD Dropbear gives your rooted device a private SSH server. This guide takes you from install to a
 working connection, including file transfer and the before-first-unlock (BFU) mode.
 
-> **Every authenticated connection gets a root shell.** Prefer keys over passwords, bind only to
+> **A login defaults to a full root shell.** Prefer keys over passwords, bind only to
 > networks you trust, and never expose the port to the open Internet without a reason.
 
 ## 1. Install
@@ -54,7 +54,7 @@ cat ~/.ssh/id_ed25519.pub     # paste this into the WebUI
 
 ## 3. Or set a password
 
-Password login is off by default (every login is root, so keys are preferred). To enable it, turn on
+Password login is off by default (a login defaults to root, so keys are preferred). To enable it, turn on
 **Password login** in the settings, then under **Password accounts** set a password for the login
 user. The hash is computed in your browser with PBKDF2; the password itself never leaves the page.
 
@@ -97,7 +97,7 @@ device-encrypted storage, which is readable before unlock: a deliberate, documen
 - **It will not start.** Check `/data/adb/vddropbear/state/daemon.log`. Make sure **Enabled** is on
   and a host key could be generated.
 - **Key rejected.** Confirm the public key line is exactly as your client offers it, and that the
-  login user is one the system resolves (usually `root`).
+  username you log in as is one the system resolves (usually `root`).
 - **Can't connect from another machine.** You are probably still bound to loopback only; enable the
   interface you need and restart.
 - **SFTP/scp fails but shell works.** Make sure the bundled `sftp-server` shipped for your ABI; the

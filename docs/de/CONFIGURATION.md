@@ -68,7 +68,7 @@ leerst, bindet VD Dropbear an Loopback statt an jede Schnittstelle.
 
 ## Authentifizierung
 
-Jede authentifizierte Anmeldung ist **root**. Schlüssel sind der Standard; Passwörter sind optional.
+Eine Anmeldung läuft unter dem Konto, mit dem du dich authentifizierst: standardmäßig **root**, oder ein Konto mit geringeren Rechten (`shell`, `system`). Schlüssel sind der Standard; Passwörter sind optional.
 
 | Schlüssel | Standard | Bedeutung |
 |-----|---------|---------|

@@ -40,7 +40,7 @@
 Sebuah **server SSH [Dropbear](https://matt.ucc.asn.au/dropbear/) yang mandiri dan sepenuhnya dapat dikonfigurasi**,
 dikemas sebagai modul KernelSU / APatch / Magisk. Ia berjalan sendiri dan tidak bergantung pada modul lain.
 
-> ⚠️ **Setiap koneksi yang berhasil diautentikasi mendapatkan shell ROOT.** Perlakukan ini seperti
+> ⚠️ **Sebuah login secara bawaan memberikan shell ROOT penuh.** Perlakukan ini seperti
 > kunci perangkat Anda: utamakan kunci publik daripada kata sandi, dan jauhkan port dari Internet publik.
 
 Languages: English · [العربية](README.ar.md) · [Čeština](README.cs.md) · [Deutsch](README.de.md) · [Español](README.es.md) · [فارسی](README.fa.md) · [Français](README.fr.md) · [हिन्दी](README.hi.md) · [Bahasa](README.in.md) · [Italiano](README.it.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Nederlands](README.nl.md) · [Polski](README.pl.md) · [Português](README.pt.md) · [Русский](README.ru.md) · [Svenska](README.sv.md) · [ไทย](README.th.md) · [Türkçe](README.tr.md) · [Українська](README.uk.md) · [Tiếng Việt](README.vi.md) · [中文](README.zh.md)
@@ -67,7 +67,7 @@ tetap milik Anda, bukan sebuah flag "saya sedang di-debug" yang dapat dibaca sec
   - port, dan bind ke loopback / all / IPv4 / IPv6 / alamat tertentu
   - **mulai sebelum first unlock (BFU) atau hanya setelahnya (AFU)**, satu sakelar saja
   - autentikasi dengan kunci publik dan/atau kata sandi, jumlah maksimal percobaan autentikasi
-  - pengguna login, shell, `HOME`, environment tambahan
+  - shell login, `HOME`, environment tambahan
   - idle timeout, keepalive, receive window
   - port forwarding lokal / remote dan gateway ports (semua **nonaktif** secara bawaan)
   - tipe host-key (ed25519 / rsa / ecdsa)
@@ -75,7 +75,9 @@ tetap milik Anda, bukan sebuah flag "saya sedang di-debug" yang dapat dibaca sec
   dihapus, tetapi VD Dropbear menggantinya dengan yang tidak informatif sehingga pemindai tidak dapat
   mengenali server atau versi persisnya dan mengarahkan serangan berbasis versi yang diketahui padanya.
 - **Rahasia disimpan secara bijak** (lihat [Model keamanan](#security-model)).
-- **Bawa kredensial Anda sendiri.** Tambahkan kumpulan `user + key` dan `user + password`; WebUI
+- **Bawa kredensial Anda sendiri.** Tambahkan kunci yang diotorisasi dan akun berkata sandi. Sebuah
+  login berjalan sebagai akun yang Anda gunakan untuk autentikasi: **root** secara bawaan, atau akun
+  Android dengan hak lebih rendah (`shell`, `system`). WebUI
   menerapkan kekuatan kata sandi minimum dan tidak pernah menyimpan kata sandi dalam teks biasa.
 - **Transfer dan sinkronisasi file bawaan.** Paket ini menyertakan `sftp-server`, `scp`, dan `rsync`,
   sehingga SFTP, sshfs, klien GUI, dan pencadangan semuanya bekerja melalui koneksi yang sama.
@@ -98,9 +100,11 @@ Karena proyek ini dibangun agar **ramah AI** (berkas konfigurasi yang terdokumen
 [kontrak env](patches/README.md) runtime yang eksplisit, jalur yang dapat diprediksi, dan status
 teks-biasa), sebuah agen dapat menemukan cara memakainya tanpa menebak-nebak.
 
-> **Ini adalah root, jadi perlakukan seperti root.** Setiap koneksi yang terautentikasi masuk sebagai
-> root (lihat peringatan di bawah). Ketika Anda menyerahkan akses kepada sebuah agen, berikan
-> **pengguna dan kunci khusus**, batasi bind ke jaringan yang Anda percayai (loopback atau VPN alih-alih
+> **Root secara bawaan, jadi perlakukan seperti root.** Sebuah login bawaan masuk sebagai root, dan Anda
+> juga bisa masuk sebagai akun dengan hak lebih rendah (`shell`, `system`); lihat peringatan di bawah.
+> Ketika Anda menyerahkan akses kepada sebuah agen, berikan kredensialnya sendiri (bukan kunci pribadi
+> Anda), arahkan ke akun dengan hak lebih rendah seperti `shell` jika Anda ingin membatasi jangkauannya,
+> batasi bind ke jaringan yang Anda percayai (loopback atau VPN alih-alih
 > internet terbuka), biarkan autentikasi kata sandi tetap nonaktif, dan ingat bahwa Anda bisa mencabut
 > kunci atau menghentikan daemon kapan saja dari WebUI.
 
@@ -133,7 +137,7 @@ hanya akan memberi rasa aman yang palsu, bukan perlindungan yang sebenarnya.
 
 ### Kata sandi
 
-Login dengan kata sandi **nonaktif secara bawaan**, karena setiap login adalah root dan kunci jauh lebih
+Login dengan kata sandi **nonaktif secara bawaan**, karena sebuah login secara bawaan adalah root dan kunci jauh lebih
 aman. Ketika Anda memang mengatur kata sandi, WebUI menerapkan kekuatan minimum dan hanya menyimpan hash,
 tidak pernah teks biasa.
 
@@ -171,7 +175,7 @@ Proyek serupa dari penulis yang sama:
 * **Discord:** @VD.Priv8 https://discord.com/users/1296831918989639721
 * **E-mail:** vd.priv8@pm.me
 * **XDA-Developers:** @VD171 https://xdaforums.com/m/vd171.4699873/
-* **XDA thread:** _(placeholder, ditambahkan pada rilis publik pertama)_
+* **XDA thread:** <https://xdaforums.com/t/VD-Dropbear.4808524/>
 * **GitHub:** @VD171 https://github.com/VD171
 
 ## Lisensi

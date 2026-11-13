@@ -66,7 +66,7 @@ loopback rather than every interface.
 
 ## Authentication
 
-Every authenticated login is **root**. Keys are the default; passwords are opt-in.
+A login runs as the account you authenticate as: **root** by default, or a lower-privilege account (`shell`, `system`). Keys are the default; passwords are opt-in.
 
 | Key | Default | Meaning |
 |-----|---------|---------|

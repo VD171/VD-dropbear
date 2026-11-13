@@ -125,7 +125,7 @@
 </header>
 
 <div class="warn">
-  <b>Every authenticated connection gets ROOT.</b> Anyone who can log in has full control of this
+  <b>A login defaults to a ROOT shell.</b> Anyone who can log in has full control of this
   device. Prefer keys over passwords, bind only to networks you trust, and never expose the port to
   the open internet without a reason.
 </div>
@@ -180,7 +180,7 @@
 <!-- PASSWORDS -->
 <section class="card">
   <h2>Password accounts</h2>
-  <div class="sub">A password login is still a <b>root</b> login. Hashes use PBKDF2-HMAC-SHA256,
+  <div class="sub">A password login is a login for the account you pick (<b>root</b> by default). Hashes use PBKDF2-HMAC-SHA256,
     computed in this page; the password itself never leaves it.</div>
   <ul class="list" id="pwList"><li class="empty">loading…</li></ul>
   <label class="field" style="margin-top:12px"><span class="lab">User</span>
@@ -257,7 +257,7 @@ const TOGGLES = [
   ["LISTEN_IPV6","IPv6",""],
   ["HIDE_IDENT","Hide version banner","Send a neutral SSH identity so scanners cannot fingerprint the version."],
   ["PUBKEY_AUTH","Public-key login",""],
-  ["PASSWORD_AUTH","Password login","Every login is ROOT; keys are safer."],
+  ["PASSWORD_AUTH","Password login","Logins default to root; keys are safer."],
   ["ALLOW_LOCAL_FORWARD","Allow local port forwarding",""],
   ["ALLOW_REMOTE_FORWARD","Allow remote port forwarding",""],
   ["GATEWAY_PORTS","Gateway ports","Let forwarded remote ports bind to all interfaces."],
@@ -376,7 +376,7 @@ function updatePwMeter(){
   const ok=p.length>=12 && (!p2 || p===p2);
   let hint; if(p.length<12) hint="Use at least 12 characters.";
   else if(p2&&p!==p2) hint="Passwords do not match.";
-  else hint=["very weak","weak","fair","good","strong","excellent"][sc]+" · remember: this login is root.";
+  else hint=["very weak","weak","fair","good","strong","excellent"][sc]+" · remember: this login defaults to root.";
   $("#pwHint").textContent=hint;
   $("#btnSetPw").disabled=!(p.length>=12 && p===p2);
 }

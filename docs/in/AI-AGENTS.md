@@ -62,12 +62,12 @@ dalam teks biasa), sebuah agen dapat menemukan cara menggunakannya tanpa menebak
 
 Ini adalah root, jadi perlakukan seperti root:
 
-- berikan agen **pengguna dan kunci khusus**, bukan milik pribadi Anda;
+- berikan agen **kredensialnya sendiri**, bukan milik pribadi Anda, dan arahkan ke akun dengan privilese lebih rendah (`shell`) jika Anda ingin membatasi jangkauannya;
 - batasi bind hanya ke jaringan yang Anda percayai: loopback atau VPN alih-alih Internet terbuka
   (lihat [Configuration](CONFIGURATION.md));
 - biarkan autentikasi kata sandi tetap mati; sebuah kunci dapat dicabut dan tidak pernah diketik;
 - Anda dapat mencabut kunci atau menghentikan daemon kapan saja dari WebUI;
-- ingat setiap koneksi adalah sesi root penuh: berikan agen hanya jangkauan yang ia butuhkan.
+- ingat koneksi default adalah sesi root penuh: berikan agen hanya jangkauan yang ia butuhkan.
 
 ## Pengaturan minimal
 

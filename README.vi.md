@@ -40,7 +40,7 @@
 **Một máy chủ SSH [Dropbear](https://matt.ucc.asn.au/dropbear/) độc lập, có thể cấu hình hoàn toàn**,
 được đóng gói thành một mô-đun KernelSU / APatch / Magisk. Nó tự khởi chạy và không phụ thuộc vào bất kỳ mô-đun nào khác.
 
-> ⚠️ **Mọi kết nối được xác thực đều nhận được một shell ROOT.** Hãy coi nó như chìa khóa của thiết bị:
+> ⚠️ **Một lần đăng nhập mặc định cho một shell ROOT đầy đủ.** Hãy coi nó như chìa khóa của thiết bị:
 > ưu tiên dùng khóa công khai thay vì mật khẩu, và giữ cổng tránh xa Internet công cộng.
 
 Languages: English · [العربية](README.ar.md) · [Čeština](README.cs.md) · [Deutsch](README.de.md) · [Español](README.es.md) · [فارسی](README.fa.md) · [Français](README.fr.md) · [हिन्दी](README.hi.md) · [Bahasa](README.in.md) · [Italiano](README.it.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Nederlands](README.nl.md) · [Polski](README.pl.md) · [Português](README.pt.md) · [Русский](README.ru.md) · [Svenska](README.sv.md) · [ไทย](README.th.md) · [Türkçe](README.tr.md) · [Українська](README.uk.md) · [Tiếng Việt](README.vi.md) · [中文](README.zh.md)
@@ -67,7 +67,7 @@ là của bạn, thay vì một lá cờ "tôi đang bị gỡ lỗi" mà bất 
   - cổng, và gắn vào loopback / tất cả / IPv4 / IPv6 / các địa chỉ cụ thể
   - **khởi động trước lần mở khóa đầu tiên (BFU) hoặc chỉ sau đó (AFU)**, chỉ một công tắc
   - xác thực bằng khóa công khai và/hoặc mật khẩu, số lần thử xác thực tối đa
-  - người dùng đăng nhập, shell, `HOME`, biến môi trường bổ sung
+  - shell đăng nhập, `HOME`, biến môi trường bổ sung
   - thời gian chờ khi nhàn rỗi, keepalive, cửa sổ nhận
   - chuyển tiếp cổng cục bộ / từ xa và cổng gateway (tất cả đều **tắt** theo mặc định)
   - loại khóa máy chủ (ed25519 / rsa / ecdsa)
@@ -75,7 +75,9 @@ là của bạn, thay vì một lá cờ "tôi đang bị gỡ lỗi" mà bất 
   nhưng VD Dropbear thay nó bằng một banner vô thưởng vô phạt để các trình quét không thể nhận diện
   chính xác máy chủ hay phiên bản mà nhắm các đòn tấn công theo phiên bản đã biết vào nó.
 - **Bí mật được lưu trữ một cách hợp lý** (xem [Mô hình bảo mật](#security-model)).
-- **Mang theo thông tin đăng nhập của riêng bạn.** Thêm các bộ `user + key` và `user + password`;
+- **Mang theo thông tin đăng nhập của riêng bạn.** Thêm các khóa được ủy quyền và tài khoản mật khẩu.
+  Một lần đăng nhập chạy dưới danh nghĩa tài khoản bạn dùng để xác thực: mặc định là **root**, hoặc một
+  tài khoản Android quyền thấp hơn (`shell`, `system`).
   WebUI buộc mật khẩu đạt độ mạnh tối thiểu và không bao giờ lưu mật khẩu ở dạng văn bản thuần.
 - **Tích hợp sẵn truyền và đồng bộ tệp.** Gói đi kèm `sftp-server`, `scp` và `rsync`, nên SFTP,
   sshfs, các trình khách giao diện đồ họa và sao lưu đều hoạt động qua cùng một kết nối.
@@ -98,9 +100,11 @@ Vì dự án được xây dựng để **thân thiện với AI** (một tệp 
 [hợp đồng biến môi trường](patches/README.md) lúc chạy rõ ràng, các đường dẫn dễ đoán và trạng thái
 dạng văn bản thuần), một tác nhân có thể tự khám phá cách dùng mà không cần đoán mò.
 
-> **Đây là root, nên hãy đối xử với nó như root.** Mọi kết nối đã xác thực đều vào với quyền root
-> (xem cảnh báo bên dưới). Khi trao quyền truy cập cho một tác nhân, hãy cấp cho nó một **người dùng
-> và khóa riêng**, giới hạn các ràng buộc vào những mạng bạn tin tưởng (loopback hoặc một VPN thay vì
+> **Mặc định là root, nên hãy đối xử với nó như root.** Một lần đăng nhập mặc định vào với quyền root,
+> và bạn cũng có thể đăng nhập bằng một tài khoản quyền thấp hơn (`shell`, `system`); xem cảnh báo bên
+> dưới. Khi trao quyền truy cập cho một tác nhân, hãy cấp cho nó thông tin đăng nhập riêng (không phải
+> khóa cá nhân của bạn), trỏ nó tới một tài khoản quyền thấp hơn như `shell` nếu bạn muốn giới hạn phạm
+> vi của nó, giới hạn các ràng buộc vào những mạng bạn tin tưởng (loopback hoặc một VPN thay vì
 > internet mở), giữ xác thực bằng mật khẩu ở trạng thái tắt, và nhớ rằng bạn có thể thu hồi một khóa
 > hoặc dừng daemon bất cứ lúc nào từ WebUI.
 
@@ -133,7 +137,7 @@ thì nó bị phơi bày; còn dẫn xuất từ thông tin đăng nhập của 
 
 ### Mật khẩu
 
-Đăng nhập bằng mật khẩu **tắt theo mặc định**, bởi mọi lần đăng nhập đều là root và khóa thì an toàn
+Đăng nhập bằng mật khẩu **tắt theo mặc định**, bởi một lần đăng nhập mặc định là root và khóa thì an toàn
 hơn nhiều. Khi bạn thực sự đặt một mật khẩu, WebUI buộc nó đạt độ mạnh tối thiểu và chỉ lưu một hash,
 không bao giờ lưu văn bản thuần.
 
@@ -171,7 +175,7 @@ Các dự án cùng tác giả:
 * **Discord:** @VD.Priv8 https://discord.com/users/1296831918989639721
 * **E-mail:** vd.priv8@pm.me
 * **XDA-Developers:** @VD171 https://xdaforums.com/m/vd171.4699873/
-* **Chủ đề XDA:** _(chỗ giữ sẵn, sẽ thêm ở bản phát hành công khai đầu tiên)_
+* **Chủ đề XDA:** <https://xdaforums.com/t/VD-Dropbear.4808524/>
 * **GitHub:** @VD171 https://github.com/VD171
 
 ## Giấy phép

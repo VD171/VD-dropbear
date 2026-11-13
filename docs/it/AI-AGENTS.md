@@ -62,12 +62,12 @@ semplice), un agente può scoprire come usarlo senza tirare a indovinare.
 
 Questo è root, quindi trattalo come root:
 
-- assegna all'agente un **utente e una chiave dedicati**, non quelli personali;
+- assegna all'agente una **credenziale propria**, non quella personale, e indirizzalo a un account con privilegi inferiori (`shell`) se vuoi limitarne la portata;
 - limita i bind alle reti di cui ti fidi: loopback o una VPN anziché l'Internet aperto
   (vedi [Configuration](CONFIGURATION.md));
 - tieni disattivata l'autenticazione con password; una chiave è revocabile e non viene mai digitata;
 - puoi revocare una chiave o fermare il daemon in qualsiasi momento dalla WebUI;
-- ricorda che ogni connessione è una sessione root completa: concedi all'agente solo la portata di cui ha bisogno.
+- ricorda che una connessione predefinita è una sessione root completa: concedi all'agente solo la portata di cui ha bisogno.
 
 ## Una configurazione minima
 

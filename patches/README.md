@@ -78,4 +78,4 @@ The **WebUI** creates these lines in the browser with the WebCrypto API
 page, and writes the file into the secret store (CE by default, DE when `START_IN_BFU=1`).
 
 > Note: like public-key auth in Dropbear, password auth only applies to an account the system can
-> resolve (typically `root`). Set `LOGIN_USER` accordingly.
+> resolve (typically `root`), which is the username the client presents on the connection.

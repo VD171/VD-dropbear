@@ -71,7 +71,7 @@ home = """# VD Dropbear
 A standalone, fully configurable **rooted SSH server** for KernelSU, APatch and Magisk: a private SSH
 daemon with a WebUI, with none of ADB's invasive, self-exposing debug flags.
 
-> **Every authenticated connection receives a root shell.** Prefer keys over passwords, bind only to
+> **An authenticated login defaults to a root shell.** Prefer keys over passwords, bind only to
 > networks you trust, and keep the port off the open Internet.
 
 ## Documentation

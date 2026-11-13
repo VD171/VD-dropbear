@@ -61,12 +61,12 @@ konfiguracyjny, jawny [kontrakt środowiska](../../patches/README.md) uruchomien
 
 To jest root, więc traktuj go jak roota:
 
-- przydziel agentowi **dedykowanego użytkownika i klucz**, a nie swoje osobiste;
+- przydziel agentowi jego **własne poświadczenie**, a nie swoje osobiste, i skieruj go na konto o niższych uprawnieniach (`shell`), jeśli chcesz ograniczyć jego zasięg;
 - ogranicz powiązania do sieci, którym ufasz: loopback lub VPN zamiast otwartego Internetu
   (zobacz [Konfiguracja](CONFIGURATION.md));
 - pozostaw uwierzytelnianie hasłem wyłączone; klucz można odwołać i nigdy się go nie wpisuje;
 - w każdej chwili możesz odwołać klucz lub zatrzymać demona z poziomu WebUI;
-- pamiętaj, że każde połączenie to pełna sesja roota. Daj agentowi tylko taki zasięg, jakiego potrzebuje.
+- pamiętaj, że domyślne połączenie to pełna sesja roota. Daj agentowi tylko taki zasięg, jakiego potrzebuje.
 
 ## Minimalna konfiguracja
 

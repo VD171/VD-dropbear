@@ -40,7 +40,7 @@
 Een **standalone, volledig configureerbare [Dropbear](https://matt.ucc.asn.au/dropbear/) SSH-server**,
 verpakt als een KernelSU-/APatch-/Magisk-module. Hij start op eigen kracht en is van geen enkele andere module afhankelijk.
 
-> ⚠️ **Elke verbinding die zich authenticeert krijgt een ROOT-shell.** Behandel dit als de sleutels tot
+> ⚠️ **Een login geeft standaard een volledige ROOT-shell.** Behandel dit als de sleutels tot
 > het toestel: geef de voorkeur aan publieke sleutels boven wachtwoorden en houd de poort weg van het publieke internet.
 
 Languages: English · [العربية](README.ar.md) · [Čeština](README.cs.md) · [Deutsch](README.de.md) · [Español](README.es.md) · [فارسی](README.fa.md) · [Français](README.fr.md) · [हिन्दी](README.hi.md) · [Bahasa](README.in.md) · [Italiano](README.it.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Nederlands](README.nl.md) · [Polski](README.pl.md) · [Português](README.pt.md) · [Русский](README.ru.md) · [Svenska](README.sv.md) · [ไทย](README.th.md) · [Türkçe](README.tr.md) · [Українська](README.uk.md) · [Tiếng Việt](README.vi.md) · [中文](README.zh.md)
@@ -66,7 +66,7 @@ wereldwijd leesbare "ik word gedebugd"-vlag die alles op het toestel kan uitleze
   - poort, en bind op loopback / all / IPv4 / IPv6 / specifieke adressen
   - **starten vóór de eerste ontgrendeling (BFU) of pas erna (AFU)**, één enkele schakelaar
   - authenticatie met publieke sleutel en/of wachtwoord, maximaal aantal auth-pogingen
-  - inloggebruiker, shell, `HOME`, extra environment
+  - login-shell, `HOME`, extra environment
   - idle timeout, keepalive, receive window
   - lokale / remote port forwarding en gateway ports (allemaal standaard **uit**)
   - type host-key (ed25519 / rsa / ecdsa)
@@ -74,7 +74,9 @@ wereldwijd leesbare "ik word gedebugd"-vlag die alles op het toestel kan uitleze
   VD Dropbear vervangt hem door een nietszeggende, zodat scanners de exacte server of versie niet kunnen
   vingerafdrukken en er geen aanvallen voor bekende versies op kunnen richten.
 - **Geheimen verstandig opgeslagen** (zie [Beveiligingsmodel](#security-model)).
-- **Neem je eigen inloggegevens mee.** Voeg sets van `user + key` en `user + password` toe; de WebUI dwingt een
+- **Neem je eigen inloggegevens mee.** Voeg geautoriseerde sleutels en wachtwoordaccounts toe. Een login draait
+  als het account waarmee je je authenticeert: standaard **root**, of een Android-account met minder rechten
+  (`shell`, `system`). De WebUI dwingt een
   minimale wachtwoordsterkte af en bewaart een wachtwoord nooit in platte tekst.
 - **Bestandsoverdracht en synchronisatie ingebouwd.** De bundel bevat `sftp-server`, `scp` en `rsync`, zodat
   SFTP, sshfs, GUI-clients en back-ups allemaal over dezelfde verbinding werken.
@@ -96,9 +98,11 @@ Omdat het project **AI-vriendelijk** is gebouwd (een gedocumenteerd configuratie
 runtime-[env-contract](patches/README.md), voorspelbare paden en status in platte tekst), kan een agent
 ontdekken hoe hij het gebruikt zonder te gissen.
 
-> **Dit is root, dus behandel het als root.** Elke geauthenticeerde verbinding komt binnen als root (zie de
-> waarschuwing hieronder). Wanneer je toegang aan een agent geeft, geef hem een **eigen gebruiker en sleutel**,
-> beperk de binds tot de netwerken die je vertrouwt (loopback of een VPN in plaats van het open internet), houd
+> **Standaard root, dus behandel het als root.** Een standaardlogin komt binnen als root, en je kunt je ook
+> aanmelden met een account met minder rechten (`shell`, `system`); zie de
+> waarschuwing hieronder. Wanneer je toegang aan een agent geeft, geef hem zijn eigen inloggegevens (niet je
+> persoonlijke sleutel), wijs hem naar een account met minder rechten zoals `shell` als je zijn bereik wilt
+> beperken, beperk de binds tot de netwerken die je vertrouwt (loopback of een VPN in plaats van het open internet), houd
 > wachtwoordauthenticatie uit, en onthoud dat je op elk moment vanuit de WebUI een sleutel kunt intrekken of de
 > daemon kunt stoppen.
 
@@ -131,7 +135,7 @@ koopt een vals gevoel van veiligheid, geen echte bescherming.
 
 ### Wachtwoorden
 
-Inloggen met wachtwoord staat **standaard uit**, omdat elke login root is en sleutels veel veiliger zijn. Wanneer
+Inloggen met wachtwoord staat **standaard uit**, omdat een login standaard root is en sleutels veel veiliger zijn. Wanneer
 je wel een wachtwoord instelt, dwingt de WebUI een minimale sterkte af en bewaart alleen een hash, nooit platte tekst.
 
 ## Build
@@ -167,7 +171,7 @@ Zusterprojecten van dezelfde auteur:
 * **Discord:** @VD.Priv8 https://discord.com/users/1296831918989639721
 * **E-mail:** vd.priv8@pm.me
 * **XDA-Developers:** @VD171 https://xdaforums.com/m/vd171.4699873/
-* **XDA thread:** _(placeholder, toegevoegd bij de eerste publieke release)_
+* **XDA thread:** <https://xdaforums.com/t/VD-Dropbear.4808524/>
 * **GitHub:** @VD171 https://github.com/VD171
 
 ## Licentie

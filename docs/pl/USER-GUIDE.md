@@ -33,7 +33,7 @@ VD Dropbear daje Twojemu zrootowanemu urządzeniu prywatny serwer SSH. Ten przew
 od instalacji do działającego połączenia, w tym transferu plików i trybu przed pierwszym odblokowaniem
 (BFU).
 
-> **Każde uwierzytelnione połączenie otrzymuje powłokę roota.** Preferuj klucze zamiast haseł, wiąż się
+> **Logowanie domyślnie daje pełną powłokę roota.** Preferuj klucze zamiast haseł, wiąż się
 > tylko z sieciami, którym ufasz, i nigdy bez powodu nie wystawiaj portu do otwartego Internetu.
 
 ## 1. Instalacja
@@ -55,7 +55,7 @@ cat ~/.ssh/id_ed25519.pub     # paste this into the WebUI
 
 ## 3. Albo ustaw hasło
 
-Logowanie hasłem jest domyślnie wyłączone (każde logowanie to root, więc klucze są preferowane). Aby je
+Logowanie hasłem jest domyślnie wyłączone (logowanie domyślnie to root, więc klucze są preferowane). Aby je
 włączyć, włącz **Password login** w ustawieniach, a następnie w sekcji **Password accounts** ustaw hasło
 dla użytkownika logowania. Hash jest obliczany w Twojej przeglądarce za pomocą PBKDF2; samo hasło nigdy
 nie opuszcza strony.
@@ -102,7 +102,7 @@ który jest czytelny przed odblokowaniem: to celowy, udokumentowany kompromis. Z
 - **Nie chce się uruchomić.** Sprawdź `/data/adb/vddropbear/state/daemon.log`. Upewnij się, że opcja
   **Enabled** jest aktywna i że klucz hosta mógł zostać wygenerowany.
 - **Klucz odrzucony.** Potwierdź, że linia klucza publicznego jest dokładnie taka, jaką oferuje Twój
-  klient, oraz że użytkownik logowania jest tym, którego system rozpoznaje (zwykle `root`).
+  klient, oraz że nazwa użytkownika, pod którą się logujesz, jest tą, którą system rozpoznaje (zwykle `root`).
 - **Nie można połączyć się z innego komputera.** Prawdopodobnie wciąż jesteś powiązany tylko z
   loopbackiem. Włącz potrzebny interfejs i uruchom ponownie.
 - **SFTP/scp zawodzi, ale powłoka działa.** Upewnij się, że dołączony `sftp-server` został dostarczony

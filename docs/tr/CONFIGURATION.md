@@ -67,7 +67,7 @@ Dropbear her arabirim yerine loopback'e bağlanır.
 
 ## Kimlik doğrulama
 
-Her kimlik doğrulanmış oturum açma **root**'tur. Anahtarlar varsayılandır; parolalar isteğe bağlıdır.
+Oturum açma, kimlik doğruladığınız hesap olarak çalışır: varsayılan olarak **root** veya daha düşük ayrıcalıklı bir hesap (`shell`, `system`). Anahtarlar varsayılandır; parolalar isteğe bağlıdır.
 
 | Key | Default | Meaning |
 |-----|---------|---------|

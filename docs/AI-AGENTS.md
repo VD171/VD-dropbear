@@ -61,12 +61,12 @@ discover how to use it without guesswork.
 
 This is root, so treat it like root:
 
-- give the agent a **dedicated user and key**, not your personal one;
+- give the agent its **own credential**, not your personal one, and point it at a lower-privilege account (`shell`) if you want to limit its reach;
 - scope the binds to networks you trust: loopback or a VPN rather than the open Internet
   (see [Configuration](CONFIGURATION.md));
 - keep password auth off; a key is revocable and never typed;
 - you can revoke a key or stop the daemon at any time from the WebUI;
-- remember every connection is a full root session: give the agent only the reach it needs.
+- remember a default connection is a full root session: give the agent only the reach it needs.
 
 ## A minimal setup
 

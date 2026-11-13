@@ -32,7 +32,7 @@
 VD Dropbear memberi perangkat ter-root Anda sebuah server SSH privat. Panduan ini membawa Anda dari
 pemasangan hingga koneksi yang berfungsi, termasuk transfer berkas dan mode before-first-unlock (BFU).
 
-> **Setiap koneksi yang terautentikasi mendapatkan shell root.** Utamakan kunci daripada kata sandi,
+> **Sebuah login secara default adalah shell root penuh.** Utamakan kunci daripada kata sandi,
 > lakukan bind hanya ke jaringan yang Anda percayai, dan jangan pernah memaparkan port ke Internet terbuka tanpa alasan.
 
 ## 1. Pasang
@@ -54,7 +54,7 @@ cat ~/.ssh/id_ed25519.pub     # paste this into the WebUI
 
 ## 3. Atau atur kata sandi
 
-Login kata sandi mati secara default (setiap login adalah root, jadi kunci lebih diutamakan). Untuk
+Login kata sandi mati secara default (login secara default adalah root, jadi kunci lebih diutamakan). Untuk
 mengaktifkannya, nyalakan **Password login** di pengaturan, lalu pada **Password accounts** atur kata
 sandi untuk pengguna login. Hash dihitung di browser Anda dengan PBKDF2; kata sandinya sendiri tidak
 pernah keluar dari halaman.
@@ -98,7 +98,7 @@ unlock: sebuah trade-off yang disengaja dan terdokumentasi. Lihat [Security mode
 - **Tidak mau mulai.** Periksa `/data/adb/vddropbear/state/daemon.log`. Pastikan **Enabled** menyala
   dan sebuah host key dapat dibuat.
 - **Kunci ditolak.** Pastikan baris kunci publik persis seperti yang ditawarkan klien Anda, dan bahwa
-  pengguna login adalah yang dapat dikenali sistem (biasanya `root`).
+  nama pengguna yang Anda gunakan untuk login adalah yang dapat dikenali sistem (biasanya `root`).
 - **Tidak bisa tersambung dari mesin lain.** Anda mungkin masih melakukan bind hanya ke loopback:
   aktifkan antarmuka yang Anda perlukan dan mulai ulang.
 - **SFTP/scp gagal tetapi shell berfungsi.** Pastikan `sftp-server` yang disertakan dikirim untuk ABI

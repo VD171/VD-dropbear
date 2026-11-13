@@ -63,12 +63,12 @@ benutzt.
 
 Das ist Root, also behandle es wie Root:
 
-- gib dem Agenten einen **eigenen Benutzer und Schlüssel**, nicht deinen persönlichen;
+- gib dem Agenten **eigene Zugangsdaten**, nicht deine persönlichen, und verweise ihn auf ein Konto mit geringeren Rechten (`shell`), wenn du seine Reichweite begrenzen willst;
 - beschränke die Bindungen auf Netzwerke, denen du vertraust: Loopback oder ein VPN statt des
   offenen Internets (siehe [Konfiguration](CONFIGURATION.md));
 - lass die Passwort-Authentifizierung aus; ein Schlüssel ist widerrufbar und wird nie eingetippt;
 - du kannst einen Schlüssel jederzeit widerrufen oder den Daemon über die WebUI stoppen;
-- denk daran, dass jede Verbindung eine vollständige Root-Sitzung ist: gib dem Agenten nur die Reichweite, die er braucht.
+- denk daran, dass eine Standardverbindung eine vollständige Root-Sitzung ist: gib dem Agenten nur die Reichweite, die er braucht.
 
 ## Eine minimale Einrichtung
 

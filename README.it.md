@@ -40,7 +40,7 @@
 Un **server SSH [Dropbear](https://matt.ucc.asn.au/dropbear/) autonomo e completamente configurabile**,
 distribuito come modulo KernelSU / APatch / Magisk. Si avvia da solo e non dipende da nessun altro modulo.
 
-> ⚠️ **Ogni connessione che si autentica ottiene una shell ROOT.** Trattala come le chiavi del
+> ⚠️ **Per impostazione predefinita, un login apre una shell ROOT completa.** Trattala come le chiavi del
 > dispositivo: preferisci le chiavi pubbliche alle password e tieni la porta lontana da Internet pubblica.
 
 Languages: English · [العربية](README.ar.md) · [Čeština](README.cs.md) · [Deutsch](README.de.md) · [Español](README.es.md) · [فارسی](README.fa.md) · [Français](README.fr.md) · [हिन्दी](README.hi.md) · [Bahasa](README.in.md) · [Italiano](README.it.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Nederlands](README.nl.md) · [Polski](README.pl.md) · [Português](README.pt.md) · [Русский](README.ru.md) · [Svenska](README.sv.md) · [ไทย](README.th.md) · [Türkçe](README.tr.md) · [Українська](README.uk.md) · [Tiếng Việt](README.vi.md) · [中文](README.zh.md)
@@ -66,7 +66,7 @@ flag "sto venendo sottoposto a debug" leggibile a livello globale che qualunque 
   - porta, e bind su loopback / all / IPv4 / IPv6 / indirizzi specifici
   - **avvio prima del primo sblocco (BFU) o solo dopo di esso (AFU)**, un singolo interruttore
   - autenticazione a chiave pubblica e/o a password, numero massimo di tentativi di autenticazione
-  - utente di login, shell, `HOME`, environment aggiuntivo
+  - shell di login, `HOME`, environment aggiuntivo
   - idle timeout, keepalive, receive window
   - port forwarding locale / remoto e gateway ports (tutti **disattivati** di default)
   - tipo di host-key (ed25519 / rsa / ecdsa)
@@ -74,7 +74,9 @@ flag "sto venendo sottoposto a debug" leggibile a livello globale che qualunque 
   ma VD Dropbear lo sostituisce con uno privo di informazioni, così gli scanner non possono identificare
   il server o la versione esatti e puntargli contro attacchi mirati a versioni note.
 - **Segreti conservati con criterio** (vedi [Modello di sicurezza](#security-model)).
-- **Porta le tue credenziali.** Aggiungi insiemi di `user + key` e `user + password`; la WebUI impone una
+- **Porta le tue credenziali.** Aggiungi chiavi autorizzate e account con password. Un login viene
+  eseguito come l'account con cui ti autentichi: **root** per impostazione predefinita, oppure un account
+  Android con privilegi inferiori (`shell`, `system`). La WebUI impone una
   robustezza minima della password e non memorizza mai una password in chiaro.
 - **Trasferimento e sincronizzazione file integrati.** Il pacchetto include `sftp-server`, `scp` e
   `rsync`, così SFTP, sshfs, client GUI e backup funzionano tutti sulla stessa connessione.
@@ -97,9 +99,11 @@ Poiché il progetto è pensato per essere **AI-friendly** (un file di configuraz
 esplicito [contratto env](patches/README.md) di runtime, percorsi prevedibili e stato in testo semplice),
 un agente può scoprire come usarlo senza tirare a indovinare.
 
-> **Questo è root, quindi trattalo come root.** Ogni connessione autenticata entra come root (vedi
-> l'avviso qui sotto). Quando affidi l'accesso a un agente, dagli un **utente e una chiave dedicati**,
-> limita i bind alle reti di cui ti fidi (loopback o una VPN anziché l'internet aperta), tieni disattivata
+> **Root per impostazione predefinita, quindi trattalo come root.** Un login predefinito entra come root,
+> e puoi anche accedere come un account con privilegi inferiori (`shell`, `system`); vedi
+> l'avviso qui sotto. Quando affidi l'accesso a un agente, dagli una credenziale propria (non la tua
+> chiave personale), puntalo a un account con privilegi inferiori come `shell` se vuoi limitarne la
+> portata, limita i bind alle reti di cui ti fidi (loopback o una VPN anziché l'internet aperta), tieni disattivata
 > l'autenticazione a password e ricorda che puoi revocare una chiave o fermare il daemon in qualsiasi
 > momento dalla WebUI.
 
@@ -133,7 +137,7 @@ un falso senso di sicurezza, non una protezione reale.
 
 ### Password
 
-Il login con password è **disattivato di default**, perché ogni login è root e le chiavi sono molto più
+Il login con password è **disattivato di default**, perché un login è root per impostazione predefinita e le chiavi sono molto più
 sicure. Quando imposti una password, la WebUI impone una robustezza minima e memorizza solo un hash, mai
 testo in chiaro.
 
@@ -171,7 +175,7 @@ Progetti affini dello stesso autore:
 * **Discord:** @VD.Priv8 https://discord.com/users/1296831918989639721
 * **E-mail:** vd.priv8@pm.me
 * **XDA-Developers:** @VD171 https://xdaforums.com/m/vd171.4699873/
-* **XDA thread:** _(placeholder, aggiunto alla prima release pubblica)_
+* **XDA thread:** <https://xdaforums.com/t/VD-Dropbear.4808524/>
 * **GitHub:** @VD171 https://github.com/VD171
 
 ## Licenza

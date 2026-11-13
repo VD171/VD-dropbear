@@ -33,7 +33,7 @@ VD Dropbear dà al tuo dispositivo con root un server SSH privato. Questa guida 
 dall'installazione a una connessione funzionante, incluso il trasferimento di file e la modalità
 before-first-unlock (BFU).
 
-> **Ogni connessione autenticata ottiene una shell root.** Preferisci le chiavi alle password, fai il
+> **Un accesso è per impostazione predefinita una shell root completa.** Preferisci le chiavi alle password, fai il
 > bind solo su reti di cui ti fidi e non esporre mai la porta all'Internet aperto senza un motivo.
 
 ## 1. Installazione
@@ -55,7 +55,7 @@ cat ~/.ssh/id_ed25519.pub     # paste this into the WebUI
 
 ## 3. Oppure imposta una password
 
-L'accesso con password è disattivato per impostazione predefinita (ogni accesso è root, quindi le
+L'accesso con password è disattivato per impostazione predefinita (un accesso è root per impostazione predefinita, quindi le
 chiavi sono da preferire). Per abilitarlo, attiva **Password login** nelle impostazioni, poi sotto
 **Password accounts** imposta una password per l'utente di accesso. L'hash viene calcolato nel tuo
 browser con PBKDF2; la password stessa non lascia mai la pagina.
@@ -100,7 +100,7 @@ README.
 - **Non si avvia.** Controlla `/data/adb/vddropbear/state/daemon.log`. Assicurati che **Enabled** sia
   attivo e che sia stato possibile generare una host key.
 - **Chiave rifiutata.** Verifica che la riga della chiave pubblica sia esattamente quella che il tuo
-  client offre, e che l'utente di accesso sia uno che il sistema riconosce (di solito `root`).
+  client offre, e che il nome utente con cui accedi sia uno che il sistema riconosce (di solito `root`).
 - **Non riesco a connettermi da un'altra macchina.** Probabilmente sei ancora in bind solo su loopback:
   abilita l'interfaccia che ti serve e riavvia.
 - **SFTP/scp fallisce ma la shell funziona.** Assicurati che il `sftp-server` incluso sia stato

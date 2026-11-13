@@ -62,7 +62,7 @@ Elke combinatie is toegestaan; de gekozen binds worden samengevoegd. Als je alle
 
 ## Authenticatie
 
-Elke geauthenticeerde login is **root**. Sleutels zijn de standaard; wachtwoorden zijn opt-in.
+Een login draait als het account waarmee je je authenticeert: standaard **root**, of een account met minder rechten (`shell`, `system`). Sleutels zijn de standaard; wachtwoorden zijn opt-in.
 
 | Key | Default | Betekenis |
 |-----|---------|---------|

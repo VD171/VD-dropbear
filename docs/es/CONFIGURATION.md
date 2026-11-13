@@ -67,8 +67,7 @@ hace el bind a loopback en lugar de a todas las interfaces.
 
 ## Autenticación
 
-Todo inicio de sesión autenticado es **root**. Las claves son lo predeterminado; las contraseñas son
-opcionales.
+Un inicio de sesión se ejecuta como la cuenta con la que te autenticas: **root** de forma predeterminada, o una cuenta de menor privilegio (`shell`, `system`). Las claves son lo predeterminado; las contraseñas son opcionales.
 
 | Key | Default | Significado |
 |-----|---------|---------|

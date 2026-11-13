@@ -63,12 +63,12 @@ durum bilgisi) bir ajan onu nasıl kullanacağını tahmin yürütmeden keşfede
 
 Bu root'tur, o yüzden ona root gibi davranın:
 
-- ajana kişisel olanınızı değil, **özel bir kullanıcı ve anahtar** verin;
+- ajana kişisel olanınızı değil, kendi **kimlik bilgisini** verin ve erişimini sınırlamak istiyorsanız onu daha düşük ayrıcalıklı bir hesaba (`shell`) yönlendirin;
 - bağlamaları güvendiğiniz ağlarla sınırlandırın: açık internet yerine loopback veya bir VPN
   (bkz. [Yapılandırma](CONFIGURATION.md));
 - parola kimlik doğrulamasını kapalı tutun; bir anahtar geri alınabilir ve asla yazılmaz;
 - bir anahtarı istediğiniz zaman WebUI'den geri alabilir veya daemon'u durdurabilirsiniz;
-- her bağlantının tam bir root oturumu olduğunu unutmayın. Ajana yalnızca ihtiyaç duyduğu erişimi verin.
+- varsayılan bir bağlantının tam bir root oturumu olduğunu unutmayın. Ajana yalnızca ihtiyaç duyduğu erişimi verin.
 
 ## Asgari bir kurulum
 

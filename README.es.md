@@ -40,7 +40,7 @@
 **Un servidor SSH [Dropbear](https://matt.ucc.asn.au/dropbear/) independiente y totalmente configurable**,
 empaquetado como módulo de KernelSU / APatch / Magisk. Se inicia por sí solo y no depende de ningún otro módulo.
 
-> ⚠️ **Toda conexión que se autentica obtiene una shell ROOT.** Trátala como las llaves del
+> ⚠️ **Por defecto, un inicio de sesión abre una shell ROOT completa.** Trátala como las llaves del
 > dispositivo: prioriza las claves públicas sobre las contraseñas y mantén el puerto fuera de la
 > Internet pública.
 
@@ -70,7 +70,7 @@ el dispositivo puede leer.
   - puerto, y enlace a loopback / todos / IPv4 / IPv6 / direcciones concretas
   - **iniciar antes del primer desbloqueo (BFU) o solo después (AFU)**, un único interruptor
   - autenticación por clave pública y/o contraseña, intentos máximos de autenticación
-  - usuario de inicio de sesión, shell, `HOME`, entorno adicional
+  - shell de inicio de sesión, `HOME`, entorno adicional
   - tiempo de inactividad, keepalive, ventana de recepción
   - reenvío de puertos local / remoto y gateway ports (todo **desactivado** por defecto)
   - tipo de clave de host (ed25519 / rsa / ecdsa)
@@ -78,8 +78,10 @@ el dispositivo puede leer.
   VD Dropbear lo sustituye por uno sin información para que los escáneres no puedan identificar con
   exactitud el servidor ni la versión y dirigirle ataques conocidos para esa versión.
 - **Secretos guardados con criterio** (consulta [Modelo de seguridad](#security-model)).
-- **Trae tus propias credenciales.** Añade conjuntos de `user + key` y `user + password`; la WebUI
-  exige una fortaleza mínima de contraseña y nunca guarda una contraseña en texto plano.
+- **Trae tus propias credenciales.** Añade claves autorizadas y cuentas con contraseña. Un inicio de
+  sesión se ejecuta como la cuenta con la que te autenticas: **root** por defecto, o una cuenta de
+  Android de menor privilegio (`shell`, `system`). La WebUI exige una fortaleza mínima de contraseña y
+  nunca guarda una contraseña en texto plano.
 - **Transferencia y sincronización de archivos integradas.** El paquete incluye `sftp-server`, `scp` y
   `rsync`, de modo que SFTP, sshfs, los clientes gráficos y las copias de seguridad funcionan todos por
   la misma conexión.
@@ -102,9 +104,11 @@ Como el proyecto está construido para ser **compatible con la IA** (un archivo 
 documentado, un [contrato de entorno](patches/README.md) explícito en tiempo de ejecución, rutas
 predecibles y estado en texto plano), un agente puede descubrir cómo usarlo sin adivinar.
 
-> **Esto es root, así que trátalo como root.** Toda conexión autenticada entra como root (consulta la
-> advertencia de abajo). Cuando entregues el acceso a un agente, dale un **usuario y una clave
-> dedicados**, acota los enlaces a las redes en las que confías (loopback o una VPN en vez de la
+> **Root por defecto, así que trátalo como root.** Un inicio de sesión por defecto entra como root, y
+> también puedes entrar como una cuenta de menor privilegio (`shell`, `system`); consulta la
+> advertencia de abajo. Cuando entregues el acceso a un agente, dale su propia credencial (no tu clave
+> personal), apúntalo a una cuenta de menor privilegio como `shell` si quieres limitar su alcance, acota
+> los enlaces a las redes en las que confías (loopback o una VPN en vez de la
 > internet abierta), mantén la autenticación por contraseña desactivada y recuerda que puedes revocar
 > una clave o detener el demonio en cualquier momento desde la WebUI.
 
@@ -138,8 +142,8 @@ una falsa sensación de seguridad, no una protección real.
 
 ### Contraseñas
 
-El inicio de sesión por contraseña está **desactivado por defecto**, porque todo inicio de sesión es
-root y las claves son mucho más seguras. Cuando sí estableces una contraseña, la WebUI exige una
+El inicio de sesión por contraseña está **desactivado por defecto**, porque un inicio de sesión es
+root por defecto y las claves son mucho más seguras. Cuando sí estableces una contraseña, la WebUI exige una
 fortaleza mínima y guarda solo un hash, nunca texto plano.
 
 ## Compilación
@@ -176,7 +180,7 @@ Proyectos hermanos del mismo autor:
 * **Discord:** @VD.Priv8 https://discord.com/users/1296831918989639721
 * **E-mail:** vd.priv8@pm.me
 * **XDA-Developers:** @VD171 https://xdaforums.com/m/vd171.4699873/
-* **XDA thread:** _(marcador de posición, se añadirá en el primer lanzamiento público)_
+* **XDA thread:** <https://xdaforums.com/t/VD-Dropbear.4808524/>
 * **GitHub:** @VD171 https://github.com/VD171
 
 ## Licencia

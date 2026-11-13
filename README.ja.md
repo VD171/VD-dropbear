@@ -40,7 +40,7 @@
 KernelSU / APatch / Magisk モジュールとしてパッケージされた、**単体で動作し、完全に設定可能な
 [Dropbear](https://matt.ucc.asn.au/dropbear/) SSH サーバー**です。単独で起動し、他のどのモジュールにも依存しません。
 
-> ⚠️ **認証に成功したすべての接続は ROOT シェルを受け取ります。** これをデバイスの鍵そのものと考えてください。
+> ⚠️ **ログインはデフォルトで完全な ROOT シェルになります。** これをデバイスの鍵そのものと考えてください。
 > パスワードよりも公開鍵を優先し、ポートを公開インターネットに晒さないようにしてください。
 
 Languages: English · [العربية](README.ar.md) · [Čeština](README.cs.md) · [Deutsch](README.de.md) · [Español](README.es.md) · [فارسی](README.fa.md) · [Français](README.fr.md) · [हिन्दी](README.hi.md) · [Bahasa](README.in.md) · [Italiano](README.it.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Nederlands](README.nl.md) · [Polski](README.pl.md) · [Português](README.pt.md) · [Русский](README.ru.md) · [Svenska](README.sv.md) · [ไทย](README.th.md) · [Türkçe](README.tr.md) · [Українська](README.uk.md) · [Tiếng Việt](README.vi.md) · [中文](README.zh.md)
@@ -66,7 +66,7 @@ SFTP と rsync）を提供します。`adb_enabled` の痕跡も、USB デバッ
   - ポート、および loopback / all / IPv4 / IPv6 / 特定アドレスへのバインド
   - **最初のアンロック前（BFU）に起動するか、その後にのみ（AFU）起動するか**、単一のトグル
   - 公開鍵認証および／またはパスワード認証、最大認証試行回数
-  - ログインユーザー、シェル、`HOME`、追加の environment
+  - ログインシェル、`HOME`、追加の environment
   - idle timeout、keepalive、receive window
   - ローカル／リモートのポートフォワーディングと gateway ports（すべてデフォルトで **オフ**）
   - host-key の種類（ed25519 / rsa / ecdsa）
@@ -74,8 +74,9 @@ SFTP と rsync）を提供します。`adb_enabled` の痕跡も、USB デバッ
   情報を持たないものに差し替えます。そのためスキャナーは正確なサーバーやバージョンを特定できず、既知バージョンを
   狙った攻撃を向けることができません。
 - **秘密情報は理にかなった形で保存**（[セキュリティモデル](#security-model)を参照）。
-- **自分の認証情報を持ち込む。** `user + key` と `user + password` のセットを追加できます。WebUI はパスワードの
-  最低強度を強制し、パスワードを平文で保存することは決してありません。
+- **自分の認証情報を持ち込む。** 認可された鍵とパスワードアカウントを追加できます。ログインは認証に使ったアカウント
+  として実行されます。デフォルトは **root** ですが、権限の低い Android アカウント（`shell`、`system`）でもログイン
+  できます。WebUI はパスワードの最低強度を強制し、パスワードを平文で保存することは決してありません。
 - **ファイル転送と同期を内蔵。** バンドルには `sftp-server`、`scp`、`rsync` が同梱されており、SFTP、sshfs、GUI
   クライアント、バックアップがすべて同じ接続上で動作します。
 - **あらゆる端末とエミュレーター。** `arm64-v8a`、`armeabi-v7a`、`x86`、`x86_64`。
@@ -95,8 +96,10 @@ SSH 接続を扱えるエージェント（Claude Code、aider、LLM を組み�
 このプロジェクトは **AI フレンドリー** に作られているため（ドキュメント化された設定ファイル、明示的なランタイム
 [env 契約](patches/README.md)、予測可能なパス、平文のステータス）、エージェントは当て推量なしに使い方を見つけられます。
 
-> **これは root なので、root として扱ってください。** 認証されたすべての接続は root として着地します（下の警告を参照）。
-> エージェントにアクセスを渡すときは、**専用のユーザーと鍵** を与え、バインドを信頼できるネットワーク（オープンな
+> **デフォルトで root なので、root として扱ってください。** デフォルトのログインは root として着地しますが、権限の低い
+> アカウント（`shell`、`system`）でログインすることもできます（下の警告を参照）。エージェントにアクセスを渡すときは、
+> （あなた個人の鍵ではなく）専用の認証情報を与え、到達範囲を絞りたい場合は `shell` のような権限の低いアカウントを指定し、
+> バインドを信頼できるネットワーク（オープンな
 > インターネットではなく loopback や VPN）に限定し、パスワード認証はオフのままにし、WebUI からいつでも鍵を失効させたり
 > デーモンを停止したりできることを忘れないでください。
 
@@ -127,7 +130,7 @@ CE を再実装するだけです）。それは偽りの安心感を買うだ�
 
 ### パスワード
 
-パスワードログインは **デフォルトでオフ** です。すべてのログインが root であり、鍵のほうがはるかに安全だからです。
+パスワードログインは **デフォルトでオフ** です。ログインがデフォルトで root であり、鍵のほうがはるかに安全だからです。
 パスワードを設定する場合、WebUI は最低強度を強制し、保存するのはハッシュのみで、平文は決して保存しません。
 
 ## ビルド
@@ -162,7 +165,7 @@ CE を再実装するだけです）。それは偽りの安心感を買うだ�
 * **Discord:** @VD.Priv8 https://discord.com/users/1296831918989639721
 * **E-mail:** vd.priv8@pm.me
 * **XDA-Developers:** @VD171 https://xdaforums.com/m/vd171.4699873/
-* **XDA thread:** _(placeholder、最初の公開リリース時に追加)_
+* **XDA thread:** <https://xdaforums.com/t/VD-Dropbear.4808524/>
 * **GitHub:** @VD171 https://github.com/VD171
 
 ## ライセンス
