@@ -5,7 +5,8 @@
 
 <blockquote><b>&#9888; Toda conexão que autentica recebe um shell ROOT.</b> Trate como as chaves do seu aparelho: prefira chaves públicas a senhas, e mantenha a porta fora da Internet pública.</blockquote>
 
-<p>A maioria das pessoas obtém SSH no aparelho pegando carona num módulo maior de ocultação de root. Isso acopla o SSH a esse módulo: se a parte Zygisk dele for desativada ou falhar, o SSH nunca sobe, e você perde o acesso remoto por um motivo que não tem nada a ver com SSH. <b>O VD Dropbear é um módulo de propósito único</b>, então o tempo-no-ar do daemon depende só do daemon.</p>
+<p>O jeito nativo do Android de ter um shell no seu próprio aparelho é o ADB (depuração USB), e ligá-lo é <b>invasivo e auto-expositor</b>. <code>adb_enabled</code> e <code>development_settings_enabled</code> são settings legíveis por qualquer um - qualquer app, SDK ou biblioteca anti-fraude/RASP lê, a conexão fica logada, e não há forma suportada de esconder que o ADB está, ou esteve, ligado. A exposição te segue até num aparelho de fábrica, não-rooted: pra ter um shell, você tem que se anunciar.</p>
+<p><b>O VD Dropbear é a alternativa privada.</b> Num aparelho rooted ele te dá um servidor SSH de verdade - shell root, SFTP e rsync pela rede - sem o tell do <code>adb_enabled</code>, sem o flag de depuração USB, com um banner de versão que não revela nada, e credenciais que você controla. Seu acesso continua seu, em vez de um flag "estou sendo depurado" que qualquer coisa no aparelho lê.</p>
 
 <h3>Recursos</h3>
 <ul>

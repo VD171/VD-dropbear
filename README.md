@@ -24,10 +24,16 @@ Languages: English · [العربية](README.ar.md) · [Čeština](README.cs.md
 
 ## Why
 
-Most people get an on-device SSH server by piggy-backing on a larger root-hiding module. That couples
-the SSH daemon to that module's lifecycle: if its Zygisk component is disabled or fails, the SSH
-daemon never starts, and you lose remote access for a reason that has nothing to do with SSH. VD
-Dropbear is a single-purpose module, so the daemon's uptime depends only on the daemon.
+Android's built-in way to get a shell on your own phone is ADB (USB debugging), and turning it on is
+invasive and self-exposing. `adb_enabled` and `development_settings_enabled` are world-readable
+settings - any app, SDK or anti-fraud / RASP library can read them, the connection is logged, and
+there is no supported way to hide that ADB is, or ever was, enabled. The exposure follows you even on
+a stock, non-rooted phone: to get a shell, you have to announce it.
+
+VD Dropbear is the private alternative. On a rooted device it gives you a real SSH server - root
+shell, SFTP and rsync over the network - with no `adb_enabled` tell, no USB-debugging flag, a version
+banner that reveals nothing, and credentials you control. Your access stays yours, instead of a
+globally-readable "I am being debugged" flag that anything on the device can read.
 
 ## Features
 

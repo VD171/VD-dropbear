@@ -5,7 +5,8 @@
 
 <blockquote><b>&#9888; Every connection that authenticates receives a ROOT shell.</b> Treat it like the keys to your device: prefer public keys over passwords, and keep the port off the public Internet.</blockquote>
 
-<p>Most people get an on-device SSH server by piggy-backing on a bigger root-hiding module. That couples the SSH daemon to that module: if its Zygisk part is disabled or fails, the SSH daemon never starts, and you lose remote access for a reason that has nothing to do with SSH. <b>VD Dropbear is a single-purpose module</b>, so the daemon's uptime depends only on the daemon.</p>
+<p>Android's built-in way to get a shell on your own phone is ADB (USB debugging), and turning it on is <b>invasive and self-exposing</b>. <code>adb_enabled</code> and <code>development_settings_enabled</code> are world-readable settings - any app, SDK or anti-fraud/RASP library can read them, the connection is logged, and there is no supported way to hide that ADB is, or ever was, enabled. The exposure follows you even on a stock, non-rooted phone: to get a shell, you have to announce it.</p>
+<p><b>VD Dropbear is the private alternative.</b> On a rooted device it gives you a real SSH server - root shell, SFTP and rsync over the network - with no <code>adb_enabled</code> tell, no USB-debugging flag, a version banner that reveals nothing, and credentials you control. Your access stays yours, instead of a globally-readable "I am being debugged" flag that anything on the device can read.</p>
 
 <h3>Features</h3>
 <ul>
