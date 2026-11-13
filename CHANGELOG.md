@@ -78,7 +78,14 @@ module (`module.prop`) and on GitHub Releases.
 - Secrets default to credential-encrypted storage; the device-encrypted fallback is opt-in (BFU) and
   documented as an exposure trade-off.
 
+- **Documentation set** under `docs/` (User guide, Configuration, Architecture, File structure,
+  AI agents, Building) plus a Code of Conduct and GitHub issue/PR templates; the README and the docs
+  are translated into 21 languages.
+- **Build validated**: the daemon cross-compiles as static-PIE for all four ABIs, and the bundled
+  tools are validated on arm64 with a reproducible `scripts/build-bundles.sh`. Interactive PTYs need
+  no patch - `openpty` is detected automatically.
+
 ### Notes
 - Runs on KernelSU, APatch and Magisk.
-- Still in progress: the first built release (binaries + bundled tools for all four ABIs), the `0004`
-  `openpty` patch, and the translated READMEs and docs/wiki.
+- Still in progress: the first tagged release (CI-built binaries + bundled tools for all four ABIs)
+  and an on-device runtime smoke test.

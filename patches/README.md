@@ -38,7 +38,9 @@ patch - these patches only make the server **able** to be configured on Android.
 | `0001-neutral-configurable-ident.patch` | Default the SSH identity banner to a neutral string, overridable at runtime via `DROPBEAR_IDENT`. | The SSH protocol requires a banner; this one reveals no product or version, so scanners cannot fingerprint and target a known version. |
 | `0002-authorized-keys-path.patch` | Read `authorized_keys` from `DROPBEAR_AUTHKEYS` when set (falls back to the account default). | Lets the module place keys on credential-encrypted (CE) or device-encrypted (DE) storage, independent of Android's account model. |
 | `0003-password-file.patch` | Verify passwords against a hash file given by `DROPBEAR_PASSWD_FILE` using **PBKDF2-HMAC-SHA256** (Dropbear's own libtomcrypt), instead of the system shadow. | Android's bionic has no usable `crypt()`/shadow; this is a clean, documented replacement - a public, standard KDF, **no obfuscation**. |
-| `0004-android-openpty.patch` *(planned)* | Use `openpty()` for PTY allocation. | Bionic exposes `openpty()`; without this, interactive PTY sessions fail on Android. |
+
+Interactive PTY sessions need no patch: bionic declares `openpty()` in `<pty.h>`, and Dropbear's
+cross-`configure` detects it (`HAVE_OPENPTY`) with the NDK, so PTYs work out of the box.
 
 ## Build options
 

@@ -141,11 +141,12 @@ The release binary is **static-PIE**. Two things are worth knowing:
   Android device or a full system emulator** instead. The build itself (compile + link + correct ELF
   type) is validated in CI.
 
-## openpty (planned `0004`)
+## openpty
 
-Interactive PTY sessions use `openpty()`, which bionic provides but Dropbear's cross-`configure` does
-not always detect. The planned `0004-android-openpty.patch` (or a `config.h` override in the build)
-forces it on. Non-interactive use (exec, SFTP, rsync, port-forwarding) does not depend on it.
+Interactive PTY sessions use `openpty()`. bionic declares it in `<pty.h>`, and Dropbear's
+cross-`configure` detects it with the NDK (`HAVE_OPENPTY` is set, `HAVE_PTY_H 1`), so **no patch is
+needed** - PTYs work out of the box. (Non-interactive use - exec, SFTP, rsync, port-forwarding - does
+not depend on it anyway.)
 
 ## Bundled tools: sftp-server, scp, rsync
 
