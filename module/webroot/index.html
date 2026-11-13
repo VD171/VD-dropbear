@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<!--
+  ======================================================================
+   VD Dropbear  ::  standalone, configurable rooted SSH daemon
+   A private SSH server for KernelSU/APatch/Magisk - no invasive ADB exposure.
+   WebUI - configure the daemon, manage keys and passwords, control the service.
+
+   Copyright (C) 2026  VD171
+   SPDX-License-Identifier: Apache-2.0
+
+   Licensed under the Apache License, Version 2.0; you may obtain a copy at
+   http://www.apache.org/licenses/LICENSE-2.0
+
+   Site           : https://vd171.ru
+   Site           : https://vd.priv8.ru
+   Source         : https://github.com/VD171/VD-dropbear
+   GitHub         : @VD171 https://github.com/VD171
+   XDA-Developers : @VD171 https://xdaforums.com/m/vd171.4699873/
+   XDA thread     : https://xdaforums.com/t/VD-dropbear.4808524/
+   Telegram       : @VD_Priv8 https://t.me/VD_Priv8
+   Channel        : @Priv8_VD https://t.me/Priv8_VD
+   Discord        : @VD.Priv8 https://discord.com/users/1296831918989639721
+   E-mail         : vd.priv8@pm.me
+  ======================================================================
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>VD Dropbear</title>
+<style>
+  :root{
+    --bg:#0b0e14; --bg2:#121722; --card:#161c28; --line:#242c3a;
+    --fg:#e8ecf3; --muted:#9aa4b2; --green:#36e86a; --green2:#17c74a;
+    --red:#ff5c6c; --amber:#f2b134; --silver:#d7dce3;
+    --radius:14px;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{
+    background:var(--bg); color:var(--fg);
+    font-family:-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+    font-size:15px; line-height:1.45;
+    padding:16px; padding-bottom:48px; max-width:720px; margin:0 auto;
+  }
+  h1{font-size:0;margin:0}
+  header{display:flex;align-items:center;gap:12px;margin:4px 0 14px}
+  header .brand{display:flex;flex-direction:column}
+  header .brand b{font-size:20px;letter-spacing:-.3px}
+  header .brand b span{color:var(--green)}
+  header .brand small{color:var(--muted)}
+  .pill{margin-left:auto;font-size:12px;color:var(--muted);border:1px solid var(--line);
+    padding:3px 9px;border-radius:999px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+    padding:16px;margin:12px 0}
+  .card h2{font-size:13px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);
+    margin:0 0 12px}
+  .warn{background:rgba(255,92,108,.08);border:1px solid rgba(255,92,108,.35);color:#ffd4d9;
+    border-radius:var(--radius);padding:12px 14px;margin:12px 0;font-size:13.5px}
+  .warn b{color:var(--red)}
+  .status-row{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+  .dot{width:11px;height:11px;border-radius:50%;background:var(--muted);flex:0 0 auto}
+  .dot.on{background:var(--green);box-shadow:0 0 10px var(--green)}
+  .dot.off{background:var(--red)}
+  .status-row .s-main{font-weight:600}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:8px 16px;font-size:13.5px}
+  .grid div{display:flex;justify-content:space-between;gap:8px;border-bottom:1px dashed var(--line);
+    padding:5px 0}
+  .grid span{color:var(--muted)} .grid b{font-weight:600;word-break:break-all;text-align:right}
+  .btns{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+  button{font:inherit;cursor:pointer;border:1px solid var(--line);background:var(--bg2);
+    color:var(--fg);border-radius:10px;padding:9px 14px;transition:.15s}
+  button:hover{border-color:#39465a}
+  button:disabled{opacity:.5;cursor:not-allowed}
+  button.primary{background:linear-gradient(180deg,var(--green),var(--green2));color:#06240f;
+    border-color:transparent;font-weight:700}
+  button.danger{color:var(--red);border-color:rgba(255,92,108,.35)}
+  button.ghost{background:transparent}
+  label.field{display:block;margin:0 0 12px}
+  label.field .lab{display:block;font-size:13px;margin-bottom:5px}
+  label.field .help{color:var(--muted);font-size:12px;margin-top:4px}
+  input[type=text],input[type=number],input[type=password],select,textarea{
+    width:100%;background:var(--bg);color:var(--fg);border:1px solid var(--line);
+    border-radius:10px;padding:9px 11px;font:inherit}
+  textarea{resize:vertical;min-height:70px;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12.5px}
+  .toggle{display:flex;align-items:center;justify-content:space-between;gap:12px;
+    padding:9px 0;border-bottom:1px solid var(--line)}
+  .toggle:last-child{border-bottom:0}
+  .toggle .tl{font-size:14px}
+  .toggle .help{color:var(--muted);font-size:12px;margin-top:2px}
+  .sw{position:relative;width:46px;height:26px;flex:0 0 auto}
+  .sw input{opacity:0;width:0;height:0;position:absolute}
+  .sw .track{position:absolute;inset:0;background:#2a3444;border-radius:999px;transition:.15s}
+  .sw .track::before{content:"";position:absolute;width:20px;height:20px;left:3px;top:3px;
+    background:#cfd6e0;border-radius:50%;transition:.15s}
+  .sw input:checked + .track{background:var(--green2)}
+  .sw input:checked + .track::before{transform:translateX(20px);background:#eafff0}
+  .row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .list{margin:0;padding:0;list-style:none}
+  .list li{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid var(--line);
+    font-size:13px}
+  .list li:last-child{border-bottom:0}
+  .list .mono{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12px;color:var(--silver);
+    word-break:break-all;flex:1}
+  .empty{color:var(--muted);font-size:13px;padding:8px 0}
+  .meter{height:6px;border-radius:999px;background:#2a3444;overflow:hidden;margin:6px 0 2px}
+  .meter i{display:block;height:100%;width:0;transition:.2s}
+  .mhint{font-size:12px;color:var(--muted)}
+  .toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);background:#0f141d;
+    border:1px solid var(--line);color:var(--fg);padding:10px 16px;border-radius:10px;
+    font-size:13.5px;opacity:0;pointer-events:none;transition:.2s;max-width:90%;z-index:9}
+  .toast.show{opacity:1}
+  .toast.err{border-color:rgba(255,92,108,.5)}
+  footer{color:var(--muted);font-size:12px;text-align:center;margin-top:22px;line-height:1.7}
+  footer a{color:var(--green)}
+  .sub{color:var(--muted);font-size:12.5px;margin:-4px 0 12px}
+</style>
+</head>
+<body>
+<h1>VD Dropbear</h1>
+<header>
+  <img src="assets/logo-icon.svg" alt="" width="40" height="40">
+  <div class="brand"><b>VD <span>Dropbear</span></b><small id="verLine">rooted SSH daemon</small></div>
+  <span class="pill" id="abiPill">-</span>
+</header>
+
+<div class="warn">
+  <b>Every authenticated connection gets ROOT.</b> Anyone who can log in has full control of this
+  device. Prefer keys over passwords, bind only to networks you trust, and never expose the port to
+  the open internet without a reason.
+</div>
+
+<!-- STATUS -->
+<section class="card">
+  <h2>Status</h2>
+  <div class="status-row">
+    <span class="dot" id="dot"></span>
+    <span class="s-main" id="sMain">checking…</span>
+  </div>
+  <div class="grid">
+    <div><span>PID</span><b id="sPid">-</b></div>
+    <div><span>Port</span><b id="sPort">-</b></div>
+    <div><span>Start mode</span><b id="sMode">-</b></div>
+    <div><span>CE unlocked</span><b id="sCe">-</b></div>
+    <div><span>ABI</span><b id="sAbi">-</b></div>
+    <div><span>Secret store</span><b id="sStore">-</b></div>
+    <div style="grid-column:1/-1"><span>Host-key fingerprint</span><b id="sFp">-</b></div>
+  </div>
+  <div class="btns">
+    <button class="primary" id="btnStart">Start</button>
+    <button id="btnRestart">Restart</button>
+    <button class="danger" id="btnStop">Stop</button>
+    <button class="ghost" id="btnRefresh">Refresh</button>
+  </div>
+</section>
+
+<!-- SETTINGS -->
+<section class="card">
+  <h2>Settings</h2>
+  <div class="sub">Changes are saved to the config; press <b>Save &amp; restart</b> to apply.</div>
+  <div id="toggles"></div>
+  <div id="fields" style="margin-top:12px"></div>
+  <div class="btns">
+    <button class="primary" id="btnSave">Save &amp; restart</button>
+    <button class="ghost" id="btnReload">Reload</button>
+  </div>
+</section>
+
+<!-- KEYS -->
+<section class="card">
+  <h2>Authorized keys</h2>
+  <ul class="list" id="keyList"><li class="empty">loading…</li></ul>
+  <label class="field" style="margin-top:12px">
+    <span class="lab">Add a public key</span>
+    <textarea id="newKey" placeholder="ssh-ed25519 AAAA… comment"></textarea>
+  </label>
+  <div class="btns"><button class="primary" id="btnAddKey">Add key</button></div>
+</section>
+
+<!-- PASSWORDS -->
+<section class="card">
+  <h2>Password accounts</h2>
+  <div class="sub">A password login is still a <b>root</b> login. Hashes use PBKDF2-HMAC-SHA256,
+    computed in this page; the password itself never leaves it.</div>
+  <ul class="list" id="pwList"><li class="empty">loading…</li></ul>
+  <div class="row2" style="margin-top:12px">
+    <label class="field"><span class="lab">User</span>
+      <input type="text" id="pwUser" value="root" autocomplete="off"></label>
+    <label class="field"><span class="lab">Iterations</span>
+      <input type="number" id="pwIter" value="200000" min="10000" step="10000"></label>
+  </div>
+  <label class="field"><span class="lab">Password</span>
+    <input type="password" id="pwPass" autocomplete="new-password"></label>
+  <label class="field"><span class="lab">Confirm</span>
+    <input type="password" id="pwPass2" autocomplete="new-password"></label>
+  <div class="meter"><i id="pwBar"></i></div>
+  <div class="mhint" id="pwHint">Use at least 12 characters.</div>
+  <div class="btns"><button class="primary" id="btnSetPw" disabled>Set password</button></div>
+</section>
+
+<footer>
+  VD Dropbear · <a href="https://github.com/VD171/VD-dropbear" target="_blank" rel="noopener">source</a>
+  · <a href="https://xdaforums.com/t/VD-dropbear.4808524/" target="_blank" rel="noopener">XDA</a>
+  · <a href="https://t.me/Priv8_VD" target="_blank" rel="noopener">@Priv8_VD</a><br>
+  generated with Claude
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<script>
+"use strict";
+const SH = "/data/adb/modules/vddropbear/common/vddb-webui.sh";
+
+/* ---- ksu.exec bridge (KernelSU / APatch / WebUI-X compatible) ---- */
+function exec(cmd, opts = {}) {
+  return new Promise((resolve, reject) => {
+    if (typeof ksu === "undefined" || !ksu.exec) {
+      reject(new Error("This page must be opened from the root manager's WebUI."));
+      return;
+    }
+    const cb = "__vddb_" + Date.now() + "_" + Math.floor(Math.random() * 1e6);
+    window[cb] = (errno, stdout, stderr) => {
+      try { delete window[cb]; } catch (e) { window[cb] = undefined; }
+      resolve({ errno: Number(errno) || 0, stdout: stdout || "", stderr: stderr || "" });
+    };
+    try { ksu.exec(cmd, JSON.stringify(opts), cb); }
+    catch (e) { reject(e); }
+  });
+}
+async function api(verb, arg) {
+  const cmd = "sh " + SH + " " + verb + (arg ? " " + arg : "");
+  const r = await exec(cmd);
+  return r.stdout;
+}
+async function apiIn(verb, b64, arg) {
+  const cmd = "printf %s '" + b64 + "' | sh " + SH + " " + verb + (arg ? " " + arg : "");
+  const r = await exec(cmd);
+  return r.stdout;
+}
+
+/* ---- helpers ---- */
+const $ = s => document.querySelector(s);
+const enc = new TextEncoder(), dec = new TextDecoder();
+function b64enc(str){ const u=enc.encode(str); let s=""; u.forEach(b=>s+=String.fromCharCode(b)); return btoa(s); }
+function b64dec(b64){ const s=atob(b64); const u=new Uint8Array(s.length); for(let i=0;i<s.length;i++)u[i]=s.charCodeAt(i); return dec.decode(u); }
+function toast(msg, err){ const t=$("#toast"); t.textContent=msg; t.className="toast show"+(err?" err":""); setTimeout(()=>t.className="toast",2200); }
+function esc(s){ return (s||"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c])); }
+function hex(u8){ return Array.from(u8).map(b=>b.toString(16).padStart(2,"0")).join(""); }
+
+/* ---- config schema ---- */
+const TOGGLES = [
+  ["ENABLED","Enabled at boot",""],
+  ["START_IN_BFU","Start before first unlock (BFU)","Off: start only after you unlock (AFU) - secrets stay on encrypted CE storage. On: also run before unlock - secrets move to DE storage, readable before unlock."],
+  ["LISTEN_LOOPBACK","Listen on loopback","127.0.0.1 / ::1 only."],
+  ["LISTEN_ALL","Listen on all interfaces","Exposes the device on every network it is on."],
+  ["LISTEN_IPV4","IPv4",""],
+  ["LISTEN_IPV6","IPv6",""],
+  ["HIDE_IDENT","Hide version banner","Send a neutral SSH identity so scanners cannot fingerprint the version."],
+  ["PUBKEY_AUTH","Public-key login",""],
+  ["PASSWORD_AUTH","Password login","Every login is ROOT; keys are safer."],
+  ["ALLOW_LOCAL_FORWARD","Allow local port forwarding",""],
+  ["ALLOW_REMOTE_FORWARD","Allow remote port forwarding",""],
+  ["GATEWAY_PORTS","Gateway ports","Let forwarded remote ports bind to all interfaces."],
+];
+const FIELDS = [
+  ["PORT","Port","number"],
+  ["LISTEN_ADDRESSES","Extra binds","text","Comma-separated: addr or addr:port (IPv4 or IPv6)."],
+  ["IDENT_STRING","Custom identity","text","Blank = neutral built-in default."],
+  ["MAX_AUTH_TRIES","Max auth tries","number"],
+  ["LOGIN_USER","Login user","text","Must be an account the system resolves (usually root)."],
+  ["LOGIN_SHELL","Login shell","text","Blank = account default."],
+  ["HOME_DIR","HOME","text","Blank = the module directory."],
+  ["EXTRA_ENV","Extra environment","text","K=V;K2=V2"],
+  ["IDLE_TIMEOUT","Idle timeout (s)","number"],
+  ["KEEPALIVE","Keepalive (s)","number"],
+  ["RECEIVE_WINDOW","Receive window","text","Blank = Dropbear default."],
+  ["HOSTKEY_TYPE","Host-key type","select",["ed25519","rsa","ecdsa"]],
+];
+let CFG = {};
+
+/* ---- rendering ---- */
+function renderForm(){
+  $("#toggles").innerHTML = TOGGLES.map(([k,lab,help])=>`
+    <div class="toggle"><div><div class="tl">${esc(lab)}</div>${help?`<div class="help">${esc(help)}</div>`:""}</div>
+      <label class="sw"><input type="checkbox" data-k="${k}" ${CFG[k]==="1"?"checked":""}><span class="track"></span></label>
+    </div>`).join("");
+  $("#fields").innerHTML = FIELDS.map(f=>{
+    const [k,lab,type,extra]=f; const v=esc(CFG[k]||"");
+    let ctl;
+    if(type==="select") ctl=`<select data-k="${k}">${extra.map(o=>`<option ${CFG[k]===o?"selected":""}>${o}</option>`).join("")}</select>`;
+    else ctl=`<input type="${type}" data-k="${k}" value="${v}">`;
+    const help=(type!=="select"&&extra)?`<div class="help">${esc(extra)}</div>`:"";
+    return `<label class="field"><span class="lab">${esc(lab)}</span>${ctl}${help}</label>`;
+  }).join("");
+}
+function collectForm(){
+  const out={};
+  document.querySelectorAll("[data-k]").forEach(el=>{
+    const k=el.dataset.k;
+    if(el.type==="checkbox") out[k]=el.checked?"1":"0";
+    else out[k]=el.value;
+  });
+  return out;
+}
+
+/* ---- status ---- */
+function parseKV(txt){ const o={}; txt.split("\n").forEach(l=>{const i=l.indexOf("=");if(i>0)o[l.slice(0,i)]=l.slice(i+1);}); return o; }
+async function refreshStatus(){
+  let s;
+  try { s=parseKV(await api("status")); } catch(e){ toast(e.message,true); $("#sMain").textContent="unavailable"; return; }
+  const run=s.running==="1";
+  $("#dot").className="dot "+(run?"on":"off");
+  $("#sMain").textContent=run?"Running":"Stopped";
+  $("#sPid").textContent=s.pid||"-";
+  $("#sPort").textContent=s.port||"-";
+  $("#sMode").textContent=(s.mode||"-")+(s.mode==="BFU"?" (before unlock)":" (after unlock)");
+  $("#sCe").textContent=s.ce_ready==="1"?"yes":"no";
+  $("#sAbi").textContent=s.abi||"-"; $("#abiPill").textContent=s.abi||"-";
+  $("#sStore").textContent=s.secret_dir||"-";
+  $("#sFp").textContent=s.hostkey_fp||"(not generated yet)";
+  if(s.version) $("#verLine").textContent="rooted SSH daemon · "+s.version;
+}
+
+/* ---- config load/save ---- */
+async function loadConfig(){
+  const txt=await api("get-config"); CFG={};
+  txt.split("\n").forEach(l=>{ const t=l.split("\t"); if(t[0]) CFG[t[0]]=t[1]?b64dec(t[1]):""; });
+  renderForm();
+}
+async function saveConfig(){
+  const data=collectForm();
+  const blob=Object.entries(data).map(([k,v])=>k+"="+v).join("\n");
+  const out=await apiIn("set-config",b64enc(blob));
+  if(out.trim().startsWith("err")){ toast(out.trim(),true); return; }
+  toast("Saved, restarting…");
+  await api("restart"); await refreshStatus(); await loadConfig();
+}
+
+/* ---- keys ---- */
+async function loadKeys(){
+  const txt=await api("list-keys"); const ul=$("#keyList");
+  const rows=txt.split("\n").filter(Boolean);
+  if(!rows.length){ ul.innerHTML='<li class="empty">No keys yet.</li>'; return; }
+  ul.innerHTML=rows.map(r=>{ const t=r.split("\t"); const idx=t[0]; const key=b64dec(t[1]);
+    const label=key.length>54?key.slice(0,28)+"…"+key.slice(-16):key;
+    return `<li><span class="mono">${esc(label)}</span><button class="danger ghost" data-del="${idx}">Remove</button></li>`;
+  }).join("");
+  ul.querySelectorAll("[data-del]").forEach(b=>b.onclick=async()=>{ await api("del-key",b.dataset.del); toast("Key removed"); loadKeys(); });
+}
+async function addKey(){
+  const v=$("#newKey").value.trim(); if(!v){ toast("Paste a public key",true); return; }
+  const out=await apiIn("add-key",b64enc(v));
+  if(out.trim().startsWith("err")){ toast(out.trim(),true); return; }
+  $("#newKey").value=""; toast("Key added"); loadKeys();
+}
+
+/* ---- passwords ---- */
+async function loadPw(){
+  const txt=await api("list-pw"); const ul=$("#pwList");
+  const rows=txt.split("\n").filter(Boolean);
+  if(!rows.length){ ul.innerHTML='<li class="empty">No password accounts.</li>'; return; }
+  ul.innerHTML=rows.map(r=>{ const u=b64dec(r);
+    return `<li><span class="mono">${esc(u)}</span><button class="danger ghost" data-u="${esc(u)}">Remove</button></li>`;
+  }).join("");
+  ul.querySelectorAll("[data-u]").forEach(b=>b.onclick=async()=>{ await api("del-pw",b.dataset.u); toast("Account removed"); loadPw(); });
+}
+function scorePw(p){
+  let s=0; if(p.length>=8)s++; if(p.length>=12)s++; if(p.length>=16)s++;
+  if(/[a-z]/.test(p)&&/[A-Z]/.test(p))s++; if(/[0-9]/.test(p))s++; if(/[^A-Za-z0-9]/.test(p))s++;
+  return Math.min(s,5);
+}
+function updatePwMeter(){
+  const p=$("#pwPass").value, p2=$("#pwPass2").value, sc=scorePw(p);
+  const pct=[0,15,35,55,80,100][sc];
+  const col=sc<=1?"var(--red)":sc<=3?"var(--amber)":"var(--green)";
+  $("#pwBar").style.width=pct+"%"; $("#pwBar").style.background=col;
+  const ok=p.length>=12 && (!p2 || p===p2);
+  let hint; if(p.length<12) hint="Use at least 12 characters.";
+  else if(p2&&p!==p2) hint="Passwords do not match.";
+  else hint=["very weak","weak","fair","good","strong","excellent"][sc]+" · remember: this login is root.";
+  $("#pwHint").textContent=hint;
+  $("#btnSetPw").disabled=!(p.length>=12 && p===p2);
+}
+async function pbkdf2Spec(password, iterations){
+  const salt=crypto.getRandomValues(new Uint8Array(16));
+  const key=await crypto.subtle.importKey("raw",enc.encode(password),"PBKDF2",false,["deriveBits"]);
+  const bits=await crypto.subtle.deriveBits({name:"PBKDF2",hash:"SHA-256",salt,iterations},key,256);
+  return "pbkdf2-sha256$"+iterations+"$"+hex(salt)+"$"+hex(new Uint8Array(bits));
+}
+async function setPw(){
+  const user=$("#pwUser").value.trim(), p=$("#pwPass").value, p2=$("#pwPass2").value;
+  let iter=parseInt($("#pwIter").value,10); if(!(iter>=10000)) iter=200000;
+  if(!/^[A-Za-z0-9_]+$/.test(user)){ toast("Invalid user",true); return; }
+  if(p.length<12||p!==p2){ toast("Check the password",true); return; }
+  if(!(window.crypto&&crypto.subtle)){ toast("WebCrypto unavailable here",true); return; }
+  $("#btnSetPw").disabled=true;
+  try{
+    const spec=await pbkdf2Spec(p,iter);
+    const out=await apiIn("set-pw",b64enc(spec),user);
+    if(out.trim().startsWith("err")){ toast(out.trim(),true); return; }
+    $("#pwPass").value=""; $("#pwPass2").value=""; updatePwMeter();
+    toast("Password set for "+user); loadPw();
+  }catch(e){ toast(String(e.message||e),true); }
+  finally{ $("#btnSetPw").disabled=false; }
+}
+
+/* ---- wire up ---- */
+$("#btnStart").onclick=async()=>{ toast("Starting…"); $("#sMain").textContent="…"; await api("start"); refreshStatus(); };
+$("#btnStop").onclick=async()=>{ toast("Stopping…"); await api("stop"); refreshStatus(); };
+$("#btnRestart").onclick=async()=>{ toast("Restarting…"); await api("restart"); refreshStatus(); };
+$("#btnRefresh").onclick=refreshStatus;
+$("#btnSave").onclick=saveConfig;
+$("#btnReload").onclick=loadConfig;
+$("#btnAddKey").onclick=addKey;
+$("#btnSetPw").onclick=setPw;
+["#pwPass","#pwPass2"].forEach(s=>$(s).addEventListener("input",updatePwMeter));
+
+(async function init(){
+  try{
+    await refreshStatus();
+    await loadConfig();
+    await loadKeys();
+    await loadPw();
+    updatePwMeter();
+  }catch(e){ toast(String(e.message||e),true); }
+})();
+</script>
+</body>
+</html>
