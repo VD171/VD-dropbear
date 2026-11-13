@@ -75,13 +75,15 @@ jobs:
           NDK: ${{ steps.ndk.outputs.ndk-path }}
         run: bash scripts/build-bundles.sh
       - name: Assemble module zip
+        id: pack
         run: |
           ver="$(sed -n 's/^version=//p' module/module.prop)"
           ( cd module && zip -r -X "../VD-dropbear-${ver}.zip" . -x '*/.gitkeep' )
           sha256sum VD-dropbear-*.zip
+          echo "ver=${ver}" >> "$GITHUB_OUTPUT"
       - uses: actions/upload-artifact@v4
         with:
-          name: VD-dropbear-module
+          name: VD-dropbear-${{ steps.pack.outputs.ver }}
           path: VD-dropbear-*.zip
       - name: Publish release (tags only)
         if: startsWith(github.ref, 'refs/tags/')
