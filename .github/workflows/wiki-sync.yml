@@ -1,9 +1,10 @@
 # VD Dropbear - mirror docs/ into the GitHub project Wiki on every docs change.
 # Copyright (C) 2026 VD171 - SPDX-License-Identifier: Apache-2.0
 #
-# docs/ is the source of truth; .github/scripts/gen_wiki.py renders the pages and
-# this pushes them into the separate VD-dropbear.wiki.git repo. The wiki must be
-# initialized once (create any page in the web UI) before the first run.
+# docs/ is the source of truth; .github/scripts/gen_wiki.sh renders the pages
+# (one tree per language, a per-page language switcher and the attribution footer)
+# and this pushes them into the separate VD-dropbear.wiki.git repo. The wiki must
+# be initialized once (create any page in the web UI) before the first run.
 name: Wiki sync
 
 on:
@@ -11,7 +12,7 @@ on:
     branches: [main, master]
     paths:
       - 'docs/**'
-      - '.github/scripts/gen_wiki.py'
+      - '.github/scripts/gen_wiki.sh'
       - '.github/workflows/wiki-sync.yml'
   workflow_dispatch: {}
 
@@ -35,7 +36,9 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git clone "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.wiki.git" wiki
-          python3 .github/scripts/gen_wiki.py docs wiki
+          # Drop stale pages (e.g. the old English-only set) so removals are tracked.
+          find wiki -mindepth 1 -maxdepth 1 ! -name '.git' -exec rm -rf {} +
+          bash .github/scripts/gen_wiki.sh docs wiki
           cd wiki
           git add -A
           if git diff --cached --quiet; then
