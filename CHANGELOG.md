@@ -29,6 +29,15 @@ All notable, real and significant changes to **VD Dropbear** are recorded here.
 The format follows [Keep a Changelog](https://keepachangelog.com/); versions are tagged in the
 module (`module.prop`) and on GitHub Releases.
 
+## [Unreleased]
+
+### Changed
+- **WebUI: simpler, safer credential forms.** The PBKDF2 iteration count is no longer a user field - it
+  is fixed at a safe 600000 (OWASP 2023 floor for PBKDF2-HMAC-SHA256), computed in the page as before;
+  older hashes keep verifying because the server reads the iteration count stored in each hash. The
+  **User** inputs (password account and `LOGIN_USER`) are now a dropdown of the accounts Android resolves
+  (`root`, `shell`, `system`, default `root`) instead of free text.
+
 ## [v1.01] - 2026-11-13
 
 ### Fixed

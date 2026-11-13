@@ -183,12 +183,12 @@
   <div class="sub">A password login is still a <b>root</b> login. Hashes use PBKDF2-HMAC-SHA256,
     computed in this page; the password itself never leaves it.</div>
   <ul class="list" id="pwList"><li class="empty">loading…</li></ul>
-  <div class="row2" style="margin-top:12px">
-    <label class="field"><span class="lab">User</span>
-      <input type="text" id="pwUser" value="root" autocomplete="off"></label>
-    <label class="field"><span class="lab">Iterations</span>
-      <input type="number" id="pwIter" value="200000" min="10000" step="10000"></label>
-  </div>
+  <label class="field" style="margin-top:12px"><span class="lab">User</span>
+    <select id="pwUser">
+      <option value="root" selected>root</option>
+      <option value="shell">shell</option>
+      <option value="system">system</option>
+    </select></label>
   <label class="field"><span class="lab">Password</span>
     <input type="password" id="pwPass" autocomplete="new-password"></label>
   <label class="field"><span class="lab">Confirm</span>
@@ -267,7 +267,7 @@ const FIELDS = [
   ["LISTEN_ADDRESSES","Extra binds","text","Comma-separated: addr or addr:port (IPv4 or IPv6)."],
   ["IDENT_STRING","Custom identity","text","Blank = neutral built-in default."],
   ["MAX_AUTH_TRIES","Max auth tries","number"],
-  ["LOGIN_USER","Login user","text","Must be an account the system resolves (usually root)."],
+  ["LOGIN_USER","Login user","select",["root","shell","system"]],
   ["LOGIN_SHELL","Login shell","text","Blank = account default."],
   ["HOME_DIR","HOME","text","Blank = the module directory."],
   ["EXTRA_ENV","Extra environment","text","K=V;K2=V2"],
@@ -381,6 +381,7 @@ function updatePwMeter(){
   $("#pwHint").textContent=hint;
   $("#btnSetPw").disabled=!(p.length>=12 && p===p2);
 }
+const PW_ITERATIONS=600000; // OWASP 2023 floor for PBKDF2-HMAC-SHA256; fixed, not user-tunable. The server reads the stored count per hash, so older hashes keep verifying.
 async function pbkdf2Spec(password, iterations){
   const salt=crypto.getRandomValues(new Uint8Array(16));
   const key=await crypto.subtle.importKey("raw",enc.encode(password),"PBKDF2",false,["deriveBits"]);
@@ -389,7 +390,7 @@ async function pbkdf2Spec(password, iterations){
 }
 async function setPw(){
   const user=$("#pwUser").value.trim(), p=$("#pwPass").value, p2=$("#pwPass2").value;
-  let iter=parseInt($("#pwIter").value,10); if(!(iter>=10000)) iter=200000;
+  const iter=PW_ITERATIONS;
   if(!/^[A-Za-z0-9_]+$/.test(user)){ toast("Invalid user",true); return; }
   if(p.length<12||p!==p2){ toast("Check the password",true); return; }
   if(!(window.crypto&&crypto.subtle)){ toast("WebCrypto unavailable here",true); return; }
