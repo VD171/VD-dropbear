@@ -85,6 +85,26 @@ jobs:
         with:
           name: VD-dropbear-${{ steps.pack.outputs.ver }}
           path: VD-dropbear-*.zip
+      - name: Write release notes (tags only)
+        if: startsWith(github.ref, 'refs/tags/')
+        run: |
+          ver="${{ steps.pack.outputs.ver }}"
+          cat > RELEASE-BODY.md <<EOF
+          **VD Dropbear ${ver}** - a standalone, fully configurable rooted SSH server for KernelSU, APatch and Magisk, with a WebUI.
+
+          > **Every authenticated connection receives a root shell.** Prefer keys over passwords, bind only to networks you trust, and keep the port off the open Internet.
+
+          ### Install
+          Flash \`VD-dropbear-${ver}.zip\` in the KernelSU / APatch / Magisk manager (or \`ksud module install\` / \`apd module install\`), open the module's **WebUI** to set the port and add your keys, then reboot.
+
+          ### Documentation
+          Full guide and reference: https://github.com/VD171/VD-dropbear/wiki
+
+          ---
+          📣 Join [@Priv8_VD](https://t.me/Priv8_VD)
+
+          _Generated with Claude._
+          EOF
       - name: Publish release (tags only)
         if: startsWith(github.ref, 'refs/tags/')
         uses: softprops/action-gh-release@v2
