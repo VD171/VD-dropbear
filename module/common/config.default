@@ -28,11 +28,19 @@ START_IN_BFU=0
 
 # --- Network ---------------------------------------------------------------
 PORT=2222
-# loopback | all | all4 | all6 | comma-separated list of binds.
-# A bind may be "ADDR" (uses PORT) or "ADDR:PORT". Examples:
-#   LISTEN=all
-#   LISTEN=192.168.1.10,10.0.0.2:2200
-LISTEN=loopback
+# Listening is composable - mix any of these freely; they merge into one set of
+# binds. IPV4/IPV6 filter the family of the loopback/all binds; specific
+# addresses carry their own family and may carry their own ":port".
+LISTEN_LOOPBACK=1      # localhost only (127.0.0.1 / ::1)  -> "local only"
+LISTEN_ALL=0           # every interface (0.0.0.0 / ::)    -> "any"; exposes the device
+LISTEN_IPV4=1
+LISTEN_IPV6=1
+# Extra specific binds, comma-separated; each "ADDR" (uses PORT) or "ADDR:PORT",
+# IPv6 literals in brackets. Examples:
+#   LISTEN_ADDRESSES=192.168.1.10
+#   LISTEN_ADDRESSES=192.168.1.10:2200,[fe80::1]:22
+# Tip: for "external only", leave LOOPBACK and ALL off and list your LAN IP here.
+LISTEN_ADDRESSES=
 
 # --- Identity / stealth ----------------------------------------------------
 # Replace the SSH version banner so scanners cannot fingerprint the exact

@@ -29,6 +29,13 @@ module (`module.prop`) and on GitHub Releases.
 - Build pipeline: `scripts/build.sh` (fetches the pinned upstream Dropbear, applies the patch set,
   cross-compiles static binaries for all ABIs) and a CI workflow that rebuilds, assembles the module
   zip, and tracks upstream for new releases. The auditable patch set is documented in `patches/`.
+- **Composable listen/bind model** - loopback, all interfaces, IPv4/IPv6 family filters and specific
+  addresses (each with an optional per-bind port) can be mixed freely; a safety net binds loopback
+  rather than every interface if the user clears all options.
+- **Bundled file-transfer tools** - `sftp-server`, `scp` and `rsync`, so SFTP, sshfs, GUI clients and
+  backups work over the same connection.
+- `THIRD-PARTY-NOTICES.md` documenting every bundled component's license and the GPL-3.0 compliance
+  for rsync (mere aggregation: the MIT module is unaffected).
 
 ### Notes
 - The patch set source (`patches/*.patch`, `localoptions.h`), the WebUI and the first built release

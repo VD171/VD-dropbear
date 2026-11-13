@@ -46,6 +46,9 @@ Dropbear is a single-purpose module, so the daemon's uptime depends only on the 
 - **Secrets stored sensibly** (see [Security model](#security-model)).
 - **Bring your own credentials.** Add sets of `user + key` and `user + password`; the WebUI enforces
   a minimum password strength and never stores a password in clear text.
+- **File transfer and sync built in.** The bundle ships `sftp-server`, `scp` and `rsync`, so SFTP,
+  sshfs, GUI clients and backups all work over the same connection.
+- **Every device and emulator.** `arm64-v8a`, `armeabi-v7a`, `x86`, `x86_64`.
 
 ## Install
 
@@ -115,8 +118,11 @@ Sibling projects by the same author:
 
 ## License
 
-**MIT** - see [LICENSE](LICENSE). VD Dropbear bundles [Dropbear SSH](https://matt.ucc.asn.au/dropbear/)
-by Matt Johnston, distributed under its own MIT-style license.
+VD Dropbear's own code is **MIT** - see [LICENSE](LICENSE). The module also bundles third-party
+binaries - [Dropbear](https://matt.ucc.asn.au/dropbear/) (MIT-style), OpenSSH's `sftp-server` and
+`scp` (BSD), and `rsync` (GPL-3.0) - each under its own license; see
+[THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md), including how we comply with the GPL for rsync. Our
+MIT code is unaffected (the GPL binary is merely aggregated, not linked).
 
 ## Trademarks
 

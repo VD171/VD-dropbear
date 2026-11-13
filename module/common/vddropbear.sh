@@ -66,7 +66,15 @@ vddb_defaults() {
     ENABLED=1
     START_IN_BFU=0
     PORT=2222
-    LISTEN="loopback"            # loopback | all | all4 | all6 | comma list of [addr:]port binds
+    # Listening is composable: any combination of the toggles below is allowed,
+    # and they are merged into one set of binds. LISTEN_IPV4/IPV6 filter the family
+    # of the loopback/all binds; specific addresses carry their own family and may
+    # carry their own ":port". If nothing is selected we fall back to loopback.
+    LISTEN_LOOPBACK=1           # localhost only (127.0.0.1 / ::1)
+    LISTEN_ALL=0               # every interface (0.0.0.0 / ::) - exposes the device
+    LISTEN_IPV4=1
+    LISTEN_IPV6=1
+    LISTEN_ADDRESSES=""        # extra specific binds: "addr" (uses PORT) or "addr:port", comma-separated
     HIDE_IDENT=1
     IDENT_STRING=""             # empty => neutral built-in (set by the patched binary)
     PASSWORD_AUTH=0             # every login is ROOT: keys are strongly preferred
@@ -127,16 +135,29 @@ vddb_build_args() {
     _sdir="$(vddb_secret_dir)"
     # host key
     printf '%s\n' -r "$(vddb_hostkey_path)"
-    # listen binds
-    case "$LISTEN" in
-        loopback) printf '%s\n' -p "127.0.0.1:$PORT"; printf '%s\n' -p "[::1]:$PORT" ;;
-        all)      printf '%s\n' -p "0.0.0.0:$PORT"; printf '%s\n' -p "[::]:$PORT" ;;
-        all4)     printf '%s\n' -p "0.0.0.0:$PORT" ;;
-        all6)     printf '%s\n' -p "[::]:$PORT" ;;
-        *) for _b in $(echo "$LISTEN" | tr ',' ' '); do
-               case "$_b" in *:*) printf '%s\n' -p "$_b" ;; *) printf '%s\n' -p "$_b:$PORT" ;; esac
-           done ;;
-    esac
+    # composable listen binds - any mix of all / loopback / specific, filtered by family
+    _bound=0
+    if [ "$LISTEN_ALL" = "1" ]; then
+        [ "$LISTEN_IPV4" = "1" ] && { printf '%s\n' -p "0.0.0.0:$PORT"; _bound=1; }
+        [ "$LISTEN_IPV6" = "1" ] && { printf '%s\n' -p "[::]:$PORT";    _bound=1; }
+    elif [ "$LISTEN_LOOPBACK" = "1" ]; then
+        [ "$LISTEN_IPV4" = "1" ] && { printf '%s\n' -p "127.0.0.1:$PORT"; _bound=1; }
+        [ "$LISTEN_IPV6" = "1" ] && { printf '%s\n' -p "[::1]:$PORT";     _bound=1; }
+    fi
+    for _b in $(echo "$LISTEN_ADDRESSES" | tr ',' ' '); do
+        [ -n "$_b" ] || continue
+        case "$_b" in
+            *]:[0-9]*)  : ;;                  # [ipv6]:port already complete
+            \[*\])      _b="$_b:$PORT" ;;      # [ipv6] without a port
+            *:*:*)      _b="[$_b]:$PORT" ;;    # bare ipv6 -> bracket it and add the port
+            *:[0-9]*)   : ;;                  # ipv4:port already complete
+            *)          _b="$_b:$PORT" ;;      # ipv4 without a port
+        esac
+        printf '%s\n' -p "$_b"; _bound=1
+    done
+    # Safety net: if the user cleared every option, bind loopback rather than
+    # letting dropbear fall back to listening on every interface.
+    [ "$_bound" = "1" ] || printf '%s\n' -p "127.0.0.1:$PORT"
     # foreground + log to stderr (captured by service.sh); no pid file in the module dir
     printf '%s\n' -F -E -P /dev/null
     # auth policy
