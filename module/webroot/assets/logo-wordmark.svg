@@ -1,28 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
   ======================================================================
-   VD Dropbear  ::  standalone, configurable rooted SSH daemon
+   VD DROPBEAR  ::  standalone, configurable rooted SSH daemon
    A private SSH server for KernelSU/APatch/Magisk - no invasive ADB exposure.
 
    Copyright (C) 2026  VD171
    SPDX-License-Identifier: Apache-2.0
-
-   Licensed under the Apache License, Version 2.0; you may obtain a copy at
-   http://www.apache.org/licenses/LICENSE-2.0
 
    Site           : https://vd171.ru
    Site           : https://vd.priv8.ru
    Source         : https://github.com/VD171/VD-dropbear
    GitHub         : @VD171 https://github.com/VD171
    XDA-Developers : @VD171 https://xdaforums.com/m/vd171.4699873/
-   XDA thread     : https://xdaforums.com/t/VD-dropbear.4808524/
+   XDA-Thread     : https://xdaforums.com/t/VD-dropbear.4808524/
    Telegram       : @VD_Priv8 https://t.me/VD_Priv8
    Channel        : @Priv8_VD https://t.me/Priv8_VD
    Discord        : @VD.Priv8 https://discord.com/users/1296831918989639721
    E-mail         : vd.priv8@pm.me
   ======================================================================
 -->
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 260" width="680" height="260" role="img" aria-label="VD Dropbear">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 240" width="760" height="240" role="img" aria-label="VD Dropbear">
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
       <stop offset="0" stop-color="#1b2430"/><stop offset="1" stop-color="#0b0e14"/>
@@ -37,9 +34,12 @@
     </linearGradient>
   </defs>
 
-  <!-- icon -->
-  <g transform="translate(20,18) scale(0.86)">
-    <rect x="8" y="8" width="240" height="240" rx="54" fill="url(#bg)" stroke="url(#silver)" stroke-width="6"/>
+  <!-- full dark card (so the image always has a background, on light or dark GitHub themes) -->
+  <rect x="1.5" y="1.5" width="757" height="237" rx="30" fill="url(#bg)" stroke="url(#silver)" stroke-width="2"/>
+
+  <!-- icon: terminal prompt + padlock (the 256 mark, scaled into the card) -->
+  <g transform="translate(30,27) scale(0.77)">
+    <rect x="8" y="8" width="240" height="240" rx="54" fill="#0b0e14" stroke="url(#silver)" stroke-width="6"/>
     <rect x="44" y="60" width="168" height="124" rx="16" fill="#060a10" stroke="#2a3340" stroke-width="3"/>
     <circle cx="62" cy="78" r="4.5" fill="#3a4350"/><circle cx="78" cy="78" r="4.5" fill="#3a4350"/><circle cx="94" cy="78" r="4.5" fill="#3a4350"/>
     <polyline points="68,110 96,134 68,158" fill="none" stroke="url(#green)" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
@@ -51,11 +51,11 @@
     </g>
   </g>
 
-  <!-- wordmark -->
-  <text x="258" y="130" font-family="'Segoe UI','DejaVu Sans',Arial,sans-serif" font-size="72" font-weight="800" letter-spacing="-1">
+  <!-- wordmark + tagline (sized to stay inside the viewBox) -->
+  <text x="250" y="120" font-family="'Segoe UI','DejaVu Sans',Arial,sans-serif" font-size="62" font-weight="800" letter-spacing="-1">
     <tspan fill="url(#green)">VD</tspan><tspan fill="url(#silver)"> Dropbear</tspan>
   </text>
-  <text x="260" y="178" font-family="'Segoe UI','DejaVu Sans',Arial,sans-serif" font-size="27" font-weight="500" fill="#9aa4b2">
+  <text x="253" y="162" font-family="'Segoe UI','DejaVu Sans',Arial,sans-serif" font-size="23" font-weight="500" fill="#9aa4b2">
     private rooted SSH - no ADB exposure
   </text>
 </svg>
