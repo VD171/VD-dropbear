@@ -1,13 +1,13 @@
 <!--
   VD Dropbear :: standalone configurable SSH server (gives ROOT) for KernelSU/Magisk
-  Copyright (C) 2026  VD171 - SPDX-License-Identifier: MIT
+  Copyright (C) 2026  VD171 - SPDX-License-Identifier: Apache-2.0
   https://github.com/VD171/VD-dropbear
 -->
 
 # VD Dropbear
 
 <p>
-  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-1a7f37" alt="License"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-Apache--2.0-1a7f37" alt="License"></a>
   <img src="https://img.shields.io/badge/KernelSU-%E2%9C%94-635bff" alt="KernelSU">
   <img src="https://img.shields.io/badge/Magisk-%E2%9C%94-00af9c" alt="Magisk">
   <a href="https://github.com/VD171/VD-dropbear/stargazers"><img src="https://img.shields.io/github/stars/VD171/VD-dropbear?color=d29922" alt="Stars"></a>
@@ -118,11 +118,11 @@ Sibling projects by the same author:
 
 ## License
 
-VD Dropbear's own code is **MIT** - see [LICENSE](LICENSE). The module also bundles third-party
+VD Dropbear's own code is **Apache-2.0** - see [LICENSE](LICENSE). The module also bundles third-party
 binaries - [Dropbear](https://matt.ucc.asn.au/dropbear/) (MIT-style), OpenSSH's `sftp-server` and
 `scp` (BSD), and `rsync` (GPL-3.0) - each under its own license; see
 [THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md), including how we comply with the GPL for rsync. Our
-MIT code is unaffected (the GPL binary is merely aggregated, not linked).
+Apache-2.0 code is unaffected (the GPL binary is merely aggregated, not linked).
 
 ## Trademarks
 

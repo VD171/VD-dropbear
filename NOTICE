@@ -1,0 +1,11 @@
+VD Dropbear
+Copyright 2026 VD171
+
+This product is licensed under the Apache License, Version 2.0 (see LICENSE).
+Source and project: https://github.com/VD171/VD-dropbear
+
+It bundles third-party software, each under its own license - see
+THIRD-PARTY-NOTICES.md for full terms and the GPL compliance for rsync:
+  - Dropbear SSH (MIT-style)                 https://github.com/mkj/dropbear
+  - OpenSSH sftp-server and scp (BSD)        https://github.com/openssh/openssh-portable
+  - rsync (GPL-3.0-or-later)                 https://github.com/RsyncProject/rsync

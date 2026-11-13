@@ -2,7 +2,7 @@
 # ======================================================================
 #  VD Dropbear  ::  standalone configurable SSH server (gives ROOT)
 #  Uninstall hook - stop the running daemon.
-#  Copyright (C) 2026  VD171 - SPDX-License-Identifier: MIT
+#  Copyright (C) 2026  VD171 - SPDX-License-Identifier: Apache-2.0
 #  https://github.com/VD171/VD-dropbear
 # ======================================================================
 #

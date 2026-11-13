@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # ======================================================================
 #  VD Dropbear  ::  build the server binary for every Android ABI
-#  Copyright (C) 2026  VD171 - SPDX-License-Identifier: MIT
+#  Copyright (C) 2026  VD171 - SPDX-License-Identifier: Apache-2.0
 #  https://github.com/VD171/VD-dropbear
 # ======================================================================
 #

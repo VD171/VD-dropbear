@@ -1,6 +1,6 @@
 <!--
   VD Dropbear - Changelog
-  Copyright (C) 2026  VD171 - SPDX-License-Identifier: MIT
+  Copyright (C) 2026  VD171 - SPDX-License-Identifier: Apache-2.0
 -->
 
 # Changelog
@@ -22,7 +22,7 @@ module (`module.prop`) and on GitHub Releases.
 - `action.sh`: manager "Action" (re)launch that never blocks on stdin and spawns the daemon in its own
   session so the manager returns.
 - Installer (`customize.sh` + `META-INF`), `uninstall.sh`, and a fully documented default config.
-- Public-repository scaffolding: family-format `README`, `MIT` `LICENSE`, this changelog,
+- Public-repository scaffolding: family-format `README`, Apache-2.0 `LICENSE`, this changelog,
   `SECURITY.md`, `CONTRIBUTING.md`, and an SPDX header on every file.
 - **Four-ABI support** - `arm64-v8a`, `armeabi-v7a`, `x86`, `x86_64` - covering every device and
   emulator.
@@ -35,7 +35,7 @@ module (`module.prop`) and on GitHub Releases.
 - **Bundled file-transfer tools** - `sftp-server`, `scp` and `rsync`, so SFTP, sshfs, GUI clients and
   backups work over the same connection.
 - `THIRD-PARTY-NOTICES.md` documenting every bundled component's license and the GPL-3.0 compliance
-  for rsync (mere aggregation: the MIT module is unaffected).
+  for rsync (mere aggregation: the Apache-2.0 module is unaffected).
 
 ### Notes
 - The patch set source (`patches/*.patch`, `localoptions.h`), the WebUI and the first built release

@@ -2,7 +2,7 @@
 # ======================================================================
 #  VD Dropbear  ::  standalone configurable SSH server (gives ROOT)
 #  Core library - config, secret-store resolution, daemon lifecycle, argv builder.
-#  Copyright (C) 2026  VD171 - SPDX-License-Identifier: MIT
+#  Copyright (C) 2026  VD171 - SPDX-License-Identifier: Apache-2.0
 #  https://github.com/VD171/VD-dropbear
 # ======================================================================
 # Sourced by service.sh / action.sh / the WebUI backend.

@@ -1,6 +1,6 @@
 <!--
   VD Dropbear - patch set
-  Copyright (C) 2026  VD171 - SPDX-License-Identifier: MIT
+  Copyright (C) 2026  VD171 - SPDX-License-Identifier: Apache-2.0
 -->
 
 # Dropbear patch set

@@ -1,12 +1,12 @@
 <!--
   VD Dropbear - third-party notices
-  Copyright (C) 2026  VD171 - SPDX-License-Identifier: MIT
+  Copyright (C) 2026  VD171 - SPDX-License-Identifier: Apache-2.0
 -->
 
 # Third-party notices
 
 VD Dropbear's own code (the module scripts, WebUI, patches and configuration) is licensed under
-**MIT** - see [`LICENSE`](LICENSE). The module distribution also bundles the third-party binaries
+**Apache-2.0** - see [`LICENSE`](LICENSE). The module distribution also bundles the third-party binaries
 below, each under its own license. Those licenses, and the compliance obligations they carry, are
 listed here; the full license texts ship alongside the binaries (in `module/licenses/`).
 
@@ -20,7 +20,7 @@ listed here; the full license texts ship alongside the binaries (in `module/lice
 ## GPL compliance (rsync)
 
 `rsync` is licensed under the GNU GPL v3. It is a **separate program** bundled alongside VD Dropbear
-(mere aggregation): it is not linked into, and does not relicense, VD Dropbear's MIT code. To comply
+(mere aggregation): it is not linked into, and does not relicense, VD Dropbear's Apache-2.0 code. To comply
 with the GPL we:
 
 - ship the full **GPL-3.0** text with the binary (`module/licenses/rsync-COPYING`),

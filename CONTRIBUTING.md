@@ -1,6 +1,6 @@
 <!--
   VD Dropbear - Contributing guide
-  Copyright (C) 2026  VD171 - SPDX-License-Identifier: MIT
+  Copyright (C) 2026  VD171 - SPDX-License-Identifier: Apache-2.0
 -->
 
 # Contributing to VD Dropbear
@@ -38,7 +38,7 @@ configuration. Please keep new patches small, documented, and justified in the P
 - Match the existing shell style (POSIX `sh` / Android `mksh`; no bashisms).
 - Every file carries a short SPDX header - keep it.
 - Update [`CHANGELOG.md`](CHANGELOG.md) under `[Unreleased]` for any real, user-visible change.
-- By submitting a PR you agree to license your contribution under the project's [MIT](LICENSE) license.
+- By submitting a PR you agree to license your contribution under the project's [Apache-2.0](LICENSE) license.
 
 ## Translations
 
