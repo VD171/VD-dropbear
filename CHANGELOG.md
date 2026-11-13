@@ -56,7 +56,29 @@ module (`module.prop`) and on GitHub Releases.
   backups work over the same connection.
 - `THIRD-PARTY-NOTICES.md` documenting every bundled component's license and the GPL-3.0 compliance
   for rsync (mere aggregation: the Apache-2.0 module is unaffected).
+- **Auditable patch set** against upstream Dropbear:
+  - `0001` - neutral, configurable SSH identity (`DROPBEAR_IDENT`), so scanners cannot fingerprint the
+    exact server or version.
+  - `0002` - read `authorized_keys` from `DROPBEAR_AUTHKEYS`, decoupling keys from Android's account
+    model and letting them live on CE or DE storage.
+  - `0003` - password auth against a hash file (`DROPBEAR_PASSWD_FILE`) using **PBKDF2-HMAC-SHA256**
+    (Dropbear's own libtomcrypt), replacing the system `crypt()`/shadow that bionic lacks - a public,
+    documented format with no obfuscation.
+- **WebUI** (`module/webroot/index.html` + `common/vddb-webui.sh` backend): live status and daemon
+  **start / stop / restart**, the **BFU/AFU start toggle**, every setting, authorized-key management,
+  and password accounts whose PBKDF2 hashes are computed in the page with WebCrypto - the clear-text
+  password never leaves the browser. Data crosses the `ksu.exec` bridge base64-encoded.
+- **AI-agents use case** documented: a standing SSH root endpoint lets an autonomous agent operate the
+  device over the network, with none of ADB's tether or self-exposing debug flags.
+- Project logos (`webroot/assets/logo-{icon,wordmark}.svg`).
+
+### Security
+- Password login is disabled at runtime by default; keys are the default. When enabled, only a salted,
+  high-iteration PBKDF2 hash is stored - never the password.
+- Secrets default to credential-encrypted storage; the device-encrypted fallback is opt-in (BFU) and
+  documented as an exposure trade-off.
 
 ### Notes
-- The patch set source (`patches/*.patch`, `localoptions.h`), the WebUI and the first built release
-  are in progress.
+- Runs on KernelSU, APatch and Magisk.
+- Still in progress: the first built release (binaries + bundled tools for all four ABIs), the `0004`
+  `openpty` patch, and the translated READMEs and docs/wiki.
