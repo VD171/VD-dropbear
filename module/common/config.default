@@ -1,0 +1,73 @@
+# VD Dropbear configuration.
+#
+# This file is the shipped default. On first boot it is copied to
+#   /data/adb/vddropbear/config
+# which is the file that is actually read, and that you (or the WebUI) edit.
+# Editing this shipped copy has no effect after the first boot.
+#
+# It is sourced as a shell script: KEY=value, no spaces around '='.
+# It holds SETTINGS ONLY. Secrets (host keys, authorized_keys, password hashes)
+# never live here - see the "secret store" note at the bottom.
+#
+# ---------------------------------------------------------------------------
+# !! SECURITY !! Every connection that authenticates receives a ROOT shell.
+#    Prefer public keys over passwords. Keep the port off the public internet.
+# ---------------------------------------------------------------------------
+
+# --- Launch ----------------------------------------------------------------
+ENABLED=1
+# Start the daemon BEFORE the user unlocks the device (Before First Unlock).
+#   0 = AFU only (default, most secure): the daemon waits for unlock and reads
+#       its secrets from credential-encrypted storage (/data/misc_ce), which
+#       Android keeps encrypted until you unlock.
+#   1 = start in BFU: lets you SSH in before unlock (e.g. to unlock remotely),
+#       but the host key + authorized_keys + password hash then live on
+#       device-encrypted storage (/data/adb), readable before unlock. This is a
+#       deliberate exposure trade-off - only enable it if you need pre-unlock SSH.
+START_IN_BFU=0
+
+# --- Network ---------------------------------------------------------------
+PORT=2222
+# loopback | all | all4 | all6 | comma-separated list of binds.
+# A bind may be "ADDR" (uses PORT) or "ADDR:PORT". Examples:
+#   LISTEN=all
+#   LISTEN=192.168.1.10,10.0.0.2:2200
+LISTEN=loopback
+
+# --- Identity / stealth ----------------------------------------------------
+# Replace the SSH version banner so scanners cannot fingerprint the exact
+# server/version (the SSH protocol requires *some* banner, so it cannot be
+# removed entirely - only made uninformative).
+HIDE_IDENT=1
+# Custom banner. Empty = a neutral "SSH-2.0-" with no product or version.
+IDENT_STRING=
+
+# --- Authentication --------------------------------------------------------
+PUBKEY_AUTH=1
+PASSWORD_AUTH=0
+MAX_AUTH_TRIES=3
+
+# --- Session ---------------------------------------------------------------
+LOGIN_USER=root
+LOGIN_SHELL=
+HOME_DIR=
+EXTRA_ENV=
+IDLE_TIMEOUT=0
+KEEPALIVE=0
+
+# --- Port forwarding (attack surface; off by default) ----------------------
+ALLOW_LOCAL_FORWARD=0
+ALLOW_REMOTE_FORWARD=0
+GATEWAY_PORTS=0
+RECEIVE_WINDOW=
+
+# --- Host key --------------------------------------------------------------
+# ed25519 (recommended) | rsa | ecdsa
+HOSTKEY_TYPE=ed25519
+
+# --- Secret store (informational, not a setting) ---------------------------
+# AFU mode (START_IN_BFU=0): /data/misc_ce/0/vddropbear/secret
+# BFU mode (START_IN_BFU=1): /data/adb/vddropbear/secret
+# Each holds: hostkey_<type>, authorized_keys, passwd (hashes). Manage them
+# from the WebUI; it enforces a minimum password strength and never stores a
+# password in clear text.

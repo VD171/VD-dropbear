@@ -1,0 +1,13 @@
+# Build artifacts and fetched upstream (the workflow pulls dropbear fresh)
+/build/
+/src/dropbear/
+*.o
+*.a
+*.zip
+# Binaries are produced by CI, not committed by hand
+/module/bin/*/vddropbear
+/module/bin/*/dropbearkey
+/module/bin/*/toybox
+# Editor/OS noise
+*~
+.DS_Store

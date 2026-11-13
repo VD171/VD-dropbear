@@ -1,0 +1,6 @@
+id=vddropbear
+name=VD Dropbear
+version=v0.1.0
+versionCode=100
+author=VD171
+description=Standalone, fully configurable Dropbear SSH server for KernelSU/Magisk. Independent of any other module. Port, binds, host keys, authorized keys, passwords, a hidden version banner and BFU/AFU start behaviour are all set from the WebUI. WARNING: every authenticated connection receives ROOT.
