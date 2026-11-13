@@ -1,6 +1,6 @@
 id=vddropbear
 name=VD Dropbear
-version=v1.01
-versionCode=10001
+version=v1.02
+versionCode=10002
 author=VD171
 description=Standalone, fully configurable Dropbear SSH server for KernelSU/APatch/Magisk. Independent of any other module. Port, binds, host keys, authorized keys, passwords, a hidden version banner and BFU/AFU start behaviour are all set from the WebUI. WARNING: logins default to a ROOT shell.

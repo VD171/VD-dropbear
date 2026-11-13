@@ -29,7 +29,12 @@ All notable, real and significant changes to **VD Dropbear** are recorded here.
 The format follows [Keep a Changelog](https://keepachangelog.com/); versions are tagged in the
 module (`module.prop`) and on GitHub Releases.
 
-## [Unreleased]
+## [v1.02] (2026-11-13)
+
+### Added
+- The bundled components' license texts now ship inside the flashable module (`module/licenses/`), along
+  with the module's `LICENSE`, `NOTICE` and `THIRD-PARTY-NOTICES.md`, so the GPL-3.0 `rsync` binary travels
+  with its license as the GPL requires.
 
 ### Fixed
 - **SFTP no longer crashes the session (the bundled `sftp-server` SIGSEGV'd at startup).** On Android,
@@ -37,8 +42,18 @@ module (`module.prop`) and on GitHub Releases.
   not `pw_gecos`, so `sftp-server` hit `xstrdup(NULL)` the moment a session opened. (`scp` over the
   legacy protocol was unaffected: its path never calls `pwcopy`.) The bundle build now patches
   `pwcopy()` to null-coalesce `pw_gecos`.
+- **The public-key login toggle now takes effect.** With `PUBKEY_AUTH` off, no `authorized_keys` file is
+  exported, so no key authenticates; before, the toggle did nothing.
+- **Config values are validated before they reach the daemon.** `HOSTKEY_TYPE` and `RECEIVE_WINDOW` are
+  checked (type against the allowed set, window numeric), so a value with a space can no longer split
+  into extra daemon flags.
+- The manager Action and the daemon log now print a real listen summary, and `add-key` keeps only the
+  first line of a pasted key.
 
 ### Changed
+- **Login privilege is a choice.** A session runs as the account you authenticate as: **root** by default,
+  or a lower-privilege Android account (`shell`, `system`). The README set (22 languages), the docs, the
+  WebUI and the release notes now say so, instead of claiming that every login is root.
 - **WebUI: simpler, safer credential forms.** The PBKDF2 iteration count is no longer a user field. It
   is fixed at a safe 600000 (OWASP 2023 floor for PBKDF2-HMAC-SHA256), computed in the page as before;
   older hashes keep verifying because the server reads the iteration count stored in each hash. The
