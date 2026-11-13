@@ -1,5 +1,10 @@
 #!/system/bin/sh
-# VD Dropbear - install-time setup (sourced by the KSU/Magisk module installer).
+# ======================================================================
+#  VD Dropbear  ::  standalone configurable SSH server (gives ROOT)
+#  Install-time setup (sourced by the KSU/Magisk module installer).
+#  Copyright (C) 2026  VD171 - SPDX-License-Identifier: MIT
+#  https://github.com/VD171/VD-dropbear
+# ======================================================================
 SKIPUNZIP=0
 
 VER=$(grep_prop version "$MODPATH/module.prop")

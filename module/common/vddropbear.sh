@@ -1,5 +1,11 @@
 #!/system/bin/sh
-# VD Dropbear - core library (sourced by service.sh / action.sh / the WebUI backend).
+# ======================================================================
+#  VD Dropbear  ::  standalone configurable SSH server (gives ROOT)
+#  Core library - config, secret-store resolution, daemon lifecycle, argv builder.
+#  Copyright (C) 2026  VD171 - SPDX-License-Identifier: MIT
+#  https://github.com/VD171/VD-dropbear
+# ======================================================================
+# Sourced by service.sh / action.sh / the WebUI backend.
 # POSIX sh (Android mksh). No external deps beyond the shipped binaries + toybox.
 #
 # Responsibilities:

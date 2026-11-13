@@ -1,5 +1,10 @@
 #!/system/bin/sh
-# VD Dropbear - uninstall hook. Stop the running daemon.
+# ======================================================================
+#  VD Dropbear  ::  standalone configurable SSH server (gives ROOT)
+#  Uninstall hook - stop the running daemon.
+#  Copyright (C) 2026  VD171 - SPDX-License-Identifier: MIT
+#  https://github.com/VD171/VD-dropbear
+# ======================================================================
 #
 # The persistent config and the secret stores are intentionally LEFT in place so
 # a reinstall keeps your settings and keys. To wipe them completely, remove by hand:

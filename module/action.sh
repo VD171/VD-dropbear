@@ -1,5 +1,10 @@
 #!/system/bin/sh
-# VD Dropbear - manager "Action" button: (re)launch the single daemon.
+# ======================================================================
+#  VD Dropbear  ::  standalone configurable SSH server (gives ROOT)
+#  Manager "Action" button: (re)launch the single daemon.
+#  Copyright (C) 2026  VD171 - SPDX-License-Identifier: MIT
+#  https://github.com/VD171/VD-dropbear
+# ======================================================================
 # Never reads stdin (the KSU manager keeps it open and would hang here), and
 # the daemon is spawned in its own session so the manager's action tree drains.
 
