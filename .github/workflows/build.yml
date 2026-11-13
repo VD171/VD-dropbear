@@ -26,7 +26,7 @@ name: build
 on:
   push:
     branches: [main, master]
-    paths: ["patches/**", "scripts/build.sh", "scripts/build-bundles.sh", "UPSTREAM_VERSION", "module/**", ".github/workflows/build.yml"]
+    tags: ['v*']   # a tag push builds AND publishes the release (see the release job)
   workflow_dispatch:
   schedule:
     - cron: "0 6 * * *"   # daily: pick up new upstream Dropbear releases
