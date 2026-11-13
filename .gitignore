@@ -68,5 +68,7 @@ TODO.local*
 *.swp
 *.bak
 .DS_Store
+*.core
+core.*
 .idea/
 .vscode/
