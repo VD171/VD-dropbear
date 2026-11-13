@@ -144,8 +144,17 @@ interactive PTYs. A scheduled workflow tracks upstream and rebuilds, so the modu
 ## Documentation
 
 <!-- vd-docs -->
-Full documentation lives in the [wiki](https://github.com/VD171/VD-dropbear/wiki) and under
-[`docs/`](docs/).
+Full documentation lives under [`docs/`](docs/) (and mirrors to the
+[wiki](https://github.com/VD171/VD-dropbear/wiki)):
+
+- [User guide](docs/USER-GUIDE.md) - install, keys, passwords, connecting, file transfer, BFU/AFU.
+- [Configuration](docs/CONFIGURATION.md) - every setting, with defaults.
+- [Architecture](docs/ARCHITECTURE.md) - how the module and daemon work.
+- [File structure](docs/FILE-STRUCTURE.md) - what lives where, in the repo and at runtime.
+- [AI agents on your device](docs/AI-AGENTS.md) - using an autonomous agent over SSH, safely.
+- [Building](docs/BUILDING.md) - the build, and the Android crypt()/cross-compile story.
+
+Each page is also translated into every language in the switcher above.
 <!-- /vd-docs -->
 
 ## See also
