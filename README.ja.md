@@ -152,21 +152,21 @@ CE を再実装するだけです）。それは偽りの安心感を買うだ�
 同じ作者による姉妹プロジェクト:
 
 - **[VDInfos](https://github.com/VD171/VD-Infos)**: 各項目を、それを読み取れるあらゆる手法で読み取り、並べて比較する端末メソッドデバッガー。
-- **[VDGoogle](https://github.com/VD171/VD-Google)**: あなたの Google サービス（RCS、Wallet、Play Integrity の attestation）を、インターネットなしで端末上から読み取ります。
+- **[VDGoogle](https://github.com/VD171/VD-Google)**: RCS、Wallet、Play Integrity についてGoogleがあなたの端末に記録している内容を、完全に端末内で、インターネットなしで読み取ります。
 - **[VDBackup](https://github.com/VD171/VD-Backup)**: root としてアプリとデータを丸ごとバックアップ・復元し、すべて WebUI から操作します。
-- **[COPG-VD](https://github.com/VD171/COPG-VD)**: グローバルな端末 fingerprint と build のスプーファー。
+- **[COPG-VD](https://github.com/VD171/COPG-VD)**: 新しいフィンガープリントを一貫性のある整合的なプロファイルに変える端末スプーファーです。
 
 ## 連絡先
 
-* https://vd171.ru
-* https://vd.priv8.ru
-* **Telegram:** @VD_Priv8 https://t.me/VD_Priv8
-* **Channel:** @Priv8_VD https://t.me/Priv8_VD
-* **Discord:** @VD.Priv8 https://discord.com/users/1296831918989639721
-* **E-mail:** vd.priv8@pm.me
-* **XDA-Developers:** @VD171 https://xdaforums.com/m/vd171.4699873/
-* **XDA thread:** <https://xdaforums.com/t/VD-Dropbear.4808524/>
-* **GitHub:** @VD171 https://github.com/VD171
+- https://vd171.ru
+- https://vd.priv8.ru
+- *Telegram:* @VD_Priv8 https://t.me/VD_Priv8
+- *Channel:* @Priv8_VD https://t.me/Priv8_VD
+- *Discord:* @VD.Priv8 https://discord.com/users/1296831918989639721
+- *E-mail:* vd.priv8@pm.me
+- *XDA-Developers:* @VD171 https://xdaforums.com/m/vd171.4699873/
+- *XDA thread:* https://xdaforums.com/t/VD-Dropbear.4808524/
+- *GitHub:* @VD171 https://github.com/VD171
 
 ## ライセンス
 

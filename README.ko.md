@@ -150,21 +150,21 @@ upstream을 추적하여 다시 빌드하므로 모듈은 항상 최신 상태�
 같은 저자의 자매 프로젝트:
 
 - **[VDInfos](https://github.com/VD171/VD-Infos)**: 각 항목을, 그것을 읽을 수 있는 모든 방법으로 읽어 나란히 비교하는 기기 메서드 디버거.
-- **[VDGoogle](https://github.com/VD171/VD-Google)**: 당신의 Google 서비스(RCS, Wallet, Play Integrity attestation)를 인터넷 없이 기기에서 읽습니다.
+- **[VDGoogle](https://github.com/VD171/VD-Google)**: RCS, Wallet, Play Integrity에 대해 Google이 기기에 기록하는 내용을 완전히 기기 내에서 인터넷 없이 읽습니다.
 - **[VDBackup](https://github.com/VD171/VD-Backup)**: 루트로 앱과 데이터를 통째로 백업·복원하며, 전부 WebUI에서 조작합니다.
-- **[COPG-VD](https://github.com/VD171/COPG-VD)**: 전역 기기 fingerprint 및 build 스푸퍼.
+- **[COPG-VD](https://github.com/VD171/COPG-VD)**: 새로운 핑거프린트를 일관되고 정합적인 프로필로 바꾸는 기기 스푸퍼입니다.
 
 ## 연락처
 
-* https://vd171.ru
-* https://vd.priv8.ru
-* **Telegram:** @VD_Priv8 https://t.me/VD_Priv8
-* **Channel:** @Priv8_VD https://t.me/Priv8_VD
-* **Discord:** @VD.Priv8 https://discord.com/users/1296831918989639721
-* **E-mail:** vd.priv8@pm.me
-* **XDA-Developers:** @VD171 https://xdaforums.com/m/vd171.4699873/
-* **XDA thread:** <https://xdaforums.com/t/VD-Dropbear.4808524/>
-* **GitHub:** @VD171 https://github.com/VD171
+- https://vd171.ru
+- https://vd.priv8.ru
+- *Telegram:* @VD_Priv8 https://t.me/VD_Priv8
+- *Channel:* @Priv8_VD https://t.me/Priv8_VD
+- *Discord:* @VD.Priv8 https://discord.com/users/1296831918989639721
+- *E-mail:* vd.priv8@pm.me
+- *XDA-Developers:* @VD171 https://xdaforums.com/m/vd171.4699873/
+- *XDA thread:* https://xdaforums.com/t/VD-Dropbear.4808524/
+- *GitHub:* @VD171 https://github.com/VD171
 
 ## 라이선스
 

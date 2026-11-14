@@ -158,21 +158,21 @@ Pełna dokumentacja znajduje się na [wiki](https://github.com/VD171/VD-dropbear
 Siostrzane projekty tego samego autora:
 
 - **[VDInfos](https://github.com/VD171/VD-Infos)**: debugger metod urządzenia, który odczytuje każdy element każdą metodą zdolną go odczytać i porównuje je obok siebie.
-- **[VDGoogle](https://github.com/VD171/VD-Google)**: twoje usługi Google (RCS, Wallet, atestacje Play Integrity) odczytywane na twoim urządzeniu bez internetu.
+- **[VDGoogle](https://github.com/VD171/VD-Google)**: odczytuje to, co Google zapisuje na twoim urządzeniu o RCS, Wallet i Play Integrity, w całości na urządzeniu i bez internetu.
 - **[VDBackup](https://github.com/VD171/VD-Backup)**: pełna kopia zapasowa i przywracanie aplikacji oraz danych jako root, sterowane w całości z WebUI.
-- **[COPG-VD](https://github.com/VD171/COPG-VD)**: globalny spoofer fingerprintu urządzenia i build.
+- **[COPG-VD](https://github.com/VD171/COPG-VD)**: spoofer urządzenia, który zamienia świeży fingerprint w spójny, konsekwentny profil.
 
 ## Kontakt
 
-* https://vd171.ru
-* https://vd.priv8.ru
-* **Telegram:** @VD_Priv8 https://t.me/VD_Priv8
-* **Channel:** @Priv8_VD https://t.me/Priv8_VD
-* **Discord:** @VD.Priv8 https://discord.com/users/1296831918989639721
-* **E-mail:** vd.priv8@pm.me
-* **XDA-Developers:** @VD171 https://xdaforums.com/m/vd171.4699873/
-* **XDA thread:** <https://xdaforums.com/t/VD-Dropbear.4808524/>
-* **GitHub:** @VD171 https://github.com/VD171
+- https://vd171.ru
+- https://vd.priv8.ru
+- *Telegram:* @VD_Priv8 https://t.me/VD_Priv8
+- *Channel:* @Priv8_VD https://t.me/Priv8_VD
+- *Discord:* @VD.Priv8 https://discord.com/users/1296831918989639721
+- *E-mail:* vd.priv8@pm.me
+- *XDA-Developers:* @VD171 https://xdaforums.com/m/vd171.4699873/
+- *XDA thread:* https://xdaforums.com/t/VD-Dropbear.4808524/
+- *GitHub:* @VD171 https://github.com/VD171
 
 ## Licencja
 

@@ -167,21 +167,21 @@ bulunur.
 Aynı geliştiricinin kardeş projeleri:
 
 - **[VDInfos](https://github.com/VD171/VD-Infos)**: her bir öğeyi onu okuyabilen her yöntemle okuyan ve bunları yan yana karşılaştıran bir cihaz yöntemi hata ayıklayıcısı.
-- **[VDGoogle](https://github.com/VD171/VD-Google)**: Google hizmetleriniz (RCS, Wallet, Play Integrity doğrulamaları), cihazınızda internet olmadan okunur.
+- **[VDGoogle](https://github.com/VD171/VD-Google)**: Google'ın cihazınızda RCS, Wallet ve Play Integrity hakkında kaydettiklerini okur, tamamen cihaz üzerinde ve internetsiz.
 - **[VDBackup](https://github.com/VD171/VD-Backup)**: root olarak tam uygulama ve veri yedekleme ve geri yükleme; tümüyle bir WebUI'den yönetilir.
-- **[COPG-VD](https://github.com/VD171/COPG-VD)**: küresel bir cihaz parmak izi ve build taklitçisi.
+- **[COPG-VD](https://github.com/VD171/COPG-VD)**: yeni bir parmak izini tutarlı ve istikrarlı bir profile dönüştüren bir cihaz sahteleyicisi.
 
 ## İletişim
 
-* https://vd171.ru
-* https://vd.priv8.ru
-* **Telegram:** @VD_Priv8 https://t.me/VD_Priv8
-* **Kanal:** @Priv8_VD https://t.me/Priv8_VD
-* **Discord:** @VD.Priv8 https://discord.com/users/1296831918989639721
-* **E-posta:** vd.priv8@pm.me
-* **XDA-Developers:** @VD171 https://xdaforums.com/m/vd171.4699873/
-* **XDA konusu:** <https://xdaforums.com/t/VD-Dropbear.4808524/>
-* **GitHub:** @VD171 https://github.com/VD171
+- https://vd171.ru
+- https://vd.priv8.ru
+- *Telegram:* @VD_Priv8 https://t.me/VD_Priv8
+- *Kanal:* @Priv8_VD https://t.me/Priv8_VD
+- *Discord:* @VD.Priv8 https://discord.com/users/1296831918989639721
+- *E-posta:* vd.priv8@pm.me
+- *XDA-Developers:* @VD171 https://xdaforums.com/m/vd171.4699873/
+- *XDA konusu:* https://xdaforums.com/t/VD-Dropbear.4808524/
+- *GitHub:* @VD171 https://github.com/VD171
 
 ## Lisans
 

@@ -160,21 +160,21 @@ rsync روی شبکه، بدون نشانه‌ی `adb_enabled`، بدون پرچ
 پروژه‌های خواهر از همان نویسنده:
 
 - **[VDInfos](https://github.com/VD171/VD-Infos)**: یک اشکال‌زدای متدهای دستگاه که هر مورد را از راه هر متدی که می‌تواند آن را بخواند می‌خواند و آن‌ها را کنار هم مقایسه می‌کند.
-- **[VDGoogle](https://github.com/VD171/VD-Google)**: سرویس‌های گوگل تو (RCS، Wallet، گواهی‌های Play Integrity)، روی دستگاهت و بدون اینترنت خوانده می‌شوند.
+- **[VDGoogle](https://github.com/VD171/VD-Google)**: آنچه را که Google دربارهٔ RCS، Wallet و Play Integrity روی دستگاه شما ثبت می‌کند می‌خواند، کاملاً روی دستگاه و بدون اینترنت.
 - **[VDBackup](https://github.com/VD171/VD-Backup)**: پشتیبان‌گیری و بازیابی کامل اپ و داده به‌صورت روت، که به‌طور کامل از یک WebUI رانده می‌شود.
-- **[COPG-VD](https://github.com/VD171/COPG-VD)**: یک جعل‌کننده‌ی سراسری اثرانگشت دستگاه و بیلد.
+- **[COPG-VD](https://github.com/VD171/COPG-VD)**: یک جعل‌کنندهٔ دستگاه که یک اثرانگشت تازه را به یک نمایهٔ منسجم و سازگار تبدیل می‌کند.
 
 ## تماس‌ها
 
-* https://vd171.ru
-* https://vd.priv8.ru
-* **Telegram:** @VD_Priv8 https://t.me/VD_Priv8
-* **Channel:** @Priv8_VD https://t.me/Priv8_VD
-* **Discord:** @VD.Priv8 https://discord.com/users/1296831918989639721
-* **E-mail:** vd.priv8@pm.me
-* **XDA-Developers:** @VD171 https://xdaforums.com/m/vd171.4699873/
-* **XDA thread:** <https://xdaforums.com/t/VD-Dropbear.4808524/>
-* **GitHub:** @VD171 https://github.com/VD171
+- https://vd171.ru
+- https://vd.priv8.ru
+- *Telegram:* @VD_Priv8 https://t.me/VD_Priv8
+- *Channel:* @Priv8_VD https://t.me/Priv8_VD
+- *Discord:* @VD.Priv8 https://discord.com/users/1296831918989639721
+- *E-mail:* vd.priv8@pm.me
+- *XDA-Developers:* @VD171 https://xdaforums.com/m/vd171.4699873/
+- *XDA thread:* https://xdaforums.com/t/VD-Dropbear.4808524/
+- *GitHub:* @VD171 https://github.com/VD171
 
 ## مجوز
 

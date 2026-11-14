@@ -165,21 +165,21 @@ Android `openpty` для інтерактивних PTY. Заплановани�
 Споріднені проєкти того самого автора:
 
 - **[VDInfos](https://github.com/VD171/VD-Infos)**: налагоджувач методів пристрою, який читає кожен елемент усіма способами, якими його можна прочитати, і порівнює результати пліч-о-пліч.
-- **[VDGoogle](https://github.com/VD171/VD-Google)**: ваші сервіси Google (RCS, Wallet, атестації Play Integrity), зчитувані на пристрої без інтернету.
+- **[VDGoogle](https://github.com/VD171/VD-Google)**: читає те, що Google записує на вашому пристрої про RCS, Wallet і Play Integrity, повністю на пристрої та без інтернету.
 - **[VDBackup](https://github.com/VD171/VD-Backup)**: повне резервне копіювання та відновлення застосунків і даних із правами root, повністю кероване з WebUI.
-- **[COPG-VD](https://github.com/VD171/COPG-VD)**: глобальний спуфер відбитка пристрою та build-параметрів.
+- **[COPG-VD](https://github.com/VD171/COPG-VD)**: спуфер пристрою, який перетворює свіжий fingerprint на узгоджений, несуперечливий профіль.
 
 ## Контакти
 
-* https://vd171.ru
-* https://vd.priv8.ru
-* **Telegram:** @VD_Priv8 https://t.me/VD_Priv8
-* **Канал:** @Priv8_VD https://t.me/Priv8_VD
-* **Discord:** @VD.Priv8 https://discord.com/users/1296831918989639721
-* **E-mail:** vd.priv8@pm.me
-* **XDA-Developers:** @VD171 https://xdaforums.com/m/vd171.4699873/
-* **Гілка XDA:** <https://xdaforums.com/t/VD-Dropbear.4808524/>
-* **GitHub:** @VD171 https://github.com/VD171
+- https://vd171.ru
+- https://vd.priv8.ru
+- *Telegram:* @VD_Priv8 https://t.me/VD_Priv8
+- *Канал:* @Priv8_VD https://t.me/Priv8_VD
+- *Discord:* @VD.Priv8 https://discord.com/users/1296831918989639721
+- *E-mail:* vd.priv8@pm.me
+- *XDA-Developers:* @VD171 https://xdaforums.com/m/vd171.4699873/
+- *Гілка XDA:* https://xdaforums.com/t/VD-Dropbear.4808524/
+- *GitHub:* @VD171 https://github.com/VD171
 
 ## Ліцензія
 

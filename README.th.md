@@ -155,21 +155,21 @@ SFTP และ rsync ผ่านเครือข่าย โดยไม่�
 โปรเจกต์พี่น้องโดยผู้สร้างคนเดียวกัน:
 
 - **[VDInfos](https://github.com/VD171/VD-Infos)**: ดีบักเกอร์เมธอดของอุปกรณ์ที่อ่านแต่ละรายการผ่านทุกเมธอดที่อ่านมันได้ แล้วนำมาเปรียบเทียบเคียงข้างกัน
-- **[VDGoogle](https://github.com/VD171/VD-Google)**: บริการ Google ของคุณ (RCS, Wallet, การรับรอง Play Integrity) อ่านบนเครื่องของคุณโดยไม่ต้องใช้อินเทอร์เน็ต
+- **[VDGoogle](https://github.com/VD171/VD-Google)**: อ่านสิ่งที่ Google บันทึกไว้บนอุปกรณ์ของคุณเกี่ยวกับ RCS, Wallet และ Play Integrity ทั้งหมดบนอุปกรณ์และไม่ต้องใช้อินเทอร์เน็ต
 - **[VDBackup](https://github.com/VD171/VD-Backup)**: สำรองและกู้คืนแอปและข้อมูลแบบเต็มในฐานะ root ขับเคลื่อนทั้งหมดจาก WebUI
-- **[COPG-VD](https://github.com/VD171/COPG-VD)**: เครื่องมือปลอมแปลงลายนิ้วมืออุปกรณ์และ build แบบครอบคลุมทั้งระบบ
+- **[COPG-VD](https://github.com/VD171/COPG-VD)**: ตัวปลอมแปลงอุปกรณ์ที่เปลี่ยน fingerprint ใหม่ให้เป็นโปรไฟล์ที่สอดคล้องและสม่ำเสมอ
 
 ## ติดต่อ
 
-* https://vd171.ru
-* https://vd.priv8.ru
-* **Telegram:** @VD_Priv8 https://t.me/VD_Priv8
-* **ช่อง:** @Priv8_VD https://t.me/Priv8_VD
-* **Discord:** @VD.Priv8 https://discord.com/users/1296831918989639721
-* **อีเมล:** vd.priv8@pm.me
-* **XDA-Developers:** @VD171 https://xdaforums.com/m/vd171.4699873/
-* **กระทู้ XDA:** <https://xdaforums.com/t/VD-Dropbear.4808524/>
-* **GitHub:** @VD171 https://github.com/VD171
+- https://vd171.ru
+- https://vd.priv8.ru
+- *Telegram:* @VD_Priv8 https://t.me/VD_Priv8
+- *ช่อง:* @Priv8_VD https://t.me/Priv8_VD
+- *Discord:* @VD.Priv8 https://discord.com/users/1296831918989639721
+- *อีเมล:* vd.priv8@pm.me
+- *XDA-Developers:* @VD171 https://xdaforums.com/m/vd171.4699873/
+- *กระทู้ XDA:* https://xdaforums.com/t/VD-Dropbear.4808524/
+- *GitHub:* @VD171 https://github.com/VD171
 
 ## สัญญาอนุญาต
 

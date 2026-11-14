@@ -162,21 +162,21 @@ Dokumentasi lengkap berada di [wiki](https://github.com/VD171/VD-dropbear/wiki) 
 Proyek serupa dari penulis yang sama:
 
 - **[VDInfos](https://github.com/VD171/VD-Infos)**: sebuah debugger metode perangkat yang membaca setiap item melalui setiap metode yang dapat membacanya dan membandingkannya berdampingan.
-- **[VDGoogle](https://github.com/VD171/VD-Google)**: layanan Google Anda (RCS, Wallet, atestasi Play Integrity), dibaca di perangkat Anda tanpa internet.
+- **[VDGoogle](https://github.com/VD171/VD-Google)**: membaca apa yang Google catat di perangkat Anda tentang RCS, Wallet, dan Play Integrity, sepenuhnya di perangkat dan tanpa internet.
 - **[VDBackup](https://github.com/VD171/VD-Backup)**: pencadangan dan pemulihan aplikasi serta data secara penuh sebagai root, dikendalikan sepenuhnya dari sebuah WebUI.
-- **[COPG-VD](https://github.com/VD171/COPG-VD)**: sebuah spoofer fingerprint perangkat dan build secara global.
+- **[COPG-VD](https://github.com/VD171/COPG-VD)**: spoofer perangkat yang mengubah fingerprint baru menjadi profil yang koheren dan konsisten.
 
 ## Kontak
 
-* https://vd171.ru
-* https://vd.priv8.ru
-* **Telegram:** @VD_Priv8 https://t.me/VD_Priv8
-* **Channel:** @Priv8_VD https://t.me/Priv8_VD
-* **Discord:** @VD.Priv8 https://discord.com/users/1296831918989639721
-* **E-mail:** vd.priv8@pm.me
-* **XDA-Developers:** @VD171 https://xdaforums.com/m/vd171.4699873/
-* **XDA thread:** <https://xdaforums.com/t/VD-Dropbear.4808524/>
-* **GitHub:** @VD171 https://github.com/VD171
+- https://vd171.ru
+- https://vd.priv8.ru
+- *Telegram:* @VD_Priv8 https://t.me/VD_Priv8
+- *Channel:* @Priv8_VD https://t.me/Priv8_VD
+- *Discord:* @VD.Priv8 https://discord.com/users/1296831918989639721
+- *E-mail:* vd.priv8@pm.me
+- *XDA-Developers:* @VD171 https://xdaforums.com/m/vd171.4699873/
+- *XDA thread:* https://xdaforums.com/t/VD-Dropbear.4808524/
+- *GitHub:* @VD171 https://github.com/VD171
 
 ## Lisensi
 

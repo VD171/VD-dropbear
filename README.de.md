@@ -170,21 +170,21 @@ Die vollständige Dokumentation liegt im [Wiki](https://github.com/VD171/VD-drop
 Verwandte Projekte desselben Autors:
 
 - **[VDInfos](https://github.com/VD171/VD-Infos)**: ein Methoden-Debugger fürs Gerät, der jeden Punkt über jede Methode liest, die ihn lesen kann, und sie nebeneinander vergleicht.
-- **[VDGoogle](https://github.com/VD171/VD-Google)**: deine Google-Dienste (RCS, Wallet, Play-Integrity-Attestierungen), auf deinem Gerät und ohne Internet gelesen.
+- **[VDGoogle](https://github.com/VD171/VD-Google)**: liest, was Google auf deinem Gerät über RCS, Wallet und Play Integrity speichert, vollständig auf dem Gerät und ohne Internet.
 - **[VDBackup](https://github.com/VD171/VD-Backup)**: vollständiges Backup und Wiederherstellen von Apps und Daten als Root, komplett über eine WebUI gesteuert.
-- **[COPG-VD](https://github.com/VD171/COPG-VD)**: ein globaler Spoofer für Geräte-Fingerprint und Build.
+- **[COPG-VD](https://github.com/VD171/COPG-VD)**: ein Geräte-Spoofer, der einen frischen Fingerprint in ein stimmiges, konsistentes Profil verwandelt.
 
 ## Kontakte
 
-* https://vd171.ru
-* https://vd.priv8.ru
-* **Telegram:** @VD_Priv8 https://t.me/VD_Priv8
-* **Channel:** @Priv8_VD https://t.me/Priv8_VD
-* **Discord:** @VD.Priv8 https://discord.com/users/1296831918989639721
-* **E-mail:** vd.priv8@pm.me
-* **XDA-Developers:** @VD171 https://xdaforums.com/m/vd171.4699873/
-* **XDA thread:** <https://xdaforums.com/t/VD-Dropbear.4808524/>
-* **GitHub:** @VD171 https://github.com/VD171
+- https://vd171.ru
+- https://vd.priv8.ru
+- *Telegram:* @VD_Priv8 https://t.me/VD_Priv8
+- *Channel:* @Priv8_VD https://t.me/Priv8_VD
+- *Discord:* @VD.Priv8 https://discord.com/users/1296831918989639721
+- *E-mail:* vd.priv8@pm.me
+- *XDA-Developers:* @VD171 https://xdaforums.com/m/vd171.4699873/
+- *XDA thread:* https://xdaforums.com/t/VD-Dropbear.4808524/
+- *GitHub:* @VD171 https://github.com/VD171
 
 ## Lizenz
 

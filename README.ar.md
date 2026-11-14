@@ -154,21 +154,21 @@ PTY التفاعلية. يتتبع سير عمل مجدول المصدر ويع�
 مشاريع شقيقة للمؤلف نفسه:
 
 - **[VDInfos](https://github.com/VD171/VD-Infos)**: مصحّح طرق للجهاز يقرأ كل عنصر عبر كل طريقة قادرة على قراءته ويقارنها جنبًا إلى جنب.
-- **[VDGoogle](https://github.com/VD171/VD-Google)**: خدمات Google الخاصة بك (RCS وWallet وتصديقات Play Integrity)، تُقرأ على جهازك دون إنترنت.
+- **[VDGoogle](https://github.com/VD171/VD-Google)**: يقرأ ما يسجّله Google على جهازك بشأن RCS وWallet وPlay Integrity، بالكامل على الجهاز ودون إنترنت.
 - **[VDBackup](https://github.com/VD171/VD-Backup)**: نسخ احتياطي واستعادة كاملان للتطبيقات والبيانات كـ root، يُدار بالكامل من واجهة ويب.
-- **[COPG-VD](https://github.com/VD171/COPG-VD)**: مزيّف عالمي لبصمة الجهاز ومعلومات البناء.
+- **[COPG-VD](https://github.com/VD171/COPG-VD)**: أداة انتحال للجهاز تحوّل بصمة جديدة إلى ملف تعريف متماسك ومتسق.
 
 ## جهات الاتصال
 
-* https://vd171.ru
-* https://vd.priv8.ru
-* **Telegram:** @VD_Priv8 https://t.me/VD_Priv8
-* **Channel:** @Priv8_VD https://t.me/Priv8_VD
-* **Discord:** @VD.Priv8 https://discord.com/users/1296831918989639721
-* **E-mail:** vd.priv8@pm.me
-* **XDA-Developers:** @VD171 https://xdaforums.com/m/vd171.4699873/
-* **XDA thread:** <https://xdaforums.com/t/VD-Dropbear.4808524/>
-* **GitHub:** @VD171 https://github.com/VD171
+- https://vd171.ru
+- https://vd.priv8.ru
+- *Telegram:* @VD_Priv8 https://t.me/VD_Priv8
+- *Channel:* @Priv8_VD https://t.me/Priv8_VD
+- *Discord:* @VD.Priv8 https://discord.com/users/1296831918989639721
+- *E-mail:* vd.priv8@pm.me
+- *XDA-Developers:* @VD171 https://xdaforums.com/m/vd171.4699873/
+- *XDA thread:* https://xdaforums.com/t/VD-Dropbear.4808524/
+- *GitHub:* @VD171 https://github.com/VD171
 
 ## الترخيص
 

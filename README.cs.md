@@ -160,21 +160,21 @@ aktuální. Viz [`.github/workflows/`](.github/workflows/) a [`CONTRIBUTING.md`]
 Příbuzné projekty téhož autora:
 
 - **[VDInfos](https://github.com/VD171/VD-Infos)**: debugger metod zařízení, který čte každou položku přes každou metodu, jež ji umí přečíst, a porovnává je vedle sebe.
-- **[VDGoogle](https://github.com/VD171/VD-Google)**: tvoje služby Google (RCS, Wallet, atestace Play Integrity), čtené na tvém zařízení bez internetu.
+- **[VDGoogle](https://github.com/VD171/VD-Google)**: čte to, co Google zaznamenává na tvém zařízení o RCS, Wallet a Play Integrity, zcela v zařízení a bez internetu.
 - **[VDBackup](https://github.com/VD171/VD-Backup)**: kompletní záloha a obnova aplikací a dat jako root, řízená zcela z WebUI.
-- **[COPG-VD](https://github.com/VD171/COPG-VD)**: globální spoofer otisku zařízení a buildu.
+- **[COPG-VD](https://github.com/VD171/COPG-VD)**: spoofer zařízení, který z čerstvého fingerprintu vytvoří soudržný a konzistentní profil.
 
 ## Kontakty
 
-* https://vd171.ru
-* https://vd.priv8.ru
-* **Telegram:** @VD_Priv8 https://t.me/VD_Priv8
-* **Channel:** @Priv8_VD https://t.me/Priv8_VD
-* **Discord:** @VD.Priv8 https://discord.com/users/1296831918989639721
-* **E-mail:** vd.priv8@pm.me
-* **XDA-Developers:** @VD171 https://xdaforums.com/m/vd171.4699873/
-* **XDA thread:** <https://xdaforums.com/t/VD-Dropbear.4808524/>
-* **GitHub:** @VD171 https://github.com/VD171
+- https://vd171.ru
+- https://vd.priv8.ru
+- *Telegram:* @VD_Priv8 https://t.me/VD_Priv8
+- *Channel:* @Priv8_VD https://t.me/Priv8_VD
+- *Discord:* @VD.Priv8 https://discord.com/users/1296831918989639721
+- *E-mail:* vd.priv8@pm.me
+- *XDA-Developers:* @VD171 https://xdaforums.com/m/vd171.4699873/
+- *XDA thread:* https://xdaforums.com/t/VD-Dropbear.4808524/
+- *GitHub:* @VD171 https://github.com/VD171
 
 ## Licence
 

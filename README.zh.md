@@ -144,21 +144,21 @@ shell，并且可以：
 同一作者的姊妹项目：
 
 - **[VDInfos](https://github.com/VD171/VD-Infos)**：一个设备方法调试器，通过每一种能读取某一项的方法去读取它，并将结果并排对比。
-- **[VDGoogle](https://github.com/VD171/VD-Google)**：你的 Google 服务（RCS、Wallet、Play Integrity 证明），在你的设备上离线读取。
+- **[VDGoogle](https://github.com/VD171/VD-Google)**：读取 Google 在你设备上记录的关于 RCS、Wallet 和 Play Integrity 的内容，完全在设备本地、无需联网。
 - **[VDBackup](https://github.com/VD171/VD-Backup)**：以 root 身份对应用和数据进行完整备份与恢复，全程由 WebUI 驱动。
-- **[COPG-VD](https://github.com/VD171/COPG-VD)**：一个全局的设备指纹和 build 伪装工具。
+- **[COPG-VD](https://github.com/VD171/COPG-VD)**：一个设备伪装器，把全新的指纹转化为连贯一致的配置。
 
 ## 联系方式
 
-* https://vd171.ru
-* https://vd.priv8.ru
-* **Telegram：** @VD_Priv8 https://t.me/VD_Priv8
-* **频道：** @Priv8_VD https://t.me/Priv8_VD
-* **Discord：** @VD.Priv8 https://discord.com/users/1296831918989639721
-* **邮箱：** vd.priv8@pm.me
-* **XDA-Developers：** @VD171 https://xdaforums.com/m/vd171.4699873/
-* **XDA 主题：** <https://xdaforums.com/t/VD-Dropbear.4808524/>
-* **GitHub：** @VD171 https://github.com/VD171
+- https://vd171.ru
+- https://vd.priv8.ru
+- *Telegram：* @VD_Priv8 https://t.me/VD_Priv8
+- *频道：* @Priv8_VD https://t.me/Priv8_VD
+- *Discord：* @VD.Priv8 https://discord.com/users/1296831918989639721
+- *邮箱：* vd.priv8@pm.me
+- *XDA-Developers：* @VD171 https://xdaforums.com/m/vd171.4699873/
+- *XDA 主题：* https://xdaforums.com/t/VD-Dropbear.4808524/
+- *GitHub：* @VD171 https://github.com/VD171
 
 ## 许可证
 
