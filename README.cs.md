@@ -37,13 +37,24 @@
   <a href="https://github.com/VD171/VD-dropbear/releases"><img src="https://img.shields.io/github/v/release/VD171/VD-dropbear?color=1a7f37" alt="Release"></a>
 </p>
 
+<p align="center">
+  <a href="https://github.com/VD171/VD-dropbear/releases">Releases</a> ·
+  <a href="https://github.com/VD171/VD-dropbear/wiki/cs-Home">Wiki</a> ·
+  <a href="https://github.com/VD171/VD-dropbear/wiki/cs-USER-GUIDE">Uživatelská příručka</a> ·
+  <a href="https://github.com/VD171/VD-dropbear/wiki/cs-CONFIGURATION">Konfigurace</a> ·
+  <a href="https://github.com/VD171/VD-dropbear/wiki/cs-ARCHITECTURE">Architektura</a> ·
+  <a href="https://github.com/VD171/VD-dropbear/wiki/cs-AI-AGENTS">AI agenti</a> ·
+  <a href="CHANGELOG.md">Changelog</a> ·
+  <a href="https://xdaforums.com/t/VD-Dropbear.4808524/">XDA thread</a>
+</p>
+
+> **Languages:** [English](README.md) · [العربية](README.ar.md) · [Čeština](README.cs.md) · [Deutsch](README.de.md) · [Español](README.es.md) · [فارسی](README.fa.md) · [Français](README.fr.md) · [हिन्दी](README.hi.md) · [Bahasa Indonesia](README.in.md) · [Italiano](README.it.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Nederlands](README.nl.md) · [Polski](README.pl.md) · [Português](README.pt.md) · [Русский](README.ru.md) · [Svenska](README.sv.md) · [ไทย](README.th.md) · [Türkçe](README.tr.md) · [Українська](README.uk.md) · [Tiếng Việt](README.vi.md) · [中文](README.zh.md)
+
 **Samostatný, plně konfigurovatelný SSH server [Dropbear](https://matt.ucc.asn.au/dropbear/)**
 zabalený jako modul pro KernelSU / APatch / Magisk. Spouští se sám a nezávisí na žádném jiném modulu.
 
 > ⚠️ **Přihlášení ve výchozím nastavení dává plný ROOT shell.** Ber to jako klíče od zařízení:
 > dávej přednost veřejným klíčům před hesly a nenech port vystavený do veřejného internetu.
-
-Languages: English · [العربية](README.ar.md) · [Čeština](README.cs.md) · [Deutsch](README.de.md) · [Español](README.es.md) · [فارسی](README.fa.md) · [Français](README.fr.md) · [हिन्दी](README.hi.md) · [Bahasa](README.in.md) · [Italiano](README.it.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Nederlands](README.nl.md) · [Polski](README.pl.md) · [Português](README.pt.md) · [Русский](README.ru.md) · [Svenska](README.sv.md) · [ไทย](README.th.md) · [Türkçe](README.tr.md) · [Українська](README.uk.md) · [Tiếng Việt](README.vi.md) · [中文](README.zh.md)
 
 ## Proč
 
@@ -151,8 +162,16 @@ aktuální. Viz [`.github/workflows/`](.github/workflows/) a [`CONTRIBUTING.md`]
 ## Dokumentace
 
 <!-- vd-docs -->
-Úplná dokumentace je na [wiki](https://github.com/VD171/VD-dropbear/wiki) a ve složce
-[`docs/`](docs/).
+- **[Wiki](https://github.com/VD171/VD-dropbear/wiki/cs-Home)**: kompletní dokumentace, k procházení online.
+- **[Uživatelská příručka](https://github.com/VD171/VD-dropbear/wiki/cs-USER-GUIDE)**: instalace, klíče, hesla, připojení, přenos souborů, BFU/AFU.
+- **[Konfigurace](https://github.com/VD171/VD-dropbear/wiki/cs-CONFIGURATION)**: každé nastavení, s výchozími hodnotami.
+- **[Architektura](https://github.com/VD171/VD-dropbear/wiki/cs-ARCHITECTURE)** a **[Struktura souborů](https://github.com/VD171/VD-dropbear/wiki/cs-FILE-STRUCTURE)**: jak modul a démon fungují a kde se co nachází.
+- **[AI agenti na tvém zařízení](https://github.com/VD171/VD-dropbear/wiki/cs-AI-AGENTS)**: bezpečné používání autonomního agenta přes SSH.
+- **[Sestavení](https://github.com/VD171/VD-dropbear/wiki/cs-BUILDING)**: sestavení a příběh crypt()/cross-compile na Androidu.
+- **[Přispívání](CONTRIBUTING.md)** a **[Zabezpečení](SECURITY.md)**.
+- **[Changelog](CHANGELOG.md)** a **[Kodex chování](CODE_OF_CONDUCT.md)**.
+
+Každá stránka wiki je také přeložena do každého jazyka v přepínači výše; tytéž zdroje jsou ve složce [`docs/`](docs/).
 <!-- /vd-docs -->
 
 ## Viz také

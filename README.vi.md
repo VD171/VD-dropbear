@@ -37,13 +37,24 @@
   <a href="https://github.com/VD171/VD-dropbear/releases"><img src="https://img.shields.io/github/v/release/VD171/VD-dropbear?color=1a7f37" alt="Release"></a>
 </p>
 
+<p align="center">
+  <a href="https://github.com/VD171/VD-dropbear/releases">Releases</a> ·
+  <a href="https://github.com/VD171/VD-dropbear/wiki/vi-Home">Wiki</a> ·
+  <a href="https://github.com/VD171/VD-dropbear/wiki/vi-USER-GUIDE">Hướng dẫn sử dụng</a> ·
+  <a href="https://github.com/VD171/VD-dropbear/wiki/vi-CONFIGURATION">Cấu hình</a> ·
+  <a href="https://github.com/VD171/VD-dropbear/wiki/vi-ARCHITECTURE">Kiến trúc</a> ·
+  <a href="https://github.com/VD171/VD-dropbear/wiki/vi-AI-AGENTS">Tác nhân AI</a> ·
+  <a href="CHANGELOG.md">Changelog</a> ·
+  <a href="https://xdaforums.com/t/VD-Dropbear.4808524/">XDA thread</a>
+</p>
+
+> **Languages:** [English](README.md) · [العربية](README.ar.md) · [Čeština](README.cs.md) · [Deutsch](README.de.md) · [Español](README.es.md) · [فارسی](README.fa.md) · [Français](README.fr.md) · [हिन्दी](README.hi.md) · [Bahasa Indonesia](README.in.md) · [Italiano](README.it.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Nederlands](README.nl.md) · [Polski](README.pl.md) · [Português](README.pt.md) · [Русский](README.ru.md) · [Svenska](README.sv.md) · [ไทย](README.th.md) · [Türkçe](README.tr.md) · [Українська](README.uk.md) · [Tiếng Việt](README.vi.md) · [中文](README.zh.md)
+
 **Một máy chủ SSH [Dropbear](https://matt.ucc.asn.au/dropbear/) độc lập, có thể cấu hình hoàn toàn**,
 được đóng gói thành một mô-đun KernelSU / APatch / Magisk. Nó tự khởi chạy và không phụ thuộc vào bất kỳ mô-đun nào khác.
 
 > ⚠️ **Một lần đăng nhập mặc định cho một shell ROOT đầy đủ.** Hãy coi nó như chìa khóa của thiết bị:
 > ưu tiên dùng khóa công khai thay vì mật khẩu, và giữ cổng tránh xa Internet công cộng.
-
-Languages: English · [العربية](README.ar.md) · [Čeština](README.cs.md) · [Deutsch](README.de.md) · [Español](README.es.md) · [فارسی](README.fa.md) · [Français](README.fr.md) · [हिन्दी](README.hi.md) · [Bahasa](README.in.md) · [Italiano](README.it.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Nederlands](README.nl.md) · [Polski](README.pl.md) · [Português](README.pt.md) · [Русский](README.ru.md) · [Svenska](README.sv.md) · [ไทย](README.th.md) · [Türkçe](README.tr.md) · [Українська](README.uk.md) · [Tiếng Việt](README.vi.md) · [中文](README.zh.md)
 
 ## Tại sao
 
@@ -153,8 +164,16 @@ và build lại, nhờ đó mô-đun luôn được cập nhật. Xem [`.github/
 ## Tài liệu
 
 <!-- vd-docs -->
-Tài liệu đầy đủ nằm trong [wiki](https://github.com/VD171/VD-dropbear/wiki) và trong thư mục
-[`docs/`](docs/).
+- **[Wiki](https://github.com/VD171/VD-dropbear/wiki/vi-Home)**: tài liệu đầy đủ, có thể xem trực tuyến.
+- **[Hướng dẫn sử dụng](https://github.com/VD171/VD-dropbear/wiki/vi-USER-GUIDE)**: cài đặt, khóa, mật khẩu, kết nối, truyền tệp, BFU/AFU.
+- **[Cấu hình](https://github.com/VD171/VD-dropbear/wiki/vi-CONFIGURATION)**: mọi thiết lập, kèm giá trị mặc định.
+- **[Kiến trúc](https://github.com/VD171/VD-dropbear/wiki/vi-ARCHITECTURE)** và **[Cấu trúc tệp](https://github.com/VD171/VD-dropbear/wiki/vi-FILE-STRUCTURE)**: cách mô-đun và daemon hoạt động, và mọi thứ nằm ở đâu.
+- **[Tác nhân AI trên thiết bị của bạn](https://github.com/VD171/VD-dropbear/wiki/vi-AI-AGENTS)**: sử dụng một tác nhân tự động qua SSH, một cách an toàn.
+- **[Build](https://github.com/VD171/VD-dropbear/wiki/vi-BUILDING)**: quá trình build, và câu chuyện crypt()/biên dịch chéo của Android.
+- **[Đóng góp](CONTRIBUTING.md)** và **[Bảo mật](SECURITY.md)**.
+- **[Changelog](CHANGELOG.md)** và **[Quy tắc ứng xử](CODE_OF_CONDUCT.md)**.
+
+Mỗi trang wiki cũng được dịch sang mọi ngôn ngữ trong bộ chuyển ở trên; cùng các nguồn đó nằm trong [`docs/`](docs/).
 <!-- /vd-docs -->
 
 ## Xem thêm

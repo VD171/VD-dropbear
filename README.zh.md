@@ -37,13 +37,24 @@
   <a href="https://github.com/VD171/VD-dropbear/releases"><img src="https://img.shields.io/github/v/release/VD171/VD-dropbear?color=1a7f37" alt="Release"></a>
 </p>
 
+<p align="center">
+  <a href="https://github.com/VD171/VD-dropbear/releases">Releases</a> ·
+  <a href="https://github.com/VD171/VD-dropbear/wiki/zh-Home">Wiki</a> ·
+  <a href="https://github.com/VD171/VD-dropbear/wiki/zh-USER-GUIDE">用户指南</a> ·
+  <a href="https://github.com/VD171/VD-dropbear/wiki/zh-CONFIGURATION">配置</a> ·
+  <a href="https://github.com/VD171/VD-dropbear/wiki/zh-ARCHITECTURE">架构</a> ·
+  <a href="https://github.com/VD171/VD-dropbear/wiki/zh-AI-AGENTS">AI 智能体</a> ·
+  <a href="CHANGELOG.md">Changelog</a> ·
+  <a href="https://xdaforums.com/t/VD-Dropbear.4808524/">XDA thread</a>
+</p>
+
+> **Languages:** [English](README.md) · [العربية](README.ar.md) · [Čeština](README.cs.md) · [Deutsch](README.de.md) · [Español](README.es.md) · [فارسی](README.fa.md) · [Français](README.fr.md) · [हिन्दी](README.hi.md) · [Bahasa Indonesia](README.in.md) · [Italiano](README.it.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Nederlands](README.nl.md) · [Polski](README.pl.md) · [Português](README.pt.md) · [Русский](README.ru.md) · [Svenska](README.sv.md) · [ไทย](README.th.md) · [Türkçe](README.tr.md) · [Українська](README.uk.md) · [Tiếng Việt](README.vi.md) · [中文](README.zh.md)
+
 **一个独立、完全可配置的 [Dropbear](https://matt.ucc.asn.au/dropbear/) SSH 服务器**，以 KernelSU /
 APatch / Magisk 模块的形式打包。它独立启动，不依赖任何其他模块。
 
 > ⚠️ **登录默认会得到一个完整的 ROOT shell。** 请把它当作设备的钥匙来对待：优先使用公钥而非
 > 密码，并让端口远离公网。
-
-Languages: English · [العربية](README.ar.md) · [Čeština](README.cs.md) · [Deutsch](README.de.md) · [Español](README.es.md) · [فارسی](README.fa.md) · [Français](README.fr.md) · [हिन्दी](README.hi.md) · [Bahasa](README.in.md) · [Italiano](README.it.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Nederlands](README.nl.md) · [Polski](README.pl.md) · [Português](README.pt.md) · [Русский](README.ru.md) · [Svenska](README.sv.md) · [ไทย](README.th.md) · [Türkçe](README.tr.md) · [Українська](README.uk.md) · [Tiếng Việt](README.vi.md) · [中文](README.zh.md)
 
 ## 为什么
 
@@ -136,7 +147,16 @@ shell，并且可以：
 ## 文档
 
 <!-- vd-docs -->
-完整文档位于 [wiki](https://github.com/VD171/VD-dropbear/wiki) 以及 [`docs/`](docs/) 目录下。
+- **[Wiki](https://github.com/VD171/VD-dropbear/wiki/zh-Home)**：完整文档，可在线浏览。
+- **[用户指南](https://github.com/VD171/VD-dropbear/wiki/zh-USER-GUIDE)**：安装、密钥、密码、连接、文件传输、BFU/AFU。
+- **[配置](https://github.com/VD171/VD-dropbear/wiki/zh-CONFIGURATION)**：每一项设置及其默认值。
+- **[架构](https://github.com/VD171/VD-dropbear/wiki/zh-ARCHITECTURE)** 和 **[文件结构](https://github.com/VD171/VD-dropbear/wiki/zh-FILE-STRUCTURE)**：模块与守护进程如何工作，以及各文件的位置。
+- **[你设备上的 AI 智能体](https://github.com/VD171/VD-dropbear/wiki/zh-AI-AGENTS)**：安全地通过 SSH 使用自主智能体。
+- **[构建](https://github.com/VD171/VD-dropbear/wiki/zh-BUILDING)**：构建，以及 Android crypt()/交叉编译的故事。
+- **[贡献](CONTRIBUTING.md)** 和 **[安全](SECURITY.md)**。
+- **[Changelog](CHANGELOG.md)** 和 **[行为准则](CODE_OF_CONDUCT.md)**。
+
+每个 wiki 页面也都翻译成了上方切换器中的每一种语言；相同的源文件位于 [`docs/`](docs/)。
 <!-- /vd-docs -->
 
 ## 另见

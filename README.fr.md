@@ -37,13 +37,24 @@
   <a href="https://github.com/VD171/VD-dropbear/releases"><img src="https://img.shields.io/github/v/release/VD171/VD-dropbear?color=1a7f37" alt="Release"></a>
 </p>
 
+<p align="center">
+  <a href="https://github.com/VD171/VD-dropbear/releases">Releases</a> ·
+  <a href="https://github.com/VD171/VD-dropbear/wiki/fr-Home">Wiki</a> ·
+  <a href="https://github.com/VD171/VD-dropbear/wiki/fr-USER-GUIDE">Guide de l'utilisateur</a> ·
+  <a href="https://github.com/VD171/VD-dropbear/wiki/fr-CONFIGURATION">Configuration</a> ·
+  <a href="https://github.com/VD171/VD-dropbear/wiki/fr-ARCHITECTURE">Architecture</a> ·
+  <a href="https://github.com/VD171/VD-dropbear/wiki/fr-AI-AGENTS">Agents IA</a> ·
+  <a href="CHANGELOG.md">Changelog</a> ·
+  <a href="https://xdaforums.com/t/VD-Dropbear.4808524/">XDA thread</a>
+</p>
+
+> **Languages:** [English](README.md) · [العربية](README.ar.md) · [Čeština](README.cs.md) · [Deutsch](README.de.md) · [Español](README.es.md) · [فارسی](README.fa.md) · [Français](README.fr.md) · [हिन्दी](README.hi.md) · [Bahasa Indonesia](README.in.md) · [Italiano](README.it.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Nederlands](README.nl.md) · [Polski](README.pl.md) · [Português](README.pt.md) · [Русский](README.ru.md) · [Svenska](README.sv.md) · [ไทย](README.th.md) · [Türkçe](README.tr.md) · [Українська](README.uk.md) · [Tiếng Việt](README.vi.md) · [中文](README.zh.md)
+
 **Un serveur SSH [Dropbear](https://matt.ucc.asn.au/dropbear/) autonome et entièrement configurable**,
 empaqueté comme module KernelSU / APatch / Magisk. Il démarre tout seul et ne dépend d'aucun autre module.
 
 > ⚠️ **Par défaut, une connexion ouvre un shell ROOT complet.** Traite cela comme les clés de
 > l'appareil : préfère les clés publiques aux mots de passe, et garde le port hors de l'Internet public.
-
-Languages: English · [العربية](README.ar.md) · [Čeština](README.cs.md) · [Deutsch](README.de.md) · [Español](README.es.md) · [فارسی](README.fa.md) · [Français](README.fr.md) · [हिन्दी](README.hi.md) · [Bahasa](README.in.md) · [Italiano](README.it.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Nederlands](README.nl.md) · [Polski](README.pl.md) · [Português](README.pt.md) · [Русский](README.ru.md) · [Svenska](README.sv.md) · [ไทย](README.th.md) · [Türkçe](README.tr.md) · [Українська](README.uk.md) · [Tiếng Việt](README.vi.md) · [中文](README.zh.md)
 
 ## Pourquoi
 
@@ -160,8 +171,16 @@ module reste à jour. Voir [`.github/workflows/`](.github/workflows/) et
 ## Documentation
 
 <!-- vd-docs -->
-La documentation complète se trouve dans le [wiki](https://github.com/VD171/VD-dropbear/wiki) et sous
-[`docs/`](docs/).
+- **[Wiki](https://github.com/VD171/VD-dropbear/wiki/fr-Home)** : la documentation complète, consultable en ligne.
+- **[Guide de l'utilisateur](https://github.com/VD171/VD-dropbear/wiki/fr-USER-GUIDE)** : installation, clés, mots de passe, connexion, transfert de fichiers, BFU/AFU.
+- **[Configuration](https://github.com/VD171/VD-dropbear/wiki/fr-CONFIGURATION)** : chaque réglage, avec ses valeurs par défaut.
+- **[Architecture](https://github.com/VD171/VD-dropbear/wiki/fr-ARCHITECTURE)** et **[Structure des fichiers](https://github.com/VD171/VD-dropbear/wiki/fr-FILE-STRUCTURE)** : comment fonctionnent le module et le démon, et où se trouve chaque chose.
+- **[Agents IA sur ton appareil](https://github.com/VD171/VD-dropbear/wiki/fr-AI-AGENTS)** : utiliser un agent autonome par SSH, en toute sécurité.
+- **[Compilation](https://github.com/VD171/VD-dropbear/wiki/fr-BUILDING)** : la compilation, et l'histoire du crypt()/compilation croisée sous Android.
+- **[Contribuer](CONTRIBUTING.md)** et **[Sécurité](SECURITY.md)**.
+- **[Changelog](CHANGELOG.md)** et **[Code de conduite](CODE_OF_CONDUCT.md)**.
+
+Chaque page du wiki est aussi traduite dans chacune des langues du sélecteur ci-dessus ; les mêmes sources se trouvent sous [`docs/`](docs/).
 <!-- /vd-docs -->
 
 ## Voir aussi

@@ -37,13 +37,24 @@
   <a href="https://github.com/VD171/VD-dropbear/releases"><img src="https://img.shields.io/github/v/release/VD171/VD-dropbear?color=1a7f37" alt="Release"></a>
 </p>
 
+<p align="center">
+  <a href="https://github.com/VD171/VD-dropbear/releases">Releases</a> ·
+  <a href="https://github.com/VD171/VD-dropbear/wiki/th-Home">Wiki</a> ·
+  <a href="https://github.com/VD171/VD-dropbear/wiki/th-USER-GUIDE">คู่มือผู้ใช้</a> ·
+  <a href="https://github.com/VD171/VD-dropbear/wiki/th-CONFIGURATION">การตั้งค่า</a> ·
+  <a href="https://github.com/VD171/VD-dropbear/wiki/th-ARCHITECTURE">สถาปัตยกรรม</a> ·
+  <a href="https://github.com/VD171/VD-dropbear/wiki/th-AI-AGENTS">เอเจนต์ AI</a> ·
+  <a href="CHANGELOG.md">Changelog</a> ·
+  <a href="https://xdaforums.com/t/VD-Dropbear.4808524/">XDA thread</a>
+</p>
+
+> **Languages:** [English](README.md) · [العربية](README.ar.md) · [Čeština](README.cs.md) · [Deutsch](README.de.md) · [Español](README.es.md) · [فارسی](README.fa.md) · [Français](README.fr.md) · [हिन्दी](README.hi.md) · [Bahasa Indonesia](README.in.md) · [Italiano](README.it.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Nederlands](README.nl.md) · [Polski](README.pl.md) · [Português](README.pt.md) · [Русский](README.ru.md) · [Svenska](README.sv.md) · [ไทย](README.th.md) · [Türkçe](README.tr.md) · [Українська](README.uk.md) · [Tiếng Việt](README.vi.md) · [中文](README.zh.md)
+
 **เซิร์ฟเวอร์ SSH [Dropbear](https://matt.ucc.asn.au/dropbear/) ที่ทำงานได้ด้วยตัวเองและปรับแต่งได้ทั้งหมด**
 แพ็กมาเป็นโมดูล KernelSU / APatch / Magisk มันเริ่มทำงานได้ด้วยตัวเองและไม่ต้องพึ่งโมดูลอื่นใด
 
 > ⚠️ **การเข้าสู่ระบบจะได้ ROOT shell เต็มรูปแบบโดยค่าเริ่มต้น** ให้ปฏิบัติกับมันเหมือนเป็นกุญแจของเครื่อง:
 > เลือกใช้คีย์สาธารณะแทนรหัสผ่าน และอย่าเปิดพอร์ตนี้ออกสู่อินเทอร์เน็ตสาธารณะ
-
-Languages: English · [العربية](README.ar.md) · [Čeština](README.cs.md) · [Deutsch](README.de.md) · [Español](README.es.md) · [فارسی](README.fa.md) · [Français](README.fr.md) · [हिन्दी](README.hi.md) · [Bahasa](README.in.md) · [Italiano](README.it.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Nederlands](README.nl.md) · [Polski](README.pl.md) · [Português](README.pt.md) · [Русский](README.ru.md) · [Svenska](README.sv.md) · [ไทย](README.th.md) · [Türkçe](README.tr.md) · [Українська](README.uk.md) · [Tiếng Việt](README.vi.md) · [中文](README.zh.md)
 
 ## ทำไม
 
@@ -147,7 +158,16 @@ SFTP และ rsync ผ่านเครือข่าย โดยไม่�
 ## เอกสาร
 
 <!-- vd-docs -->
-เอกสารฉบับเต็มอยู่ใน [wiki](https://github.com/VD171/VD-dropbear/wiki) และภายใต้ [`docs/`](docs/)
+- **[Wiki](https://github.com/VD171/VD-dropbear/wiki/th-Home)**: เอกสารฉบับเต็ม เปิดอ่านออนไลน์ได้.
+- **[คู่มือผู้ใช้](https://github.com/VD171/VD-dropbear/wiki/th-USER-GUIDE)**: การติดตั้ง, คีย์, รหัสผ่าน, การเชื่อมต่อ, การถ่ายโอนไฟล์, BFU/AFU.
+- **[การตั้งค่า](https://github.com/VD171/VD-dropbear/wiki/th-CONFIGURATION)**: ทุกการตั้งค่า พร้อมค่าเริ่มต้น.
+- **[สถาปัตยกรรม](https://github.com/VD171/VD-dropbear/wiki/th-ARCHITECTURE)** และ **[โครงสร้างไฟล์](https://github.com/VD171/VD-dropbear/wiki/th-FILE-STRUCTURE)**: โมดูลและเดมอนทำงานอย่างไร และทุกอย่างอยู่ที่ใด.
+- **[เอเจนต์ AI บนเครื่องของคุณ](https://github.com/VD171/VD-dropbear/wiki/th-AI-AGENTS)**: การใช้เอเจนต์อัตโนมัติผ่าน SSH อย่างปลอดภัย.
+- **[การบิลด์](https://github.com/VD171/VD-dropbear/wiki/th-BUILDING)**: การบิลด์ และเรื่องราวของ crypt()/การคอมไพล์ข้ามแพลตฟอร์มบน Android.
+- **[การร่วมพัฒนา](CONTRIBUTING.md)** และ **[ความปลอดภัย](SECURITY.md)**.
+- **[Changelog](CHANGELOG.md)** และ **[หลักจรรยาบรรณ](CODE_OF_CONDUCT.md)**.
+
+ทุกหน้าของวิกิยังได้รับการแปลเป็นแต่ละภาษาในตัวสลับด้านบนด้วย; แหล่งข้อมูลเดียวกันอยู่ภายใต้ [`docs/`](docs/).
 <!-- /vd-docs -->
 
 ## ดูเพิ่มเติม

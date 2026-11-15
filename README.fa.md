@@ -37,13 +37,24 @@
   <a href="https://github.com/VD171/VD-dropbear/releases"><img src="https://img.shields.io/github/v/release/VD171/VD-dropbear?color=1a7f37" alt="Release"></a>
 </p>
 
+<p align="center">
+  <a href="https://github.com/VD171/VD-dropbear/releases">Releases</a> ·
+  <a href="https://github.com/VD171/VD-dropbear/wiki/fa-Home">Wiki</a> ·
+  <a href="https://github.com/VD171/VD-dropbear/wiki/fa-USER-GUIDE">راهنمای کاربر</a> ·
+  <a href="https://github.com/VD171/VD-dropbear/wiki/fa-CONFIGURATION">پیکربندی</a> ·
+  <a href="https://github.com/VD171/VD-dropbear/wiki/fa-ARCHITECTURE">معماری</a> ·
+  <a href="https://github.com/VD171/VD-dropbear/wiki/fa-AI-AGENTS">عامل‌های هوش مصنوعی</a> ·
+  <a href="CHANGELOG.md">Changelog</a> ·
+  <a href="https://xdaforums.com/t/VD-Dropbear.4808524/">XDA thread</a>
+</p>
+
+> **Languages:** [English](README.md) · [العربية](README.ar.md) · [Čeština](README.cs.md) · [Deutsch](README.de.md) · [Español](README.es.md) · [فارسی](README.fa.md) · [Français](README.fr.md) · [हिन्दी](README.hi.md) · [Bahasa Indonesia](README.in.md) · [Italiano](README.it.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Nederlands](README.nl.md) · [Polski](README.pl.md) · [Português](README.pt.md) · [Русский](README.ru.md) · [Svenska](README.sv.md) · [ไทย](README.th.md) · [Türkçe](README.tr.md) · [Українська](README.uk.md) · [Tiếng Việt](README.vi.md) · [中文](README.zh.md)
+
 **یک سرور SSH مستقل و کاملاً قابل‌پیکربندی بر پایه‌ی [Dropbear](https://matt.ucc.asn.au/dropbear/)**
 که به‌صورت ماژول KernelSU / APatch / Magisk بسته‌بندی شده است. خودش راه می‌افتد و به هیچ ماژول دیگری وابسته نیست.
 
 > ⚠️ **ورود به‌صورت پیش‌فرض یک شل ROOT کامل می‌دهد.** با آن مانند کلیدهای دستگاه رفتار کن:
 > کلیدهای عمومی را به رمز عبور ترجیح بده و پورت را از اینترنت عمومی دور نگه دار.
-
-Languages: English · [العربية](README.ar.md) · [Čeština](README.cs.md) · [Deutsch](README.de.md) · [Español](README.es.md) · [فارسی](README.fa.md) · [Français](README.fr.md) · [हिन्दी](README.hi.md) · [Bahasa](README.in.md) · [Italiano](README.it.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Nederlands](README.nl.md) · [Polski](README.pl.md) · [Português](README.pt.md) · [Русский](README.ru.md) · [Svenska](README.sv.md) · [ไทย](README.th.md) · [Türkçe](README.tr.md) · [Українська](README.uk.md) · [Tiếng Việt](README.vi.md) · [中文](README.zh.md)
 
 ## چرا
 
@@ -151,8 +162,16 @@ rsync روی شبکه، بدون نشانه‌ی `adb_enabled`، بدون پرچ
 ## مستندات
 
 <!-- vd-docs -->
-مستندات کامل در [ویکی](https://github.com/VD171/VD-dropbear/wiki) و زیر پوشه‌ی
-[`docs/`](docs/) قرار دارد.
+- **[Wiki](https://github.com/VD171/VD-dropbear/wiki/fa-Home)**: مستندات کامل، قابل مرور به‌صورت آنلاین.
+- **[راهنمای کاربر](https://github.com/VD171/VD-dropbear/wiki/fa-USER-GUIDE)**: نصب، کلیدها، رمزهای عبور، اتصال، انتقال فایل، BFU/AFU.
+- **[پیکربندی](https://github.com/VD171/VD-dropbear/wiki/fa-CONFIGURATION)**: هر تنظیم، همراه با مقادیر پیش‌فرض.
+- **[معماری](https://github.com/VD171/VD-dropbear/wiki/fa-ARCHITECTURE)** و **[ساختار فایل](https://github.com/VD171/VD-dropbear/wiki/fa-FILE-STRUCTURE)**: نحوه‌ی کار ماژول و دیمِن، و اینکه هر چیزی کجا قرار دارد.
+- **[عامل‌های هوش مصنوعی روی دستگاه تو](https://github.com/VD171/VD-dropbear/wiki/fa-AI-AGENTS)**: استفاده از یک عامل خودمختار روی SSH، با امنیت.
+- **[ساخت](https://github.com/VD171/VD-dropbear/wiki/fa-BUILDING)**: ساخت، و داستان crypt()/کامپایل متقابل در اندروید.
+- **[مشارکت](CONTRIBUTING.md)** و **[امنیت](SECURITY.md)**.
+- **[Changelog](CHANGELOG.md)** و **[آیین‌نامه رفتار](CODE_OF_CONDUCT.md)**.
+
+هر صفحه‌ی ویکی نیز به هر زبان موجود در سوئیچر بالا ترجمه شده است؛ همان منابع زیر [`docs/`](docs/) قرار دارند.
 <!-- /vd-docs -->
 
 ## همچنین ببینید

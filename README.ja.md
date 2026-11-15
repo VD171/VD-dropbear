@@ -37,13 +37,24 @@
   <a href="https://github.com/VD171/VD-dropbear/releases"><img src="https://img.shields.io/github/v/release/VD171/VD-dropbear?color=1a7f37" alt="Release"></a>
 </p>
 
+<p align="center">
+  <a href="https://github.com/VD171/VD-dropbear/releases">Releases</a> ·
+  <a href="https://github.com/VD171/VD-dropbear/wiki/ja-Home">Wiki</a> ·
+  <a href="https://github.com/VD171/VD-dropbear/wiki/ja-USER-GUIDE">ユーザーガイド</a> ·
+  <a href="https://github.com/VD171/VD-dropbear/wiki/ja-CONFIGURATION">設定</a> ·
+  <a href="https://github.com/VD171/VD-dropbear/wiki/ja-ARCHITECTURE">アーキテクチャ</a> ·
+  <a href="https://github.com/VD171/VD-dropbear/wiki/ja-AI-AGENTS">AI エージェント</a> ·
+  <a href="CHANGELOG.md">Changelog</a> ·
+  <a href="https://xdaforums.com/t/VD-Dropbear.4808524/">XDA thread</a>
+</p>
+
+> **Languages:** [English](README.md) · [العربية](README.ar.md) · [Čeština](README.cs.md) · [Deutsch](README.de.md) · [Español](README.es.md) · [فارسی](README.fa.md) · [Français](README.fr.md) · [हिन्दी](README.hi.md) · [Bahasa Indonesia](README.in.md) · [Italiano](README.it.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Nederlands](README.nl.md) · [Polski](README.pl.md) · [Português](README.pt.md) · [Русский](README.ru.md) · [Svenska](README.sv.md) · [ไทย](README.th.md) · [Türkçe](README.tr.md) · [Українська](README.uk.md) · [Tiếng Việt](README.vi.md) · [中文](README.zh.md)
+
 KernelSU / APatch / Magisk モジュールとしてパッケージされた、**単体で動作し、完全に設定可能な
 [Dropbear](https://matt.ucc.asn.au/dropbear/) SSH サーバー**です。単独で起動し、他のどのモジュールにも依存しません。
 
 > ⚠️ **ログインはデフォルトで完全な ROOT シェルになります。** これをデバイスの鍵そのものと考えてください。
 > パスワードよりも公開鍵を優先し、ポートを公開インターネットに晒さないようにしてください。
-
-Languages: English · [العربية](README.ar.md) · [Čeština](README.cs.md) · [Deutsch](README.de.md) · [Español](README.es.md) · [فارسی](README.fa.md) · [Français](README.fr.md) · [हिन्दी](README.hi.md) · [Bahasa](README.in.md) · [Italiano](README.it.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Nederlands](README.nl.md) · [Polski](README.pl.md) · [Português](README.pt.md) · [Русский](README.ru.md) · [Svenska](README.sv.md) · [ไทย](README.th.md) · [Türkçe](README.tr.md) · [Українська](README.uk.md) · [Tiếng Việt](README.vi.md) · [中文](README.zh.md)
 
 ## なぜ
 
@@ -144,7 +155,16 @@ CE を再実装するだけです）。それは偽りの安心感を買うだ�
 ## ドキュメント
 
 <!-- vd-docs -->
-完全なドキュメントは [wiki](https://github.com/VD171/VD-dropbear/wiki) と [`docs/`](docs/) の下にあります。
+- **[Wiki](https://github.com/VD171/VD-dropbear/wiki/ja-Home)**: 完全なドキュメント。オンラインで閲覧できます。
+- **[ユーザーガイド](https://github.com/VD171/VD-dropbear/wiki/ja-USER-GUIDE)**: インストール、鍵、パスワード、接続、ファイル転送、BFU/AFU。
+- **[設定](https://github.com/VD171/VD-dropbear/wiki/ja-CONFIGURATION)**: すべての設定項目とそのデフォルト値。
+- **[アーキテクチャ](https://github.com/VD171/VD-dropbear/wiki/ja-ARCHITECTURE)** と **[ファイル構成](https://github.com/VD171/VD-dropbear/wiki/ja-FILE-STRUCTURE)**: モジュールとデーモンの仕組み、そして各ファイルの場所。
+- **[端末上の AI エージェント](https://github.com/VD171/VD-dropbear/wiki/ja-AI-AGENTS)**: 自律型エージェントを SSH 越しに安全に使う方法。
+- **[ビルド](https://github.com/VD171/VD-dropbear/wiki/ja-BUILDING)**: ビルドと、Android の crypt()／クロスコンパイルの経緯。
+- **[コントリビュート](CONTRIBUTING.md)** と **[セキュリティ](SECURITY.md)**。
+- **[Changelog](CHANGELOG.md)** と **[行動規範](CODE_OF_CONDUCT.md)**。
+
+wiki の各ページは上の切り替えメニューにある各言語にも翻訳されており、同じソースは [`docs/`](docs/) の下にあります。
 <!-- /vd-docs -->
 
 ## 関連プロジェクト

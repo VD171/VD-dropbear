@@ -37,13 +37,24 @@
   <a href="https://github.com/VD171/VD-dropbear/releases"><img src="https://img.shields.io/github/v/release/VD171/VD-dropbear?color=1a7f37" alt="Release"></a>
 </p>
 
+<p align="center">
+  <a href="https://github.com/VD171/VD-dropbear/releases">Releases</a> ·
+  <a href="https://github.com/VD171/VD-dropbear/wiki/ko-Home">Wiki</a> ·
+  <a href="https://github.com/VD171/VD-dropbear/wiki/ko-USER-GUIDE">사용자 가이드</a> ·
+  <a href="https://github.com/VD171/VD-dropbear/wiki/ko-CONFIGURATION">설정</a> ·
+  <a href="https://github.com/VD171/VD-dropbear/wiki/ko-ARCHITECTURE">아키텍처</a> ·
+  <a href="https://github.com/VD171/VD-dropbear/wiki/ko-AI-AGENTS">AI 에이전트</a> ·
+  <a href="CHANGELOG.md">Changelog</a> ·
+  <a href="https://xdaforums.com/t/VD-Dropbear.4808524/">XDA thread</a>
+</p>
+
+> **Languages:** [English](README.md) · [العربية](README.ar.md) · [Čeština](README.cs.md) · [Deutsch](README.de.md) · [Español](README.es.md) · [فارسی](README.fa.md) · [Français](README.fr.md) · [हिन्दी](README.hi.md) · [Bahasa Indonesia](README.in.md) · [Italiano](README.it.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Nederlands](README.nl.md) · [Polski](README.pl.md) · [Português](README.pt.md) · [Русский](README.ru.md) · [Svenska](README.sv.md) · [ไทย](README.th.md) · [Türkçe](README.tr.md) · [Українська](README.uk.md) · [Tiếng Việt](README.vi.md) · [中文](README.zh.md)
+
 KernelSU / APatch / Magisk 모듈로 패키징된 **독립 실행형이며 완전히 설정 가능한
 [Dropbear](https://matt.ucc.asn.au/dropbear/) SSH 서버**입니다. 스스로 실행되며 다른 어떤 모듈에도 의존하지 않습니다.
 
 > ⚠️ **로그인은 기본적으로 완전한 ROOT 셸이 됩니다.** 이것을 기기의 열쇠처럼 다루세요.
 > 비밀번호보다 공개 키를 우선하고, 포트를 공개 인터넷에 노출하지 마세요.
-
-Languages: English · [العربية](README.ar.md) · [Čeština](README.cs.md) · [Deutsch](README.de.md) · [Español](README.es.md) · [فارسی](README.fa.md) · [Français](README.fr.md) · [हिन्दी](README.hi.md) · [Bahasa](README.in.md) · [Italiano](README.it.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Nederlands](README.nl.md) · [Polski](README.pl.md) · [Português](README.pt.md) · [Русский](README.ru.md) · [Svenska](README.sv.md) · [ไทย](README.th.md) · [Türkçe](README.tr.md) · [Українська](README.uk.md) · [Tiếng Việt](README.vi.md) · [中文](README.zh.md)
 
 ## 왜
 
@@ -142,7 +153,16 @@ upstream을 추적하여 다시 빌드하므로 모듈은 항상 최신 상태�
 ## 문서
 
 <!-- vd-docs -->
-전체 문서는 [wiki](https://github.com/VD171/VD-dropbear/wiki)와 [`docs/`](docs/) 아래에 있습니다.
+- **[Wiki](https://github.com/VD171/VD-dropbear/wiki/ko-Home)**: 온라인에서 볼 수 있는 전체 문서.
+- **[사용자 가이드](https://github.com/VD171/VD-dropbear/wiki/ko-USER-GUIDE)**: 설치, 키, 비밀번호, 연결, 파일 전송, BFU/AFU.
+- **[설정](https://github.com/VD171/VD-dropbear/wiki/ko-CONFIGURATION)**: 모든 설정 항목과 기본값.
+- **[아키텍처](https://github.com/VD171/VD-dropbear/wiki/ko-ARCHITECTURE)** 와 **[파일 구조](https://github.com/VD171/VD-dropbear/wiki/ko-FILE-STRUCTURE)**: 모듈과 데몬이 어떻게 동작하는지, 그리고 모든 것이 어디에 있는지.
+- **[기기 위의 AI 에이전트](https://github.com/VD171/VD-dropbear/wiki/ko-AI-AGENTS)**: 자율 에이전트를 SSH로 안전하게 사용하기.
+- **[빌드](https://github.com/VD171/VD-dropbear/wiki/ko-BUILDING)**: 빌드, 그리고 Android crypt()/크로스 컴파일 이야기.
+- **[기여하기](CONTRIBUTING.md)** 와 **[보안](SECURITY.md)**.
+- **[Changelog](CHANGELOG.md)** 와 **[행동 강령](CODE_OF_CONDUCT.md)**.
+
+wiki의 각 페이지는 위 전환 메뉴의 각 언어로도 번역되어 있으며, 같은 소스가 [`docs/`](docs/) 아래에 있습니다.
 <!-- /vd-docs -->
 
 ## 함께 보기

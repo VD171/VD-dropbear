@@ -37,13 +37,24 @@
   <a href="https://github.com/VD171/VD-dropbear/releases"><img src="https://img.shields.io/github/v/release/VD171/VD-dropbear?color=1a7f37" alt="Release"></a>
 </p>
 
+<p align="center">
+  <a href="https://github.com/VD171/VD-dropbear/releases">Releases</a> ·
+  <a href="https://github.com/VD171/VD-dropbear/wiki/in-Home">Wiki</a> ·
+  <a href="https://github.com/VD171/VD-dropbear/wiki/in-USER-GUIDE">Panduan pengguna</a> ·
+  <a href="https://github.com/VD171/VD-dropbear/wiki/in-CONFIGURATION">Konfigurasi</a> ·
+  <a href="https://github.com/VD171/VD-dropbear/wiki/in-ARCHITECTURE">Arsitektur</a> ·
+  <a href="https://github.com/VD171/VD-dropbear/wiki/in-AI-AGENTS">Agen AI</a> ·
+  <a href="CHANGELOG.md">Changelog</a> ·
+  <a href="https://xdaforums.com/t/VD-Dropbear.4808524/">XDA thread</a>
+</p>
+
+> **Languages:** [English](README.md) · [العربية](README.ar.md) · [Čeština](README.cs.md) · [Deutsch](README.de.md) · [Español](README.es.md) · [فارسی](README.fa.md) · [Français](README.fr.md) · [हिन्दी](README.hi.md) · [Bahasa Indonesia](README.in.md) · [Italiano](README.it.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Nederlands](README.nl.md) · [Polski](README.pl.md) · [Português](README.pt.md) · [Русский](README.ru.md) · [Svenska](README.sv.md) · [ไทย](README.th.md) · [Türkçe](README.tr.md) · [Українська](README.uk.md) · [Tiếng Việt](README.vi.md) · [中文](README.zh.md)
+
 Sebuah **server SSH [Dropbear](https://matt.ucc.asn.au/dropbear/) yang mandiri dan sepenuhnya dapat dikonfigurasi**,
 dikemas sebagai modul KernelSU / APatch / Magisk. Ia berjalan sendiri dan tidak bergantung pada modul lain.
 
 > ⚠️ **Sebuah login secara bawaan memberikan shell ROOT penuh.** Perlakukan ini seperti
 > kunci perangkat Anda: utamakan kunci publik daripada kata sandi, dan jauhkan port dari Internet publik.
-
-Languages: English · [العربية](README.ar.md) · [Čeština](README.cs.md) · [Deutsch](README.de.md) · [Español](README.es.md) · [فارسی](README.fa.md) · [Français](README.fr.md) · [हिन्दी](README.hi.md) · [Bahasa](README.in.md) · [Italiano](README.it.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Nederlands](README.nl.md) · [Polski](README.pl.md) · [Português](README.pt.md) · [Русский](README.ru.md) · [Svenska](README.sv.md) · [ไทย](README.th.md) · [Türkçe](README.tr.md) · [Українська](README.uk.md) · [Tiếng Việt](README.vi.md) · [中文](README.zh.md)
 
 ## Mengapa
 
@@ -153,8 +164,16 @@ dan membangun ulang, sehingga modul tetap mutakhir. Lihat [`.github/workflows/`]
 ## Dokumentasi
 
 <!-- vd-docs -->
-Dokumentasi lengkap berada di [wiki](https://github.com/VD171/VD-dropbear/wiki) dan di bawah
-[`docs/`](docs/).
+- **[Wiki](https://github.com/VD171/VD-dropbear/wiki/in-Home)**: dokumentasi lengkap, dapat dibaca online.
+- **[Panduan pengguna](https://github.com/VD171/VD-dropbear/wiki/in-USER-GUIDE)**: instalasi, kunci, kata sandi, menghubungkan, transfer file, BFU/AFU.
+- **[Konfigurasi](https://github.com/VD171/VD-dropbear/wiki/in-CONFIGURATION)**: setiap pengaturan, beserta nilai bawaannya.
+- **[Arsitektur](https://github.com/VD171/VD-dropbear/wiki/in-ARCHITECTURE)** dan **[Struktur file](https://github.com/VD171/VD-dropbear/wiki/in-FILE-STRUCTURE)**: cara kerja modul dan daemon, serta lokasi setiap berkas.
+- **[Agen AI di perangkat Anda](https://github.com/VD171/VD-dropbear/wiki/in-AI-AGENTS)**: menggunakan agen otonom melalui SSH, dengan aman.
+- **[Build](https://github.com/VD171/VD-dropbear/wiki/in-BUILDING)**: proses build, dan kisah crypt()/kompilasi silang di Android.
+- **[Berkontribusi](CONTRIBUTING.md)** dan **[Keamanan](SECURITY.md)**.
+- **[Changelog](CHANGELOG.md)** dan **[Pedoman Perilaku](CODE_OF_CONDUCT.md)**.
+
+Setiap halaman wiki juga diterjemahkan ke setiap bahasa pada pengalih di atas; sumber yang sama berada di bawah [`docs/`](docs/).
 <!-- /vd-docs -->
 
 ## Lihat juga

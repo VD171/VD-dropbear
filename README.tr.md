@@ -37,13 +37,24 @@
   <a href="https://github.com/VD171/VD-dropbear/releases"><img src="https://img.shields.io/github/v/release/VD171/VD-dropbear?color=1a7f37" alt="Release"></a>
 </p>
 
+<p align="center">
+  <a href="https://github.com/VD171/VD-dropbear/releases">Releases</a> ·
+  <a href="https://github.com/VD171/VD-dropbear/wiki/tr-Home">Wiki</a> ·
+  <a href="https://github.com/VD171/VD-dropbear/wiki/tr-USER-GUIDE">Kullanıcı kılavuzu</a> ·
+  <a href="https://github.com/VD171/VD-dropbear/wiki/tr-CONFIGURATION">Yapılandırma</a> ·
+  <a href="https://github.com/VD171/VD-dropbear/wiki/tr-ARCHITECTURE">Mimari</a> ·
+  <a href="https://github.com/VD171/VD-dropbear/wiki/tr-AI-AGENTS">Yapay zeka ajanları</a> ·
+  <a href="CHANGELOG.md">Changelog</a> ·
+  <a href="https://xdaforums.com/t/VD-Dropbear.4808524/">XDA thread</a>
+</p>
+
+> **Languages:** [English](README.md) · [العربية](README.ar.md) · [Čeština](README.cs.md) · [Deutsch](README.de.md) · [Español](README.es.md) · [فارسی](README.fa.md) · [Français](README.fr.md) · [हिन्दी](README.hi.md) · [Bahasa Indonesia](README.in.md) · [Italiano](README.it.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Nederlands](README.nl.md) · [Polski](README.pl.md) · [Português](README.pt.md) · [Русский](README.ru.md) · [Svenska](README.sv.md) · [ไทย](README.th.md) · [Türkçe](README.tr.md) · [Українська](README.uk.md) · [Tiếng Việt](README.vi.md) · [中文](README.zh.md)
+
 **KernelSU / APatch / Magisk modülü olarak paketlenmiş, bağımsız ve tamamen yapılandırılabilir bir
 [Dropbear](https://matt.ucc.asn.au/dropbear/) SSH sunucusu.** Kendi başına çalışır ve başka hiçbir modüle bağlı değildir.
 
 > ⚠️ **Bir oturum varsayılan olarak tam bir ROOT kabuğu açar.** Buna cihazın anahtarları gibi davranın:
 > parolalar yerine açık anahtarları tercih edin ve bağlantı noktasını açık İnternet'ten uzak tutun.
-
-Languages: English · [العربية](README.ar.md) · [Čeština](README.cs.md) · [Deutsch](README.de.md) · [Español](README.es.md) · [فارسی](README.fa.md) · [Français](README.fr.md) · [हिन्दी](README.hi.md) · [Bahasa](README.in.md) · [Italiano](README.it.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Nederlands](README.nl.md) · [Polski](README.pl.md) · [Português](README.pt.md) · [Русский](README.ru.md) · [Svenska](README.sv.md) · [ไทย](README.th.md) · [Türkçe](README.tr.md) · [Українська](README.uk.md) · [Tiếng Việt](README.vi.md) · [中文](README.zh.md)
 
 ## Neden
 
@@ -158,8 +169,16 @@ yeniden derler; böylece modül güncel kalır. Bkz. [`.github/workflows/`](.git
 ## Belgeler
 
 <!-- vd-docs -->
-Belgelerin tamamı [wiki](https://github.com/VD171/VD-dropbear/wiki) içinde ve [`docs/`](docs/) altında
-bulunur.
+- **[Wiki](https://github.com/VD171/VD-dropbear/wiki/tr-Home)**: çevrimiçi göz atılabilen tüm belgeler.
+- **[Kullanıcı kılavuzu](https://github.com/VD171/VD-dropbear/wiki/tr-USER-GUIDE)**: kurulum, anahtarlar, parolalar, bağlanma, dosya aktarımı, BFU/AFU.
+- **[Yapılandırma](https://github.com/VD171/VD-dropbear/wiki/tr-CONFIGURATION)**: her ayar, varsayılan değerleriyle.
+- **[Mimari](https://github.com/VD171/VD-dropbear/wiki/tr-ARCHITECTURE)** ve **[Dosya yapısı](https://github.com/VD171/VD-dropbear/wiki/tr-FILE-STRUCTURE)**: modülün ve arka plan hizmetinin nasıl çalıştığı ve her şeyin nerede olduğu.
+- **[Cihazınızdaki yapay zeka ajanları](https://github.com/VD171/VD-dropbear/wiki/tr-AI-AGENTS)**: SSH üzerinden özerk bir ajanı güvenle kullanma.
+- **[Derleme](https://github.com/VD171/VD-dropbear/wiki/tr-BUILDING)**: derleme ve Android crypt()/çapraz derleme hikâyesi.
+- **[Katkıda bulunma](CONTRIBUTING.md)** ve **[Güvenlik](SECURITY.md)**.
+- **[Changelog](CHANGELOG.md)** ve **[Davranış kuralları](CODE_OF_CONDUCT.md)**.
+
+Her wiki sayfası, yukarıdaki seçicideki her dile de çevrilmiştir; aynı kaynaklar [`docs/`](docs/) altında bulunur.
 <!-- /vd-docs -->
 
 ## Ayrıca bkz.

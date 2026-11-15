@@ -37,13 +37,24 @@
   <a href="https://github.com/VD171/VD-dropbear/releases"><img src="https://img.shields.io/github/v/release/VD171/VD-dropbear?color=1a7f37" alt="Release"></a>
 </p>
 
+<p align="center">
+  <a href="https://github.com/VD171/VD-dropbear/releases">Releases</a> ·
+  <a href="https://github.com/VD171/VD-dropbear/wiki/hi-Home">Wiki</a> ·
+  <a href="https://github.com/VD171/VD-dropbear/wiki/hi-USER-GUIDE">उपयोगकर्ता गाइड</a> ·
+  <a href="https://github.com/VD171/VD-dropbear/wiki/hi-CONFIGURATION">कॉन्फ़िगरेशन</a> ·
+  <a href="https://github.com/VD171/VD-dropbear/wiki/hi-ARCHITECTURE">आर्किटेक्चर</a> ·
+  <a href="https://github.com/VD171/VD-dropbear/wiki/hi-AI-AGENTS">AI एजेंट</a> ·
+  <a href="CHANGELOG.md">Changelog</a> ·
+  <a href="https://xdaforums.com/t/VD-Dropbear.4808524/">XDA thread</a>
+</p>
+
+> **Languages:** [English](README.md) · [العربية](README.ar.md) · [Čeština](README.cs.md) · [Deutsch](README.de.md) · [Español](README.es.md) · [فارسی](README.fa.md) · [Français](README.fr.md) · [हिन्दी](README.hi.md) · [Bahasa Indonesia](README.in.md) · [Italiano](README.it.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Nederlands](README.nl.md) · [Polski](README.pl.md) · [Português](README.pt.md) · [Русский](README.ru.md) · [Svenska](README.sv.md) · [ไทย](README.th.md) · [Türkçe](README.tr.md) · [Українська](README.uk.md) · [Tiếng Việt](README.vi.md) · [中文](README.zh.md)
+
 **एक स्वतंत्र, पूरी तरह कॉन्फ़िगर करने योग्य [Dropbear](https://matt.ucc.asn.au/dropbear/) SSH सर्वर**,
 जो KernelSU / APatch / Magisk मॉड्यूल के रूप में पैक किया गया है। यह अपने आप शुरू होता है और किसी दूसरे मॉड्यूल पर निर्भर नहीं है।
 
 > ⚠️ **लॉगिन डिफ़ॉल्ट रूप से एक पूर्ण ROOT शेल देता है।** इसे डिवाइस की चाबियों की तरह समझें:
 > पासवर्ड के बजाय पब्लिक कीज़ को प्राथमिकता दें, और पोर्ट को सार्वजनिक इंटरनेट से दूर रखें।
-
-Languages: English · [العربية](README.ar.md) · [Čeština](README.cs.md) · [Deutsch](README.de.md) · [Español](README.es.md) · [فارسی](README.fa.md) · [Français](README.fr.md) · [हिन्दी](README.hi.md) · [Bahasa](README.in.md) · [Italiano](README.it.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Nederlands](README.nl.md) · [Polski](README.pl.md) · [Português](README.pt.md) · [Русский](README.ru.md) · [Svenska](README.sv.md) · [ไทย](README.th.md) · [Türkçe](README.tr.md) · [Українська](README.uk.md) · [Tiếng Việt](README.vi.md) · [中文](README.zh.md)
 
 ## क्यों
 
@@ -148,8 +159,16 @@ rsync, बिना किसी `adb_enabled` संकेत के, बिन
 ## प्रलेखन
 
 <!-- vd-docs -->
-पूरा प्रलेखन [विकी](https://github.com/VD171/VD-dropbear/wiki) में और
-[`docs/`](docs/) के अंतर्गत है।
+- **[Wiki](https://github.com/VD171/VD-dropbear/wiki/hi-Home)**: पूरा प्रलेखन, ऑनलाइन देखने योग्य।
+- **[उपयोगकर्ता गाइड](https://github.com/VD171/VD-dropbear/wiki/hi-USER-GUIDE)**: इंस्टॉल, कीज़, पासवर्ड, कनेक्ट करना, फ़ाइल ट्रांसफ़र, BFU/AFU।
+- **[कॉन्फ़िगरेशन](https://github.com/VD171/VD-dropbear/wiki/hi-CONFIGURATION)**: हर सेटिंग, डिफ़ॉल्ट मानों के साथ।
+- **[आर्किटेक्चर](https://github.com/VD171/VD-dropbear/wiki/hi-ARCHITECTURE)** और **[फ़ाइल संरचना](https://github.com/VD171/VD-dropbear/wiki/hi-FILE-STRUCTURE)**: मॉड्यूल और डेमन कैसे काम करते हैं, और हर चीज़ कहाँ रहती है।
+- **[आपके डिवाइस पर AI एजेंट](https://github.com/VD171/VD-dropbear/wiki/hi-AI-AGENTS)**: SSH पर एक स्वायत्त एजेंट का सुरक्षित उपयोग।
+- **[बिल्ड](https://github.com/VD171/VD-dropbear/wiki/hi-BUILDING)**: बिल्ड, और Android के crypt()/क्रॉस-कंपाइल की कहानी।
+- **[योगदान](CONTRIBUTING.md)** और **[सुरक्षा](SECURITY.md)**।
+- **[Changelog](CHANGELOG.md)** और **[आचार संहिता](CODE_OF_CONDUCT.md)**।
+
+विकी का हर पेज ऊपर दिए स्विचर की हर भाषा में भी अनूदित है; वही स्रोत [`docs/`](docs/) के अंतर्गत रहते हैं।
 <!-- /vd-docs -->
 
 ## यह भी देखें

@@ -37,13 +37,24 @@
   <a href="https://github.com/VD171/VD-dropbear/releases"><img src="https://img.shields.io/github/v/release/VD171/VD-dropbear?color=1a7f37" alt="Release"></a>
 </p>
 
+<p align="center">
+  <a href="https://github.com/VD171/VD-dropbear/releases">Releases</a> ·
+  <a href="https://github.com/VD171/VD-dropbear/wiki/ar-Home">Wiki</a> ·
+  <a href="https://github.com/VD171/VD-dropbear/wiki/ar-USER-GUIDE">دليل المستخدم</a> ·
+  <a href="https://github.com/VD171/VD-dropbear/wiki/ar-CONFIGURATION">الإعداد</a> ·
+  <a href="https://github.com/VD171/VD-dropbear/wiki/ar-ARCHITECTURE">البنية</a> ·
+  <a href="https://github.com/VD171/VD-dropbear/wiki/ar-AI-AGENTS">وكلاء الذكاء الاصطناعي</a> ·
+  <a href="CHANGELOG.md">Changelog</a> ·
+  <a href="https://xdaforums.com/t/VD-Dropbear.4808524/">XDA thread</a>
+</p>
+
+> **Languages:** [English](README.md) · [العربية](README.ar.md) · [Čeština](README.cs.md) · [Deutsch](README.de.md) · [Español](README.es.md) · [فارسی](README.fa.md) · [Français](README.fr.md) · [हिन्दी](README.hi.md) · [Bahasa Indonesia](README.in.md) · [Italiano](README.it.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Nederlands](README.nl.md) · [Polski](README.pl.md) · [Português](README.pt.md) · [Русский](README.ru.md) · [Svenska](README.sv.md) · [ไทย](README.th.md) · [Türkçe](README.tr.md) · [Українська](README.uk.md) · [Tiếng Việt](README.vi.md) · [中文](README.zh.md)
+
 **خادم SSH مستقل وقابل للتهيئة بالكامل يعتمد على [Dropbear](https://matt.ucc.asn.au/dropbear/)**،
 معبّأ كوحدة لـ KernelSU / APatch / Magisk. يعمل بمفرده ولا يعتمد على أي وحدة أخرى.
 
 > ⚠️ **يمنح تسجيل الدخول افتراضيًا صدفة ROOT كاملة.** تعامل مع هذا كأنه مفاتيح الجهاز:
 > فضّل المفاتيح العامة على كلمات المرور، وأبقِ المنفذ بعيدًا عن شبكة الإنترنت العامة.
-
-Languages: English · [العربية](README.ar.md) · [Čeština](README.cs.md) · [Deutsch](README.de.md) · [Español](README.es.md) · [فارسی](README.fa.md) · [Français](README.fr.md) · [हिन्दी](README.hi.md) · [Bahasa](README.in.md) · [Italiano](README.it.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Nederlands](README.nl.md) · [Polski](README.pl.md) · [Português](README.pt.md) · [Русский](README.ru.md) · [Svenska](README.sv.md) · [ไทย](README.th.md) · [Türkçe](README.tr.md) · [Українська](README.uk.md) · [Tiếng Việt](README.vi.md) · [中文](README.zh.md)
 
 ## لماذا
 
@@ -145,8 +156,16 @@ PTY التفاعلية. يتتبع سير عمل مجدول المصدر ويع�
 ## التوثيق
 
 <!-- vd-docs -->
-التوثيق الكامل موجود في [الويكي](https://github.com/VD171/VD-dropbear/wiki) وتحت
-[`docs/`](docs/).
+- **[Wiki](https://github.com/VD171/VD-dropbear/wiki/ar-Home)**: التوثيق الكامل، قابل للتصفح عبر الإنترنت.
+- **[دليل المستخدم](https://github.com/VD171/VD-dropbear/wiki/ar-USER-GUIDE)**: التثبيت والمفاتيح وكلمات المرور والاتصال ونقل الملفات وBFU/AFU.
+- **[الإعداد](https://github.com/VD171/VD-dropbear/wiki/ar-CONFIGURATION)**: كل إعداد، مع القيم الافتراضية.
+- **[البنية](https://github.com/VD171/VD-dropbear/wiki/ar-ARCHITECTURE)** و**[بنية الملفات](https://github.com/VD171/VD-dropbear/wiki/ar-FILE-STRUCTURE)**: كيف تعمل الوحدة والداعم، وأين يوجد كل شيء.
+- **[وكلاء الذكاء الاصطناعي على جهازك](https://github.com/VD171/VD-dropbear/wiki/ar-AI-AGENTS)**: استخدام وكيل مستقل عبر SSH بأمان.
+- **[البناء](https://github.com/VD171/VD-dropbear/wiki/ar-BUILDING)**: البناء، وقصة crypt()/الترجمة المتقاطعة على أندرويد.
+- **[المساهمة](CONTRIBUTING.md)** و**[الأمان](SECURITY.md)**.
+- **[Changelog](CHANGELOG.md)** و**[مدونة قواعد السلوك](CODE_OF_CONDUCT.md)**.
+
+كل صفحة من الويكي مترجمة أيضًا إلى كل لغة في المبدّل أعلاه؛ المصادر نفسها موجودة تحت [`docs/`](docs/).
 <!-- /vd-docs -->
 
 ## انظر أيضًا
