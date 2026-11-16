@@ -37,6 +37,7 @@
     checkBtn: 'Check for updates', updateNow: 'Update now', automation: 'Automation',
     onOpen: 'On WebUI open', onOpenSub: 'Runs VDLU in the background (applies LIVE, stages the <code>.so</code> for the reboot).',
     onReboot: 'On reboot', onRebootSub: 'In pre-zygote applies everything, including the <code>.so</code>, with no extra reboot.',
+    bootRetryEvery: 'Boot retry every (s)', bootRetryUpTo: 'Boot retry up to (min)', bootRetryHint: 'If the device boots offline, keep retrying the manifest fetch. 0 min = off.',
     source: 'Source', saveSource: 'Save source', savedDot: 'Saved.',
     savedToast: 'saved', saveFail: 'save failed', sourceSaved: 'source saved',
     bootstrapping: 'Preparing updater…', bootstrapSub: 'one-time download of the fetcher', bootstrapFail: 'Could not prepare the updater',
@@ -457,6 +458,9 @@
       + '    <span class="vdlu-sw" data-cfg="auto_on_webui_open" role="switch" tabindex="0"></span></div>'
       + '  <div class="vdlu-tg"><div class="vdlu-tg-tx"><b>' + esc(T('onReboot')) + '</b><small>' + T('onRebootSub') + '</small></div>'
       + '    <span class="vdlu-sw" data-cfg="auto_on_reboot" role="switch" tabindex="0"></span></div>'
+      + '  <label class="vdlu-fld"><span>' + esc(T('bootRetryEvery')) + '</span><input class="vdlu-num" data-cfg="boot_retry_interval" type="number" min="5" step="5" inputmode="numeric"></label>'
+      + '  <label class="vdlu-fld"><span>' + esc(T('bootRetryUpTo')) + '</span><input class="vdlu-num" data-cfg="boot_retry_minutes" type="number" min="0" step="1" inputmode="numeric"></label>'
+      + '  <div class="vdlu-hint">' + esc(T('bootRetryHint')) + '</div>'
       + '</div>'
       + '<div class="vdlu-sec">'
       + '  <div class="vdlu-sec-ttl">' + esc(T('source')) + '</div>'
@@ -481,9 +485,18 @@
       sw.addEventListener('click', function () { swToggle(sw); });
       sw.addEventListener('keydown', function (e) { if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); swToggle(sw); } });
     });
-    [].forEach.call(panelEl.querySelectorAll('.vdlu-fld [data-cfg]'), function (f) {
+    [].forEach.call(panelEl.querySelectorAll('.vdlu-fld [data-cfg]:not(.vdlu-num)'), function (f) {
       var markDirty = function () { panelEl.querySelector('[data-a=save]').hidden = false; panelEl.querySelector('[data-a=saved]').hidden = true; };
       f.addEventListener('input', markDirty); f.addEventListener('change', markDirty);
+    });
+    // numeric config fields (boot retry) save immediately on change, like the toggles; revert on bad input.
+    [].forEach.call(panelEl.querySelectorAll('.vdlu-num[data-cfg]'), function (n) {
+      n.addEventListener('change', function () {
+        var k = n.getAttribute('data-cfg'), v = String(n.value).trim();
+        if (!/^\d+$/.test(v)) { n.value = ((cfgCache || { map: {} }).map || {})[k] || ''; return; }
+        var p = {}; p[k] = v;
+        writeConfig(p).then(function () { toastMsg(T('savedToast')); }, function () { n.value = ((cfgCache || { map: {} }).map || {})[k] || ''; toastMsg(T('saveFail')); });
+      });
     });
 
     return readConfig().then(fillPanelFromConfig);

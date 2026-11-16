@@ -29,6 +29,25 @@ All notable, real and significant changes to **VD Dropbear** are recorded here.
 The format follows [Keep a Changelog](https://keepachangelog.com/); versions are tagged in the
 module (`module.prop`) and on GitHub Releases.
 
+## [v1.05] (2026-11-16)
+
+### Fixed
+- **Public-key login now works in the default (AFU) mode.** Dropbear checks the ownership and permissions of
+  every parent directory of `authorized_keys` and rejects any that is group-writable or not owned by root;
+  Android's `/data` tree is system-owned and group-writable (`0771`), so a keys file stored there (where the
+  module keeps its secrets, on credential- or device-encrypted storage) was rejected and every key was
+  refused with `Permission denied (publickey)`, while password login still worked. The daemon now reaches the
+  keys through a root-owned, `0700` shim on `/dev` (tmpfs), so the directory chain Dropbear walks is clean
+  while the real key file's own ownership and permissions are still enforced. Reported in #1; thanks for the
+  precise diagnosis and the minimal reproducer.
+
+### Added
+- **Boot update retry-until-online.** If the device boots offline, the flashless updater keeps retrying the
+  update check instead of giving up until the next boot. It only retries a genuine network failure (never a
+  bad manifest, signature or downgrade), sleeps between tries so it never busies the CPU, and runs in the
+  background so boot is never delayed. Two new options on the Updates tab set the pace: **Boot retry every**
+  (seconds between tries, default 30) and **Boot retry up to** (minutes, default 15; `0` turns it off).
+
 ## [v1.04] (2026-11-16)
 
 ### Added

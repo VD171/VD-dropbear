@@ -26,4 +26,5 @@
 # a reinstall keeps your settings and keys. To wipe them completely, remove by hand:
 #   rm -rf /data/adb/vddropbear /data/misc_ce/0/vddropbear
 pkill -x vddropbear 2>/dev/null
+rm -rf /dev/vddropbear 2>/dev/null   # tmpfs authorized_keys shim (gone on reboot anyway)
 exit 0

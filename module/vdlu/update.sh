@@ -189,18 +189,32 @@ json_flatten() {
 flat_get() { grep -m1 "^$1$TAB" "$WORK/manifest.flat" 2>/dev/null | cut -f2; }
 
 # ---- network --------------------------------------------------------------
-fetch_url() { # url dest
+fetch_url() { # url dest -> sets FETCH_RC (transport exit code) and returns it
 	local url="$1" dest="$2" src
+	FETCH_RC=0
 	case "$url" in
-		file://*) src=${url#file://}; cp -f "$src" "$dest" 2>/dev/null ;;
+		file://*) src=${url#file://}; cp -f "$src" "$dest" 2>/dev/null; FETCH_RC=$? ;;
 		http://*|https://*)
 			if [ -n "$CURL" ]; then
 				if [ -n "$CAPATH" ]; then "$CURL" -fsSL --capath "$CAPATH" --max-filesize "$MAX_FILE_BYTES" -o "$dest" "$url"
 				else "$CURL" -fsSL --max-filesize "$MAX_FILE_BYTES" -o "$dest" "$url"; fi
-			elif [ -n "$WGET" ]; then "$WGET" -q -O "$dest" "$url"
-			else echo "VDLU: no curl/wget available" >&2; return 1; fi ;;
-		*) echo "VDLU: unsupported source url: $url" >&2; return 1 ;;
+				FETCH_RC=$?
+			elif [ -n "$WGET" ]; then "$WGET" -q -O "$dest" "$url"; FETCH_RC=$?
+			else echo "VDLU: no curl/wget available" >&2; FETCH_RC=1; return 1; fi ;;
+		*) echo "VDLU: unsupported source url: $url" >&2; FETCH_RC=1; return 1 ;;
 	esac
+	return "$FETCH_RC"
+}
+
+# A failed manifest fetch is worth a boot retry ONLY when it is a transport/connectivity failure (offline),
+# never a server that answered with an error or a bad/invalid manifest (deterministic - retry cannot fix it).
+# Classify by the fetcher exit captured in FETCH_RC: curl resolve/connect/timeout/ssl/empty-reply/recv.
+fetch_offline() {
+	case "$FETCH_RC" in
+		6|7|28|35|52|56) return 0 ;;
+		4) [ -n "$WGET" ] && [ -z "$CURL" ] && return 0 ;;
+	esac
+	return 1
 }
 
 dl_manifest() {
@@ -702,10 +716,30 @@ cmd_resume() {
 
 cmd_boot() {
 	acquire_lock
+	local rc interval cap deadline
 	if [ -f "$TARGET" ]; then
-		run_pipeline 1; local rc=$?; release_lock; return $rc
+		run_pipeline 1; rc=$?; release_lock; return "$rc"
 	fi
-	do_diff 1 || { local rc=$?; release_lock; return $rc; }
+	# Boot-only retry-until-online, bounded. If the manifest fetch fails because the device booted OFFLINE,
+	# sleep and retry up to boot_retry_minutes (0 = disabled = one-shot). Never retries a deterministic
+	# failure (bad manifest / bad sig / downgrade): fetch_offline gates on the transport exit code. The
+	# sleep makes it a zero-busy-loop; service.sh backgrounds this, so boot never stalls. Lock is held for
+	# the window (a pending boot update serializes against a manual run; check/auto-open do not take it).
+	interval=$(cfg boot_retry_interval 30); isnum "$interval" || interval=30
+	[ "$interval" -ge 5 ] || interval=5
+	cap=$(cfg boot_retry_minutes 0); isnum "$cap" || cap=0
+	do_diff 1; rc=$?
+	if [ "$rc" != 0 ] && [ "$cap" -gt 0 ] && fetch_offline; then
+		deadline=$(( $(date +%s) + cap * 60 ))
+		while [ "$(date +%s)" -lt "$deadline" ]; do
+			sleep "$interval"
+			do_diff 1; rc=$?
+			[ "$rc" = 0 ] && break
+			fetch_offline || break                    # online now but a deterministic failure -> stop
+		done
+		[ "$rc" = 0 ] || echo "VDLU: boot manifest still unreachable, gave up after ${cap}min" >&2
+	fi
+	[ "$rc" = 0 ] || { release_lock; return "$rc"; }
 	if ! work_to_do; then
 		write_current "$WORK/manifest.json"
 		write_journal diff DONE ""
@@ -713,7 +747,7 @@ cmd_boot() {
 		release_lock; return 0
 	fi
 	write_journal diff PLANNED ""
-	run_pipeline 1; local rc=$?; release_lock; return $rc
+	run_pipeline 1; rc=$?; release_lock; return "$rc"
 }
 
 cmd_status() {

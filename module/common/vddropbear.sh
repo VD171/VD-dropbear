@@ -143,6 +143,24 @@ vddb_ensure_hostkey() {
     [ -s "$_k" ]
 }
 
+# --- authorized_keys shim --------------------------------------------------
+# Dropbear's checkpubkeyperms() walks every parent of the authorized_keys path
+# and rejects any that is group/other-writable or not owned by root/the user.
+# Android's /data tree is system-owned and group-writable (0771), so a keys file
+# under /data (CE or DE) is rejected and pubkey auth fails. Expose it through a
+# root-owned 0700 shim on tmpfs (/dev): the parent walk sees a clean /dev -> /
+# chain, while stat() follows the link so the real key file's ownership/perms
+# are still enforced. tmpfs is recreated each start (service.sh), so it persists
+# across reboots in practice. Falls back to the real path if the shim can't be made.
+vddb_authkeys_link() {
+    _real="$1"; _shim=/dev/vddropbear
+    if mkdir -p "$_shim" 2>/dev/null && chmod 700 "$_shim" 2>/dev/null; then
+        chown 0:0 "$_shim" 2>/dev/null
+        ln -sfn "$_real" "$_shim/authorized_keys" 2>/dev/null && { echo "$_shim/authorized_keys"; return 0; }
+    fi
+    echo "$_real"
+}
+
 # --- argument vector -------------------------------------------------------
 # Emits the dropbear argv (one token per line) from the loaded config.
 # The patched binary honours DROPBEAR_AUTHKEYS / DROPBEAR_PASSWD_FILE / DROPBEAR_IDENT
@@ -198,7 +216,7 @@ vddb_export_env() {
     # Public-key auth: point dropbear at the keys file only when the toggle is on.
     # With it off, no authorized_keys is exported, so no key authenticates.
     if [ "$PUBKEY_AUTH" = "1" ]; then
-        export DROPBEAR_AUTHKEYS="$_sdir/authorized_keys"   # honoured by the VD patch
+        export DROPBEAR_AUTHKEYS="$(vddb_authkeys_link "$_sdir/authorized_keys")"
     else
         unset DROPBEAR_AUTHKEYS
     fi
