@@ -41,6 +41,7 @@
     savedToast: 'saved', saveFail: 'save failed', sourceSaved: 'source saved',
     bootstrapping: 'Preparing updater…', bootstrapSub: 'one-time download of the fetcher', bootstrapFail: 'Could not prepare the updater',
     searching: 'Searching…', upToDate: 'Up to date', nothingNew: 'nothing new',
+      ahead: 'Newer than the feed', aheadSub: 'your version is ahead of the published update',
     updateAvail: 'Update available', install: 'install', fileOne: 'file', fileMany: 'files',
     requiresReboot: 'requires reboot', checkFail: 'Check failed', ksuUnavailable: 'KSU API unavailable',
     pendingUpdate: 'Pending update', notNow: 'Not now', srcPlaceholder: 'https://…/&lt;module&gt;'
@@ -66,7 +67,7 @@
 
   var elToast = null, elBanner = null, panelEl = null;
   var pollTimer = null, cancelRequested = false, running = false;
-  var lastJournal = null, emptyTicks = 0, cfgCache = null;
+  var lastJournal = null, emptyTicks = 0, staleTicks = 0, lastSig = null, cfgCache = null;
 
   function ex(cmd) {
     if (typeof C.exec === 'function') return C.exec(cmd);
@@ -109,6 +110,9 @@
   }
   function cancelFilePresent() {
     return ex('[ -e ' + q(C.vdluDir + '/cancel') + ' ] && echo P || echo G').then(function (o) { return o.trim() === 'P'; }, function () { return false; });
+  }
+  function engineRunning() {
+    return ex('[ -d ' + q(C.vdluDir + '/lock.d') + ' ] && echo R || echo G').then(function (o) { return String(o).trim() === 'R'; }, function () { return false; });
   }
 
   // ---- config (key=value, §5): reads all, changes only touched keys, preserves order/unknowns
@@ -293,12 +297,27 @@
         });
         return;
       }
+      // stale-journal guard: a journal frozen on the same values is either a slow single-blob fetch OR an
+      // engine that died mid-run (killed/crashed) without a terminal state. After staleTicks the lock is the
+      // arbiter: alive => keep waiting (reset), dead => surface it instead of polling "updating" forever.
+      var sig = j.state + '|' + (j.phase || '') + '|' + (j.done || 0) + '|' + (j.total || 0) + '|' + (j.current || '');
+      if (sig === lastSig) {
+        staleTicks++;
+        if (staleTicks >= 20) {
+          engineRunning().then(function (alive) {
+            if (alive) { staleTicks = 0; renderToast(j, { buttons: progressButtons() }); return; }
+            stopPoll(); running = false;
+            renderToast(j, { kind: 'err', line: '<b>' + esc(T('error')) + '</b> · ' + esc(T('engineFail')), buttons: [{ label: T('resume'), cls: 'pri', on: function () { resume(); } }, { label: T('close'), cls: 'ghost', on: hideToast }] });
+          });
+          return;
+        }
+      } else { staleTicks = 0; lastSig = sig; }
       renderToast(j, { buttons: progressButtons() });
     }, function () {});
   }
 
   function startPoll() {
-    stopPoll(); emptyTicks = 0;
+    stopPoll(); emptyTicks = 0; staleTicks = 0; lastSig = null;
     pollTimer = setInterval(tick, C.pollMs);
     tick();
   }
@@ -483,20 +502,38 @@
   }
   function truthy(v) { v = String(v == null ? '' : v).trim().toLowerCase(); return v === '1' || v === 'true' || v === 'on' || v === 'yes'; }
 
+  function renderCheckResult(r, err) {
+    if (!panelEl) return;                               // no panel mounted: stay quiet (auto-open)
+    var box = panelEl.querySelector('[data-a=result]');
+    if (!box) return;
+    box.hidden = false; box.className = 'vdlu-result';
+    if (err) { box.classList.add('err'); box.innerHTML = '<b>' + esc(T('checkFail')) + '</b><br>' + esc(err && err.message ? err.message : err); return; }
+    if (r.ahead) { box.classList.add('ok'); box.innerHTML = '<b>' + esc(T('ahead')) + '</b> · ' + esc(T('aheadSub')) + (r.from != null ? ' (v' + esc(r.from) + (r.to != null ? ' &gt; v' + esc(r.to) : '') + ')' : ''); return; }
+    if (!r.update) { box.classList.add('ok'); box.innerHTML = '<b>' + esc(T('upToDate')) + '</b> · ' + esc(T('nothingNew')) + (r.from != null ? ' (v' + esc(r.from) + ')' : ''); return; }
+    box.classList.add('upd');
+    box.innerHTML = '<b>' + esc(T('updateAvail')) + '</b><br>'
+      + (r.from != null ? 'v' + esc(r.from) + ' → ' : esc(T('install')) + ' → ') + 'v' + esc(r.to)
+      + ' · ' + esc(r.fetch) + ' ' + (Number(r.fetch) === 1 ? esc(T('fileOne')) : esc(T('fileMany')))
+      + (r.reboot ? ' · <span class="vdlu-tag">' + esc(T('requiresReboot')) + '</span>' : '')
+      + '<div class="vdlu-row" style="margin-top:10px"><button class="vdlu-btn pri" type="button" data-a="run2">' + esc(T('updateNow')) + '</button></div>';
+    var b = box.querySelector('[data-a=run2]'); if (b) b.addEventListener('click', function () { startUpdate(); });
+  }
   function doCheck() {
+    if (!panelEl) return;
     var box = panelEl.querySelector('[data-a=result]');
     box.hidden = false; box.className = 'vdlu-result'; box.innerHTML = '<span class="vdlu-spin"></span> ' + esc(T('searching'));
-    check().then(function (r) {
-      if (!r.update) { box.classList.add('ok'); box.innerHTML = '<b>' + esc(T('upToDate')) + '</b> · ' + esc(T('nothingNew')) + (r.from != null ? ' (v' + esc(r.from) + ')' : ''); return; }
-      box.classList.add('upd');
-      box.innerHTML = '<b>' + esc(T('updateAvail')) + '</b><br>'
-        + (r.from != null ? 'v' + esc(r.from) + ' → ' : esc(T('install')) + ' → ') + 'v' + esc(r.to)
-        + ' · ' + esc(r.fetch) + ' ' + (Number(r.fetch) === 1 ? esc(T('fileOne')) : esc(T('fileMany')))
-        + (r.reboot ? ' · <span class="vdlu-tag">' + esc(T('requiresReboot')) + '</span>' : '')
-        + '<div class="vdlu-row" style="margin-top:10px"><button class="vdlu-btn pri" type="button" data-a="run2">' + esc(T('updateNow')) + '</button></div>';
-      var b = box.querySelector('[data-a=run2]'); if (b) b.addEventListener('click', function () { startUpdate(); });
+    check().then(function (r) { renderCheckResult(r); }, function (e) { renderCheckResult(null, e); });
+  }
+  // auto_on_webui_open: quiet check first; the persistent progress toast (and auto-apply) only when a real
+  // download will happen (update && fetch>0). Otherwise the result shows inline in the panel - no toast left.
+  function autoUpdate() {
+    return check().then(function (r) {
+      if (r.update && Number(r.fetch) > 0) { startUpdate(); return; }
+      hideToast();                                      // clear the one-time bootstrap toast, if any
+      renderCheckResult(r);
     }, function (e) {
-      box.classList.add('err'); box.innerHTML = '<b>' + esc(T('checkFail')) + '</b><br>' + esc(e && e.message ? e.message : e);
+      hideToast();
+      renderCheckResult(null, e);
     });
   }
 
@@ -528,7 +565,7 @@
             buttons: [{ label: T('resume'), cls: 'pri', on: function () { resume(); } }, { label: T('notNow'), cls: 'ghost', on: hideToast }]
           });
         }
-        if (truthy((cfg.map || {}).auto_on_webui_open) && (!j || isTerminal(j.state))) startUpdate();
+        if (truthy((cfg.map || {}).auto_on_webui_open) && (!j || isTerminal(j.state))) autoUpdate();
         return j;
       });
     });

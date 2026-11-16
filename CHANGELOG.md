@@ -29,6 +29,26 @@ All notable, real and significant changes to **VD Dropbear** are recorded here.
 The format follows [Keep a Changelog](https://keepachangelog.com/); versions are tagged in the
 module (`module.prop`) and on GitHub Releases.
 
+## [v1.04] (2026-11-16)
+
+### Added
+- **The WebUI is organised into tabs.** Status, Settings, Keys, Passwords and Updates each live on their
+  own tab instead of one long scroll, so the page is easier to read on a phone. The root-shell warning
+  stays pinned above the tabs.
+
+### Fixed
+- **The Updates panel no longer gets stuck on "preparing updater".** A finished update run that left no
+  terminal journal entry kept the progress toast spinning; the updater widget now detects a stalled run and
+  clears it or offers to resume.
+- **A check no longer reports "check failed" when the device is newer than the feed.** Being ahead of the
+  published update is a benign state; the updater now shows "newer than the feed" instead of an error (more
+  visible now that the open-the-WebUI check is on by default).
+
+### Changed
+- **Checking for updates when the WebUI opens is now on by default.** New installs enable
+  `auto_on_webui_open`, so the module looks for a flashless update each time you open its WebUI; existing
+  installs keep whatever they had. Turn it off in the config if you prefer manual checks.
+
 ## [v1.03] (2026-11-15)
 
 ### Added

@@ -114,6 +114,16 @@
   footer{color:var(--muted);font-size:12px;text-align:center;margin-top:22px;line-height:1.7}
   footer a{color:var(--green)}
   .sub{color:var(--muted);font-size:12.5px;margin:-4px 0 12px}
+  .tabs{display:flex;gap:2px;overflow-x:auto;margin:14px 0 2px;border-bottom:1px solid var(--line);
+    -webkit-overflow-scrolling:touch;scrollbar-width:none}
+  .tabs::-webkit-scrollbar{display:none}
+  .tabs button{flex:1 0 auto;background:transparent;border:0;border-bottom:2px solid transparent;
+    border-radius:0;color:var(--muted);padding:10px 14px;font-size:13px;font-weight:600;white-space:nowrap}
+  .tabs button:hover{color:var(--fg);border-color:transparent}
+  .tabs button.active{color:var(--fg);border-bottom-color:var(--green)}
+  .tabpanel{display:none;margin-top:12px}
+  .tabpanel.active{display:block;animation:fade .18s ease}
+  @keyframes fade{from{opacity:0;transform:translateY(3px)}to{opacity:1;transform:none}}
 </style>
 <link rel="stylesheet" href="vdlu.css">
 </head>
@@ -131,8 +141,16 @@
   the open internet without a reason.
 </div>
 
+<nav class="tabs" id="tabs">
+  <button class="active" data-tab="status">Status</button>
+  <button data-tab="settings">Settings</button>
+  <button data-tab="keys">Keys</button>
+  <button data-tab="pw">Passwords</button>
+  <button data-tab="updates">Updates</button>
+</nav>
+
 <!-- STATUS -->
-<section class="card">
+<section class="card tabpanel active" id="tab-status">
   <h2>Status</h2>
   <div class="status-row">
     <span class="dot" id="dot"></span>
@@ -156,7 +174,7 @@
 </section>
 
 <!-- SETTINGS -->
-<section class="card">
+<section class="card tabpanel" id="tab-settings">
   <h2>Settings</h2>
   <div class="sub">Changes are saved to the config; press <b>Save &amp; restart</b> to apply.</div>
   <div id="toggles"></div>
@@ -168,7 +186,7 @@
 </section>
 
 <!-- KEYS -->
-<section class="card">
+<section class="card tabpanel" id="tab-keys">
   <h2>Authorized keys</h2>
   <ul class="list" id="keyList"><li class="empty">loading…</li></ul>
   <label class="field" style="margin-top:12px">
@@ -179,7 +197,7 @@
 </section>
 
 <!-- PASSWORDS -->
-<section class="card">
+<section class="card tabpanel" id="tab-pw">
   <h2>Password accounts</h2>
   <div class="sub">A password login is a login for the account you pick (<b>root</b> by default). Hashes use PBKDF2-HMAC-SHA256,
     computed in this page; the password itself never leaves it.</div>
@@ -200,7 +218,7 @@
 </section>
 
 <!-- UPDATES (VDLU) -->
-<section class="card">
+<section class="card tabpanel" id="tab-updates">
   <h2>Updates</h2>
   <div class="sub">Flashless incremental updates: fetch only what changed, verified and applied without reflashing the whole zip.</div>
   <div id="vdlu-updates"></div>
@@ -423,6 +441,13 @@ $("#btnReload").onclick=loadConfig;
 $("#btnAddKey").onclick=addKey;
 $("#btnSetPw").onclick=setPw;
 ["#pwPass","#pwPass2"].forEach(s=>$(s).addEventListener("input",updatePwMeter));
+
+/* ---- tabs ---- */
+document.querySelectorAll("#tabs button").forEach(b=>b.onclick=()=>{
+  const t=b.dataset.tab;
+  document.querySelectorAll("#tabs button").forEach(x=>x.classList.toggle("active",x===b));
+  document.querySelectorAll(".tabpanel").forEach(p=>p.classList.toggle("active",p.id==="tab-"+t));
+});
 
 /* ---- VDLU flashless updater ---- */
 function vdluExec(cmd){

@@ -2,6 +2,6 @@ profile=hardened
 source=https://vd171.github.io/VD-Modules/VD-dropbear
 channel=stable
 auto_on_reboot=1
-auto_on_webui_open=0
+auto_on_webui_open=1
 pubkey_dir=keyring
 allow_metered=0

@@ -242,7 +242,7 @@ validate_meta() {
 	[ -z "$ch" ] || [ "$ch" = "$wantch" ] || { echo "VDLU: channel mismatch ($ch != $wantch)" >&2; return 1; }
 	prof=$(cfg profile trusted)
 	if [ "$prof" = hardened ] && [ -f "$CURRENT" ] && isnum "$FROMVER"; then
-		[ "$ver" -ge "$FROMVER" ] || { echo "VDLU: downgrade blocked ($ver < $FROMVER)" >&2; return 1; }
+		[ "$ver" -ge "$FROMVER" ] || { echo "VDLU: downgrade blocked ($ver < $FROMVER)" >&2; return 4; }
 	fi
 	return 0
 }
@@ -614,8 +614,8 @@ run_pipeline() { # allow_swap
 }
 
 # ---- diff -----------------------------------------------------------------
-do_diff() { # persist(0|1)
-	local persist="$1"
+do_diff() { # persist(0|1); rc: 2 fetch/parse, 3 verify/meta fail, 4 device AHEAD of feed (benign)
+	local persist="$1" _vr
 	rm -rf "$WORK"; mkdir -p "$WORK"
 	dl_manifest || { echo "VDLU: manifest download failed" >&2; return 2; }
 	json_flatten "$WORK/manifest.json" >"$WORK/manifest.flat" 2>/dev/null || { echo "VDLU: manifest parse failed" >&2; return 2; }
@@ -628,7 +628,7 @@ do_diff() { # persist(0|1)
 		isnum "$FROMVER" || FROMVER=0
 	fi
 	verify_manifest || return 3
-	validate_meta || return 3
+	validate_meta || { _vr=$?; [ "$_vr" = 4 ] && return 4; return 3; }
 	build_plan "$WORK/manifest.flat" >"$WORK/plan.raw"
 	finalize_plan "$WORK/plan.raw" >"$WORK/plan.work"
 	grep "^delete/[0-9]" "$WORK/manifest.flat" 2>/dev/null | cut -f2 >"$WORK/plan.del"
@@ -652,7 +652,7 @@ work_to_do() { # uses $WORK/plan.work + $WORK/plan.del
 
 # ---- commands -------------------------------------------------------------
 cmd_check() {
-	do_diff 0 || exit $?
+	do_diff 0 || { _dr=$?; [ "$_dr" = 4 ] && { printf '{"update":false,"ahead":true,"from":%s,"to":%s}\n' "$FROMVER" "$TGTVER"; exit 0; }; exit "$_dr"; }
 	local pend reb del fetchc upd rb
 	pend=$(awk -F'\t' '$2=="pending"{n++}END{print n+0}' "$WORK/plan.work")
 	reb=$(awk -F'\t' '$2=="pending" && $1=="reboot"{n++}END{print n+0}' "$WORK/plan.work")
