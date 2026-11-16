@@ -29,6 +29,17 @@ All notable, real and significant changes to **VD Dropbear** are recorded here.
 The format follows [Keep a Changelog](https://keepachangelog.com/); versions are tagged in the
 module (`module.prop`) and on GitHub Releases.
 
+## [v1.06] (2026-11-16)
+
+### Changed
+- **The boot update retry is now patient and battery-friendly.** When the device boots offline, the flashless
+  updater waits for the network without holding anything: no lock (a manual check or update stays unblocked)
+  and no wakelock, so it costs essentially no battery while it waits. It only spends a fetch once a cheap
+  routing-table probe shows the network is actually up (no blind radio wake-ups), and a connect timeout keeps
+  it from hanging on a captive portal. Because nothing is pinned, the cap is now generous: **`boot_retry_minutes`
+  defaults to 1440** (24 hours of awake-time, so it simply catches you the next time you connect; `0` still
+  turns it off). `boot_retry_interval` stays 30s.
+
 ## [v1.05] (2026-11-16)
 
 ### Fixed

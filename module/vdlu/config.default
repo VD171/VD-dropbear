@@ -6,4 +6,4 @@ auto_on_webui_open=1
 pubkey_dir=keyring
 allow_metered=0
 boot_retry_interval=30
-boot_retry_minutes=15
+boot_retry_minutes=1440

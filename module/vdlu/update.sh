@@ -101,21 +101,23 @@ init_paths() {
 # ---- lock -----------------------------------------------------------------
 # mkdir-based lock (portable: toybox `flock` only takes the fd-form and its fd handling is
 # unreliable on Android, so flock is NOT used). mkdir is atomic; stale-lock recovery by PID.
-acquire_lock() {
+acquire_lock_try() {   # non-blocking: 0 = acquired, 1 = busy (NO exit). The patient boot retry backs off on 1.
 	local opid
 	if ! mkdir "$VDLU_DIR/lock.d" 2>/dev/null; then
 		opid=$(cat "$VDLU_DIR/lock.d/pid" 2>/dev/null)
 		if [ -z "$opid" ] || ! kill -0 "$opid" 2>/dev/null; then
 			rm -rf "$VDLU_DIR/lock.d" 2>/dev/null
-			mkdir "$VDLU_DIR/lock.d" 2>/dev/null || { echo "VDLU: busy (another run holds the lock)" >&2; exit 4; }
+			mkdir "$VDLU_DIR/lock.d" 2>/dev/null || return 1
 		else
-			echo "VDLU: busy (another run holds the lock)" >&2; exit 4
+			return 1
 		fi
 	fi
 	echo $$ >"$VDLU_DIR/lock.d/pid" 2>/dev/null
 	LOCKDIR="$VDLU_DIR/lock.d"
 	trap release_lock EXIT INT TERM
+	return 0
 }
+acquire_lock() { acquire_lock_try || { echo "VDLU: busy (another run holds the lock)" >&2; exit 4; } }
 release_lock() {
 	[ -n "$LOCKDIR" ] && rm -rf "$LOCKDIR" 2>/dev/null
 	LOCKDIR=""
@@ -196,10 +198,12 @@ fetch_url() { # url dest -> sets FETCH_RC (transport exit code) and returns it
 		file://*) src=${url#file://}; cp -f "$src" "$dest" 2>/dev/null; FETCH_RC=$? ;;
 		http://*|https://*)
 			if [ -n "$CURL" ]; then
-				if [ -n "$CAPATH" ]; then "$CURL" -fsSL --capath "$CAPATH" --max-filesize "$MAX_FILE_BYTES" -o "$dest" "$url"
-				else "$CURL" -fsSL --max-filesize "$MAX_FILE_BYTES" -o "$dest" "$url"; fi
+				# --connect-timeout bounds the CONNECT only (not the transfer), so a slow-but-connected blob
+				# download is unaffected, but a captive portal / dead host that never answers cannot hang.
+				if [ -n "$CAPATH" ]; then "$CURL" -fsSL --connect-timeout 15 --capath "$CAPATH" --max-filesize "$MAX_FILE_BYTES" -o "$dest" "$url"
+				else "$CURL" -fsSL --connect-timeout 15 --max-filesize "$MAX_FILE_BYTES" -o "$dest" "$url"; fi
 				FETCH_RC=$?
-			elif [ -n "$WGET" ]; then "$WGET" -q -O "$dest" "$url"; FETCH_RC=$?
+			elif [ -n "$WGET" ]; then "$WGET" -q --connect-timeout=15 -O "$dest" "$url"; FETCH_RC=$?
 			else echo "VDLU: no curl/wget available" >&2; FETCH_RC=1; return 1; fi ;;
 		*) echo "VDLU: unsupported source url: $url" >&2; FETCH_RC=1; return 1 ;;
 	esac
@@ -214,6 +218,20 @@ fetch_offline() {
 		6|7|28|35|52|56) return 0 ;;
 		4) [ -n "$WGET" ] && [ -z "$CURL" ] && return 0 ;;
 	esac
+	return 1
+}
+
+# Cheap connectivity hint for the patient boot retry: a default route means a configured network. Reads the
+# kernel routing table only - NO curl, NO radio/modem wake - so the retry can wait offline at ~zero cost and
+# only spend a real fetch when the network has actually appeared. If `ip` is unavailable, assume up (the
+# bounded curl attempt just fails fast).
+net_up() {
+	command -v ip >/dev/null 2>&1 || return 0
+	# `ip route get` does a kernel routing lookup that RESPECTS Android policy routing (default routes live
+	# in per-network tables, not `main`, so `route show default` is a false negative/positive on Android).
+	# Pure lookup - no packet, no radio wake. A resolvable route to a public address = a usable network.
+	ip route get 1.1.1.1 2>/dev/null | grep -q ' dev ' && return 0
+	ip route get 2606:4700:4700::1111 2>/dev/null | grep -q ' dev ' && return 0
 	return 1
 }
 
@@ -720,24 +738,31 @@ cmd_boot() {
 	if [ -f "$TARGET" ]; then
 		run_pipeline 1; rc=$?; release_lock; return "$rc"
 	fi
-	# Boot-only retry-until-online, bounded. If the manifest fetch fails because the device booted OFFLINE,
-	# sleep and retry up to boot_retry_minutes (0 = disabled = one-shot). Never retries a deterministic
-	# failure (bad manifest / bad sig / downgrade): fetch_offline gates on the transport exit code. The
-	# sleep makes it a zero-busy-loop; service.sh backgrounds this, so boot never stalls. Lock is held for
-	# the window (a pending boot update serializes against a manual run; check/auto-open do not take it).
+	# Patient, NON-HOLDING boot retry (device booted offline). While waiting it HOLDS NOTHING: no lock (a
+	# manual run/check stays unblocked) and no wakelock (the `sleep` freezes during deep-sleep, so ~zero
+	# battery - it just waits for the user to eventually connect; no hurry, no force, nothing pinned). Only
+	# when the network actually appears (cheap route probe `net_up` - reads the routing table, NO curl, NO
+	# radio wake) does it re-acquire the lock briefly and try a real fetch. Never retries a deterministic
+	# failure (bad manifest/sig/downgrade: fetch_offline gates on the transport exit). Bounded by
+	# boot_retry_minutes of AWAKE-time (0 = off = one-shot). service.sh backgrounds this, so boot never stalls.
 	interval=$(cfg boot_retry_interval 30); isnum "$interval" || interval=30
 	[ "$interval" -ge 5 ] || interval=5
 	cap=$(cfg boot_retry_minutes 0); isnum "$cap" || cap=0
 	do_diff 1; rc=$?
 	if [ "$rc" != 0 ] && [ "$cap" -gt 0 ] && fetch_offline; then
-		deadline=$(( $(date +%s) + cap * 60 ))
+		release_lock                                   # hold NOTHING while we wait
+		deadline=$(( $(date +%s) + cap * 60 )); rc=1
 		while [ "$(date +%s)" -lt "$deadline" ]; do
-			sleep "$interval"
+			sleep "$interval"                          # no lock, no wakelock; frozen during deep-sleep
+			net_up || continue                         # still offline: wake nothing, hold nothing
+			acquire_lock_try || continue               # a manual run is working: back off, try later
+			if [ -f "$TARGET" ]; then release_lock; return 0; fi   # a run staged one meanwhile: defer to it
 			do_diff 1; rc=$?
-			[ "$rc" = 0 ] && break
-			fetch_offline || break                    # online now but a deterministic failure -> stop
+			[ "$rc" = 0 ] && break                     # got it: keep the lock, fall through to apply
+			release_lock                               # drop the lock before waiting again
+			fetch_offline || return "$rc"              # reachable now but a deterministic failure: stop
 		done
-		[ "$rc" = 0 ] || echo "VDLU: boot manifest still unreachable, gave up after ${cap}min" >&2
+		if [ "$rc" != 0 ]; then echo "VDLU: still offline, will retry next boot" >&2; return 0; fi
 	fi
 	[ "$rc" = 0 ] || { release_lock; return "$rc"; }
 	if ! work_to_do; then
