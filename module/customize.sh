@@ -41,6 +41,7 @@ set_perm "$MODPATH/action.sh"             0 0 0755
 set_perm "$MODPATH/common/vddropbear.sh"  0 0 0755
 set_perm "$MODPATH/vdlu/update.sh"        0 0 0755
 set_perm "$MODPATH/vdlu/vdlu-verify"      0 0 0755
+[ -d "$MODPATH/vdlu/verify" ] && find "$MODPATH/vdlu/verify" -name ed25519-mini -exec chmod 0755 {} + 2>/dev/null
 
 # Persistent data dir (lives outside the module so it survives updates/removal).
 VDDB_DATA="/data/adb/vddropbear"
