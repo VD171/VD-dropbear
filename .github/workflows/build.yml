@@ -1,7 +1,7 @@
 # ======================================================================
 #  VD Dropbear  ::  standalone, configurable rooted SSH daemon
 #  A private SSH server for KernelSU/APatch/Magisk. No invasive ADB exposure.
-#  CI: build the binaries, assemble the module, track upstream.
+#  CI: assemble and publish the module from the committed tree.
 #
 #  Copyright (C) 2026  VD171
 #  SPDX-License-Identifier: Apache-2.0
@@ -20,60 +20,35 @@
 #  Discord        : @VD.Priv8 https://discord.com/users/1296831918989639721
 #  E-mail         : vd.priv8@pm.me
 # ======================================================================
+#
+#  The SSH binaries are COMMITTED (module/bin/<abi>/, see module/bin/PROVENANCE.json),
+#  not built here: this keeps the release reproducible from the repo and lets the VDLU
+#  feed manifest hash the exact shipped bytes while the signing key stays off CI. To
+#  pick up a newer upstream Dropbear, rebuild locally with scripts/build.sh +
+#  scripts/build-bundles.sh and commit the result.
 
 name: build
 
 on:
   push:
     branches: [main, master]
-    tags: ['v*']   # a tag push builds AND publishes the release (see the release job)
+    tags: ['v*']   # a tag push publishes the release (see the release job)
   workflow_dispatch:
-  schedule:
-    - cron: "0 6 * * *"   # daily: pick up new upstream Dropbear releases
 
 permissions:
   contents: write
 
 jobs:
-  # Bump UPSTREAM_VERSION when upstream Dropbear tags a newer release; the push
-  # it makes triggers the build job below.
-  track-upstream:
-    if: github.event_name == 'schedule'
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Check upstream for a newer tag
-        run: |
-          cur="$(tr -d ' \n' < UPSTREAM_VERSION)"
-          latest="$(git ls-remote --tags --refs https://github.com/mkj/dropbear \
-                    | sed -E 's#.*refs/tags/##' | grep -E '^DROPBEAR_[0-9]' | sort -V | tail -1)"
-          echo "current=$cur latest=$latest"
-          if [ -n "$latest" ] && [ "$latest" != "$cur" ]; then
-            echo "$latest" > UPSTREAM_VERSION
-            git config user.name "VD \$ VD171 @ Priv8"
-            git config user.email "80125987+VD171@users.noreply.github.com"
-            git commit -am "upstream: track $latest"
-            git push
-          fi
-
   build:
-    if: github.event_name != 'schedule'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Set up Android NDK
-        id: ndk
-        uses: nttld/setup-ndk@v1
-        with:
-          ndk-version: r27c
-      - name: Build the daemon (all ABIs)
-        env:
-          NDK: ${{ steps.ndk.outputs.ndk-path }}
-        run: bash scripts/build.sh
-      - name: Build the bundled tools (sftp-server, scp, rsync, all ABIs)
-        env:
-          NDK: ${{ steps.ndk.outputs.ndk-path }}
-        run: bash scripts/build-bundles.sh
+      - name: Verify committed binaries against provenance
+        run: |
+          # The committed SSH tools must match module/bin/PROVENANCE.json byte for byte.
+          if [ -d module/bin ]; then
+            python3 -c "import json,hashlib,sys; d=json.load(open('module/bin/PROVENANCE.json')); bad=[f'module/bin/{a}/{b}' for b,m in d['binaries'].items() for a,i in m['abi'].items() if hashlib.sha256(open(f'module/bin/{a}/{b}','rb').read()).hexdigest()!=i['sha256']]; sys.exit('provenance MISMATCH: '+', '.join(bad)) if bad else print('provenance OK')"
+          fi
       - name: Assemble module zip
         id: pack
         run: |
@@ -81,7 +56,7 @@ jobs:
           # so the GPL-3.0 rsync binary travels with its license texts in module/licenses/.
           cp LICENSE NOTICE THIRD-PARTY-NOTICES.md module/
           ver="$(sed -n 's/^version=//p' module/module.prop)"
-          ( cd module && zip -r -X "../VD-dropbear-${ver}.zip" . -x '*/.gitkeep' )
+          ( cd module && zip -r -X "../VD-dropbear-${ver}.zip" . -x '*/.gitkeep' -x 'vdlu/RELEASE.md' )
           sha256sum VD-dropbear-*.zip
           echo "ver=${ver}" >> "$GITHUB_OUTPUT"
       # Keep the run artifact for branch builds (CI validation / quick download).

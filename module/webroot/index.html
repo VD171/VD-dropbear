@@ -115,6 +115,7 @@
   footer a{color:var(--green)}
   .sub{color:var(--muted);font-size:12.5px;margin:-4px 0 12px}
 </style>
+<link rel="stylesheet" href="vdlu.css">
 </head>
 <body>
 <h1>VD Dropbear</h1>
@@ -198,6 +199,13 @@
   <div class="btns"><button class="primary" id="btnSetPw" disabled>Set password</button></div>
 </section>
 
+<!-- UPDATES (VDLU) -->
+<section class="card">
+  <h2>Updates</h2>
+  <div class="sub">Flashless incremental updates: fetch only what changed, verified and applied without reflashing the whole zip.</div>
+  <div id="vdlu-updates"></div>
+</section>
+
 <footer>
   VD Dropbear · <a href="https://github.com/VD171/VD-dropbear" target="_blank" rel="noopener">source</a>
   · <a href="https://xdaforums.com/t/VD-Dropbear.4808524/" target="_blank" rel="noopener">XDA</a>
@@ -207,6 +215,7 @@
 
 <div class="toast" id="toast"></div>
 
+<script src="vdlu.js"></script>
 <script>
 "use strict";
 const SH = "/data/adb/modules/vddropbear/common/vddb-webui.sh";
@@ -415,6 +424,24 @@ $("#btnAddKey").onclick=addKey;
 $("#btnSetPw").onclick=setPw;
 ["#pwPass","#pwPass2"].forEach(s=>$(s).addEventListener("input",updatePwMeter));
 
+/* ---- VDLU flashless updater ---- */
+function vdluExec(cmd){
+  return exec(cmd).then(r=>{ if(r.errno===0) return r.stdout; throw new Error((r.stderr||"").trim()||("rc="+r.errno)); });
+}
+function initVdlu(){
+  if(typeof VDLU==="undefined") return;
+  VDLU.init({
+    moduleDir:"/data/adb/modules/vddropbear",
+    vdluDir:"/data/adb/vddropbear/vdlu",
+    modid:"vddropbear",
+    module:"VD Dropbear",
+    exec:vdluExec,
+    toast:m=>toast(m)
+  });
+  VDLU.mountUpdatesPanel("vdlu-updates");
+  VDLU.onWebUIOpen();
+}
+
 (async function init(){
   try{
     await refreshStatus();
@@ -423,6 +450,7 @@ $("#btnSetPw").onclick=setPw;
     await loadPw();
     updatePwMeter();
   }catch(e){ toast(String(e.message||e),true); }
+  try{ initVdlu(); }catch(e){}
 })();
 </script>
 </body>

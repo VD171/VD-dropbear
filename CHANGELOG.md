@@ -29,6 +29,21 @@ All notable, real and significant changes to **VD Dropbear** are recorded here.
 The format follows [Keep a Changelog](https://keepachangelog.com/); versions are tagged in the
 module (`module.prop`) and on GitHub Releases.
 
+## [v1.03] (2026-11-15)
+
+### Added
+- **Flashless incremental updates (VD Live Update).** Between releases the module can update itself by
+  fetching only the files that changed, each verified against a signed manifest, without reflashing the
+  full zip. The signature check uses a tiny vendored `ed25519-mini` verifier (TweetNaCl); blobs are
+  decompressed with the device's toybox `gzip`; the one network tool, a static `curl`, is fetched on
+  demand from a signed tools-feed rather than shipped. The flashable zip stays the install and fallback
+  path, so the updater is always optional.
+
+### Changed
+- **The README set is paired across all 22 languages.** The Documentation section now links the wiki
+  (translations point at their language-prefixed pages) instead of the in-repo markdown, with a top
+  navigation bar and a bold language switcher, matching the layout of the other modules.
+
 ## [v1.02] (2026-11-13)
 
 ### Added

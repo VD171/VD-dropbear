@@ -55,13 +55,11 @@ TODO.local*
 *.zip
 *.tar.*
 
-# --- CI-produced binaries (never committed by hand) ---
-/module/bin/*/vddropbear
-/module/bin/*/dropbearkey
-/module/bin/*/sftp-server
-/module/bin/*/scp
-/module/bin/*/rsync
-/module/bin/*/toybox
+# --- Product binaries: COMMITTED (not CI-built at release) ---
+# The SSH tools are vendored into the repo so the VDLU feed manifest hashes the
+# exact shipped bytes and the release stays reproducible. Rebuild with
+# scripts/build.sh + scripts/build-bundles.sh and commit; provenance and per-file
+# sha256 live in module/bin/PROVENANCE.json. Their library closure is bionic-only.
 
 # --- Notices copied into the module at build time (shipped in the zip, not tracked here) ---
 /module/LICENSE

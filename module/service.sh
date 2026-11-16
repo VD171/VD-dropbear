@@ -33,6 +33,23 @@ if [ ! -f "$VDDB_CONFIG" ]; then
 fi
 
 vddb_load_config
+
+# VDLU flashless updater: detached session + backgrounded so it can never stall boot
+# or race the daemon start below. Runs before the ENABLED gate (a disabled daemon still
+# gets updates), no-ops without a feed, and swaps nothing the running daemon holds open.
+VDLU_DIR="$VDDB_DATA/vdlu"
+if [ -f "$MODDIR/vdlu/update.sh" ]; then
+    mkdir -p "$VDLU_DIR" 2>/dev/null
+    [ -f "$VDLU_DIR/config" ] || cp -f "$MODDIR/vdlu/config.default" "$VDLU_DIR/config" 2>/dev/null
+    if grep -q '^auto_on_reboot=1' "$VDLU_DIR/config" 2>/dev/null; then
+        (
+            export VDLU_DIR MODULE_DIR="$MODDIR" MODID="$VDDB_NAME"
+            export PATH="$VDDB_BIN_DIR:/system/bin:/system/xbin:$PATH"
+            "$VDDB_TOYBOX" setsid sh "$MODDIR/vdlu/update.sh" boot >>"$VDLU_DIR/boot.log" 2>&1
+        ) </dev/null >/dev/null 2>&1 &
+    fi
+fi
+
 [ "$ENABLED" = "1" ] || exit 0
 
 if [ "$START_IN_BFU" = "1" ]; then

@@ -39,6 +39,8 @@ set_perm_recursive "$MODPATH/bin" 0 0 0755 0755
 set_perm "$MODPATH/service.sh"            0 0 0755
 set_perm "$MODPATH/action.sh"             0 0 0755
 set_perm "$MODPATH/common/vddropbear.sh"  0 0 0755
+set_perm "$MODPATH/vdlu/update.sh"        0 0 0755
+set_perm "$MODPATH/vdlu/vdlu-verify"      0 0 0755
 
 # Persistent data dir (lives outside the module so it survives updates/removal).
 VDDB_DATA="/data/adb/vddropbear"
@@ -50,5 +52,13 @@ else
     ui_print "- Existing config kept ($VDDB_DATA/config)"
 fi
 chmod 700 "$VDDB_DATA" 2>/dev/null
+
+# VDLU flashless updater: seed its config once (lives in Tier-2, survives updates/removal).
+VDLU_DIR="$VDDB_DATA/vdlu"
+mkdir -p "$VDLU_DIR" 2>/dev/null
+if [ ! -f "$VDLU_DIR/config" ]; then
+    cp "$MODPATH/vdlu/config.default" "$VDLU_DIR/config" 2>/dev/null
+    ui_print "- VDLU updater seeded ($VDLU_DIR/config)"
+fi
 
 ui_print "- Done. Open the WebUI to set port/keys, then reboot (or use Action)."

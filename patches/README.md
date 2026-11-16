@@ -51,9 +51,9 @@ and sets Android-appropriate defaults. It overrides `default_options.h` in the u
 
 The module's `common/vddropbear.sh` sets these before launching the daemon:
 
-- `DROPBEAR_IDENT` - the identity banner (omitted to use the neutral built-in default).
-- `DROPBEAR_AUTHKEYS` - absolute path to `authorized_keys`.
-- `DROPBEAR_PASSWD_FILE` - absolute path to the password hash file.
+- `DROPBEAR_IDENT`: the identity banner (omitted to use the neutral built-in default).
+- `DROPBEAR_AUTHKEYS`: absolute path to `authorized_keys`.
+- `DROPBEAR_PASSWD_FILE`: absolute path to the password hash file.
 
 Port, binds, auth toggles, forwarding, timeouts and the host key are passed as ordinary command-line
 options, so they need no patches at all.
@@ -70,7 +70,7 @@ Password auth (`0003`) reads a small, shadow-like file. One account per line:
 - the salt is random, lower-case hex (16 bytes is plenty);
 - `iterations` is a decimal integer (the WebUI uses a high default);
 - blank lines and lines starting with `#` are ignored;
-- the password itself is **never** stored - only its hash.
+- the password itself is **never** stored, only its hash.
 
 This is a public, interoperable format: any standard PBKDF2 implementation produces the same hash.
 The **WebUI** creates these lines in the browser with the WebCrypto API
