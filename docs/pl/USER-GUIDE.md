@@ -81,6 +81,24 @@ rsync -e 'ssh -p 2222' -av ./dir/ root@<device-ip>:/sdcard/dir/
 `sftp-server`, `scp` i `rsync` są dołączone, więc SFTP, `sshfs`, klienci graficzni i kopie zapasowe
 działają przez to samo połączenie.
 
+### Połączenie przez USB (bez wifi, bez ADB)
+
+Aby przesyłać szybciej i stabilniej, zupełnie bez sieci, połącz się z demonem przez kabel USB za pomocą **tetheringu USB**, bez ADB ani debugowania USB:
+
+1. Podłącz kabel, a w telefonie włącz **tethering USB** (Ustawienia -> Sieć -> Hotspot i tethering).
+2. Telefon dołącza do małej sieci tylko-USB, zwykle pod `192.168.42.129`.
+3. W kroku 4 powyżej dodaj ten adres do **konkretnych powiązań** (`LISTEN_ADDRESSES`) i zostaw **wszystkie interfejsy** wyłączone, aby demon odpowiadał tylko przez kabel.
+
+Następnie połącz się z adresem USB zamiast bezprzewodowego:
+
+```sh
+ssh -p 2222 root@192.168.42.129
+scp -P 2222 file root@192.168.42.129:/sdcard/
+```
+
+Jeśli `192.168.42.129` to nie jest adres na Twoim urządzeniu, sprawdź interfejs USB telefonu poleceniem `ip addr`.
+
+
 ## 6. Przed pierwszym odblokowaniem (BFU)
 
 Domyślnie demon uruchamia się dopiero **po** jednokrotnym odblokowaniu urządzenia (AFU), ponieważ jego

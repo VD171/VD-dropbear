@@ -59,6 +59,8 @@ leerst, bindet VD Dropbear an Loopback statt an jede Schnittstelle.
 | `LISTEN_IPV6` | `1` | IPv6-Bindungen einbeziehen. |
 | `LISTEN_ADDRESSES` | `""` | Zusätzliche konkrete Bindungen, durch Kommas getrennt: `addr` (nutzt `PORT`) oder `addr:port`, IPv4 oder IPv6. |
 
+> **SSH über USB (ohne WLAN, ohne ADB).** Schalte am Telefon **USB-Tethering** ein und füge seine USB-Adresse (meist `192.168.42.129`) zu `LISTEN_ADDRESSES` hinzu, mit `LISTEN_ALL` aus. Der Daemon ist dann nur über das Kabel erreichbar, was bei großen Übertragungen meist schneller und stabiler ist als drahtlos.
+
 ## Identität
 
 | Schlüssel | Standard | Bedeutung |

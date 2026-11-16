@@ -80,6 +80,24 @@ rsync -e 'ssh -p 2222' -av ./dir/ root@<device-ip>:/sdcard/dir/
 `sftp-server`, `scp` ve `rsync` paket içinde gelir, böylece SFTP, `sshfs`, GUI istemcileri ve
 yedeklemeler aynı bağlantı üzerinden çalışır.
 
+### USB ile bağlanma (wifi yok, ADB yok)
+
+Hiç ağ olmadan daha hızlı ve kararlı aktarımlar için daemon'a USB kablosuyla **USB bağlantı paylaşımı (tethering)** üzerinden ulaşın, ADB veya USB hata ayıklama olmadan:
+
+1. Kabloyu takın, ardından telefonda **USB bağlantı paylaşımı**'nı açın (Ayarlar -> Ağ -> Erişim noktası ve bağlantı paylaşımı).
+2. Telefon yalnızca USB'den oluşan küçük bir ağa katılır, genellikle `192.168.42.129` adresinde.
+3. Yukarıdaki 4. adımda bu adresi **belirli bağlamalara** (`LISTEN_ADDRESSES`) ekleyin ve **tüm arabirimler**'i kapalı bırakın; böylece daemon yalnızca kablo üzerinden yanıt verir.
+
+Sonra kablosuz adres yerine USB adresine bağlanın:
+
+```sh
+ssh -p 2222 root@192.168.42.129
+scp -P 2222 file root@192.168.42.129:/sdcard/
+```
+
+`192.168.42.129` cihazınızdaki adres değilse, telefonun USB arabirimini `ip addr` ile kontrol edin.
+
+
 ## 6. İlk kilit açılışından önce (BFU)
 
 Varsayılan olarak daemon, sırları credential-encrypted depoda bulunduğu için yalnızca cihazın kilidini

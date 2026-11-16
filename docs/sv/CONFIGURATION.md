@@ -58,6 +58,8 @@ VD Dropbear loopback i stället för varje gränssnitt.
 | `LISTEN_IPV6` | `1` | Inkludera IPv6-bindningar. |
 | `LISTEN_ADDRESSES` | `""` | Extra specifika bindningar, kommaseparerade: `addr` (använder `PORT`) eller `addr:port`, IPv4 eller IPv6. |
 
+> **SSH över USB (utan wifi, utan ADB).** Slå på telefonens **USB-delning** och lägg till dess USB-adress (vanligtvis `192.168.42.129`) i `LISTEN_ADDRESSES`, med `LISTEN_ALL` av. Daemonen nås då bara via kabeln, vilket för stora överföringar oftast är snabbare och stabilare än trådlöst.
+
 ## Identitet
 
 | Key | Default | Meaning |

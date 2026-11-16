@@ -58,6 +58,8 @@ Dropbear her arabirim yerine loopback'e bağlanır.
 | `LISTEN_IPV6` | `1` | IPv6 bağlamalarını dahil et. |
 | `LISTEN_ADDRESSES` | `""` | Ek belirli bağlamalar, virgülle ayrılmış: `addr` (`PORT` kullanır) veya `addr:port`, IPv4 ya da IPv6. |
 
+> **USB üzerinden SSH (wifi yok, ADB yok).** Telefonda **USB bağlantı paylaşımı**'nı açın ve USB adresini (genellikle `192.168.42.129`) `LISTEN_ALL` kapalıyken `LISTEN_ADDRESSES`'e ekleyin. Daemon'a o zaman yalnızca kablo üzerinden ulaşılır; bu büyük aktarımlarda genelde kablosuzdan daha hızlı ve kararlıdır.
+
 ## Kimlik
 
 | Key | Default | Meaning |

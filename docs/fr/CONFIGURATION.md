@@ -59,6 +59,8 @@ fait le bind sur loopback plutôt que sur chaque interface.
 | `LISTEN_IPV6` | `1` | Inclut les binds IPv6. |
 | `LISTEN_ADDRESSES` | `""` | Binds spécifiques supplémentaires, séparés par des virgules : `addr` (utilise `PORT`) ou `addr:port`, IPv4 ou IPv6. |
 
+> **SSH par USB (sans wifi, sans ADB).** Activez le **partage de connexion USB** du téléphone et ajoutez son adresse USB (en général `192.168.42.129`) à `LISTEN_ADDRESSES`, avec `LISTEN_ALL` désactivé. Le démon n'est alors accessible que par le câble, ce qui est souvent plus rapide et plus stable que le sans-fil pour les gros transferts.
+
 ## Identité
 
 | Key | Default | Signification |

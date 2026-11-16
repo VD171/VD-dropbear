@@ -53,6 +53,8 @@
 | `LISTEN_IPV6` | `1` | IPv6 바인드를 포함합니다. |
 | `LISTEN_ADDRESSES` | `""` | 추가의 구체적 바인드, 쉼표로 구분: `addr`(`PORT` 사용) 또는 `addr:port`, IPv4 또는 IPv6. |
 
+> **USB를 통한 SSH (wifi 없이, ADB 없이).** 휴대폰의 **USB 테더링**을 켜고 그 USB 주소(보통 `192.168.42.129`)를 `LISTEN_ALL`을 끈 채 `LISTEN_ADDRESSES`에 추가하세요. 그러면 데몬은 케이블로만 접근할 수 있으며, 큰 전송에서는 보통 무선보다 빠르고 안정적입니다.
+
 ## 신원
 
 | Key | Default | 의미 |

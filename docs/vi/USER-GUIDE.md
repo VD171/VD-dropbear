@@ -79,6 +79,24 @@ rsync -e 'ssh -p 2222' -av ./dir/ root@<device-ip>:/sdcard/dir/
 `sftp-server`, `scp` và `rsync` được đóng gói kèm theo, nên SFTP, `sshfs`, các client GUI và sao lưu
 đều hoạt động qua cùng một kết nối.
 
+### Kết nối qua USB (không wifi, không ADB)
+
+Để truyền nhanh và ổn định hơn mà không cần mạng nào, hãy truy cập daemon qua cáp USB bằng **chia sẻ kết nối USB (tethering)**, không cần ADB hay gỡ lỗi USB:
+
+1. Cắm cáp, rồi trên điện thoại bật **chia sẻ kết nối USB** (Cài đặt -> Mạng -> Điểm phát sóng và chia sẻ kết nối).
+2. Điện thoại vào một mạng nhỏ chỉ qua USB, thường ở `192.168.42.129`.
+3. Ở bước 4 phía trên, thêm địa chỉ đó vào **các bind cụ thể** (`LISTEN_ADDRESSES`) và để **tất cả giao diện** tắt, để daemon chỉ trả lời qua cáp.
+
+Sau đó kết nối tới địa chỉ USB thay vì địa chỉ không dây:
+
+```sh
+ssh -p 2222 root@192.168.42.129
+scp -P 2222 file root@192.168.42.129:/sdcard/
+```
+
+Nếu `192.168.42.129` không phải địa chỉ trên thiết bị của bạn, hãy xem giao diện USB của điện thoại bằng `ip addr`.
+
+
 ## 6. Before first unlock (BFU)
 
 Theo mặc định, daemon chỉ khởi động **sau** khi bạn mở khóa thiết bị một lần (AFU), vì các secret của

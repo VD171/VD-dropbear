@@ -58,6 +58,8 @@ il bind su loopback anziché su ogni interfaccia.
 | `LISTEN_IPV6` | `1` | Includi i bind IPv6. |
 | `LISTEN_ADDRESSES` | `""` | Bind specifici aggiuntivi, separati da virgola: `addr` (usa `PORT`) o `addr:port`, IPv4 o IPv6. |
 
+> **SSH via USB (senza wifi, senza ADB).** Attiva il **tethering USB** del telefono e aggiungi il suo indirizzo USB (di solito `192.168.42.129`) a `LISTEN_ADDRESSES`, con `LISTEN_ALL` disattivato. Il daemon è così raggiungibile solo tramite il cavo, di norma più veloce e stabile del wireless per i trasferimenti grandi.
+
 ## Identità
 
 | Key | Default | Significato |

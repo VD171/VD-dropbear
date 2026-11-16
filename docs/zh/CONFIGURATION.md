@@ -56,6 +56,8 @@
 | `LISTEN_IPV6` | `1` | 包含 IPv6 绑定。 |
 | `LISTEN_ADDRESSES` | `""` | 额外的特定绑定，以逗号分隔：`addr`（使用 `PORT`）或 `addr:port`，IPv4 或 IPv6。 |
 
+> **通过 USB 的 SSH（无需 wifi，无需 ADB）。** 打开手机的 **USB 网络共享**，在 `LISTEN_ALL` 关闭的情况下，把它的 USB 地址（通常是 `192.168.42.129`）加入 `LISTEN_ADDRESSES`。这样守护进程只能通过数据线访问，对于大文件传输通常比无线更快更稳定。
+
 ## 身份
 
 | Key | Default | Meaning |

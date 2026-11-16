@@ -57,6 +57,10 @@ loopback rather than every interface.
 | `LISTEN_IPV6` | `1` | Include IPv6 binds. |
 | `LISTEN_ADDRESSES` | `""` | Extra specific binds, comma-separated: `addr` (uses `PORT`) or `addr:port`, IPv4 or IPv6. |
 
+> **SSH over USB (no wifi, no ADB).** Turn on the phone's **USB tethering** and add its USB address
+> (usually `192.168.42.129`) to `LISTEN_ADDRESSES`, with `LISTEN_ALL` off. The daemon is then reachable
+> only through the cable, which is typically faster and steadier than wireless for large transfers.
+
 ## Identity
 
 | Key | Default | Meaning |

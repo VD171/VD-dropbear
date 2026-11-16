@@ -58,6 +58,8 @@ loopback místo každého rozhraní.
 | `LISTEN_IPV6` | `1` | Zahrnout vazby IPv6. |
 | `LISTEN_ADDRESSES` | `""` | Další konkrétní vazby oddělené čárkami: `addr` (použije `PORT`) nebo `addr:port`, IPv4 nebo IPv6. |
 
+> **SSH přes USB (bez wifi, bez ADB).** Zapněte v telefonu **USB tethering** a přidejte jeho USB adresu (obvykle `192.168.42.129`) do `LISTEN_ADDRESSES` s vypnutým `LISTEN_ALL`. Daemon je pak dostupný jen přes kabel, což bývá u velkých přenosů rychlejší a stabilnější než bezdrátově.
+
 ## Identita
 
 | Klíč | Výchozí | Význam |

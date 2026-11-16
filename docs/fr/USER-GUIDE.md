@@ -81,6 +81,24 @@ rsync -e 'ssh -p 2222' -av ./dir/ root@<device-ip>:/sdcard/dir/
 `sftp-server`, `scp` et `rsync` sont inclus, donc SFTP, `sshfs`, les clients graphiques et les
 sauvegardes fonctionnent tous sur la même connexion.
 
+### Se connecter par USB (sans wifi, sans ADB)
+
+Pour des transferts plus rapides et plus stables, sans aucun réseau, atteignez le démon par le câble USB avec le **partage de connexion USB**, sans ADB ni débogage USB :
+
+1. Branchez le câble, puis sur le téléphone activez le **partage de connexion USB** (Paramètres -> Réseau -> Point d'accès et partage de connexion).
+2. Le téléphone rejoint un petit réseau USB uniquement, en général à `192.168.42.129`.
+3. À l'étape 4 ci-dessus, ajoutez cette adresse aux **binds spécifiques** (`LISTEN_ADDRESSES`) et laissez **toutes les interfaces** désactivé, pour que le démon ne réponde que par le câble.
+
+Connectez-vous ensuite à l'adresse USB plutôt qu'à l'adresse sans fil :
+
+```sh
+ssh -p 2222 root@192.168.42.129
+scp -P 2222 file root@192.168.42.129:/sdcard/
+```
+
+Si `192.168.42.129` n'est pas l'adresse sur votre appareil, vérifiez l'interface USB du téléphone avec `ip addr`.
+
+
 ## 6. Avant le premier déverrouillage (BFU)
 
 Par défaut, le démon démarre uniquement **après** que vous avez déverrouillé l'appareil une fois (AFU),

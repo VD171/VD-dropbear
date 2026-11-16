@@ -58,6 +58,8 @@ Dropbear melakukan bind ke loopback alih-alih setiap antarmuka.
 | `LISTEN_IPV6` | `1` | Sertakan bind IPv6. |
 | `LISTEN_ADDRESSES` | `""` | Bind spesifik tambahan, dipisah koma: `addr` (memakai `PORT`) atau `addr:port`, IPv4 atau IPv6. |
 
+> **SSH lewat USB (tanpa wifi, tanpa ADB).** Nyalakan **tethering USB** ponsel dan tambahkan alamat USB-nya (biasanya `192.168.42.129`) ke `LISTEN_ADDRESSES`, dengan `LISTEN_ALL` mati. Daemon lalu hanya bisa dijangkau lewat kabel, yang biasanya lebih cepat dan stabil daripada nirkabel untuk transfer besar.
+
 ## Identitas
 
 | Key | Default | Makna |

@@ -58,6 +58,8 @@ loopback thay vì mọi giao diện.
 | `LISTEN_IPV6` | `1` | Bao gồm các bind IPv6. |
 | `LISTEN_ADDRESSES` | `""` | Các bind cụ thể bổ sung, phân tách bằng dấu phẩy: `addr` (dùng `PORT`) hoặc `addr:port`, IPv4 hoặc IPv6. |
 
+> **SSH qua USB (không wifi, không ADB).** Bật **chia sẻ kết nối USB** trên điện thoại và thêm địa chỉ USB của nó (thường là `192.168.42.129`) vào `LISTEN_ADDRESSES`, với `LISTEN_ALL` tắt. Khi đó daemon chỉ truy cập được qua cáp, thường nhanh và ổn định hơn không dây cho các lần truyền lớn.
+
 ## Nhận dạng
 
 | Key | Default | Meaning |

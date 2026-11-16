@@ -53,6 +53,8 @@
 | `LISTEN_IPV6` | `1` | IPv6のバインドを含めます。 |
 | `LISTEN_ADDRESSES` | `""` | 追加の具体的なバインド、カンマ区切り：`addr`（`PORT` を使用）または `addr:port`、IPv4またはIPv6。 |
 
+> **USB 経由の SSH（wifi なし、ADB なし）。** 電話の **USB テザリング**をオンにし、その USB アドレス（通常 `192.168.42.129`）を `LISTEN_ALL` をオフにしたまま `LISTEN_ADDRESSES` に追加します。するとデーモンはケーブル経由だけで到達でき、大きな転送では無線より速く安定するのが普通です。
+
 ## アイデンティティ
 
 | Key | Default | 意味 |

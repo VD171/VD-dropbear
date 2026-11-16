@@ -58,6 +58,8 @@ Dropbear powiąże się z loopbackiem zamiast z każdym interfejsem.
 | `LISTEN_IPV6` | `1` | Uwzględnij powiązania IPv6. |
 | `LISTEN_ADDRESSES` | `""` | Dodatkowe konkretne powiązania, oddzielone przecinkami: `addr` (używa `PORT`) lub `addr:port`, IPv4 lub IPv6. |
 
+> **SSH przez USB (bez wifi, bez ADB).** Włącz w telefonie **tethering USB** i dodaj jego adres USB (zwykle `192.168.42.129`) do `LISTEN_ADDRESSES`, z wyłączonym `LISTEN_ALL`. Demon jest wtedy osiągalny tylko przez kabel, co przy dużych transferach jest zwykle szybsze i stabilniejsze niż bezprzewodowo.
+
 ## Tożsamość
 
 | Key | Default | Meaning |

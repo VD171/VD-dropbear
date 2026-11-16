@@ -69,6 +69,24 @@ rsync -e 'ssh -p 2222' -av ./dir/ root@<device-ip>:/sdcard/dir/
 
 `sftp-server`, `scp` en `rsync` zijn meegeleverd, zodat SFTP, `sshfs`, GUI-clients en back-ups allemaal over dezelfde verbinding werken.
 
+### Verbinden via USB (zonder wifi, zonder ADB)
+
+Voor snellere, stabielere overdrachten zonder netwerk ertussen bereik je de daemon via de USB-kabel met **USB-tethering**, zonder ADB of USB-foutopsporing:
+
+1. Sluit de kabel aan en zet op de telefoon **USB-tethering** aan (Instellingen -> Netwerk -> Hotspot en tethering).
+2. De telefoon komt in een klein USB-only netwerk, meestal op `192.168.42.129`.
+3. Voeg dat adres bij stap 4 hierboven toe aan de **specifieke binds** (`LISTEN_ADDRESSES`) en laat **alle interfaces** uit, zodat de daemon alleen via de kabel antwoordt.
+
+Maak dan verbinding met het USB-adres in plaats van het draadloze:
+
+```sh
+ssh -p 2222 root@192.168.42.129
+scp -P 2222 file root@192.168.42.129:/sdcard/
+```
+
+Als `192.168.42.129` niet het adres op jouw apparaat is, bekijk dan de USB-interface van de telefoon met `ip addr`.
+
+
 ## 6. Before first unlock (BFU)
 
 Standaard start de daemon pas **nadat** je het toestel één keer ontgrendelt (AFU), omdat de geheimen op credential-encrypted opslag staan. Als je SSH **voor** de eerste ontgrendeling nodig hebt (bijvoorbeeld om een toestel na een herstart op afstand te ontgrendelen) zet dan **Start before first unlock (BFU)** aan. De geheimen verhuizen dan naar device-encrypted opslag, die leesbaar is vóór ontgrendeling: een bewuste, gedocumenteerde afweging. Zie [Security model](#) in de README.

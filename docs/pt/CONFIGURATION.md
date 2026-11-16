@@ -58,6 +58,8 @@ Dropbear faz bind no loopback em vez de em todas as interfaces.
 | `LISTEN_IPV6` | `1` | Inclui binds IPv6. |
 | `LISTEN_ADDRESSES` | `""` | Binds específicos adicionais, separados por vírgula: `addr` (usa `PORT`) ou `addr:port`, IPv4 ou IPv6. |
 
+> **SSH por USB (sem wifi, sem ADB).** Ative o **tethering USB** no telefone e adicione o endereço USB dele (geralmente `192.168.42.129`) em `LISTEN_ADDRESSES`, com `LISTEN_ALL` desligado. O daemon fica acessível só pelo cabo, o que costuma ser mais rápido e estável que sem fio para transferências grandes.
+
 ## Identidade
 
 | Key | Default | Meaning |

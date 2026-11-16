@@ -58,6 +58,8 @@ hace el bind a loopback en lugar de a todas las interfaces.
 | `LISTEN_IPV6` | `1` | Incluye binds IPv6. |
 | `LISTEN_ADDRESSES` | `""` | Binds específicos adicionales, separados por comas: `addr` (usa `PORT`) o `addr:port`, IPv4 o IPv6. |
 
+> **SSH por USB (sin wifi, sin ADB).** Activa el **anclaje USB** del teléfono y añade su dirección USB (normalmente `192.168.42.129`) a `LISTEN_ADDRESSES`, con `LISTEN_ALL` desactivado. El daemon queda accesible solo por el cable, lo que suele ser más rápido y estable que la conexión inalámbrica para transferencias grandes.
+
 ## Identidad
 
 | Key | Default | Significado |

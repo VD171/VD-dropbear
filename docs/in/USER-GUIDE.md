@@ -79,6 +79,24 @@ rsync -e 'ssh -p 2222' -av ./dir/ root@<device-ip>:/sdcard/dir/
 `sftp-server`, `scp` dan `rsync` disertakan, sehingga SFTP, `sshfs`, klien GUI, dan pencadangan semua
 berfungsi lewat koneksi yang sama.
 
+### Menghubungkan lewat USB (tanpa wifi, tanpa ADB)
+
+Untuk transfer yang lebih cepat dan stabil tanpa jaringan sama sekali, jangkau daemon lewat kabel USB menggunakan **tethering USB**, tanpa ADB atau debugging USB:
+
+1. Colok kabelnya, lalu di ponsel nyalakan **tethering USB** (Setelan -> Jaringan -> Hotspot dan tethering).
+2. Ponsel masuk ke jaringan kecil khusus USB, biasanya di `192.168.42.129`.
+3. Di langkah 4 di atas, tambahkan alamat itu ke **bind spesifik** (`LISTEN_ADDRESSES`) dan biarkan **semua antarmuka** mati, agar daemon hanya menjawab lewat kabel.
+
+Lalu sambungkan ke alamat USB alih-alih yang nirkabel:
+
+```sh
+ssh -p 2222 root@192.168.42.129
+scp -P 2222 file root@192.168.42.129:/sdcard/
+```
+
+Kalau `192.168.42.129` bukan alamat di perangkatmu, lihat antarmuka USB ponsel dengan `ip addr`.
+
+
 ## 6. Sebelum first unlock (BFU)
 
 Secara default daemon hanya mulai **setelah** Anda membuka kunci perangkat sekali (AFU), karena

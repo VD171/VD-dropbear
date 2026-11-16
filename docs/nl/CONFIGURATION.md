@@ -53,6 +53,8 @@ Elke combinatie is toegestaan; de gekozen binds worden samengevoegd. Als je alle
 | `LISTEN_IPV6` | `1` | Neem IPv6-binds op. |
 | `LISTEN_ADDRESSES` | `""` | Extra specifieke binds, door komma's gescheiden: `addr` (gebruikt `PORT`) of `addr:port`, IPv4 of IPv6. |
 
+> **SSH via USB (zonder wifi, zonder ADB).** Zet **USB-tethering** op de telefoon aan en voeg het USB-adres (meestal `192.168.42.129`) toe aan `LISTEN_ADDRESSES`, met `LISTEN_ALL` uit. De daemon is dan alleen via de kabel bereikbaar, wat voor grote overdrachten meestal sneller en stabieler is dan draadloos.
+
 ## Identiteit
 
 | Key | Default | Betekenis |

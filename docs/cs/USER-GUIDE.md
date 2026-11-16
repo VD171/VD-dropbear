@@ -79,6 +79,24 @@ rsync -e 'ssh -p 2222' -av ./dir/ root@<device-ip>:/sdcard/dir/
 `sftp-server`, `scp` a `rsync` jsou přibaleny, takže SFTP, `sshfs`, grafičtí klienti i zálohy fungují
 přes totéž spojení.
 
+### Připojení přes USB (bez wifi, bez ADB)
+
+Pro rychlejší a stabilnější přenosy úplně bez sítě dosáhnete na daemon přes USB kabel pomocí **USB tetheringu**, bez ADB i ladění USB:
+
+1. Zapojte kabel a v telefonu zapněte **USB tethering** (Nastavení -> Síť -> Hotspot a tethering).
+2. Telefon se připojí do malé čistě USB sítě, obvykle na `192.168.42.129`.
+3. V kroku 4 výše přidejte tuto adresu do **konkrétních vazeb** (`LISTEN_ADDRESSES`) a **všechna rozhraní** nechte vypnutá, aby daemon odpovídal jen přes kabel.
+
+Pak se připojte na USB adresu místo bezdrátové:
+
+```sh
+ssh -p 2222 root@192.168.42.129
+scp -P 2222 file root@192.168.42.129:/sdcard/
+```
+
+Pokud `192.168.42.129` není adresa na vašem zařízení, zkontrolujte USB rozhraní telefonu pomocí `ip addr`.
+
+
 ## 6. Před prvním odemčením (BFU)
 
 Ve výchozím stavu démon startuje až **poté**, co jednou odemkneš zařízení (AFU), protože jeho

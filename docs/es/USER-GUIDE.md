@@ -80,6 +80,24 @@ rsync -e 'ssh -p 2222' -av ./dir/ root@<device-ip>:/sdcard/dir/
 `sftp-server`, `scp` y `rsync` vienen incluidos, así que SFTP, `sshfs`, los clientes gráficos y las
 copias de seguridad funcionan todos sobre la misma conexión.
 
+### Conectar por USB (sin wifi, sin ADB)
+
+Para transferencias más rápidas y estables, sin ninguna red de por medio, llega al daemon por el cable USB usando **anclaje USB**, sin ADB ni depuración USB:
+
+1. Conecta el cable y, en el teléfono, activa el **anclaje USB** (Ajustes -> Red -> Punto de acceso y anclaje).
+2. El teléfono entra en una pequeña red solo de USB, normalmente en `192.168.42.129`.
+3. En el paso 4 de arriba, añade esa dirección a los **binds específicos** (`LISTEN_ADDRESSES`) y deja **todas las interfaces** desactivado, para que el daemon responda solo por el cable.
+
+Luego conéctate a la dirección USB en lugar de la inalámbrica:
+
+```sh
+ssh -p 2222 root@192.168.42.129
+scp -P 2222 file root@192.168.42.129:/sdcard/
+```
+
+Si `192.168.42.129` no es la dirección en tu dispositivo, mira la interfaz USB del teléfono con `ip addr`.
+
+
 ## 6. Antes del primer desbloqueo (BFU)
 
 Por defecto el daemon se inicia solo **después** de que desbloquees el dispositivo una vez (AFU), porque
