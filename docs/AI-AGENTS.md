@@ -74,3 +74,5 @@ This is root, so treat it like root:
 2. Add its public key in the WebUI (**Authorized keys**).
 3. Bind to loopback or your VPN only, on a non-default port.
 4. Point the agent's SSH config at the device and let it work.
+
+Over USB, with no ADB: turn on USB tethering and bind to its USB address for a cable-only link, handy for an agent on a tethered laptop. See the user guide.

@@ -75,3 +75,5 @@ Tohle je root, tak s tím zacházej jako s rootem:
 2. Přidej jeho veřejný klíč ve WebUI (**Authorized keys**).
 3. Nastav vazbu jen na loopback nebo svou VPN, na jiném než výchozím portu.
 4. Nasměruj konfiguraci SSH agenta na zařízení a nech ho pracovat.
+
+Přes USB, bez ADB: zapněte USB tethering a navažte na USB adresu pro spojení jen přes kabel, hodí se pro agenta na připojeném notebooku. Viz uživatelská příručka.

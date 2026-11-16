@@ -94,6 +94,7 @@ bayrağına dönüşmez.
   asgari bir parola gücü dayatır ve parolayı asla düz metin olarak saklamaz.
 - **Dosya aktarımı ve eşitleme yerleşik olarak gelir.** Paket `sftp-server`, `scp` ve `rsync`
   içerir; böylece SFTP, sshfs, grafik arayüzlü istemciler ve yedeklemelerin hepsi aynı bağlantı
+- **USB üzerinden SSH, ADB yok.** USB bağlantı paylaşımını açın ve daemon'ı USB adresine bağlayın: kablo üzerinden aynı oturum, büyük aktarımlarda wifi'den daha hızlı ve kararlı.
   üzerinden çalışır.
 - **Her cihaz ve emülatör.** `arm64-v8a`, `armeabi-v7a`, `x86`, `x86_64`.
 

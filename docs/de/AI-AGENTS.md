@@ -76,3 +76,5 @@ Das ist Root, also behandle es wie Root:
 2. Füge seinen öffentlichen Schlüssel in der WebUI hinzu (**Authorized keys**).
 3. Binde nur an Loopback oder dein VPN, auf einem nicht standardmäßigen Port.
 4. Richte die SSH-Konfiguration des Agenten auf das Gerät und lass ihn arbeiten.
+
+Über USB, ohne ADB: Schalte USB-Tethering ein und binde an die USB-Adresse für eine reine Kabelverbindung, praktisch für einen Agenten auf einem per Kabel verbundenen Laptop. Siehe das Benutzerhandbuch.

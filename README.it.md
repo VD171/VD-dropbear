@@ -91,6 +91,7 @@ flag "sto venendo sottoposto a debug" leggibile a livello globale che qualunque 
   robustezza minima della password e non memorizza mai una password in chiaro.
 - **Trasferimento e sincronizzazione file integrati.** Il pacchetto include `sftp-server`, `scp` e
   `rsync`, così SFTP, sshfs, client GUI e backup funzionano tutti sulla stessa connessione.
+- **SSH via USB, senza ADB.** Attiva il tethering USB e lega il daemon all'indirizzo USB: la stessa sessione via cavo, più veloce e stabile del wifi per i trasferimenti grandi.
 - **Ogni dispositivo ed emulatore.** `arm64-v8a`, `armeabi-v7a`, `x86`, `x86_64`.
 
 ## Agenti AI sul tuo dispositivo

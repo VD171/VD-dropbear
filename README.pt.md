@@ -90,6 +90,7 @@ flag "estou sendo depurado", legível globalmente, que qualquer coisa no aparelh
   `system`). A WebUI impõe uma força mínima de senha e nunca armazena a senha em texto puro.
 - **Transferência e sincronização de arquivos embutidas.** O pacote inclui `sftp-server`, `scp` e `rsync`,
   então SFTP, sshfs, clientes gráficos e backups funcionam todos pela mesma conexão.
+- **SSH por USB, sem ADB.** Ative o tethering USB e faça o bind do daemon no endereço USB: a mesma sessão pelo cabo, mais rápida e estável que o wifi para transferências grandes.
 - **Todo aparelho e emulador.** `arm64-v8a`, `armeabi-v7a`, `x86`, `x86_64`.
 
 ## Agentes de IA no seu aparelho

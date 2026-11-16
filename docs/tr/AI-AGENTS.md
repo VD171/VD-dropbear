@@ -76,3 +76,5 @@ Bu root'tur, o yüzden ona root gibi davranın:
 2. Genel anahtarını WebUI'de ekleyin (**Authorized keys**).
 3. Yalnızca loopback'e veya VPN'inize, varsayılan olmayan bir bağlantı noktasında bağlayın.
 4. Ajanın SSH yapılandırmasını cihaza yönlendirin ve çalışmasına izin verin.
+
+USB üzerinden, ADB olmadan: USB bağlantı paylaşımını açın ve yalnızca kablo bağlantısı için USB adresine bağlayın; kabloyla bağlı bir dizüstünde çalışan bir aracı için kullanışlıdır. Kullanıcı kılavuzuna bakın.

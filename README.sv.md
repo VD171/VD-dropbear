@@ -92,6 +92,7 @@ som vad som helst på enheten kan läsa.
   med lägre behörighet (`shell`, `system`). WebUI:et kräver en lägsta lösenordsstyrka och lagrar aldrig ett lösenord i klartext.
 - **Filöverföring och synkning inbyggt.** Paketet innehåller `sftp-server`, `scp` och `rsync`, så
   SFTP, sshfs, grafiska klienter och säkerhetskopior fungerar alla över samma anslutning.
+- **SSH över USB, utan ADB.** Slå på USB-delning och bind daemonen till USB-adressen: samma session via kabeln, snabbare och stabilare än trådlöst för stora överföringar.
 - **Varje enhet och emulator.** `arm64-v8a`, `armeabi-v7a`, `x86`, `x86_64`.
 
 ## AI-agenter på din enhet

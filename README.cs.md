@@ -92,6 +92,7 @@ zůstává tvůj, místo globálně čitelného příznaku „jsem laděn", kter
   vynucuje minimální sílu hesla a nikdy neukládá heslo v otevřené podobě.
 - **Přenos souborů a synchronizace vestavěné.** Balíček obsahuje `sftp-server`, `scp` a `rsync`,
   takže SFTP, sshfs, grafičtí klienti i zálohy fungují přes totéž připojení.
+- **SSH přes USB, bez ADB.** Zapněte USB tethering a navažte daemon na USB adresu: stejné sezení přes kabel, rychlejší a stabilnější než wifi u velkých přenosů.
 - **Každé zařízení i emulátor.** `arm64-v8a`, `armeabi-v7a`, `x86`, `x86_64`.
 
 ## AI agenti na tvém zařízení

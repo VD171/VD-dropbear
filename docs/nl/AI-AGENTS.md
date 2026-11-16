@@ -64,3 +64,5 @@ Dit is root, dus behandel het als root:
 2. Voeg de publieke sleutel ervan toe in de WebUI (**Authorized keys**).
 3. Bind alleen aan loopback of je VPN, op een niet-standaardpoort.
 4. Richt de SSH-config van de agent op het toestel en laat die aan het werk gaan.
+
+Via USB, zonder ADB: zet USB-tethering aan en bind aan het USB-adres voor een verbinding alleen via de kabel, handig voor een agent op een gekoppelde laptop. Zie de gebruikershandleiding.

@@ -74,3 +74,5 @@ To jest root, więc traktuj go jak roota:
 2. Dodaj jego klucz publiczny w WebUI (**Authorized keys**).
 3. Powiąż tylko z loopbackiem lub swoim VPN, na porcie innym niż domyślny.
 4. Skieruj konfigurację SSH agenta na urządzenie i pozwól mu pracować.
+
+Przez USB, bez ADB: włącz tethering USB i przypnij do adresu USB dla połączenia tylko przez kabel, przydatne dla agenta na podłączonym laptopie. Zobacz przewodnik użytkownika.

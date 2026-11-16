@@ -74,3 +74,5 @@ Det här är root, så behandla det som root:
 2. Lägg till dess publika nyckel i WebUI (**Authorized keys**).
 3. Bind endast till loopback eller ditt VPN, på en icke-standardport.
 4. Rikta agentens SSH-konfiguration mot enheten och låt den arbeta.
+
+Över USB, utan ADB: slå på USB-delning och bind till dess USB-adress för en anslutning enbart via kabel, praktiskt för en agent på en kabelansluten laptop. Se användarguiden.

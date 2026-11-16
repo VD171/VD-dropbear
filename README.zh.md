@@ -86,6 +86,7 @@ shell、SFTP 和 rsync，没有 `adb_enabled` 这一破绽，没有 USB 调试�
   权限更低的 Android 账户（`shell`、`system`）。WebUI 会强制要求最低密码强度，并且
   绝不以明文存储密码。
 - **内置文件传输与同步。** 该套件附带 `sftp-server`、`scp` 和 `rsync`，因此 SFTP、sshfs、图形界面客户端和
+- **通过 USB 的 SSH，无需 ADB。** 打开 USB 网络共享并把守护进程绑定到 USB 地址：通过数据线的同一会话，对于大文件传输比无线更快更稳定。
   备份都能在同一个连接上运行。
 - **兼容每一款设备和模拟器。** `arm64-v8a`、`armeabi-v7a`、`x86`、`x86_64`。
 

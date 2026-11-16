@@ -97,6 +97,7 @@ alles auf dem Gerät auslesen kann.
   Mindest-Passwortstärke und speichert ein Passwort nie im Klartext.
 - **Dateiübertragung und Synchronisierung eingebaut.** Das Paket liefert `sftp-server`, `scp` und
   `rsync` mit, sodass SFTP, sshfs, GUI-Clients und Backups alle über dieselbe Verbindung laufen.
+- **SSH über USB, ohne ADB.** Schalte USB-Tethering ein und binde den Daemon an die USB-Adresse: dieselbe Sitzung über das Kabel, schneller und stabiler als WLAN bei großen Übertragungen.
 - **Jedes Gerät und jeder Emulator.** `arm64-v8a`, `armeabi-v7a`, `x86`, `x86_64`.
 
 ## KI-Agenten auf deinem Gerät

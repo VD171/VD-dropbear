@@ -96,6 +96,7 @@ que tout ce qui se trouve sur l'appareil peut lire.
   passe et ne stocke jamais un mot de passe en clair.
 - **Transfert et synchronisation de fichiers intégrés.** Le paquet livre `sftp-server`, `scp` et
   `rsync`, de sorte que SFTP, sshfs, les clients graphiques et les sauvegardes fonctionnent tous par
+- **SSH par USB, sans ADB.** Activez le partage de connexion USB et liez le démon à l'adresse USB : la même session par le câble, plus rapide et plus stable que le wifi pour les gros transferts.
   la même connexion.
 - **Tout appareil et tout émulateur.** `arm64-v8a`, `armeabi-v7a`, `x86`, `x86_64`.
 

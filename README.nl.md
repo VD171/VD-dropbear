@@ -91,6 +91,7 @@ wereldwijd leesbare "ik word gedebugd"-vlag die alles op het toestel kan uitleze
   minimale wachtwoordsterkte af en bewaart een wachtwoord nooit in platte tekst.
 - **Bestandsoverdracht en synchronisatie ingebouwd.** De bundel bevat `sftp-server`, `scp` en `rsync`, zodat
   SFTP, sshfs, GUI-clients en back-ups allemaal over dezelfde verbinding werken.
+- **SSH via USB, zonder ADB.** Zet USB-tethering aan en bind de daemon aan het USB-adres: dezelfde sessie via de kabel, sneller en stabieler dan wifi voor grote overdrachten.
 - **Elk toestel en elke emulator.** `arm64-v8a`, `armeabi-v7a`, `x86`, `x86_64`.
 
 ## AI-agents op je toestel

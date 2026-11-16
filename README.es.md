@@ -95,6 +95,7 @@ el dispositivo puede leer.
   nunca guarda una contraseña en texto plano.
 - **Transferencia y sincronización de archivos integradas.** El paquete incluye `sftp-server`, `scp` y
   `rsync`, de modo que SFTP, sshfs, los clientes gráficos y las copias de seguridad funcionan todos por
+- **SSH por USB, sin ADB.** Activa el anclaje USB y vincula el daemon a la dirección USB: la misma sesión por el cable, más rápida y estable que el wifi para transferencias grandes.
   la misma conexión.
 - **Todo dispositivo y emulador.** `arm64-v8a`, `armeabi-v7a`, `x86`, `x86_64`.
 

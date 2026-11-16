@@ -75,3 +75,5 @@ C'est du root, alors traitez-le comme du root :
 2. Ajoutez sa clé publique dans la WebUI (**Authorized keys**).
 3. Faites le bind uniquement sur loopback ou votre VPN, sur un port non par défaut.
 4. Pointez la configuration SSH de l'agent vers l'appareil et laissez-le travailler.
+
+Par USB, sans ADB : activez le partage de connexion USB et liez le démon à son adresse USB pour un lien uniquement par câble, pratique pour un agent sur un portable connecté. Voir le guide de l'utilisateur.

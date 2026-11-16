@@ -75,3 +75,5 @@ Esto es root, así que trátalo como root:
 2. Añade su clave pública en la WebUI (**Authorized keys**).
 3. Haz el bind solo a loopback o a tu VPN, en un puerto no predeterminado.
 4. Apunta la configuración SSH del agente al dispositivo y déjalo trabajar.
+
+Por USB, sin ADB: activa el anclaje USB y vincula a su dirección USB para un enlace solo por cable, útil para un agente en un portátil conectado. Consulta la guía del usuario.

@@ -92,6 +92,7 @@ tetap milik Anda, bukan sebuah flag "saya sedang di-debug" yang dapat dibaca sec
   menerapkan kekuatan kata sandi minimum dan tidak pernah menyimpan kata sandi dalam teks biasa.
 - **Transfer dan sinkronisasi file bawaan.** Paket ini menyertakan `sftp-server`, `scp`, dan `rsync`,
   sehingga SFTP, sshfs, klien GUI, dan pencadangan semuanya bekerja melalui koneksi yang sama.
+- **SSH lewat USB, tanpa ADB.** Nyalakan tethering USB dan ikat daemon ke alamat USB: sesi yang sama lewat kabel, lebih cepat dan stabil daripada wifi untuk transfer besar.
 - **Setiap perangkat dan emulator.** `arm64-v8a`, `armeabi-v7a`, `x86`, `x86_64`.
 
 ## Agen AI di perangkat Anda

@@ -92,6 +92,7 @@ odczytywalnej flagi „jestem debugowany", którą może przeczytać cokolwiek n
   minimalną siłę hasła i nigdy nie przechowuje hasła jako zwykłego tekstu.
 - **Wbudowany transfer i synchronizacja plików.** Pakiet zawiera `sftp-server`, `scp` i `rsync`, więc SFTP,
   sshfs, klienci graficzni oraz kopie zapasowe, wszystko działa przez to samo połączenie.
+- **SSH przez USB, bez ADB.** Włącz tethering USB i przypnij demona do adresu USB: ta sama sesja przez kabel, szybsza i stabilniejsza niż wifi przy dużych transferach.
 - **Każde urządzenie i emulator.** `arm64-v8a`, `armeabi-v7a`, `x86`, `x86_64`.
 
 ## Agenci AI na twoim urządzeniu

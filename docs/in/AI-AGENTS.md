@@ -75,3 +75,5 @@ Ini adalah root, jadi perlakukan seperti root:
 2. Tambahkan kunci publiknya di WebUI (**Authorized keys**).
 3. Bind hanya ke loopback atau VPN Anda, pada port non-default.
 4. Arahkan konfigurasi SSH agen ke perangkat dan biarkan ia bekerja.
+
+Lewat USB, tanpa ADB: nyalakan tethering USB dan ikat ke alamat USB untuk tautan khusus kabel, berguna untuk agen di laptop yang terhubung. Lihat panduan pengguna.

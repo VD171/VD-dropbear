@@ -92,6 +92,7 @@ là của bạn, thay vì một lá cờ "tôi đang bị gỡ lỗi" mà bất 
   WebUI buộc mật khẩu đạt độ mạnh tối thiểu và không bao giờ lưu mật khẩu ở dạng văn bản thuần.
 - **Tích hợp sẵn truyền và đồng bộ tệp.** Gói đi kèm `sftp-server`, `scp` và `rsync`, nên SFTP,
   sshfs, các trình khách giao diện đồ họa và sao lưu đều hoạt động qua cùng một kết nối.
+- **SSH qua USB, không ADB.** Bật chia sẻ kết nối USB và bind daemon vào địa chỉ USB: cùng phiên qua cáp, nhanh và ổn định hơn wifi cho các lần truyền lớn.
 - **Mọi thiết bị và trình giả lập.** `arm64-v8a`, `armeabi-v7a`, `x86`, `x86_64`.
 
 ## Tác nhân AI trên thiết bị của bạn

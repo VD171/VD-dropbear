@@ -90,6 +90,7 @@ globally-readable "I am being debugged" flag that anything on the device can rea
   `system`). The WebUI enforces a minimum password strength and never stores a password in clear text.
 - **File transfer and sync built in.** The bundle ships `sftp-server`, `scp` and `rsync`, so SFTP,
   sshfs, GUI clients and backups all work over the same connection.
+- **SSH over USB, no ADB.** Turn on USB tethering and bind the daemon to the USB address: the same session over the cable, faster and steadier than wifi for large transfers.
 - **Every device and emulator.** `arm64-v8a`, `armeabi-v7a`, `x86`, `x86_64`.
 
 ## AI agents on your device
