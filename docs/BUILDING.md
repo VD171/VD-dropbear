@@ -146,7 +146,7 @@ This matters, and it was learned the hard way, **on a real device**, not in CI:
 
 Lesson for testing: **`qemu-aarch64` (qemu-user) is not a valid smoke test** here (it also segfaults on
 these binaries), and neither is a successful compile+link. **Run the binary on a real arm64 Android
-device.** (The migration that put this binary into VDAntiRoot was validated exactly this way: the daemon
+device.** (This was validated exactly this way: the daemon
 was launched on an alternate port on a live device and a password login was confirmed to succeed, with a
 wrong password rejected.)
 
