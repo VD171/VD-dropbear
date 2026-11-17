@@ -23,15 +23,15 @@
   ======================================================================
 -->
 
-> **Languages:** [English](../BUILDING.md) · [العربية](../ar/BUILDING.md) · [Čeština](../cs/BUILDING.md) · [Deutsch](../de/BUILDING.md) · [Español](../es/BUILDING.md) · [فارسی](../fa/BUILDING.md) · [Français](../fr/BUILDING.md) · [हिन्दी](../hi/BUILDING.md) · [Bahasa Indonesia](../in/BUILDING.md) · [Italiano](../it/BUILDING.md) · [日本語](../ja/BUILDING.md) · [한국어](../ko/BUILDING.md) · [Nederlands](../nl/BUILDING.md) · [Polski](../pl/BUILDING.md) · [Português](../pt/BUILDING.md) · Русский · [Svenska](../sv/BUILDING.md) · [ไทย](../th/BUILDING.md) · [Türkçe](../tr/BUILDING.md) · [Українська](../uk/BUILDING.md) · [Tiếng Việt](../vi/BUILDING.md) · [中文](../zh/BUILDING.md)
+> **Languages:** [English](../BUILDING.md) · [العربية](../ar/BUILDING.md) · [Čeština](../cs/BUILDING.md) · [Deutsch](../de/BUILDING.md) · [Español](../es/BUILDING.md) · [فارسی](../fa/BUILDING.md) · [Français](../fr/BUILDING.md) · [हिन्दी](../hi/BUILDING.md) · [Bahasa Indonesia](../id/BUILDING.md) · [Italiano](../it/BUILDING.md) · [日本語](../ja/BUILDING.md) · [한국어](../ko/BUILDING.md) · [Nederlands](../nl/BUILDING.md) · [Polski](../pl/BUILDING.md) · [Português](../pt/BUILDING.md) · Русский · [Svenska](../sv/BUILDING.md) · [ไทย](../th/BUILDING.md) · [Türkçe](../tr/BUILDING.md) · [Українська](../uk/BUILDING.md) · [Tiếng Việt](../vi/BUILDING.md) · [中文](../zh/BUILDING.md)
 
 ---
 
 # Сборка VD Dropbear
 
 VD Dropbear поставляет **[Dropbear](https://github.com/mkj/dropbear) upstream** (тег, закреплённый в
-[`UPSTREAM_VERSION`](../UPSTREAM_VERSION)) плюс небольшой проверяемый набор патчей в
-[`patches/`](../patches/). CI собирает его; вы можете воспроизвести это локально.
+[`UPSTREAM_VERSION`](../../UPSTREAM_VERSION)) плюс небольшой проверяемый набор патчей в
+[`patches/`](../../patches/). CI собирает его; вы можете воспроизвести это локально.
 
 ## Быстрый старт
 
@@ -53,7 +53,7 @@ ABIS="arm64-v8a" ./scripts/build.sh
 встроенным в бинарник; динамической является только библиотека C. См. [Динамический, не static-PIE](#динамический-не-static-pie).
 
 Бинарники **не коммитятся**; их собирает CI при каждом теге и прикрепляет к релизу. См.
-[`.gitignore`](../.gitignore).
+[`.gitignore`](../../.gitignore).
 
 ---
 
@@ -62,7 +62,7 @@ ABIS="arm64-v8a" ./scripts/build.sh
 Аутентификация по паролю в Dropbear написана для обычного Unix-хоста с `crypt()` и `/etc/shadow`. В
 Android **нет ни того, ни другого**, и это сталкивается со сборкой в трёх отдельных местах. Этот раздел
 документирует каждое из них, потому что это именно тот тип вещей, который больно открывать заново. Всё
-это обрабатывает патч [`0003-password-file.patch`](../patches/0003-password-file.patch); ничто ниже не
+это обрабатывает патч [`0003-password-file.patch`](../../patches/0003-password-file.patch); ничто ниже не
 оставлено на волю случая во время выполнения.
 
 ### 1. в bionic нет пригодного `crypt()`
@@ -75,7 +75,7 @@ Android **нет ни того, ни другого**, и это сталкив�
 
 **Наш ответ:** вообще не использовать `crypt()`. Аутентификация по паролю проверяет предъявленный пароль
 с помощью **PBKDF2-HMAC-SHA256** против файла хешей (`DROPBEAR_PASSWD_FILE`), публичной, стандартной, с
-солью, итеративной KDF. Формат файла задокументирован в [`patches/README.md`](../patches/README.md).
+солью, итеративной KDF. Формат файла задокументирован в [`patches/README.md`](../../patches/README.md).
 
 ### 2. защита на этапе компиляции в `sysoptions.h`
 

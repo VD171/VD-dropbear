@@ -23,15 +23,15 @@
   ======================================================================
 -->
 
-> **Languages:** [English](../BUILDING.md) · [العربية](../ar/BUILDING.md) · [Čeština](../cs/BUILDING.md) · [Deutsch](../de/BUILDING.md) · [Español](../es/BUILDING.md) · فارسی · [Français](../fr/BUILDING.md) · [हिन्दी](../hi/BUILDING.md) · [Bahasa Indonesia](../in/BUILDING.md) · [Italiano](../it/BUILDING.md) · [日本語](../ja/BUILDING.md) · [한국어](../ko/BUILDING.md) · [Nederlands](../nl/BUILDING.md) · [Polski](../pl/BUILDING.md) · [Português](../pt/BUILDING.md) · [Русский](../ru/BUILDING.md) · [Svenska](../sv/BUILDING.md) · [ไทย](../th/BUILDING.md) · [Türkçe](../tr/BUILDING.md) · [Українська](../uk/BUILDING.md) · [Tiếng Việt](../vi/BUILDING.md) · [中文](../zh/BUILDING.md)
+> **Languages:** [English](../BUILDING.md) · [العربية](../ar/BUILDING.md) · [Čeština](../cs/BUILDING.md) · [Deutsch](../de/BUILDING.md) · [Español](../es/BUILDING.md) · فارسی · [Français](../fr/BUILDING.md) · [हिन्दी](../hi/BUILDING.md) · [Bahasa Indonesia](../id/BUILDING.md) · [Italiano](../it/BUILDING.md) · [日本語](../ja/BUILDING.md) · [한국어](../ko/BUILDING.md) · [Nederlands](../nl/BUILDING.md) · [Polski](../pl/BUILDING.md) · [Português](../pt/BUILDING.md) · [Русский](../ru/BUILDING.md) · [Svenska](../sv/BUILDING.md) · [ไทย](../th/BUILDING.md) · [Türkçe](../tr/BUILDING.md) · [Українська](../uk/BUILDING.md) · [Tiếng Việt](../vi/BUILDING.md) · [中文](../zh/BUILDING.md)
 
 ---
 
 # ساخت VD Dropbear
 
 ‏VD Dropbear نسخهٔ **[Dropbear](https://github.com/mkj/dropbear) اصلی (upstream)** را (تگ پین‌شده در
-[`UPSTREAM_VERSION`](../UPSTREAM_VERSION)) به‌همراه مجموعهٔ کوچک و قابل‌ممیزی وصله‌ها در
-[`patches/`](../patches/) عرضه می‌کند. CI آن را می‌سازد؛ می‌توانید آن را به‌صورت محلی بازتولید کنید.
+[`UPSTREAM_VERSION`](../../UPSTREAM_VERSION)) به‌همراه مجموعهٔ کوچک و قابل‌ممیزی وصله‌ها در
+[`patches/`](../../patches/) عرضه می‌کند. CI آن را می‌سازد؛ می‌توانید آن را به‌صورت محلی بازتولید کنید.
 
 ## شروع سریع
 
@@ -53,7 +53,7 @@ ELF **پویا** است (`file` گزارش می‌دهد `dynamically linked, in
 می‌ماند؛ تنها کتابخانهٔ C پویاست. ببینید [پویا، نه static-PIE](#پویا-نه-static-pie).
 
 باینری‌ها **کامیت نمی‌شوند**؛ در هر تگ توسط CI ساخته و به ریلیز پیوست می‌شوند. ببینید
-[`.gitignore`](../.gitignore).
+[`.gitignore`](../../.gitignore).
 
 ---
 
@@ -62,7 +62,7 @@ ELF **پویا** است (`file` گزارش می‌دهد `dynamically linked, in
 احراز هویت با گذرواژهٔ Dropbear برای یک میزبان یونیکس معمولی با `crypt()` و `/etc/shadow` نوشته شده است.
 اندروید **هیچ‌کدام را ندارد**، و این در سه جای جداگانه با ساخت تداخل می‌کند. این بخش هر یک از آن‌ها را
 مستند می‌کند، زیرا دقیقاً از آن نوع چیزهایی است که کشف دوبارهٔ آن دردناک است. همهٔ این‌ها را وصلهٔ
-[`0003-password-file.patch`](../patches/0003-password-file.patch) مدیریت می‌کند؛ هیچ‌چیزِ زیر در زمان اجرا
+[`0003-password-file.patch`](../../patches/0003-password-file.patch) مدیریت می‌کند؛ هیچ‌چیزِ زیر در زمان اجرا
 به شانس واگذار نشده است.
 
 ### ۱. bionic یک `crypt()` قابل‌استفاده ندارد
@@ -75,7 +75,7 @@ ELF **پویا** است (`file` گزارش می‌دهد `dynamically linked, in
 
 **پاسخ ما:** اصلاً از `crypt()` استفاده نکنیم. احراز هویت با گذرواژه، گذرواژهٔ ارائه‌شده را با
 **PBKDF2-HMAC-SHA256** در برابر یک فایل هش (`DROPBEAR_PASSWD_FILE`) راستی‌آزمایی می‌کند؛ یک KDF عمومی،
-استاندارد، نمک‌دار و تکرارشونده. قالب فایل در [`patches/README.md`](../patches/README.md) مستند شده است.
+استاندارد، نمک‌دار و تکرارشونده. قالب فایل در [`patches/README.md`](../../patches/README.md) مستند شده است.
 
 ### ۲. نگهبان زمان کامپایل در `sysoptions.h`
 

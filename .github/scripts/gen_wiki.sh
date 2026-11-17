@@ -53,6 +53,10 @@ for _f in "$SRC"/*.md; do
   [ -f "$_f" ] || continue
   _b="$(basename "$_f" .md)"; case " $DOCS " in *" $_b "*) ;; *) DOCS="$DOCS $_b" ;; esac
 done
+# CHANGELOG lives at the repo root (English only); publish it to the wiki too so
+# the link to it from CONTRIBUTING resolves. Not added to Home/Sidebar on purpose
+# (it has no translations, so a per-language Home link would 404).
+[ -f "$ROOT_DIR/CHANGELOG.md" ] && case " $DOCS " in *" CHANGELOG "*) ;; *) DOCS="$DOCS CHANGELOG" ;; esac
 for _b in $DOCS; do
   _s="$(en_src "$_b")"
   [ -n "$_s" ] && cp "$_s" "$WIKI/$_b.md"
@@ -89,14 +93,14 @@ tagline() {
 t_doc() { case "$1" in
   en) printf Documentation ;; ar) printf '%s' "التوثيق" ;; cs) printf Dokumentace ;; de) printf Dokumentation ;;
   es) printf '%s' "Documentación" ;; fa) printf '%s' "مستندات" ;; fr) printf Documentation ;; hi) printf '%s' "दस्तावेज़ीकरण" ;;
-  in) printf Dokumentasi ;; it) printf Documentazione ;; ja) printf '%s' "ドキュメント" ;; ko) printf '%s' "문서" ;;
+  id) printf Dokumentasi ;; it) printf Documentazione ;; ja) printf '%s' "ドキュメント" ;; ko) printf '%s' "문서" ;;
   nl) printf Documentatie ;; pl) printf Dokumentacja ;; pt) printf '%s' "Documentação" ;; ru) printf '%s' "Документация" ;;
   sv) printf Dokumentation ;; th) printf '%s' "เอกสารประกอบ" ;; tr) printf Belgeler ;; uk) printf '%s' "Документація" ;;
   vi) printf '%s' "Tài liệu" ;; zh) printf '%s' "文档" ;; esac; }
 t_all() { case "$1" in
   en) printf '%s' "All languages" ;; ar) printf '%s' "كل اللغات" ;; cs) printf '%s' "Všechny jazyky" ;; de) printf '%s' "Alle Sprachen" ;;
   es) printf '%s' "Todos los idiomas" ;; fa) printf '%s' "همه زبان‌ها" ;; fr) printf '%s' "Toutes les langues" ;; hi) printf '%s' "सभी भाषाएँ" ;;
-  in) printf '%s' "Semua bahasa" ;; it) printf '%s' "Tutte le lingue" ;; ja) printf '%s' "すべての言語" ;; ko) printf '%s' "모든 언어" ;;
+  id) printf '%s' "Semua bahasa" ;; it) printf '%s' "Tutte le lingue" ;; ja) printf '%s' "すべての言語" ;; ko) printf '%s' "모든 언어" ;;
   nl) printf '%s' "Alle talen" ;; pl) printf '%s' "Wszystkie języki" ;; pt) printf '%s' "Todos os idiomas" ;; ru) printf '%s' "Все языки" ;;
   sv) printf '%s' "Alla språk" ;; th) printf '%s' "ทุกภาษา" ;; tr) printf '%s' "Tüm diller" ;; uk) printf '%s' "Усі мови" ;;
   vi) printf '%s' "Tất cả ngôn ngữ" ;; zh) printf '%s' "所有语言" ;; esac; }
@@ -113,7 +117,7 @@ t_foot() { case "$1" in
   fa) printf '%s' "این مستندات با Claude (Anthropic) تولید شده و توسط VD171 نگهداری می‌شود. اصلاحات و بهبودها خوش‌آمد است؛ به [CONTRIBUTING.md](CONTRIBUTING.md) مراجعه کنید." ;;
   fr) printf '%s' "Cette documentation a été générée avec Claude (Anthropic) et est maintenue par VD171. Les corrections et améliorations sont les bienvenues ; voir [CONTRIBUTING.md](CONTRIBUTING.md)." ;;
   hi) printf '%s' "यह दस्तावेज़ Claude (Anthropic) से तैयार किया गया है और इसे VD171 द्वारा अनुरक्षित किया जाता है। सुधार और संशोधन का स्वागत है; देखें [CONTRIBUTING.md](CONTRIBUTING.md)।" ;;
-  in) printf '%s' "Dokumentasi ini dibuat dengan Claude (Anthropic) dan dikelola oleh VD171. Koreksi dan perbaikan dipersilakan; lihat [CONTRIBUTING.md](CONTRIBUTING.md)." ;;
+  id) printf '%s' "Dokumentasi ini dibuat dengan Claude (Anthropic) dan dikelola oleh VD171. Koreksi dan perbaikan dipersilakan; lihat [CONTRIBUTING.md](CONTRIBUTING.md)." ;;
   it) printf '%s' "Questa documentazione è stata generata con Claude (Anthropic) ed è gestita da VD171. Correzioni e miglioramenti sono benvenuti; vedi [CONTRIBUTING.md](CONTRIBUTING.md)." ;;
   ja) printf '%s' "このドキュメントは Claude (Anthropic) で生成され、VD171 によって保守されています。修正や改善を歓迎します。[CONTRIBUTING.md](CONTRIBUTING.md) を参照してください。" ;;
   ko) printf '%s' "이 문서는 Claude (Anthropic)로 생성되었으며 VD171이 유지 관리합니다. 수정 및 개선을 환영합니다. [CONTRIBUTING.md](CONTRIBUTING.md)를 참조하세요." ;;
@@ -128,11 +132,11 @@ t_foot() { case "$1" in
   vi) printf '%s' "Tài liệu này được tạo bằng Claude (Anthropic) và được duy trì bởi VD171. Chúng tôi hoan nghênh các chỉnh sửa và cải tiến; xem [CONTRIBUTING.md](CONTRIBUTING.md)." ;;
   zh) printf '%s' "本文档由 Claude (Anthropic) 生成，并由 VD171 维护。欢迎修正和改进；请参阅 [CONTRIBUTING.md](CONTRIBUTING.md)。" ;;
   esac; }
-NAV_LANGS="ar cs de es fa fr hi in it ja ko nl pl pt ru sv th tr uk vi zh"
+NAV_LANGS="ar cs de es fa fr hi id it ja ko nl pl pt ru sv th tr uk vi zh"
 endonym() { case "$1" in
   en) printf English ;; ar) printf '%s' "العربية" ;; cs) printf '%s' "Čeština" ;; de) printf Deutsch ;;
   es) printf '%s' "Español" ;; fa) printf '%s' "فارسی" ;; fr) printf '%s' "Français" ;; hi) printf '%s' "हिन्दी" ;;
-  in) printf '%s' "Bahasa Indonesia" ;; it) printf Italiano ;; ja) printf '%s' "日本語" ;; ko) printf '%s' "한국어" ;;
+  id) printf '%s' "Bahasa Indonesia" ;; it) printf Italiano ;; ja) printf '%s' "日本語" ;; ko) printf '%s' "한국어" ;;
   nl) printf Nederlands ;; pl) printf Polski ;; pt) printf '%s' "Português" ;; ru) printf '%s' "Русский" ;;
   sv) printf Svenska ;; th) printf '%s' "ไทย" ;; tr) printf '%s' "Türkçe" ;; uk) printf '%s' "Українська" ;;
   vi) printf '%s' "Tiếng Việt" ;; zh) printf '%s' "中文" ;; esac; }
@@ -142,7 +146,7 @@ FOOT_MARK="<!-- doc-footer -->"
 append_foot() {
   _ff="$1"; _fc="$2"
   grep -qF "$FOOT_MARK" "$_ff" 2>/dev/null && return 0
-  { echo; echo; echo "$FOOT_MARK"; echo; echo "---"; echo; echo "> $(t_foot "$_fc")"; } >> "$_ff"
+  { echo; echo; echo "$FOOT_MARK"; echo; echo "---"; echo; echo "> _$(t_foot "$_fc")_"; } >> "$_ff"
 }
 
 home_switcher() {

@@ -23,14 +23,14 @@
   ======================================================================
 -->
 
-> **Languages:** [English](../BUILDING.md) · [العربية](../ar/BUILDING.md) · [Čeština](../cs/BUILDING.md) · [Deutsch](../de/BUILDING.md) · [Español](../es/BUILDING.md) · [فارسی](../fa/BUILDING.md) · [Français](../fr/BUILDING.md) · हिन्दी · [Bahasa Indonesia](../in/BUILDING.md) · [Italiano](../it/BUILDING.md) · [日本語](../ja/BUILDING.md) · [한국어](../ko/BUILDING.md) · [Nederlands](../nl/BUILDING.md) · [Polski](../pl/BUILDING.md) · [Português](../pt/BUILDING.md) · [Русский](../ru/BUILDING.md) · [Svenska](../sv/BUILDING.md) · [ไทย](../th/BUILDING.md) · [Türkçe](../tr/BUILDING.md) · [Українська](../uk/BUILDING.md) · [Tiếng Việt](../vi/BUILDING.md) · [中文](../zh/BUILDING.md)
+> **Languages:** [English](../BUILDING.md) · [العربية](../ar/BUILDING.md) · [Čeština](../cs/BUILDING.md) · [Deutsch](../de/BUILDING.md) · [Español](../es/BUILDING.md) · [فارسی](../fa/BUILDING.md) · [Français](../fr/BUILDING.md) · हिन्दी · [Bahasa Indonesia](../id/BUILDING.md) · [Italiano](../it/BUILDING.md) · [日本語](../ja/BUILDING.md) · [한국어](../ko/BUILDING.md) · [Nederlands](../nl/BUILDING.md) · [Polski](../pl/BUILDING.md) · [Português](../pt/BUILDING.md) · [Русский](../ru/BUILDING.md) · [Svenska](../sv/BUILDING.md) · [ไทย](../th/BUILDING.md) · [Türkçe](../tr/BUILDING.md) · [Українська](../uk/BUILDING.md) · [Tiếng Việt](../vi/BUILDING.md) · [中文](../zh/BUILDING.md)
 
 ---
 
 # VD Dropbear बनाना
 
-VD Dropbear **[Dropbear](https://github.com/mkj/dropbear) upstream** ([`UPSTREAM_VERSION`](../UPSTREAM_VERSION)
-में पिन किया गया टैग) के साथ [`patches/`](../patches/) में मौजूद छोटा, ऑडिट-योग्य पैच सेट भेजता है। CI इसे
+VD Dropbear **[Dropbear](https://github.com/mkj/dropbear) upstream** ([`UPSTREAM_VERSION`](../../UPSTREAM_VERSION)
+में पिन किया गया टैग) के साथ [`patches/`](../../patches/) में मौजूद छोटा, ऑडिट-योग्य पैच सेट भेजता है। CI इसे
 बनाता है; आप इसे स्थानीय रूप से पुनः उत्पन्न कर सकते हैं।
 
 ## त्वरित शुरुआत
@@ -53,7 +53,7 @@ bionic libc से लिंक है जो हर Android डिवाइस 
 लाइब्रेरी डायनामिक है। देखें [डायनामिक, static-PIE नहीं](#डयनमक-static-pie-नह)।
 
 बाइनरी **कमिट नहीं की जातीं**; उन्हें हर टैग पर CI बनाता है और रिलीज़ के साथ संलग्न करता है। देखें
-[`.gitignore`](../.gitignore)।
+[`.gitignore`](../../.gitignore)।
 
 ---
 
@@ -62,7 +62,7 @@ bionic libc से लिंक है जो हर Android डिवाइस 
 Dropbear का पासवर्ड प्रमाणीकरण `crypt()` और `/etc/shadow` वाले एक सामान्य Unix होस्ट के लिए लिखा गया है।
 Android के पास **इनमें से कोई नहीं** है, और यह बिल्ड से तीन अलग-अलग जगहों पर टकराता है। यह खंड उनमें से हर एक
 का दस्तावेज़ीकरण करता है, क्योंकि यह ठीक उसी तरह की चीज़ है जिसे फिर से खोजना कष्टदायक होता है। यह सब पैच
-[`0003-password-file.patch`](../patches/0003-password-file.patch) संभालता है; नीचे कुछ भी रनटाइम पर संयोग पर
+[`0003-password-file.patch`](../../patches/0003-password-file.patch) संभालता है; नीचे कुछ भी रनटाइम पर संयोग पर
 नहीं छोड़ा गया।
 
 ### 1. bionic में कोई उपयोगी `crypt()` नहीं है
@@ -75,7 +75,7 @@ Android की C लाइब्रेरी (bionic) न `crypt()`, न `crypt_
 
 **हमारा उत्तर:** `crypt()` का बिल्कुल उपयोग न करना। पासवर्ड ऑथ प्रस्तुत पासवर्ड को एक हैश फ़ाइल
 (`DROPBEAR_PASSWD_FILE`) के विरुद्ध **PBKDF2-HMAC-SHA256** से सत्यापित करता है, जो एक सार्वजनिक, मानक,
-साल्टेड, पुनरावृत्त KDF है। फ़ाइल प्रारूप [`patches/README.md`](../patches/README.md) में प्रलेखित है।
+साल्टेड, पुनरावृत्त KDF है। फ़ाइल प्रारूप [`patches/README.md`](../../patches/README.md) में प्रलेखित है।
 
 ### 2. `sysoptions.h` में कंपाइल-टाइम गार्ड
 

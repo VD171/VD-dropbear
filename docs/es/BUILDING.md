@@ -23,15 +23,15 @@
   ======================================================================
 -->
 
-> **Languages:** [English](../BUILDING.md) · [العربية](../ar/BUILDING.md) · [Čeština](../cs/BUILDING.md) · [Deutsch](../de/BUILDING.md) · Español · [فارسی](../fa/BUILDING.md) · [Français](../fr/BUILDING.md) · [हिन्दी](../hi/BUILDING.md) · [Bahasa Indonesia](../in/BUILDING.md) · [Italiano](../it/BUILDING.md) · [日本語](../ja/BUILDING.md) · [한국어](../ko/BUILDING.md) · [Nederlands](../nl/BUILDING.md) · [Polski](../pl/BUILDING.md) · [Português](../pt/BUILDING.md) · [Русский](../ru/BUILDING.md) · [Svenska](../sv/BUILDING.md) · [ไทย](../th/BUILDING.md) · [Türkçe](../tr/BUILDING.md) · [Українська](../uk/BUILDING.md) · [Tiếng Việt](../vi/BUILDING.md) · [中文](../zh/BUILDING.md)
+> **Languages:** [English](../BUILDING.md) · [العربية](../ar/BUILDING.md) · [Čeština](../cs/BUILDING.md) · [Deutsch](../de/BUILDING.md) · Español · [فارسی](../fa/BUILDING.md) · [Français](../fr/BUILDING.md) · [हिन्दी](../hi/BUILDING.md) · [Bahasa Indonesia](../id/BUILDING.md) · [Italiano](../it/BUILDING.md) · [日本語](../ja/BUILDING.md) · [한국어](../ko/BUILDING.md) · [Nederlands](../nl/BUILDING.md) · [Polski](../pl/BUILDING.md) · [Português](../pt/BUILDING.md) · [Русский](../ru/BUILDING.md) · [Svenska](../sv/BUILDING.md) · [ไทย](../th/BUILDING.md) · [Türkçe](../tr/BUILDING.md) · [Українська](../uk/BUILDING.md) · [Tiếng Việt](../vi/BUILDING.md) · [中文](../zh/BUILDING.md)
 
 ---
 
 # Compilar VD Dropbear
 
 VD Dropbear entrega el **[Dropbear](https://github.com/mkj/dropbear) upstream** (la etiqueta fijada en
-[`UPSTREAM_VERSION`](../UPSTREAM_VERSION)) más el conjunto de parches pequeño y auditable en
-[`patches/`](../patches/). La CI lo compila; puedes reproducirlo localmente.
+[`UPSTREAM_VERSION`](../../UPSTREAM_VERSION)) más el conjunto de parches pequeño y auditable en
+[`patches/`](../../patches/). La CI lo compila; puedes reproducirlo localmente.
 
 ## Inicio rápido
 
@@ -53,7 +53,7 @@ enlazado contra la libc bionic que todo dispositivo Android ya tiene. libtomcryp
 dentro del binario; solo la biblioteca C es dinámica. Véase [Dinámico, no static-PIE](#dinámico-no-static-pie).
 
 Los binarios **no se commitean**; los compila la CI en cada etiqueta y se adjuntan a la release.
-Véase [`.gitignore`](../.gitignore).
+Véase [`.gitignore`](../../.gitignore).
 
 ---
 
@@ -63,7 +63,7 @@ La autenticación por contraseña de Dropbear está escrita para un host Unix no
 `/etc/shadow`. Android **no tiene ninguno de los dos**, y eso choca con la compilación en tres lugares
 distintos. Esta sección documenta cada uno de ellos, porque es exactamente el tipo de cosa dolorosa de
 redescubrir. Todo ello lo gestiona el parche
-[`0003-password-file.patch`](../patches/0003-password-file.patch); nada de lo de abajo se deja al azar
+[`0003-password-file.patch`](../../patches/0003-password-file.patch); nada de lo de abajo se deja al azar
 en tiempo de ejecución.
 
 ### 1. bionic no tiene un `crypt()` utilizable
@@ -77,7 +77,7 @@ hash de contraseña sería una dependencia grande y torpe para un binario estát
 **Nuestra respuesta:** no usar `crypt()` en absoluto. La autenticación por contraseña verifica la
 contraseña presentada con **PBKDF2-HMAC-SHA256** contra un archivo de hash (`DROPBEAR_PASSWD_FILE`), una
 KDF pública, estándar, con salt e iterada. El formato del archivo está documentado en
-[`patches/README.md`](../patches/README.md).
+[`patches/README.md`](../../patches/README.md).
 
 ### 2. el guard de tiempo de compilación en `sysoptions.h`
 

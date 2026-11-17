@@ -23,15 +23,15 @@
   ======================================================================
 -->
 
-> **Languages:** [English](../BUILDING.md) · العربية · [Čeština](../cs/BUILDING.md) · [Deutsch](../de/BUILDING.md) · [Español](../es/BUILDING.md) · [فارسی](../fa/BUILDING.md) · [Français](../fr/BUILDING.md) · [हिन्दी](../hi/BUILDING.md) · [Bahasa Indonesia](../in/BUILDING.md) · [Italiano](../it/BUILDING.md) · [日本語](../ja/BUILDING.md) · [한국어](../ko/BUILDING.md) · [Nederlands](../nl/BUILDING.md) · [Polski](../pl/BUILDING.md) · [Português](../pt/BUILDING.md) · [Русский](../ru/BUILDING.md) · [Svenska](../sv/BUILDING.md) · [ไทย](../th/BUILDING.md) · [Türkçe](../tr/BUILDING.md) · [Українська](../uk/BUILDING.md) · [Tiếng Việt](../vi/BUILDING.md) · [中文](../zh/BUILDING.md)
+> **Languages:** [English](../BUILDING.md) · العربية · [Čeština](../cs/BUILDING.md) · [Deutsch](../de/BUILDING.md) · [Español](../es/BUILDING.md) · [فارسی](../fa/BUILDING.md) · [Français](../fr/BUILDING.md) · [हिन्दी](../hi/BUILDING.md) · [Bahasa Indonesia](../id/BUILDING.md) · [Italiano](../it/BUILDING.md) · [日本語](../ja/BUILDING.md) · [한국어](../ko/BUILDING.md) · [Nederlands](../nl/BUILDING.md) · [Polski](../pl/BUILDING.md) · [Português](../pt/BUILDING.md) · [Русский](../ru/BUILDING.md) · [Svenska](../sv/BUILDING.md) · [ไทย](../th/BUILDING.md) · [Türkçe](../tr/BUILDING.md) · [Українська](../uk/BUILDING.md) · [Tiếng Việt](../vi/BUILDING.md) · [中文](../zh/BUILDING.md)
 
 ---
 
 # بناء VD Dropbear
 
 يوفّر VD Dropbear نسخة **[Dropbear](https://github.com/mkj/dropbear) الأصلية (upstream)** (الوسم المثبّت في
-[`UPSTREAM_VERSION`](../UPSTREAM_VERSION)) إضافة إلى مجموعة الرقع الصغيرة القابلة للتدقيق في
-[`patches/`](../patches/). يبنيه الـ CI؛ ويمكنك إعادة إنتاجه محليًا.
+[`UPSTREAM_VERSION`](../../UPSTREAM_VERSION)) إضافة إلى مجموعة الرقع الصغيرة القابلة للتدقيق في
+[`patches/`](../../patches/). يبنيه الـ CI؛ ويمكنك إعادة إنتاجه محليًا.
 
 ## بداية سريعة
 
@@ -53,7 +53,7 @@ ABIS="arm64-v8a" ./scripts/build.sh
 [ديناميكي، وليس static-PIE](#ديناميكي-وليس-static-pie).
 
 الملفات الثنائية **لا تُودع (commit)**؛ يبنيها الـ CI عند كل وسم ويُرفقها بالإصدار. انظر
-[`.gitignore`](../.gitignore).
+[`.gitignore`](../../.gitignore).
 
 ---
 
@@ -62,7 +62,7 @@ ABIS="arm64-v8a" ./scripts/build.sh
 كُتبت مصادقة كلمة المرور في Dropbear لمضيف Unix اعتيادي فيه `crypt()` و`/etc/shadow`. ولا يملك Android
 **أيًّا منهما**، وهذا يصطدم بالبناء في ثلاثة مواضع منفصلة. يوثّق هذا القسم كلًّا منها، لأنه بالضبط من النوع
 المؤلم عند إعادة اكتشافه. كل ذلك تتولّاه الرقعة
-[`0003-password-file.patch`](../patches/0003-password-file.patch)؛ ولا شيء مما يلي متروك للصدفة وقت
+[`0003-password-file.patch`](../../patches/0003-password-file.patch)؛ ولا شيء مما يلي متروك للصدفة وقت
 التشغيل.
 
 ### 1. لا تملك bionic دالة `crypt()` صالحة للاستخدام
@@ -74,7 +74,7 @@ ABIS="arm64-v8a" ./scripts/build.sh
 
 **جوابنا:** عدم استخدام `crypt()` إطلاقًا. تتحقق مصادقة كلمة المرور من كلمة المرور المقدَّمة باستخدام
 **PBKDF2-HMAC-SHA256** مقابل ملف تجزئة (`DROPBEAR_PASSWD_FILE`)، وهو دالة اشتقاق مفاتيح (KDF) عامة
-وقياسية ومملّحة ومتكرّرة. صيغة الملف موثّقة في [`patches/README.md`](../patches/README.md).
+وقياسية ومملّحة ومتكرّرة. صيغة الملف موثّقة في [`patches/README.md`](../../patches/README.md).
 
 ### 2. حارس وقت الترجمة في `sysoptions.h`
 

@@ -39,16 +39,16 @@
 
 <p align="center">
   <a href="https://github.com/VD171/VD-dropbear/releases">Releases</a> ·
-  <a href="https://github.com/VD171/VD-dropbear/wiki/in-Home">Wiki</a> ·
-  <a href="https://github.com/VD171/VD-dropbear/wiki/in-USER-GUIDE">Panduan pengguna</a> ·
-  <a href="https://github.com/VD171/VD-dropbear/wiki/in-CONFIGURATION">Konfigurasi</a> ·
-  <a href="https://github.com/VD171/VD-dropbear/wiki/in-ARCHITECTURE">Arsitektur</a> ·
-  <a href="https://github.com/VD171/VD-dropbear/wiki/in-AI-AGENTS">Agen AI</a> ·
+  <a href="https://github.com/VD171/VD-dropbear/wiki/id-Home">Wiki</a> ·
+  <a href="https://github.com/VD171/VD-dropbear/wiki/id-USER-GUIDE">Panduan pengguna</a> ·
+  <a href="https://github.com/VD171/VD-dropbear/wiki/id-CONFIGURATION">Konfigurasi</a> ·
+  <a href="https://github.com/VD171/VD-dropbear/wiki/id-ARCHITECTURE">Arsitektur</a> ·
+  <a href="https://github.com/VD171/VD-dropbear/wiki/id-AI-AGENTS">Agen AI</a> ·
   <a href="CHANGELOG.md">Changelog</a> ·
   <a href="https://xdaforums.com/t/VD-Dropbear.4808524/">XDA thread</a>
 </p>
 
-> **Languages:** [English](README.md) · [العربية](README.ar.md) · [Čeština](README.cs.md) · [Deutsch](README.de.md) · [Español](README.es.md) · [فارسی](README.fa.md) · [Français](README.fr.md) · [हिन्दी](README.hi.md) · [Bahasa Indonesia](README.in.md) · [Italiano](README.it.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Nederlands](README.nl.md) · [Polski](README.pl.md) · [Português](README.pt.md) · [Русский](README.ru.md) · [Svenska](README.sv.md) · [ไทย](README.th.md) · [Türkçe](README.tr.md) · [Українська](README.uk.md) · [Tiếng Việt](README.vi.md) · [中文](README.zh.md)
+> **Languages:** [English](README.md) · [العربية](README.ar.md) · [Čeština](README.cs.md) · [Deutsch](README.de.md) · [Español](README.es.md) · [فارسی](README.fa.md) · [Français](README.fr.md) · [हिन्दी](README.hi.md) · [Bahasa Indonesia](README.id.md) · [Italiano](README.it.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Nederlands](README.nl.md) · [Polski](README.pl.md) · [Português](README.pt.md) · [Русский](README.ru.md) · [Svenska](README.sv.md) · [ไทย](README.th.md) · [Türkçe](README.tr.md) · [Українська](README.uk.md) · [Tiếng Việt](README.vi.md) · [中文](README.zh.md)
 
 Sebuah **server SSH [Dropbear](https://matt.ucc.asn.au/dropbear/) yang mandiri dan sepenuhnya dapat dikonfigurasi**,
 dikemas sebagai modul KernelSU / APatch / Magisk. Ia berjalan sendiri dan tidak bergantung pada modul lain.
@@ -165,12 +165,12 @@ dan membangun ulang, sehingga modul tetap mutakhir. Lihat [`.github/workflows/`]
 ## Dokumentasi
 
 <!-- vd-docs -->
-- **[Wiki](https://github.com/VD171/VD-dropbear/wiki/in-Home)**: dokumentasi lengkap, dapat dibaca online.
-- **[Panduan pengguna](https://github.com/VD171/VD-dropbear/wiki/in-USER-GUIDE)**: instalasi, kunci, kata sandi, menghubungkan, transfer file, BFU/AFU.
-- **[Konfigurasi](https://github.com/VD171/VD-dropbear/wiki/in-CONFIGURATION)**: setiap pengaturan, beserta nilai bawaannya.
-- **[Arsitektur](https://github.com/VD171/VD-dropbear/wiki/in-ARCHITECTURE)** dan **[Struktur file](https://github.com/VD171/VD-dropbear/wiki/in-FILE-STRUCTURE)**: cara kerja modul dan daemon, serta lokasi setiap berkas.
-- **[Agen AI di perangkat Anda](https://github.com/VD171/VD-dropbear/wiki/in-AI-AGENTS)**: menggunakan agen otonom melalui SSH, dengan aman.
-- **[Build](https://github.com/VD171/VD-dropbear/wiki/in-BUILDING)**: proses build, dan kisah crypt()/kompilasi silang di Android.
+- **[Wiki](https://github.com/VD171/VD-dropbear/wiki/id-Home)**: dokumentasi lengkap, dapat dibaca online.
+- **[Panduan pengguna](https://github.com/VD171/VD-dropbear/wiki/id-USER-GUIDE)**: instalasi, kunci, kata sandi, menghubungkan, transfer file, BFU/AFU.
+- **[Konfigurasi](https://github.com/VD171/VD-dropbear/wiki/id-CONFIGURATION)**: setiap pengaturan, beserta nilai bawaannya.
+- **[Arsitektur](https://github.com/VD171/VD-dropbear/wiki/id-ARCHITECTURE)** dan **[Struktur file](https://github.com/VD171/VD-dropbear/wiki/id-FILE-STRUCTURE)**: cara kerja modul dan daemon, serta lokasi setiap berkas.
+- **[Agen AI di perangkat Anda](https://github.com/VD171/VD-dropbear/wiki/id-AI-AGENTS)**: menggunakan agen otonom melalui SSH, dengan aman.
+- **[Build](https://github.com/VD171/VD-dropbear/wiki/id-BUILDING)**: proses build, dan kisah crypt()/kompilasi silang di Android.
 - **[Berkontribusi](CONTRIBUTING.md)** dan **[Keamanan](SECURITY.md)**.
 - **[Changelog](CHANGELOG.md)** dan **[Pedoman Perilaku](CODE_OF_CONDUCT.md)**.
 

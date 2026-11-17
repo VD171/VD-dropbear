@@ -23,15 +23,15 @@
   ======================================================================
 -->
 
-> **Languages:** [English](../BUILDING.md) · [العربية](../ar/BUILDING.md) · [Čeština](../cs/BUILDING.md) · [Deutsch](../de/BUILDING.md) · [Español](../es/BUILDING.md) · [فارسی](../fa/BUILDING.md) · [Français](../fr/BUILDING.md) · [हिन्दी](../hi/BUILDING.md) · [Bahasa Indonesia](../in/BUILDING.md) · [Italiano](../it/BUILDING.md) · [日本語](../ja/BUILDING.md) · [한국어](../ko/BUILDING.md) · [Nederlands](../nl/BUILDING.md) · Polski · [Português](../pt/BUILDING.md) · [Русский](../ru/BUILDING.md) · [Svenska](../sv/BUILDING.md) · [ไทย](../th/BUILDING.md) · [Türkçe](../tr/BUILDING.md) · [Українська](../uk/BUILDING.md) · [Tiếng Việt](../vi/BUILDING.md) · [中文](../zh/BUILDING.md)
+> **Languages:** [English](../BUILDING.md) · [العربية](../ar/BUILDING.md) · [Čeština](../cs/BUILDING.md) · [Deutsch](../de/BUILDING.md) · [Español](../es/BUILDING.md) · [فارسی](../fa/BUILDING.md) · [Français](../fr/BUILDING.md) · [हिन्दी](../hi/BUILDING.md) · [Bahasa Indonesia](../id/BUILDING.md) · [Italiano](../it/BUILDING.md) · [日本語](../ja/BUILDING.md) · [한국어](../ko/BUILDING.md) · [Nederlands](../nl/BUILDING.md) · Polski · [Português](../pt/BUILDING.md) · [Русский](../ru/BUILDING.md) · [Svenska](../sv/BUILDING.md) · [ไทย](../th/BUILDING.md) · [Türkçe](../tr/BUILDING.md) · [Українська](../uk/BUILDING.md) · [Tiếng Việt](../vi/BUILDING.md) · [中文](../zh/BUILDING.md)
 
 ---
 
 # Budowanie VD Dropbear
 
 VD Dropbear dostarcza **[Dropbear](https://github.com/mkj/dropbear) upstream** (tag przypięty w
-[`UPSTREAM_VERSION`](../UPSTREAM_VERSION)) oraz mały, audytowalny zestaw łatek w
-[`patches/`](../patches/). CI go buduje; możesz to odtworzyć lokalnie.
+[`UPSTREAM_VERSION`](../../UPSTREAM_VERSION)) oraz mały, audytowalny zestaw łatek w
+[`patches/`](../../patches/). CI go buduje; możesz to odtworzyć lokalnie.
 
 ## Szybki start
 
@@ -53,7 +53,7 @@ następnie kompiluje skrośnie `vddropbear` i `dropbearkey` do `module/bin/<abi>
 w binarkę; dynamiczna jest tylko biblioteka C. Zobacz [Dynamiczny, nie static-PIE](#dynamiczny-nie-static-pie).
 
 Binarki **nie są commitowane**; buduje je CI przy każdym tagu i dołącza do wydania. Zobacz
-[`.gitignore`](../.gitignore).
+[`.gitignore`](../../.gitignore).
 
 ---
 
@@ -62,7 +62,7 @@ Binarki **nie są commitowane**; buduje je CI przy każdym tagu i dołącza do w
 Uwierzytelnianie hasłem w Dropbear jest napisane dla zwykłego hosta Unix z `crypt()` i `/etc/shadow`.
 Android **nie ma żadnego z nich**, i to koliduje z budowaniem w trzech osobnych miejscach. Ten rozdział
 dokumentuje każde z nich, bo to dokładnie ten rodzaj rzeczy, który boli przy ponownym odkrywaniu.
-Wszystkim zajmuje się łatka [`0003-password-file.patch`](../patches/0003-password-file.patch); nic
+Wszystkim zajmuje się łatka [`0003-password-file.patch`](../../patches/0003-password-file.patch); nic
 poniżej nie jest zostawione przypadkowi w czasie działania.
 
 ### 1. bionic nie ma użytecznego `crypt()`
@@ -76,7 +76,7 @@ niewygodną zależnością dla statycznej binarki.
 **Nasza odpowiedź:** w ogóle nie używać `crypt()`. Uwierzytelnianie hasłem weryfikuje przedstawione
 hasło za pomocą **PBKDF2-HMAC-SHA256** wobec pliku skrótu (`DROPBEAR_PASSWD_FILE`), publicznej,
 standardowej, solonej, iterowanej KDF. Format pliku jest udokumentowany w
-[`patches/README.md`](../patches/README.md).
+[`patches/README.md`](../../patches/README.md).
 
 ### 2. strażnik kompilacji w `sysoptions.h`
 

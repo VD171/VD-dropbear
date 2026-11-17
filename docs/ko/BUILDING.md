@@ -23,14 +23,14 @@
   ======================================================================
 -->
 
-> **Languages:** [English](../BUILDING.md) · [العربية](../ar/BUILDING.md) · [Čeština](../cs/BUILDING.md) · [Deutsch](../de/BUILDING.md) · [Español](../es/BUILDING.md) · [فارسی](../fa/BUILDING.md) · [Français](../fr/BUILDING.md) · [हिन्दी](../hi/BUILDING.md) · [Bahasa Indonesia](../in/BUILDING.md) · [Italiano](../it/BUILDING.md) · [日本語](../ja/BUILDING.md) · 한국어 · [Nederlands](../nl/BUILDING.md) · [Polski](../pl/BUILDING.md) · [Português](../pt/BUILDING.md) · [Русский](../ru/BUILDING.md) · [Svenska](../sv/BUILDING.md) · [ไทย](../th/BUILDING.md) · [Türkçe](../tr/BUILDING.md) · [Українська](../uk/BUILDING.md) · [Tiếng Việt](../vi/BUILDING.md) · [中文](../zh/BUILDING.md)
+> **Languages:** [English](../BUILDING.md) · [العربية](../ar/BUILDING.md) · [Čeština](../cs/BUILDING.md) · [Deutsch](../de/BUILDING.md) · [Español](../es/BUILDING.md) · [فارسی](../fa/BUILDING.md) · [Français](../fr/BUILDING.md) · [हिन्दी](../hi/BUILDING.md) · [Bahasa Indonesia](../id/BUILDING.md) · [Italiano](../it/BUILDING.md) · [日本語](../ja/BUILDING.md) · 한국어 · [Nederlands](../nl/BUILDING.md) · [Polski](../pl/BUILDING.md) · [Português](../pt/BUILDING.md) · [Русский](../ru/BUILDING.md) · [Svenska](../sv/BUILDING.md) · [ไทย](../th/BUILDING.md) · [Türkçe](../tr/BUILDING.md) · [Українська](../uk/BUILDING.md) · [Tiếng Việt](../vi/BUILDING.md) · [中文](../zh/BUILDING.md)
 
 ---
 
 # VD Dropbear 빌드
 
-VD Dropbear는 **[Dropbear](https://github.com/mkj/dropbear) upstream**([`UPSTREAM_VERSION`](../UPSTREAM_VERSION)에
-고정된 태그)에, [`patches/`](../patches/)에 있는 작고 감사 가능한 패치 세트를 더해 제공합니다. CI가 이를
+VD Dropbear는 **[Dropbear](https://github.com/mkj/dropbear) upstream**([`UPSTREAM_VERSION`](../../UPSTREAM_VERSION)에
+고정된 태그)에, [`patches/`](../../patches/)에 있는 작고 감사 가능한 패치 세트를 더해 제공합니다. CI가 이를
 빌드하며, 로컬에서 재현할 수 있습니다.
 
 ## 빠른 시작
@@ -52,7 +52,7 @@ ABIS="arm64-v8a" ./scripts/build.sh
 가지고 있는 bionic libc에 링크됩니다. libtomcrypt는 바이너리 안에 임베드된 채로 남고, 동적인 것은 C 라이
 브러리뿐입니다. [동적, static-PIE 아님](#동적-static-pie-아님)을 참고하세요.
 
-바이너리는 **커밋되지 않습니다**. 태그마다 CI가 빌드하여 릴리스에 첨부합니다. [`.gitignore`](../.gitignore)를
+바이너리는 **커밋되지 않습니다**. 태그마다 CI가 빌드하여 릴리스에 첨부합니다. [`.gitignore`](../../.gitignore)를
 참고하세요.
 
 ---
@@ -62,7 +62,7 @@ ABIS="arm64-v8a" ./scripts/build.sh
 Dropbear의 비밀번호 인증은 `crypt()`와 `/etc/shadow`를 갖춘 일반적인 Unix 호스트용으로 작성되었습니다.
 Android에는 **둘 다 없고**, 이는 빌드와 세 군데에서 충돌합니다. 이 절은 그 각각을 기록합니다. 바로 다시
 발견하기 고통스러운 종류의 것이기 때문입니다. 이 모든 것은 패치
-[`0003-password-file.patch`](../patches/0003-password-file.patch)가 처리하며, 아래의 어떤 것도 런타임에서
+[`0003-password-file.patch`](../../patches/0003-password-file.patch)가 처리하며, 아래의 어떤 것도 런타임에서
 운에 맡기지 않습니다.
 
 ### 1. bionic에는 쓸 만한 `crypt()`가 없다
@@ -75,7 +75,7 @@ Dropbear의 표준 비밀번호 경로는 Android에서 아예 빌드도 실행�
 
 **우리의 답:** `crypt()`를 전혀 쓰지 않는 것입니다. 비밀번호 인증은 제시된 비밀번호를 해시 파일
 (`DROPBEAR_PASSWD_FILE`)에 대해 **PBKDF2-HMAC-SHA256**으로 검증합니다. 이는 공개·표준·솔트·반복 KDF입니다.
-파일 형식은 [`patches/README.md`](../patches/README.md)에 문서화되어 있습니다.
+파일 형식은 [`patches/README.md`](../../patches/README.md)에 문서화되어 있습니다.
 
 ### 2. `sysoptions.h`의 컴파일 타임 가드
 

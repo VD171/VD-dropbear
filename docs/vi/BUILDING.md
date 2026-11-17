@@ -23,15 +23,15 @@
   ======================================================================
 -->
 
-> **Languages:** [English](../BUILDING.md) · [العربية](../ar/BUILDING.md) · [Čeština](../cs/BUILDING.md) · [Deutsch](../de/BUILDING.md) · [Español](../es/BUILDING.md) · [فارسی](../fa/BUILDING.md) · [Français](../fr/BUILDING.md) · [हिन्दी](../hi/BUILDING.md) · [Bahasa Indonesia](../in/BUILDING.md) · [Italiano](../it/BUILDING.md) · [日本語](../ja/BUILDING.md) · [한국어](../ko/BUILDING.md) · [Nederlands](../nl/BUILDING.md) · [Polski](../pl/BUILDING.md) · [Português](../pt/BUILDING.md) · [Русский](../ru/BUILDING.md) · [Svenska](../sv/BUILDING.md) · [ไทย](../th/BUILDING.md) · [Türkçe](../tr/BUILDING.md) · [Українська](../uk/BUILDING.md) · Tiếng Việt · [中文](../zh/BUILDING.md)
+> **Languages:** [English](../BUILDING.md) · [العربية](../ar/BUILDING.md) · [Čeština](../cs/BUILDING.md) · [Deutsch](../de/BUILDING.md) · [Español](../es/BUILDING.md) · [فارسی](../fa/BUILDING.md) · [Français](../fr/BUILDING.md) · [हिन्दी](../hi/BUILDING.md) · [Bahasa Indonesia](../id/BUILDING.md) · [Italiano](../it/BUILDING.md) · [日本語](../ja/BUILDING.md) · [한국어](../ko/BUILDING.md) · [Nederlands](../nl/BUILDING.md) · [Polski](../pl/BUILDING.md) · [Português](../pt/BUILDING.md) · [Русский](../ru/BUILDING.md) · [Svenska](../sv/BUILDING.md) · [ไทย](../th/BUILDING.md) · [Türkçe](../tr/BUILDING.md) · [Українська](../uk/BUILDING.md) · Tiếng Việt · [中文](../zh/BUILDING.md)
 
 ---
 
 # Biên dịch VD Dropbear
 
 VD Dropbear cung cấp **[Dropbear](https://github.com/mkj/dropbear) upstream** (tag được ghim trong
-[`UPSTREAM_VERSION`](../UPSTREAM_VERSION)) cùng bộ patch nhỏ, có thể kiểm toán trong
-[`patches/`](../patches/). CI biên dịch nó; bạn có thể tái tạo cục bộ.
+[`UPSTREAM_VERSION`](../../UPSTREAM_VERSION)) cùng bộ patch nhỏ, có thể kiểm toán trong
+[`patches/`](../../patches/). CI biên dịch nó; bạn có thể tái tạo cục bộ.
 
 ## Bắt đầu nhanh
 
@@ -53,7 +53,7 @@ mọi thiết bị Android đã có sẵn. libtomcrypt vẫn được nhúng bê
 động. Xem [Động, không phải static-PIE](#động-không-phải-static-pie).
 
 Các tệp nhị phân **không được commit**; chúng được CI biên dịch ở mỗi tag và đính kèm vào bản phát hành.
-Xem [`.gitignore`](../.gitignore).
+Xem [`.gitignore`](../../.gitignore).
 
 ---
 
@@ -62,7 +62,7 @@ Xem [`.gitignore`](../.gitignore).
 Xác thực bằng mật khẩu của Dropbear được viết cho một máy chủ Unix thông thường với `crypt()` và
 `/etc/shadow`. Android **không có cả hai**, và điều đó xung đột với quá trình biên dịch ở ba chỗ riêng
 biệt. Phần này ghi lại từng chỗ, vì đây đúng là loại việc gây đau đớn khi phải khám phá lại. Tất cả được
-xử lý bởi patch [`0003-password-file.patch`](../patches/0003-password-file.patch); không có gì bên dưới
+xử lý bởi patch [`0003-password-file.patch`](../../patches/0003-password-file.patch); không có gì bên dưới
 bị phó mặc cho may rủi lúc chạy.
 
 ### 1. bionic không có `crypt()` dùng được
@@ -75,7 +75,7 @@ khẩu sẽ là một phụ thuộc lớn, vụng về cho một tệp nhị ph�
 
 **Câu trả lời của chúng tôi:** không dùng `crypt()` chút nào. Xác thực mật khẩu kiểm tra mật khẩu được
 cung cấp bằng **PBKDF2-HMAC-SHA256** đối chiếu với một tệp hash (`DROPBEAR_PASSWD_FILE`), một KDF công
-khai, chuẩn, có salt và lặp. Định dạng tệp được ghi lại trong [`patches/README.md`](../patches/README.md).
+khai, chuẩn, có salt và lặp. Định dạng tệp được ghi lại trong [`patches/README.md`](../../patches/README.md).
 
 ### 2. bộ bảo vệ thời điểm biên dịch trong `sysoptions.h`
 

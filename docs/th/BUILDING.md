@@ -23,14 +23,14 @@
   ======================================================================
 -->
 
-> **Languages:** [English](../BUILDING.md) · [العربية](../ar/BUILDING.md) · [Čeština](../cs/BUILDING.md) · [Deutsch](../de/BUILDING.md) · [Español](../es/BUILDING.md) · [فارسی](../fa/BUILDING.md) · [Français](../fr/BUILDING.md) · [हिन्दी](../hi/BUILDING.md) · [Bahasa Indonesia](../in/BUILDING.md) · [Italiano](../it/BUILDING.md) · [日本語](../ja/BUILDING.md) · [한국어](../ko/BUILDING.md) · [Nederlands](../nl/BUILDING.md) · [Polski](../pl/BUILDING.md) · [Português](../pt/BUILDING.md) · [Русский](../ru/BUILDING.md) · [Svenska](../sv/BUILDING.md) · ไทย · [Türkçe](../tr/BUILDING.md) · [Українська](../uk/BUILDING.md) · [Tiếng Việt](../vi/BUILDING.md) · [中文](../zh/BUILDING.md)
+> **Languages:** [English](../BUILDING.md) · [العربية](../ar/BUILDING.md) · [Čeština](../cs/BUILDING.md) · [Deutsch](../de/BUILDING.md) · [Español](../es/BUILDING.md) · [فارسی](../fa/BUILDING.md) · [Français](../fr/BUILDING.md) · [हिन्दी](../hi/BUILDING.md) · [Bahasa Indonesia](../id/BUILDING.md) · [Italiano](../it/BUILDING.md) · [日本語](../ja/BUILDING.md) · [한국어](../ko/BUILDING.md) · [Nederlands](../nl/BUILDING.md) · [Polski](../pl/BUILDING.md) · [Português](../pt/BUILDING.md) · [Русский](../ru/BUILDING.md) · [Svenska](../sv/BUILDING.md) · ไทย · [Türkçe](../tr/BUILDING.md) · [Українська](../uk/BUILDING.md) · [Tiếng Việt](../vi/BUILDING.md) · [中文](../zh/BUILDING.md)
 
 ---
 
 # การสร้าง VD Dropbear
 
 VD Dropbear ส่งมอบ **[Dropbear](https://github.com/mkj/dropbear) upstream** (แท็กที่ปักหมุดใน
-[`UPSTREAM_VERSION`](../UPSTREAM_VERSION)) พร้อมชุดแพตช์เล็กๆ ที่ตรวจสอบได้ใน [`patches/`](../patches/)
+[`UPSTREAM_VERSION`](../../UPSTREAM_VERSION)) พร้อมชุดแพตช์เล็กๆ ที่ตรวจสอบได้ใน [`patches/`](../../patches/)
 CI สร้างมัน คุณสามารถทำซ้ำได้ในเครื่องของคุณ
 
 ## เริ่มต้นอย่างรวดเร็ว
@@ -52,7 +52,7 @@ ABIS="arm64-v8a" ./scripts/build.sh
 bionic libc ที่ทุกอุปกรณ์ Android มีอยู่แล้ว libtomcrypt ยังคงฝังอยู่ภายในไบนารี มีเพียงไลบรารี C เท่านั้น
 ที่เป็นไดนามิก ดู [ไดนามิก ไม่ใช่ static-PIE](#ไดนามก-ไมใช-static-pie)
 
-ไบนารี **ไม่ถูกคอมมิต** ถูกสร้างโดย CI ในทุกแท็กและแนบไปกับรีลีส ดู [`.gitignore`](../.gitignore)
+ไบนารี **ไม่ถูกคอมมิต** ถูกสร้างโดย CI ในทุกแท็กและแนบไปกับรีลีส ดู [`.gitignore`](../../.gitignore)
 
 ---
 
@@ -61,7 +61,7 @@ bionic libc ที่ทุกอุปกรณ์ Android มีอยู่�
 การยืนยันตัวตนด้วยรหัสผ่านของ Dropbear เขียนขึ้นสำหรับโฮสต์ Unix ปกติที่มี `crypt()` และ `/etc/shadow`
 Android **ไม่มีทั้งสองอย่าง** และนั่นปะทะกับการสร้างในสามจุดแยกกัน หัวข้อนี้บันทึกแต่ละจุดไว้ เพราะมันเป็น
 สิ่งที่เจ็บปวดเวลาต้องมาค้นพบใหม่อย่างแท้จริง ทั้งหมดนี้จัดการโดยแพตช์
-[`0003-password-file.patch`](../patches/0003-password-file.patch) ไม่มีสิ่งใดด้านล่างถูกปล่อยให้เป็นเรื่อง
+[`0003-password-file.patch`](../../patches/0003-password-file.patch) ไม่มีสิ่งใดด้านล่างถูกปล่อยให้เป็นเรื่อง
 ของโชคในเวลารันไทม์
 
 ### 1. bionic ไม่มี `crypt()` ที่ใช้งานได้
@@ -73,7 +73,7 @@ Android **ไม่มีทั้งสองอย่าง** และนั�
 
 **คำตอบของเรา:** ไม่ใช้ `crypt()` เลย การยืนยันตัวตนด้วยรหัสผ่านตรวจสอบรหัสผ่านที่ให้มาด้วย
 **PBKDF2-HMAC-SHA256** เทียบกับไฟล์แฮช (`DROPBEAR_PASSWD_FILE`) ซึ่งเป็น KDF ที่เปิดเผย เป็นมาตรฐาน มีเกลือ
-และวนซ้ำ รูปแบบไฟล์มีบันทึกไว้ใน [`patches/README.md`](../patches/README.md)
+และวนซ้ำ รูปแบบไฟล์มีบันทึกไว้ใน [`patches/README.md`](../../patches/README.md)
 
 ### 2. ตัวป้องกันเวลาคอมไพล์ใน `sysoptions.h`
 

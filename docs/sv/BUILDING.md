@@ -23,15 +23,15 @@
   ======================================================================
 -->
 
-> **Languages:** [English](../BUILDING.md) · [العربية](../ar/BUILDING.md) · [Čeština](../cs/BUILDING.md) · [Deutsch](../de/BUILDING.md) · [Español](../es/BUILDING.md) · [فارسی](../fa/BUILDING.md) · [Français](../fr/BUILDING.md) · [हिन्दी](../hi/BUILDING.md) · [Bahasa Indonesia](../in/BUILDING.md) · [Italiano](../it/BUILDING.md) · [日本語](../ja/BUILDING.md) · [한국어](../ko/BUILDING.md) · [Nederlands](../nl/BUILDING.md) · [Polski](../pl/BUILDING.md) · [Português](../pt/BUILDING.md) · [Русский](../ru/BUILDING.md) · Svenska · [ไทย](../th/BUILDING.md) · [Türkçe](../tr/BUILDING.md) · [Українська](../uk/BUILDING.md) · [Tiếng Việt](../vi/BUILDING.md) · [中文](../zh/BUILDING.md)
+> **Languages:** [English](../BUILDING.md) · [العربية](../ar/BUILDING.md) · [Čeština](../cs/BUILDING.md) · [Deutsch](../de/BUILDING.md) · [Español](../es/BUILDING.md) · [فارسی](../fa/BUILDING.md) · [Français](../fr/BUILDING.md) · [हिन्दी](../hi/BUILDING.md) · [Bahasa Indonesia](../id/BUILDING.md) · [Italiano](../it/BUILDING.md) · [日本語](../ja/BUILDING.md) · [한국어](../ko/BUILDING.md) · [Nederlands](../nl/BUILDING.md) · [Polski](../pl/BUILDING.md) · [Português](../pt/BUILDING.md) · [Русский](../ru/BUILDING.md) · Svenska · [ไทย](../th/BUILDING.md) · [Türkçe](../tr/BUILDING.md) · [Українська](../uk/BUILDING.md) · [Tiếng Việt](../vi/BUILDING.md) · [中文](../zh/BUILDING.md)
 
 ---
 
 # Bygga VD Dropbear
 
 VD Dropbear levererar **[Dropbear](https://github.com/mkj/dropbear) upstream** (taggen som är fäst i
-[`UPSTREAM_VERSION`](../UPSTREAM_VERSION)) plus den lilla, granskningsbara patchuppsättningen i
-[`patches/`](../patches/). CI bygger det; du kan reproducera det lokalt.
+[`UPSTREAM_VERSION`](../../UPSTREAM_VERSION)) plus den lilla, granskningsbara patchuppsättningen i
+[`patches/`](../../patches/). CI bygger det; du kan reproducera det lokalt.
 
 ## Snabbstart
 
@@ -53,7 +53,7 @@ och korskompilerar sedan `vddropbear` och `dropbearkey` till `module/bin/<abi>/`
 endast C-biblioteket är dynamiskt. Se [Dynamisk, inte static-PIE](#dynamisk-inte-static-pie).
 
 Binärerna **committas inte**; de byggs av CI vid varje tagg och bifogas till releasen. Se
-[`.gitignore`](../.gitignore).
+[`.gitignore`](../../.gitignore).
 
 ---
 
@@ -62,7 +62,7 @@ Binärerna **committas inte**; de byggs av CI vid varje tagg och bifogas till re
 Dropbears lösenordsautentisering är skriven för en vanlig Unix-värd med `crypt()` och `/etc/shadow`.
 Android har **ingetdera**, och det krockar med bygget på tre separata ställen. Det här avsnittet
 dokumenterar var och en av dem, för det är precis den sortens sak som är smärtsam att återupptäcka. Allt
-hanteras av patchen [`0003-password-file.patch`](../patches/0003-password-file.patch); inget nedan
+hanteras av patchen [`0003-password-file.patch`](../../patches/0003-password-file.patch); inget nedan
 lämnas åt slumpen vid körning.
 
 ### 1. bionic har inget användbart `crypt()`
@@ -75,7 +75,7 @@ stort, otympligt beroende för en statisk binär.
 
 **Vårt svar:** använd inte `crypt()` alls. Lösenordsautentiseringen verifierar det angivna lösenordet
 med **PBKDF2-HMAC-SHA256** mot en hashfil (`DROPBEAR_PASSWD_FILE`), en publik, standard, saltad, itererad
-KDF. Filformatet är dokumenterat i [`patches/README.md`](../patches/README.md).
+KDF. Filformatet är dokumenterat i [`patches/README.md`](../../patches/README.md).
 
 ### 2. kompileringstidsskyddet i `sysoptions.h`
 

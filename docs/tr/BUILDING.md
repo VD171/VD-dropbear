@@ -23,14 +23,14 @@
   ======================================================================
 -->
 
-> **Languages:** [English](../BUILDING.md) · [العربية](../ar/BUILDING.md) · [Čeština](../cs/BUILDING.md) · [Deutsch](../de/BUILDING.md) · [Español](../es/BUILDING.md) · [فارسی](../fa/BUILDING.md) · [Français](../fr/BUILDING.md) · [हिन्दी](../hi/BUILDING.md) · [Bahasa Indonesia](../in/BUILDING.md) · [Italiano](../it/BUILDING.md) · [日本語](../ja/BUILDING.md) · [한국어](../ko/BUILDING.md) · [Nederlands](../nl/BUILDING.md) · [Polski](../pl/BUILDING.md) · [Português](../pt/BUILDING.md) · [Русский](../ru/BUILDING.md) · [Svenska](../sv/BUILDING.md) · [ไทย](../th/BUILDING.md) · Türkçe · [Українська](../uk/BUILDING.md) · [Tiếng Việt](../vi/BUILDING.md) · [中文](../zh/BUILDING.md)
+> **Languages:** [English](../BUILDING.md) · [العربية](../ar/BUILDING.md) · [Čeština](../cs/BUILDING.md) · [Deutsch](../de/BUILDING.md) · [Español](../es/BUILDING.md) · [فارسی](../fa/BUILDING.md) · [Français](../fr/BUILDING.md) · [हिन्दी](../hi/BUILDING.md) · [Bahasa Indonesia](../id/BUILDING.md) · [Italiano](../it/BUILDING.md) · [日本語](../ja/BUILDING.md) · [한국어](../ko/BUILDING.md) · [Nederlands](../nl/BUILDING.md) · [Polski](../pl/BUILDING.md) · [Português](../pt/BUILDING.md) · [Русский](../ru/BUILDING.md) · [Svenska](../sv/BUILDING.md) · [ไทย](../th/BUILDING.md) · Türkçe · [Українська](../uk/BUILDING.md) · [Tiếng Việt](../vi/BUILDING.md) · [中文](../zh/BUILDING.md)
 
 ---
 
 # VD Dropbear derleme
 
 VD Dropbear, **[Dropbear](https://github.com/mkj/dropbear) upstream**'ini
-([`UPSTREAM_VERSION`](../UPSTREAM_VERSION) içinde sabitlenen etiket) ve [`patches/`](../patches/)
+([`UPSTREAM_VERSION`](../../UPSTREAM_VERSION) içinde sabitlenen etiket) ve [`patches/`](../../patches/)
 içindeki küçük, denetlenebilir yama setini sunar. CI onu derler; yerelde yeniden üretebilirsiniz.
 
 ## Hızlı başlangıç
@@ -53,7 +53,7 @@ for Android 24`), her Android cihazın zaten sahip olduğu bionic libc'ye bağla
 dosyanın içinde gömülü kalır; yalnızca C kütüphanesi dinamiktir. Bkz. [Dinamik, static-PIE değil](#dinamik-static-pie-değil).
 
 İkili dosyalar **commit edilmez**; her etikette CI tarafından derlenir ve sürüme eklenir. Bkz.
-[`.gitignore`](../.gitignore).
+[`.gitignore`](../../.gitignore).
 
 ---
 
@@ -62,7 +62,7 @@ dosyanın içinde gömülü kalır; yalnızca C kütüphanesi dinamiktir. Bkz. [
 Dropbear'ın parola kimlik doğrulaması, `crypt()` ve `/etc/shadow` olan normal bir Unix ana makinesi için
 yazılmıştır. Android'de **ikisi de yoktur** ve bu, derlemeyle üç ayrı yerde çakışır. Bu bölüm her birini
 belgeler, çünkü tam da yeniden keşfetmesi acı veren türden bir şeydir. Hepsi
-[`0003-password-file.patch`](../patches/0003-password-file.patch) yaması tarafından ele alınır;
+[`0003-password-file.patch`](../../patches/0003-password-file.patch) yaması tarafından ele alınır;
 aşağıdaki hiçbir şey çalışma zamanında şansa bırakılmaz.
 
 ### 1. bionic'te kullanılabilir bir `crypt()` yok
@@ -75,7 +75,7 @@ bir ikili için büyük, hantal bir bağımlılık olurdu.
 
 **Yanıtımız:** `crypt()`'i hiç kullanmamak. Parola kimlik doğrulaması, sunulan parolayı bir özet dosyası
 (`DROPBEAR_PASSWD_FILE`) karşısında **PBKDF2-HMAC-SHA256** ile doğrular; bu açık, standart, tuzlu,
-yinelemeli bir KDF'dir. Dosya biçimi [`patches/README.md`](../patches/README.md) içinde belgelenmiştir.
+yinelemeli bir KDF'dir. Dosya biçimi [`patches/README.md`](../../patches/README.md) içinde belgelenmiştir.
 
 ### 2. `sysoptions.h` içindeki derleme zamanı koruması
 

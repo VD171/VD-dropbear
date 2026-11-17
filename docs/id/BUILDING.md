@@ -30,8 +30,8 @@
 # Membangun VD Dropbear
 
 VD Dropbear mengirimkan **[Dropbear](https://github.com/mkj/dropbear) upstream** (tag yang disematkan di
-[`UPSTREAM_VERSION`](../UPSTREAM_VERSION)) ditambah set patch kecil yang dapat diaudit di
-[`patches/`](../patches/). CI membangunnya; Anda bisa mereproduksinya secara lokal.
+[`UPSTREAM_VERSION`](../../UPSTREAM_VERSION)) ditambah set patch kecil yang dapat diaudit di
+[`patches/`](../../patches/). CI membangunnya; Anda bisa mereproduksinya secara lokal.
 
 ## Mulai cepat
 
@@ -54,7 +54,7 @@ perangkat Android. libtomcrypt tetap tertanam di dalam biner; hanya pustaka C ya
 [Dinamis, bukan static-PIE](#dinamis-bukan-static-pie).
 
 Biner **tidak di-commit**; keduanya dibangun oleh CI pada setiap tag dan dilampirkan ke rilis. Lihat
-[`.gitignore`](../.gitignore).
+[`.gitignore`](../../.gitignore).
 
 ---
 
@@ -63,7 +63,7 @@ Biner **tidak di-commit**; keduanya dibangun oleh CI pada setiap tag dan dilampi
 Autentikasi kata sandi Dropbear ditulis untuk host Unix biasa dengan `crypt()` dan `/etc/shadow`.
 Android **tidak punya keduanya**, dan itu berbenturan dengan build di tiga tempat terpisah. Bagian ini
 mendokumentasikan masing-masing, karena ini persis jenis hal yang menyakitkan untuk ditemukan kembali.
-Semuanya ditangani oleh patch [`0003-password-file.patch`](../patches/0003-password-file.patch); tidak
+Semuanya ditangani oleh patch [`0003-password-file.patch`](../../patches/0003-password-file.patch); tidak
 ada yang di bawah ini diserahkan pada keberuntungan saat runtime.
 
 ### 1. bionic tidak punya `crypt()` yang dapat dipakai
@@ -77,7 +77,7 @@ sandi akan menjadi dependensi besar dan canggung untuk biner statis.
 **Jawaban kami:** sama sekali tidak memakai `crypt()`. Auth kata sandi memverifikasi kata sandi yang
 disajikan dengan **PBKDF2-HMAC-SHA256** terhadap berkas hash (`DROPBEAR_PASSWD_FILE`), sebuah KDF publik,
 standar, bergaram, dan beriterasi. Format berkas didokumentasikan di
-[`patches/README.md`](../patches/README.md).
+[`patches/README.md`](../../patches/README.md).
 
 ### 2. penjaga waktu kompilasi di `sysoptions.h`
 

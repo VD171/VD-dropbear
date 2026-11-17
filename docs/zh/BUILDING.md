@@ -23,14 +23,14 @@
   ======================================================================
 -->
 
-> **Languages:** [English](../BUILDING.md) · [العربية](../ar/BUILDING.md) · [Čeština](../cs/BUILDING.md) · [Deutsch](../de/BUILDING.md) · [Español](../es/BUILDING.md) · [فارسی](../fa/BUILDING.md) · [Français](../fr/BUILDING.md) · [हिन्दी](../hi/BUILDING.md) · [Bahasa Indonesia](../in/BUILDING.md) · [Italiano](../it/BUILDING.md) · [日本語](../ja/BUILDING.md) · [한국어](../ko/BUILDING.md) · [Nederlands](../nl/BUILDING.md) · [Polski](../pl/BUILDING.md) · [Português](../pt/BUILDING.md) · [Русский](../ru/BUILDING.md) · [Svenska](../sv/BUILDING.md) · [ไทย](../th/BUILDING.md) · [Türkçe](../tr/BUILDING.md) · [Українська](../uk/BUILDING.md) · [Tiếng Việt](../vi/BUILDING.md) · 中文
+> **Languages:** [English](../BUILDING.md) · [العربية](../ar/BUILDING.md) · [Čeština](../cs/BUILDING.md) · [Deutsch](../de/BUILDING.md) · [Español](../es/BUILDING.md) · [فارسی](../fa/BUILDING.md) · [Français](../fr/BUILDING.md) · [हिन्दी](../hi/BUILDING.md) · [Bahasa Indonesia](../id/BUILDING.md) · [Italiano](../it/BUILDING.md) · [日本語](../ja/BUILDING.md) · [한국어](../ko/BUILDING.md) · [Nederlands](../nl/BUILDING.md) · [Polski](../pl/BUILDING.md) · [Português](../pt/BUILDING.md) · [Русский](../ru/BUILDING.md) · [Svenska](../sv/BUILDING.md) · [ไทย](../th/BUILDING.md) · [Türkçe](../tr/BUILDING.md) · [Українська](../uk/BUILDING.md) · [Tiếng Việt](../vi/BUILDING.md) · 中文
 
 ---
 
 # 构建 VD Dropbear
 
 VD Dropbear 交付 **[Dropbear](https://github.com/mkj/dropbear) 上游（upstream）**（固定在
-[`UPSTREAM_VERSION`](../UPSTREAM_VERSION) 中的标签），外加 [`patches/`](../patches/) 中那套小而可审计的补
+[`UPSTREAM_VERSION`](../../UPSTREAM_VERSION) 中的标签），外加 [`patches/`](../../patches/) 中那套小而可审计的补
 丁集。CI 会构建它；你可以在本地复现。
 
 ## 快速开始
@@ -52,7 +52,7 @@ ABIS="arm64-v8a" ./scripts/build.sh
 具备的 bionic libc。libtomcrypt 仍嵌入在二进制内部；只有 C 库是动态的。参见
 [动态，而非 static-PIE](#动态而非-static-pie)。
 
-二进制 **不被提交**；它们由 CI 在每个标签上构建并附加到发布。参见 [`.gitignore`](../.gitignore)。
+二进制 **不被提交**；它们由 CI 在每个标签上构建并附加到发布。参见 [`.gitignore`](../../.gitignore)。
 
 ---
 
@@ -60,7 +60,7 @@ ABIS="arm64-v8a" ./scripts/build.sh
 
 Dropbear 的密码认证是为具备 `crypt()` 和 `/etc/shadow` 的普通 Unix 主机编写的。Android **两者都没有**，
 这在三个独立之处与构建相冲突。本节记录其中每一处，因为这正是那种重新发现起来令人痛苦的东西。这一切都由
-补丁 [`0003-password-file.patch`](../patches/0003-password-file.patch) 处理；以下内容在运行时没有任何一
+补丁 [`0003-password-file.patch`](../../patches/0003-password-file.patch) 处理；以下内容在运行时没有任何一
 项听天由命。
 
 ### 1. bionic 没有可用的 `crypt()`
@@ -72,7 +72,7 @@ Android 上根本无法构建或运行。也没有可链接的 `libcrypt`，而�
 
 **我们的答案：** 根本不使用 `crypt()`。密码认证使用 **PBKDF2-HMAC-SHA256** 针对一个哈希文件
 （`DROPBEAR_PASSWD_FILE`）来校验所提交的密码，这是一个公开、标准、加盐、迭代的 KDF。文件格式记录在
-[`patches/README.md`](../patches/README.md) 中。
+[`patches/README.md`](../../patches/README.md) 中。
 
 ### 2. `sysoptions.h` 中的编译期守卫
 

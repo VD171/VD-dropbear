@@ -23,15 +23,15 @@
   ======================================================================
 -->
 
-> **Languages:** [English](../BUILDING.md) · [العربية](../ar/BUILDING.md) · Čeština · [Deutsch](../de/BUILDING.md) · [Español](../es/BUILDING.md) · [فارسی](../fa/BUILDING.md) · [Français](../fr/BUILDING.md) · [हिन्दी](../hi/BUILDING.md) · [Bahasa Indonesia](../in/BUILDING.md) · [Italiano](../it/BUILDING.md) · [日本語](../ja/BUILDING.md) · [한국어](../ko/BUILDING.md) · [Nederlands](../nl/BUILDING.md) · [Polski](../pl/BUILDING.md) · [Português](../pt/BUILDING.md) · [Русский](../ru/BUILDING.md) · [Svenska](../sv/BUILDING.md) · [ไทย](../th/BUILDING.md) · [Türkçe](../tr/BUILDING.md) · [Українська](../uk/BUILDING.md) · [Tiếng Việt](../vi/BUILDING.md) · [中文](../zh/BUILDING.md)
+> **Languages:** [English](../BUILDING.md) · [العربية](../ar/BUILDING.md) · Čeština · [Deutsch](../de/BUILDING.md) · [Español](../es/BUILDING.md) · [فارسی](../fa/BUILDING.md) · [Français](../fr/BUILDING.md) · [हिन्दी](../hi/BUILDING.md) · [Bahasa Indonesia](../id/BUILDING.md) · [Italiano](../it/BUILDING.md) · [日本語](../ja/BUILDING.md) · [한국어](../ko/BUILDING.md) · [Nederlands](../nl/BUILDING.md) · [Polski](../pl/BUILDING.md) · [Português](../pt/BUILDING.md) · [Русский](../ru/BUILDING.md) · [Svenska](../sv/BUILDING.md) · [ไทย](../th/BUILDING.md) · [Türkçe](../tr/BUILDING.md) · [Українська](../uk/BUILDING.md) · [Tiếng Việt](../vi/BUILDING.md) · [中文](../zh/BUILDING.md)
 
 ---
 
 # Sestavení VD Dropbear
 
 VD Dropbear dodává **[Dropbear](https://github.com/mkj/dropbear) upstream** (tag připnutý v
-[`UPSTREAM_VERSION`](../UPSTREAM_VERSION)) plus malou, auditovatelnou sadu patchů v
-[`patches/`](../patches/). CI jej sestavuje; můžeš to reprodukovat lokálně.
+[`UPSTREAM_VERSION`](../../UPSTREAM_VERSION)) plus malou, auditovatelnou sadu patchů v
+[`patches/`](../../patches/). CI jej sestavuje; můžeš to reprodukovat lokálně.
 
 ## Rychlý start
 
@@ -53,7 +53,7 @@ bionic libc, kterou každé zařízení s Androidem už má. libtomcrypt zůstá
 je jen knihovna C. Viz [Dynamický, ne static-PIE](#dynamický-ne-static-pie).
 
 Binárky se **necommitují**; sestavuje je CI při každém tagu a připojuje je k vydání. Viz
-[`.gitignore`](../.gitignore).
+[`.gitignore`](../../.gitignore).
 
 ---
 
@@ -62,7 +62,7 @@ Binárky se **necommitují**; sestavuje je CI při každém tagu a připojuje je
 Autentizace heslem v Dropbearu je napsaná pro běžný unixový host s `crypt()` a `/etc/shadow`. Android
 **nemá ani jedno**, a to naráží na sestavení na třech samostatných místech. Tato sekce dokumentuje každé
 z nich, protože je to přesně ten druh věci, který je bolestivé znovu objevovat. Vše řeší patch
-[`0003-password-file.patch`](../patches/0003-password-file.patch); nic níže není za běhu ponecháno
+[`0003-password-file.patch`](../../patches/0003-password-file.patch); nic níže není za běhu ponecháno
 náhodě.
 
 ### 1. bionic nemá použitelné `crypt()`
@@ -75,7 +75,7 @@ velká, nemotorná závislost pro statickou binárku.
 
 **Naše odpověď:** `crypt()` vůbec nepoužívat. Autentizace heslem ověřuje předložené heslo pomocí
 **PBKDF2-HMAC-SHA256** proti souboru hashů (`DROPBEAR_PASSWD_FILE`), veřejné, standardní, solené,
-iterované KDF. Formát souboru je zdokumentován v [`patches/README.md`](../patches/README.md).
+iterované KDF. Formát souboru je zdokumentován v [`patches/README.md`](../../patches/README.md).
 
 ### 2. kontrola v době kompilace v `sysoptions.h`
 

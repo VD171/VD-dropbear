@@ -23,14 +23,14 @@
   ======================================================================
 -->
 
-> **Languages:** [English](../BUILDING.md) · [العربية](../ar/BUILDING.md) · [Čeština](../cs/BUILDING.md) · [Deutsch](../de/BUILDING.md) · [Español](../es/BUILDING.md) · [فارسی](../fa/BUILDING.md) · [Français](../fr/BUILDING.md) · [हिन्दी](../hi/BUILDING.md) · [Bahasa Indonesia](../in/BUILDING.md) · [Italiano](../it/BUILDING.md) · 日本語 · [한국어](../ko/BUILDING.md) · [Nederlands](../nl/BUILDING.md) · [Polski](../pl/BUILDING.md) · [Português](../pt/BUILDING.md) · [Русский](../ru/BUILDING.md) · [Svenska](../sv/BUILDING.md) · [ไทย](../th/BUILDING.md) · [Türkçe](../tr/BUILDING.md) · [Українська](../uk/BUILDING.md) · [Tiếng Việt](../vi/BUILDING.md) · [中文](../zh/BUILDING.md)
+> **Languages:** [English](../BUILDING.md) · [العربية](../ar/BUILDING.md) · [Čeština](../cs/BUILDING.md) · [Deutsch](../de/BUILDING.md) · [Español](../es/BUILDING.md) · [فارسی](../fa/BUILDING.md) · [Français](../fr/BUILDING.md) · [हिन्दी](../hi/BUILDING.md) · [Bahasa Indonesia](../id/BUILDING.md) · [Italiano](../it/BUILDING.md) · 日本語 · [한국어](../ko/BUILDING.md) · [Nederlands](../nl/BUILDING.md) · [Polski](../pl/BUILDING.md) · [Português](../pt/BUILDING.md) · [Русский](../ru/BUILDING.md) · [Svenska](../sv/BUILDING.md) · [ไทย](../th/BUILDING.md) · [Türkçe](../tr/BUILDING.md) · [Українська](../uk/BUILDING.md) · [Tiếng Việt](../vi/BUILDING.md) · [中文](../zh/BUILDING.md)
 
 ---
 
 # VD Dropbear のビルド
 
-VD Dropbear は **[Dropbear](https://github.com/mkj/dropbear) upstream**（[`UPSTREAM_VERSION`](../UPSTREAM_VERSION)
-でピン留めされたタグ）に、[`patches/`](../patches/) にある小さく監査可能なパッチ群を加えて提供します。CI
+VD Dropbear は **[Dropbear](https://github.com/mkj/dropbear) upstream**（[`UPSTREAM_VERSION`](../../UPSTREAM_VERSION)
+でピン留めされたタグ）に、[`patches/`](../../patches/) にある小さく監査可能なパッチ群を加えて提供します。CI
 がこれをビルドします。ローカルで再現できます。
 
 ## クイックスタート
@@ -54,7 +54,7 @@ ABIS="arm64-v8a" ./scripts/build.sh
 を参照してください。
 
 バイナリは **コミットされません**。タグごとに CI がビルドし、リリースに添付します。
-[`.gitignore`](../.gitignore) を参照してください。
+[`.gitignore`](../../.gitignore) を参照してください。
 
 ---
 
@@ -63,7 +63,7 @@ ABIS="arm64-v8a" ./scripts/build.sh
 Dropbear のパスワード認証は、`crypt()` と `/etc/shadow` を備えた通常の Unix ホスト向けに書かれていま
 す。Android には **どちらもありません**。これはビルドと三つの別々の箇所で衝突します。本節はそのそれぞ
 れを記録します。まさに再発見するのが苦痛な類いのものだからです。これらはすべてパッチ
-[`0003-password-file.patch`](../patches/0003-password-file.patch) が処理し、以下の何ひとつ実行時に運任
+[`0003-password-file.patch`](../../patches/0003-password-file.patch) が処理し、以下の何ひとつ実行時に運任
 せにしていません。
 
 ### 1. bionic には使える `crypt()` がない
@@ -76,7 +76,7 @@ Dropbear の標準パスワード経路は、Android ではそもそもビルド
 
 **私たちの答え:** `crypt()` をまったく使わないことです。パスワード認証は、提示されたパスワードを
 **PBKDF2-HMAC-SHA256** でハッシュファイル（`DROPBEAR_PASSWD_FILE`）に対して検証します。これは公開・標
-準・ソルト付き・反復の KDF です。ファイル形式は [`patches/README.md`](../patches/README.md) に記載して
+準・ソルト付き・反復の KDF です。ファイル形式は [`patches/README.md`](../../patches/README.md) に記載して
 います。
 
 ### 2. `sysoptions.h` のコンパイル時ガード
