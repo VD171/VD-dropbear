@@ -250,6 +250,26 @@ langs = set(os.environ["NAV"].split())
 if not docs:
     sys.exit(0)
 rx = re.compile(r"\]\((?:[^)]*/)?(" + "|".join(re.escape(d) for d in docs) + r")\.md(#[^)]*)?\)")
+# Wiki pages that actually exist, so a translated page that links to an
+# English-only doc (e.g. CHANGELOG, which ships EN-only) falls back to the EN
+# page instead of a dead `<lang>-DOC` link.
+pages = {f[:-3] for f in os.listdir(wiki) if f.endswith(".md")}
+def _rewrite(pref):
+    def _sub(mm):
+        doc, frag = mm.group(1), (mm.group(2) or "")
+        target = pref + doc if (pref + doc) in pages else doc
+        return "](" + target + frag + ")"
+    return _sub
+# Links that climb out of the docs tree (../UPSTREAM_VERSION, ../../patches/, ...)
+# point at repo files/dirs that are not wiki pages, so they die in the flat wiki
+# namespace. Redirect every such relative escape to the repo on GitHub (tree for
+# a directory, blob for a file). DOC/screenshot links are rewritten first, so
+# what reaches here is only the repo-artifact references.
+REPO = "https://github.com/VD171/VD-dropbear"
+def _repo(mm):
+    path = re.sub(r"^(?:\.\./)+", "", mm.group(1))
+    kind = "tree" if path.endswith("/") else "blob"
+    return "](" + REPO + "/" + kind + "/master/" + path + ")"
 for fn in os.listdir(wiki):
     if not fn.endswith(".md"):
         continue
@@ -257,8 +277,12 @@ for fn in os.listdir(wiki):
     pref = m.group(1) + "-" if (m and m.group(1) in langs) else ""
     p = os.path.join(wiki, fn)
     t = open(p, encoding="utf-8").read()
-    nt = rx.sub(lambda mm: "](" + pref + mm.group(1) + (mm.group(2) or "") + ")", t)
+    nt = rx.sub(_rewrite(pref), t)
     nt = re.sub(r"\]\((?:\.\./|docs/)*screenshots/", "](screenshots/", nt)
+    nt = re.sub(r"\]\(((?:\.\./)+[^):#]+)\)", _repo, nt)
+    # Bare repo-root files (no ../ prefix) that are not wiki pages, e.g. the EN
+    # CONTRIBUTING's [Apache-2.0](LICENSE).
+    nt = re.sub(r"\]\(LICENSE\)", "](" + REPO + "/blob/master/LICENSE)", nt)
     if nt != t:
         open(p, "w", encoding="utf-8").write(nt)
 PY
