@@ -1,4 +1,6 @@
 #!/system/bin/sh
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (C) 2026 VD171
 # VDLU engine - flashless incremental module updater (DIFF->FETCH->APPLY->COMMIT).
 # POSIX sh (mksh/busybox/toybox). Env in: VDLU_DIR, MODULE_DIR, MODID.
 # Contract: INTERFACES.md (CLI/layout/JSON keys = immutable) + MODULO_VDLU.md.

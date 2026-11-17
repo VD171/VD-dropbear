@@ -29,6 +29,16 @@ All notable, real and significant changes to **VD Dropbear** are recorded here.
 The format follows [Keep a Changelog](https://keepachangelog.com/); versions are tagged in the
 module (`module.prop`) and on GitHub Releases.
 
+## [v1.08] (2026-11-17)
+
+### Fixed
+- **Number inputs are legible again in the WebUI.** The boot-retry fields in the Updates tab used unstyled
+  number inputs that rendered with poor contrast on some devices; they now match the other form controls.
+
+### Changed
+- Added an Apache-2.0 SPDX and copyright header to the flashless updater engine and the WebUI widget, in
+  line with the rest of the project. No behaviour change.
+
 ## [v1.07] (2026-11-16)
 
 ### Added
