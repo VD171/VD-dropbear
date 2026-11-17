@@ -192,18 +192,21 @@ flat_get() { grep -m1 "^$1$TAB" "$WORK/manifest.flat" 2>/dev/null | cut -f2; }
 
 # ---- network --------------------------------------------------------------
 fetch_url() { # url dest -> sets FETCH_RC (transport exit code) and returns it
-	local url="$1" dest="$2" src
+	local url="$1" dest="$2" src T
 	FETCH_RC=0
 	case "$url" in
 		file://*) src=${url#file://}; cp -f "$src" "$dest" 2>/dev/null; FETCH_RC=$? ;;
 		http://*|https://*)
 			if [ -n "$CURL" ]; then
-				# --connect-timeout bounds the CONNECT only (not the transfer), so a slow-but-connected blob
-				# download is unaffected, but a captive portal / dead host that never answers cannot hang.
-				if [ -n "$CAPATH" ]; then "$CURL" -fsSL --connect-timeout 15 --capath "$CAPATH" --max-filesize "$MAX_FILE_BYTES" -o "$dest" "$url"
-				else "$CURL" -fsSL --connect-timeout 15 --max-filesize "$MAX_FILE_BYTES" -o "$dest" "$url"; fi
+				# Bounded so a dead/stalled transfer can never hang the run: --connect-timeout bounds the
+				# CONNECT (captive portal / dead host); --speed-time/--speed-limit abort a transfer stuck below
+				# 1 byte/s for 60s (mid-stream stall). A slow-but-PROGRESSING blob download is NOT affected (no
+				# --max-time cap). A partial/corrupt download is caught anyway by the blob's sha256.
+				T="--connect-timeout 15 --speed-limit 1 --speed-time 60"
+				if [ -n "$CAPATH" ]; then "$CURL" -fsSL $T --capath "$CAPATH" --max-filesize "$MAX_FILE_BYTES" -o "$dest" "$url"
+				else "$CURL" -fsSL $T --max-filesize "$MAX_FILE_BYTES" -o "$dest" "$url"; fi
 				FETCH_RC=$?
-			elif [ -n "$WGET" ]; then "$WGET" -q --connect-timeout=15 -O "$dest" "$url"; FETCH_RC=$?
+			elif [ -n "$WGET" ]; then "$WGET" -q --connect-timeout=15 --read-timeout=60 -O "$dest" "$url"; FETCH_RC=$?
 			else echo "VDLU: no curl/wget available" >&2; FETCH_RC=1; return 1; fi ;;
 		*) echo "VDLU: unsupported source url: $url" >&2; FETCH_RC=1; return 1 ;;
 	esac
@@ -221,18 +224,33 @@ fetch_offline() {
 	return 1
 }
 
-# Cheap connectivity hint for the patient boot retry: a default route means a configured network. Reads the
-# kernel routing table only - NO curl, NO radio/modem wake - so the retry can wait offline at ~zero cost and
-# only spend a real fetch when the network has actually appeared. If `ip` is unavailable, assume up (the
-# bounded curl attempt just fails fast).
-net_up() {
-	command -v ip >/dev/null 2>&1 || return 0
-	# `ip route get` does a kernel routing lookup that RESPECTS Android policy routing (default routes live
-	# in per-network tables, not `main`, so `route show default` is a false negative/positive on Android).
-	# Pure lookup - no packet, no radio wake. A resolvable route to a public address = a usable network.
-	ip route get 1.1.1.1 2>/dev/null | grep -q ' dev ' && return 0
-	ip route get 2606:4700:4700::1111 2>/dev/null | grep -q ' dev ' && return 0
-	return 1
+# Egress network CLASS for the default route to a public address: wifi | mobile | none. Kernel routing
+# lookup only (`ip route get` respects Android policy routing - per-network default tables, which
+# `route show default` on `main` misses) - NO curl, NO packet, NO radio wake. The iface name classifies:
+# cellular ifaces (rmnet/ccmni/v4-*/pdp) = mobile; anything else with a route (wlan/eth/usb) = wifi/unmetered.
+net_type() {
+	command -v ip >/dev/null 2>&1 || { echo wifi; return 0; }    # can't tell -> assume unmetered
+	local line dev
+	line=$(ip route get 1.1.1.1 2>/dev/null)
+	[ -n "$line" ] || line=$(ip route get 2606:4700:4700::1111 2>/dev/null)
+	[ -n "$line" ] || { echo none; return 0; }
+	dev=$(printf '%s\n' "$line" | sed -n 's/.* dev \([^ ]*\).*/\1/p' | head -1)
+	case "$dev" in
+		rmnet*|ccmni*|ccinet*|v4-*|pdp*|wwan*|clat*) echo mobile ;;
+		*) echo wifi ;;
+	esac
+}
+# Is the current egress allowed by net_policy (any | wifi | mobile)? `none` (no route) is never allowed.
+# Default `any` = Wi-Fi + mobile. Gates the patient boot retry (waits for an ALLOWED network) and the blob
+# download (do_fetch); the manifest check stays ungated (tiny, so the UI can report updates on any network).
+net_allowed() {
+	local t p; t=$(net_type); p=$(cfg net_policy any)
+	[ "$t" = none ] && return 1
+	case "$p" in
+		wifi)   [ "$t" = wifi ] ;;
+		mobile) [ "$t" = mobile ] ;;
+		*)      return 0 ;;
+	esac
 }
 
 dl_manifest() {
@@ -245,7 +263,11 @@ dl_manifest() {
 # ---- signature / meta -----------------------------------------------------
 verify_manifest() {
 	local prof keyring v pd
-	prof=$(cfg profile trusted)
+	# fail-CLOSED default: a live config that lost its profile line (corruption / a bad edit / MITM of the
+	# config) must NOT silently downgrade to best-effort verify and accept an unsigned manifest (-> .so swap
+	# under MITM = root RCE). hardened = signature mandatory; `trusted` is opt-in only (private file:// modules
+	# set it in their config on purpose). Audited 2026-11-16.
+	prof=$(cfg profile hardened)
 	pd=$(cfg pubkey_dir keyring); case "$pd" in ''|*/*|*..*) pd=keyring ;; esac
 	keyring="$MODULE_DIR/vdlu/$pd"
 	v="$MODULE_DIR/vdlu/vdlu-verify"
@@ -272,7 +294,7 @@ validate_meta() {
 	isnum "$ver" || { echo "VDLU: manifest version not numeric" >&2; return 1; }
 	wantch=$(cfg channel stable)
 	[ -z "$ch" ] || [ "$ch" = "$wantch" ] || { echo "VDLU: channel mismatch ($ch != $wantch)" >&2; return 1; }
-	prof=$(cfg profile trusted)
+	prof=$(cfg profile hardened)   # fail-closed default (see verify_manifest): absent profile = hardened
 	if [ "$prof" = hardened ] && [ -f "$CURRENT" ] && isnum "$FROMVER"; then
 		[ "$ver" -ge "$FROMVER" ] || { echo "VDLU: downgrade blocked ($ver < $FROMVER)" >&2; return 4; }
 	fi
@@ -524,6 +546,12 @@ load_target() {
 }
 
 do_fetch() {
+	# net_policy gate: the blob download (the real data cost) only runs on an ALLOWED network. The manifest
+	# check (do_diff) stays ungated, so the UI still reports updates on any network; only the download waits.
+	# Resumable: the plan/target persist, so the next trigger on an allowed network finishes it.
+	case "$SOURCE" in http://*|https://*)   # only a network source is gated; file:// (local staging) never is
+		net_allowed || { write_journal fetch DEFERRED "waiting for $(cfg net_policy any) network" ""; echo "VDLU: download deferred - net_policy=$(cfg net_policy any), egress=$(net_type)" >&2; return 1; } ;;
+	esac
 	write_journal fetch FETCHING ""
 	local class st mode enc sha size path
 	while IFS="$TAB" read -r class st mode enc sha size path; do
@@ -754,7 +782,7 @@ cmd_boot() {
 		deadline=$(( $(date +%s) + cap * 60 )); rc=1
 		while [ "$(date +%s)" -lt "$deadline" ]; do
 			sleep "$interval"                          # no lock, no wakelock; frozen during deep-sleep
-			net_up || continue                         # still offline: wake nothing, hold nothing
+			net_allowed || continue                    # offline or a disallowed net (net_policy): wake nothing, hold nothing
 			acquire_lock_try || continue               # a manual run is working: back off, try later
 			if [ -f "$TARGET" ]; then release_lock; return 0; fi   # a run staged one meanwhile: defer to it
 			do_diff 1; rc=$?

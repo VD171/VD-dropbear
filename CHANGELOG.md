@@ -29,6 +29,20 @@ All notable, real and significant changes to **VD Dropbear** are recorded here.
 The format follows [Keep a Changelog](https://keepachangelog.com/); versions are tagged in the
 module (`module.prop`) and on GitHub Releases.
 
+## [v1.07] (2026-11-16)
+
+### Added
+- **Choose which networks the flashless updater may download on.** A new `net_policy` setting (and a selector
+  in the WebUI Updates tab) decides when the updater is allowed to fetch: `any` (Wi-Fi or mobile, the default
+  and the previous behaviour), `wifi` (only on Wi-Fi), or `mobile` (only on mobile data). It classifies the
+  active route with a kernel routing-table lookup, so it costs no packet and wakes no radio, and it gates only
+  the download (and the boot retry probe); checking for a new version still works on any network, and a fetch
+  on a disallowed network is simply deferred and resumed later.
+
+### Changed
+- **`net_policy` replaces `allow_metered`.** The old `allow_metered` flag was never actually consulted by the
+  updater; `net_policy` is the real, three-way control that supersedes it.
+
 ## [v1.06] (2026-11-16)
 
 ### Changed
@@ -201,3 +215,9 @@ First public release.
   PTYs need no patch (`openpty` is auto-detected), and the `-E` flag is dropped (the server is built
   `--disable-syslog`). Validated end-to-end on a real arm64 device: password login succeeds and a wrong
   password is rejected.
+
+<!-- doc-footer -->
+
+---
+
+> _This documentation was generated with Claude (Anthropic) and is maintained by VD171. Corrections and improvements are welcome; see [CONTRIBUTING.md](CONTRIBUTING.md)._

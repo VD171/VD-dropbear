@@ -23,7 +23,7 @@
   ======================================================================
 -->
 
-> **Languages:** English · [العربية](docs/ar/CONTRIBUTING.md) · [Čeština](docs/cs/CONTRIBUTING.md) · [Deutsch](docs/de/CONTRIBUTING.md) · [Español](docs/es/CONTRIBUTING.md) · [فارسی](docs/fa/CONTRIBUTING.md) · [Français](docs/fr/CONTRIBUTING.md) · [हिन्दी](docs/hi/CONTRIBUTING.md) · [Bahasa Indonesia](docs/in/CONTRIBUTING.md) · [Italiano](docs/it/CONTRIBUTING.md) · [日本語](docs/ja/CONTRIBUTING.md) · [한국어](docs/ko/CONTRIBUTING.md) · [Nederlands](docs/nl/CONTRIBUTING.md) · [Polski](docs/pl/CONTRIBUTING.md) · [Português](docs/pt/CONTRIBUTING.md) · [Русский](docs/ru/CONTRIBUTING.md) · [Svenska](docs/sv/CONTRIBUTING.md) · [ไทย](docs/th/CONTRIBUTING.md) · [Türkçe](docs/tr/CONTRIBUTING.md) · [Українська](docs/uk/CONTRIBUTING.md) · [Tiếng Việt](docs/vi/CONTRIBUTING.md) · [中文](docs/zh/CONTRIBUTING.md)
+> **Languages:** English · [العربية](docs/ar/CONTRIBUTING.md) · [Čeština](docs/cs/CONTRIBUTING.md) · [Deutsch](docs/de/CONTRIBUTING.md) · [Español](docs/es/CONTRIBUTING.md) · [فارسی](docs/fa/CONTRIBUTING.md) · [Français](docs/fr/CONTRIBUTING.md) · [हिन्दी](docs/hi/CONTRIBUTING.md) · [Bahasa Indonesia](docs/id/CONTRIBUTING.md) · [Italiano](docs/it/CONTRIBUTING.md) · [日本語](docs/ja/CONTRIBUTING.md) · [한국어](docs/ko/CONTRIBUTING.md) · [Nederlands](docs/nl/CONTRIBUTING.md) · [Polski](docs/pl/CONTRIBUTING.md) · [Português](docs/pt/CONTRIBUTING.md) · [Русский](docs/ru/CONTRIBUTING.md) · [Svenska](docs/sv/CONTRIBUTING.md) · [ไทย](docs/th/CONTRIBUTING.md) · [Türkçe](docs/tr/CONTRIBUTING.md) · [Українська](docs/uk/CONTRIBUTING.md) · [Tiếng Việt](docs/vi/CONTRIBUTING.md) · [中文](docs/zh/CONTRIBUTING.md)
 
 ---
 
@@ -74,3 +74,9 @@ section anchors identical to the English version.
 
 Use the issue templates for bugs and feature requests. For anything that could compromise a device,
 follow [`SECURITY.md`](SECURITY.md) and report privately instead of opening a public issue.
+
+<!-- doc-footer -->
+
+---
+
+> _This documentation was generated with Claude (Anthropic) and is maintained by VD171. Corrections and improvements are welcome; see [CONTRIBUTING.md](CONTRIBUTING.md)._

@@ -39,10 +39,12 @@
     onReboot: 'On reboot', onRebootSub: 'In pre-zygote applies everything, including the <code>.so</code>, with no extra reboot.',
     bootRetryEvery: 'Boot retry every (s)', bootRetryUpTo: 'Boot retry up to (min)', bootRetryHint: 'If the device boots offline, keep retrying the manifest fetch. 0 min = off.',
     source: 'Source', saveSource: 'Save source', savedDot: 'Saved.',
+    netPolicy: 'Network', netAny: 'Wi-Fi + mobile', netWifi: 'Wi-Fi only', netMobile: 'Mobile only',
     savedToast: 'saved', saveFail: 'save failed', sourceSaved: 'source saved',
     bootstrapping: 'Preparing updater…', bootstrapSub: 'one-time download of the fetcher', bootstrapFail: 'Could not prepare the updater',
     searching: 'Searching…', upToDate: 'Up to date', nothingNew: 'nothing new',
       ahead: 'Newer than the feed', aheadSub: 'your version is ahead of the published update',
+      deferred: 'Download deferred', deferredSub: 'waiting for the allowed network - resumes at the next check',
     updateAvail: 'Update available', install: 'install', fileOne: 'file', fileMany: 'files',
     requiresReboot: 'requires reboot', checkFail: 'Check failed', ksuUnavailable: 'KSU API unavailable',
     pendingUpdate: 'Pending update', notNow: 'Not now', srcPlaceholder: 'https://…/&lt;module&gt;'
@@ -272,8 +274,22 @@
       ]
     });
   }
+  // net_policy deferred the download to the allowed network - a benign wait, NOT an error. Gentle toast,
+  // resumes on the next check/boot (or a manual retry) when the device is on the right network.
+  function finishDeferred(j) {
+    stopPoll(); running = false; cancelRequested = false;
+    renderToast(j || {}, {
+      kind: 'info',
+      line: '<b>' + esc(T('deferred')) + '</b> · ' + esc((j && j.current) || T('deferredSub')),
+      buttons: [
+        { label: T('retry'), cls: 'ghost', on: function () { startUpdate(); } },
+        { label: T('close'), cls: 'ghost', on: hideToast }
+      ]
+    });
+    hideBanner();
+  }
 
-  function isTerminal(st) { return st === 'DONE' || st === 'ERROR' || st === 'PENDING_REBOOT'; }
+  function isTerminal(st) { return st === 'DONE' || st === 'ERROR' || st === 'PENDING_REBOOT' || st === 'DEFERRED'; }
 
   function tick() {
     readJournal().then(function (j) {
@@ -287,6 +303,7 @@
       emptyTicks = 0; lastJournal = j;
 
       if (j.state === 'ERROR' || j.error) { finishError(j); return; }
+      if (j.state === 'DEFERRED') { finishDeferred(j); return; }
       if (j.state === 'PENDING_REBOOT' || j.reboot_pending === true) { finishReboot(j); return; }
       if (j.state === 'DONE') { finishDone(j); return; }
       if (j.cancelled === true) { finishCancelled(j); return; }
@@ -467,6 +484,7 @@
       + '  <label class="vdlu-fld"><span>source</span><input class="vdlu-inp" data-cfg="source" type="text" inputmode="url" spellcheck="false" placeholder="' + T('srcPlaceholder') + '"></label>'
       + '  <label class="vdlu-fld"><span>channel</span><select class="vdlu-sel" data-cfg="channel"><option value="stable">stable</option><option value="canary">canary</option></select></label>'
       + '  <label class="vdlu-fld"><span>profile</span><select class="vdlu-sel" data-cfg="profile"><option value="trusted">trusted</option><option value="hardened">hardened</option></select></label>'
+      + '  <label class="vdlu-fld"><span>' + esc(T('netPolicy')) + '</span><select class="vdlu-sel" data-cfg="net_policy"><option value="any">' + esc(T('netAny')) + '</option><option value="wifi">' + esc(T('netWifi')) + '</option><option value="mobile">' + esc(T('netMobile')) + '</option></select></label>'
       + '  <button class="vdlu-btn" type="button" data-a="save" hidden>' + esc(T('saveSource')) + '</button>'
       + '  <div class="vdlu-hint" data-a="saved" hidden>' + esc(T('savedDot')) + '</div>'
       + '</div>';
@@ -552,7 +570,7 @@
 
   function doSaveSource() {
     var p = {};
-    ['source', 'channel', 'profile'].forEach(function (k) {
+    ['source', 'channel', 'profile', 'net_policy'].forEach(function (k) {
       var f = panelEl.querySelector('.vdlu-fld [data-cfg=' + k + ']'); if (f) p[k] = f.value.trim();
     });
     writeConfig(p).then(function () {

@@ -23,7 +23,7 @@
   ======================================================================
 -->
 
-> **Languages:** English · [العربية](docs/ar/SECURITY.md) · [Čeština](docs/cs/SECURITY.md) · [Deutsch](docs/de/SECURITY.md) · [Español](docs/es/SECURITY.md) · [فارسی](docs/fa/SECURITY.md) · [Français](docs/fr/SECURITY.md) · [हिन्दी](docs/hi/SECURITY.md) · [Bahasa Indonesia](docs/in/SECURITY.md) · [Italiano](docs/it/SECURITY.md) · [日本語](docs/ja/SECURITY.md) · [한국어](docs/ko/SECURITY.md) · [Nederlands](docs/nl/SECURITY.md) · [Polski](docs/pl/SECURITY.md) · [Português](docs/pt/SECURITY.md) · [Русский](docs/ru/SECURITY.md) · [Svenska](docs/sv/SECURITY.md) · [ไทย](docs/th/SECURITY.md) · [Türkçe](docs/tr/SECURITY.md) · [Українська](docs/uk/SECURITY.md) · [Tiếng Việt](docs/vi/SECURITY.md) · [中文](docs/zh/SECURITY.md)
+> **Languages:** English · [العربية](docs/ar/SECURITY.md) · [Čeština](docs/cs/SECURITY.md) · [Deutsch](docs/de/SECURITY.md) · [Español](docs/es/SECURITY.md) · [فارسی](docs/fa/SECURITY.md) · [Français](docs/fr/SECURITY.md) · [हिन्दी](docs/hi/SECURITY.md) · [Bahasa Indonesia](docs/id/SECURITY.md) · [Italiano](docs/it/SECURITY.md) · [日本語](docs/ja/SECURITY.md) · [한국어](docs/ko/SECURITY.md) · [Nederlands](docs/nl/SECURITY.md) · [Polski](docs/pl/SECURITY.md) · [Português](docs/pt/SECURITY.md) · [Русский](docs/ru/SECURITY.md) · [Svenska](docs/sv/SECURITY.md) · [ไทย](docs/th/SECURITY.md) · [Türkçe](docs/tr/SECURITY.md) · [Українська](docs/uk/SECURITY.md) · [Tiếng Việt](docs/vi/SECURITY.md) · [中文](docs/zh/SECURITY.md)
 
 ---
 
@@ -66,3 +66,9 @@ Please report security issues privately, not in a public issue:
 Include the version, a description, and (ideally) a reproduction. You will get an acknowledgement, and
 we will coordinate a fix and disclosure timeline with you. For vulnerabilities in Dropbear itself,
 please also report upstream at <https://matt.ucc.asn.au/dropbear/>.
+
+<!-- doc-footer -->
+
+---
+
+> _This documentation was generated with Claude (Anthropic) and is maintained by VD171. Corrections and improvements are welcome; see [CONTRIBUTING.md](CONTRIBUTING.md)._

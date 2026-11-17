@@ -176,10 +176,15 @@ case "$1" in
     _user="$2"
     case "$_user" in ''|*[!a-zA-Z0-9_]*) die "bad user" ;; esac
     _spec="$(unb64)"
-    case "$_spec" in
-      pbkdf2-sha256\$[0-9]*\$*\$*) : ;;
-      *) die "bad hash spec" ;;
-    esac
+    # Strict 4-field validation: pbkdf2-sha256$<iter>$<salthex>$<hashhex>. The per-field
+    # charset checks (digits, hex) reject any embedded newline/CR or extra '$' field, so a
+    # crafted spec cannot inject a second passwd line (e.g. a weak iter=1 account).
+    case "$_spec" in pbkdf2-sha256\$*\$*\$*) : ;; *) die "bad hash spec" ;; esac
+    _rest="${_spec#pbkdf2-sha256\$}"
+    _iter="${_rest%%\$*}"; _rest="${_rest#*\$}"; _salt="${_rest%%\$*}"; _hash="${_rest#*\$}"
+    case "$_iter" in ''|*[!0-9]*) die "bad hash spec" ;; esac
+    case "$_salt" in ''|*[!0-9a-fA-F]*) die "bad hash spec" ;; esac
+    case "$_hash" in ''|*[!0-9a-fA-F]*) die "bad hash spec" ;; esac
     _d="$(_secret_ready)" || die "secret dir"
     _f="$_d/passwd"; _tmp="$_f.tmp.$$"
     # drop any existing line for this user, then add the new one

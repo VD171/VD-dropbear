@@ -144,14 +144,17 @@ vddb_ensure_hostkey() {
 }
 
 # --- authorized_keys shim --------------------------------------------------
-# Dropbear's checkpubkeyperms() walks every parent of the authorized_keys path
-# and rejects any that is group/other-writable or not owned by root/the user.
+# Dropbear's checkpubkeyperms() walks every PARENT directory of the authorized_keys
+# path and rejects any that is group/other-writable or not owned by root/the user.
 # Android's /data tree is system-owned and group-writable (0771), so a keys file
 # under /data (CE or DE) is rejected and pubkey auth fails. Expose it through a
-# root-owned 0700 shim on tmpfs (/dev): the parent walk sees a clean /dev -> /
-# chain, while stat() follows the link so the real key file's ownership/perms
-# are still enforced. tmpfs is recreated each start (service.sh), so it persists
-# across reboots in practice. Falls back to the real path if the shim can't be made.
+# root-owned 0700 shim on tmpfs (/dev): the parent walk then sees a clean
+# /dev/vddropbear -> /dev -> / chain, all root-owned and non-writable by others.
+# The real key file is reachable only through that root-only 0700 shim dir, so no
+# non-root process can substitute it (the shim, not the leaf's own mode, is what
+# makes it safe - checkpubkeyperms checks the parents, not the file). tmpfs is
+# recreated each start (service.sh), so it persists across reboots in practice.
+# Falls back to the real path if the shim can't be made.
 vddb_authkeys_link() {
     _real="$1"; _shim=/dev/vddropbear
     if mkdir -p "$_shim" 2>/dev/null && chmod 700 "$_shim" 2>/dev/null; then
@@ -267,8 +270,12 @@ vddb_spawn() {
     # Word-splitting here is intentional: every token is a flag or a normalised
     # value (PORT, HOSTKEY_TYPE and RECEIVE_WINDOW are validated in
     # vddb_load_config; binds are addr:port), none of which contain whitespace.
+    # set -f disables globbing first: IPv6 binds like [::1]:PORT contain [ ] which
+    # would otherwise be glob-expanded against the cwd.
+    set -f
     set -- $(vddb_build_args | tr '\n' ' ')
     "$VDDB_TOYBOX" setsid "$VDDB_DROPBEAR" "$@" </dev/null >>"$VDDB_LOG" 2>&1 &
+    set +f
     vddb_log "spawned daemon (port $PORT, listen $(vddb_listen_summary), mode $([ "$START_IN_BFU" = 1 ] && echo BFU || echo AFU))"
 }
 
