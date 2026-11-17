@@ -79,3 +79,9 @@ A static page in the manager's WebUI (KernelSU / APatch / WebUI-X). It drives
 read/write, and management of keys and password accounts. All data crosses the bridge base64-encoded,
 so the shell never interprets it; password hashes are computed in the browser with WebCrypto, so the
 clear-text password never leaves the page.
+
+<!-- doc-footer -->
+
+---
+
+> _This documentation was generated with Claude (Anthropic) and is maintained by VD171. Corrections and improvements are welcome; see [CONTRIBUTING.md](../CONTRIBUTING.md)._

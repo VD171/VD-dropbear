@@ -71,3 +71,9 @@ README 和文档以多种语言维护（`README.<lang>.md`）。英文是事实�
 
 缺陷和功能请求请使用 issue 模板。对任何可能危及设备的问题，请遵循 [`SECURITY.md`](SECURITY.md)，私下报告，
 而不是开一个公开 issue。
+
+<!-- doc-footer -->
+
+---
+
+> _本文档由 Claude (Anthropic) 生成，并由 VD171 维护。欢迎修正和改进；请参阅 [CONTRIBUTING.md](CONTRIBUTING.md)。_

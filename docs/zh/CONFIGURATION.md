@@ -109,3 +109,9 @@
 
 它保存 host key、`authorized_keys` 以及 `passwd` 哈希文件。密码哈希格式见
 [BUILDING.md](../BUILDING.md)。
+
+<!-- doc-footer -->
+
+---
+
+> _本文档由 Claude (Anthropic) 生成，并由 VD171 维护。欢迎修正和改进；请参阅 [CONTRIBUTING.md](CONTRIBUTING.md)。_

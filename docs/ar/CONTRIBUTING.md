@@ -73,3 +73,9 @@ scripts/build.sh            # fetches the tracked upstream, applies patches, bui
 
 استخدم قوالب المشكلات للعلل وطلبات الميزات. وبالنسبة لأي شيء قد يُعرّض جهازاً للخطر، اتّبع
 [`SECURITY.md`](SECURITY.md) وأبلِغ بسرّية بدلاً من فتح مشكلة علنية.
+
+<!-- doc-footer -->
+
+---
+
+> _تم إنشاء هذا التوثيق باستخدام Claude (Anthropic) ويتولى صيانته VD171. التصحيحات والتحسينات مرحّب بها؛ راجع [CONTRIBUTING.md](CONTRIBUTING.md)._

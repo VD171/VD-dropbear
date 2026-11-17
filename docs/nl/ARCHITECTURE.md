@@ -59,3 +59,9 @@ De SSH-server blijft upstream Dropbear; onze wijzigingen zijn een paar controlee
 ## De WebUI
 
 Een statische pagina in de WebUI van de manager (KernelSU / APatch / WebUI-X). Die stuurt `module/common/vddb-webui.sh` aan via de `ksu.exec`-brug: status, start/stop/restart, config lezen/schrijven, en beheer van sleutels en wachtwoordaccounts. Alle data gaat base64-gecodeerd over de brug, zodat de shell die nooit interpreteert; wachtwoordhashes worden in de browser berekend met WebCrypto, zodat het wachtwoord in platte tekst de pagina nooit verlaat.
+
+<!-- doc-footer -->
+
+---
+
+> _Deze documentatie is gegenereerd met Claude (Anthropic) en wordt onderhouden door VD171. Correcties en verbeteringen zijn welkom; zie [CONTRIBUTING.md](CONTRIBUTING.md)._

@@ -113,3 +113,9 @@ Wird nicht hier konfiguriert, wird aus `START_IN_BFU` abgeleitet:
 
 Er enthält den Host-Schlüssel, `authorized_keys` und die `passwd`-Hash-Datei. Zum Format des
 Passwort-Hashes siehe [BUILDING.md](../BUILDING.md).
+
+<!-- doc-footer -->
+
+---
+
+> _Diese Dokumentation wurde mit Claude (Anthropic) erstellt und wird von VD171 gepflegt. Korrekturen und Verbesserungen sind willkommen; siehe [CONTRIBUTING.md](CONTRIBUTING.md)._

@@ -84,3 +84,9 @@ configuration, et gestion des clés et des comptes avec mot de passe. Toutes les
 pont encodées en base64, de sorte que le shell ne les interprète jamais ; les hachages de mots de passe
 sont calculés dans le navigateur avec WebCrypto, si bien que le mot de passe en clair ne quitte jamais la
 page.
+
+<!-- doc-footer -->
+
+---
+
+> _Cette documentation a été générée avec Claude (Anthropic) et est maintenue par VD171. Les corrections et améliorations sont les bienvenues ; voir [CONTRIBUTING.md](CONTRIBUTING.md)._

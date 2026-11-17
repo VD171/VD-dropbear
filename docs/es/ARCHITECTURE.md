@@ -83,3 +83,9 @@ Una página estática en la WebUI del gestor (KernelSU / APatch / WebUI-X). Gobi
 escritura de la configuración, y gestión de claves y cuentas con contraseña. Todos los datos cruzan el
 puente codificados en base64, de modo que la shell nunca los interpreta; los hashes de contraseña se
 calculan en el navegador con WebCrypto, así que la contraseña en texto claro nunca sale de la página.
+
+<!-- doc-footer -->
+
+---
+
+> _Esta documentación se generó con Claude (Anthropic) y la mantiene VD171. Las correcciones y mejoras son bienvenidas; consulta [CONTRIBUTING.md](CONTRIBUTING.md)._

@@ -85,3 +85,9 @@ Eine statische Seite in der WebUI des Managers (KernelSU / APatch / WebUI-X). Si
 Konfiguration lesen/schreiben sowie Verwaltung von Schlüsseln und Passwortkonten. Alle Daten
 überqueren die Brücke base64-codiert, sodass die Shell sie nie interpretiert; Passwort-Hashes werden
 im Browser mit WebCrypto berechnet, sodass das Klartext-Passwort die Seite nie verlässt.
+
+<!-- doc-footer -->
+
+---
+
+> _Diese Dokumentation wurde mit Claude (Anthropic) erstellt und wird von VD171 gepflegt. Korrekturen und Verbesserungen sind willkommen; siehe [CONTRIBUTING.md](CONTRIBUTING.md)._

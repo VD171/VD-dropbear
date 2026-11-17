@@ -67,3 +67,9 @@ Conduta, e podem banir colaboradores por comportamento que considerem inadequado
 ## Atribuição
 
 Adaptado do [Contributor Covenant](https://www.contributor-covenant.org), versão 2.1.
+
+<!-- doc-footer -->
+
+---
+
+> _Esta documentação foi gerada com o Claude (Anthropic) e é mantida por VD171. Correções e melhorias são bem-vindas; veja [CONTRIBUTING.md](CONTRIBUTING.md)._

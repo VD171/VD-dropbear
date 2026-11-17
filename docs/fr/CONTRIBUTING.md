@@ -76,3 +76,9 @@ langue, gardez la structure et les ancres de section identiques à la version an
 Utilisez les modèles de tickets pour les bugs et les demandes de fonctionnalités. Pour tout ce qui
 pourrait compromettre un appareil, suivez [`SECURITY.md`](SECURITY.md) et signalez-le en privé plutôt que
 d'ouvrir un ticket public.
+
+<!-- doc-footer -->
+
+---
+
+> _Cette documentation a été générée avec Claude (Anthropic) et est maintenue par VD171. Les corrections et améliorations sont les bienvenues ; voir [CONTRIBUTING.md](CONTRIBUTING.md)._

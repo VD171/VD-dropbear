@@ -112,3 +112,9 @@ Burada yapılandırılmaz, `START_IN_BFU`'dan çözümlenir:
 
 Host key'i, `authorized_keys`'i ve `passwd` karma dosyasını barındırır. Parola karma biçimi için bkz.
 [BUILDING.md](../BUILDING.md).
+
+<!-- doc-footer -->
+
+---
+
+> _Bu belgeler Claude (Anthropic) ile oluşturulmuş olup VD171 tarafından yürütülmektedir. Düzeltmeler ve iyileştirmeler memnuniyetle karşılanır; bkz. [CONTRIBUTING.md](CONTRIBUTING.md)._

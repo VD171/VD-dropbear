@@ -123,3 +123,9 @@ documentado. Veja [Modelo de segurança](#) no README.
   Habilite a interface de que precisa e reinicie.
 - **SFTP/scp falha, mas o shell funciona.** Verifique se o `sftp-server` incluído foi distribuído para
   o seu ABI; o status da WebUI mostra o ABI detectado.
+
+<!-- doc-footer -->
+
+---
+
+> _Esta documentação foi gerada com o Claude (Anthropic) e é mantida por VD171. Correções e melhorias são bem-vindas; veja [CONTRIBUTING.md](CONTRIBUTING.md)._

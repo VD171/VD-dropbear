@@ -73,3 +73,9 @@ UPSTREAM_VERSION            the pinned upstream Dropbear tag
 
 Çalışma zamanı yapılandırması ve sırlar, kaldırdığınızda bilinçli olarak korunur, böylece yeniden
 kurulum ayarlarınızı ve anahtarlarınızı saklar. Bunları silmek için o dizinleri elle kaldırın.
+
+<!-- doc-footer -->
+
+---
+
+> _Bu belgeler Claude (Anthropic) ile oluşturulmuş olup VD171 tarafından yürütülmektedir. Düzeltmeler ve iyileştirmeler memnuniyetle karşılanır; bkz. [CONTRIBUTING.md](CONTRIBUTING.md)._

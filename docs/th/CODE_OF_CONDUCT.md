@@ -66,3 +66,9 @@
 ## การระบุที่มา
 
 ดัดแปลงจาก [Contributor Covenant](https://www.contributor-covenant.org) เวอร์ชัน 2.1
+
+<!-- doc-footer -->
+
+---
+
+> _เอกสารนี้สร้างขึ้นด้วย Claude (Anthropic) และดูแลโดย VD171 ยินดีรับการแก้ไขและการปรับปรุง ดู [CONTRIBUTING.md](CONTRIBUTING.md)_

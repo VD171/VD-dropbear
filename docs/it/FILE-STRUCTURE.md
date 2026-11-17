@@ -74,3 +74,9 @@ UPSTREAM_VERSION            the pinned upstream Dropbear tag
 La configurazione di runtime e i secret vengono mantenuti di proposito quando disinstalli, così una
 reinstallazione conserva le tue impostazioni e chiavi. Per cancellarli, rimuovi quelle directory a
 mano.
+
+<!-- doc-footer -->
+
+---
+
+> _Questa documentazione è stata generata con Claude (Anthropic) ed è gestita da VD171. Correzioni e miglioramenti sono benvenuti; vedi [CONTRIBUTING.md](CONTRIBUTING.md)._

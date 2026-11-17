@@ -77,3 +77,9 @@ Tohle je root, tak s tím zacházej jako s rootem:
 4. Nasměruj konfiguraci SSH agenta na zařízení a nech ho pracovat.
 
 Přes USB, bez ADB: zapněte USB tethering a navažte na USB adresu pro spojení jen přes kabel, hodí se pro agenta na připojeném notebooku. Viz uživatelská příručka.
+
+<!-- doc-footer -->
+
+---
+
+> _Tato dokumentace byla vytvořena pomocí Claude (Anthropic) a spravuje ji VD171. Opravy a vylepšení jsou vítány; viz [CONTRIBUTING.md](CONTRIBUTING.md)._

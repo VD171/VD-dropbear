@@ -112,3 +112,9 @@ Non configurato qui, risolto da `START_IN_BFU`:
 
 Contiene la host key, `authorized_keys` e il file di hash `passwd`. Vedi
 [BUILDING.md](../BUILDING.md) per il formato dell'hash delle password.
+
+<!-- doc-footer -->
+
+---
+
+> _Questa documentazione è stata generata con Claude (Anthropic) ed è gestita da VD171. Correzioni e miglioramenti sono benvenuti; vedi [CONTRIBUTING.md](CONTRIBUTING.md)._

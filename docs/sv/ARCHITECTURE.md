@@ -79,3 +79,9 @@ En statisk sida i hanterarens WebUI (KernelSU / APatch / WebUI-X). Den driver
 av konfiguration och hantering av nycklar och lösenordskonton. All data passerar bryggan
 base64-kodad, så skalet tolkar den aldrig; lösenordshashar beräknas i webbläsaren med WebCrypto, så det
 klartextlösenordet lämnar aldrig sidan.
+
+<!-- doc-footer -->
+
+---
+
+> _Denna dokumentation genererades med Claude (Anthropic) och underhålls av VD171. Rättelser och förbättringar välkomnas; se [CONTRIBUTING.md](CONTRIBUTING.md)._

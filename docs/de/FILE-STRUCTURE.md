@@ -74,3 +74,9 @@ UPSTREAM_VERSION            the pinned upstream Dropbear tag
 Die Laufzeitkonfiguration und die Geheimnisse bleiben bei der Deinstallation absichtlich erhalten,
 sodass eine Neuinstallation deine Einstellungen und Schlüssel behält. Um sie zu löschen, entferne
 diese Verzeichnisse von Hand.
+
+<!-- doc-footer -->
+
+---
+
+> _Diese Dokumentation wurde mit Claude (Anthropic) erstellt und wird von VD171 gepflegt. Korrekturen und Verbesserungen sind willkommen; siehe [CONTRIBUTING.md](CONTRIBUTING.md)._

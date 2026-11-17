@@ -57,3 +57,9 @@ VD DropbearはSSHサーバーを起動し、**認証に成功したすべての�
 - **Telegram：** [@VD_Priv8](https://t.me/VD_Priv8)
 
 バージョン、説明、そして（できれば）再現手順を含めてください。受領の返信をお送りし、修正と公開のタイムラインをあなたと調整します。Dropbear自体の脆弱性については、<https://matt.ucc.asn.au/dropbear/> のupstreamにも報告してください。
+
+<!-- doc-footer -->
+
+---
+
+> _このドキュメントは Claude (Anthropic) で生成され、VD171 によって保守されています。修正や改善を歓迎します。[CONTRIBUTING.md](CONTRIBUTING.md) を参照してください。_

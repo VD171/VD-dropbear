@@ -77,3 +77,9 @@ Esto es root, así que trátalo como root:
 4. Apunta la configuración SSH del agente al dispositivo y déjalo trabajar.
 
 Por USB, sin ADB: activa el anclaje USB y vincula a su dirección USB para un enlace solo por cable, útil para un agente en un portátil conectado. Consulta la guía del usuario.
+
+<!-- doc-footer -->
+
+---
+
+> _Esta documentación se generó con Claude (Anthropic) y la mantiene VD171. Las correcciones y mejoras son bienvenidas; consulta [CONTRIBUTING.md](CONTRIBUTING.md)._

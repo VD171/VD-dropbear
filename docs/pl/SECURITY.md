@@ -66,3 +66,9 @@ Prosimy zgłaszać problemy bezpieczeństwa prywatnie, a nie w publicznym zgłos
 Podaj wersję, opis oraz (najlepiej) sposób odtworzenia. Otrzymasz potwierdzenie, a my uzgodnimy z Tobą
 poprawkę oraz harmonogram ujawnienia. W przypadku podatności w samym Dropbearze prosimy zgłosić je także
 do upstreamu pod adresem <https://matt.ucc.asn.au/dropbear/>.
+
+<!-- doc-footer -->
+
+---
+
+> _Ta dokumentacja została wygenerowana za pomocą Claude (Anthropic) i jest utrzymywana przez VD171. Poprawki i ulepszenia są mile widziane; zobacz [CONTRIBUTING.md](CONTRIBUTING.md)._

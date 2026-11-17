@@ -105,3 +105,9 @@
 - **BFU：** `/data/adb/vddropbear/secret`：デバイス暗号化で、最初のアンロック前に読み取れます。
 
 ここにはホスト鍵、`authorized_keys`、`passwd` ハッシュファイルが入ります。パスワードハッシュの形式については [BUILDING.md](../BUILDING.md) を参照してください。
+
+<!-- doc-footer -->
+
+---
+
+> _このドキュメントは Claude (Anthropic) で生成され、VD171 によって保守されています。修正や改善を歓迎します。[CONTRIBUTING.md](CONTRIBUTING.md) を参照してください。_

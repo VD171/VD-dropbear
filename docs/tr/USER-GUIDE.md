@@ -122,3 +122,9 @@ bilinçli, belgelenmiş bir takas. README'deki [Güvenlik modeli](#) bölümüne
   olan arabirimi etkinleştirin ve yeniden başlatın.
 - **SFTP/scp başarısız oluyor ama kabuk çalışıyor.** Paket içindeki `sftp-server`'ın ABI'niz için
   gönderildiğinden emin olun; WebUI durumu algılanan ABI'yi gösterir.
+
+<!-- doc-footer -->
+
+---
+
+> _Bu belgeler Claude (Anthropic) ile oluşturulmuş olup VD171 tarafından yürütülmektedir. Düzeltmeler ve iyileştirmeler memnuniyetle karşılanır; bkz. [CONTRIBUTING.md](CONTRIBUTING.md)._

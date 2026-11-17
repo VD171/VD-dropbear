@@ -77,3 +77,9 @@ mục giống hệt phiên bản tiếng Anh.
 
 Dùng các mẫu issue cho lỗi và yêu cầu tính năng. Với bất cứ điều gì có thể làm tổn hại một thiết bị, hãy
 theo [`SECURITY.md`](SECURITY.md) và báo cáo riêng tư thay vì mở một issue công khai.
+
+<!-- doc-footer -->
+
+---
+
+> _Tài liệu này được tạo bằng Claude (Anthropic) và được duy trì bởi VD171. Chúng tôi hoan nghênh các chỉnh sửa và cải tiến; xem [CONTRIBUTING.md](CONTRIBUTING.md)._

@@ -69,3 +69,9 @@ Vui lòng báo cáo các vấn đề bảo mật một cách riêng tư, không 
 Hãy bao gồm phiên bản, một mô tả, và (lý tưởng là) cách tái hiện. Bạn sẽ nhận được một xác nhận, và
 chúng tôi sẽ phối hợp với bạn về bản sửa và mốc thời gian công bố. Với các lỗ hổng trong chính Dropbear,
 vui lòng cũng báo cáo lên upstream tại <https://matt.ucc.asn.au/dropbear/>.
+
+<!-- doc-footer -->
+
+---
+
+> _Tài liệu này được tạo bằng Claude (Anthropic) và được duy trì bởi VD171. Chúng tôi hoan nghênh các chỉnh sửa và cải tiến; xem [CONTRIBUTING.md](CONTRIBUTING.md)._

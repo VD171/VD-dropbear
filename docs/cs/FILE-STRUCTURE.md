@@ -73,3 +73,9 @@ UPSTREAM_VERSION            the pinned upstream Dropbear tag
 
 Běhová konfigurace a tajemství se při odinstalaci záměrně zachovávají, takže přeinstalace ponechá tvá
 nastavení a klíče. Chceš-li je vymazat, odstraň tyto adresáře ručně.
+
+<!-- doc-footer -->
+
+---
+
+> _Tato dokumentace byla vytvořena pomocí Claude (Anthropic) a spravuje ji VD171. Opravy a vylepšení jsou vítány; viz [CONTRIBUTING.md](CONTRIBUTING.md)._

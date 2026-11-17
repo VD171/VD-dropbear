@@ -66,3 +66,9 @@ Mohon laporkan masalah keamanan secara pribadi, bukan di issue publik:
 Sertakan versi, deskripsi, dan (idealnya) langkah reproduksi. Anda akan menerima tanda terima, dan kami
 akan menyelaraskan jadwal perbaikan dan pengungkapan bersama Anda. Untuk kerentanan di Dropbear itu
 sendiri, mohon laporkan juga ke upstream di <https://matt.ucc.asn.au/dropbear/>.
+
+<!-- doc-footer -->
+
+---
+
+> _Dokumentasi ini dibuat dengan Claude (Anthropic) dan dikelola oleh VD171. Koreksi dan perbaikan dipersilakan; lihat [CONTRIBUTING.md](CONTRIBUTING.md)._

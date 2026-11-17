@@ -113,3 +113,9 @@ Non configuré ici, résolu à partir de `START_IN_BFU` :
 
 Il contient la host key, `authorized_keys` et le fichier de hachages `passwd`. Voir
 [BUILDING.md](../BUILDING.md) pour le format du hachage de mot de passe.
+
+<!-- doc-footer -->
+
+---
+
+> _Cette documentation a été générée avec Claude (Anthropic) et est maintenue par VD171. Les corrections et améliorations sont les bienvenues ; voir [CONTRIBUTING.md](CONTRIBUTING.md)._

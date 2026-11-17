@@ -67,3 +67,9 @@
 ## Атрибуція
 
 Адаптовано з [Contributor Covenant](https://www.contributor-covenant.org), версія 2.1.
+
+<!-- doc-footer -->
+
+---
+
+> _Ця документація створена за допомогою Claude (Anthropic) і підтримується VD171. Виправлення та покращення вітаються; див. [CONTRIBUTING.md](CONTRIBUTING.md)._

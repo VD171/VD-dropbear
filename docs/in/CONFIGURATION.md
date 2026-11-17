@@ -112,3 +112,9 @@ Tidak dikonfigurasi di sini, ditentukan dari `START_IN_BFU`:
 
 Store ini menyimpan host key, `authorized_keys`, dan berkas hash `passwd`. Lihat
 [BUILDING.md](../BUILDING.md) untuk format hash kata sandi.
+
+<!-- doc-footer -->
+
+---
+
+> _Dokumentasi ini dibuat dengan Claude (Anthropic) dan dikelola oleh VD171. Koreksi dan perbaikan dipersilakan; lihat [CONTRIBUTING.md](CONTRIBUTING.md)._

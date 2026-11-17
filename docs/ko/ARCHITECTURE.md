@@ -59,3 +59,9 @@ SSH 서버는 upstream Dropbear 그대로이며, 우리의 변경은 검토 가�
 ## WebUI
 
 매니저 WebUI(KernelSU / APatch / WebUI-X) 안의 정적 페이지입니다. `ksu.exec` 브리지를 통해 `module/common/vddb-webui.sh` 를 구동합니다: 상태, start/stop/restart, 설정 읽기/쓰기, 키와 비밀번호 계정 관리. 모든 데이터는 base64로 인코딩되어 브리지를 건너므로 셸이 그것을 해석하지 않습니다; 비밀번호 해시는 브라우저에서 WebCrypto로 계산되므로 평문 비밀번호가 페이지를 떠나지 않습니다.
+
+<!-- doc-footer -->
+
+---
+
+> _이 문서는 Claude (Anthropic)로 생성되었으며 VD171이 유지 관리합니다. 수정 및 개선을 환영합니다. [CONTRIBUTING.md](CONTRIBUTING.md)를 참조하세요._

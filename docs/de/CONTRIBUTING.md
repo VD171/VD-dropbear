@@ -75,3 +75,9 @@ hinzufügst, halte Struktur und Abschnittsanker identisch zur englischen Version
 
 Nutze für Fehler und Funktionswünsche die Issue-Vorlagen. Für alles, was ein Gerät gefährden könnte,
 folge [`SECURITY.md`](SECURITY.md) und melde es privat, statt ein öffentliches Issue zu öffnen.
+
+<!-- doc-footer -->
+
+---
+
+> _Diese Dokumentation wurde mit Claude (Anthropic) erstellt und wird von VD171 gepflegt. Korrekturen und Verbesserungen sind willkommen; siehe [CONTRIBUTING.md](CONTRIBUTING.md)._

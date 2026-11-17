@@ -79,3 +79,9 @@ Một trang tĩnh trong WebUI của trình quản lý (KernelSU / APatch / WebUI
 và quản lý khóa cùng các tài khoản mật khẩu. Mọi dữ liệu đi qua cầu nối đều được mã hóa base64, nên
 shell không bao giờ diễn giải nó; các hash mật khẩu được tính trong trình duyệt bằng WebCrypto, nên mật
 khẩu dạng văn bản rõ không bao giờ rời khỏi trang.
+
+<!-- doc-footer -->
+
+---
+
+> _Tài liệu này được tạo bằng Claude (Anthropic) và được duy trì bởi VD171. Chúng tôi hoan nghênh các chỉnh sửa và cải tiến; xem [CONTRIBUTING.md](CONTRIBUTING.md)._

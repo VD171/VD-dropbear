@@ -105,3 +105,9 @@
 - **BFU:** `/data/adb/vddropbear/secret`: 기기 암호화이며, 첫 잠금 해제 전에 읽을 수 있습니다.
 
 여기에는 호스트 키, `authorized_keys`, `passwd` 해시 파일이 들어갑니다. 비밀번호 해시 형식은 [BUILDING.md](../BUILDING.md) 를 참고하십시오.
+
+<!-- doc-footer -->
+
+---
+
+> _이 문서는 Claude (Anthropic)로 생성되었으며 VD171이 유지 관리합니다. 수정 및 개선을 환영합니다. [CONTRIBUTING.md](CONTRIBUTING.md)를 참조하세요._

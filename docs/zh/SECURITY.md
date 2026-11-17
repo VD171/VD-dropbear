@@ -61,3 +61,9 @@ VD Dropbear 会启动一个 SSH 服务器，而**每一个成功通过认证的�
 
 请附上版本、描述，以及（最好有）复现方式。你会收到一份确认，我们会与你协调修复和披露的时间线。对于 Dropbear
 本身的漏洞，也请向 upstream 报告：<https://matt.ucc.asn.au/dropbear/>。
+
+<!-- doc-footer -->
+
+---
+
+> _本文档由 Claude (Anthropic) 生成，并由 VD171 维护。欢迎修正和改进；请参阅 [CONTRIBUTING.md](CONTRIBUTING.md)。_

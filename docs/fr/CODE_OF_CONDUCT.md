@@ -69,3 +69,9 @@ inapproprié, menaçant ou nuisible.
 ## Attribution
 
 Adapté du [Contributor Covenant](https://www.contributor-covenant.org), version 2.1.
+
+<!-- doc-footer -->
+
+---
+
+> _Cette documentation a été générée avec Claude (Anthropic) et est maintenue par VD171. Les corrections et améliorations sont les bienvenues ; voir [CONTRIBUTING.md](CONTRIBUTING.md)._

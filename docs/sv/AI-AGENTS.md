@@ -76,3 +76,9 @@ Det här är root, så behandla det som root:
 4. Rikta agentens SSH-konfiguration mot enheten och låt den arbeta.
 
 Över USB, utan ADB: slå på USB-delning och bind till dess USB-adress för en anslutning enbart via kabel, praktiskt för en agent på en kabelansluten laptop. Se användarguiden.
+
+<!-- doc-footer -->
+
+---
+
+> _Denna dokumentation genererades med Claude (Anthropic) och underhålls av VD171. Rättelser och förbättringar välkomnas; se [CONTRIBUTING.md](CONTRIBUTING.md)._

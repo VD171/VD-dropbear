@@ -112,3 +112,9 @@ Nekonfiguruje se zde, určuje se z `START_IN_BFU`:
 
 Obsahuje hostitelský klíč, `authorized_keys` a soubor otisků `passwd`. Formát otisku hesla viz
 [BUILDING.md](../BUILDING.md).
+
+<!-- doc-footer -->
+
+---
+
+> _Tato dokumentace byla vytvořena pomocí Claude (Anthropic) a spravuje ji VD171. Opravy a vylepšení jsou vítány; viz [CONTRIBUTING.md](CONTRIBUTING.md)._

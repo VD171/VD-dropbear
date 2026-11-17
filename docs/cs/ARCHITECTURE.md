@@ -79,3 +79,9 @@ Statická stránka ve WebUI správce (KernelSU / APatch / WebUI-X). Řídí
 a správu klíčů a účtů s heslem. Všechna data procházejí mostem zakódovaná v base64, takže je shell
 nikdy neinterpretuje; otisky hesel se počítají v prohlížeči pomocí WebCrypto, takže heslo v čitelné
 podobě nikdy stránku neopustí.
+
+<!-- doc-footer -->
+
+---
+
+> _Tato dokumentace byla vytvořena pomocí Claude (Anthropic) a spravuje ji VD171. Opravy a vylepšení jsou vítány; viz [CONTRIBUTING.md](CONTRIBUTING.md)._

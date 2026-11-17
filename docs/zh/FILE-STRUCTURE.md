@@ -73,3 +73,9 @@ UPSTREAM_VERSION            the pinned upstream Dropbear tag
 
 运行时配置和 secret 在你卸载时会被有意保留，因此重新安装会保留你的设置和密钥。若要清除它们，请手动删除那些
 目录。
+
+<!-- doc-footer -->
+
+---
+
+> _本文档由 Claude (Anthropic) 生成，并由 VD171 维护。欢迎修正和改进；请参阅 [CONTRIBUTING.md](CONTRIBUTING.md)。_

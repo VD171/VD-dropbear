@@ -67,3 +67,9 @@ De README en documentatie worden in veel talen onderhouden (`README.<lang>.md`).
 ## Bugs en beveiligingsproblemen melden
 
 Gebruik de issue-templates voor bugs en functieverzoeken. Voor alles wat een toestel in gevaar kan brengen, volg [`SECURITY.md`](SECURITY.md) en meld het privé in plaats van een openbare issue te openen.
+
+<!-- doc-footer -->
+
+---
+
+> _Deze documentatie is gegenereerd met Claude (Anthropic) en wordt onderhouden door VD171. Correcties en verbeteringen zijn welkom; zie [CONTRIBUTING.md](CONTRIBUTING.md)._

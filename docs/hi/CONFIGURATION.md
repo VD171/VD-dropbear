@@ -112,3 +112,9 @@
 
 इसमें होस्ट कुंजी, `authorized_keys`, और `passwd` हैश फ़ाइल होती है। पासवर्ड हैश प्रारूप के लिए
 [BUILDING.md](../BUILDING.md) देखें।
+
+<!-- doc-footer -->
+
+---
+
+> _यह दस्तावेज़ Claude (Anthropic) से तैयार किया गया है और इसे VD171 द्वारा अनुरक्षित किया जाता है। सुधार और संशोधन का स्वागत है; देखें [CONTRIBUTING.md](CONTRIBUTING.md)।_

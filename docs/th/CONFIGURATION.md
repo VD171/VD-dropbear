@@ -111,3 +111,9 @@
 
 มันเก็บ host key, `authorized_keys` และไฟล์แฮช `passwd` ดู
 [BUILDING.md](../BUILDING.md) สำหรับรูปแบบแฮชรหัสผ่าน
+
+<!-- doc-footer -->
+
+---
+
+> _เอกสารนี้สร้างขึ้นด้วย Claude (Anthropic) และดูแลโดย VD171 ยินดีรับการแก้ไขและการปรับปรุง ดู [CONTRIBUTING.md](CONTRIBUTING.md)_

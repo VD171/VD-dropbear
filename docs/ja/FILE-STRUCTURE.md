@@ -72,3 +72,9 @@ UPSTREAM_VERSION            the pinned upstream Dropbear tag
 ```
 
 ランタイムの設定とシークレットは、アンインストールしても意図的に保持されるため、再インストールしても設定と鍵はそのまま残ります。消去するには、それらのディレクトリを手で削除してください。
+
+<!-- doc-footer -->
+
+---
+
+> _このドキュメントは Claude (Anthropic) で生成され、VD171 によって保守されています。修正や改善を歓迎します。[CONTRIBUTING.md](CONTRIBUTING.md) を参照してください。_

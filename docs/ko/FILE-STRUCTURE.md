@@ -72,3 +72,9 @@ UPSTREAM_VERSION            the pinned upstream Dropbear tag
 ```
 
 런타임 설정과 시크릿은 제거해도 의도적으로 유지되므로, 재설치해도 설정과 키가 그대로 남습니다. 지우려면 그 디렉터리들을 직접 삭제하십시오.
+
+<!-- doc-footer -->
+
+---
+
+> _이 문서는 Claude (Anthropic)로 생성되었으며 VD171이 유지 관리합니다. 수정 및 개선을 환영합니다. [CONTRIBUTING.md](CONTRIBUTING.md)를 참조하세요._

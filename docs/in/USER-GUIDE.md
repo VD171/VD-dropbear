@@ -121,3 +121,9 @@ unlock: sebuah trade-off yang disengaja dan terdokumentasi. Lihat [Security mode
   aktifkan antarmuka yang Anda perlukan dan mulai ulang.
 - **SFTP/scp gagal tetapi shell berfungsi.** Pastikan `sftp-server` yang disertakan dikirim untuk ABI
   Anda; status WebUI menampilkan ABI yang terdeteksi.
+
+<!-- doc-footer -->
+
+---
+
+> _Dokumentasi ini dibuat dengan Claude (Anthropic) dan dikelola oleh VD171. Koreksi dan perbaikan dipersilakan; lihat [CONTRIBUTING.md](CONTRIBUTING.md)._

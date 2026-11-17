@@ -66,3 +66,9 @@ Lütfen güvenlik sorunlarını kamuya açık bir sorun olarak değil, özel ola
 Sürümü, bir açıklamayı ve (ideal olarak) bir yeniden üretim adımını ekleyin. Bir onay alacaksınız ve
 sizinle bir düzeltme ve açıklama zaman çizelgesini koordine edeceğiz. Dropbear'ın kendisindeki güvenlik
 açıkları için lütfen <https://matt.ucc.asn.au/dropbear/> adresinden upstream'e de bildirin.
+
+<!-- doc-footer -->
+
+---
+
+> _Bu belgeler Claude (Anthropic) ile oluşturulmuş olup VD171 tarafından yürütülmektedir. Düzeltmeler ve iyileştirmeler memnuniyetle karşılanır; bkz. [CONTRIBUTING.md](CONTRIBUTING.md)._

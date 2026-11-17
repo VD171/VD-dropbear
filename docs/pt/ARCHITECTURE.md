@@ -81,3 +81,9 @@ Uma página estática na WebUI do gerenciador (KernelSU / APatch / WebUI-X). Ela
 de configuração e gerenciamento de chaves e contas de senha. Todos os dados cruzam a ponte codificados
 em base64, de modo que o shell nunca os interpreta; os hashes de senha são calculados no navegador com
 WebCrypto, de modo que a senha em texto claro nunca sai da página.
+
+<!-- doc-footer -->
+
+---
+
+> _Esta documentação foi gerada com o Claude (Anthropic) e é mantida por VD171. Correções e melhorias são bem-vindas; veja [CONTRIBUTING.md](CONTRIBUTING.md)._

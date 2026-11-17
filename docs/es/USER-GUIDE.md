@@ -124,3 +124,9 @@ dispositivo, que es legible antes del desbloqueo: un compromiso deliberado y doc
   la interfaz que necesites y reinicia.
 - **SFTP/scp falla pero la shell funciona.** Asegúrate de que el `sftp-server` incluido se distribuyó
   para tu ABI; el estado de la WebUI muestra la ABI detectada.
+
+<!-- doc-footer -->
+
+---
+
+> _Esta documentación se generó con Claude (Anthropic) y la mantiene VD171. Las correcciones y mejoras son bienvenidas; consulta [CONTRIBUTING.md](CONTRIBUTING.md)._

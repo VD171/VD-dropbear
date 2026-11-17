@@ -76,3 +76,9 @@ y los anclajes de sección idénticos a los de la versión en inglés.
 Usa las plantillas de incidencias para errores y solicitudes de funciones. Para cualquier cosa que pueda
 comprometer un dispositivo, sigue [`SECURITY.md`](SECURITY.md) y repórtalo de forma privada en lugar de
 abrir una incidencia pública.
+
+<!-- doc-footer -->
+
+---
+
+> _Esta documentación se generó con Claude (Anthropic) y la mantiene VD171. Las correcciones y mejoras son bienvenidas; consulta [CONTRIBUTING.md](CONTRIBUTING.md)._

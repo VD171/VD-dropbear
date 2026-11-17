@@ -112,3 +112,9 @@ loopback باند می‌شود.
 
 این انبار host key، `authorized_keys` و فایل هش `passwd` را نگه می‌دارد. برای قالب هش رمز عبور به
 [BUILDING.md](../BUILDING.md) نگاه کنید.
+
+<!-- doc-footer -->
+
+---
+
+> _این مستندات با Claude (Anthropic) تولید شده و توسط VD171 نگهداری می‌شود. اصلاحات و بهبودها خوش‌آمد است؛ به [CONTRIBUTING.md](CONTRIBUTING.md) مراجعه کنید._

@@ -57,3 +57,9 @@ Meld beveiligingsproblemen privé, niet in een openbare issue:
 - **Telegram:** [@VD_Priv8](https://t.me/VD_Priv8)
 
 Vermeld de versie, een beschrijving, en (idealiter) een reproductie. Je krijgt een ontvangstbevestiging, en we stemmen een fix en een openbaarmakingstijdlijn met je af. Voor kwetsbaarheden in Dropbear zelf, meld die ook upstream op <https://matt.ucc.asn.au/dropbear/>.
+
+<!-- doc-footer -->
+
+---
+
+> _Deze documentatie is gegenereerd met Claude (Anthropic) en wordt onderhouden door VD171. Correcties en verbeteringen zijn welkom; zie [CONTRIBUTING.md](CONTRIBUTING.md)._

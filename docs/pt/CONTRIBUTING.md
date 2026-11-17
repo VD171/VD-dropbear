@@ -75,3 +75,9 @@ estrutura e as âncoras de seção idênticas às da versão em inglês.
 
 Use os templates de issue para bugs e pedidos de recurso. Para qualquer coisa que possa comprometer um
 dispositivo, siga o [`SECURITY.md`](SECURITY.md) e relate em privado em vez de abrir uma issue pública.
+
+<!-- doc-footer -->
+
+---
+
+> _Esta documentação foi gerada com o Claude (Anthropic) e é mantida por VD171. Correções e melhorias são bem-vindas; veja [CONTRIBUTING.md](CONTRIBUTING.md)._

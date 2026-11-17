@@ -122,3 +122,9 @@ liệu. Xem [Mô hình bảo mật](#) trong README.
   cần và khởi động lại.
 - **SFTP/scp thất bại nhưng shell hoạt động.** Hãy chắc chắn `sftp-server` đóng gói kèm theo đã được
   phát hành cho ABI của bạn; trạng thái WebUI hiển thị ABI được phát hiện.
+
+<!-- doc-footer -->
+
+---
+
+> _Tài liệu này được tạo bằng Claude (Anthropic) và được duy trì bởi VD171. Chúng tôi hoan nghênh các chỉnh sửa và cải tiến; xem [CONTRIBUTING.md](CONTRIBUTING.md)._

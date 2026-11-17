@@ -80,3 +80,9 @@ Yöneticinin WebUI'sinde (KernelSU / APatch / WebUI-X) statik bir sayfa. `ksu.ex
 okuma/yazma ve anahtarların ve parola hesaplarının yönetimi. Tüm veriler köprüyü base64 kodlanmış
 olarak geçer, böylece kabuk onu asla yorumlamaz; parola karmaları tarayıcıda WebCrypto ile hesaplanır,
 böylece açık metin parola asla sayfadan çıkmaz.
+
+<!-- doc-footer -->
+
+---
+
+> _Bu belgeler Claude (Anthropic) ile oluşturulmuş olup VD171 tarafından yürütülmektedir. Düzeltmeler ve iyileştirmeler memnuniyetle karşılanır; bkz. [CONTRIBUTING.md](CONTRIBUTING.md)._

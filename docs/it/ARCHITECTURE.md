@@ -80,3 +80,9 @@ Una pagina statica nella WebUI del manager (KernelSU / APatch / WebUI-X). Guida
 della configurazione e gestione di chiavi e account password. Tutti i dati attraversano il bridge
 codificati in base64, così la shell non li interpreta mai; gli hash delle password sono calcolati nel
 browser con WebCrypto, così la password in chiaro non lascia mai la pagina.
+
+<!-- doc-footer -->
+
+---
+
+> _Questa documentazione è stata generata con Claude (Anthropic) ed è gestita da VD171. Correzioni e miglioramenti sono benvenuti; vedi [CONTRIBUTING.md](CONTRIBUTING.md)._

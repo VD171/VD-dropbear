@@ -74,3 +74,9 @@ strukturen och sektionsankarna identiska med den engelska versionen.
 
 Använd ärendemallarna för buggar och funktionsförfrågningar. För allt som kan äventyra en enhet, följ
 [`SECURITY.md`](SECURITY.md) och rapportera privat i stället för att öppna ett offentligt ärende.
+
+<!-- doc-footer -->
+
+---
+
+> _Denna dokumentation genererades med Claude (Anthropic) och underhålls av VD171. Rättelser och förbättringar välkomnas; se [CONTRIBUTING.md](CONTRIBUTING.md)._

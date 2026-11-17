@@ -112,3 +112,9 @@ Nie konfigurowany tutaj, ustalany na podstawie `START_IN_BFU`:
 
 Przechowuje klucz hosta, `authorized_keys` oraz plik z hashem `passwd`. Format hashu hasła opisuje
 [BUILDING.md](../BUILDING.md).
+
+<!-- doc-footer -->
+
+---
+
+> _Ta dokumentacja została wygenerowana za pomocą Claude (Anthropic) i jest utrzymywana przez VD171. Poprawki i ulepszenia są mile widziane; zobacz [CONTRIBUTING.md](CONTRIBUTING.md)._

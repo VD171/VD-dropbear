@@ -68,3 +68,9 @@ minacciosi o dannosi.
 ## Attribuzione
 
 Adattato dal [Contributor Covenant](https://www.contributor-covenant.org), versione 2.1.
+
+<!-- doc-footer -->
+
+---
+
+> _Questa documentazione è stata generata con Claude (Anthropic) ed è gestita da VD171. Correzioni e miglioramenti sono benvenuti; vedi [CONTRIBUTING.md](CONTRIBUTING.md)._

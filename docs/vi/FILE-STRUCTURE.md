@@ -74,3 +74,9 @@ UPSTREAM_VERSION            the pinned upstream Dropbear tag
 Cấu hình thời gian chạy và các secret được giữ lại một cách có chủ đích khi bạn gỡ cài đặt, nên việc
 cài lại giữ nguyên các thiết lập và khóa của bạn. Để xóa sạch chúng, hãy tự tay gỡ bỏ những thư mục
 đó.
+
+<!-- doc-footer -->
+
+---
+
+> _Tài liệu này được tạo bằng Claude (Anthropic) và được duy trì bởi VD171. Chúng tôi hoan nghênh các chỉnh sửa và cải tiến; xem [CONTRIBUTING.md](CONTRIBUTING.md)._

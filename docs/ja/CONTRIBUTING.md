@@ -67,3 +67,9 @@ READMEとドキュメントは多くの言語で維持されています（`READ
 ## バグとセキュリティ問題の報告
 
 バグと機能要望にはissueテンプレートを使ってください。デバイスを危険にさらしうるものについては、[`SECURITY.md`](SECURITY.md) に従い、公開のissueを開く代わりに非公開で報告してください。
+
+<!-- doc-footer -->
+
+---
+
+> _このドキュメントは Claude (Anthropic) で生成され、VD171 によって保守されています。修正や改善を歓迎します。[CONTRIBUTING.md](CONTRIBUTING.md) を参照してください。_

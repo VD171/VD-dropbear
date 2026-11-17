@@ -72,3 +72,9 @@ VD Dropbear 是私密的替代方案：一次普通的 SSH 登录，凭据由你
 4. 把代理的 SSH 配置指向该设备，让它去工作。
 
 通过 USB、无需 ADB：打开 USB 网络共享并绑定到它的 USB 地址，即可获得仅限数据线的连接，便于连接数据线的笔记本上的代理使用。参见用户指南。
+
+<!-- doc-footer -->
+
+---
+
+> _本文档由 Claude (Anthropic) 生成，并由 VD171 维护。欢迎修正和改进；请参阅 [CONTRIBUTING.md](CONTRIBUTING.md)。_

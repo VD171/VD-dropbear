@@ -66,3 +66,9 @@ xử này, và có thể cấm những người đóng góp vì hành vi mà h�
 ## Ghi nhận
 
 Phỏng theo [Contributor Covenant](https://www.contributor-covenant.org), phiên bản 2.1.
+
+<!-- doc-footer -->
+
+---
+
+> _Tài liệu này được tạo bằng Claude (Anthropic) và được duy trì bởi VD171. Chúng tôi hoan nghênh các chỉnh sửa và cải tiến; xem [CONTRIBUTING.md](CONTRIBUTING.md)._

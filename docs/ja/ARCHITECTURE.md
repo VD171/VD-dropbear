@@ -59,3 +59,9 @@ SSHサーバーはupstreamのDropbearのままで、私たちの変更はレビ�
 ## WebUI
 
 マネージャのWebUI（KernelSU / APatch / WebUI-X）内の静的なページです。`ksu.exec` ブリッジを通じて `module/common/vddb-webui.sh` を駆動します：ステータス、start/stop/restart、設定の読み書き、鍵とパスワードアカウントの管理。すべてのデータはbase64エンコードされてブリッジを渡るため、シェルがそれを解釈することはありません；パスワードハッシュはブラウザ内でWebCryptoを使って計算されるため、平文のパスワードがページを離れることはありません。
+
+<!-- doc-footer -->
+
+---
+
+> _このドキュメントは Claude (Anthropic) で生成され、VD171 によって保守されています。修正や改善を歓迎します。[CONTRIBUTING.md](CONTRIBUTING.md) を参照してください。_

@@ -73,3 +73,9 @@ UPSTREAM_VERSION            the pinned upstream Dropbear tag
 
 Konfiguracja uruchomieniowa i sekrety są celowo zachowywane przy odinstalowaniu, więc ponowna
 instalacja zachowuje Twoje ustawienia i klucze. Aby je usunąć, skasuj te katalogi ręcznie.
+
+<!-- doc-footer -->
+
+---
+
+> _Ta dokumentacja została wygenerowana za pomocą Claude (Anthropic) i jest utrzymywana przez VD171. Poprawki i ulepszenia są mile widziane; zobacz [CONTRIBUTING.md](CONTRIBUTING.md)._

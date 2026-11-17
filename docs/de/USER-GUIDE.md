@@ -127,3 +127,9 @@ Kompromiss. Siehe [Sicherheitsmodell](#) in der README.
   gebunden: aktiviere die benötigte Schnittstelle und starte neu.
 - **SFTP/scp schlägt fehl, aber die Shell funktioniert.** Stelle sicher, dass der mitgelieferte
   `sftp-server` für deine ABI ausgeliefert wurde; der WebUI-Status zeigt die erkannte ABI.
+
+<!-- doc-footer -->
+
+---
+
+> _Diese Dokumentation wurde mit Claude (Anthropic) erstellt und wird von VD171 gepflegt. Korrekturen und Verbesserungen sind willkommen; siehe [CONTRIBUTING.md](CONTRIBUTING.md)._

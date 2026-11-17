@@ -75,3 +75,9 @@ i kotwice sekcji identyczne jak w wersji angielskiej.
 Do zgłaszania błędów i propozycji funkcji używaj szablonów zgłoszeń. W przypadku czegokolwiek, co mogłoby
 narazić urządzenie, postępuj zgodnie z [`SECURITY.md`](SECURITY.md) i zgłoś to prywatnie, zamiast
 otwierać publiczne zgłoszenie.
+
+<!-- doc-footer -->
+
+---
+
+> _Ta dokumentacja została wygenerowana za pomocą Claude (Anthropic) i jest utrzymywana przez VD171. Poprawki i ulepszenia są mile widziane; zobacz [CONTRIBUTING.md](CONTRIBUTING.md)._

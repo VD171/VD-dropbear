@@ -73,3 +73,9 @@ UPSTREAM_VERSION            the pinned upstream Dropbear tag
 
 A configuração de execução e os segredos são mantidos de propósito quando você desinstala, então uma
 reinstalação preserva suas configurações e chaves. Para apagá-los, remova esses diretórios à mão.
+
+<!-- doc-footer -->
+
+---
+
+> _Esta documentação foi gerada com o Claude (Anthropic) e é mantida por VD171. Correções e melhorias são bem-vindas; veja [CONTRIBUTING.md](CONTRIBUTING.md)._

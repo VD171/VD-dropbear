@@ -67,3 +67,9 @@ README와 문서는 여러 언어로 유지됩니다(`README.<lang>.md`). 영어
 ## 버그 및 보안 문제 신고
 
 버그와 기능 요청에는 issue 템플릿을 사용하십시오. 기기를 위험에 빠뜨릴 수 있는 것은 [`SECURITY.md`](SECURITY.md) 를 따라, 공개 issue를 여는 대신 비공개로 신고하십시오.
+
+<!-- doc-footer -->
+
+---
+
+> _이 문서는 Claude (Anthropic)로 생성되었으며 VD171이 유지 관리합니다. 수정 및 개선을 환영합니다. [CONTRIBUTING.md](CONTRIBUTING.md)를 참조하세요._

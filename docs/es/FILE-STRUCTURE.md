@@ -74,3 +74,9 @@ UPSTREAM_VERSION            the pinned upstream Dropbear tag
 La configuración y los secretos en tiempo de ejecución se conservan deliberadamente al desinstalar, de
 modo que una reinstalación mantiene tus ajustes y tus claves. Para borrarlos, elimina esos directorios a
 mano.
+
+<!-- doc-footer -->
+
+---
+
+> _Esta documentación se generó con Claude (Anthropic) y la mantiene VD171. Las correcciones y mejoras son bienvenidas; consulta [CONTRIBUTING.md](CONTRIBUTING.md)._

@@ -72,3 +72,9 @@ UPSTREAM_VERSION            the pinned upstream Dropbear tag
 ```
 
 De runtimeconfiguratie en geheimen worden bij het verwijderen bewust behouden, zodat een herinstallatie je instellingen en sleutels behoudt. Om ze te wissen, verwijder die mappen met de hand.
+
+<!-- doc-footer -->
+
+---
+
+> _Deze documentatie is gegenereerd met Claude (Anthropic) en wordt onderhouden door VD171. Correcties en verbeteringen zijn welkom; zie [CONTRIBUTING.md](CONTRIBUTING.md)._

@@ -77,3 +77,9 @@ C'est du root, alors traitez-le comme du root :
 4. Pointez la configuration SSH de l'agent vers l'appareil et laissez-le travailler.
 
 Par USB, sans ADB : activez le partage de connexion USB et liez le démon à son adresse USB pour un lien uniquement par câble, pratique pour un agent sur un portable connecté. Voir le guide de l'utilisateur.
+
+<!-- doc-footer -->
+
+---
+
+> _Cette documentation a été générée avec Claude (Anthropic) et est maintenue par VD171. Les corrections et améliorations sont les bienvenues ; voir [CONTRIBUTING.md](CONTRIBUTING.md)._

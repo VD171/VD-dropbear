@@ -74,3 +74,9 @@ UPSTREAM_VERSION            the pinned upstream Dropbear tag
 La configuration et les secrets à l'exécution sont volontairement conservés lors de la désinstallation,
 de sorte qu'une réinstallation garde vos réglages et vos clés. Pour les effacer, supprimez ces
 répertoires à la main.
+
+<!-- doc-footer -->
+
+---
+
+> _Cette documentation a été générée avec Claude (Anthropic) et est maintenue par VD171. Les corrections et améliorations sont les bienvenues ; voir [CONTRIBUTING.md](CONTRIBUTING.md)._

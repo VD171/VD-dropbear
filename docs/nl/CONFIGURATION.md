@@ -105,3 +105,9 @@ Hier niet geconfigureerd, afgeleid van `START_IN_BFU`:
 - **BFU:** `/data/adb/vddropbear/secret`: device-encrypted, leesbaar vóór de eerste ontgrendeling.
 
 Die bevat de hostsleutel, `authorized_keys`, en het `passwd`-hashbestand. Zie [BUILDING.md](../BUILDING.md) voor het formaat van de wachtwoordhash.
+
+<!-- doc-footer -->
+
+---
+
+> _Deze documentatie is gegenereerd met Claude (Anthropic) en wordt onderhouden door VD171. Correcties en verbeteringen zijn welkom; zie [CONTRIBUTING.md](CONTRIBUTING.md)._

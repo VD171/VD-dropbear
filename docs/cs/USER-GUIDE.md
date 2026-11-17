@@ -121,3 +121,9 @@ odemčením (například abys zařízení po restartu odemkl na dálku), zapni
   rozhraní a restartuj.
 - **SFTP/scp selhává, ale shell funguje.** Ujisti se, že přibalený `sftp-server` byl dodán pro tvou
   ABI; stav ve WebUI ukazuje zjištěnou ABI.
+
+<!-- doc-footer -->
+
+---
+
+> _Tato dokumentace byla vytvořena pomocí Claude (Anthropic) a spravuje ji VD171. Opravy a vylepšení jsou vítány; viz [CONTRIBUTING.md](CONTRIBUTING.md)._

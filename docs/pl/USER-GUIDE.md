@@ -125,3 +125,9 @@ który jest czytelny przed odblokowaniem: to celowy, udokumentowany kompromis. Z
   loopbackiem. Włącz potrzebny interfejs i uruchom ponownie.
 - **SFTP/scp zawodzi, ale powłoka działa.** Upewnij się, że dołączony `sftp-server` został dostarczony
   dla Twojego ABI; status WebUI pokazuje wykryte ABI.
+
+<!-- doc-footer -->
+
+---
+
+> _Ta dokumentacja została wygenerowana za pomocą Claude (Anthropic) i jest utrzymywana przez VD171. Poprawki i ulepszenia są mile widziane; zobacz [CONTRIBUTING.md](CONTRIBUTING.md)._

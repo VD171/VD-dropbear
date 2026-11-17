@@ -112,3 +112,9 @@ Konfigureras inte här, löses upp utifrån `START_IN_BFU`:
 
 Det innehåller värdnyckeln, `authorized_keys` och `passwd`-hashfilen. Se
 [BUILDING.md](../BUILDING.md) för lösenordshashens format.
+
+<!-- doc-footer -->
+
+---
+
+> _Denna dokumentation genererades med Claude (Anthropic) och underhålls av VD171. Rättelser och förbättringar välkomnas; se [CONTRIBUTING.md](CONTRIBUTING.md)._

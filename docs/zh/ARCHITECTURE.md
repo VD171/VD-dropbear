@@ -73,3 +73,9 @@ SSH 服务器仍为 upstream Dropbear；我们的改动只是几个可供审阅�
 `module/common/vddb-webui.sh`：状态、start/stop/restart、配置读写，以及对密钥和密码账户的管理。所有数据都以
 base64 编码跨桥传递，因此 shell 从不对其进行解释；密码哈希在浏览器中用 WebCrypto 计算，因此明文密码从不离开
 页面。
+
+<!-- doc-footer -->
+
+---
+
+> _本文档由 Claude (Anthropic) 生成，并由 VD171 维护。欢迎修正和改进；请参阅 [CONTRIBUTING.md](CONTRIBUTING.md)。_

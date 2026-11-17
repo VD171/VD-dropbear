@@ -67,3 +67,9 @@ Bezpečnostní problémy prosím hlas soukromě, ne ve veřejném issue:
 Uveď verzi, popis a (ideálně) postup reprodukce. Dostaneš potvrzení o přijetí a domluvíme s tebou
 opravu a časový plán zveřejnění. U zranitelností v samotném Dropbearu prosím nahlas také upstream na
 <https://matt.ucc.asn.au/dropbear/>.
+
+<!-- doc-footer -->
+
+---
+
+> _Tato dokumentace byla vytvořena pomocí Claude (Anthropic) a spravuje ji VD171. Opravy a vylepšení jsou vítány; viz [CONTRIBUTING.md](CONTRIBUTING.md)._

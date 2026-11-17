@@ -81,3 +81,9 @@ Statyczna strona w WebUI menedżera (KernelSU / APatch / WebUI-X). Steruje ona
 konfiguracji oraz zarządzanie kluczami i kontami hasłowymi. Wszystkie dane przechodzą przez most
 zakodowane w base64, więc powłoka nigdy ich nie interpretuje; hashe haseł są obliczane w przeglądarce za
 pomocą WebCrypto, więc hasło w postaci jawnej nigdy nie opuszcza strony.
+
+<!-- doc-footer -->
+
+---
+
+> _Ta dokumentacja została wygenerowana za pomocą Claude (Anthropic) i jest utrzymywana przez VD171. Poprawki i ulepszenia są mile widziane; zobacz [CONTRIBUTING.md](CONTRIBUTING.md)._

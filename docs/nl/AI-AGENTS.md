@@ -66,3 +66,9 @@ Dit is root, dus behandel het als root:
 4. Richt de SSH-config van de agent op het toestel en laat die aan het werk gaan.
 
 Via USB, zonder ADB: zet USB-tethering aan en bind aan het USB-adres voor een verbinding alleen via de kabel, handig voor een agent op een gekoppelde laptop. Zie de gebruikershandleiding.
+
+<!-- doc-footer -->
+
+---
+
+> _Deze documentatie is gegenereerd met Claude (Anthropic) en wordt onderhouden door VD171. Correcties en verbeteringen zijn welkom; zie [CONTRIBUTING.md](CONTRIBUTING.md)._

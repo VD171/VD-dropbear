@@ -112,3 +112,9 @@ Không được cấu hình ở đây, được xác định từ `START_IN_BFU`
 
 Nó chứa host key, `authorized_keys`, và tệp hash `passwd`. Xem [BUILDING.md](../BUILDING.md) để biết
 định dạng hash mật khẩu.
+
+<!-- doc-footer -->
+
+---
+
+> _Tài liệu này được tạo bằng Claude (Anthropic) và được duy trì bởi VD171. Chúng tôi hoan nghênh các chỉnh sửa và cải tiến; xem [CONTRIBUTING.md](CONTRIBUTING.md)._

@@ -79,3 +79,9 @@ Sebuah halaman statis di WebUI manajer (KernelSU / APatch / WebUI-X). Ia mengger
 konfigurasi, serta pengelolaan kunci dan akun kata sandi. Semua data menyeberangi jembatan dalam bentuk
 base64, sehingga shell tidak pernah menafsirkannya; hash kata sandi dihitung di browser dengan
 WebCrypto, sehingga kata sandi teks-jelas tidak pernah keluar dari halaman.
+
+<!-- doc-footer -->
+
+---
+
+> _Dokumentasi ini dibuat dengan Claude (Anthropic) dan dikelola oleh VD171. Koreksi dan perbaikan dipersilakan; lihat [CONTRIBUTING.md](CONTRIBUTING.md)._

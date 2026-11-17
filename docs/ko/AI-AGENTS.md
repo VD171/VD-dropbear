@@ -66,3 +66,9 @@ ADB는 스스로를 드러냅니다. `adb_enabled` 와 `development_settings_ena
 4. 에이전트의 SSH 설정을 기기로 향하게 하고 작업하도록 둡니다.
 
 USB를 통해, ADB 없이: USB 테더링을 켜고 그 USB 주소에 바인드하면 케이블 전용 연결이 됩니다. 케이블로 연결된 노트북의 에이전트에 편리합니다. 사용자 가이드를 참고하세요.
+
+<!-- doc-footer -->
+
+---
+
+> _이 문서는 Claude (Anthropic)로 생성되었으며 VD171이 유지 관리합니다. 수정 및 개선을 환영합니다. [CONTRIBUTING.md](CONTRIBUTING.md)를 참조하세요._

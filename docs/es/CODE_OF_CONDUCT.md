@@ -68,3 +68,9 @@ inapropiado, amenazante o dañino.
 ## Atribución
 
 Adaptado del [Contributor Covenant](https://www.contributor-covenant.org), versión 2.1.
+
+<!-- doc-footer -->
+
+---
+
+> _Esta documentación se generó con Claude (Anthropic) y la mantiene VD171. Las correcciones y mejoras son bienvenidas; consulta [CONTRIBUTING.md](CONTRIBUTING.md)._

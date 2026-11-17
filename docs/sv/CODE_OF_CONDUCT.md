@@ -66,3 +66,9 @@ stänga av bidragsgivare för beteende de anser olämpligt, hotfullt eller skadl
 ## Tillskrivning
 
 Anpassad från [Contributor Covenant](https://www.contributor-covenant.org), version 2.1.
+
+<!-- doc-footer -->
+
+---
+
+> _Denna dokumentation genererades med Claude (Anthropic) och underhålls av VD171. Rättelser och förbättringar välkomnas; se [CONTRIBUTING.md](CONTRIBUTING.md)._

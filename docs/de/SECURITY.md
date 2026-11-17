@@ -70,3 +70,9 @@ Gib die Version, eine Beschreibung und (idealerweise) eine Reproduktion an. Du e
 Bestätigung, und wir stimmen mit dir eine Behebung und einen Zeitplan zur Offenlegung ab. Für
 Schwachstellen in Dropbear selbst melde sie bitte auch beim Upstream unter
 <https://matt.ucc.asn.au/dropbear/>.
+
+<!-- doc-footer -->
+
+---
+
+> _Diese Dokumentation wurde mit Claude (Anthropic) erstellt und wird von VD171 gepflegt. Korrekturen und Verbesserungen sind willkommen; siehe [CONTRIBUTING.md](CONTRIBUTING.md)._

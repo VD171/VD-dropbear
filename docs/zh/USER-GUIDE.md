@@ -113,3 +113,9 @@ scp -P 2222 file root@192.168.42.129:/sdcard/
 - **密钥被拒绝。** 确认公钥那一行与你的客户端所提供的完全一致，并且你用于登录的用户名是系统能够解析的（通常是 `root`）。
 - **无法从另一台机器连接。** 你多半仍然只绑定到了 loopback，请启用你需要的接口并重启。
 - **SFTP/scp 失败但 shell 正常。** 确认随附的 `sftp-server` 已为你的 ABI 发布；WebUI 状态会显示检测到的 ABI。
+
+<!-- doc-footer -->
+
+---
+
+> _本文档由 Claude (Anthropic) 生成，并由 VD171 维护。欢迎修正和改进；请参阅 [CONTRIBUTING.md](CONTRIBUTING.md)。_

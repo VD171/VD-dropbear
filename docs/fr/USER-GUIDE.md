@@ -125,3 +125,9 @@ appareil, lisible avant le déverrouillage : un compromis délibéré et documen
   uniquement sur loopback : activez l'interface voulue et redémarrez.
 - **SFTP/scp échoue mais le shell fonctionne.** Assurez-vous que le `sftp-server` inclus a été livré pour
   votre ABI ; l'état de la WebUI montre l'ABI détectée.
+
+<!-- doc-footer -->
+
+---
+
+> _Cette documentation a été générée avec Claude (Anthropic) et est maintenue par VD171. Les corrections et améliorations sont les bienvenues ; voir [CONTRIBUTING.md](CONTRIBUTING.md)._

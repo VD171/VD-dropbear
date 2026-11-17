@@ -76,3 +76,9 @@ onu izler. Bir çeviriyi geliştirir veya bir dil eklerseniz, yapıyı ve bölü
 Hatalar ve özellik istekleri için sorun şablonlarını kullanın. Bir cihazı tehlikeye atabilecek her şey
 için, [`SECURITY.md`](SECURITY.md)'yi izleyin ve kamuya açık bir sorun açmak yerine özel olarak
 bildirin.
+
+<!-- doc-footer -->
+
+---
+
+> _Bu belgeler Claude (Anthropic) ile oluşturulmuş olup VD171 tarafından yürütülmektedir. Düzeltmeler ve iyileştirmeler memnuniyetle karşılanır; bkz. [CONTRIBUTING.md](CONTRIBUTING.md)._

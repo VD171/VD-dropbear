@@ -77,3 +77,9 @@ Questo è root, quindi trattalo come root:
 4. Punta la configurazione SSH dell'agente al dispositivo e lascialo lavorare.
 
 Via USB, senza ADB: attiva il tethering USB e lega all'indirizzo USB per un collegamento solo via cavo, comodo per un agente su un laptop collegato. Vedi la guida utente.
+
+<!-- doc-footer -->
+
+---
+
+> _Questa documentazione è stata generata con Claude (Anthropic) ed è gestita da VD171. Correzioni e miglioramenti sono benvenuti; vedi [CONTRIBUTING.md](CONTRIBUTING.md)._

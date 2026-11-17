@@ -76,3 +76,9 @@ trạng thái ở dạng văn bản thuần) một tác nhân có thể tự tì
 4. Trỏ cấu hình SSH của tác nhân vào thiết bị và để nó làm việc.
 
 Qua USB, không ADB: bật chia sẻ kết nối USB và bind vào địa chỉ USB để có liên kết chỉ qua cáp, tiện cho một agent trên laptop đã kết nối. Xem hướng dẫn người dùng.
+
+<!-- doc-footer -->
+
+---
+
+> _Tài liệu này được tạo bằng Claude (Anthropic) và được duy trì bởi VD171. Chúng tôi hoan nghênh các chỉnh sửa và cải tiến; xem [CONTRIBUTING.md](CONTRIBUTING.md)._

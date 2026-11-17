@@ -112,3 +112,9 @@
 
 Оно хранит ключ хоста, `authorized_keys` и файл хешей `passwd`. См.
 [BUILDING.md](../BUILDING.md) для формата хеша пароля.
+
+<!-- doc-footer -->
+
+---
+
+> _Эта документация создана с помощью Claude (Anthropic) и поддерживается VD171. Исправления и улучшения приветствуются; см. [CONTRIBUTING.md](CONTRIBUTING.md)._

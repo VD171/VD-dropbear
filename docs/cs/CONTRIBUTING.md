@@ -74,3 +74,9 @@ shodné s anglickou verzí.
 
 Pro chyby a žádosti o funkce použij šablony issue. U čehokoli, co by mohlo ohrozit zařízení, se řiď
 souborem [`SECURITY.md`](SECURITY.md) a nahlas to soukromě místo otevření veřejného issue.
+
+<!-- doc-footer -->
+
+---
+
+> _Tato dokumentace byla vytvořena pomocí Claude (Anthropic) a spravuje ji VD171. Opravy a vylepšení jsou vítány; viz [CONTRIBUTING.md](CONTRIBUTING.md)._

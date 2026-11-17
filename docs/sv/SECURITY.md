@@ -66,3 +66,9 @@ Rapportera säkerhetsproblem privat, inte i ett offentligt ärende:
 Ange versionen, en beskrivning och (helst) ett sätt att återskapa. Du får en bekräftelse, och vi
 samordnar en tidsplan för fix och offentliggörande med dig. För sårbarheter i Dropbear självt,
 rapportera även till upstream på <https://matt.ucc.asn.au/dropbear/>.
+
+<!-- doc-footer -->
+
+---
+
+> _Denna dokumentation genererades med Claude (Anthropic) och underhålls av VD171. Rättelser och förbättringar välkomnas; se [CONTRIBUTING.md](CONTRIBUTING.md)._

@@ -71,3 +71,9 @@ Incluez la version, une description et (idéalement) un moyen de reproduire. Vou
 réception, et nous coordonnerons avec vous un correctif et un calendrier de divulgation. Pour les
 vulnérabilités dans Dropbear lui-même, signalez-les aussi à upstream sur
 <https://matt.ucc.asn.au/dropbear/>.
+
+<!-- doc-footer -->
+
+---
+
+> _Cette documentation a été générée avec Claude (Anthropic) et est maintenue par VD171. Les corrections et améliorations sont les bienvenues ; voir [CONTRIBUTING.md](CONTRIBUTING.md)._

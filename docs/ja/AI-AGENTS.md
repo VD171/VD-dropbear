@@ -66,3 +66,9 @@ ADBは自らの存在を公言します。`adb_enabled` と `development_setting
 4. エージェントのSSH設定をデバイスに向け、作業させる。
 
 USB 経由、ADB なし: USB テザリングをオンにし、その USB アドレスにバインドするとケーブルだけの接続になります。ケーブル接続したノート PC 上のエージェントに便利です。ユーザーガイドを参照してください。
+
+<!-- doc-footer -->
+
+---
+
+> _このドキュメントは Claude (Anthropic) で生成され、VD171 によって保守されています。修正や改善を歓迎します。[CONTRIBUTING.md](CONTRIBUTING.md) を参照してください。_

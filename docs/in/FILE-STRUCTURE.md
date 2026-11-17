@@ -74,3 +74,9 @@ UPSTREAM_VERSION            the pinned upstream Dropbear tag
 Konfigurasi runtime dan secret sengaja dipertahankan ketika Anda meng-uninstall, sehingga pemasangan
 ulang mempertahankan pengaturan dan kunci Anda. Untuk menghapusnya, singkirkan direktori-direktori itu
 secara manual.
+
+<!-- doc-footer -->
+
+---
+
+> _Dokumentasi ini dibuat dengan Claude (Anthropic) dan dikelola oleh VD171. Koreksi dan perbaikan dipersilakan; lihat [CONTRIBUTING.md](CONTRIBUTING.md)._

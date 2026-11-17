@@ -121,3 +121,9 @@ en medveten, dokumenterad avvägning. Se [Säkerhetsmodell](#) i README.
   Aktivera det gränssnitt du behöver och starta om.
 - **SFTP/scp misslyckas men skalet fungerar.** Se till att den medföljande `sftp-server` levererades
   för din ABI; WebUI:ns status visar den upptäckta ABI:n.
+
+<!-- doc-footer -->
+
+---
+
+> _Denna dokumentation genererades med Claude (Anthropic) och underhålls av VD171. Rättelser och förbättringar välkomnas; se [CONTRIBUTING.md](CONTRIBUTING.md)._

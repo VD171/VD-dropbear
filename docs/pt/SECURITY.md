@@ -67,3 +67,9 @@ Por favor, relate problemas de segurança em privado, não em uma issue pública
 Inclua a versão, uma descrição e (idealmente) uma forma de reproduzir. Você receberá uma confirmação, e
 coordenaremos com você uma correção e um cronograma de divulgação. Para vulnerabilidades no próprio
 Dropbear, por favor relate também ao upstream em <https://matt.ucc.asn.au/dropbear/>.
+
+<!-- doc-footer -->
+
+---
+
+> _Esta documentação foi gerada com o Claude (Anthropic) e é mantida por VD171. Correções e melhorias são bem-vindas; veja [CONTRIBUTING.md](CONTRIBUTING.md)._

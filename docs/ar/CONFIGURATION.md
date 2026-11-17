@@ -111,3 +111,9 @@
 
 يحتوي على مفتاح المضيف و`authorized_keys` وملف بصمات `passwd`. انظر
 [BUILDING.md](../BUILDING.md) لمعرفة صيغة بصمة كلمة المرور.
+
+<!-- doc-footer -->
+
+---
+
+> _تم إنشاء هذا التوثيق باستخدام Claude (Anthropic) ويتولى صيانته VD171. التصحيحات والتحسينات مرحّب بها؛ راجع [CONTRIBUTING.md](CONTRIBUTING.md)._

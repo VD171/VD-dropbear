@@ -78,3 +78,9 @@ Bu root'tur, o yüzden ona root gibi davranın:
 4. Ajanın SSH yapılandırmasını cihaza yönlendirin ve çalışmasına izin verin.
 
 USB üzerinden, ADB olmadan: USB bağlantı paylaşımını açın ve yalnızca kablo bağlantısı için USB adresine bağlayın; kabloyla bağlı bir dizüstünde çalışan bir aracı için kullanışlıdır. Kullanıcı kılavuzuna bakın.
+
+<!-- doc-footer -->
+
+---
+
+> _Bu belgeler Claude (Anthropic) ile oluşturulmuş olup VD171 tarafından yürütülmektedir. Düzeltmeler ve iyileştirmeler memnuniyetle karşılanır; bkz. [CONTRIBUTING.md](CONTRIBUTING.md)._

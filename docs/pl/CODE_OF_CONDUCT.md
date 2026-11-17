@@ -67,3 +67,9 @@ a także mogą zbanować osoby, których zachowanie uznają za niewłaściwe, gr
 ## Atrybucja
 
 Zaadaptowano z [Contributor Covenant](https://www.contributor-covenant.org), wersja 2.1.
+
+<!-- doc-footer -->
+
+---
+
+> _Ta dokumentacja została wygenerowana za pomocą Claude (Anthropic) i jest utrzymywana przez VD171. Poprawki i ulepszenia są mile widziane; zobacz [CONTRIBUTING.md](CONTRIBUTING.md)._

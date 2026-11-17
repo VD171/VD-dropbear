@@ -74,3 +74,9 @@ UPSTREAM_VERSION            the pinned upstream Dropbear tag
 Körtidskonfigurationen och hemligheterna behålls avsiktligt när du avinstallerar, så att en
 ominstallation behåller dina inställningar och nycklar. För att radera dem, ta bort de katalogerna för
 hand.
+
+<!-- doc-footer -->
+
+---
+
+> _Denna dokumentation genererades med Claude (Anthropic) och underhålls av VD171. Rättelser och förbättringar välkomnas; se [CONTRIBUTING.md](CONTRIBUTING.md)._

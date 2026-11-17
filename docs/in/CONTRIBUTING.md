@@ -75,3 +75,9 @@ struktur dan anchor bagian tetap identik dengan versi bahasa Inggris.
 Gunakan templat issue untuk bug dan permintaan fitur. Untuk apa pun yang bisa membahayakan sebuah
 perangkat, ikuti [`SECURITY.md`](SECURITY.md) dan laporkan secara pribadi alih-alih membuka issue
 publik.
+
+<!-- doc-footer -->
+
+---
+
+> _Dokumentasi ini dibuat dengan Claude (Anthropic) dan dikelola oleh VD171. Koreksi dan perbaikan dipersilakan; lihat [CONTRIBUTING.md](CONTRIBUTING.md)._

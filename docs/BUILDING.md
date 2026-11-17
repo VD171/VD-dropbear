@@ -23,6 +23,10 @@
   ======================================================================
 -->
 
+> **Languages:** English · [العربية](ar/BUILDING.md) · [Čeština](cs/BUILDING.md) · [Deutsch](de/BUILDING.md) · [Español](es/BUILDING.md) · [فارسی](fa/BUILDING.md) · [Français](fr/BUILDING.md) · [हिन्दी](hi/BUILDING.md) · [Bahasa Indonesia](in/BUILDING.md) · [Italiano](it/BUILDING.md) · [日本語](ja/BUILDING.md) · [한국어](ko/BUILDING.md) · [Nederlands](nl/BUILDING.md) · [Polski](pl/BUILDING.md) · [Português](pt/BUILDING.md) · [Русский](ru/BUILDING.md) · [Svenska](sv/BUILDING.md) · [ไทย](th/BUILDING.md) · [Türkçe](tr/BUILDING.md) · [Українська](uk/BUILDING.md) · [Tiếng Việt](vi/BUILDING.md) · [中文](zh/BUILDING.md)
+
+---
+
 # Building VD Dropbear
 
 VD Dropbear ships **upstream [Dropbear](https://github.com/mkj/dropbear)** (the tag pinned in
@@ -221,3 +225,9 @@ TC="$NDK/toolchains/llvm/prebuilt/linux-x86_64/bin"
 make PROGRAMS="dropbear dropbearkey" -j"$(nproc)"
 file ./dropbear   # -> dynamically linked, interpreter /system/bin/linker64, for Android 24
 ```
+
+<!-- doc-footer -->
+
+---
+
+> _This documentation was generated with Claude (Anthropic) and is maintained by VD171. Corrections and improvements are welcome; see [CONTRIBUTING.md](../CONTRIBUTING.md)._

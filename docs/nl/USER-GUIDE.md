@@ -103,3 +103,9 @@ Standaard start de daemon pas **nadat** je het toestel één keer ontgrendelt (A
 - **Sleutel geweigerd.** Bevestig dat de regel met de publieke sleutel exact is zoals je client die aanbiedt, en dat de gebruikersnaam waarmee je inlogt er een is die het systeem herkent (meestal `root`).
 - **Kan niet verbinden vanaf een andere machine.** Je bent waarschijnlijk nog alleen aan loopback gebonden. Schakel de interface in die je nodig hebt en herstart.
 - **SFTP/scp mislukt maar de shell werkt.** Zorg dat de meegeleverde `sftp-server` voor jouw ABI is uitgeleverd; de WebUI-status toont de gedetecteerde ABI.
+
+<!-- doc-footer -->
+
+---
+
+> _Deze documentatie is gegenereerd met Claude (Anthropic) en wordt onderhouden door VD171. Correcties en verbeteringen zijn welkom; zie [CONTRIBUTING.md](CONTRIBUTING.md)._
