@@ -179,13 +179,13 @@ wiki의 각 페이지는 위 전환 메뉴의 각 언어로도 번역되어 있�
 
 - https://vd171.ru
 - https://vd.priv8.ru
-- *Telegram:* @VD_Priv8 https://t.me/VD_Priv8
-- *Channel:* @Priv8_VD https://t.me/Priv8_VD
-- *Discord:* @VD.Priv8 https://discord.com/users/1296831918989639721
-- *E-mail:* vd.priv8@pm.me
-- *XDA-Developers:* @VD171 https://xdaforums.com/m/vd171.4699873/
-- *XDA thread:* https://xdaforums.com/t/VD-Dropbear.4808524/
-- *GitHub:* @VD171 https://github.com/VD171
+- **Telegram:** @VD_Priv8 https://t.me/VD_Priv8
+- **Channel:** @Priv8_VD https://t.me/Priv8_VD
+- **Discord:** @VD.Priv8 https://discord.com/users/1296831918989639721
+- **E-mail:** vd.priv8@pm.me
+- **XDA-Developers:** @VD171 https://xdaforums.com/m/vd171.4699873/
+- **XDA thread:** https://xdaforums.com/t/VD-Dropbear.4808524/
+- **GitHub:** @VD171 https://github.com/VD171
 
 ## 라이선스
 
