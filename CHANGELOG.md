@@ -29,6 +29,26 @@ All notable, real and significant changes to **VD Dropbear** are recorded here.
 The format follows [Keep a Changelog](https://keepachangelog.com/); versions are tagged in the
 module (`module.prop`) and on GitHub Releases.
 
+## [v1.09] (2026-11-17)
+
+### Security
+- **Hardened the flashless updater's manifest verification.** The signature-profile check now fails closed on
+  any unexpected value (a corrupted or malformed `profile` no longer degrades to best-effort verification), and
+  every manifest is now bound to its own module id, so a manifest signed for a different module cannot be applied
+  to this one. The normal update path was already signature-checked; these close edge cases around a corrupted
+  config value and cross-module or MITM feed scenarios.
+
+### Added
+- **`PASS_ENV` setting (on by default) - the SSH session inherits the daemon's environment.** With it on
+  (dropbear `-e`), a login session sees the platform environment the module service was started with, so tools
+  run over SSH that shell out to the Android framework (`am`, `content`, `pm`) work instead of failing silently
+  with empty output. Turn it off for a leaner, bare login environment. Settable from the WebUI Settings tab.
+
+### Fixed
+- The WebUI no longer interrupts an in-progress update to prompt for a reboot.
+- Network-type classification now handles IPv6-only Wi-Fi (464XLAT) correctly, so such a link is no longer
+  misread as mobile data.
+
 ## [v1.08] (2026-11-17)
 
 ### Fixed

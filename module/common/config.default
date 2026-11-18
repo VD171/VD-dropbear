@@ -82,6 +82,15 @@ MAX_AUTH_TRIES=3
 LOGIN_SHELL=
 HOME_DIR=
 EXTRA_ENV=
+# Pass the daemon's own process environment on to login sessions (dropbear -e).
+#   1 = (default) the session inherits the platform environment the module
+#       service was started with (on Android: BOOTCLASSPATH, ANDROID_ROOT/DATA,
+#       etc.). Root-ops tools run over SSH that fork app_process - `am`,
+#       `content`, `pm`, instrumentation - need it; without it they fail
+#       silently (empty output, exit 0).
+#   0 = a bare login environment. Leaner, but breaks those tools. Only turn it
+#       off if you do not run anything that shells out to the Android framework.
+PASS_ENV=1
 IDLE_TIMEOUT=0
 KEEPALIVE=0
 

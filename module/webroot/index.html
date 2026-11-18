@@ -285,6 +285,7 @@ const TOGGLES = [
   ["HIDE_IDENT","Hide version banner","Send a neutral SSH identity so scanners cannot fingerprint the version."],
   ["PUBKEY_AUTH","Public-key login",""],
   ["PASSWORD_AUTH","Password login","Logins default to root; keys are safer."],
+  ["PASS_ENV","Pass environment to sessions","Session inherits the daemon's platform environment (BOOTCLASSPATH, etc.). Needed for root-ops tools run over SSH that shell out to the Android framework (am, content, pm); off is leaner but breaks them silently."],
   ["ALLOW_LOCAL_FORWARD","Allow local port forwarding",""],
   ["ALLOW_REMOTE_FORWARD","Allow remote port forwarding",""],
   ["GATEWAY_PORTS","Gateway ports","Let forwarded remote ports bind to all interfaces."],

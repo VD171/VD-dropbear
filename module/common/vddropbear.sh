@@ -99,6 +99,7 @@ vddb_defaults() {
     LOGIN_SHELL=""
     HOME_DIR=""
     EXTRA_ENV=""
+    PASS_ENV=1                  # pass the daemon's environment on to login sessions (dropbear -e)
     IDLE_TIMEOUT=0
     KEEPALIVE=0
     ALLOW_LOCAL_FORWARD=0
@@ -197,6 +198,11 @@ vddb_build_args() {
     [ "$_bound" = "1" ] || printf '%s\n' -p "127.0.0.1:$PORT"
     # foreground + log to stderr (captured by service.sh); no pid file in the module dir
     printf '%s\n' -F -P /dev/null
+    # pass the server process environment on to login sessions (dropbear -e). A rooted ops
+    # daemon is started by the module service with the platform environment set (on Android:
+    # BOOTCLASSPATH, ANDROID_ROOT/DATA, etc.); tools launched over SSH that fork app_process
+    # (am, content, pm instrument) need it, and a bare login env silently breaks them.
+    [ "$PASS_ENV" = "1" ] && printf '%s\n' -e
     # auth policy
     [ "$PASSWORD_AUTH" = "1" ] || printf '%s\n' -s          # -s disables password auth
     [ "$MAX_AUTH_TRIES" -gt 0 ] 2>/dev/null && printf '%s\n' -T "$MAX_AUTH_TRIES"

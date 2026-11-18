@@ -166,7 +166,7 @@
   function hideBanner() { if (elBanner) elBanner.hidden = true; }
   function refreshBanner() {
     return readJournal().then(function (j) {
-      if (j && (j.reboot_pending === true || j.state === 'PENDING_REBOOT')) showBanner(j.target);
+      if (j && j.state === 'PENDING_REBOOT') showBanner(j.target);
       else hideBanner();
       return j;
     });
@@ -307,7 +307,7 @@
 
       if (j.state === 'ERROR' || j.error) { finishError(j); return; }
       if (j.state === 'DEFERRED') { finishDeferred(j); return; }
-      if (j.state === 'PENDING_REBOOT' || j.reboot_pending === true) { finishReboot(j); return; }
+      if (j.state === 'PENDING_REBOOT') { finishReboot(j); return; }   // terminal state is authoritative, NOT reboot_pending (which is true from the first fetch of any .so plan)
       if (j.state === 'DONE') { finishDone(j); return; }
       if (j.cancelled === true) { finishCancelled(j); return; }
 
@@ -589,7 +589,7 @@
     return readConfig().then(function (cfg) {
       return readJournal().then(function (j) {
         lastJournal = j || null;
-        if (j && (j.state === 'PENDING_REBOOT' || j.reboot_pending === true)) { showBanner(j.target); }
+        if (j && j.state === 'PENDING_REBOOT') { showBanner(j.target); }
         else if (j && j.state === 'ERROR') { lastJournal = j; }
         else if (j && !isTerminal(j.state)) {
           // non-terminal transaction left by a previous session/boot: offer to resume

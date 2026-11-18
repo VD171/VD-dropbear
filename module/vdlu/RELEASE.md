@@ -30,21 +30,25 @@ The producer tools live in the private VDLiveUpdate repo (`producer/vdlu-pack`, 
    NDK=/path/to/ndk bash scripts/build-bundles.sh
    ```
 
-2. Pack the tree. `<versionCode>` is `versionCode` from `module/module.prop` (monotonic: hardened blocks
-   downgrades, so every release raises it). `--prev` points at the previous release manifest so paths
-   gone since then land in `delete[]`:
+2. Pack and sign the tree. **Preferred: `scripts/repack-baseline.sh`** does steps 2-3 in one command -
+   it exports the tree with git's canonical modes, copies the license notices and forces them back to
+   0644 (a recurring umask bug otherwise shipped them 0664 and drifted the baseline from the zip), packs,
+   signs, verifies the signature on the PC, and writes `module/vdlu/baseline.json`:
+
+   ```sh
+   scripts/repack-baseline.sh [--prev prev/manifest.json] [--out feed_dir]
+   ```
+
+   It reads the version from `module/module.prop`; `--out` also stages the feed (`manifest.json` + `blobs/`).
+
+   The manual equivalent (`<versionCode>` is `versionCode` from `module.prop`; monotonic, hardened blocks
+   downgrades; `--prev` is the previous release manifest so paths gone since then land in `delete[]`):
 
    ```sh
    vdlu-pack  module  out  vddropbear  <versionCode> \
               --version-name <version> --channel stable \
               [--prev prev/manifest.json]
-   ```
-
-   Output: `out/manifest.json` (unsigned, canonical) and `out/blobs/<sha256>[.gz]`.
-
-3. Sign the manifest in place with `key_id` `vd-2026`:
-
-   ```sh
+   # Output: out/manifest.json (unsigned, canonical) + out/blobs/<sha256>[.gz]
    vdlu-sign  out/manifest.json  /path/to/keys/vd-2026.pem  vd-2026
    ```
 
