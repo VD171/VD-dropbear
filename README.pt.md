@@ -179,8 +179,10 @@ Projetos irmãos do mesmo autor:
 
 - **[VDInfos](https://github.com/VD171/VD-Infos)**: um depurador de métodos do aparelho que lê cada item por todos os métodos capazes de lê-lo e os compara lado a lado.
 - **[VDGoogle](https://github.com/VD171/VD-Google)**: lê o que o Google registra no seu aparelho sobre RCS, Wallet e Play Integrity, totalmente no aparelho e sem internet.
-- **[VDBackup](https://github.com/VD171/VD-Backup)**: backup e restauração completos de apps e dados como root, conduzidos inteiramente por uma WebUI.
 - **[COPG-VD](https://github.com/VD171/COPG-VD)**: um spoofer de aparelho que transforma um fingerprint novo em um perfil coerente e consistente.
+- **[VDBackup](https://github.com/VD171/VD-Backup)**: backup e restauração completos de apps e dados como root, conduzidos inteiramente por uma WebUI.
+- **[VDLiveUpdate](https://github.com/VD171/VDLiveUpdate)**: um motor de autoatualização incremental e sem flash, embarcado em módulos KernelSU/APatch/Magisk.
+- **[VDInstaller](https://github.com/VD171/VD-Installer)**: um instalador sideload com root e sem atrito para APKs únicos, em lote e divididos, com um interruptor para o verificador do Play Protect e falsificação da origem de instalação.
 
 ## Contatos
 

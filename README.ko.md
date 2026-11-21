@@ -172,8 +172,10 @@ wiki의 각 페이지는 위 전환 메뉴의 각 언어로도 번역되어 있�
 
 - **[VDInfos](https://github.com/VD171/VD-Infos)**: 각 항목을, 그것을 읽을 수 있는 모든 방법으로 읽어 나란히 비교하는 기기 메서드 디버거.
 - **[VDGoogle](https://github.com/VD171/VD-Google)**: RCS, Wallet, Play Integrity에 대해 Google이 기기에 기록하는 내용을 완전히 기기 내에서 인터넷 없이 읽습니다.
-- **[VDBackup](https://github.com/VD171/VD-Backup)**: 루트로 앱과 데이터를 통째로 백업·복원하며, 전부 WebUI에서 조작합니다.
 - **[COPG-VD](https://github.com/VD171/COPG-VD)**: 새로운 핑거프린트를 일관되고 정합적인 프로필로 바꾸는 기기 스푸퍼입니다.
+- **[VDBackup](https://github.com/VD171/VD-Backup)**: 루트로 앱과 데이터를 통째로 백업·복원하며, 전부 WebUI에서 조작합니다.
+- **[VDLiveUpdate](https://github.com/VD171/VDLiveUpdate)**: KernelSU/APatch/Magisk 모듈에 내장된, 플래시가 필요 없는 증분 자가 업데이트 엔진.
+- **[VDInstaller](https://github.com/VD171/VD-Installer)**: 단일, 배치, 분할 APK 를 위한 마찰 없는 root 사이드로드 설치기로, Play Protect 검사기 토글과 설치 출처 위장을 갖추고 있습니다.
 
 ## 연락처
 

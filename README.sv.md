@@ -184,8 +184,10 @@ Systerprojekt av samma upphovsperson:
 
 - **[VDInfos](https://github.com/VD171/VD-Infos)**: en felsökare för enhetens metoder som läser varje post genom varje metod som kan läsa den och jämför dem sida vid sida.
 - **[VDGoogle](https://github.com/VD171/VD-Google)**: läser vad Google registrerar på din enhet om RCS, Wallet och Play Integrity, helt på enheten och utan internet.
-- **[VDBackup](https://github.com/VD171/VD-Backup)**: fullständig säkerhetskopiering och återställning av appar och data som root, helt styrd från ett WebUI.
 - **[COPG-VD](https://github.com/VD171/COPG-VD)**: en enhets-spoofer som gör ett färskt fingeravtryck till en sammanhängande, konsekvent profil.
+- **[VDBackup](https://github.com/VD171/VD-Backup)**: fullständig säkerhetskopiering och återställning av appar och data som root, helt styrd från ett WebUI.
+- **[VDLiveUpdate](https://github.com/VD171/VDLiveUpdate)**: en flashfri, inkrementell självuppdateringsmotor, inbäddad i KernelSU/APatch/Magisk-moduler.
+- **[VDInstaller](https://github.com/VD171/VD-Installer)**: en friktionsfri root-sideload-installerare för enskilda, batch- och split-APK:er, med en växel för Play Protect-verifieraren och förfalskning av installationskällan.
 
 ## Kontakter
 

@@ -178,8 +178,10 @@ rsync, बिना किसी `adb_enabled` संकेत के, बिन
 
 - **[VDInfos](https://github.com/VD171/VD-Infos)**: एक डिवाइस मेथड डिबगर जो हर आइटम को हर उस मेथड से पढ़ता है जो उसे पढ़ सकता है और उन्हें आमने-सामने तुलना करता है।
 - **[VDGoogle](https://github.com/VD171/VD-Google)**: RCS, Wallet और Play Integrity के बारे में Google आपके डिवाइस पर जो दर्ज करता है उसे पढ़ता है, पूरी तरह डिवाइस पर और बिना इंटरनेट के।
-- **[VDBackup](https://github.com/VD171/VD-Backup)**: रूट के रूप में ऐप और डेटा का पूरा बैकअप और रिस्टोर, पूरी तरह WebUI से संचालित।
 - **[COPG-VD](https://github.com/VD171/COPG-VD)**: एक डिवाइस स्पूफर जो नए fingerprint को एक सुसंगत, एकरूप प्रोफ़ाइल में बदल देता है।
+- **[VDBackup](https://github.com/VD171/VD-Backup)**: रूट के रूप में ऐप और डेटा का पूरा बैकअप और रिस्टोर, पूरी तरह WebUI से संचालित।
+- **[VDLiveUpdate](https://github.com/VD171/VDLiveUpdate)**: KernelSU/APatch/Magisk मॉड्यूल में एम्बेडेड एक फ्लैशलेस, इंक्रीमेंटल सेल्फ-अपडेट इंजन।
+- **[VDInstaller](https://github.com/VD171/VD-Installer)**: एकल, बैच और स्प्लिट APK के लिए एक घर्षण-रहित रूट साइडलोड इंस्टॉलर, जिसमें Play Protect वेरिफायर टॉगल और इंस्टॉल-सोर्स स्पूफिंग शामिल है।
 
 ## संपर्क
 

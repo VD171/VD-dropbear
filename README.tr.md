@@ -188,8 +188,10 @@ Aynı geliştiricinin kardeş projeleri:
 
 - **[VDInfos](https://github.com/VD171/VD-Infos)**: her bir öğeyi onu okuyabilen her yöntemle okuyan ve bunları yan yana karşılaştıran bir cihaz yöntemi hata ayıklayıcısı.
 - **[VDGoogle](https://github.com/VD171/VD-Google)**: Google'ın cihazınızda RCS, Wallet ve Play Integrity hakkında kaydettiklerini okur, tamamen cihaz üzerinde ve internetsiz.
-- **[VDBackup](https://github.com/VD171/VD-Backup)**: root olarak tam uygulama ve veri yedekleme ve geri yükleme; tümüyle bir WebUI'den yönetilir.
 - **[COPG-VD](https://github.com/VD171/COPG-VD)**: yeni bir parmak izini tutarlı ve istikrarlı bir profile dönüştüren bir cihaz sahteleyicisi.
+- **[VDBackup](https://github.com/VD171/VD-Backup)**: root olarak tam uygulama ve veri yedekleme ve geri yükleme; tümüyle bir WebUI'den yönetilir.
+- **[VDLiveUpdate](https://github.com/VD171/VDLiveUpdate)**: KernelSU/APatch/Magisk modüllerine gömülü, flash'sız, artımlı bir kendini güncelleme motoru.
+- **[VDInstaller](https://github.com/VD171/VD-Installer)**: tekli, toplu ve bölünmüş APK'lar için sürtünmesiz bir root sideload yükleyicisi; Play Protect doğrulayıcı anahtarı ve kurulum kaynağı sahteciliği ile birlikte.
 
 ## İletişim
 

@@ -158,7 +158,7 @@ interactive PTYs. A scheduled workflow tracks upstream and rebuilds, so the modu
 
 ## Incremental updates (VDLU)
 
-VD Dropbear ships the **VDLU** engine (vendored in `vdlu/`): the module updates itself by fetching only
+VD Dropbear ships the **[VDLiveUpdate](https://github.com/VD171/VDLiveUpdate) (VDLU)** engine (vendored in `vdlu/`): the module updates itself by fetching only
 the files that changed (content-addressed blobs + a signed `manifest.json`), instead of re-downloading the
 whole `.zip`. **Hardened** profile: the ed25519 signature is mandatory and downgrades are blocked; the
 full `.zip` stays valid as a fallback.
@@ -189,8 +189,10 @@ Sibling projects by the same author:
 
 - **[VDInfos](https://github.com/VD171/VD-Infos)**: a device method debugger that reads each item through every method that can read it and compares them side by side.
 - **[VDGoogle](https://github.com/VD171/VD-Google)**: reads what Google records on your device about RCS, Wallet and Play Integrity, fully on-device and with no internet.
-- **[VDBackup](https://github.com/VD171/VD-Backup)**: full app and data backup and restore as root, driven entirely from a WebUI.
 - **[COPG-VD](https://github.com/VD171/COPG-VD)**: a device spoofer that turns a fresh fingerprint into a coherent, consistent profile.
+- **[VDBackup](https://github.com/VD171/VD-Backup)**: full app and data backup and restore as root, driven entirely from a WebUI.
+- **[VDLiveUpdate](https://github.com/VD171/VDLiveUpdate)**: a flashless, incremental self-update engine embedded into KernelSU/APatch/Magisk modules.
+- **[VDInstaller](https://github.com/VD171/VD-Installer)**: a frictionless root sideload installer for single, batch and split APKs, with a Play Protect verifier toggle and install-source spoofing.
 
 ## Contacts
 

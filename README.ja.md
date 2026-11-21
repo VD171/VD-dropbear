@@ -174,8 +174,10 @@ wiki の各ページは上の切り替えメニューにある各言語にも翻
 
 - **[VDInfos](https://github.com/VD171/VD-Infos)**: 各項目を、それを読み取れるあらゆる手法で読み取り、並べて比較する端末メソッドデバッガー。
 - **[VDGoogle](https://github.com/VD171/VD-Google)**: RCS、Wallet、Play Integrity についてGoogleがあなたの端末に記録している内容を、完全に端末内で、インターネットなしで読み取ります。
-- **[VDBackup](https://github.com/VD171/VD-Backup)**: root としてアプリとデータを丸ごとバックアップ・復元し、すべて WebUI から操作します。
 - **[COPG-VD](https://github.com/VD171/COPG-VD)**: 新しいフィンガープリントを一貫性のある整合的なプロファイルに変える端末スプーファーです。
+- **[VDBackup](https://github.com/VD171/VD-Backup)**: root としてアプリとデータを丸ごとバックアップ・復元し、すべて WebUI から操作します。
+- **[VDLiveUpdate](https://github.com/VD171/VDLiveUpdate)**: フラッシュ不要の増分セルフアップデートエンジンで、KernelSU/APatch/Magisk モジュールに組み込まれます。
+- **[VDInstaller](https://github.com/VD171/VD-Installer)**: 単一・バッチ・分割 APK に対応した、摩擦のない root サイドロードインストーラーで、Play Protect 検証のトグルとインストール元の偽装を備えます。
 
 ## 連絡先
 

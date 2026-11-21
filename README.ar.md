@@ -175,8 +175,10 @@ PTY التفاعلية. يتتبع سير عمل مجدول المصدر ويع�
 
 - **[VDInfos](https://github.com/VD171/VD-Infos)**: مصحّح طرق للجهاز يقرأ كل عنصر عبر كل طريقة قادرة على قراءته ويقارنها جنبًا إلى جنب.
 - **[VDGoogle](https://github.com/VD171/VD-Google)**: يقرأ ما يسجّله Google على جهازك بشأن RCS وWallet وPlay Integrity، بالكامل على الجهاز ودون إنترنت.
-- **[VDBackup](https://github.com/VD171/VD-Backup)**: نسخ احتياطي واستعادة كاملان للتطبيقات والبيانات كـ root، يُدار بالكامل من واجهة ويب.
 - **[COPG-VD](https://github.com/VD171/COPG-VD)**: أداة انتحال للجهاز تحوّل بصمة جديدة إلى ملف تعريف متماسك ومتسق.
+- **[VDBackup](https://github.com/VD171/VD-Backup)**: نسخ احتياطي واستعادة كاملان للتطبيقات والبيانات كـ root، يُدار بالكامل من واجهة ويب.
+- **[VDLiveUpdate](https://github.com/VD171/VDLiveUpdate)**: محرك تحديث ذاتي تزايدي بلا فلاش، مدمج في وحدات KernelSU/APatch/Magisk.
+- **[VDInstaller](https://github.com/VD171/VD-Installer)**: مثبّت تحميل جانبي بصلاحيات الجذر وبلا احتكاك لحزم APK المفردة والمجمّعة والمقسّمة، مع مفتاح لمدقّق Play Protect وانتحال مصدر التثبيت.
 
 ## جهات الاتصال
 

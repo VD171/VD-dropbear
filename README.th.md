@@ -177,8 +177,10 @@ SFTP และ rsync ผ่านเครือข่าย โดยไม่�
 
 - **[VDInfos](https://github.com/VD171/VD-Infos)**: ดีบักเกอร์เมธอดของอุปกรณ์ที่อ่านแต่ละรายการผ่านทุกเมธอดที่อ่านมันได้ แล้วนำมาเปรียบเทียบเคียงข้างกัน
 - **[VDGoogle](https://github.com/VD171/VD-Google)**: อ่านสิ่งที่ Google บันทึกไว้บนอุปกรณ์ของคุณเกี่ยวกับ RCS, Wallet และ Play Integrity ทั้งหมดบนอุปกรณ์และไม่ต้องใช้อินเทอร์เน็ต
-- **[VDBackup](https://github.com/VD171/VD-Backup)**: สำรองและกู้คืนแอปและข้อมูลแบบเต็มในฐานะ root ขับเคลื่อนทั้งหมดจาก WebUI
 - **[COPG-VD](https://github.com/VD171/COPG-VD)**: ตัวปลอมแปลงอุปกรณ์ที่เปลี่ยน fingerprint ใหม่ให้เป็นโปรไฟล์ที่สอดคล้องและสม่ำเสมอ
+- **[VDBackup](https://github.com/VD171/VD-Backup)**: สำรองและกู้คืนแอปและข้อมูลแบบเต็มในฐานะ root ขับเคลื่อนทั้งหมดจาก WebUI
+- **[VDLiveUpdate](https://github.com/VD171/VDLiveUpdate)**: เอนจินอัปเดตตัวเองแบบเพิ่มทีละส่วนโดยไม่ต้องแฟลช ฝังอยู่ในโมดูล KernelSU/APatch/Magisk
+- **[VDInstaller](https://github.com/VD171/VD-Installer)**: ตัวติดตั้งแบบ sideload ด้วยสิทธิ์ root ที่ไร้แรงเสียดทาน สำหรับ APK เดี่ยว แบบชุด และแบบแยก พร้อมสวิตช์ตัวตรวจสอบ Play Protect และการปลอมแหล่งที่มาของการติดตั้ง
 
 ## ติดต่อ
 

@@ -166,8 +166,10 @@ shell，并且可以：
 
 - **[VDInfos](https://github.com/VD171/VD-Infos)**：一个设备方法调试器，通过每一种能读取某一项的方法去读取它，并将结果并排对比。
 - **[VDGoogle](https://github.com/VD171/VD-Google)**：读取 Google 在你设备上记录的关于 RCS、Wallet 和 Play Integrity 的内容，完全在设备本地、无需联网。
-- **[VDBackup](https://github.com/VD171/VD-Backup)**：以 root 身份对应用和数据进行完整备份与恢复，全程由 WebUI 驱动。
 - **[COPG-VD](https://github.com/VD171/COPG-VD)**：一个设备伪装器，把全新的指纹转化为连贯一致的配置。
+- **[VDBackup](https://github.com/VD171/VD-Backup)**：以 root 身份对应用和数据进行完整备份与恢复，全程由 WebUI 驱动。
+- **[VDLiveUpdate](https://github.com/VD171/VDLiveUpdate)**: 一个无需刷入的增量自更新引擎，嵌入到 KernelSU/APatch/Magisk 模块中。
+- **[VDInstaller](https://github.com/VD171/VD-Installer)**: 一个面向单个、批量和拆分 APK 的无摩擦 root 侧载安装器，带有 Play Protect 验证器开关和安装来源伪装。
 
 ## 联系方式
 

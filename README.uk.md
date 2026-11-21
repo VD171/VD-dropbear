@@ -186,8 +186,10 @@ Android `openpty` для інтерактивних PTY. Заплановани�
 
 - **[VDInfos](https://github.com/VD171/VD-Infos)**: налагоджувач методів пристрою, який читає кожен елемент усіма способами, якими його можна прочитати, і порівнює результати пліч-о-пліч.
 - **[VDGoogle](https://github.com/VD171/VD-Google)**: читає те, що Google записує на вашому пристрої про RCS, Wallet і Play Integrity, повністю на пристрої та без інтернету.
-- **[VDBackup](https://github.com/VD171/VD-Backup)**: повне резервне копіювання та відновлення застосунків і даних із правами root, повністю кероване з WebUI.
 - **[COPG-VD](https://github.com/VD171/COPG-VD)**: спуфер пристрою, який перетворює свіжий fingerprint на узгоджений, несуперечливий профіль.
+- **[VDBackup](https://github.com/VD171/VD-Backup)**: повне резервне копіювання та відновлення застосунків і даних із правами root, повністю кероване з WebUI.
+- **[VDLiveUpdate](https://github.com/VD171/VDLiveUpdate)**: безфлешевий інкрементальний рушій самооновлення, вбудований у модулі KernelSU/APatch/Magisk.
+- **[VDInstaller](https://github.com/VD171/VD-Installer)**: безперешкодний root-інсталятор sideload для одиночних, пакетних і розділених APK, з перемикачем верифікатора Play Protect та підробкою джерела встановлення.
 
 ## Контакти
 

@@ -179,8 +179,10 @@ Zusterprojecten van dezelfde auteur:
 
 - **[VDInfos](https://github.com/VD171/VD-Infos)**: een debugger van toestelmethoden die elk item uitleest via elke methode die het kan lezen en ze naast elkaar vergelijkt.
 - **[VDGoogle](https://github.com/VD171/VD-Google)**: leest wat Google op je apparaat vastlegt over RCS, Wallet en Play Integrity, volledig op het apparaat en zonder internet.
-- **[VDBackup](https://github.com/VD171/VD-Backup)**: volledige back-up en herstel van apps en data als root, geheel aangestuurd vanuit een WebUI.
 - **[COPG-VD](https://github.com/VD171/COPG-VD)**: een apparaat-spoofer die een nieuwe fingerprint omzet in een samenhangend, consistent profiel.
+- **[VDBackup](https://github.com/VD171/VD-Backup)**: volledige back-up en herstel van apps en data als root, geheel aangestuurd vanuit een WebUI.
+- **[VDLiveUpdate](https://github.com/VD171/VDLiveUpdate)**: een flashloze, incrementele zelfupdate-engine, ingebed in KernelSU/APatch/Magisk-modules.
+- **[VDInstaller](https://github.com/VD171/VD-Installer)**: een wrijvingsloze root-sideload-installer voor losse, batch- en split-APK's, met een Play Protect-verifier-schakelaar en vervalsing van de installatiebron.
 
 ## Contacten
 
