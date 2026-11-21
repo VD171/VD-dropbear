@@ -38,7 +38,7 @@ VD Dropbear is een KernelSU / APatch / Magisk-module die precies één Dropbear 
 - `module/action.sh`: de **Action**-knop van de manager: de daemon (opnieuw) starten. Die leest nooit stdin en maakt de daemon los in zijn eigen sessie, zodat de manager niet blijft hangen.
 - `module/common/vddb-webui.sh` + `module/webroot/index.html`: de WebUI-backend en de pagina.
 - `patches/`: kleine, controleerbare patches die bij het bouwen op upstream Dropbear worden toegepast.
-- `scripts/build.sh`, `scripts/build-bundles.sh`, `.github/workflows/build.yml`: de build.
+- `scripts/build.sh`, `scripts/build-bundles.sh`, `.github/workflows/release.yml`: de build.
 
 ## Levenscyclus van de daemon (één instantie)
 

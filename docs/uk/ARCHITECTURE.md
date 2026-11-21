@@ -46,7 +46,7 @@ VD Dropbear є модулем KernelSU / APatch / Magisk, що запускає 
 - `module/common/vddb-webui.sh` + `module/webroot/index.html`: бекенд і сторінка WebUI.
 - `patches/`: невеликі, придатні для аудиту патчі, що застосовуються до upstream-версії Dropbear під
   час збирання.
-- `scripts/build.sh`, `scripts/build-bundles.sh`, `.github/workflows/build.yml`: збирання.
+- `scripts/build.sh`, `scripts/build-bundles.sh`, `.github/workflows/release.yml`: збирання.
 
 ## Життєвий цикл демона (єдиний екземпляр)
 

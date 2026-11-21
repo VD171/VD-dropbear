@@ -44,7 +44,7 @@ specific is runtime config or a secret.
   and detaches the daemon into its own session, so the manager does not hang.
 - `module/common/vddb-webui.sh` + `module/webroot/index.html`: the WebUI backend and page.
 - `patches/`: small, auditable patches applied to upstream Dropbear at build time.
-- `scripts/build.sh`, `scripts/build-bundles.sh`, `.github/workflows/build.yml`: the build.
+- `scripts/build.sh`, `scripts/build-bundles.sh`, `.github/workflows/release.yml`: the build.
 
 ## Daemon lifecycle (single instance)
 

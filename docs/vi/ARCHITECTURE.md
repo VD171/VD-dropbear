@@ -44,7 +44,7 @@ riêng biệt đều là cấu hình thời gian chạy hoặc một secret.
   stdin và tách daemon ra phiên riêng của nó, nên trình quản lý không bị treo.
 - `module/common/vddb-webui.sh` + `module/webroot/index.html`: backend và trang của WebUI.
 - `patches/`: các bản vá nhỏ, có thể kiểm tra, được áp dụng lên Dropbear upstream khi build.
-- `scripts/build.sh`, `scripts/build-bundles.sh`, `.github/workflows/build.yml`: quá trình build.
+- `scripts/build.sh`, `scripts/build-bundles.sh`, `.github/workflows/release.yml`: quá trình build.
 
 ## Vòng đời của daemon (một thực thể duy nhất)
 

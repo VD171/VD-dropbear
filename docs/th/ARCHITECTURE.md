@@ -44,7 +44,7 @@ VD Dropbear เป็นโมดูล KernelSU / APatch / Magisk ที่ร�
   และแยก daemon ออกไปเป็นเซสชันของตัวเอง ดังนั้นตัวจัดการจึงไม่ค้าง
 - `module/common/vddb-webui.sh` + `module/webroot/index.html`: แบ็กเอนด์และหน้าของ WebUI
 - `patches/`: แพตช์ขนาดเล็กที่ตรวจสอบได้ ซึ่งนำไปใช้กับ upstream Dropbear ขณะบิลด์
-- `scripts/build.sh`, `scripts/build-bundles.sh`, `.github/workflows/build.yml`: การบิลด์
+- `scripts/build.sh`, `scripts/build-bundles.sh`, `.github/workflows/release.yml`: การบิลด์
 
 ## วงจรชีวิตของ daemon (อินสแตนซ์เดียว)
 

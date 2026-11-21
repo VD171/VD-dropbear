@@ -34,6 +34,11 @@ ui_print "   public Internet. Configure it from the WebUI."
 ui_print "  **************************************************"
 ui_print " "
 
+# Flash-time integrity gate (STANDARDS 8): verify every shipped file against its
+# .sha256 companion and ABORT on a mismatch (a corrupted or truncated download),
+# before any install side-effect. Skips cleanly if the env has no `sha256sum -c`.
+. "$MODPATH/.vd/sha256-gate.sh"
+
 # Executable bits on the shipped binaries and scripts.
 set_perm_recursive "$MODPATH/bin" 0 0 0755 0755
 set_perm "$MODPATH/service.sh"            0 0 0755

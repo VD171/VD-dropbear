@@ -44,7 +44,7 @@ kodlanmamıştır; özgül olan her şey çalışma zamanı yapılandırması ve
   ve daemon'u kendi oturumuna ayırır, böylece yönetici takılmaz.
 - `module/common/vddb-webui.sh` + `module/webroot/index.html`: WebUI arka ucu ve sayfası.
 - `patches/`: derleme sırasında upstream Dropbear'a uygulanan küçük, denetlenebilir yamalar.
-- `scripts/build.sh`, `scripts/build-bundles.sh`, `.github/workflows/build.yml`: derleme.
+- `scripts/build.sh`, `scripts/build-bundles.sh`, `.github/workflows/release.yml`: derleme.
 
 ## Daemon yaşam döngüsü (tek örnek)
 

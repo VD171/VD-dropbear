@@ -45,7 +45,7 @@ tout ce qui est spécifique est de la configuration à l'exécution ou un secret
   stdin et détache le démon dans sa propre session, de sorte que le gestionnaire ne se fige pas.
 - `module/common/vddb-webui.sh` + `module/webroot/index.html` : le backend et la page de la WebUI.
 - `patches/` : de petits correctifs auditables appliqués à Dropbear upstream au moment de la compilation.
-- `scripts/build.sh`, `scripts/build-bundles.sh`, `.github/workflows/build.yml` : la compilation.
+- `scripts/build.sh`, `scripts/build-bundles.sh`, `.github/workflows/release.yml` : la compilation.
 
 ## Cycle de vie du démon (instance unique)
 

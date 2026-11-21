@@ -43,7 +43,7 @@ VD Dropbear هو وحدة KernelSU / APatch / Magisk تشغّل خادم Dropbea
   ويفصل الخادم الخفي إلى جلسته الخاصة، فلا يتجمّد المدير.
 - `module/common/vddb-webui.sh` + `module/webroot/index.html`: الواجهة الخلفية لـ WebUI وصفحتها.
 - `patches/`: تصحيحات صغيرة قابلة للتدقيق تُطبَّق على Dropbear الأصلي وقت البناء.
-- `scripts/build.sh` و`scripts/build-bundles.sh` و`.github/workflows/build.yml`: عملية البناء.
+- `scripts/build.sh` و`scripts/build-bundles.sh` و`.github/workflows/release.yml`: عملية البناء.
 
 ## دورة حياة الخادم الخفي (نسخة واحدة)
 

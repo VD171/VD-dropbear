@@ -110,6 +110,23 @@ if [ -f module/webroot/vdlu.js ]; then
     || info "node not found, skipped vdlu.js check"
 fi
 
+# 8. Every GitHub release must be authored by github-actions[bot], never a human
+#    (owner HARD rule, auditability: github_release_sempre_bot_author). Two ways it
+#    regresses: `draft: true` (then a human clicks "Publish" in the UI and the release
+#    is attributed to them) or a PAT on the release step (attributed to that user).
+#    The default GITHUB_TOKEN publishing a non-draft release authors it as the bot.
+echo "[8] release workflow = github-actions[bot]"
+rel_bad=0
+for wf in .github/workflows/*.yml .github/workflows/*.yaml; do
+  [ -f "$wf" ] || continue
+  grep -qE 'action-gh-release|gh release create' "$wf" || continue
+  grep -qE '^[[:space:]]*draft:[[:space:]]*true' "$wf" \
+    && { bad "draft: true in $(basename "$wf") (a UI publish attributes the release to a human)"; rel_bad=1; }
+  grep -iE '^[[:space:]]*token:' "$wf" | grep -ivE 'github\.token|secrets\.GITHUB_TOKEN' | grep -q . \
+    && { bad "custom release token in $(basename "$wf") (a PAT attributes the release to a user; use the default GITHUB_TOKEN)"; rel_bad=1; }
+done
+[ "$rel_bad" = 0 ] && ok "release workflow publishes direct as github-actions[bot] (no draft, no PAT)"
+
 echo
 [ "$fail" = 0 ] && { echo "PREFLIGHT: PASS - safe to release"; exit 0; } \
                 || { echo "PREFLIGHT: FAIL - fix the above before releasing"; exit 1; }

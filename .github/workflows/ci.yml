@@ -1,0 +1,91 @@
+# ======================================================================
+#  VD Dropbear  ::  standalone, configurable rooted SSH daemon
+#  A private SSH server for KernelSU/APatch/Magisk. No invasive ADB exposure.
+#  CI: cheap sanity on every push/PR (lint + JSON + preflight + zip smoke).
+#
+#  Copyright (C) 2026  VD171
+#  SPDX-License-Identifier: Apache-2.0
+#
+#  Licensed under the Apache License, Version 2.0; you may obtain a copy at
+#  http://www.apache.org/licenses/LICENSE-2.0
+#
+#  Site           : https://vd171.ru
+#  Site           : https://vd.priv8.ru
+#  Source         : https://github.com/VD171/VD-dropbear
+#  GitHub         : @VD171 https://github.com/VD171
+#  XDA-Developers : @VD171 https://xdaforums.com/m/vd171.4699873/
+#  XDA thread     : https://xdaforums.com/t/VD-Dropbear.4808524/
+#  Telegram       : @VD_Priv8 https://t.me/VD_Priv8
+#  Channel        : @Priv8_VD https://t.me/Priv8_VD
+#  Discord        : @VD.Priv8 https://discord.com/users/1296831918989639721
+#  E-mail         : vd.priv8@pm.me
+# ======================================================================
+#
+#  STANDARDS.md §7: canonical split - ci.yml (this, push/PR) + release.yml (tag -> publish).
+#  The real build/publish lives in release.yml; keep this cheap and build-free-ish.
+#  Third-party actions are pinned by commit SHA (STANDARDS §7.1, supply-chain safety).
+
+name: CI
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+
+      - name: Shell lint
+        run: |
+          sudo apt-get update && sudo apt-get install -y shellcheck
+          shellcheck -s sh module/*.sh module/common/*.sh module/vdlu/update.sh module/vdlu/vdlu-verify 2>/dev/null || true
+          shellcheck .github/scripts/*.sh scripts/*.sh 2>/dev/null || true
+
+      - name: Validate JSON
+        run: |
+          for f in module/update.json module/vdlu/baseline.json module/webroot/*.json module/webroot/lang/*.json; do
+            [ -e "$f" ] || continue
+            python3 -c "import json,sys; json.load(open('$f'))" && echo "ok $f"
+          done
+
+      # Kit guards (STANDARDS §8): vendor-parity (kit tools) + engine-parity (vendored VDLU engine
+      # vs the canonical VDLiveUpdate). Both need the reference repos checked out BESIDE this one
+      # (../VD-ModuleKit, ../VDLiveUpdate); they are separate repos, so in bare github CI these SKIP
+      # cleanly. They are the gate LOCALLY (run on every change) + release-workflow-lint runs here too.
+      - name: Kit + engine parity (skip if references absent)
+        run: |
+          vp=../VD-ModuleKit/tooling/vendor-parity.sh
+          ep=../VD-ModuleKit/tooling/engine-parity.sh
+          [ -f "$vp" ] && sh "$vp" . || echo "vendor-parity: VD-ModuleKit not beside repo (skip)"
+          [ -f "$ep" ] && sh "$ep" . || echo "engine-parity: VD-ModuleKit not beside repo (skip)"
+          sh .github/scripts/release-workflow-lint.sh . || exit 1
+
+      - name: Release preflight (version surfaces, baseline, links, shell parse, bot-author guard)
+        run: bash scripts/preflight.sh
+
+      - name: Zip smoke test (assemble + verify the flashable payload builds)
+        run: |
+          cp LICENSE NOTICE THIRD-PARTY-NOTICES.md module/
+          # Drop zip-excluded files before hashing so no orphan <file>.sha256 ships without its
+          # target (the flash-time gate aborts on a missing target). See release.yml for the detail.
+          rm -f module/vdlu/RELEASE.md
+          find module -name .gitkeep -delete
+          sh .github/scripts/gen-sha256.sh module
+          ver="$(sed -n 's/^version=//p' module/module.prop)"
+          ( cd module && zip -qr -X "../VD-dropbear-${ver}.zip" . -x '*/.gitkeep' -x 'vdlu/RELEASE.md' )
+          unzip -tq "VD-dropbear-${ver}.zip" && echo "zip ok"
+          echo "ver=${ver}" >> "$GITHUB_OUTPUT"
+        id: pack
+
+      # Keep the branch-build zip for quick download / CI validation (a tag build's canonical,
+      # directly-flashable zip is the Release in release.yml, not this artifact).
+      - uses: actions/upload-artifact@6f51ac03b9356f520e9adb1b1b7802705f340c2b # v4.5.0
+        with:
+          name: VD-dropbear-${{ steps.pack.outputs.ver }}
+          path: VD-dropbear-*.zip

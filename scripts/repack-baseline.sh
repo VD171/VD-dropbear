@@ -8,7 +8,7 @@
 #  the license notices were copied AFTER the mode normalization and shipped 0664,
 #  drifting the baseline from the CI zip. Here the notices are chmod'd 0644 after
 #  the copy and a guard fails the run if any group-writable file survives.
-#  Run on the PC with the private VDLiveUpdate producer repo + signing key.
+#  Run on the PC with the VDLiveUpdate producer repo + signing key.
 #
 #  Copyright (C) 2026  VD171
 #  SPDX-License-Identifier: Apache-2.0
@@ -44,7 +44,7 @@ while [ $# -gt 0 ]; do
 done
 
 for _t in "$PACK" "$SIGN" "$KEY"; do
-  [ -e "$_t" ] || { echo "repack: missing $_t (need the private VDLiveUpdate producer repo + key)" >&2; exit 2; }
+  [ -e "$_t" ] || { echo "repack: missing $_t (need the VDLiveUpdate producer repo + key)" >&2; exit 2; }
 done
 
 VER=$(sed -n 's/^version=//p'     module/module.prop)

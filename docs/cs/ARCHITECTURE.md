@@ -44,7 +44,7 @@ specifické je buď běhová konfigurace, nebo tajemství.
   a odpojí démona do vlastní relace, takže se správce nezasekne.
 - `module/common/vddb-webui.sh` + `module/webroot/index.html`: backend WebUI a jeho stránka.
 - `patches/`: malé, auditovatelné záplaty aplikované na upstreamový Dropbear při sestavení.
-- `scripts/build.sh`, `scripts/build-bundles.sh`, `.github/workflows/build.yml`: sestavení.
+- `scripts/build.sh`, `scripts/build-bundles.sh`, `.github/workflows/release.yml`: sestavení.
 
 ## Životní cyklus démona (jediná instance)
 

@@ -1,7 +1,7 @@
 # ======================================================================
 #  VD Dropbear  ::  standalone, configurable rooted SSH daemon
 #  A private SSH server for KernelSU/APatch/Magisk. No invasive ADB exposure.
-#  CI: assemble and publish the module from the committed tree.
+#  Release: a tag push publishes the module zip directly as github-actions[bot].
 #
 #  Copyright (C) 2026  VD171
 #  SPDX-License-Identifier: Apache-2.0
@@ -23,56 +23,66 @@
 #
 #  The SSH binaries are COMMITTED (module/bin/<abi>/, see module/bin/PROVENANCE.json),
 #  not built here: this keeps the release reproducible from the repo and lets the VDLU
-#  feed manifest hash the exact shipped bytes while the signing key stays off CI. To
-#  pick up a newer upstream Dropbear, rebuild locally with scripts/build.sh +
-#  scripts/build-bundles.sh and commit the result.
+#  feed manifest hash the exact shipped bytes while the signing key stays off CI. To pick
+#  up a newer upstream Dropbear, rebuild locally (scripts/build.sh + build-bundles.sh).
+#
+#  RELEASE MODEL (why a tag, not workflow_dispatch): the VDLU baseline (module/vdlu/baseline.json)
+#  is re-packed AND signed with a key kept OFF CI, so the bump+repack+sign is a LOCAL ritual
+#  (scripts/repack-baseline.sh). The human's release decision IS the tag push; CI only packages
+#  the already-signed tree and publishes. STANDARDS §7.1: the CI publishes DIRECTLY (author =
+#  github-actions[bot]); NEVER draft:true + manual UI "Publish" (that attributes it to a human).
+#  Third-party actions pinned by commit SHA (supply-chain safety).
 
-name: build
+name: Release
 
 on:
   push:
-    branches: [main, master]
-    tags: ['v*']   # a tag push publishes the release (see the release job)
-  workflow_dispatch:
+    tags: ['v*']
 
 permissions:
   contents: write
 
 jobs:
-  build:
+  release:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+
+      - name: Lint release workflow (no draft-publish anti-pattern)
+        run: sh .github/scripts/release-workflow-lint.sh .
+
       - name: Verify committed binaries against provenance
         run: |
           # The committed SSH tools must match module/bin/PROVENANCE.json byte for byte.
           if [ -d module/bin ]; then
             python3 -c "import json,hashlib,sys; d=json.load(open('module/bin/PROVENANCE.json')); bad=[f'module/bin/{a}/{b}' for b,m in d['binaries'].items() for a,i in m['abi'].items() if hashlib.sha256(open(f'module/bin/{a}/{b}','rb').read()).hexdigest()!=i['sha256']]; sys.exit('provenance MISMATCH: '+', '.join(bad)) if bad else print('provenance OK')"
           fi
+
       - name: Assemble module zip
         id: pack
         run: |
           # Ship the notices inside the flashable module (the zip is module/ only),
           # so the GPL-3.0 rsync binary travels with its license texts in module/licenses/.
           cp LICENSE NOTICE THIRD-PARTY-NOTICES.md module/
+          # Drop files excluded from the zip BEFORE hashing: otherwise gen-sha256 writes a
+          # companion for a file the zip omits, and that orphan <file>.sha256 ships without its
+          # target - the flash-time gate runs `sha256sum -c` on every .sha256 and aborts the flash
+          # on the missing target. Remove them first so every shipped .sha256 has its file.
+          rm -f module/vdlu/RELEASE.md
+          find module -name .gitkeep -delete
+          # Per-file .sha256 companions in the flashable payload (STANDARDS 8). Generated here,
+          # after the final tree is assembled and BEFORE zipping, so each matches what ships.
+          # vdlu-pack excludes *.sha256, so they ride only in the zip, never in the VDLU manifest.
+          sh .github/scripts/gen-sha256.sh module
           ver="$(sed -n 's/^version=//p' module/module.prop)"
           ( cd module && zip -r -X "../VD-dropbear-${ver}.zip" . -x '*/.gitkeep' -x 'vdlu/RELEASE.md' )
           sha256sum VD-dropbear-*.zip
           echo "ver=${ver}" >> "$GITHUB_OUTPUT"
-      # Keep the run artifact for branch builds (CI validation / quick download).
-      # On a tag build the Release below is the canonical, directly-flashable zip,
-      # so skip the artifact there: a GitHub artifact is wrapped in an extra zip
-      # layer and is not flashable as-is, which only confuses the download.
-      - uses: actions/upload-artifact@v4
-        if: ${{ !startsWith(github.ref, 'refs/tags/') }}
-        with:
-          name: VD-dropbear-${{ steps.pack.outputs.ver }}
-          path: VD-dropbear-*.zip
-      - name: Write release notes (tags only)
-        # House rules (do NOT change without the owner): the body ends with the
-        # canonical @Priv8_VD banner VERBATIM, carries a per-file sha256 block, and
-        # NEVER includes a "Generated with Claude" footer (that is for docs/wiki only).
-        if: startsWith(github.ref, 'refs/tags/')
+
+      - name: Write release notes
+        # House rules (do NOT change without the owner): the body ends with the canonical
+        # @Priv8_VD banner VERBATIM, carries a per-file sha256 block, and NEVER includes a
+        # "Generated with Claude" footer (that is for docs/wiki only).
         run: |
           ver="${{ steps.pack.outputs.ver }}"
           zip="VD-dropbear-${ver}.zip"
@@ -100,9 +110,21 @@ jobs:
             echo "---"
             echo "📣 **Join the channel for updates:** @Priv8_VD https://t.me/Priv8_VD"
           } > RELEASE-BODY.md
-      - name: Publish release (tags only)
-        if: startsWith(github.ref, 'refs/tags/')
-        uses: softprops/action-gh-release@v2
+
+      - name: Publish release
+        uses: softprops/action-gh-release@e7a8f85e1c67a31e6ed99a94b41bd0b71bbee6b8 # v2.0.9
         with:
           files: VD-dropbear-*.zip
           body_path: RELEASE-BODY.md
+
+      - name: Assert release author is github-actions[bot]
+        # Authoritative check (owner HARD rule, github_release_sempre_bot_author): verify the REAL
+        # author of the just-published release is the bot, never a human. Catches any cause (draft,
+        # PAT, manual), not just a YAML pattern. github.token => bot; read-only gh is never blocked.
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          ver="${{ steps.pack.outputs.ver }}"
+          author="$(gh release view "$ver" --json author -q '.author.login')"
+          [ "$author" = "github-actions[bot]" ] \
+            || { echo "::error::release $ver authored by $author, not github-actions[bot]"; exit 1; }

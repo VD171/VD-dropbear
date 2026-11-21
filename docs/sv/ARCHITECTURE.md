@@ -44,7 +44,7 @@ körtidskonfiguration eller en hemlighet.
   kopplar loss daemonen till sin egen session, så hanteraren hänger sig inte.
 - `module/common/vddb-webui.sh` + `module/webroot/index.html`: WebUI:ns backend och sida.
 - `patches/`: små, granskningsbara patchar som appliceras på upstream Dropbear vid byggtid.
-- `scripts/build.sh`, `scripts/build-bundles.sh`, `.github/workflows/build.yml`: bygget.
+- `scripts/build.sh`, `scripts/build-bundles.sh`, `.github/workflows/release.yml`: bygget.
 
 ## Daemonens livscykel (en instans)
 

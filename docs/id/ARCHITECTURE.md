@@ -44,7 +44,7 @@ satu perangkat; semua yang spesifik berupa konfigurasi runtime atau sebuah secre
   membaca stdin dan melepaskan daemon ke sesinya sendiri, sehingga manajer tidak menggantung.
 - `module/common/vddb-webui.sh` + `module/webroot/index.html`: backend dan halaman WebUI.
 - `patches/`: patch kecil yang dapat diaudit, diterapkan ke Dropbear upstream saat build.
-- `scripts/build.sh`, `scripts/build-bundles.sh`, `.github/workflows/build.yml`: proses build.
+- `scripts/build.sh`, `scripts/build-bundles.sh`, `.github/workflows/release.yml`: proses build.
 
 ## Siklus hidup daemon (instance tunggal)
 

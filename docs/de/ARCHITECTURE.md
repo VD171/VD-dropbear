@@ -46,7 +46,7 @@ verdrahtet; alles Spezifische ist Laufzeitkonfiguration oder ein Geheimnis.
   nie stdin und löst den Daemon in eine eigene Sitzung ab, sodass der Manager nicht hängen bleibt.
 - `module/common/vddb-webui.sh` + `module/webroot/index.html`: das WebUI-Backend und die Seite.
 - `patches/`: kleine, prüfbare Patches, die zur Buildzeit auf das Upstream-Dropbear angewendet werden.
-- `scripts/build.sh`, `scripts/build-bundles.sh`, `.github/workflows/build.yml`: der Build.
+- `scripts/build.sh`, `scripts/build-bundles.sh`, `.github/workflows/release.yml`: der Build.
 
 ## Daemon-Lebenszyklus (eine einzige Instanz)
 

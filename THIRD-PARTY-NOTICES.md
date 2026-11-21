@@ -37,7 +37,7 @@ listed here; the full license texts ship alongside the binaries (in `module/lice
 | **sftp-server**, **scp** | file transfer (OpenSSH) | BSD-style | <https://github.com/openssh/openssh-portable> |
 | zlib | compression, used by the OpenSSH tools | zlib license | <https://github.com/madler/zlib> |
 | **rsync** | file sync over SSH | **GPL-3.0-or-later** | <https://github.com/RsyncProject/rsync> |
-| `ed25519-mini` | signature verify for the VDLU updater | public domain (TweetNaCl) | <https://tweetnacl.cr.yp.to/> (provenance: `module/vdlu/verify/PROVENANCE.json`) |
+| `ed25519-mini` | signature verify for the [VDLiveUpdate](https://github.com/VD171/VDLiveUpdate) (VDLU) updater | public domain (TweetNaCl) | <https://tweetnacl.cr.yp.to/> (provenance: `module/vdlu/verify/PROVENANCE.json`) |
 
 ## GPL compliance (rsync)
 

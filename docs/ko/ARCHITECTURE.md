@@ -38,7 +38,7 @@ VD Dropbear는 정확히 하나의 Dropbear SSH 데몬을 실행하는 KernelSU 
 - `module/action.sh`: 매니저의 **Action** 버튼: 데몬을 (재)실행합니다. stdin을 전혀 읽지 않고 데몬을 자신의 세션으로 분리하므로 매니저가 멈추지 않습니다.
 - `module/common/vddb-webui.sh` + `module/webroot/index.html`: WebUI 백엔드와 페이지.
 - `patches/`: 빌드 시점에 upstream Dropbear에 적용되는, 작고 감사 가능한 패치.
-- `scripts/build.sh`, `scripts/build-bundles.sh`, `.github/workflows/build.yml`: 빌드.
+- `scripts/build.sh`, `scripts/build-bundles.sh`, `.github/workflows/release.yml`: 빌드.
 
 ## 데몬 수명 주기(단일 인스턴스)
 

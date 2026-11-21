@@ -44,7 +44,7 @@ jedno urządzenie; wszystko, co specyficzne, to konfiguracja uruchomieniowa lub 
   stdin i odłącza demona do jego własnej sesji, więc menedżer się nie zawiesza.
 - `module/common/vddb-webui.sh` + `module/webroot/index.html`: backend i strona WebUI.
 - `patches/`: małe, audytowalne łatki nakładane na oryginalny Dropbear w czasie budowania.
-- `scripts/build.sh`, `scripts/build-bundles.sh`, `.github/workflows/build.yml`: proces budowania.
+- `scripts/build.sh`, `scripts/build-bundles.sh`, `.github/workflows/release.yml`: proces budowania.
 
 ## Cykl życia demona (pojedyncza instancja)
 

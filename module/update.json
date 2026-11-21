@@ -1,6 +1,9 @@
 {
-  "version": "v1.09",
-  "versionCode": 10009,
-  "zipUrl": "https://github.com/VD171/VD-dropbear/releases/download/v1.09/VD-dropbear-v1.09.zip",
-  "changelog": "https://raw.githubusercontent.com/VD171/VD-dropbear/master/CHANGELOG.md"
+  "version": "v1.10",
+  "versionCode": 10010,
+  "zipUrl": "https://github.com/VD171/VD-dropbear/releases/download/v1.10/VD-dropbear-v1.10.zip",
+  "changelog": "https://raw.githubusercontent.com/VD171/VD-dropbear/master/CHANGELOG.md",
+  "notes": "",
+  "size": 0,
+  "sha256": ""
 }

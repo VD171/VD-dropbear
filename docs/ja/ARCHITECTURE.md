@@ -38,7 +38,7 @@ VD Dropbearは、ちょうど1つのDropbear SSHデーモンを実行するKerne
 - `module/action.sh`：マネージャの **Action** ボタン。デーモンを（再）起動します。stdinを一切読まず、デーモンを自身のセッションへ切り離すため、マネージャがハングしません。
 - `module/common/vddb-webui.sh` + `module/webroot/index.html`：WebUIのバックエンドとページ。
 - `patches/`：ビルド時にupstreamのDropbearへ適用される、小さく監査可能なパッチ。
-- `scripts/build.sh`、`scripts/build-bundles.sh`、`.github/workflows/build.yml`：ビルド。
+- `scripts/build.sh`、`scripts/build-bundles.sh`、`.github/workflows/release.yml`：ビルド。
 
 ## デーモンのライフサイクル（単一インスタンス）
 

@@ -44,7 +44,7 @@ VD Dropbear یک ماژول KernelSU / APatch / Magisk است که دقیقاً 
   دیمون را به نشست خودش جدا می‌کند، بنابراین مدیر معلق نمی‌ماند.
 - `module/common/vddb-webui.sh` + `module/webroot/index.html`: بک‌اند و صفحهٔ WebUI.
 - `patches/`: وصله‌های کوچک و قابل‌ممیزی که در زمان ساخت روی Dropbear upstream اعمال می‌شوند.
-- `scripts/build.sh`، `scripts/build-bundles.sh`، `.github/workflows/build.yml`: ساخت.
+- `scripts/build.sh`، `scripts/build-bundles.sh`، `.github/workflows/release.yml`: ساخت.
 
 ## چرخهٔ عمر دیمون (نمونهٔ واحد)
 

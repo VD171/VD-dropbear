@@ -54,6 +54,9 @@ TODO.local*
 *.so
 *.zip
 *.tar.*
+# Per-file .sha256 companions (STANDARDS 8): generated at build before zipping,
+# ride only in the flashable zip, never committed (vdlu-pack excludes them too).
+*.sha256
 
 # --- Product binaries: COMMITTED (not CI-built at release) ---
 # The SSH tools are vendored into the repo so the VDLU feed manifest hashes the

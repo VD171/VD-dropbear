@@ -29,6 +29,28 @@ All notable, real and significant changes to **VD Dropbear** are recorded here.
 The format follows [Keep a Changelog](https://keepachangelog.com/); versions are tagged in the
 module (`module.prop`) and on GitHub Releases.
 
+## [v1.10] (2026-11-19)
+
+### Added
+- **Flash-time integrity gate.** Every shipped file now carries a per-file `.sha256` companion, and the
+  installer verifies them and aborts the flash on any mismatch (a corrupted or truncated download). It skips
+  cleanly when the flash environment has no `sha256sum -c`, so a legitimate install is never blocked.
+- **Light and dark theme for the WebUI.** It follows the device theme by default and a header toggle cycles
+  System / Dark / Light, remembered across visits.
+- **Accessibility pass on the WebUI:** the tabs are a proper ARIA tablist with arrow-key navigation, the
+  setting switches have names, status toasts are announced, and there is a visible keyboard focus ring.
+
+### Fixed
+- **Saving settings from the WebUI no longer silently drops the last field.** Choosing a non-default host-key
+  type (or any setting that happens to be last in the form) is now written to the config instead of reverting
+  on the next load.
+- The WebUI now reports a real error if writing a key or password fails (it no longer shows success on a failed
+  save), and the ksu.exec command boundary is hardened with explicit argument quoting.
+
+### Changed
+- Updated the flashless updater engine. It now builds a CA bundle from the device trust store, so update
+  checks verify over HTTPS even on devices without a system CA store, plus hardened manifest handling.
+
 ## [v1.09] (2026-11-17)
 
 ### Security

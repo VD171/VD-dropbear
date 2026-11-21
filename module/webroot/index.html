@@ -23,7 +23,7 @@
    E-mail         : vd.priv8@pm.me
   ======================================================================
 -->
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -33,7 +33,34 @@
     --bg:#0b0e14; --bg2:#121722; --card:#161c28; --line:#242c3a;
     --fg:#e8ecf3; --muted:#9aa4b2; --green:#36e86a; --green2:#17c74a;
     --red:#ff5c6c; --amber:#f2b134; --silver:#d7dce3;
+    --hover:#39465a; --track:#2a3444; --thumb:#cfd6e0; --meterbg:#2a3444;
+    --toastbg:#0f141d; --toastfg:#e8ecf3;
+    --warnbg:rgba(255,92,108,.08); --warnline:rgba(255,92,108,.35); --warnfg:#ffd4d9;
+    /* VDLU widget tokens (host-provided; the shared vdlu.css consumes these via var()) */
+    --surface:#181d24; --surface2:#1f252e; --border:#2a3240; --fg2:#94a3b8; --fg3:#64748b; --blue:#3b82f6; --orange:#f59e0b;
     --radius:14px;
+  }
+  /* Dark is the default (:root). Light auto-follows the device theme (data-theme="auto")
+     and is also selectable (data-theme="light"); the header toggle cycles the three. STANDARDS 9. */
+  :root[data-theme="light"]{
+    --bg:#f4f6fa; --bg2:#eaeef4; --card:#ffffff; --line:#d5dbe4;
+    --fg:#1a2130; --muted:#5b6575; --green:#0f9d58; --green2:#0c8a4b;
+    --red:#d32f3f; --amber:#8a5d00; --silver:#3a4150;
+    --hover:#b8c0cc; --track:#c4ccd6; --thumb:#ffffff; --meterbg:#d5dbe4;
+    --toastbg:#2a3242; --toastfg:#f4f6fa;
+    --warnbg:#fdecee; --warnline:#f3b6bd; --warnfg:#8a1f2b;
+    --surface:#ffffff; --surface2:#eef1f6; --border:#d5dbe4; --fg2:#5b6575; --fg3:#8a93a3; --blue:#2563eb; --orange:#b5790a;
+  }
+  @media (prefers-color-scheme: light){
+    :root[data-theme="auto"]{
+      --bg:#f4f6fa; --bg2:#eaeef4; --card:#ffffff; --line:#d5dbe4;
+      --fg:#1a2130; --muted:#5b6575; --green:#0f9d58; --green2:#0c8a4b;
+      --red:#d32f3f; --amber:#8a5d00; --silver:#3a4150;
+      --hover:#b8c0cc; --track:#c4ccd6; --thumb:#ffffff; --meterbg:#d5dbe4;
+      --toastbg:#2a3242; --toastfg:#f4f6fa;
+      --warnbg:#fdecee; --warnline:#f3b6bd; --warnfg:#8a1f2b;
+    --surface:#ffffff; --surface2:#eef1f6; --border:#d5dbe4; --fg2:#5b6575; --fg3:#8a93a3; --blue:#2563eb; --orange:#b5790a;
+    }
   }
   *{box-sizing:border-box}
   html,body{margin:0}
@@ -55,7 +82,7 @@
     padding:16px;margin:12px 0}
   .card h2{font-size:13px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);
     margin:0 0 12px}
-  .warn{background:rgba(255,92,108,.08);border:1px solid rgba(255,92,108,.35);color:#ffd4d9;
+  .warn{background:var(--warnbg);border:1px solid var(--warnline);color:var(--warnfg);
     border-radius:var(--radius);padding:12px 14px;margin:12px 0;font-size:13.5px}
   .warn b{color:var(--red)}
   .status-row{display:flex;align-items:center;gap:10px;margin-bottom:12px}
@@ -70,7 +97,7 @@
   .btns{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
   button{font:inherit;cursor:pointer;border:1px solid var(--line);background:var(--bg2);
     color:var(--fg);border-radius:10px;padding:9px 14px;transition:.15s}
-  button:hover{border-color:#39465a}
+  button:hover{border-color:var(--hover)}
   button:disabled{opacity:.5;cursor:not-allowed}
   button.primary{background:linear-gradient(180deg,var(--green),var(--green2));color:#06240f;
     border-color:transparent;font-weight:700}
@@ -90,9 +117,10 @@
   .toggle .help{color:var(--muted);font-size:12px;margin-top:2px}
   .sw{position:relative;width:46px;height:26px;flex:0 0 auto}
   .sw input{opacity:0;width:0;height:0;position:absolute}
-  .sw .track{position:absolute;inset:0;background:#2a3444;border-radius:999px;transition:.15s}
+  .sw .track{position:absolute;inset:0;background:var(--track);border-radius:999px;transition:.15s}
   .sw .track::before{content:"";position:absolute;width:20px;height:20px;left:3px;top:3px;
-    background:#cfd6e0;border-radius:50%;transition:.15s}
+    background:var(--thumb);border-radius:50%;transition:.15s}
+  .sw input:focus-visible + .track{outline:2px solid var(--green);outline-offset:2px}
   .sw input:checked + .track{background:var(--green2)}
   .sw input:checked + .track::before{transform:translateX(20px);background:#eafff0}
   .row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
@@ -103,11 +131,11 @@
   .list .mono{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12px;color:var(--silver);
     word-break:break-all;flex:1}
   .empty{color:var(--muted);font-size:13px;padding:8px 0}
-  .meter{height:6px;border-radius:999px;background:#2a3444;overflow:hidden;margin:6px 0 2px}
+  .meter{height:6px;border-radius:999px;background:var(--meterbg);overflow:hidden;margin:6px 0 2px}
   .meter i{display:block;height:100%;width:0;transition:.2s}
   .mhint{font-size:12px;color:var(--muted)}
-  .toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);background:#0f141d;
-    border:1px solid var(--line);color:var(--fg);padding:10px 16px;border-radius:10px;
+  .toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);background:var(--toastbg);
+    border:1px solid var(--line);color:var(--toastfg);padding:10px 16px;border-radius:10px;
     font-size:13.5px;opacity:0;pointer-events:none;transition:.2s;max-width:90%;z-index:9}
   .toast.show{opacity:1}
   .toast.err{border-color:rgba(255,92,108,.5)}
@@ -124,8 +152,18 @@
   .tabpanel{display:none;margin-top:12px}
   .tabpanel.active{display:block;animation:fade .18s ease}
   @keyframes fade{from{opacity:0;transform:translateY(3px)}to{opacity:1;transform:none}}
+  /* a11y: a visible keyboard-focus ring everywhere (pointer taps stay ring-free via :focus-visible). */
+  button:focus-visible,a:focus-visible,select:focus-visible,[role=tab]:focus-visible{outline:2px solid var(--green);outline-offset:2px}
+  .icon-btn{background:transparent;border:1px solid var(--line);color:var(--muted);width:34px;height:34px;
+    padding:0;border-radius:9px;font-size:15px;line-height:1;display:inline-flex;align-items:center;justify-content:center}
+  .icon-btn:hover{color:var(--fg);border-color:var(--hover)}
+  @media (prefers-reduced-motion: reduce){*{animation:none!important;transition:none!important}}
 </style>
 <link rel="stylesheet" href="vdlu.css">
+<script>
+/* no-flash theme: apply the saved preference (auto|dark|light) before first paint */
+(function(){try{var t=localStorage.getItem("vddb-theme")||"auto";document.documentElement.setAttribute("data-theme",t);}catch(e){}})();
+</script>
 </head>
 <body>
 <h1>VD Dropbear</h1>
@@ -133,6 +171,7 @@
   <img src="assets/logo-icon.svg" alt="" width="40" height="40">
   <div class="brand"><b>VD <span>Dropbear</span></b><small id="verLine">rooted SSH daemon</small></div>
   <span class="pill" id="abiPill">-</span>
+  <button class="icon-btn" id="themeBtn" type="button" aria-label="Theme (system / dark / light)" title="Theme">&#9789;</button>
 </header>
 
 <div class="warn">
@@ -141,19 +180,19 @@
   the open internet without a reason.
 </div>
 
-<nav class="tabs" id="tabs">
-  <button class="active" data-tab="status">Status</button>
-  <button data-tab="settings">Settings</button>
-  <button data-tab="keys">Keys</button>
-  <button data-tab="pw">Passwords</button>
-  <button data-tab="updates">Updates</button>
+<nav class="tabs" id="tabs" role="tablist" aria-label="Sections">
+  <button class="active" role="tab" id="tabbtn-status"   aria-controls="tab-status"   aria-selected="true"              data-tab="status">Status</button>
+  <button              role="tab" id="tabbtn-settings" aria-controls="tab-settings" aria-selected="false" tabindex="-1" data-tab="settings">Settings</button>
+  <button              role="tab" id="tabbtn-keys"     aria-controls="tab-keys"     aria-selected="false" tabindex="-1" data-tab="keys">Keys</button>
+  <button              role="tab" id="tabbtn-pw"       aria-controls="tab-pw"       aria-selected="false" tabindex="-1" data-tab="pw">Passwords</button>
+  <button              role="tab" id="tabbtn-updates"  aria-controls="tab-updates"  aria-selected="false" tabindex="-1" data-tab="updates">Updates</button>
 </nav>
 
 <!-- STATUS -->
-<section class="card tabpanel active" id="tab-status">
+<section class="card tabpanel active" id="tab-status" role="tabpanel" aria-labelledby="tabbtn-status" tabindex="0">
   <h2>Status</h2>
   <div class="status-row">
-    <span class="dot" id="dot"></span>
+    <span class="dot" id="dot" aria-hidden="true"></span>
     <span class="s-main" id="sMain">checking…</span>
   </div>
   <div class="grid">
@@ -174,7 +213,7 @@
 </section>
 
 <!-- SETTINGS -->
-<section class="card tabpanel" id="tab-settings">
+<section class="card tabpanel" id="tab-settings" role="tabpanel" aria-labelledby="tabbtn-settings" tabindex="0">
   <h2>Settings</h2>
   <div class="sub">Changes are saved to the config; press <b>Save &amp; restart</b> to apply.</div>
   <div id="toggles"></div>
@@ -186,7 +225,7 @@
 </section>
 
 <!-- KEYS -->
-<section class="card tabpanel" id="tab-keys">
+<section class="card tabpanel" id="tab-keys" role="tabpanel" aria-labelledby="tabbtn-keys" tabindex="0">
   <h2>Authorized keys</h2>
   <ul class="list" id="keyList"><li class="empty">loading…</li></ul>
   <label class="field" style="margin-top:12px">
@@ -197,7 +236,7 @@
 </section>
 
 <!-- PASSWORDS -->
-<section class="card tabpanel" id="tab-pw">
+<section class="card tabpanel" id="tab-pw" role="tabpanel" aria-labelledby="tabbtn-pw" tabindex="0">
   <h2>Password accounts</h2>
   <div class="sub">A password login is a login for the account you pick (<b>root</b> by default). Hashes use PBKDF2-HMAC-SHA256,
     computed in this page; the password itself never leaves it.</div>
@@ -212,13 +251,13 @@
     <input type="password" id="pwPass" autocomplete="new-password"></label>
   <label class="field"><span class="lab">Confirm</span>
     <input type="password" id="pwPass2" autocomplete="new-password"></label>
-  <div class="meter"><i id="pwBar"></i></div>
+  <div class="meter" role="progressbar" aria-label="Password strength" aria-valuemin="0" aria-valuemax="5" aria-valuenow="0" id="pwMeter"><i id="pwBar"></i></div>
   <div class="mhint" id="pwHint">Use at least 12 characters.</div>
   <div class="btns"><button class="primary" id="btnSetPw" disabled>Set password</button></div>
 </section>
 
 <!-- UPDATES (VDLU) -->
-<section class="card tabpanel" id="tab-updates">
+<section class="card tabpanel" id="tab-updates" role="tabpanel" aria-labelledby="tabbtn-updates" tabindex="0">
   <h2>Updates</h2>
   <div class="sub">Flashless incremental updates: fetch only what changed, verified and applied without reflashing the whole zip.</div>
   <div id="vdlu-updates"></div>
@@ -231,7 +270,7 @@
   generated with Claude
 </footer>
 
-<div class="toast" id="toast"></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <script src="vdlu.js"></script>
 <script>
@@ -254,15 +293,19 @@ function exec(cmd, opts = {}) {
     catch (e) { reject(e); }
   });
 }
+// shell single-quote: the quoting, not a charset assumption, protects the ksu.exec string
+const shq = s => "'" + String(s).replace(/'/g, "'\\''") + "'";
+// a non-zero exit with no "err..."-prefixed stdout (backend died before printing) is
+// surfaced as an error string, so callers that check startsWith("err") see the failure
+function apiErr(r){ return (r.errno && !(r.stdout || "").trim().startsWith("err"))
+  ? "err: command failed (exit " + r.errno + (r.stderr ? ": " + r.stderr.trim() : "") + ")" : r.stdout; }
 async function api(verb, arg) {
-  const cmd = "sh " + SH + " " + verb + (arg ? " " + arg : "");
-  const r = await exec(cmd);
-  return r.stdout;
+  const cmd = "sh " + SH + " " + verb + (arg ? " " + shq(arg) : "");
+  return apiErr(await exec(cmd));
 }
 async function apiIn(verb, b64, arg) {
-  const cmd = "printf %s '" + b64 + "' | sh " + SH + " " + verb + (arg ? " " + arg : "");
-  const r = await exec(cmd);
-  return r.stdout;
+  const cmd = "printf %s '" + b64 + "' | sh " + SH + " " + verb + (arg ? " " + shq(arg) : "");
+  return apiErr(await exec(cmd));
 }
 
 /* ---- helpers ---- */
@@ -271,7 +314,7 @@ const enc = new TextEncoder(), dec = new TextDecoder();
 function b64enc(str){ const u=enc.encode(str); let s=""; u.forEach(b=>s+=String.fromCharCode(b)); return btoa(s); }
 function b64dec(b64){ const s=atob(b64); const u=new Uint8Array(s.length); for(let i=0;i<s.length;i++)u[i]=s.charCodeAt(i); return dec.decode(u); }
 function toast(msg, err){ const t=$("#toast"); t.textContent=msg; t.className="toast show"+(err?" err":""); setTimeout(()=>t.className="toast",2200); }
-function esc(s){ return (s||"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c])); }
+function esc(s){ return (s||"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c])); }
 function hex(u8){ return Array.from(u8).map(b=>b.toString(16).padStart(2,"0")).join(""); }
 
 /* ---- config schema ---- */
@@ -309,7 +352,7 @@ let CFG = {};
 function renderForm(){
   $("#toggles").innerHTML = TOGGLES.map(([k,lab,help])=>`
     <div class="toggle"><div><div class="tl">${esc(lab)}</div>${help?`<div class="help">${esc(help)}</div>`:""}</div>
-      <label class="sw"><input type="checkbox" data-k="${k}" ${CFG[k]==="1"?"checked":""}><span class="track"></span></label>
+      <label class="sw"><input type="checkbox" role="switch" aria-label="${esc(lab)}" data-k="${k}" ${CFG[k]==="1"?"checked":""}><span class="track"></span></label>
     </div>`).join("");
   $("#fields").innerHTML = FIELDS.map(f=>{
     const [k,lab,type,extra]=f; const v=esc(CFG[k]||"");
@@ -370,9 +413,9 @@ async function loadKeys(){
   if(!rows.length){ ul.innerHTML='<li class="empty">No keys yet.</li>'; return; }
   ul.innerHTML=rows.map(r=>{ const t=r.split("\t"); const idx=t[0]; const key=b64dec(t[1]);
     const label=key.length>54?key.slice(0,28)+"…"+key.slice(-16):key;
-    return `<li><span class="mono">${esc(label)}</span><button class="danger ghost" data-del="${idx}">Remove</button></li>`;
+    return `<li><span class="mono">${esc(label)}</span><button class="danger ghost" data-del="${esc(idx)}">Remove</button></li>`;
   }).join("");
-  ul.querySelectorAll("[data-del]").forEach(b=>b.onclick=async()=>{ await api("del-key",b.dataset.del); toast("Key removed"); loadKeys(); });
+  ul.querySelectorAll("[data-del]").forEach(b=>b.onclick=async()=>{ const o=await api("del-key",b.dataset.del); if(o.trim().startsWith("err")){ toast(o.trim(),true); return; } toast("Key removed"); loadKeys(); });
 }
 async function addKey(){
   const v=$("#newKey").value.trim(); if(!v){ toast("Paste a public key",true); return; }
@@ -389,7 +432,7 @@ async function loadPw(){
   ul.innerHTML=rows.map(r=>{ const u=b64dec(r);
     return `<li><span class="mono">${esc(u)}</span><button class="danger ghost" data-u="${esc(u)}">Remove</button></li>`;
   }).join("");
-  ul.querySelectorAll("[data-u]").forEach(b=>b.onclick=async()=>{ await api("del-pw",b.dataset.u); toast("Account removed"); loadPw(); });
+  ul.querySelectorAll("[data-u]").forEach(b=>b.onclick=async()=>{ const o=await api("del-pw",b.dataset.u); if(o.trim().startsWith("err")){ toast(o.trim(),true); return; } toast("Account removed"); loadPw(); });
 }
 function scorePw(p){
   let s=0; if(p.length>=8)s++; if(p.length>=12)s++; if(p.length>=16)s++;
@@ -401,7 +444,7 @@ function updatePwMeter(){
   const pct=[0,15,35,55,80,100][sc];
   const col=sc<=1?"var(--red)":sc<=3?"var(--amber)":"var(--green)";
   $("#pwBar").style.width=pct+"%"; $("#pwBar").style.background=col;
-  const ok=p.length>=12 && (!p2 || p===p2);
+  $("#pwMeter").setAttribute("aria-valuenow",sc);
   let hint; if(p.length<12) hint="Use at least 12 characters.";
   else if(p2&&p!==p2) hint="Passwords do not match.";
   else hint=["very weak","weak","fair","good","strong","excellent"][sc]+" · remember: this login defaults to root.";
@@ -429,7 +472,7 @@ async function setPw(){
     $("#pwPass").value=""; $("#pwPass2").value=""; updatePwMeter();
     toast("Password set for "+user); loadPw();
   }catch(e){ toast(String(e.message||e),true); }
-  finally{ $("#btnSetPw").disabled=false; }
+  finally{ updatePwMeter(); }
 }
 
 /* ---- wire up ---- */
@@ -443,12 +486,39 @@ $("#btnAddKey").onclick=addKey;
 $("#btnSetPw").onclick=setPw;
 ["#pwPass","#pwPass2"].forEach(s=>$(s).addEventListener("input",updatePwMeter));
 
-/* ---- tabs ---- */
-document.querySelectorAll("#tabs button").forEach(b=>b.onclick=()=>{
+/* ---- tabs (ARIA tablist: roving tabindex + arrow/Home/End keyboard nav) ---- */
+const tabBtns=Array.from(document.querySelectorAll("#tabs [role=tab]"));
+function selectTab(b,focus){
   const t=b.dataset.tab;
-  document.querySelectorAll("#tabs button").forEach(x=>x.classList.toggle("active",x===b));
+  tabBtns.forEach(x=>{ const on=x===b;
+    x.classList.toggle("active",on); x.setAttribute("aria-selected",on?"true":"false"); x.tabIndex=on?0:-1; });
   document.querySelectorAll(".tabpanel").forEach(p=>p.classList.toggle("active",p.id==="tab-"+t));
+  if(focus) b.focus();
+}
+tabBtns.forEach((b,i)=>{
+  b.onclick=()=>selectTab(b);
+  b.onkeydown=e=>{
+    let j=null;
+    if(e.key==="ArrowRight"||e.key==="ArrowDown") j=(i+1)%tabBtns.length;
+    else if(e.key==="ArrowLeft"||e.key==="ArrowUp") j=(i-1+tabBtns.length)%tabBtns.length;
+    else if(e.key==="Home") j=0; else if(e.key==="End") j=tabBtns.length-1;
+    if(j!==null){ e.preventDefault(); selectTab(tabBtns[j],true); }
+  };
 });
+
+/* ---- theme toggle (system / dark / light), persisted; mirrors VD-Backup's model ---- */
+(function(){
+  const order=["auto","dark","light"], sym={auto:"☼",dark:"☾",light:"☀"}; // sun-rays / moon / sun
+  const btn=$("#themeBtn"); if(!btn) return;
+  function cur(){ try{ return localStorage.getItem("vddb-theme")||"auto"; }catch(e){ return "auto"; } }
+  function apply(t){
+    document.documentElement.setAttribute("data-theme",t);
+    try{ localStorage.setItem("vddb-theme",t); }catch(e){}
+    btn.textContent=sym[t]; btn.setAttribute("aria-label","Theme: "+t+" (tap to change)"); btn.title="Theme: "+t;
+  }
+  apply(cur());
+  btn.onclick=()=>apply(order[(order.indexOf(cur())+1)%order.length]);
+})();
 
 /* ---- VDLU flashless updater ---- */
 function vdluExec(cmd){

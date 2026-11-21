@@ -4,13 +4,13 @@ Copyright (C) 2026  VD171
 -->
 # VDLU release step (VD Dropbear)
 
-VD Dropbear ships the VDLU flashless updater in `module/vdlu/` (engine `update.sh` + `vdlu-verify` +
+VD Dropbear ships the **[VDLiveUpdate](https://github.com/VD171/VDLiveUpdate) (VDLU)** flashless updater in `module/vdlu/` (engine `update.sh` + `vdlu-verify` +
 `keyring/`) with the **hardened** profile: a signed manifest is mandatory, and an unsigned, tampered or
 downgraded manifest is refused. Producing a release means packing the assembled module tree into a
 content addressed store, signing the manifest, and publishing it to the module feed. The flashable
 `.zip` stays the install and fallback path; VDLU is additive.
 
-The producer tools live in the private VDLiveUpdate repo (`producer/vdlu-pack`, `producer/vdlu-sign`,
+The producer tools live in the VDLiveUpdate repo (https://github.com/VD171/VDLiveUpdate) (`producer/vdlu-pack`, `producer/vdlu-sign`,
 `producer/vdlu-keygen`). They run on the PC, never on device.
 
 ## Prerequisites
@@ -21,6 +21,13 @@ The producer tools live in the private VDLiveUpdate repo (`producer/vdlu-pack`, 
   `module/vdlu/keyring/`.
 
 ## Steps
+
+Bump the version first with the canonical bumper. **VD-dropbear uses the `minor` scheme** (`major*10000 +
+minor`, e.g. v1.09 = 10009 -> v1.10 = 10010), not the fleet `*100+patch` one, so pass `SCHEME=minor`:
+
+```sh
+SCHEME=minor .github/scripts/version.sh bump   # feature bump; rewrites module/module.prop + module/update.json
+```
 
 1. Build the module exactly as for a normal release so `module/` is the final flashable tree (same tree
    the `.zip` carries, bins included):
@@ -117,7 +124,7 @@ and caches it under `vdlu-tools/<abi>/`. Covers `arm64-v8a`, `armeabi-v7a`, `x86
 
 ## Packaging
 
-Nothing to wire: the release zip is the whole `module/` tree (`.github/workflows/build.yml`), so
+Nothing to wire: the release zip is the whole `module/` tree (`.github/workflows/release.yml`), so
 `vdlu/` and `webroot/vdlu.js` + `webroot/vdlu.css` ship automatically.
 
 ---

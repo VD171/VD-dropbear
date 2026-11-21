@@ -44,7 +44,7 @@ VD Dropbear एक KernelSU / APatch / Magisk मॉड्यूल है ज�
   और डेमॉन को उसके अपने सत्र में अलग कर देता है, ताकि मैनेजर अटके नहीं।
 - `module/common/vddb-webui.sh` + `module/webroot/index.html`: WebUI बैकएंड और पृष्ठ।
 - `patches/`: बिल्ड के समय अपस्ट्रीम Dropbear पर लागू किए गए छोटे, ऑडिट-योग्य पैच।
-- `scripts/build.sh`, `scripts/build-bundles.sh`, `.github/workflows/build.yml`: बिल्ड।
+- `scripts/build.sh`, `scripts/build-bundles.sh`, `.github/workflows/release.yml`: बिल्ड।
 
 ## डेमॉन जीवनचक्र (एकल इंस्टेंस)
 

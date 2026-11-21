@@ -45,7 +45,7 @@ dispositivo concreto; todo lo específico es configuración en tiempo de ejecuci
   daemon en su propia sesión, de modo que el gestor no se queda colgado.
 - `module/common/vddb-webui.sh` + `module/webroot/index.html`: el backend y la página de la WebUI.
 - `patches/`: parches pequeños y auditables aplicados a Dropbear upstream en tiempo de compilación.
-- `scripts/build.sh`, `scripts/build-bundles.sh`, `.github/workflows/build.yml`: la compilación.
+- `scripts/build.sh`, `scripts/build-bundles.sh`, `.github/workflows/release.yml`: la compilación.
 
 ## Ciclo de vida del daemon (una sola instancia)
 

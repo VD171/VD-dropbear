@@ -44,7 +44,7 @@ tutto ciò che è specifico è configurazione di runtime o un secret.
   e distacca il daemon nella sua sessione, così il manager non si blocca.
 - `module/common/vddb-webui.sh` + `module/webroot/index.html`: il backend e la pagina della WebUI.
 - `patches/`: piccole patch verificabili applicate a Dropbear upstream in fase di build.
-- `scripts/build.sh`, `scripts/build-bundles.sh`, `.github/workflows/build.yml`: la build.
+- `scripts/build.sh`, `scripts/build-bundles.sh`, `.github/workflows/release.yml`: la build.
 
 ## Ciclo di vita del daemon (istanza singola)
 

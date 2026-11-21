@@ -42,7 +42,7 @@ VD Dropbear 是一个 KernelSU / APatch / Magisk 模块，仅运行一个 Dropbe
   的会话中，因此管理器不会卡住。
 - `module/common/vddb-webui.sh` + `module/webroot/index.html`：WebUI 的后端和页面。
 - `patches/`：在构建时应用到 upstream Dropbear 上的小而可审计的补丁。
-- `scripts/build.sh`、`scripts/build-bundles.sh`、`.github/workflows/build.yml`：构建。
+- `scripts/build.sh`、`scripts/build-bundles.sh`、`.github/workflows/release.yml`：构建。
 
 ## 守护进程生命周期（单实例）
 

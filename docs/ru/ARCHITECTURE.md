@@ -45,7 +45,7 @@ VD Dropbear является модулем KernelSU / APatch / Magisk, кото
   отделяет демон в отдельную сессию, поэтому менеджер не зависает.
 - `module/common/vddb-webui.sh` + `module/webroot/index.html`: бэкенд и страница WebUI.
 - `patches/`: небольшие, поддающиеся аудиту патчи, применяемые к апстрим-Dropbear при сборке.
-- `scripts/build.sh`, `scripts/build-bundles.sh`, `.github/workflows/build.yml`: сборка.
+- `scripts/build.sh`, `scripts/build-bundles.sh`, `.github/workflows/release.yml`: сборка.
 
 ## Жизненный цикл демона (единственный экземпляр)
 
