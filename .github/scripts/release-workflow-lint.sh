@@ -146,13 +146,19 @@ for wf in "$wfdir"/*.y*ml; do
   fi
 done
 
-# -- VDLU baseline seeding (new, repo-level) --
-# A module that vendors the VDLU engine (module/vdlu/) and publishes a release must seed a
-# content-addressed baseline (vdlu/baseline.json) into each release zip. If it publishes but NO
-# publish workflow references baseline seeding, the first on-device auto-update does a full from:0
-# re-download instead of an incremental diff. App-only modules (no module/vdlu/) are skipped.
-if [ -d "$root/module/vdlu" ] && [ "$seen_publish" = 1 ] && [ "$seen_baseline" = 0 ]; then
-  echo "::error::VDLU module ($root/module/vdlu present) publishes a release but no publish workflow seeds vdlu/baseline.json (grep baseline.json / seed_baseline) -- the first on-device VDLU auto-update will do a full from:0 re-download instead of an incremental diff; seed a content-addressed baseline per release zip (see VD-Backup.yml seed_baseline())"
+# -- VDLU baseline seeding (repo-level) --
+# A module that vendors the VDLU engine (module/vdlu/) and publishes a release must SEED a
+# content-addressed baseline (vdlu/baseline.json), else the first on-device auto-update does a full
+# from:0 re-download instead of an incremental diff. The baseline is seeded by EITHER of two valid
+# paths, and either one clears the check:
+#   (a) CI keyless seed  -- a publish workflow references baseline.json / seed_baseline (seen_baseline).
+#   (b) committed signed -- module/vdlu/baseline.json is COMMITTED to the repo (COPG-VD's deliberate,
+#                           stronger choice: a signed integrity-root baseline, signing key kept out of CI).
+# FLAG only when NEITHER path is taken. App-only modules (no module/vdlu/) are skipped.
+seeded_committed=0
+[ -f "$root/module/vdlu/baseline.json" ] && seeded_committed=1
+if [ -d "$root/module/vdlu" ] && [ "$seen_publish" = 1 ] && [ "$seen_baseline" = 0 ] && [ "$seeded_committed" = 0 ]; then
+  echo "::error::VDLU module ($root/module/vdlu present) publishes a release but seeds no baseline -- neither a CI seed step (grep baseline.json / seed_baseline) NOR a committed module/vdlu/baseline.json; the first on-device VDLU auto-update will do a full from:0 re-download instead of an incremental diff. Seed it one of two ways: a seed_baseline() step in the publish workflow (keyless, see VD-Backup.yml) OR commit a signed module/vdlu/baseline.json per release (see COPG-VD's runbook)"
   rc=1
 fi
 

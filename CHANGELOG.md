@@ -29,6 +29,16 @@ All notable, real and significant changes to **VD Dropbear** are recorded here.
 The format follows [Keep a Changelog](https://keepachangelog.com/); versions are tagged in the
 module (`module.prop`) and on GitHub Releases.
 
+## [v1.11] (2026-11-22)
+
+### Fixed
+- **Stopping or restarting the daemon no longer deletes the `/dev/null` device node.** The daemon ran with
+  `-P /dev/null`, and Dropbear unlinks its pid file when it exits, so every stop/restart removed the
+  `/dev/null` character device. The next root-side `> /dev/null` redirect then recreated it as a regular
+  `0644` file, and from then on every process that opened `/dev/null` failed with `EACCES` - the zygote
+  aborted and apps died at launch with no crash record until a reboot. The pid file now lives in the module
+  state dir. Reported and fixed by Konstantin Nikiforov (@helllamer, GitHub PR #2).
+
 ## [v1.10] (2026-11-19)
 
 ### Added

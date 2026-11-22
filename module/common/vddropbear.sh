@@ -196,8 +196,10 @@ vddb_build_args() {
     # Safety net: if the user cleared every option, bind loopback rather than
     # letting dropbear fall back to listening on every interface.
     [ "$_bound" = "1" ] || printf '%s\n' -p "127.0.0.1:$PORT"
-    # foreground + log to stderr (captured by service.sh); no pid file in the module dir
-    printf '%s\n' -F -P /dev/null
+    # Foreground + log to stderr (captured by service.sh). The pid file MUST go to the state
+    # dir, never /dev/null: dropbear unlinks its pid file on exit, so `-P /dev/null` deleted
+    # the /dev/null char device each restart -> every app died at launch until reboot (PR #2).
+    printf '%s\n' -F -P "$VDDB_STATE/vddropbear.pid"
     # pass the server process environment on to login sessions (dropbear -e). A rooted ops
     # daemon is started by the module service with the platform environment set (on Android:
     # BOOTCLASSPATH, ANDROID_ROOT/DATA, etc.); tools launched over SSH that fork app_process
