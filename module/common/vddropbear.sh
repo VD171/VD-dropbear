@@ -196,8 +196,14 @@ vddb_build_args() {
     # Safety net: if the user cleared every option, bind loopback rather than
     # letting dropbear fall back to listening on every interface.
     [ "$_bound" = "1" ] || printf '%s\n' -p "127.0.0.1:$PORT"
-    # foreground + log to stderr (captured by service.sh); no pid file in the module dir
-    printf '%s\n' -F -P /dev/null
+    # Foreground + log to stderr (captured by service.sh). The pid file goes to the
+    # module state dir, never to a device node: dropbear UNLINKS its pid file when it
+    # exits, so `-P /dev/null` deleted the /dev/null character device on every stop or
+    # restart. The next root-side `> /dev/null` redirect then recreated it as a regular
+    # 0644 file, and from then on every process that opened /dev/null failed with
+    # EACCES - zygote aborted with "JNI FatalError", apps died at launch with no crash
+    # record, and the device looked broken until reboot. vddb_spawn() creates this dir.
+    printf '%s\n' -F -P "$VDDB_STATE/vddropbear.pid"
     # pass the server process environment on to login sessions (dropbear -e). A rooted ops
     # daemon is started by the module service with the platform environment set (on Android:
     # BOOTCLASSPATH, ANDROID_ROOT/DATA, etc.); tools launched over SSH that fork app_process
