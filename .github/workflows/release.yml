@@ -46,7 +46,7 @@ jobs:
   release:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - uses: actions/checkout@v7
 
       - name: Lint release workflow (no draft-publish anti-pattern)
         run: sh .github/scripts/release-workflow-lint.sh .
@@ -112,7 +112,7 @@ jobs:
           } > RELEASE-BODY.md
 
       - name: Publish release
-        uses: softprops/action-gh-release@e7a8f85e1c67a31e6ed99a94b41bd0b71bbee6b8 # v2.0.9
+        uses: softprops/action-gh-release@v3
         with:
           files: VD-dropbear-*.zip
           body_path: RELEASE-BODY.md
