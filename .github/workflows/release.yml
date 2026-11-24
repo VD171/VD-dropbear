@@ -1,7 +1,7 @@
 # ======================================================================
 #  VD Dropbear  ::  standalone, configurable rooted SSH daemon
 #  A private SSH server for KernelSU/APatch/Magisk. No invasive ADB exposure.
-#  Release: a tag push publishes the module zip directly as github-actions[bot].
+#  Release: a manual dispatch publishes the module zip directly as github-actions[bot].
 #
 #  Copyright (C) 2026  VD171
 #  SPDX-License-Identifier: Apache-2.0
@@ -26,18 +26,23 @@
 #  feed manifest hash the exact shipped bytes while the signing key stays off CI. To pick
 #  up a newer upstream Dropbear, rebuild locally (scripts/build.sh + build-bundles.sh).
 #
-#  RELEASE MODEL (why a tag, not workflow_dispatch): the VDLU baseline (module/vdlu/baseline.json)
-#  is re-packed AND signed with a key kept OFF CI, so the bump+repack+sign is a LOCAL ritual
-#  (scripts/repack-baseline.sh). The human's release decision IS the tag push; CI only packages
-#  the already-signed tree and publishes. STANDARDS §7.1: the CI publishes DIRECTLY (author =
-#  github-actions[bot]); NEVER draft:true + manual UI "Publish" (that attributes it to a human).
-#  Third-party actions pinned by commit SHA (supply-chain safety).
+#  RELEASE MODEL (fleet-standard, like VD-Backup / COPG-VD): the release is triggered with
+#  `gh workflow run release.yml` and the CI creates BOTH the tag and the GitHub release
+#  directly as github-actions[bot] (via github.token) - never a human tag push, never a
+#  draft + manual UI "Publish" (STANDARDS §7.1; that would attribute the release to a human).
+#  dropbear does NOT bump in CI: the VDLU baseline (module/vdlu/baseline.json) is re-packed
+#  AND signed with a key kept OFF CI, so the bump + repack + sign is a LOCAL ritual
+#  (scripts/repack-baseline.sh) committed before dispatch; the CI reads the already-committed
+#  version from module.prop and packages the already-signed tree as-is.
 
 name: Release
 
 on:
-  push:
-    tags: ['v*']
+  workflow_dispatch:
+    inputs:
+      notes:
+        description: "Extra release notes (optional; prepended to the generated body)"
+        required: false
 
 permissions:
   contents: write
@@ -83,6 +88,8 @@ jobs:
         # House rules (do NOT change without the owner): the body ends with the canonical
         # @Priv8_VD banner VERBATIM, carries a per-file sha256 block, and NEVER includes a
         # "Generated with Claude" footer (that is for docs/wiki only).
+        env:
+          EXTRA_NOTES: ${{ github.event.inputs.notes }}
         run: |
           ver="${{ steps.pack.outputs.ver }}"
           zip="VD-dropbear-${ver}.zip"
@@ -93,6 +100,7 @@ jobs:
           {
             echo "Standalone, fully configurable rooted SSH server for KernelSU, APatch and Magisk, with a WebUI."
             echo
+            if [ -n "$EXTRA_NOTES" ]; then echo "$EXTRA_NOTES"; echo; fi
             echo "> **An authenticated login defaults to a root shell.** Prefer keys over passwords, bind only to networks you trust, and keep the port off the open Internet."
             echo
             echo "### Install"
@@ -111,11 +119,18 @@ jobs:
             echo "📣 **Join the channel for updates:** @Priv8_VD https://t.me/Priv8_VD"
           } > RELEASE-BODY.md
 
-      - name: Publish release
-        uses: softprops/action-gh-release@v3
-        with:
-          files: VD-dropbear-*.zip
-          body_path: RELEASE-BODY.md
+      - name: Create the tag and publish the release (github-actions[bot])
+        # gh release create makes BOTH the tag and the release server-side as the bot
+        # (github.token): no manual tag push, no draft, no PAT. The human's release decision
+        # is the `gh workflow run` dispatch; the machine tags and publishes.
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          ver="${{ steps.pack.outputs.ver }}"
+          if gh release view "$ver" >/dev/null 2>&1; then
+            echo "::error::release $ver already exists; bump module.prop before dispatching"; exit 1
+          fi
+          gh release create "$ver" --target "$GITHUB_SHA" --title "$ver" --notes-file RELEASE-BODY.md VD-dropbear-*.zip
 
       - name: Assert release author is github-actions[bot]
         # Authoritative check (owner HARD rule, github_release_sempre_bot_author): verify the REAL
