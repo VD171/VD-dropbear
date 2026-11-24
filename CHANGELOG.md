@@ -29,6 +29,14 @@ All notable, real and significant changes to **VD Dropbear** are recorded here.
 The format follows [Keep a Changelog](https://keepachangelog.com/); versions are tagged in the
 module (`module.prop`) and on GitHub Releases.
 
+## [v1.12] (2026-11-24)
+
+### Changed
+- **Updated the flashless updater engine to ENGINE_VERSION 5.** A stricter trust-anchor rule when
+  verifying the update manifest, clearer and smaller TLS diagnostics, the apply step now defers while
+  the module is busy instead of failing, and tighter download size ceilings (128 MiB / 2 MiB). The SSH
+  daemon itself is unchanged.
+
 ## [v1.11] (2026-11-22)
 
 ### Fixed
