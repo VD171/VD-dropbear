@@ -29,6 +29,18 @@ All notable, real and significant changes to **VD Dropbear** are recorded here.
 The format follows [Keep a Changelog](https://keepachangelog.com/); versions are tagged in the
 module (`module.prop`) and on GitHub Releases.
 
+## [Unreleased]
+
+### Fixed
+- **The daemon no longer inherits the manager app's freezer cgroup.** Starting or restarting it
+  from the manager's Action button or the WebUI forked dropbear inside the manager app's cgroup
+  (`/sys/fs/cgroup/apps/uid_<n>/pid_<m>`). When Android cached the manager it froze that whole
+  group, and the frozen daemon kept its listening socket open while never accepting a connection:
+  clients finished the TCP handshake, printed `Connection established ... Local version string`,
+  and then hung indefinitely because the banner never arrived. The spawn path now moves itself to
+  the root cgroup - which the freezer never touches - before forking, so the daemon survives the
+  manager being put to sleep. `setsid` was never enough: it detaches the session, not the cgroup.
+
 ## [v1.12] (2026-11-24)
 
 ### Changed
