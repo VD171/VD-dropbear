@@ -257,8 +257,6 @@ vddb_stop() {
     ! vddb_is_running
 }
 
-# Launch the single daemon in its own session (so the KSU manager's action.sh
-# does not block waiting for the process group to drain), detached from stdio.
 # A short human summary of where the daemon listens, for logs and the manager.
 vddb_listen_summary() {
     _ls=""
@@ -272,8 +270,42 @@ vddb_listen_summary() {
     printf '%s port %s' "$_ls" "$PORT"
 }
 
+# --- freezer isolation -----------------------------------------------------
+# Android's CachedAppOptimizer freezes a cached app together with every process left
+# in the app's cgroup. The manager's Action button and the WebUI both run inside the
+# manager app, so a daemon (re)started from either inherits
+# /sys/fs/cgroup/apps/uid_<manager-uid>/pid_<manager-pid> and is frozen with it a
+# minute later. A frozen dropbear still owns its listening socket (the backlog lives
+# in the kernel): TCP connects keep completing, but the process never accept()s them
+# and never sends its identification banner, so clients hang forever at
+# "Connection established ... Local version string" with no timeout of their own.
+# /proc/<pid>/wchan then reads do_freezer_trap instead of do_select.
+# setsid() detaches the session, not the cgroup - hence this step.
+# The root cgroup is exempt from the freezer, so leave any /apps/* group before the
+# daemon is forked and let the daemon inherit the exit. No-op when service.sh starts
+# the daemon at boot (already at /) and wherever the platform has no freezer.
+# The pid must be read by a builtin, in this shell: a command substitution would fork
+# and report the (already dead) subshell's pid instead of ours.
+vddb_own_pid() { read -r VDDB_OWN_PID _ < /proc/self/stat 2>/dev/null; }
+
+vddb_escape_freezer() {
+    [ -w /sys/fs/cgroup/cgroup.procs ] || return 0
+    case "$(sed -n 's/^0:://p' /proc/self/cgroup 2>/dev/null)" in
+        /apps/*) ;;
+        *) return 0 ;;
+    esac
+    vddb_own_pid || return 1
+    [ -n "$VDDB_OWN_PID" ] || return 1
+    echo "$VDDB_OWN_PID" > /sys/fs/cgroup/cgroup.procs 2>/dev/null || return 1
+    vddb_log "moved pid $VDDB_OWN_PID from an app cgroup to / (freezer escape)"
+}
+
+# Launch the single daemon in its own session (so the KSU manager's action.sh does
+# not block waiting for the process group to drain), detached from stdio and outside
+# any app freezer cgroup (see vddb_escape_freezer).
 vddb_spawn() {
     mkdir -p "$VDDB_STATE" 2>/dev/null
+    vddb_escape_freezer
     vddb_export_env
     # Word-splitting here is intentional: every token is a flag or a normalised
     # value (PORT, HOSTKEY_TYPE and RECEIVE_WINDOW are validated in
