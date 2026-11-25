@@ -168,26 +168,28 @@ wiki의 각 페이지는 위 전환 메뉴의 각 언어로도 번역되어 있�
 
 ## 함께 보기
 
-같은 저자의 자매 프로젝트:
-
-- **[VDInfos](https://github.com/VD171/VD-Infos)**: 각 항목을, 그것을 읽을 수 있는 모든 방법으로 읽어 나란히 비교하는 기기 메서드 디버거.
-- **[VDGoogle](https://github.com/VD171/VD-Google)**: RCS, Wallet, Play Integrity에 대해 Google이 기기에 기록하는 내용을 완전히 기기 내에서 인터넷 없이 읽습니다.
-- **[COPG-VD](https://github.com/VD171/COPG-VD)**: 새로운 핑거프린트를 일관되고 정합적인 프로필로 바꾸는 기기 스푸퍼입니다.
-- **[VDBackup](https://github.com/VD171/VD-Backup)**: 루트로 앱과 데이터를 통째로 백업·복원하며, 전부 WebUI에서 조작합니다.
-- **[VDLiveUpdate](https://github.com/VD171/VDLiveUpdate)**: KernelSU/APatch/Magisk 모듈에 내장된, 플래시가 필요 없는 증분 자가 업데이트 엔진.
+- **[COPG-VD](https://github.com/VD171/COPG-VD)**: 전역 기기 핑거프린트 / Play Integrity 위장으로, 앱별 범위와 WebUI 를 갖추고 기기 전체에 적용됩니다.
+- **[VDBackup](https://github.com/VD171/VD-Backup)**: 앱과 데이터의 전체 백업과 복원을 root로 수행하며, 전적으로 WebUI에서 제어합니다.
+- **[VDGoogle](https://github.com/VD171/VD-Google)**: 당신의 Google 서비스(RCS, Wallet, Play Integrity 증명)를 인터넷 없이 기기에서 읽습니다.
 - **[VDInstaller](https://github.com/VD171/VD-Installer)**: 단일, 배치, 분할 APK 를 위한 마찰 없는 root 사이드로드 설치기로, Play Protect 검사기 토글과 설치 출처 위장을 갖추고 있습니다.
+- **[VDInfos](https://github.com/VD171/VD-Infos)**: 각 항목을 그것을 읽을 수 있는 모든 메서드를 통해 읽고 나란히 비교하는 기기 메서드 디버거입니다.
+- **[VDLiveUpdate](https://github.com/VD171/VDLiveUpdate)**: KernelSU/APatch/Magisk 모듈에 내장된, 플래시가 필요 없는 증분 자가 업데이트 엔진.
+- **[VD-Modules](https://github.com/VD171/VD-Modules)**: MMRL/WebUI-X 용 우리의 모듈 저장소 (이 모든 것을 당신의 root 관리자에서 설치하세요).
+- **[@VictorGabriel7Dev/build.prop](https://github.com/VictorGabriel7Dev/build.prop)**: Pixel `build.prop` 핑거프린트 데이터셋 (@T3SL4 의 포크).
+- **[@VictorGabriel7Dev/mtproto-store](https://github.com/VictorGabriel7Dev/mtproto-store)**: 작은 Go CLI 로 Telegram 을 오브젝트 스토리지로 활용.
 
 ## 연락처
 
-- https://vd171.ru
-- https://vd.priv8.ru
-- **Telegram:** @VD_Priv8 https://t.me/VD_Priv8
-- **Channel:** @Priv8_VD https://t.me/Priv8_VD
-- **Discord:** @VD.Priv8 https://discord.com/users/1296831918989639721
-- **E-mail:** vd.priv8@pm.me
-- **XDA-Developers:** @VD171 https://xdaforums.com/m/vd171.4699873/
-- **XDA thread:** https://xdaforums.com/t/VD-Dropbear.4808524/
-- **GitHub:** @VD171 https://github.com/VD171
+- Site           : https://vd171.ru
+- Site           : https://vd.priv8.ru
+- Source         : https://github.com/VD171/VD-dropbear
+- GitHub         : [@VD171](https://github.com/VD171)
+- XDA-Developers : [@VD171](https://xdaforums.com/m/vd171.4699873/)
+- XDA thread     : [VD-Dropbear](https://xdaforums.com/t/VD-Dropbear.4808524/)
+- Telegram       : [@VD_Priv8](https://t.me/VD_Priv8)
+- Channel        : [@Priv8_VD](https://t.me/Priv8_VD)
+- Discord        : [@VD.Priv8](https://discord.com/users/1296831918989639721)
+- E-mail         : vd.priv8@pm.me
 
 ## 라이선스
 

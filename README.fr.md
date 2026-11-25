@@ -186,26 +186,28 @@ Chaque page du wiki est aussi traduite dans chacune des langues du sélecteur ci
 
 ## Voir aussi
 
-Projets frères du même auteur :
-
-- **[VDInfos](https://github.com/VD171/VD-Infos)** : un débogueur de méthodes de l'appareil qui lit chaque élément par chaque méthode capable de le lire et les compare côte à côte.
-- **[VDGoogle](https://github.com/VD171/VD-Google)** : lit ce que Google enregistre sur ton appareil à propos de RCS, Wallet et Play Integrity, entièrement sur l'appareil et sans internet.
-- **[COPG-VD](https://github.com/VD171/COPG-VD)** : un falsificateur d'appareil qui transforme une empreinte neuve en un profil cohérent et consistant.
+- **[COPG-VD](https://github.com/VD171/COPG-VD)** : usurpation globale de l'empreinte de l'appareil / Play Integrity, sur tout l'appareil avec une portée par application et une WebUI.
 - **[VDBackup](https://github.com/VD171/VD-Backup)** : sauvegarde et restauration complètes des applications et des données en root, pilotées entièrement depuis une WebUI.
-- **[VDLiveUpdate](https://github.com/VD171/VDLiveUpdate)** : un moteur d'auto-mise à jour incrémentale et sans flashage, intégré aux modules KernelSU/APatch/Magisk.
+- **[VDGoogle](https://github.com/VD171/VD-Google)** : vos services Google (RCS, Wallet, attestations Play Integrity), lus sur votre appareil sans internet.
 - **[VDInstaller](https://github.com/VD171/VD-Installer)** : un installateur sideload en root et sans friction pour les APK uniques, par lots et splittés, avec un interrupteur pour le vérificateur Play Protect et l'usurpation de la source d'installation.
+- **[VDInfos](https://github.com/VD171/VD-Infos)** : un débogueur de méthodes de l'appareil qui lit chaque élément via toutes les méthodes capables de le lire et les compare côte à côte.
+- **[VDLiveUpdate](https://github.com/VD171/VDLiveUpdate)** : un moteur d'auto-mise à jour incrémentale et sans flashage, intégré aux modules KernelSU/APatch/Magisk.
+- **[VD-Modules](https://github.com/VD171/VD-Modules)** : notre dépôt de modules pour MMRL/WebUI-X (installez-les tous depuis votre gestionnaire root).
+- **[@VictorGabriel7Dev/build.prop](https://github.com/VictorGabriel7Dev/build.prop)** : un jeu de données d'empreintes `build.prop` de Pixel (fork de @T3SL4).
+- **[@VictorGabriel7Dev/mtproto-store](https://github.com/VictorGabriel7Dev/mtproto-store)** : utilisez Telegram comme stockage d'objets depuis un petit CLI en Go.
 
 ## Contacts
 
-- https://vd171.ru
-- https://vd.priv8.ru
-- **Telegram:** @VD_Priv8 https://t.me/VD_Priv8
-- **Channel:** @Priv8_VD https://t.me/Priv8_VD
-- **Discord:** @VD.Priv8 https://discord.com/users/1296831918989639721
-- **E-mail:** vd.priv8@pm.me
-- **XDA-Developers:** @VD171 https://xdaforums.com/m/vd171.4699873/
-- **XDA thread:** https://xdaforums.com/t/VD-Dropbear.4808524/
-- **GitHub:** @VD171 https://github.com/VD171
+- Site           : https://vd171.ru
+- Site           : https://vd.priv8.ru
+- Source         : https://github.com/VD171/VD-dropbear
+- GitHub         : [@VD171](https://github.com/VD171)
+- XDA-Developers : [@VD171](https://xdaforums.com/m/vd171.4699873/)
+- XDA thread     : [VD-Dropbear](https://xdaforums.com/t/VD-Dropbear.4808524/)
+- Telegram       : [@VD_Priv8](https://t.me/VD_Priv8)
+- Channel        : [@Priv8_VD](https://t.me/Priv8_VD)
+- Discord        : [@VD.Priv8](https://discord.com/users/1296831918989639721)
+- E-mail         : vd.priv8@pm.me
 
 ## Licence
 

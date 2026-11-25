@@ -174,26 +174,28 @@ rsync, बिना किसी `adb_enabled` संकेत के, बिन
 
 ## यह भी देखें
 
-इसी लेखक की सहोदर परियोजनाएँ:
-
-- **[VDInfos](https://github.com/VD171/VD-Infos)**: एक डिवाइस मेथड डिबगर जो हर आइटम को हर उस मेथड से पढ़ता है जो उसे पढ़ सकता है और उन्हें आमने-सामने तुलना करता है।
-- **[VDGoogle](https://github.com/VD171/VD-Google)**: RCS, Wallet और Play Integrity के बारे में Google आपके डिवाइस पर जो दर्ज करता है उसे पढ़ता है, पूरी तरह डिवाइस पर और बिना इंटरनेट के।
-- **[COPG-VD](https://github.com/VD171/COPG-VD)**: एक डिवाइस स्पूफर जो नए fingerprint को एक सुसंगत, एकरूप प्रोफ़ाइल में बदल देता है।
-- **[VDBackup](https://github.com/VD171/VD-Backup)**: रूट के रूप में ऐप और डेटा का पूरा बैकअप और रिस्टोर, पूरी तरह WebUI से संचालित।
-- **[VDLiveUpdate](https://github.com/VD171/VDLiveUpdate)**: KernelSU/APatch/Magisk मॉड्यूल में एम्बेडेड एक फ्लैशलेस, इंक्रीमेंटल सेल्फ-अपडेट इंजन।
+- **[COPG-VD](https://github.com/VD171/COPG-VD)**: वैश्विक डिवाइस फ़िंगरप्रिंट / Play Integrity स्पूफ़िंग, प्रति-ऐप स्कोप और एक WebUI के साथ पूरे डिवाइस के लिए।
+- **[VDBackup](https://github.com/VD171/VD-Backup)**: रूट के रूप में ऐप और डेटा का पूर्ण बैकअप और रीस्टोर, पूरी तरह एक WebUI से संचालित।
+- **[VDGoogle](https://github.com/VD171/VD-Google)**: आपकी Google सेवाएँ (RCS, Wallet, Play Integrity प्रमाणन), आपके डिवाइस पर बिना इंटरनेट के पढ़ी गईं।
 - **[VDInstaller](https://github.com/VD171/VD-Installer)**: एकल, बैच और स्प्लिट APK के लिए एक घर्षण-रहित रूट साइडलोड इंस्टॉलर, जिसमें Play Protect वेरिफायर टॉगल और इंस्टॉल-सोर्स स्पूफिंग शामिल है।
+- **[VDInfos](https://github.com/VD171/VD-Infos)**: एक डिवाइस मेथड डिबगर जो हर आइटम को उसे पढ़ सकने वाले हर मेथड के ज़रिए पढ़ता है और उन्हें साथ-साथ तुलना करता है।
+- **[VDLiveUpdate](https://github.com/VD171/VDLiveUpdate)**: KernelSU/APatch/Magisk मॉड्यूल में एम्बेडेड एक फ्लैशलेस, इंक्रीमेंटल सेल्फ-अपडेट इंजन।
+- **[VD-Modules](https://github.com/VD171/VD-Modules)**: MMRL/WebUI-X के लिए हमारा मॉड्यूल रिपॉज़िटरी (इन सभी को अपने रूट मैनेजर से इंस्टॉल करें)।
+- **[@VictorGabriel7Dev/build.prop](https://github.com/VictorGabriel7Dev/build.prop)**: Pixel `build.prop` फ़िंगरप्रिंट का एक डेटासेट (@T3SL4 का फ़ोर्क)।
+- **[@VictorGabriel7Dev/mtproto-store](https://github.com/VictorGabriel7Dev/mtproto-store)**: एक छोटे Go CLI से Telegram को ऑब्जेक्ट स्टोर के रूप में उपयोग करें।
 
 ## संपर्क
 
-- https://vd171.ru
-- https://vd.priv8.ru
-- **Telegram:** @VD_Priv8 https://t.me/VD_Priv8
-- **Channel:** @Priv8_VD https://t.me/Priv8_VD
-- **Discord:** @VD.Priv8 https://discord.com/users/1296831918989639721
-- **E-mail:** vd.priv8@pm.me
-- **XDA-Developers:** @VD171 https://xdaforums.com/m/vd171.4699873/
-- **XDA thread:** https://xdaforums.com/t/VD-Dropbear.4808524/
-- **GitHub:** @VD171 https://github.com/VD171
+- Site           : https://vd171.ru
+- Site           : https://vd.priv8.ru
+- Source         : https://github.com/VD171/VD-dropbear
+- GitHub         : [@VD171](https://github.com/VD171)
+- XDA-Developers : [@VD171](https://xdaforums.com/m/vd171.4699873/)
+- XDA thread     : [VD-Dropbear](https://xdaforums.com/t/VD-Dropbear.4808524/)
+- Telegram       : [@VD_Priv8](https://t.me/VD_Priv8)
+- Channel        : [@Priv8_VD](https://t.me/Priv8_VD)
+- Discord        : [@VD.Priv8](https://discord.com/users/1296831918989639721)
+- E-mail         : vd.priv8@pm.me
 
 ## लाइसेंस
 

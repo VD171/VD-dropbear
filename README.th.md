@@ -173,26 +173,28 @@ SFTP และ rsync ผ่านเครือข่าย โดยไม่�
 
 ## ดูเพิ่มเติม
 
-โปรเจกต์พี่น้องโดยผู้สร้างคนเดียวกัน:
-
-- **[VDInfos](https://github.com/VD171/VD-Infos)**: ดีบักเกอร์เมธอดของอุปกรณ์ที่อ่านแต่ละรายการผ่านทุกเมธอดที่อ่านมันได้ แล้วนำมาเปรียบเทียบเคียงข้างกัน
-- **[VDGoogle](https://github.com/VD171/VD-Google)**: อ่านสิ่งที่ Google บันทึกไว้บนอุปกรณ์ของคุณเกี่ยวกับ RCS, Wallet และ Play Integrity ทั้งหมดบนอุปกรณ์และไม่ต้องใช้อินเทอร์เน็ต
-- **[COPG-VD](https://github.com/VD171/COPG-VD)**: ตัวปลอมแปลงอุปกรณ์ที่เปลี่ยน fingerprint ใหม่ให้เป็นโปรไฟล์ที่สอดคล้องและสม่ำเสมอ
-- **[VDBackup](https://github.com/VD171/VD-Backup)**: สำรองและกู้คืนแอปและข้อมูลแบบเต็มในฐานะ root ขับเคลื่อนทั้งหมดจาก WebUI
-- **[VDLiveUpdate](https://github.com/VD171/VDLiveUpdate)**: เอนจินอัปเดตตัวเองแบบเพิ่มทีละส่วนโดยไม่ต้องแฟลช ฝังอยู่ในโมดูล KernelSU/APatch/Magisk
+- **[COPG-VD](https://github.com/VD171/COPG-VD)**: การปลอมลายนิ้วมืออุปกรณ์ทั่วทั้งระบบ / Play Integrity ครอบคลุมทั้งอุปกรณ์พร้อมขอบเขตแยกตามแอปและ WebUI
+- **[VDBackup](https://github.com/VD171/VD-Backup)**: สำรองและกู้คืนแอปและข้อมูลแบบเต็มรูปแบบในฐานะ root ควบคุมทั้งหมดจาก WebUI
+- **[VDGoogle](https://github.com/VD171/VD-Google)**: บริการ Google ของคุณ (RCS, Wallet, การรับรอง Play Integrity) อ่านบนอุปกรณ์ของคุณโดยไม่ใช้อินเทอร์เน็ต
 - **[VDInstaller](https://github.com/VD171/VD-Installer)**: ตัวติดตั้งแบบ sideload ด้วยสิทธิ์ root ที่ไร้แรงเสียดทาน สำหรับ APK เดี่ยว แบบชุด และแบบแยก พร้อมสวิตช์ตัวตรวจสอบ Play Protect และการปลอมแหล่งที่มาของการติดตั้ง
+- **[VDInfos](https://github.com/VD171/VD-Infos)**: ตัวดีบักเมธอดของอุปกรณ์ที่อ่านแต่ละรายการผ่านทุกเมธอดที่สามารถอ่านได้ และนำมาเปรียบเทียบกันเคียงข้างกัน
+- **[VDLiveUpdate](https://github.com/VD171/VDLiveUpdate)**: เอนจินอัปเดตตัวเองแบบเพิ่มทีละส่วนโดยไม่ต้องแฟลช ฝังอยู่ในโมดูล KernelSU/APatch/Magisk
+- **[VD-Modules](https://github.com/VD171/VD-Modules)**: ที่เก็บโมดูลของเราสำหรับ MMRL/WebUI-X (ติดตั้งทั้งหมดนี้จากตัวจัดการ root ของคุณ)
+- **[@VictorGabriel7Dev/build.prop](https://github.com/VictorGabriel7Dev/build.prop)**: ชุดข้อมูลลายนิ้วมือ `build.prop` ของ Pixel (fork จาก @T3SL4)
+- **[@VictorGabriel7Dev/mtproto-store](https://github.com/VictorGabriel7Dev/mtproto-store)**: ใช้ Telegram เป็นที่เก็บออบเจกต์จาก CLI ขนาดเล็กที่เขียนด้วย Go
 
 ## ติดต่อ
 
-- https://vd171.ru
-- https://vd.priv8.ru
-- **Telegram:** @VD_Priv8 https://t.me/VD_Priv8
-- **ช่อง:** @Priv8_VD https://t.me/Priv8_VD
-- **Discord:** @VD.Priv8 https://discord.com/users/1296831918989639721
-- **อีเมล:** vd.priv8@pm.me
-- **XDA-Developers:** @VD171 https://xdaforums.com/m/vd171.4699873/
-- **กระทู้ XDA:** https://xdaforums.com/t/VD-Dropbear.4808524/
-- **GitHub:** @VD171 https://github.com/VD171
+- Site           : https://vd171.ru
+- Site           : https://vd.priv8.ru
+- Source         : https://github.com/VD171/VD-dropbear
+- GitHub         : [@VD171](https://github.com/VD171)
+- XDA-Developers : [@VD171](https://xdaforums.com/m/vd171.4699873/)
+- XDA thread     : [VD-Dropbear](https://xdaforums.com/t/VD-Dropbear.4808524/)
+- Telegram       : [@VD_Priv8](https://t.me/VD_Priv8)
+- Channel        : [@Priv8_VD](https://t.me/Priv8_VD)
+- Discord        : [@VD.Priv8](https://discord.com/users/1296831918989639721)
+- E-mail         : vd.priv8@pm.me
 
 ## สัญญาอนุญาต
 

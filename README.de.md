@@ -187,26 +187,28 @@ Jede Wiki-Seite ist außerdem in jede Sprache im Umschalter oben übersetzt; die
 
 ## Siehe auch
 
-Verwandte Projekte desselben Autors:
-
-- **[VDInfos](https://github.com/VD171/VD-Infos)**: ein Methoden-Debugger fürs Gerät, der jeden Punkt über jede Methode liest, die ihn lesen kann, und sie nebeneinander vergleicht.
-- **[VDGoogle](https://github.com/VD171/VD-Google)**: liest, was Google auf deinem Gerät über RCS, Wallet und Play Integrity speichert, vollständig auf dem Gerät und ohne Internet.
-- **[COPG-VD](https://github.com/VD171/COPG-VD)**: ein Geräte-Spoofer, der einen frischen Fingerprint in ein stimmiges, konsistentes Profil verwandelt.
-- **[VDBackup](https://github.com/VD171/VD-Backup)**: vollständiges Backup und Wiederherstellen von Apps und Daten als Root, komplett über eine WebUI gesteuert.
-- **[VDLiveUpdate](https://github.com/VD171/VDLiveUpdate)**: eine flashlose, inkrementelle Selbstaktualisierungs-Engine, eingebettet in KernelSU/APatch/Magisk-Module.
+- **[COPG-VD](https://github.com/VD171/COPG-VD)**: globales Geräte-Fingerprint-/Play-Integrity-Spoofing, geräteweit mit App-spezifischem Geltungsbereich und einer WebUI.
+- **[VDBackup](https://github.com/VD171/VD-Backup)**: vollständige Sicherung und Wiederherstellung von Apps und Daten als root, komplett über eine WebUI gesteuert.
+- **[VDGoogle](https://github.com/VD171/VD-Google)**: deine Google-Dienste (RCS, Wallet, Play-Integrity-Attestierungen), auf deinem Gerät gelesen, ohne Internet.
 - **[VDInstaller](https://github.com/VD171/VD-Installer)**: ein reibungsloser Root-Sideload-Installer für einzelne, Batch- und Split-APKs, mit einem Play-Protect-Verifier-Schalter und Fälschung der Installationsquelle.
+- **[VDInfos](https://github.com/VD171/VD-Infos)**: ein Geräte-Methoden-Debugger, der jeden Eintrag über jede Methode liest, die ihn lesen kann, und sie nebeneinander vergleicht.
+- **[VDLiveUpdate](https://github.com/VD171/VDLiveUpdate)**: eine flashlose, inkrementelle Selbstaktualisierungs-Engine, eingebettet in KernelSU/APatch/Magisk-Module.
+- **[VD-Modules](https://github.com/VD171/VD-Modules)**: unser Modul-Repository für MMRL/WebUI-X (installiere alle davon über deinen Root-Manager).
+- **[@VictorGabriel7Dev/build.prop](https://github.com/VictorGabriel7Dev/build.prop)**: ein Datensatz von Pixel-`build.prop`-Fingerprints (Fork von @T3SL4).
+- **[@VictorGabriel7Dev/mtproto-store](https://github.com/VictorGabriel7Dev/mtproto-store)**: Telegram als Objektspeicher über eine winzige Go-CLI nutzen.
 
 ## Kontakte
 
-- https://vd171.ru
-- https://vd.priv8.ru
-- **Telegram:** @VD_Priv8 https://t.me/VD_Priv8
-- **Channel:** @Priv8_VD https://t.me/Priv8_VD
-- **Discord:** @VD.Priv8 https://discord.com/users/1296831918989639721
-- **E-mail:** vd.priv8@pm.me
-- **XDA-Developers:** @VD171 https://xdaforums.com/m/vd171.4699873/
-- **XDA thread:** https://xdaforums.com/t/VD-Dropbear.4808524/
-- **GitHub:** @VD171 https://github.com/VD171
+- Site           : https://vd171.ru
+- Site           : https://vd.priv8.ru
+- Source         : https://github.com/VD171/VD-dropbear
+- GitHub         : [@VD171](https://github.com/VD171)
+- XDA-Developers : [@VD171](https://xdaforums.com/m/vd171.4699873/)
+- XDA thread     : [VD-Dropbear](https://xdaforums.com/t/VD-Dropbear.4808524/)
+- Telegram       : [@VD_Priv8](https://t.me/VD_Priv8)
+- Channel        : [@Priv8_VD](https://t.me/Priv8_VD)
+- Discord        : [@VD.Priv8](https://discord.com/users/1296831918989639721)
+- E-mail         : vd.priv8@pm.me
 
 ## Lizenz
 

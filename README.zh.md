@@ -162,26 +162,28 @@ shell，并且可以：
 
 ## 另见
 
-同一作者的姊妹项目：
-
-- **[VDInfos](https://github.com/VD171/VD-Infos)**：一个设备方法调试器，通过每一种能读取某一项的方法去读取它，并将结果并排对比。
-- **[VDGoogle](https://github.com/VD171/VD-Google)**：读取 Google 在你设备上记录的关于 RCS、Wallet 和 Play Integrity 的内容，完全在设备本地、无需联网。
-- **[COPG-VD](https://github.com/VD171/COPG-VD)**：一个设备伪装器，把全新的指纹转化为连贯一致的配置。
-- **[VDBackup](https://github.com/VD171/VD-Backup)**：以 root 身份对应用和数据进行完整备份与恢复，全程由 WebUI 驱动。
-- **[VDLiveUpdate](https://github.com/VD171/VDLiveUpdate)**: 一个无需刷入的增量自更新引擎，嵌入到 KernelSU/APatch/Magisk 模块中。
+- **[COPG-VD](https://github.com/VD171/COPG-VD)**：全局设备指纹 / Play Integrity 伪装，面向整机并支持按应用分别设置，带有 WebUI。
+- **[VDBackup](https://github.com/VD171/VD-Backup)**：以 root 权限完整备份和恢复应用与数据，完全从 WebUI 驱动。
+- **[VDGoogle](https://github.com/VD171/VD-Google)**：你的 Google 服务（RCS、Wallet、Play Integrity 证明），在你的设备上读取，无需联网。
 - **[VDInstaller](https://github.com/VD171/VD-Installer)**: 一个面向单个、批量和拆分 APK 的无摩擦 root 侧载安装器，带有 Play Protect 验证器开关和安装来源伪装。
+- **[VDInfos](https://github.com/VD171/VD-Infos)**：一个设备方法调试器，通过每一种能读取某项的方法来读取它，并将它们并排比较。
+- **[VDLiveUpdate](https://github.com/VD171/VDLiveUpdate)**: 一个无需刷入的增量自更新引擎，嵌入到 KernelSU/APatch/Magisk 模块中。
+- **[VD-Modules](https://github.com/VD171/VD-Modules)**：我们面向 MMRL/WebUI-X 的模块仓库（从你的 root 管理器安装全部这些）。
+- **[@VictorGabriel7Dev/build.prop](https://github.com/VictorGabriel7Dev/build.prop)**：一个 Pixel `build.prop` 指纹数据集（@T3SL4 的分支）。
+- **[@VictorGabriel7Dev/mtproto-store](https://github.com/VictorGabriel7Dev/mtproto-store)**：通过一个小巧的 Go CLI 把 Telegram 当作对象存储。
 
 ## 联系方式
 
-- https://vd171.ru
-- https://vd.priv8.ru
-- **Telegram：** @VD_Priv8 https://t.me/VD_Priv8
-- **频道：** @Priv8_VD https://t.me/Priv8_VD
-- **Discord：** @VD.Priv8 https://discord.com/users/1296831918989639721
-- **邮箱：** vd.priv8@pm.me
-- **XDA-Developers：** @VD171 https://xdaforums.com/m/vd171.4699873/
-- **XDA 主题：** https://xdaforums.com/t/VD-Dropbear.4808524/
-- **GitHub：** @VD171 https://github.com/VD171
+- Site           : https://vd171.ru
+- Site           : https://vd.priv8.ru
+- Source         : https://github.com/VD171/VD-dropbear
+- GitHub         : [@VD171](https://github.com/VD171)
+- XDA-Developers : [@VD171](https://xdaforums.com/m/vd171.4699873/)
+- XDA thread     : [VD-Dropbear](https://xdaforums.com/t/VD-Dropbear.4808524/)
+- Telegram       : [@VD_Priv8](https://t.me/VD_Priv8)
+- Channel        : [@Priv8_VD](https://t.me/Priv8_VD)
+- Discord        : [@VD.Priv8](https://discord.com/users/1296831918989639721)
+- E-mail         : vd.priv8@pm.me
 
 ## 许可证
 

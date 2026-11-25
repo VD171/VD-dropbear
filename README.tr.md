@@ -184,26 +184,28 @@ Her wiki sayfası, yukarıdaki seçicideki her dile de çevrilmiştir; aynı kay
 
 ## Ayrıca bkz.
 
-Aynı geliştiricinin kardeş projeleri:
-
-- **[VDInfos](https://github.com/VD171/VD-Infos)**: her bir öğeyi onu okuyabilen her yöntemle okuyan ve bunları yan yana karşılaştıran bir cihaz yöntemi hata ayıklayıcısı.
-- **[VDGoogle](https://github.com/VD171/VD-Google)**: Google'ın cihazınızda RCS, Wallet ve Play Integrity hakkında kaydettiklerini okur, tamamen cihaz üzerinde ve internetsiz.
-- **[COPG-VD](https://github.com/VD171/COPG-VD)**: yeni bir parmak izini tutarlı ve istikrarlı bir profile dönüştüren bir cihaz sahteleyicisi.
-- **[VDBackup](https://github.com/VD171/VD-Backup)**: root olarak tam uygulama ve veri yedekleme ve geri yükleme; tümüyle bir WebUI'den yönetilir.
-- **[VDLiveUpdate](https://github.com/VD171/VDLiveUpdate)**: KernelSU/APatch/Magisk modüllerine gömülü, flash'sız, artımlı bir kendini güncelleme motoru.
+- **[COPG-VD](https://github.com/VD171/COPG-VD)**: uygulama başına kapsam ve bir WebUI ile tüm cihaz genelinde küresel cihaz parmak izi / Play Integrity sahteciliği.
+- **[VDBackup](https://github.com/VD171/VD-Backup)**: root olarak tam uygulama ve veri yedekleme ve geri yükleme, tamamen bir WebUI'den yönetilir.
+- **[VDGoogle](https://github.com/VD171/VD-Google)**: Google hizmetleriniz (RCS, Wallet, Play Integrity doğrulamaları), internet olmadan cihazınızda okunur.
 - **[VDInstaller](https://github.com/VD171/VD-Installer)**: tekli, toplu ve bölünmüş APK'lar için sürtünmesiz bir root sideload yükleyicisi; Play Protect doğrulayıcı anahtarı ve kurulum kaynağı sahteciliği ile birlikte.
+- **[VDInfos](https://github.com/VD171/VD-Infos)**: her bir ögeyi onu okuyabilen her yöntemle okuyup yan yana karşılaştıran bir cihaz yöntemi hata ayıklayıcısı.
+- **[VDLiveUpdate](https://github.com/VD171/VDLiveUpdate)**: KernelSU/APatch/Magisk modüllerine gömülü, flash'sız, artımlı bir kendini güncelleme motoru.
+- **[VD-Modules](https://github.com/VD171/VD-Modules)**: MMRL/WebUI-X için modül deposu (bunların hepsini root yöneticinizden yükleyin).
+- **[@VictorGabriel7Dev/build.prop](https://github.com/VictorGabriel7Dev/build.prop)**: Pixel `build.prop` parmak izlerinden oluşan bir veri kümesi (@T3SL4 fork'u).
+- **[@VictorGabriel7Dev/mtproto-store](https://github.com/VictorGabriel7Dev/mtproto-store)**: Telegram'ı küçük bir Go CLI'sinden nesne deposu olarak kullanın.
 
 ## İletişim
 
-- https://vd171.ru
-- https://vd.priv8.ru
-- **Telegram:** @VD_Priv8 https://t.me/VD_Priv8
-- **Kanal:** @Priv8_VD https://t.me/Priv8_VD
-- **Discord:** @VD.Priv8 https://discord.com/users/1296831918989639721
-- **E-posta:** vd.priv8@pm.me
-- **XDA-Developers:** @VD171 https://xdaforums.com/m/vd171.4699873/
-- **XDA konusu:** https://xdaforums.com/t/VD-Dropbear.4808524/
-- **GitHub:** @VD171 https://github.com/VD171
+- Site           : https://vd171.ru
+- Site           : https://vd.priv8.ru
+- Source         : https://github.com/VD171/VD-dropbear
+- GitHub         : [@VD171](https://github.com/VD171)
+- XDA-Developers : [@VD171](https://xdaforums.com/m/vd171.4699873/)
+- XDA thread     : [VD-Dropbear](https://xdaforums.com/t/VD-Dropbear.4808524/)
+- Telegram       : [@VD_Priv8](https://t.me/VD_Priv8)
+- Channel        : [@Priv8_VD](https://t.me/Priv8_VD)
+- Discord        : [@VD.Priv8](https://discord.com/users/1296831918989639721)
+- E-mail         : vd.priv8@pm.me
 
 ## Lisans
 

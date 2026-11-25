@@ -177,26 +177,28 @@ rsync روی شبکه، بدون نشانه‌ی `adb_enabled`، بدون پرچ
 
 ## همچنین ببینید
 
-پروژه‌های خواهر از همان نویسنده:
-
-- **[VDInfos](https://github.com/VD171/VD-Infos)**: یک اشکال‌زدای متدهای دستگاه که هر مورد را از راه هر متدی که می‌تواند آن را بخواند می‌خواند و آن‌ها را کنار هم مقایسه می‌کند.
-- **[VDGoogle](https://github.com/VD171/VD-Google)**: آنچه را که Google دربارهٔ RCS، Wallet و Play Integrity روی دستگاه شما ثبت می‌کند می‌خواند، کاملاً روی دستگاه و بدون اینترنت.
-- **[COPG-VD](https://github.com/VD171/COPG-VD)**: یک جعل‌کنندهٔ دستگاه که یک اثرانگشت تازه را به یک نمایهٔ منسجم و سازگار تبدیل می‌کند.
-- **[VDBackup](https://github.com/VD171/VD-Backup)**: پشتیبان‌گیری و بازیابی کامل اپ و داده به‌صورت روت، که به‌طور کامل از یک WebUI رانده می‌شود.
-- **[VDLiveUpdate](https://github.com/VD171/VDLiveUpdate)**: یک موتور خودبه‌روزرسانی افزایشی و بدون فلش، تعبیه‌شده در ماژول‌های KernelSU/APatch/Magisk.
+- **[COPG-VD](https://github.com/VD171/COPG-VD)**: جعل سراسری اثر انگشت دستگاه / Play Integrity، در کل دستگاه با دامنهٔ هر برنامه و یک WebUI.
+- **[VDBackup](https://github.com/VD171/VD-Backup)**: پشتیبان‌گیری و بازیابی کامل اپ‌ها و داده‌ها به‌صورت root، که به‌طور کامل از یک WebUI هدایت می‌شود.
+- **[VDGoogle](https://github.com/VD171/VD-Google)**: سرویس‌های Google شما (RCS، Wallet، گواهی‌های Play Integrity)، خوانده‌شده روی دستگاه شما بدون اینترنت.
 - **[VDInstaller](https://github.com/VD171/VD-Installer)**: یک نصب‌کنندهٔ ساید‌لود روت‌شدهٔ بدون‌اصطکاک برای APKهای تکی، دسته‌ای و تقسیم‌شده، همراه با کلید تأییدکنندهٔ Play Protect و جعل منبع نصب.
+- **[VDInfos](https://github.com/VD171/VD-Infos)**: یک اشکال‌زدای روش‌های دستگاه که هر مورد را از طریق همه روش‌هایی که می‌توانند آن را بخوانند می‌خواند و آن‌ها را کنار هم مقایسه می‌کند.
+- **[VDLiveUpdate](https://github.com/VD171/VDLiveUpdate)**: یک موتور خودبه‌روزرسانی افزایشی و بدون فلش، تعبیه‌شده در ماژول‌های KernelSU/APatch/Magisk.
+- **[VD-Modules](https://github.com/VD171/VD-Modules)**: مخزن ماژول‌های ما برای MMRL/WebUI-X (همهٔ این‌ها را از مدیر روت خود نصب کنید).
+- **[@VictorGabriel7Dev/build.prop](https://github.com/VictorGabriel7Dev/build.prop)**: یک مجموعه‌داده از اثرهای `build.prop` دستگاه‌های Pixel (فورک از @T3SL4).
+- **[@VictorGabriel7Dev/mtproto-store](https://github.com/VictorGabriel7Dev/mtproto-store)**: از Telegram به عنوان یک فضای ذخیره‌سازی شیء از طریق یک CLI کوچک Go استفاده کنید.
 
 ## تماس‌ها
 
-- https://vd171.ru
-- https://vd.priv8.ru
-- **Telegram:** @VD_Priv8 https://t.me/VD_Priv8
-- **Channel:** @Priv8_VD https://t.me/Priv8_VD
-- **Discord:** @VD.Priv8 https://discord.com/users/1296831918989639721
-- **E-mail:** vd.priv8@pm.me
-- **XDA-Developers:** @VD171 https://xdaforums.com/m/vd171.4699873/
-- **XDA thread:** https://xdaforums.com/t/VD-Dropbear.4808524/
-- **GitHub:** @VD171 https://github.com/VD171
+- Site           : https://vd171.ru
+- Site           : https://vd.priv8.ru
+- Source         : https://github.com/VD171/VD-dropbear
+- GitHub         : [@VD171](https://github.com/VD171)
+- XDA-Developers : [@VD171](https://xdaforums.com/m/vd171.4699873/)
+- XDA thread     : [VD-Dropbear](https://xdaforums.com/t/VD-Dropbear.4808524/)
+- Telegram       : [@VD_Priv8](https://t.me/VD_Priv8)
+- Channel        : [@Priv8_VD](https://t.me/Priv8_VD)
+- Discord        : [@VD.Priv8](https://discord.com/users/1296831918989639721)
+- E-mail         : vd.priv8@pm.me
 
 ## مجوز
 

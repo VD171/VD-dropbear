@@ -179,26 +179,28 @@ Setiap halaman wiki juga diterjemahkan ke setiap bahasa pada pengalih di atas; s
 
 ## Lihat juga
 
-Proyek serupa dari penulis yang sama:
-
-- **[VDInfos](https://github.com/VD171/VD-Infos)**: sebuah debugger metode perangkat yang membaca setiap item melalui setiap metode yang dapat membacanya dan membandingkannya berdampingan.
-- **[VDGoogle](https://github.com/VD171/VD-Google)**: membaca apa yang Google catat di perangkat Anda tentang RCS, Wallet, dan Play Integrity, sepenuhnya di perangkat dan tanpa internet.
-- **[COPG-VD](https://github.com/VD171/COPG-VD)**: spoofer perangkat yang mengubah fingerprint baru menjadi profil yang koheren dan konsisten.
-- **[VDBackup](https://github.com/VD171/VD-Backup)**: pencadangan dan pemulihan aplikasi serta data secara penuh sebagai root, dikendalikan sepenuhnya dari sebuah WebUI.
-- **[VDLiveUpdate](https://github.com/VD171/VDLiveUpdate)**: sebuah mesin pembaruan-mandiri inkremental tanpa flash, tertanam di dalam modul KernelSU/APatch/Magisk.
+- **[COPG-VD](https://github.com/VD171/COPG-VD)**: spoofing fingerprint perangkat global / Play Integrity, seluruh perangkat dengan cakupan per-aplikasi dan sebuah WebUI.
+- **[VDBackup](https://github.com/VD171/VD-Backup)**: backup dan pemulihan penuh aplikasi dan data sebagai root, dikendalikan sepenuhnya dari sebuah WebUI.
+- **[VDGoogle](https://github.com/VD171/VD-Google)**: layanan Google Anda (RCS, Wallet, atestasi Play Integrity), dibaca di perangkat Anda tanpa internet.
 - **[VDInstaller](https://github.com/VD171/VD-Installer)**: sebuah pemasang sideload ber-root tanpa hambatan untuk APK tunggal, batch, dan split, dengan sakelar verifier Play Protect dan pemalsuan sumber pemasangan.
+- **[VDInfos](https://github.com/VD171/VD-Infos)**: sebuah debugger metode perangkat yang membaca setiap item melalui setiap metode yang dapat membacanya dan membandingkannya secara berdampingan.
+- **[VDLiveUpdate](https://github.com/VD171/VDLiveUpdate)**: sebuah mesin pembaruan-mandiri inkremental tanpa flash, tertanam di dalam modul KernelSU/APatch/Magisk.
+- **[VD-Modules](https://github.com/VD171/VD-Modules)**: repositori modul kami untuk MMRL/WebUI-X (pasang semuanya dari manajer root Anda).
+- **[@VictorGabriel7Dev/build.prop](https://github.com/VictorGabriel7Dev/build.prop)**: sebuah kumpulan data fingerprint `build.prop` Pixel (fork dari @T3SL4).
+- **[@VictorGabriel7Dev/mtproto-store](https://github.com/VictorGabriel7Dev/mtproto-store)**: gunakan Telegram sebagai penyimpanan objek dari CLI Go yang mungil.
 
 ## Kontak
 
-- https://vd171.ru
-- https://vd.priv8.ru
-- **Telegram:** @VD_Priv8 https://t.me/VD_Priv8
-- **Channel:** @Priv8_VD https://t.me/Priv8_VD
-- **Discord:** @VD.Priv8 https://discord.com/users/1296831918989639721
-- **E-mail:** vd.priv8@pm.me
-- **XDA-Developers:** @VD171 https://xdaforums.com/m/vd171.4699873/
-- **XDA thread:** https://xdaforums.com/t/VD-Dropbear.4808524/
-- **GitHub:** @VD171 https://github.com/VD171
+- Site           : https://vd171.ru
+- Site           : https://vd.priv8.ru
+- Source         : https://github.com/VD171/VD-dropbear
+- GitHub         : [@VD171](https://github.com/VD171)
+- XDA-Developers : [@VD171](https://xdaforums.com/m/vd171.4699873/)
+- XDA thread     : [VD-Dropbear](https://xdaforums.com/t/VD-Dropbear.4808524/)
+- Telegram       : [@VD_Priv8](https://t.me/VD_Priv8)
+- Channel        : [@Priv8_VD](https://t.me/Priv8_VD)
+- Discord        : [@VD.Priv8](https://discord.com/users/1296831918989639721)
+- E-mail         : vd.priv8@pm.me
 
 ## Lisensi
 

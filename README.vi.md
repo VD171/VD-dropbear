@@ -179,26 +179,28 @@ Mỗi trang wiki cũng được dịch sang mọi ngôn ngữ trong bộ chuyể
 
 ## Xem thêm
 
-Các dự án cùng tác giả:
-
-- **[VDInfos](https://github.com/VD171/VD-Infos)**: một trình gỡ lỗi phương thức thiết bị, đọc từng mục qua mọi phương thức có thể đọc nó và so sánh chúng cạnh nhau.
-- **[VDGoogle](https://github.com/VD171/VD-Google)**: đọc những gì Google ghi lại trên thiết bị của bạn về RCS, Wallet và Play Integrity, hoàn toàn trên thiết bị và không cần internet.
-- **[COPG-VD](https://github.com/VD171/COPG-VD)**: một trình giả mạo thiết bị biến một fingerprint mới thành một hồ sơ mạch lạc, nhất quán.
-- **[VDBackup](https://github.com/VD171/VD-Backup)**: sao lưu và khôi phục toàn bộ ứng dụng và dữ liệu với quyền root, điều khiển hoàn toàn từ một WebUI.
-- **[VDLiveUpdate](https://github.com/VD171/VDLiveUpdate)**: một engine tự cập nhật tăng dần không cần flash, được nhúng vào các module KernelSU/APatch/Magisk.
+- **[COPG-VD](https://github.com/VD171/COPG-VD)**: giả mạo fingerprint thiết bị toàn cục / Play Integrity, trên toàn thiết bị với phạm vi theo từng ứng dụng và một WebUI.
+- **[VDBackup](https://github.com/VD171/VD-Backup)**: sao lưu và khôi phục toàn bộ ứng dụng và dữ liệu với quyền root, điều khiển hoàn toàn từ WebUI.
+- **[VDGoogle](https://github.com/VD171/VD-Google)**: các dịch vụ Google của bạn (RCS, Wallet, chứng thực Play Integrity), đọc trên thiết bị của bạn mà không cần internet.
 - **[VDInstaller](https://github.com/VD171/VD-Installer)**: một trình cài đặt sideload với quyền root không ma sát cho các APK đơn, hàng loạt và phân tách, với công tắc trình xác minh Play Protect và giả mạo nguồn cài đặt.
+- **[VDInfos](https://github.com/VD171/VD-Infos)**: một trình gỡ lỗi phương thức thiết bị, đọc từng mục qua mọi phương thức có thể đọc được nó và so sánh chúng cạnh nhau.
+- **[VDLiveUpdate](https://github.com/VD171/VDLiveUpdate)**: một engine tự cập nhật tăng dần không cần flash, được nhúng vào các module KernelSU/APatch/Magisk.
+- **[VD-Modules](https://github.com/VD171/VD-Modules)**: kho module của chúng tôi cho MMRL/WebUI-X (cài đặt tất cả chúng từ trình quản lý root của bạn).
+- **[@VictorGabriel7Dev/build.prop](https://github.com/VictorGabriel7Dev/build.prop)**: một tập dữ liệu fingerprint `build.prop` của Pixel (fork từ @T3SL4).
+- **[@VictorGabriel7Dev/mtproto-store](https://github.com/VictorGabriel7Dev/mtproto-store)**: dùng Telegram làm kho lưu trữ đối tượng từ một CLI Go nhỏ gọn.
 
 ## Liên hệ
 
-- https://vd171.ru
-- https://vd.priv8.ru
-- **Telegram:** @VD_Priv8 https://t.me/VD_Priv8
-- **Kênh:** @Priv8_VD https://t.me/Priv8_VD
-- **Discord:** @VD.Priv8 https://discord.com/users/1296831918989639721
-- **E-mail:** vd.priv8@pm.me
-- **XDA-Developers:** @VD171 https://xdaforums.com/m/vd171.4699873/
-- **Chủ đề XDA:** https://xdaforums.com/t/VD-Dropbear.4808524/
-- **GitHub:** @VD171 https://github.com/VD171
+- Site           : https://vd171.ru
+- Site           : https://vd.priv8.ru
+- Source         : https://github.com/VD171/VD-dropbear
+- GitHub         : [@VD171](https://github.com/VD171)
+- XDA-Developers : [@VD171](https://xdaforums.com/m/vd171.4699873/)
+- XDA thread     : [VD-Dropbear](https://xdaforums.com/t/VD-Dropbear.4808524/)
+- Telegram       : [@VD_Priv8](https://t.me/VD_Priv8)
+- Channel        : [@Priv8_VD](https://t.me/Priv8_VD)
+- Discord        : [@VD.Priv8](https://discord.com/users/1296831918989639721)
+- E-mail         : vd.priv8@pm.me
 
 ## Giấy phép
 

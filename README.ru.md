@@ -183,26 +183,28 @@ CE). Это дало бы ложное чувство безопасности, 
 
 ## Смотрите также
 
-Родственные проекты того же автора:
-
-- **[VDInfos](https://github.com/VD171/VD-Infos)**: отладчик методов устройства, который читает каждый элемент всеми способами, которыми его можно прочитать, и сравнивает результаты бок о бок.
-- **[VDGoogle](https://github.com/VD171/VD-Google)**: читает то, что Google записывает на вашем устройстве о RCS, Wallet и Play Integrity, полностью на устройстве и без интернета.
-- **[COPG-VD](https://github.com/VD171/COPG-VD)**: спуфер устройства, который превращает свежий fingerprint в согласованный, непротиворечивый профиль.
+- **[COPG-VD](https://github.com/VD171/COPG-VD)**: глобальная подмена отпечатка устройства / Play Integrity, для всего устройства с областью на уровне приложений и WebUI.
 - **[VDBackup](https://github.com/VD171/VD-Backup)**: полное резервное копирование и восстановление приложений и данных с правами root, полностью управляемое из WebUI.
-- **[VDLiveUpdate](https://github.com/VD171/VDLiveUpdate)**: безфлешевый инкрементальный движок самообновления, встроенный в модули KernelSU/APatch/Magisk.
+- **[VDGoogle](https://github.com/VD171/VD-Google)**: ваши сервисы Google (RCS, Wallet, аттестации Play Integrity), прочитанные на вашем устройстве без интернета.
 - **[VDInstaller](https://github.com/VD171/VD-Installer)**: беспроблемный root-установщик sideload для одиночных, пакетных и раздельных APK, с переключателем верификатора Play Protect и подменой источника установки.
+- **[VDInfos](https://github.com/VD171/VD-Infos)**: отладчик методов устройства, который читает каждый элемент всеми методами, способными его прочитать, и сравнивает их бок о бок.
+- **[VDLiveUpdate](https://github.com/VD171/VDLiveUpdate)**: безфлешевый инкрементальный движок самообновления, встроенный в модули KernelSU/APatch/Magisk.
+- **[VD-Modules](https://github.com/VD171/VD-Modules)**: наш репозиторий модулей для MMRL/WebUI-X (установите их все из вашего root-менеджера).
+- **[@VictorGabriel7Dev/build.prop](https://github.com/VictorGabriel7Dev/build.prop)**: набор данных отпечатков `build.prop` устройств Pixel (форк @T3SL4).
+- **[@VictorGabriel7Dev/mtproto-store](https://github.com/VictorGabriel7Dev/mtproto-store)**: используйте Telegram как объектное хранилище из крошечного CLI на Go.
 
 ## Контакты
 
-- https://vd171.ru
-- https://vd.priv8.ru
-- **Telegram:** @VD_Priv8 https://t.me/VD_Priv8
-- **Канал:** @Priv8_VD https://t.me/Priv8_VD
-- **Discord:** @VD.Priv8 https://discord.com/users/1296831918989639721
-- **E-mail:** vd.priv8@pm.me
-- **XDA-Developers:** @VD171 https://xdaforums.com/m/vd171.4699873/
-- **Ветка XDA:** https://xdaforums.com/t/VD-Dropbear.4808524/
-- **GitHub:** @VD171 https://github.com/VD171
+- Site           : https://vd171.ru
+- Site           : https://vd.priv8.ru
+- Source         : https://github.com/VD171/VD-dropbear
+- GitHub         : [@VD171](https://github.com/VD171)
+- XDA-Developers : [@VD171](https://xdaforums.com/m/vd171.4699873/)
+- XDA thread     : [VD-Dropbear](https://xdaforums.com/t/VD-Dropbear.4808524/)
+- Telegram       : [@VD_Priv8](https://t.me/VD_Priv8)
+- Channel        : [@Priv8_VD](https://t.me/Priv8_VD)
+- Discord        : [@VD.Priv8](https://discord.com/users/1296831918989639721)
+- E-mail         : vd.priv8@pm.me
 
 ## Лицензия
 
