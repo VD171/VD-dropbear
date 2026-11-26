@@ -94,16 +94,17 @@ jobs:
 
       - name: Write release notes
         # House rules (do NOT change without the owner): the body ends with the canonical
-        # @Priv8_VD banner VERBATIM, carries a per-file sha256 block, and NEVER includes a
-        # "Generated with Claude" footer (that is for docs/wiki only).
+        # @Priv8_VD banner VERBATIM, carries a sha256 block for the zip and the binaries, and
+        # NEVER includes a "Generated with Claude" footer (that is for docs/wiki only).
         env:
           EXTRA_NOTES: ${{ github.event.inputs.notes }}
         run: |
           ver="${{ steps.pack.outputs.ver }}"
           zip="VD-dropbear-${ver}.zip"
           tmp="$(mktemp -d)"; unzip -q "$zip" -d "$tmp"
-          # sha256 of the zip, then of every file inside it
-          sums="$( sha256sum "$zip"; ( cd "$tmp" && find . -type f | sed 's#^\./##' | LC_ALL=C sort | while IFS= read -r f; do sha256sum "$f"; done ) )"
+          # sha256 of the zip, then of each shipped SSH binary (bin/<abi>/*). The full per-file
+          # set is noise here; it lives in bin/PROVENANCE.json. Owner: the zip + binaries is enough.
+          sums="$( sha256sum "$zip"; ( cd "$tmp" && find bin -type f ! -name '*.json' ! -name '*.sha256' | LC_ALL=C sort | while IFS= read -r f; do sha256sum "$f"; done ) )"
           rm -rf "$tmp"
           {
             echo "Standalone, fully configurable rooted SSH server for KernelSU, APatch and Magisk, with a WebUI."
@@ -118,6 +119,7 @@ jobs:
             echo "Full guide and reference: https://github.com/VD171/VD-dropbear/wiki"
             echo
             echo "### Checksums (sha256)"
+            echo "The module zip and the shipped per-ABI SSH binaries."
             echo
             echo '```'
             echo "$sums"
