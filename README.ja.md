@@ -23,18 +23,16 @@
 -->
 
 <p align="center">
-  <img src="module/webroot/assets/logo-wordmark.svg" alt="VD Dropbear" width="540">
+  <img src="module/webroot/assets/logo-wordmark.svg" alt="VD Dropbear" width="320">
 </p>
 
 # VD Dropbear
 
-<p>
+<p align="center">
+  <a href="https://github.com/VD171/VD-dropbear/releases/latest"><img src="https://img.shields.io/github/v/release/VD171/VD-dropbear?label=release&color=36e86a" alt="Release"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-Apache--2.0-1a7f37" alt="License"></a>
-  <img src="https://img.shields.io/badge/KernelSU-%E2%9C%94-635bff" alt="KernelSU">
-  <img src="https://img.shields.io/badge/APatch-%E2%9C%94-ff7043" alt="APatch">
-  <img src="https://img.shields.io/badge/Magisk-%E2%9C%94-00af9c" alt="Magisk">
+  <a href="https://github.com/VD171/VD-dropbear/releases"><img src="https://img.shields.io/github/downloads/VD171/VD-dropbear/total?label=downloads&color=8250df" alt="Downloads"></a>
   <a href="https://github.com/VD171/VD-dropbear/stargazers"><img src="https://img.shields.io/github/stars/VD171/VD-dropbear?color=d29922" alt="Stars"></a>
-  <a href="https://github.com/VD171/VD-dropbear/releases"><img src="https://img.shields.io/github/v/release/VD171/VD-dropbear?color=1a7f37" alt="Release"></a>
 </p>
 
 <p align="center">
@@ -55,6 +53,12 @@ KernelSU / APatch / Magisk モジュールとしてパッケージされた、**
 
 > ⚠️ **ログインはデフォルトで完全な ROOT シェルになります。** これをデバイスの鍵そのものと考えてください。
 > パスワードよりも公開鍵を優先し、ポートを公開インターネットに晒さないようにしてください。
+
+## スクリーンショット
+
+<p align="center">
+  <img src="screenshots/status.png" width="24%" alt="Status"> <img src="screenshots/settings.png" width="24%" alt="Settings"> <img src="screenshots/keys.png" width="24%" alt="Keys"> <img src="screenshots/passwords.png" width="24%" alt="Passwords">
+</p>
 
 ## なぜ
 
@@ -93,7 +97,7 @@ SFTP と rsync）を提供します。`adb_enabled` の痕跡も、USB デバッ
   クライアント、バックアップがすべて同じ接続上で動作します。
 - **あらゆる端末とエミュレーター。** `arm64-v8a`、`armeabi-v7a`、`x86`、`x86_64`。
 
-## 端末上の AI エージェント
+## AI エージェント
 
 常設の SSH エンドポイントは、あなたの端末を **自律型 AI エージェントが直接操作できる** ものに変えます。シェルや
 SSH 接続を扱えるエージェント（Claude Code、aider、LLM を組み込んだスクリプト、あなた自身の自動化など）は、
@@ -121,7 +125,7 @@ KernelSU、APatch、または Magisk のマネージャーでモジュールの 
 `ksud module install` / `apd module install`）、モジュールの **WebUI** を開いてポートを設定し鍵を追加してから、
 再起動してください（または **Action** を押して今すぐ起動します）。
 
-## セキュリティモデル
+## セキュリティ
 
 ### 秘密情報の置き場所: BFU と AFU
 
@@ -153,6 +157,14 @@ CE を再実装するだけです）。それは偽りの安心感を買うだ�
 スケジュールされた workflow が upstream を追跡して再ビルドするため、モジュールは常に最新に保たれます。
 [`.github/workflows/`](.github/workflows/) と [`CONTRIBUTING.md`](CONTRIBUTING.md) を参照してください。
 
+## 増分アップデート (VDLU)
+
+VD Dropbear は **[VDLiveUpdate](https://github.com/VD171/VDLiveUpdate) (VDLU)** エンジンを同梱しています（`vdlu/` にベンダリング）: モジュールは変更されたファイルだけを取得して自身を更新します（内容アドレス指定の blob + 署名付きの `manifest.json`）。`.zip` 全体を再ダウンロードしません。**Hardened** プロファイル: ed25519 署名は必須でダウングレードはブロックされ、完全な `.zip` はフォールバックとして有効なまま残ります。
+
+- **LIVE のみ**（再起動なし）: 更新は次回の起動時に `service.sh` 経由で適用されます（`setsid`、バックグラウンド、起動を決して止めません）。到達可能なフィードがないときは no-op です。
+- **状態**は `/data/adb/<module>/vdlu/`、モジュールの外にあるため、再フラッシュを生き延びます。
+- **WebUI:** 進捗トーストとキャンセルを備えた **Updates** パネル。自動更新はオプトイン（opt-in）です。
+
 ## ドキュメント
 
 <!-- vd-docs -->
@@ -160,7 +172,7 @@ CE を再実装するだけです）。それは偽りの安心感を買うだ�
 - **[ユーザーガイド](https://github.com/VD171/VD-dropbear/wiki/ja-USER-GUIDE)**: インストール、鍵、パスワード、接続、ファイル転送、BFU/AFU。
 - **[設定](https://github.com/VD171/VD-dropbear/wiki/ja-CONFIGURATION)**: すべての設定項目とそのデフォルト値。
 - **[アーキテクチャ](https://github.com/VD171/VD-dropbear/wiki/ja-ARCHITECTURE)** と **[ファイル構成](https://github.com/VD171/VD-dropbear/wiki/ja-FILE-STRUCTURE)**: モジュールとデーモンの仕組み、そして各ファイルの場所。
-- **[端末上の AI エージェント](https://github.com/VD171/VD-dropbear/wiki/ja-AI-AGENTS)**: 自律型エージェントを SSH 越しに安全に使う方法。
+- **[AI エージェント](https://github.com/VD171/VD-dropbear/wiki/ja-AI-AGENTS)**: 自律型エージェントを SSH 越しに安全に使う方法。
 - **[ビルド](https://github.com/VD171/VD-dropbear/wiki/ja-BUILDING)**: ビルドと、Android の crypt()／クロスコンパイルの経緯。
 - **[コントリビュート](CONTRIBUTING.md)** と **[セキュリティ](SECURITY.md)**。
 - **[Changelog](CHANGELOG.md)** と **[行動規範](CODE_OF_CONDUCT.md)**。
@@ -182,16 +194,15 @@ wiki の各ページは上の切り替えメニューにある各言語にも翻
 
 ## 連絡先
 
-- Site           : https://vd171.ru
-- Site           : https://vd.priv8.ru
-- Source         : https://github.com/VD171/VD-dropbear
-- GitHub         : [@VD171](https://github.com/VD171)
-- XDA-Developers : [@VD171](https://xdaforums.com/m/vd171.4699873/)
-- XDA thread     : [VD-Dropbear](https://xdaforums.com/t/VD-Dropbear.4808524/)
-- Telegram       : [@VD_Priv8](https://t.me/VD_Priv8)
-- Channel        : [@Priv8_VD](https://t.me/Priv8_VD)
-- Discord        : [@VD.Priv8](https://discord.com/users/1296831918989639721)
-- E-mail         : vd.priv8@pm.me
+- https://vd171.ru
+- https://vd.priv8.ru
+- **Telegram:** @VD_Priv8 https://t.me/VD_Priv8
+- **Channel:** @Priv8_VD https://t.me/Priv8_VD
+- **Discord:** @VD.Priv8 https://discord.com/users/1296831918989639721
+- **E-mail:** vd.priv8@pm.me
+- **XDA-Developers:** @VD171 https://xdaforums.com/m/vd171.4699873/
+- **XDA thread:** https://xdaforums.com/t/VD-Dropbear.4808524/
+- **GitHub:** @VD171 https://github.com/VD171
 
 ## ライセンス
 
@@ -210,3 +221,7 @@ VD Dropbear は独立した非公式のプロジェクトであり、いかな�
 ## Tags
 
 `SSH` `Dropbear` `KernelSU` `Magisk` `APatch` `root` `sshd` `remote-access` `openssh-alternative` `Android` `BFU` `VD-dropbear`
+
+---
+
+📣 **更新はチャンネルに参加してください:** @Priv8_VD https://t.me/Priv8_VD

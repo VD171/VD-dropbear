@@ -64,7 +64,7 @@ trạng thái ở dạng văn bản thuần) một tác nhân có thể tự tì
 - cấp cho tác nhân **thông tin xác thực riêng** của nó, không phải của cá nhân bạn, và trỏ nó tới một tài khoản có đặc quyền thấp hơn (`shell`) nếu bạn muốn giới hạn tầm với của nó;
 - giới hạn các bind vào những mạng bạn tin cậy: loopback hoặc một VPN thay vì Internet mở
   (xem [Cấu hình](CONFIGURATION.md));
-- giữ xác thực bằng mật khẩu tắt; một khóa có thể thu hồi và không bao giờ phải gõ ra;
+- giữ xác thực bằng mật khẩu tắt, một khóa có thể thu hồi và không bao giờ phải gõ ra;
 - bạn có thể thu hồi một khóa hoặc dừng daemon bất cứ lúc nào từ WebUI;
 - hãy nhớ một kết nối mặc định là một phiên root đầy đủ. Chỉ trao cho tác nhân phạm vi mà nó cần.
 
@@ -81,4 +81,4 @@ Qua USB, không ADB: bật chia sẻ kết nối USB và bind vào địa chỉ 
 
 ---
 
-> _Tài liệu này được tạo bằng Claude (Anthropic) và được duy trì bởi VD171. Chúng tôi hoan nghênh các chỉnh sửa và cải tiến; xem [CONTRIBUTING.md](CONTRIBUTING.md)._
+> _Tài liệu này được tạo bằng Claude (Anthropic) và được duy trì bởi VD171. Chúng tôi hoan nghênh các chỉnh sửa và cải tiến, xem [CONTRIBUTING.md](CONTRIBUTING.md)._

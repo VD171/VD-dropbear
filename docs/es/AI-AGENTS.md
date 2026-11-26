@@ -65,7 +65,7 @@ Esto es root, así que trátalo como root:
 - dale al agente su **propia credencial**, no la tuya personal, y apúntalo a una cuenta de menor privilegio (`shell`) si quieres limitar su alcance;
 - limita los binds a redes en las que confíes: loopback o una VPN en lugar de la Internet abierta
   (consulta [Configuración](CONFIGURATION.md));
-- mantén la autenticación por contraseña desactivada; una clave es revocable y nunca se teclea;
+- mantén la autenticación por contraseña desactivada, una clave es revocable y nunca se teclea;
 - puedes revocar una clave o detener el daemon en cualquier momento desde la WebUI;
 - recuerda que una conexión por defecto es una sesión root completa: dale al agente solo el alcance que necesita.
 
@@ -82,4 +82,4 @@ Por USB, sin ADB: activa el anclaje USB y vincula a su dirección USB para un en
 
 ---
 
-> _Esta documentación se generó con Claude (Anthropic) y la mantiene VD171. Las correcciones y mejoras son bienvenidas; consulta [CONTRIBUTING.md](CONTRIBUTING.md)._
+> _Esta documentación se generó con Claude (Anthropic) y la mantiene VD171. Las correcciones y mejoras son bienvenidas, consulta [CONTRIBUTING.md](CONTRIBUTING.md)._

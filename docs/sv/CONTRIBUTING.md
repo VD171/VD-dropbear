@@ -58,8 +58,8 @@ körtidskonfiguration. Håll gärna nya patchar små, dokumenterade och motivera
 
 ## Pull-förfrågningar
 
-- En logisk ändring per PR; beskriv motivet och säkerhetspåverkan.
-- Följ den befintliga skalstilen (POSIX `sh` / Android `mksh`; inga bashismer).
+- En logisk ändring per PR, beskriv motivet och säkerhetspåverkan.
+- Följ den befintliga skalstilen (POSIX `sh` / Android `mksh`, inga bashismer).
 - Varje fil bär en kort SPDX-header. Behåll den.
 - Uppdatera [`CHANGELOG.md`](../../CHANGELOG.md) under `[Unreleased]` för varje verklig, användarsynlig ändring.
 - Genom att skicka in en PR godkänner du att licensiera ditt bidrag under projektets [Apache-2.0](../../LICENSE)-licens.
@@ -67,7 +67,7 @@ körtidskonfiguration. Håll gärna nya patchar små, dokumenterade och motivera
 ## Översättningar
 
 README och dokumentationen underhålls på många språk (`README.<lang>.md`). Engelska är källan till
-sanningen; översättningar följer den. Om du förbättrar en översättning eller lägger till ett språk, håll
+sanningen, översättningar följer den. Om du förbättrar en översättning eller lägger till ett språk, håll
 strukturen och sektionsankarna identiska med den engelska versionen.
 
 ## Rapportera buggar och säkerhetsproblem
@@ -79,4 +79,4 @@ Använd ärendemallarna för buggar och funktionsförfrågningar. För allt som 
 
 ---
 
-> _Denna dokumentation genererades med Claude (Anthropic) och underhålls av VD171. Rättelser och förbättringar välkomnas; se [CONTRIBUTING.md](CONTRIBUTING.md)._
+> _Denna dokumentation genererades med Claude (Anthropic) och underhålls av VD171. Rättelser och förbättringar välkomnas, se [CONTRIBUTING.md](CONTRIBUTING.md)._

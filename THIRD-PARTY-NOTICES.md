@@ -28,7 +28,7 @@
 VD Dropbear's own code (the module scripts, WebUI, patches and configuration) is licensed under
 **Apache-2.0**: see [`LICENSE`](LICENSE). The module distribution also bundles the third-party binaries
 below, each under its own license. Those licenses, and the compliance obligations they carry, are
-listed here; the full license texts ship alongside the binaries (in `module/licenses/`).
+listed here, the full license texts ship alongside the binaries (in `module/licenses/`).
 
 | Component | Role | License | Source |
 |-----------|------|---------|--------|
@@ -52,4 +52,4 @@ with the GPL we:
   [`SECURITY.md`](SECURITY.md) / the project's contacts for three years from distribution.
 
 If you prefer a fully permissive distribution, rsync can be left out at build time (the SSH server and
-the OpenSSH file-transfer tools are all permissively licensed); the module works without it.
+the OpenSSH file-transfer tools are all permissively licensed), the module works without it.

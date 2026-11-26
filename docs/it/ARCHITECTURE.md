@@ -38,7 +38,7 @@ tutto ciò che è specifico è configurazione di runtime o un secret.
 - `module/common/vddropbear.sh`, la libreria centrale: carica la configurazione (con default
   incorporati sicuri), risolve il secret store, garantisce una host key, costruisce il vettore di
   argomenti di Dropbear e gestisce una singola istanza del daemon (start / stop / status / restart).
-- `module/service.sh`: punto d'ingresso all'avvio. Rispetta la politica di avvio BFU/AFU; in modalità
+- `module/service.sh`: punto d'ingresso all'avvio. Rispetta la politica di avvio BFU/AFU, in modalità
   AFU attende che lo storage credential-encrypted si sblocchi senza bloccare l'avvio.
 - `module/action.sh`, il pulsante **Action** del manager: (ri)avvia il daemon. Non legge mai lo stdin
   e distacca il daemon nella sua sessione, così il manager non si blocca.
@@ -54,6 +54,18 @@ corrisponde esattamente a `pgrep -x` (il `mksh` di Android non ha `exec -a`). Vi
 così da distaccarsi dal gruppo di processi del chiamante: è questo che impedisce all'Action del manager
 di bloccarsi.
 
+`setsid` non ha mai coperto i cgroups, e quella lacuna era una vera regressione: il pulsante Action e
+la WebUI girano dentro l'app del manager, così un daemon avviato da uno dei due ereditava il freezer
+cgroup dell'app (`/apps/uid_<uid>/pid_<pid>`). Il `CachedAppOptimizer` di Android congela quel cgroup
+non appena mette l'app in cache, e il daemon viene congelato con esso mentre tiene ancora il suo
+socket in ascolto. Le connessioni TCP continuano a completarsi perché il backlog vive nel kernel, ma
+nulla chiama `accept()`, così i client restano bloccati su
+"Connection established ... Local version string" senza errore su nessuno dei due lati, e
+`/proc/<pid>/wchan` riporta `do_freezer_trap` invece di `do_select`. Ora `vddb_escape_freezer` sposta
+la shell che fa lo spawn nel cgroup root (che il freezer non tocca mai) prima del fork, così il daemon
+eredita questa uscita. È un no-op al boot (già su `/`) e sulle piattaforme senza freezer, non
+"semplificare" lo spawn riportandolo a un `setsid` nudo.
+
 ## Il secret store (CE vs DE, BFU vs AFU)
 
 Le impostazioni non sono secret e risiedono sullo storage device-encrypted (`/data/adb/vddropbear`),
@@ -65,7 +77,7 @@ secret leggibili prima. Il modulo calcola quale store usare a ogni fase dell'avv
 
 ## L'insieme di patch
 
-Il server SSH resta Dropbear upstream; le nostre modifiche sono poche patch verificabili (vedi
+Il server SSH resta Dropbear upstream, le nostre modifiche sono poche patch verificabili (vedi
 [patches/README.md](../../patches/README.md)):
 
 - un banner d'identità neutro, configurabile a runtime;
@@ -78,11 +90,11 @@ Il server SSH resta Dropbear upstream; le nostre modifiche sono poche patch veri
 Una pagina statica nella WebUI del manager (KernelSU / APatch / WebUI-X). Guida
 `module/common/vddb-webui.sh` attraverso il bridge `ksu.exec`: stato, start/stop/restart, lettura/scrittura
 della configurazione e gestione di chiavi e account password. Tutti i dati attraversano il bridge
-codificati in base64, così la shell non li interpreta mai; gli hash delle password sono calcolati nel
+codificati in base64, così la shell non li interpreta mai, gli hash delle password sono calcolati nel
 browser con WebCrypto, così la password in chiaro non lascia mai la pagina.
 
 <!-- doc-footer -->
 
 ---
 
-> _Questa documentazione è stata generata con Claude (Anthropic) ed è gestita da VD171. Correzioni e miglioramenti sono benvenuti; vedi [CONTRIBUTING.md](CONTRIBUTING.md)._
+> _Questa documentazione è stata generata con Claude (Anthropic) ed è gestita da VD171. Correzioni e miglioramenti sono benvenuti, vedi [CONTRIBUTING.md](CONTRIBUTING.md)._

@@ -23,18 +23,16 @@
 -->
 
 <p align="center">
-  <img src="module/webroot/assets/logo-wordmark.svg" alt="VD Dropbear" width="540">
+  <img src="module/webroot/assets/logo-wordmark.svg" alt="VD Dropbear" width="320">
 </p>
 
 # VD Dropbear
 
-<p>
+<p align="center">
+  <a href="https://github.com/VD171/VD-dropbear/releases/latest"><img src="https://img.shields.io/github/v/release/VD171/VD-dropbear?label=release&color=36e86a" alt="Release"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-Apache--2.0-1a7f37" alt="License"></a>
-  <img src="https://img.shields.io/badge/KernelSU-%E2%9C%94-635bff" alt="KernelSU">
-  <img src="https://img.shields.io/badge/APatch-%E2%9C%94-ff7043" alt="APatch">
-  <img src="https://img.shields.io/badge/Magisk-%E2%9C%94-00af9c" alt="Magisk">
+  <a href="https://github.com/VD171/VD-dropbear/releases"><img src="https://img.shields.io/github/downloads/VD171/VD-dropbear/total?label=downloads&color=8250df" alt="Downloads"></a>
   <a href="https://github.com/VD171/VD-dropbear/stargazers"><img src="https://img.shields.io/github/stars/VD171/VD-dropbear?color=d29922" alt="Stars"></a>
-  <a href="https://github.com/VD171/VD-dropbear/releases"><img src="https://img.shields.io/github/v/release/VD171/VD-dropbear?color=1a7f37" alt="Release"></a>
 </p>
 
 <p align="center">
@@ -56,6 +54,12 @@
 > ⚠️ **Вход по умолчанию даёт полноценный ROOT-шелл.** Относитесь к этому как к
 > ключам от устройства: предпочитайте открытые ключи паролям и не выставляйте порт в публичный Интернет.
 
+## Снимки экрана
+
+<p align="center">
+  <img src="screenshots/status.png" width="24%" alt="Status"> <img src="screenshots/settings.png" width="24%" alt="Settings"> <img src="screenshots/keys.png" width="24%" alt="Keys"> <img src="screenshots/passwords.png" width="24%" alt="Passwords">
+</p>
+
 ## Зачем
 
 Штатным способом получить шелл на собственном телефоне в Android служит ADB (отладка по USB), и его
@@ -74,7 +78,7 @@ root-шелл, SFTP и rsync по сети, без выдающего вас `ad
 ## Возможности
 
 - **Всегда один демон.** Он запускается при загрузке и по кнопке **Action** в менеджере, а из
-  WebUI вы в любой момент можете его **запустить / остановить / перезапустить**; никогда не больше
+  WebUI вы в любой момент можете его **запустить / остановить / перезапустить**, никогда не больше
   одного экземпляра.
 - **Всё настраивается** из WebUI (или в `/data/adb/vddropbear/config`):
   - порт и привязка к loopback / всем / IPv4 / IPv6 / конкретным адресам
@@ -97,7 +101,7 @@ root-шелл, SFTP и rsync по сети, без выдающего вас `ad
 - **SSH по USB, без ADB.** Включите USB-модем и привяжите демон к USB-адресу: та же сессия по кабелю, быстрее и стабильнее wifi при больших передачах.
 - **Любое устройство и эмулятор.** `arm64-v8a`, `armeabi-v7a`, `x86`, `x86_64`.
 
-## ИИ-агенты на вашем устройстве
+## ИИ-агенты
 
 Постоянная SSH-точка превращает ваш телефон в то, чем **автономный ИИ-агент может управлять
 напрямую**. Любой агент, умеющий работать с шеллом или SSH-соединением (Claude Code, aider, скрипт
@@ -115,7 +119,7 @@ Linux-подобный шелл и может:
 и статус в виде обычного текста), агент может сам разобраться, как им пользоваться, без догадок.
 
 > **По умолчанию root, поэтому и относитесь к нему как к root.** Вход по умолчанию даёт права root, но
-> можно войти и под учётной записью с меньшими привилегиями (`shell`, `system`); см. предупреждение
+> можно войти и под учётной записью с меньшими привилегиями (`shell`, `system`), см. предупреждение
 > ниже. Передавая доступ агенту, заведите ему собственные учётные данные (не ваш личный ключ),
 > направьте его на учётную запись с меньшими привилегиями, например `shell`, если хотите ограничить
 > его охват, ограничьте привязки доверенными сетями (loopback или VPN, а не открытый
@@ -128,7 +132,7 @@ Linux-подобный шелл и может:
 `ksud module install` / `apd module install`), откройте **WebUI** модуля, чтобы задать порт и
 добавить свои ключи, затем перезагрузитесь (или нажмите **Action**, чтобы запустить его сразу).
 
-## Модель безопасности
+## Безопасность
 
 ### Где хранятся секреты: BFU или AFU
 
@@ -139,7 +143,7 @@ Linux-подобный шелл и может:
 (After First Unlock).
 
 - **Режим AFU (по умолчанию, `START_IN_BFU=0`):** демон ждёт разблокировки и читает свой хост-ключ,
-  `authorized_keys` и хеши паролей из CE-хранилища. Максимальная защита; SSH работает только после
+  `authorized_keys` и хеши паролей из CE-хранилища. Максимальная защита, SSH работает только после
   того, как устройство хотя бы раз было разблокировано с момента загрузки.
 - **Режим BFU (`START_IN_BFU=1`):** демон запускается до разблокировки, чтобы вы могли подключиться
   по SSH заранее (например, чтобы разблокировать устройство удалённо). Его секреты при этом лежат в
@@ -148,7 +152,7 @@ Linux-подобный шелл и может:
 
 Мы намеренно **не** добавляем собственное шифрование поверх CE: оно уже зашифровано учётными данными
 пользователя, а добавление ещё одного шифра потребовало бы ключа, который где-то должен храниться
-(в DE он был бы открыт; а вывод его из учётных данных пользователя является просто повторной реализацией
+(в DE он был бы открыт, а вывод его из учётных данных пользователя является просто повторной реализацией
 CE). Это дало бы ложное чувство безопасности, а не реальную защиту.
 
 ### Пароли
@@ -166,6 +170,14 @@ CE). Это дало бы ложное чувство безопасности, 
 пересобирает проект, поэтому модуль остаётся актуальным. См. [`.github/workflows/`](.github/workflows/)
 и [`CONTRIBUTING.md`](CONTRIBUTING.md).
 
+## Инкрементальные обновления (VDLU)
+
+VD Dropbear поставляется с движком **[VDLiveUpdate](https://github.com/VD171/VDLiveUpdate) (VDLU)** (встроен в `vdlu/`): модуль обновляет себя сам, загружая только изменившиеся файлы (адресуемые по содержимому блобы + подписанный `manifest.json`), вместо повторной загрузки всего `.zip`. Профиль **Hardened**: подпись ed25519 обязательна и понижения версии заблокированы, полный `.zip` остаётся действительным как запасной вариант.
+
+- **Только LIVE** (без перезагрузки): обновления применяются при следующей загрузке через `service.sh` (`setsid`, в фоне, никогда не задерживает загрузку), no-op, когда ни один фид недоступен.
+- **Состояние** в `/data/adb/<module>/vdlu/`, вне модуля, чтобы оно пережило перепрошивку.
+- **WebUI:** панель **Updates** с тостом прогресса и отменой, автообновление включается по желанию (opt-in).
+
 ## Документация
 
 <!-- vd-docs -->
@@ -173,12 +185,12 @@ CE). Это дало бы ложное чувство безопасности, 
 - **[Руководство пользователя](https://github.com/VD171/VD-dropbear/wiki/ru-USER-GUIDE)**: установка, ключи, пароли, подключение, передача файлов, BFU/AFU.
 - **[Конфигурация](https://github.com/VD171/VD-dropbear/wiki/ru-CONFIGURATION)**: каждая настройка со значениями по умолчанию.
 - **[Архитектура](https://github.com/VD171/VD-dropbear/wiki/ru-ARCHITECTURE)** и **[Структура файлов](https://github.com/VD171/VD-dropbear/wiki/ru-FILE-STRUCTURE)**: как работают модуль и демон и где что находится.
-- **[ИИ-агенты на вашем устройстве](https://github.com/VD171/VD-dropbear/wiki/ru-AI-AGENTS)**: безопасное использование автономного агента по SSH.
+- **[ИИ-агенты](https://github.com/VD171/VD-dropbear/wiki/ru-AI-AGENTS)**: безопасное использование автономного агента по SSH.
 - **[Сборка](https://github.com/VD171/VD-dropbear/wiki/ru-BUILDING)**: сборка и история crypt()/кросс-компиляции на Android.
 - **[Участие в разработке](CONTRIBUTING.md)** и **[Безопасность](SECURITY.md)**.
 - **[Changelog](CHANGELOG.md)** и **[Кодекс поведения](CODE_OF_CONDUCT.md)**.
 
-Каждая страница вики также переведена на каждый язык из переключателя выше; те же исходники лежат в [`docs/`](docs/).
+Каждая страница вики также переведена на каждый язык из переключателя выше, те же исходники лежат в [`docs/`](docs/).
 <!-- /vd-docs -->
 
 ## Смотрите также
@@ -195,31 +207,34 @@ CE). Это дало бы ложное чувство безопасности, 
 
 ## Контакты
 
-- Site           : https://vd171.ru
-- Site           : https://vd.priv8.ru
-- Source         : https://github.com/VD171/VD-dropbear
-- GitHub         : [@VD171](https://github.com/VD171)
-- XDA-Developers : [@VD171](https://xdaforums.com/m/vd171.4699873/)
-- XDA thread     : [VD-Dropbear](https://xdaforums.com/t/VD-Dropbear.4808524/)
-- Telegram       : [@VD_Priv8](https://t.me/VD_Priv8)
-- Channel        : [@Priv8_VD](https://t.me/Priv8_VD)
-- Discord        : [@VD.Priv8](https://discord.com/users/1296831918989639721)
-- E-mail         : vd.priv8@pm.me
+- https://vd171.ru
+- https://vd.priv8.ru
+- **Telegram:** @VD_Priv8 https://t.me/VD_Priv8
+- **Channel:** @Priv8_VD https://t.me/Priv8_VD
+- **Discord:** @VD.Priv8 https://discord.com/users/1296831918989639721
+- **E-mail:** vd.priv8@pm.me
+- **XDA-Developers:** @VD171 https://xdaforums.com/m/vd171.4699873/
+- **XDA thread:** https://xdaforums.com/t/VD-Dropbear.4808524/
+- **GitHub:** @VD171 https://github.com/VD171
 
 ## Лицензия
 
-Собственный код VD Dropbear распространяется под **Apache-2.0**; см. [LICENSE](LICENSE). Модуль также
+Собственный код VD Dropbear распространяется под **Apache-2.0**, см. [LICENSE](LICENSE). Модуль также
 включает сторонние бинарники: [Dropbear](https://matt.ucc.asn.au/dropbear/) (лицензия в стиле MIT),
-`sftp-server` и `scp` из OpenSSH (BSD) и `rsync` (GPL-3.0), каждый под своей лицензией; см.
+`sftp-server` и `scp` из OpenSSH (BSD) и `rsync` (GPL-3.0), каждый под своей лицензией, см.
 [THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md), в том числе о том, как мы соблюдаем GPL для rsync.
 На наш код под Apache-2.0 это не влияет (бинарник под GPL лишь агрегирован, а не слинкован).
 
 ## Товарные знаки
 
 VD Dropbear является независимым неофициальным проектом, не связанным с какими-либо третьими сторонами и не
-одобренным ими. «Android» является товарным знаком Google LLC; «SSH» является зарегистрированным товарным знаком
+одобренным ими. «Android» является товарным знаком Google LLC. «SSH» является зарегистрированным товарным знаком
 SSH Communications Security. VD Dropbear работает целиком на вашем устройстве.
 
 ## Tags
 
 `SSH` `Dropbear` `KernelSU` `Magisk` `APatch` `root` `sshd` `remote-access` `openssh-alternative` `Android` `BFU` `VD-dropbear`
+
+---
+
+📣 **Подпишитесь на канал для обновлений:** @Priv8_VD https://t.me/Priv8_VD

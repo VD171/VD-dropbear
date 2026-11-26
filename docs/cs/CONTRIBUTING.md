@@ -58,8 +58,8 @@ a běhová konfigurace. Nové záplaty prosím udržuj malé, zdokumentované a 
 
 ## Pull requesty
 
-- Jedna logická změna na jeden PR; popiš motivaci a bezpečnostní dopad.
-- Drž se stávajícího stylu shellu (POSIX `sh` / Android `mksh`; žádné bashismy).
+- Jedna logická změna na jeden PR, popiš motivaci a bezpečnostní dopad.
+- Drž se stávajícího stylu shellu (POSIX `sh` / Android `mksh`, žádné bashismy).
 - Každý soubor nese krátkou hlavičku SPDX. Zachovej ji.
 - Aktualizuj [`CHANGELOG.md`](../../CHANGELOG.md) pod `[Unreleased]` u každé reálné změny viditelné pro uživatele.
 - Odesláním PR souhlasíš s licencováním svého příspěvku pod licencí projektu [Apache-2.0](../../LICENSE).
@@ -79,4 +79,4 @@ souborem [`SECURITY.md`](SECURITY.md) a nahlas to soukromě místo otevření ve
 
 ---
 
-> _Tato dokumentace byla vytvořena pomocí Claude (Anthropic) a spravuje ji VD171. Opravy a vylepšení jsou vítány; viz [CONTRIBUTING.md](CONTRIBUTING.md)._
+> _Tato dokumentace byla vytvořena pomocí Claude (Anthropic) a spravuje ji VD171. Opravy a vylepšení jsou vítány, viz [CONTRIBUTING.md](CONTRIBUTING.md)._

@@ -62,7 +62,7 @@ lämnar aldrig sidan.
 ## 4. Välj en port och var du vill lyssna
 
 Under **Settings**, ange **Port** och välj bindningarna. Som standard lyssnar VD Dropbear bara på
-**loopback**; för att nå den från ditt LAN eller ett VPN, aktivera de gränssnitt du vill ha. Undvik
+**loopback**, för att nå den från ditt LAN eller ett VPN, aktivera de gränssnitt du vill ha. Undvik
 **Listen on all interfaces** om du inte förstår exponeringen.
 
 Tryck på **Save & restart** för att tillämpa, och sedan **Start** om den inte redan körs.
@@ -120,10 +120,10 @@ en medveten, dokumenterad avvägning. Se [Säkerhetsmodell](#) i README.
 - **Kan inte ansluta från en annan dator.** Du är troligen fortfarande bunden endast till loopback.
   Aktivera det gränssnitt du behöver och starta om.
 - **SFTP/scp misslyckas men skalet fungerar.** Se till att den medföljande `sftp-server` levererades
-  för din ABI; WebUI:ns status visar den upptäckta ABI:n.
+  för din ABI, WebUI:ns status visar den upptäckta ABI:n.
 
 <!-- doc-footer -->
 
 ---
 
-> _Denna dokumentation genererades med Claude (Anthropic) och underhålls av VD171. Rättelser och förbättringar välkomnas; se [CONTRIBUTING.md](CONTRIBUTING.md)._
+> _Denna dokumentation genererades med Claude (Anthropic) och underhålls av VD171. Rättelser och förbättringar välkomnas, se [CONTRIBUTING.md](CONTRIBUTING.md)._

@@ -54,15 +54,15 @@ De patchset is bewust minimaal en controleerbaar: een neutrale/configureerbare i
 
 ## Pull requests
 
-- Eén logische wijziging per PR; beschrijf de motivatie en de beveiligingsimpact.
-- Sluit aan bij de bestaande shellstijl (POSIX `sh` / Android `mksh`; geen bashisms).
+- Eén logische wijziging per PR, beschrijf de motivatie en de beveiligingsimpact.
+- Sluit aan bij de bestaande shellstijl (POSIX `sh` / Android `mksh`, geen bashisms).
 - Elk bestand draagt een korte SPDX-header. Houd die.
 - Werk [`CHANGELOG.md`](../../CHANGELOG.md) bij onder `[Unreleased]` voor elke echte, voor gebruikers zichtbare wijziging.
 - Door een PR in te dienen ga je ermee akkoord je bijdrage te licentiëren onder de [Apache-2.0](../../LICENSE)-licentie van het project.
 
 ## Vertalingen
 
-De README en documentatie worden in veel talen onderhouden (`README.<lang>.md`). Engels is de bron van waarheid; vertalingen volgen die. Als je een vertaling verbetert of een taal toevoegt, houd dan de structuur en de sectieankers identiek aan de Engelse versie.
+De README en documentatie worden in veel talen onderhouden (`README.<lang>.md`). Engels is de bron van waarheid, vertalingen volgen die. Als je een vertaling verbetert of een taal toevoegt, houd dan de structuur en de sectieankers identiek aan de Engelse versie.
 
 ## Bugs en beveiligingsproblemen melden
 
@@ -72,4 +72,4 @@ Gebruik de issue-templates voor bugs en functieverzoeken. Voor alles wat een toe
 
 ---
 
-> _Deze documentatie is gegenereerd met Claude (Anthropic) en wordt onderhouden door VD171. Correcties en verbeteringen zijn welkom; zie [CONTRIBUTING.md](CONTRIBUTING.md)._
+> _Deze documentatie is gegenereerd met Claude (Anthropic) en wordt onderhouden door VD171. Correcties en verbeteringen zijn welkom, zie [CONTRIBUTING.md](CONTRIBUTING.md)._

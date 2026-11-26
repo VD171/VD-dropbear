@@ -66,7 +66,7 @@ Bu root'tur, o yüzden ona root gibi davranın:
 - ajana kişisel olanınızı değil, kendi **kimlik bilgisini** verin ve erişimini sınırlamak istiyorsanız onu daha düşük ayrıcalıklı bir hesaba (`shell`) yönlendirin;
 - bağlamaları güvendiğiniz ağlarla sınırlandırın: açık internet yerine loopback veya bir VPN
   (bkz. [Yapılandırma](CONFIGURATION.md));
-- parola kimlik doğrulamasını kapalı tutun; bir anahtar geri alınabilir ve asla yazılmaz;
+- parola kimlik doğrulamasını kapalı tutun, bir anahtar geri alınabilir ve asla yazılmaz;
 - bir anahtarı istediğiniz zaman WebUI'den geri alabilir veya daemon'u durdurabilirsiniz;
 - varsayılan bir bağlantının tam bir root oturumu olduğunu unutmayın. Ajana yalnızca ihtiyaç duyduğu erişimi verin.
 
@@ -77,10 +77,10 @@ Bu root'tur, o yüzden ona root gibi davranın:
 3. Yalnızca loopback'e veya VPN'inize, varsayılan olmayan bir bağlantı noktasında bağlayın.
 4. Ajanın SSH yapılandırmasını cihaza yönlendirin ve çalışmasına izin verin.
 
-USB üzerinden, ADB olmadan: USB bağlantı paylaşımını açın ve yalnızca kablo bağlantısı için USB adresine bağlayın; kabloyla bağlı bir dizüstünde çalışan bir aracı için kullanışlıdır. Kullanıcı kılavuzuna bakın.
+USB üzerinden, ADB olmadan: USB bağlantı paylaşımını açın ve yalnızca kablo bağlantısı için USB adresine bağlayın, kabloyla bağlı bir dizüstünde çalışan bir aracı için kullanışlıdır. Kullanıcı kılavuzuna bakın.
 
 <!-- doc-footer -->
 
 ---
 
-> _Bu belgeler Claude (Anthropic) ile oluşturulmuş olup VD171 tarafından yürütülmektedir. Düzeltmeler ve iyileştirmeler memnuniyetle karşılanır; bkz. [CONTRIBUTING.md](CONTRIBUTING.md)._
+> _Bu belgeler Claude (Anthropic) ile oluşturulmuş olup VD171 tarafından yürütülmektedir. Düzeltmeler ve iyileştirmeler memnuniyetle karşılanır, bkz. [CONTRIBUTING.md](CONTRIBUTING.md)._

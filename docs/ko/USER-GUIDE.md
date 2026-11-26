@@ -54,7 +54,7 @@ cat ~/.ssh/id_ed25519.pub     # paste this into the WebUI
 
 ## 4. 포트와 수신 위치 선택
 
-**Settings** 에서 **Port** 를 설정하고 바인드를 선택합니다. 기본적으로 VD Dropbear는 **loopback** 에서만 수신합니다; LAN이나 VPN에서 접근하려면 원하는 인터페이스를 켜십시오. 노출을 이해하지 못한다면 **Listen on all interfaces** 는 피하십시오.
+**Settings** 에서 **Port** 를 설정하고 바인드를 선택합니다. 기본적으로 VD Dropbear는 **loopback** 에서만 수신합니다, LAN이나 VPN에서 접근하려면 원하는 인터페이스를 켜십시오. 노출을 이해하지 못한다면 **Listen on all interfaces** 는 피하십시오.
 
 적용하려면 **Save & restart** 를 누르고, 아직 실행 중이 아니면 **Start** 를 누르십시오.
 
@@ -102,7 +102,7 @@ scp -P 2222 file root@192.168.42.129:/sdcard/
 - **시작되지 않음.** `/data/adb/vddropbear/state/daemon.log` 를 확인하십시오. **Enabled** 가 켜져 있고 호스트 키가 생성될 수 있었는지 확인하십시오.
 - **키 거부됨.** 공개 키 줄이 클라이언트가 제시하는 것과 정확히 같은지, 그리고 로그인하는 사용자명이 시스템이 해석하는 것(보통 `root`)인지 확인하십시오.
 - **다른 기기에서 연결할 수 없음.** 아마 아직 루프백에만 바인드되어 있을 것입니다. 필요한 인터페이스를 켜고 재시작하십시오.
-- **SFTP/scp는 실패하지만 셸은 동작함.** 함께 제공되는 `sftp-server` 가 여러분의 ABI용으로 배포되었는지 확인하십시오; WebUI 상태에 감지된 ABI가 표시됩니다.
+- **SFTP/scp는 실패하지만 셸은 동작함.** 함께 제공되는 `sftp-server` 가 여러분의 ABI용으로 배포되었는지 확인하십시오, WebUI 상태에 감지된 ABI가 표시됩니다.
 
 <!-- doc-footer -->
 

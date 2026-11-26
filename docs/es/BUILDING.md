@@ -31,7 +31,7 @@
 
 VD Dropbear entrega el **[Dropbear](https://github.com/mkj/dropbear) upstream** (la etiqueta fijada en
 [`UPSTREAM_VERSION`](../../UPSTREAM_VERSION)) más el conjunto de parches pequeño y auditable en
-[`patches/`](../../patches/). La CI lo compila; puedes reproducirlo localmente.
+[`patches/`](../../patches/). La CI lo compila, puedes reproducirlo localmente.
 
 ## Inicio rápido
 
@@ -50,9 +50,9 @@ ABIS="arm64-v8a" ./scripts/build.sh
 luego compila de forma cruzada `vddropbear` y `dropbearkey` en `module/bin/<abi>/`. La salida es un ELF
 **dinámico** (`file` informa `dynamically linked, interpreter /system/bin/linker64 … for Android 24`),
 enlazado contra la libc bionic que todo dispositivo Android ya tiene. libtomcrypt queda incrustado
-dentro del binario; solo la biblioteca C es dinámica. Véase [Dinámico, no static-PIE](#dinámico-no-static-pie).
+dentro del binario, solo la biblioteca C es dinámica. Véase [Dinámico, no static-PIE](#dinámico-no-static-pie).
 
-Los binarios **no se commitean**; los compila la CI en cada etiqueta y se adjuntan a la release.
+Los binarios **no se commitean**, los compila la CI en cada etiqueta y se adjuntan a la release.
 Véase [`.gitignore`](../../.gitignore).
 
 ---
@@ -63,7 +63,7 @@ La autenticación por contraseña de Dropbear está escrita para un host Unix no
 `/etc/shadow`. Android **no tiene ninguno de los dos**, y eso choca con la compilación en tres lugares
 distintos. Esta sección documenta cada uno de ellos, porque es exactamente el tipo de cosa dolorosa de
 redescubrir. Todo ello lo gestiona el parche
-[`0003-password-file.patch`](../../patches/0003-password-file.patch); nada de lo de abajo se deja al azar
+[`0003-password-file.patch`](../../patches/0003-password-file.patch), nada de lo de abajo se deja al azar
 en tiempo de ejecución.
 
 ### 1. bionic no tiene un `crypt()` utilizable
@@ -142,7 +142,7 @@ estáticos. Esto importa, y se aprendió por las malas, **en un dispositivo real
 - Una compilación **static-PIE** *parece* estar bien (`file` informa un `static-pie executable` limpio)
   y enlaza sin error, pero **da SIGSEGV en el instante en que corre en el dispositivo** (verificado en
   un teléfono arm64 Android 16, exit 139, sin tombstone útil). Los ejecutables estáticos en Android son
-  frágiles; la forma fiable es un binario dinámico normal, que también es como se entrega todo dropbear
+  frágiles, la forma fiable es un binario dinámico normal, que también es como se entrega todo dropbear
   de Android consolidado.
 - Una compilación **estática, no-PIE** ni siquiera arranca: bionic la rechaza con
   `executable's TLS segment is underaligned … needs to be at least 64 for ARM64 Bionic`.
@@ -158,14 +158,14 @@ inicio de sesión por contraseña tenía éxito, con una contraseña incorrecta 
 ## Sin la flag `-E`
 
 El servidor se compila con `--disable-syslog`, así que siempre registra en stderr y la opción `-E` del
-upstream ("log to stderr") **no existe** en este binario; pasarla imprime `Invalid option -E` y el
+upstream ("log to stderr") **no existe** en este binario, pasarla imprime `Invalid option -E` y el
 daemon nunca arranca. Por eso el constructor de argumentos del módulo no pasa `-E`.
 
 ## openpty
 
 Las sesiones PTY interactivas usan `openpty()`. bionic lo declara en `<pty.h>`, y el `configure` cruzado
 de Dropbear lo detecta con el NDK (`HAVE_OPENPTY` se establece, `HAVE_PTY_H 1`), así que **no hace falta
-ningún parche**; los PTY funcionan de inmediato. (El uso no interactivo como exec, SFTP, rsync y reenvío
+ningún parche**, los PTY funcionan de inmediato. (El uso no interactivo como exec, SFTP, rsync y reenvío
 de puertos no depende de él de todos modos.)
 
 ## Herramientas incluidas: sftp-server, scp, rsync
@@ -228,4 +228,4 @@ file ./dropbear   # -> dynamically linked, interpreter /system/bin/linker64, for
 
 ---
 
-> _Esta documentación se generó con Claude (Anthropic) y la mantiene VD171. Las correcciones y mejoras son bienvenidas; consulta [CONTRIBUTING.md](CONTRIBUTING.md)._
+> _Esta documentación se generó con Claude (Anthropic) y la mantiene VD171. Las correcciones y mejoras son bienvenidas, consulta [CONTRIBUTING.md](CONTRIBUTING.md)._

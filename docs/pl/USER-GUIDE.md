@@ -63,7 +63,7 @@ nie opuszcza strony.
 ## 4. Wybierz port i gdzie nasłuchiwać
 
 W sekcji **Settings** ustaw **Port** i wybierz powiązania. Domyślnie VD Dropbear nasłuchuje tylko na
-**loopbacku**; aby dotrzeć do niego z sieci LAN lub VPN, włącz interfejsy, których potrzebujesz. Unikaj
+**loopbacku**, aby dotrzeć do niego z sieci LAN lub VPN, włącz interfejsy, których potrzebujesz. Unikaj
 opcji **Listen on all interfaces**, chyba że rozumiesz związane z tym narażenie.
 
 Naciśnij **Save & restart**, aby zastosować zmiany, a następnie **Start**, jeśli jeszcze
@@ -124,10 +124,10 @@ który jest czytelny przed odblokowaniem: to celowy, udokumentowany kompromis. Z
 - **Nie można połączyć się z innego komputera.** Prawdopodobnie wciąż jesteś powiązany tylko z
   loopbackiem. Włącz potrzebny interfejs i uruchom ponownie.
 - **SFTP/scp zawodzi, ale powłoka działa.** Upewnij się, że dołączony `sftp-server` został dostarczony
-  dla Twojego ABI; status WebUI pokazuje wykryte ABI.
+  dla Twojego ABI, status WebUI pokazuje wykryte ABI.
 
 <!-- doc-footer -->
 
 ---
 
-> _Ta dokumentacja została wygenerowana za pomocą Claude (Anthropic) i jest utrzymywana przez VD171. Poprawki i ulepszenia są mile widziane; zobacz [CONTRIBUTING.md](CONTRIBUTING.md)._
+> _Ta dokumentacja została wygenerowana za pomocą Claude (Anthropic) i jest utrzymywana przez VD171. Poprawki i ulepszenia są mile widziane, zobacz [CONTRIBUTING.md](CONTRIBUTING.md)._

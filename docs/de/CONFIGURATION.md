@@ -30,9 +30,9 @@
 # Konfiguration
 
 Einstellungen liegen in `/data/adb/vddropbear/config` (beim ersten Booten aus
-`module/common/config.default` befüllt). Die **WebUI** bearbeitet diese Datei für dich; du kannst sie
+`module/common/config.default` befüllt). Die **WebUI** bearbeitet diese Datei für dich, du kannst sie
 auch von Hand bearbeiten. Sie wird als Shell eingelesen, verwende also `KEY=value` ohne Leerzeichen um
-`=`. Einstellungen sind nicht geheim und liegen auf gerätverschlüsseltem Speicher; Geheimnisse
+`=`. Einstellungen sind nicht geheim und liegen auf gerätverschlüsseltem Speicher, Geheimnisse
 (Host-Schlüssel, autorisierte Schlüssel, Passwort-Hashes) liegen im Geheimnisspeicher, nie hier.
 
 Änderungen werden durch einen Neustart des Daemons wirksam (das **Save & restart** der WebUI erledigt
@@ -43,18 +43,18 @@ das).
 | Schlüssel | Standard | Bedeutung |
 |-----|---------|---------|
 | `ENABLED` | `1` | Den Daemon beim Booten starten. `0` deaktiviert ihn vollständig. |
-| `START_IN_BFU` | `0` | `0`: erst nach der ersten Entsperrung starten (AFU); Geheimnisse bleiben auf mit Zugangsdaten verschlüsseltem (CE) Speicher. `1`: auch vor der ersten Entsperrung starten (BFU); Geheimnisse wandern auf gerätverschlüsselten (DE) Speicher, lesbar vor der Entsperrung. |
+| `START_IN_BFU` | `0` | `0`: erst nach der ersten Entsperrung starten (AFU), Geheimnisse bleiben auf mit Zugangsdaten verschlüsseltem (CE) Speicher. `1`: auch vor der ersten Entsperrung starten (BFU), Geheimnisse wandern auf gerätverschlüsselten (DE) Speicher, lesbar vor der Entsperrung. |
 | `PORT` | `2222` | Standard-Lauschport (Ports einzelner Bindungen können ihn in `LISTEN_ADDRESSES` überschreiben). |
 
 ## Lauschen / Bindungen (kombinierbar)
 
-Jede Kombination ist erlaubt; die ausgewählten Bindungen werden zusammengeführt. Wenn du alles
+Jede Kombination ist erlaubt, die ausgewählten Bindungen werden zusammengeführt. Wenn du alles
 leerst, bindet VD Dropbear an Loopback statt an jede Schnittstelle.
 
 | Schlüssel | Standard | Bedeutung |
 |-----|---------|---------|
 | `LISTEN_LOOPBACK` | `1` | Nur auf `127.0.0.1` / `::1` lauschen. |
-| `LISTEN_ALL` | `0` | Auf jeder Schnittstelle lauschen (`0.0.0.0` / `::`); macht das Gerät angreifbar. |
+| `LISTEN_ALL` | `0` | Auf jeder Schnittstelle lauschen (`0.0.0.0` / `::`), macht das Gerät angreifbar. |
 | `LISTEN_IPV4` | `1` | IPv4-Bindungen einbeziehen. |
 | `LISTEN_IPV6` | `1` | IPv6-Bindungen einbeziehen. |
 | `LISTEN_ADDRESSES` | `""` | Zusätzliche konkrete Bindungen, durch Kommas getrennt: `addr` (nutzt `PORT`) oder `addr:port`, IPv4 oder IPv6. |
@@ -70,7 +70,7 @@ leerst, bindet VD Dropbear an Loopback statt an jede Schnittstelle.
 
 ## Authentifizierung
 
-Eine Anmeldung läuft unter dem Konto, mit dem du dich authentifizierst: standardmäßig **root**, oder ein Konto mit geringeren Rechten (`shell`, `system`). Schlüssel sind der Standard; Passwörter sind optional.
+Eine Anmeldung läuft unter dem Konto, mit dem du dich authentifizierst: standardmäßig **root**, oder ein Konto mit geringeren Rechten (`shell`, `system`). Schlüssel sind der Standard, Passwörter sind optional.
 
 | Schlüssel | Standard | Bedeutung |
 |-----|---------|---------|
@@ -118,4 +118,4 @@ Passwort-Hashes siehe [BUILDING.md](../BUILDING.md).
 
 ---
 
-> _Diese Dokumentation wurde mit Claude (Anthropic) erstellt und wird von VD171 gepflegt. Korrekturen und Verbesserungen sind willkommen; siehe [CONTRIBUTING.md](CONTRIBUTING.md)._
+> _Diese Dokumentation wurde mit Claude (Anthropic) erstellt und wird von VD171 gepflegt. Korrekturen und Verbesserungen sind willkommen, siehe [CONTRIBUTING.md](CONTRIBUTING.md)._

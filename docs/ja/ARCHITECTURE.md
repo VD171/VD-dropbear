@@ -44,6 +44,8 @@ VD Dropbearは、ちょうど1つのDropbear SSHデーモンを実行するKerne
 
 `vddb_start` は設定を読み込み、実行中のインスタンスがあれば停止し、ホスト鍵の存在を確保したうえで、1つのデーモンを起動します。バイナリは `vddropbear` として配布されるため、そのプロセス名は `pgrep -x` と完全に一致します（Androidの `mksh` には `exec -a` がありません）。`setsid` で起動され、呼び出し元のプロセスグループから切り離されます。これがマネージャのActionをブロックさせない仕組みです。
 
+`setsid` は cgroups を一度もカバーしておらず、その隙間は実際のリグレッションでした。Actionボタンと WebUI はマネージャアプリ内で動くため、どちらから起動したデーモンもアプリの freezer cgroup（`/apps/uid_<uid>/pid_<pid>`）を継承していました。Androidの `CachedAppOptimizer` はアプリをキャッシュするとその cgroup をフリーズし、デーモンはリッスン中のソケットを保持したまま一緒にフリーズされます。バックログはカーネルに存在するため TCP の接続は完了し続けますが、`accept()` を呼ぶものがないため、クライアントは "Connection established ... Local version string" でハングし、どちらの側にもエラーが出ず、`/proc/<pid>/wchan` は `do_select` ではなく `do_freezer_trap` を示します。いまや `vddb_escape_freezer` は fork の前に、起動を行うシェルをルート cgroup（freezer が決して触れない）へ移し、デーモンがこの退出を継承するようにします。これはブート時には no-op であり（すでに `/` にいる）、freezer のないプラットフォームでも同様です。起動を素の `setsid` へ「単純化」してはいけません。
+
 ## シークレットストア（CE対DE、BFU対AFU）
 
 設定はシークレットではなく、デバイス暗号化ストレージ（`/data/adb/vddropbear`）に置かれ、起動時に読み取れます。シークレット（ホスト鍵、`authorized_keys`、パスワードハッシュ）は既定で **認証情報暗号化（credential-encrypted）** ストレージ（`/data/misc_ce/0/vddropbear`）に置かれ、これはユーザーが認証したあとにのみアンロックされます。`START_IN_BFU` を有効にするとシークレットはデバイス暗号化ストレージへ移り、デーモンは最初のアンロック前に実行できるようになりますが、その代わりにシークレットがより早い段階で読み取れるようになります。モジュールは各起動ステージでどのストアを使うかを計算します。

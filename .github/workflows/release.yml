@@ -63,6 +63,10 @@ jobs:
             python3 -c "import json,hashlib,sys; d=json.load(open('module/bin/PROVENANCE.json')); bad=[f'module/bin/{a}/{b}' for b,m in d['binaries'].items() for a,i in m['abi'].items() if hashlib.sha256(open(f'module/bin/{a}/{b}','rb').read()).hexdigest()!=i['sha256']]; sys.exit('provenance MISMATCH: '+', '.join(bad)) if bad else print('provenance OK')"
           fi
 
+      - name: Provenance beside every bundled binary (kit guard, STANDARDS 8)
+        # Each bin/<abi> and vdlu/verify/<abi> dir must ship a PROVENANCE.json that names its binaries.
+        run: sh .github/scripts/provenance-check.sh module
+
       - name: Assemble module zip
         id: pack
         run: |
@@ -83,6 +87,10 @@ jobs:
           ( cd module && zip -r -X "../VD-dropbear-${ver}.zip" . -x '*/.gitkeep' -x 'vdlu/RELEASE.md' )
           sha256sum VD-dropbear-*.zip
           echo "ver=${ver}" >> "$GITHUB_OUTPUT"
+
+      - name: Reject orphan .sha256 companions in the zip (kit guard, STANDARDS 8)
+        # An orphan <file>.sha256 (target pruned by -x) would abort the on-device flash gate.
+        run: sh .github/scripts/zip-orphan-check.sh "VD-dropbear-${{ steps.pack.outputs.ver }}.zip"
 
       - name: Write release notes
         # House rules (do NOT change without the owner): the body ends with the canonical

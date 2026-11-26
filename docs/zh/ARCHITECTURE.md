@@ -50,6 +50,8 @@ VD Dropbear 是一个 KernelSU / APatch / Magisk 模块，仅运行一个 Dropbe
 `vddropbear` 名称发布，因此其进程名与 `pgrep -x` 完全匹配（Android `mksh` 没有 `exec -a`）。它以 `setsid`
 启动，从而脱离调用者的进程组：这正是让管理器的 Action 不被阻塞的原因。
 
+`setsid` 从不覆盖 cgroups，而那个缺口是一次真正的回归：Action 按钮和 WebUI 都运行在管理器应用内，因此从任一者启动的守护进程都会继承该应用的 freezer cgroup（`/apps/uid_<uid>/pid_<pid>`）。Android 的 `CachedAppOptimizer` 一旦缓存该应用就会冻结那个 cgroup，守护进程也随之被冻结，而它仍然持有自己的监听套接字。由于 backlog 存在于内核中，TCP 连接会继续完成，但没有任何东西调用 `accept()`，于是客户端卡在 "Connection established ... Local version string"，两端都没有错误，`/proc/<pid>/wchan` 读到的是 `do_freezer_trap` 而不是 `do_select`。现在 `vddb_escape_freezer` 会在 fork 之前，把执行生成的 shell 移动到根 cgroup（freezer 从不触碰它），让守护进程继承这次退出。它在启动时是 no-op（已经在 `/`），在没有 freezer 的平台上也是如此，不要把生成“简化”回裸的 `setsid`。
+
 ## secret 存储（CE 与 DE，BFU 与 AFU）
 
 设置并非 secret，存放在 device-encrypted 存储（`/data/adb/vddropbear`）中，启动时即可读取。secret（host key、

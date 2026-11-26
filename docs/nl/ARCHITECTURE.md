@@ -29,12 +29,12 @@
 
 # Architectuur
 
-VD Dropbear is een KernelSU / APatch / Magisk-module die precies één Dropbear SSH-daemon draait, volledig aangestuurd door configuratie. Niets aan de SSH-server is hardcoded op één toestel; alles wat specifiek is, is runtimeconfiguratie of een geheim.
+VD Dropbear is een KernelSU / APatch / Magisk-module die precies één Dropbear SSH-daemon draait, volledig aangestuurd door configuratie. Niets aan de SSH-server is hardcoded op één toestel, alles wat specifiek is, is runtimeconfiguratie of een geheim.
 
 ## Onderdelen
 
 - `module/common/vddropbear.sh`: de kernbibliotheek: config laden (met veilige ingebouwde standaardwaarden), de geheimenopslag bepalen, een hostsleutel verzekeren, de Dropbear-argumentvector opbouwen, en één enkele daemon-instantie beheren (start / stop / status / restart).
-- `module/service.sh`: opstartingang. Respecteert het BFU/AFU-startbeleid; in AFU-modus wacht die op het ontgrendelen van credential-encrypted opslag zonder het opstarten op te houden.
+- `module/service.sh`: opstartingang. Respecteert het BFU/AFU-startbeleid, in AFU-modus wacht die op het ontgrendelen van credential-encrypted opslag zonder het opstarten op te houden.
 - `module/action.sh`: de **Action**-knop van de manager: de daemon (opnieuw) starten. Die leest nooit stdin en maakt de daemon los in zijn eigen sessie, zodat de manager niet blijft hangen.
 - `module/common/vddb-webui.sh` + `module/webroot/index.html`: de WebUI-backend en de pagina.
 - `patches/`: kleine, controleerbare patches die bij het bouwen op upstream Dropbear worden toegepast.
@@ -44,13 +44,15 @@ VD Dropbear is een KernelSU / APatch / Magisk-module die precies één Dropbear 
 
 `vddb_start` laadt de config, stopt een eventueel draaiende instantie, verzekert dat er een hostsleutel bestaat, en start dan één daemon. De binary wordt geleverd als `vddropbear`, zodat de procesnaam precies overeenkomt met `pgrep -x` (Android `mksh` heeft geen `exec -a`). Die wordt gestart met `setsid`, zodat die loskomt van de procesgroep van de aanroeper: dat is wat de Action van de manager niet laat blokkeren.
 
+`setsid` dekte de cgroups nooit, en dat gat was een echte regressie: de Action-knop en de WebUI draaien binnen de manager-app, dus een daemon die vanuit een van beide werd gestart erfde de freezer cgroup van de app (`/apps/uid_<uid>/pid_<pid>`). Androids `CachedAppOptimizer` bevriest die cgroup zodra hij de app cachet, en de daemon wordt ermee bevroren terwijl die zijn luisterende socket nog vasthoudt. TCP-verbindingen blijven voltooien omdat de backlog in de kernel leeft, maar niets roept `accept()` aan, dus clients blijven hangen op "Connection established ... Local version string" zonder fout aan weerszijden, en `/proc/<pid>/wchan` leest `do_freezer_trap` in plaats van `do_select`. `vddb_escape_freezer` verplaatst nu de spawnende shell naar de root-cgroup (die de freezer nooit aanraakt) vóór de fork, zodat de daemon deze exit erft. Het is een no-op bij het opstarten (al op `/`) en op platforms zonder freezer, "vereenvoudig" de spawn niet terug naar een kale `setsid`.
+
 ## De geheimenopslag (CE versus DE, BFU versus AFU)
 
 Instellingen zijn niet geheim en staan op device-encrypted opslag (`/data/adb/vddropbear`), leesbaar bij het opstarten. Geheimen (hostsleutel, `authorized_keys`, wachtwoordhashes) staan standaard op **credential-encrypted** opslag (`/data/misc_ce/0/vddropbear`), die pas ontgrendelt nadat de gebruiker zich heeft geauthenticeerd. Door `START_IN_BFU` aan te zetten verplaatsen de geheimen naar device-encrypted opslag, zodat de daemon kan draaien vóór de eerste ontgrendeling, ten koste van het feit dat die geheimen eerder leesbaar zijn. De module berekent bij elke opstartfase welke opslag te gebruiken.
 
 ## De patchset
 
-De SSH-server blijft upstream Dropbear; onze wijzigingen zijn een paar controleerbare patches (zie [patches/README.md](../../patches/README.md)):
+De SSH-server blijft upstream Dropbear, onze wijzigingen zijn een paar controleerbare patches (zie [patches/README.md](../../patches/README.md)):
 
 - een neutrale, tijdens runtime configureerbare identiteitsbanner;
 - `authorized_keys` die wordt gelezen vanuit een via de omgeving ingesteld pad (zodat sleutels in de geheimenopslag staan);
@@ -58,10 +60,10 @@ De SSH-server blijft upstream Dropbear; onze wijzigingen zijn een paar controlee
 
 ## De WebUI
 
-Een statische pagina in de WebUI van de manager (KernelSU / APatch / WebUI-X). Die stuurt `module/common/vddb-webui.sh` aan via de `ksu.exec`-brug: status, start/stop/restart, config lezen/schrijven, en beheer van sleutels en wachtwoordaccounts. Alle data gaat base64-gecodeerd over de brug, zodat de shell die nooit interpreteert; wachtwoordhashes worden in de browser berekend met WebCrypto, zodat het wachtwoord in platte tekst de pagina nooit verlaat.
+Een statische pagina in de WebUI van de manager (KernelSU / APatch / WebUI-X). Die stuurt `module/common/vddb-webui.sh` aan via de `ksu.exec`-brug: status, start/stop/restart, config lezen/schrijven, en beheer van sleutels en wachtwoordaccounts. Alle data gaat base64-gecodeerd over de brug, zodat de shell die nooit interpreteert, wachtwoordhashes worden in de browser berekend met WebCrypto, zodat het wachtwoord in platte tekst de pagina nooit verlaat.
 
 <!-- doc-footer -->
 
 ---
 
-> _Deze documentatie is gegenereerd met Claude (Anthropic) en wordt onderhouden door VD171. Correcties en verbeteringen zijn welkom; zie [CONTRIBUTING.md](CONTRIBUTING.md)._
+> _Deze documentatie is gegenereerd met Claude (Anthropic) en wordt onderhouden door VD171. Correcties en verbeteringen zijn welkom, zie [CONTRIBUTING.md](CONTRIBUTING.md)._

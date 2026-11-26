@@ -30,7 +30,7 @@
 # Kiến trúc
 
 VD Dropbear là một mô-đun KernelSU / APatch / Magisk chạy đúng một daemon SSH Dropbear, được điều khiển
-hoàn toàn bằng cấu hình. Không có gì về máy chủ SSH được mã hóa cứng cho một thiết bị duy nhất; mọi thứ
+hoàn toàn bằng cấu hình. Không có gì về máy chủ SSH được mã hóa cứng cho một thiết bị duy nhất, mọi thứ
 riêng biệt đều là cấu hình thời gian chạy hoặc một secret.
 
 ## Các thành phần
@@ -38,7 +38,7 @@ riêng biệt đều là cấu hình thời gian chạy hoặc một secret.
 - `module/common/vddropbear.sh`: thư viện lõi: tải cấu hình (với các giá trị mặc định tích hợp an
   toàn), xác định kho secret, bảo đảm có host key, dựng vector đối số của Dropbear, và quản lý một thực
   thể daemon duy nhất (start / stop / status / restart).
-- `module/service.sh`: điểm vào khi khởi động. Tuân theo chính sách khởi động BFU/AFU; ở chế độ AFU nó
+- `module/service.sh`: điểm vào khi khởi động. Tuân theo chính sách khởi động BFU/AFU, ở chế độ AFU nó
   chờ kho credential-encrypted được mở khóa mà không làm nghẽn quá trình khởi động.
 - `module/action.sh`: nút **Action** của trình quản lý: (tái) khởi chạy daemon. Nó không bao giờ đọc
   stdin và tách daemon ra phiên riêng của nó, nên trình quản lý không bị treo.
@@ -53,6 +53,17 @@ daemon. Tệp nhị phân được phát hành dưới tên `vddropbear`, nên t
 `pgrep -x` (Android `mksh` không có `exec -a`). Nó được khởi chạy bằng `setsid` để tách khỏi nhóm tiến
 trình của bên gọi: đó là điều giữ cho nút Action của trình quản lý không bị chặn.
 
+`setsid` chưa bao giờ bao phủ các cgroups, và lỗ hổng đó là một sự thoái lui thực sự: nút Action và
+WebUI chạy bên trong ứng dụng trình quản lý, nên một daemon khởi động từ bất kỳ cái nào trong hai cái
+đó đều kế thừa freezer cgroup của ứng dụng (`/apps/uid_<uid>/pid_<pid>`). `CachedAppOptimizer` của
+Android đóng băng cgroup đó ngay khi nó cache ứng dụng, và daemon bị đóng băng theo trong khi vẫn đang
+giữ listening socket của mình. Các kết nối TCP vẫn tiếp tục hoàn tất vì backlog nằm trong kernel, nhưng
+không có gì gọi `accept()`, nên client treo tại "Connection established ... Local version string" mà
+không có lỗi ở cả hai phía, và `/proc/<pid>/wchan` đọc ra `do_freezer_trap` thay vì `do_select`. Giờ
+đây `vddb_escape_freezer` chuyển shell đang spawn sang cgroup gốc (thứ mà freezer không bao giờ chạm
+tới) trước khi fork, để daemon kế thừa lối thoát này. Nó là no-op khi khởi động (đã ở `/` rồi) và trên
+các nền tảng không có freezer, đừng "đơn giản hóa" việc spawn trở lại thành một `setsid` trần trụi.
+
 ## Kho secret (CE so với DE, BFU so với AFU)
 
 Các thiết lập không phải là secret và nằm trên kho device-encrypted (`/data/adb/vddropbear`), đọc được
@@ -64,7 +75,7 @@ khởi động.
 
 ## Bộ bản vá
 
-Máy chủ SSH vẫn là Dropbear upstream; các thay đổi của chúng tôi là vài bản vá có thể xem xét (xem
+Máy chủ SSH vẫn là Dropbear upstream, các thay đổi của chúng tôi là vài bản vá có thể xem xét (xem
 [patches/README.md](../../patches/README.md)):
 
 - một banner nhận dạng trung tính, cấu hình được ở thời gian chạy;
@@ -77,11 +88,11 @@ Máy chủ SSH vẫn là Dropbear upstream; các thay đổi của chúng tôi l
 Một trang tĩnh trong WebUI của trình quản lý (KernelSU / APatch / WebUI-X). Nó điều khiển
 `module/common/vddb-webui.sh` qua cầu nối `ksu.exec`: trạng thái, start/stop/restart, đọc/ghi cấu hình,
 và quản lý khóa cùng các tài khoản mật khẩu. Mọi dữ liệu đi qua cầu nối đều được mã hóa base64, nên
-shell không bao giờ diễn giải nó; các hash mật khẩu được tính trong trình duyệt bằng WebCrypto, nên mật
+shell không bao giờ diễn giải nó, các hash mật khẩu được tính trong trình duyệt bằng WebCrypto, nên mật
 khẩu dạng văn bản rõ không bao giờ rời khỏi trang.
 
 <!-- doc-footer -->
 
 ---
 
-> _Tài liệu này được tạo bằng Claude (Anthropic) và được duy trì bởi VD171. Chúng tôi hoan nghênh các chỉnh sửa và cải tiến; xem [CONTRIBUTING.md](CONTRIBUTING.md)._
+> _Tài liệu này được tạo bằng Claude (Anthropic) và được duy trì bởi VD171. Chúng tôi hoan nghênh các chỉnh sửa và cải tiến, xem [CONTRIBUTING.md](CONTRIBUTING.md)._

@@ -64,7 +64,7 @@ To jest root, więc traktuj go jak roota:
 - przydziel agentowi jego **własne poświadczenie**, a nie swoje osobiste, i skieruj go na konto o niższych uprawnieniach (`shell`), jeśli chcesz ograniczyć jego zasięg;
 - ogranicz powiązania do sieci, którym ufasz: loopback lub VPN zamiast otwartego Internetu
   (zobacz [Konfiguracja](CONFIGURATION.md));
-- pozostaw uwierzytelnianie hasłem wyłączone; klucz można odwołać i nigdy się go nie wpisuje;
+- pozostaw uwierzytelnianie hasłem wyłączone, klucz można odwołać i nigdy się go nie wpisuje;
 - w każdej chwili możesz odwołać klucz lub zatrzymać demona z poziomu WebUI;
 - pamiętaj, że domyślne połączenie to pełna sesja roota. Daj agentowi tylko taki zasięg, jakiego potrzebuje.
 
@@ -81,4 +81,4 @@ Przez USB, bez ADB: włącz tethering USB i przypnij do adresu USB dla połącze
 
 ---
 
-> _Ta dokumentacja została wygenerowana za pomocą Claude (Anthropic) i jest utrzymywana przez VD171. Poprawki i ulepszenia są mile widziane; zobacz [CONTRIBUTING.md](CONTRIBUTING.md)._
+> _Ta dokumentacja została wygenerowana za pomocą Claude (Anthropic) i jest utrzymywana przez VD171. Poprawki i ulepszenia są mile widziane, zobacz [CONTRIBUTING.md](CONTRIBUTING.md)._

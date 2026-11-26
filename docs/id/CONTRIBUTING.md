@@ -58,8 +58,8 @@ serta konfigurasi runtime. Mohon jaga patch baru tetap kecil, terdokumentasi, da
 
 ## Pull request
 
-- Satu perubahan logis per PR; jelaskan motivasi dan dampak keamanannya.
-- Sesuaikan dengan gaya shell yang ada (POSIX `sh` / `mksh` Android; tanpa bashism).
+- Satu perubahan logis per PR, jelaskan motivasi dan dampak keamanannya.
+- Sesuaikan dengan gaya shell yang ada (POSIX `sh` / `mksh` Android, tanpa bashism).
 - Setiap berkas memuat header SPDX singkat. Pertahankan.
 - Perbarui [`CHANGELOG.md`](../../CHANGELOG.md) di bawah `[Unreleased]` untuk setiap perubahan nyata yang terlihat pengguna.
 - Dengan mengirimkan PR, Anda setuju melisensikan kontribusi Anda di bawah lisensi [Apache-2.0](../../LICENSE) proyek ini.
@@ -67,7 +67,7 @@ serta konfigurasi runtime. Mohon jaga patch baru tetap kecil, terdokumentasi, da
 ## Terjemahan
 
 README dan docs dikelola dalam banyak bahasa (`README.<lang>.md`). Bahasa Inggris adalah sumber
-kebenaran; terjemahan mengikutinya. Jika Anda memperbaiki sebuah terjemahan atau menambah bahasa, jaga
+kebenaran, terjemahan mengikutinya. Jika Anda memperbaiki sebuah terjemahan atau menambah bahasa, jaga
 struktur dan anchor bagian tetap identik dengan versi bahasa Inggris.
 
 ## Melaporkan bug dan masalah keamanan
@@ -80,4 +80,4 @@ publik.
 
 ---
 
-> _Dokumentasi ini dibuat dengan Claude (Anthropic) dan dikelola oleh VD171. Koreksi dan perbaikan dipersilakan; lihat [CONTRIBUTING.md](CONTRIBUTING.md)._
+> _Dokumentasi ini dibuat dengan Claude (Anthropic) dan dikelola oleh VD171. Koreksi dan perbaikan dipersilakan, lihat [CONTRIBUTING.md](CONTRIBUTING.md)._

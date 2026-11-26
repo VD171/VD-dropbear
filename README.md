@@ -23,18 +23,16 @@
 -->
 
 <p align="center">
-  <img src="module/webroot/assets/logo-wordmark.svg" alt="VD Dropbear" width="540">
+  <img src="module/webroot/assets/logo-wordmark.svg" alt="VD Dropbear" width="320">
 </p>
 
 # VD Dropbear
 
-<p>
+<p align="center">
+  <a href="https://github.com/VD171/VD-dropbear/releases/latest"><img src="https://img.shields.io/github/v/release/VD171/VD-dropbear?label=release&color=36e86a" alt="Release"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-Apache--2.0-1a7f37" alt="License"></a>
-  <img src="https://img.shields.io/badge/KernelSU-%E2%9C%94-635bff" alt="KernelSU">
-  <img src="https://img.shields.io/badge/APatch-%E2%9C%94-ff7043" alt="APatch">
-  <img src="https://img.shields.io/badge/Magisk-%E2%9C%94-00af9c" alt="Magisk">
+  <a href="https://github.com/VD171/VD-dropbear/releases"><img src="https://img.shields.io/github/downloads/VD171/VD-dropbear/total?label=downloads&color=8250df" alt="Downloads"></a>
   <a href="https://github.com/VD171/VD-dropbear/stargazers"><img src="https://img.shields.io/github/stars/VD171/VD-dropbear?color=d29922" alt="Stars"></a>
-  <a href="https://github.com/VD171/VD-dropbear/releases"><img src="https://img.shields.io/github/v/release/VD171/VD-dropbear?color=1a7f37" alt="Release"></a>
 </p>
 
 <p align="center">
@@ -56,11 +54,17 @@ packaged as a KernelSU / APatch / Magisk module. It launches on its own and depe
 > ⚠️ **A login defaults to a full ROOT shell.** Treat this like the keys to
 > the device: prefer public keys over passwords, and keep the port off the public Internet.
 
+## Screenshots
+
+<p align="center">
+  <img src="screenshots/status.png" width="24%" alt="Status"> <img src="screenshots/settings.png" width="24%" alt="Settings"> <img src="screenshots/keys.png" width="24%" alt="Keys"> <img src="screenshots/passwords.png" width="24%" alt="Passwords">
+</p>
+
 ## Why
 
 Android's built-in way to get a shell on your own phone is ADB (USB debugging), and turning it on is
 invasive and self-exposing. `adb_enabled` and `development_settings_enabled` are world-readable
-settings; any app, SDK or anti-fraud / RASP library can read them, the connection is logged, and
+settings, any app, SDK or anti-fraud / RASP library can read them, the connection is logged, and
 there is no supported way to hide that ADB is, or ever was, enabled. The exposure follows you even on
 a stock, non-rooted phone: to get a shell, you have to announce it.
 
@@ -72,7 +76,7 @@ globally-readable "I am being debugged" flag that anything on the device can rea
 ## Features
 
 - **One daemon, always.** It starts at boot and from the manager's **Action** button, and you can
-  **start / stop / restart** it from the WebUI at any time; never more than one instance.
+  **start / stop / restart** it from the WebUI at any time, never more than one instance.
 - **Everything is configurable** from the WebUI (or `/data/adb/vddropbear/config`):
   - port, and bind to loopback / all / IPv4 / IPv6 / specific addresses
   - **start before first unlock (BFU) or only after it (AFU)**, a single toggle
@@ -93,7 +97,7 @@ globally-readable "I am being debugged" flag that anything on the device can rea
 - **SSH over USB, no ADB.** Turn on USB tethering and bind the daemon to the USB address: the same session over the cable, faster and steadier than wifi for large transfers.
 - **Every device and emulator.** `arm64-v8a`, `armeabi-v7a`, `x86`, `x86_64`.
 
-## AI agents on your device
+## AI agents
 
 A standing SSH endpoint turns your phone into something an **autonomous AI agent can operate
 directly**. Any agent that can drive a shell or an SSH connection (Claude Code, aider, an
@@ -111,7 +115,7 @@ runtime [env contract](patches/README.md), predictable paths and plain-text stat
 discover how to use it without guesswork.
 
 > **Root by default, so treat it like root.** A default login lands as root, and you can also log in
-> as a lower-privilege account (`shell`, `system`); see the warning below. When you hand access to an
+> as a lower-privilege account (`shell`, `system`), see the warning below. When you hand access to an
 > agent, give it its own credential (not your personal key), point it at a lower-privilege account like
 > `shell` if you want to limit its reach, scope the
 > binds to the networks you trust (loopback or a VPN rather than the open internet), keep password
@@ -123,7 +127,7 @@ Flash the module zip in the KernelSU, APatch or Magisk manager (or from the comm
 `ksud module install` / `apd module install`), open the module's
 **WebUI** to set the port and add your keys, then reboot (or press **Action** to start it now).
 
-## Security model
+## Security
 
 ### Where secrets live: BFU vs AFU
 
@@ -132,7 +136,7 @@ Flash the module zip in the KernelSU, APatch or Magisk manager (or from the comm
 **credential-encrypted (CE)**: Android keeps it encrypted until the user unlocks (After First Unlock).
 
 - **AFU mode (default, `START_IN_BFU=0`):** the daemon waits for unlock and reads its host key,
-  `authorized_keys` and password hashes from CE storage. Maximum protection; SSH works only after the
+  `authorized_keys` and password hashes from CE storage. Maximum protection, SSH works only after the
   device has been unlocked once since boot.
 - **BFU mode (`START_IN_BFU=1`):** the daemon starts before unlock so you can SSH in early (for
   example, to unlock the device remotely). Its secrets then live on DE storage and are readable before
@@ -140,7 +144,7 @@ Flash the module zip in the KernelSU, APatch or Magisk manager (or from the comm
 
 We deliberately do **not** add our own encryption on top of CE: it is already encrypted with the
 user's credential, and layering another cipher would need a key that has to live somewhere (on DE it
-would be exposed; deriving it from the user credential just re-implements CE). That would buy a false
+would be exposed, deriving it from the user credential just re-implements CE). That would buy a false
 sense of security, not real protection.
 
 ### Passwords
@@ -160,13 +164,13 @@ interactive PTYs. A scheduled workflow tracks upstream and rebuilds, so the modu
 
 VD Dropbear ships the **[VDLiveUpdate](https://github.com/VD171/VDLiveUpdate) (VDLU)** engine (vendored in `vdlu/`): the module updates itself by fetching only
 the files that changed (content-addressed blobs + a signed `manifest.json`), instead of re-downloading the
-whole `.zip`. **Hardened** profile: the ed25519 signature is mandatory and downgrades are blocked; the
+whole `.zip`. **Hardened** profile: the ed25519 signature is mandatory and downgrades are blocked, the
 full `.zip` stays valid as a fallback.
 
 - **LIVE-only** (no reboot): updates apply on the next boot via `service.sh` (`setsid`, backgrounded,
   never stalling boot), a no-op when no feed is reachable.
 - **State** in `/data/adb/<module>/vdlu/`, outside the module, so it survives a reflash.
-- **WebUI:** an **Updates** panel with a progress toast and cancel; auto-update is opt-in.
+- **WebUI:** an **Updates** panel with a progress toast and cancel, auto-update is opt-in.
 
 ## Documentation
 
@@ -175,24 +179,25 @@ full `.zip` stays valid as a fallback.
 - **[User guide](https://github.com/VD171/VD-dropbear/wiki/USER-GUIDE)**: install, keys, passwords, connecting, file transfer, BFU/AFU.
 - **[Configuration](https://github.com/VD171/VD-dropbear/wiki/CONFIGURATION)**: every setting, with defaults.
 - **[Architecture](https://github.com/VD171/VD-dropbear/wiki/ARCHITECTURE)** and **[File structure](https://github.com/VD171/VD-dropbear/wiki/FILE-STRUCTURE)**: how the module and daemon work, and where everything lives.
-- **[AI agents on your device](https://github.com/VD171/VD-dropbear/wiki/AI-AGENTS)**: using an autonomous agent over SSH, safely.
+- **[AI agents](https://github.com/VD171/VD-dropbear/wiki/AI-AGENTS)**: using an autonomous agent over SSH, safely.
 - **[Building](https://github.com/VD171/VD-dropbear/wiki/BUILDING)**: the build, and the Android crypt()/cross-compile story.
 - **[Contributing](CONTRIBUTING.md)** and **[Security](SECURITY.md)**.
 - **[Changelog](CHANGELOG.md)** and **[Code of Conduct](CODE_OF_CONDUCT.md)**.
 
-Every wiki page is also translated into each language in the switcher above; the same sources live under [`docs/`](docs/).
+Every wiki page is also translated into each language in the switcher above, the same sources live under [`docs/`](docs/).
 <!-- /vd-docs -->
 
 ## See also
 
-Sibling projects by the same author:
-
-- **[VDInfos](https://github.com/VD171/VD-Infos)**: a device method debugger that reads each item through every method that can read it and compares them side by side.
-- **[VDGoogle](https://github.com/VD171/VD-Google)**: reads what Google records on your device about RCS, Wallet and Play Integrity, fully on-device and with no internet.
-- **[COPG-VD](https://github.com/VD171/COPG-VD)**: a device spoofer that turns a fresh fingerprint into a coherent, consistent profile.
+- **[COPG-VD](https://github.com/VD171/COPG-VD)**: global device fingerprint / Play Integrity spoofing, whole-device with per-app scope and a WebUI.
 - **[VDBackup](https://github.com/VD171/VD-Backup)**: full app and data backup and restore as root, driven entirely from a WebUI.
-- **[VDLiveUpdate](https://github.com/VD171/VDLiveUpdate)**: a flashless, incremental self-update engine embedded into KernelSU/APatch/Magisk modules.
+- **[VDGoogle](https://github.com/VD171/VD-Google)**: your Google services (RCS, Wallet, Play Integrity attestations), read on your device with no internet.
 - **[VDInstaller](https://github.com/VD171/VD-Installer)**: a frictionless root sideload installer for single, batch and split APKs, with a Play Protect verifier toggle and install-source spoofing.
+- **[VDInfos](https://github.com/VD171/VD-Infos)**: a device method debugger that reads each item through every method that can read it and compares them side by side.
+- **[VDLiveUpdate](https://github.com/VD171/VDLiveUpdate)**: a flashless, incremental self-update engine embedded into KernelSU/APatch/Magisk modules.
+- **[VD-Modules](https://github.com/VD171/VD-Modules)**: our MMRL/WebUI-X module repository (install all of these from your root manager).
+- **[@VictorGabriel7Dev/build.prop](https://github.com/VictorGabriel7Dev/build.prop)**: a dataset of Pixel `build.prop` fingerprints (fork of @T3SL4).
+- **[@VictorGabriel7Dev/mtproto-store](https://github.com/VictorGabriel7Dev/mtproto-store)**: use Telegram as an object store from a tiny Go CLI.
 
 ## Contacts
 
@@ -208,18 +213,22 @@ Sibling projects by the same author:
 
 ## License
 
-VD Dropbear's own code is **Apache-2.0**; see [LICENSE](LICENSE). The module also bundles third-party
+VD Dropbear's own code is **Apache-2.0**, see [LICENSE](LICENSE). The module also bundles third-party
 binaries: [Dropbear](https://matt.ucc.asn.au/dropbear/) (MIT-style), OpenSSH's `sftp-server` and
-`scp` (BSD), and `rsync` (GPL-3.0), each under its own license; see
+`scp` (BSD), and `rsync` (GPL-3.0), each under its own license, see
 [THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md), including how we comply with the GPL for rsync. Our
 Apache-2.0 code is unaffected (the GPL binary is merely aggregated, not linked).
 
 ## Trademarks
 
 VD Dropbear is an independent, unofficial project, not affiliated with or endorsed by any third party.
-"Android" is a trademark of Google LLC; "SSH" is a registered trademark of SSH Communications Security.
+"Android" is a trademark of Google LLC. "SSH" is a registered trademark of SSH Communications Security.
 VD Dropbear runs entirely on your device.
 
 ## Tags
 
 `SSH` `Dropbear` `KernelSU` `Magisk` `APatch` `root` `sshd` `remote-access` `openssh-alternative` `Android` `BFU` `VD-dropbear`
+
+---
+
+📣 **Join the channel for updates:** @Priv8_VD https://t.me/Priv8_VD

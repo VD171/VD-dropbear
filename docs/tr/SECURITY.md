@@ -53,7 +53,7 @@ güvenliğine eşittir. Lütfen:
 
 ## Desteklenen sürümler
 
-Güvenlik düzeltmeleri en son sürüme iner. Sunucu ikilisi upstream Dropbear'ı izler; upstream güvenlik
+Güvenlik düzeltmeleri en son sürüme iner. Sunucu ikilisi upstream Dropbear'ı izler, upstream güvenlik
 sürümleri, CI onları aldığı anda yeniden derlenir ve gönderilir.
 
 ## Bir güvenlik açığını bildirme
@@ -71,4 +71,4 @@ açıkları için lütfen <https://matt.ucc.asn.au/dropbear/> adresinden upstrea
 
 ---
 
-> _Bu belgeler Claude (Anthropic) ile oluşturulmuş olup VD171 tarafından yürütülmektedir. Düzeltmeler ve iyileştirmeler memnuniyetle karşılanır; bkz. [CONTRIBUTING.md](CONTRIBUTING.md)._
+> _Bu belgeler Claude (Anthropic) ile oluşturulmuş olup VD171 tarafından yürütülmektedir. Düzeltmeler ve iyileştirmeler memnuniyetle karşılanır, bkz. [CONTRIBUTING.md](CONTRIBUTING.md)._

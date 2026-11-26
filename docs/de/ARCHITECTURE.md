@@ -31,7 +31,7 @@
 
 VD Dropbear ist ein Modul für KernelSU / APatch / Magisk, das genau einen Dropbear-SSH-Daemon
 betreibt, vollständig durch Konfiguration gesteuert. Nichts am SSH-Server ist fest auf ein Gerät
-verdrahtet; alles Spezifische ist Laufzeitkonfiguration oder ein Geheimnis.
+verdrahtet, alles Spezifische ist Laufzeitkonfiguration oder ein Geheimnis.
 
 ## Bestandteile
 
@@ -39,7 +39,7 @@ verdrahtet; alles Spezifische ist Laufzeitkonfiguration oder ein Geheimnis.
   Standardwerten), den Geheimnisspeicher auflösen, einen Host-Schlüssel sicherstellen, den
   Argumentvektor für Dropbear bauen und eine einzelne Daemon-Instanz verwalten (Start / Stopp /
   Status / Neustart).
-- `module/service.sh`: Einstiegspunkt beim Booten. Befolgt die BFU/AFU-Startrichtlinie; im
+- `module/service.sh`: Einstiegspunkt beim Booten. Befolgt die BFU/AFU-Startrichtlinie, im
   AFU-Modus wartet er darauf, dass der mit Zugangsdaten verschlüsselte Speicher entsperrt wird, ohne
   den Bootvorgang aufzuhalten.
 - `module/action.sh`, die **Action**-Schaltfläche des Managers: den Daemon (neu) starten. Er liest
@@ -56,6 +56,18 @@ ausgeliefert, sodass ihr Prozessname genau zu `pgrep -x` passt (Androids `mksh` 
 `exec -a`). Sie wird mit `setsid` gestartet, damit sie sich von der Prozessgruppe des Aufrufers löst:
 genau das verhindert, dass die Action des Managers blockiert.
 
+`setsid` deckte die cgroups nie ab, und diese Lücke war eine echte Regression: Der Action-Button und
+die WebUI laufen innerhalb der Manager-App, sodass ein aus einem der beiden gestarteter Daemon die
+freezer cgroup der App erbte (`/apps/uid_<uid>/pid_<pid>`). Androids `CachedAppOptimizer` friert diese
+cgroup ein, sobald er die App cacht, und der Daemon wird mit ihr eingefroren, während er seinen
+lauschenden Socket noch hält. TCP-Verbindungen werden weiterhin abgeschlossen, weil das Backlog im
+Kernel liegt, aber nichts ruft `accept()` auf, sodass Clients bei
+"Connection established ... Local version string" hängen bleiben, ohne Fehler auf einer der beiden
+Seiten, und `/proc/<pid>/wchan` zeigt `do_freezer_trap` statt `do_select`. `vddb_escape_freezer`
+verschiebt die startende Shell nun vor dem Fork in die Root-cgroup (die der Freezer nie berührt),
+sodass der Daemon diesen Ausstieg erbt. Beim Booten ist es ein No-op (schon bei `/`) und auf
+Plattformen ohne Freezer, den Start nicht wieder auf ein nacktes `setsid` „vereinfachen".
+
 ## Der Geheimnisspeicher (CE vs. DE, BFU vs. AFU)
 
 Einstellungen sind nicht geheim und liegen auf gerätverschlüsseltem Speicher
@@ -69,7 +81,7 @@ verwenden ist.
 
 ## Der Patch-Satz
 
-Der SSH-Server bleibt Upstream-Dropbear; unsere Änderungen sind einige wenige überprüfbare Patches
+Der SSH-Server bleibt Upstream-Dropbear, unsere Änderungen sind einige wenige überprüfbare Patches
 (siehe [patches/README.md](../../patches/README.md)):
 
 - ein neutraler, zur Laufzeit konfigurierbarer Identitäts-Banner;
@@ -83,11 +95,11 @@ Der SSH-Server bleibt Upstream-Dropbear; unsere Änderungen sind einige wenige �
 Eine statische Seite in der WebUI des Managers (KernelSU / APatch / WebUI-X). Sie steuert
 `module/common/vddb-webui.sh` über die `ksu.exec`-Brücke: Status, Start/Stopp/Neustart,
 Konfiguration lesen/schreiben sowie Verwaltung von Schlüsseln und Passwortkonten. Alle Daten
-überqueren die Brücke base64-codiert, sodass die Shell sie nie interpretiert; Passwort-Hashes werden
+überqueren die Brücke base64-codiert, sodass die Shell sie nie interpretiert, Passwort-Hashes werden
 im Browser mit WebCrypto berechnet, sodass das Klartext-Passwort die Seite nie verlässt.
 
 <!-- doc-footer -->
 
 ---
 
-> _Diese Dokumentation wurde mit Claude (Anthropic) erstellt und wird von VD171 gepflegt. Korrekturen und Verbesserungen sind willkommen; siehe [CONTRIBUTING.md](CONTRIBUTING.md)._
+> _Diese Dokumentation wurde mit Claude (Anthropic) erstellt und wird von VD171 gepflegt. Korrekturen und Verbesserungen sind willkommen, siehe [CONTRIBUTING.md](CONTRIBUTING.md)._

@@ -31,7 +31,7 @@
 
 VD Dropbear **[Dropbear](https://github.com/mkj/dropbear) upstream** ([`UPSTREAM_VERSION`](../../UPSTREAM_VERSION)
 में पिन किया गया टैग) के साथ [`patches/`](../../patches/) में मौजूद छोटा, ऑडिट-योग्य पैच सेट भेजता है। CI इसे
-बनाता है; आप इसे स्थानीय रूप से पुनः उत्पन्न कर सकते हैं।
+बनाता है, आप इसे स्थानीय रूप से पुनः उत्पन्न कर सकते हैं।
 
 ## त्वरित शुरुआत
 
@@ -49,10 +49,10 @@ ABIS="arm64-v8a" ./scripts/build.sh
 `scripts/build.sh` पिन किए गए upstream टैग को क्लोन करता है, `patches/*.patch` और `localoptions.h` लागू करता
 है, फिर `vddropbear` और `dropbearkey` को `module/bin/<abi>/` में क्रॉस-कंपाइल करता है। आउटपुट एक **डायनामिक**
 ELF है (`file` बताता है `dynamically linked, interpreter /system/bin/linker64 … for Android 24`), जो उस
-bionic libc से लिंक है जो हर Android डिवाइस में पहले से है। libtomcrypt बाइनरी के अंदर एम्बेडेड रहता है; केवल C
+bionic libc से लिंक है जो हर Android डिवाइस में पहले से है। libtomcrypt बाइनरी के अंदर एम्बेडेड रहता है, केवल C
 लाइब्रेरी डायनामिक है। देखें [डायनामिक, static-PIE नहीं](#डयनमक-static-pie-नह)।
 
-बाइनरी **कमिट नहीं की जातीं**; उन्हें हर टैग पर CI बनाता है और रिलीज़ के साथ संलग्न करता है। देखें
+बाइनरी **कमिट नहीं की जातीं**, उन्हें हर टैग पर CI बनाता है और रिलीज़ के साथ संलग्न करता है। देखें
 [`.gitignore`](../../.gitignore)।
 
 ---
@@ -62,7 +62,7 @@ bionic libc से लिंक है जो हर Android डिवाइस 
 Dropbear का पासवर्ड प्रमाणीकरण `crypt()` और `/etc/shadow` वाले एक सामान्य Unix होस्ट के लिए लिखा गया है।
 Android के पास **इनमें से कोई नहीं** है, और यह बिल्ड से तीन अलग-अलग जगहों पर टकराता है। यह खंड उनमें से हर एक
 का दस्तावेज़ीकरण करता है, क्योंकि यह ठीक उसी तरह की चीज़ है जिसे फिर से खोजना कष्टदायक होता है। यह सब पैच
-[`0003-password-file.patch`](../../patches/0003-password-file.patch) संभालता है; नीचे कुछ भी रनटाइम पर संयोग पर
+[`0003-password-file.patch`](../../patches/0003-password-file.patch) संभालता है, नीचे कुछ भी रनटाइम पर संयोग पर
 नहीं छोड़ा गया।
 
 ### 1. bionic में कोई उपयोगी `crypt()` नहीं है
@@ -137,7 +137,7 @@ llvm-nm build/dropbear-*/libtomcrypt/src/mac/hmac/hmac_memory.o
 
 - एक **static-PIE** बिल्ड *ठीक दिखता* है (`file` एक साफ़ `static-pie executable` बताता है) और बिना त्रुटि
   लिंक होता है, पर **डिवाइस पर चलते ही SIGSEGV कर देता है** (एक arm64 Android 16 फ़ोन पर सत्यापित, exit 139,
-  कोई उपयोगी tombstone नहीं)। Android पर स्टैटिक एक्ज़ीक्यूटेबल नाज़ुक हैं; भरोसेमंद रूप एक सामान्य डायनामिक
+  कोई उपयोगी tombstone नहीं)। Android पर स्टैटिक एक्ज़ीक्यूटेबल नाज़ुक हैं, भरोसेमंद रूप एक सामान्य डायनामिक
   बाइनरी है, जो हर स्थापित Android dropbear के भेजे जाने का तरीका भी है।
 - एक **स्टैटिक, non-PIE** बिल्ड शुरू ही नहीं होता: bionic इसे
   `executable's TLS segment is underaligned … needs to be at least 64 for ARM64 Bionic` के साथ अस्वीकार करता है।
@@ -152,14 +152,14 @@ llvm-nm build/dropbear-*/libtomcrypt/src/mac/hmac/hmac_memory.o
 ## कोई `-E` फ़्लैग नहीं
 
 सर्वर `--disable-syslog` के साथ बनाया जाता है, इसलिए यह हमेशा stderr में लॉग करता है और upstream का `-E`
-विकल्प («log to stderr») इस बाइनरी में **मौजूद नहीं** है; इसे पास करने पर `Invalid option -E` प्रिंट होता है और
+विकल्प («log to stderr») इस बाइनरी में **मौजूद नहीं** है, इसे पास करने पर `Invalid option -E` प्रिंट होता है और
 daemon कभी शुरू नहीं होता। इसलिए मॉड्यूल का आर्गुमेंट-बिल्डर `-E` पास नहीं करता।
 
 ## openpty
 
 इंटरैक्टिव PTY सत्र `openpty()` का उपयोग करते हैं। bionic इसे `<pty.h>` में घोषित करता है, और Dropbear का
 क्रॉस-`configure` इसे NDK के साथ पहचानता है (`HAVE_OPENPTY` सेट होता है, `HAVE_PTY_H 1`), इसलिए **किसी पैच की
-ज़रूरत नहीं**; PTYs तुरंत काम करते हैं। (exec, SFTP, rsync और पोर्ट-फ़ॉरवर्डिंग जैसे ग़ैर-इंटरैक्टिव उपयोग वैसे
+ज़रूरत नहीं**, PTYs तुरंत काम करते हैं। (exec, SFTP, rsync और पोर्ट-फ़ॉरवर्डिंग जैसे ग़ैर-इंटरैक्टिव उपयोग वैसे
 भी इस पर निर्भर नहीं हैं।)
 
 ## एम्बेडेड टूल: sftp-server, scp, rsync
@@ -174,7 +174,7 @@ daemon कभी शुरू नहीं होता। इसलिए म�
   है।
 
 Android पर OpenSSH ऊपर की crypt() कहानी जितना ही नख़रैल है, क्योंकि इसका `configure` क्रॉस-कंपाइल करते समय कई
-libc फ़ंक्शनों को ग़लत पहचानता है। स्क्रिप्ट इस सुधार को कोड करती है; अभिलेख के लिए, टुकड़े ये हैं:
+libc फ़ंक्शनों को ग़लत पहचानता है। स्क्रिप्ट इस सुधार को कोड करती है, अभिलेख के लिए, टुकड़े ये हैं:
 
 1. **उन फ़ंक्शनों का एक कैश seed जो bionic में नहीं हैं** पर configure सोचता है कि हैं, ताकि उनके बजाय compat
    संस्करण कंपाइल हों: `recallocarray`, `close_range`, `getentropy`, `getrandom`, `nl_langinfo`,
@@ -219,4 +219,4 @@ file ./dropbear   # -> dynamically linked, interpreter /system/bin/linker64, for
 
 ---
 
-> _यह दस्तावेज़ Claude (Anthropic) से तैयार किया गया है और इसे VD171 द्वारा अनुरक्षित किया जाता है। सुधार और संशोधन का स्वागत है; देखें [CONTRIBUTING.md](CONTRIBUTING.md)।_
+> _यह दस्तावेज़ Claude (Anthropic) से तैयार किया गया है और इसे VD171 द्वारा अनुरक्षित किया जाता है। सुधार और संशोधन का स्वागत है, देखें [CONTRIBUTING.md](CONTRIBUTING.md)।_

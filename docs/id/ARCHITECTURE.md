@@ -31,14 +31,14 @@
 
 VD Dropbear adalah modul KernelSU / APatch / Magisk yang menjalankan tepat satu daemon SSH Dropbear,
 yang sepenuhnya dikendalikan oleh konfigurasi. Tidak ada bagian dari server SSH yang di-hardcode untuk
-satu perangkat; semua yang spesifik berupa konfigurasi runtime atau sebuah secret.
+satu perangkat, semua yang spesifik berupa konfigurasi runtime atau sebuah secret.
 
 ## Bagian-bagian
 
 - `module/common/vddropbear.sh`, pustaka inti: memuat konfigurasi (dengan default bawaan yang aman),
   menentukan secret store, memastikan ada host key, menyusun vektor argumen Dropbear, dan mengelola
   satu instance daemon tunggal (start / stop / status / restart).
-- `module/service.sh`: titik masuk boot. Mematuhi kebijakan start BFU/AFU; dalam mode AFU ia menunggu
+- `module/service.sh`: titik masuk boot. Mematuhi kebijakan start BFU/AFU, dalam mode AFU ia menunggu
   penyimpanan credential-encrypted terbuka tanpa menahan proses boot.
 - `module/action.sh`, tombol **Action** pada manajer: (men)jalankan ulang daemon. Ia tidak pernah
   membaca stdin dan melepaskan daemon ke sesinya sendiri, sehingga manajer tidak menggantung.
@@ -53,6 +53,18 @@ lalu menelurkan satu daemon. Binary dikirim sebagai `vddropbear`, sehingga nama 
 dengan `pgrep -x` (`mksh` Android tidak punya `exec -a`). Ia dijalankan dengan `setsid` agar terlepas
 dari grup proses pemanggil: itulah yang membuat tombol Action manajer tidak terblokir.
 
+`setsid` tidak pernah mencakup cgroups, dan celah itu adalah regresi yang nyata: tombol Action dan
+WebUI berjalan di dalam aplikasi manajer, sehingga daemon yang dimulai dari salah satunya mewarisi
+freezer cgroup milik aplikasi (`/apps/uid_<uid>/pid_<pid>`). `CachedAppOptimizer` Android membekukan
+cgroup itu begitu aplikasi di-cache, dan daemon ikut membeku bersamanya padahal masih memegang
+listening socket-nya. Koneksi TCP terus selesai karena backlog hidup di kernel, tetapi tidak ada yang
+memanggil `accept()`, sehingga klien menggantung di "Connection established ... Local version string"
+tanpa error di kedua sisi, dan `/proc/<pid>/wchan` menunjukkan `do_freezer_trap` alih-alih
+`do_select`. Kini `vddb_escape_freezer` memindahkan shell yang melakukan spawn ke cgroup root (yang
+tidak pernah disentuh freezer) sebelum fork, sehingga daemon mewarisi exit itu. Ini no-op saat boot
+(sudah di `/`) dan pada platform tanpa freezer, jangan "sederhanakan" spawn kembali menjadi `setsid`
+telanjang.
+
 ## Secret store (CE vs DE, BFU vs AFU)
 
 Pengaturan bukanlah secret dan berada di penyimpanan device-encrypted (`/data/adb/vddropbear`), yang
@@ -64,7 +76,7 @@ awal. Modul menghitung store mana yang dipakai di setiap tahap boot.
 
 ## Kumpulan patch
 
-Server SSH tetap Dropbear upstream; perubahan kami hanya beberapa patch yang dapat ditinjau (lihat
+Server SSH tetap Dropbear upstream, perubahan kami hanya beberapa patch yang dapat ditinjau (lihat
 [patches/README.md](../../patches/README.md)):
 
 - banner identitas yang netral dan dapat dikonfigurasi saat runtime;
@@ -77,11 +89,11 @@ Server SSH tetap Dropbear upstream; perubahan kami hanya beberapa patch yang dap
 Sebuah halaman statis di WebUI manajer (KernelSU / APatch / WebUI-X). Ia menggerakkan
 `module/common/vddb-webui.sh` melalui jembatan `ksu.exec`: status, start/stop/restart, baca/tulis
 konfigurasi, serta pengelolaan kunci dan akun kata sandi. Semua data menyeberangi jembatan dalam bentuk
-base64, sehingga shell tidak pernah menafsirkannya; hash kata sandi dihitung di browser dengan
+base64, sehingga shell tidak pernah menafsirkannya, hash kata sandi dihitung di browser dengan
 WebCrypto, sehingga kata sandi teks-jelas tidak pernah keluar dari halaman.
 
 <!-- doc-footer -->
 
 ---
 
-> _Dokumentasi ini dibuat dengan Claude (Anthropic) dan dikelola oleh VD171. Koreksi dan perbaikan dipersilakan; lihat [CONTRIBUTING.md](CONTRIBUTING.md)._
+> _Dokumentasi ini dibuat dengan Claude (Anthropic) dan dikelola oleh VD171. Koreksi dan perbaikan dipersilakan, lihat [CONTRIBUTING.md](CONTRIBUTING.md)._

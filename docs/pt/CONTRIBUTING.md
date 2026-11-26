@@ -59,8 +59,8 @@ patches pequenos, documentados e justificados no PR.
 
 ## Pull requests
 
-- Uma mudança lógica por PR; descreva a motivação e o impacto na segurança.
-- Siga o estilo de shell existente (POSIX `sh` / Android `mksh`; sem bashisms).
+- Uma mudança lógica por PR, descreva a motivação e o impacto na segurança.
+- Siga o estilo de shell existente (POSIX `sh` / Android `mksh`, sem bashisms).
 - Todo arquivo carrega um cabeçalho SPDX curto. Mantenha-o.
 - Atualize o [`CHANGELOG.md`](../../CHANGELOG.md) sob `[Unreleased]` para qualquer mudança real e visível ao usuário.
 - Ao enviar um PR você concorda em licenciar sua contribuição sob a licença [Apache-2.0](../../LICENSE) do projeto.
@@ -68,7 +68,7 @@ patches pequenos, documentados e justificados no PR.
 ## Traduções
 
 O README e a documentação são mantidos em vários idiomas (`README.<lang>.md`). O inglês é a fonte da
-verdade; as traduções o seguem. Se você melhorar uma tradução ou adicionar um idioma, mantenha a
+verdade, as traduções o seguem. Se você melhorar uma tradução ou adicionar um idioma, mantenha a
 estrutura e as âncoras de seção idênticas às da versão em inglês.
 
 ## Relatando bugs e problemas de segurança
@@ -80,4 +80,4 @@ dispositivo, siga o [`SECURITY.md`](SECURITY.md) e relate em privado em vez de a
 
 ---
 
-> _Esta documentação foi gerada com o Claude (Anthropic) e é mantida por VD171. Correções e melhorias são bem-vindas; veja [CONTRIBUTING.md](CONTRIBUTING.md)._
+> _Esta documentação foi gerada com o Claude (Anthropic) e é mantida por VD171. Correções e melhorias são bem-vindas, veja [CONTRIBUTING.md](CONTRIBUTING.md)._

@@ -54,7 +54,7 @@ poświadczeń tego serwera. Prosimy:
 ## Wspierane wersje
 
 Poprawki bezpieczeństwa trafiają do najnowszego wydania. Plik binarny serwera śledzi oryginalnego
-Dropbeara; wydania bezpieczeństwa upstreamu są przebudowywane i dostarczane, gdy tylko CI je podchwyci.
+Dropbeara, wydania bezpieczeństwa upstreamu są przebudowywane i dostarczane, gdy tylko CI je podchwyci.
 
 ## Zgłaszanie podatności
 
@@ -71,4 +71,4 @@ do upstreamu pod adresem <https://matt.ucc.asn.au/dropbear/>.
 
 ---
 
-> _Ta dokumentacja została wygenerowana za pomocą Claude (Anthropic) i jest utrzymywana przez VD171. Poprawki i ulepszenia są mile widziane; zobacz [CONTRIBUTING.md](CONTRIBUTING.md)._
+> _Ta dokumentacja została wygenerowana za pomocą Claude (Anthropic) i jest utrzymywana przez VD171. Poprawki i ulepszenia są mile widziane, zobacz [CONTRIBUTING.md](CONTRIBUTING.md)._

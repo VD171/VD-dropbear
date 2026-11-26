@@ -30,9 +30,9 @@
 # Konfigurace
 
 Nastavení jsou v `/data/adb/vddropbear/config` (při prvním startu naplněna z
-`module/common/config.default`). **WebUI** tento soubor upravuje za tebe; můžeš jej upravit i ručně.
+`module/common/config.default`). **WebUI** tento soubor upravuje za tebe, můžeš jej upravit i ručně.
 Načítá se jako shell, takže používej `KEY=value` bez mezer kolem `=`. Nastavení nejsou tajná a leží na
-úložišti šifrovaném zařízením; tajemství (hostitelské klíče, autorizované klíče, otisky hesel) leží
+úložišti šifrovaném zařízením, tajemství (hostitelské klíče, autorizované klíče, otisky hesel) leží
 v úložišti tajemství, nikdy ne tady.
 
 Změny uplatníš restartem démona (dělá to tlačítko **Save & restart** ve WebUI).
@@ -42,18 +42,18 @@ Změny uplatníš restartem démona (dělá to tlačítko **Save & restart** ve 
 | Klíč | Výchozí | Význam |
 |-----|---------|---------|
 | `ENABLED` | `1` | Spustit démona při startu. `0` jej zcela vypne. |
-| `START_IN_BFU` | `0` | `0`: spustit až po prvním odemčení (AFU); tajemství zůstanou na úložišti šifrovaném přihlašovacími údaji (CE). `1`: spustit i před prvním odemčením (BFU); tajemství se přesunou na úložiště šifrované zařízením (DE), čitelné před odemčením. |
+| `START_IN_BFU` | `0` | `0`: spustit až po prvním odemčení (AFU), tajemství zůstanou na úložišti šifrovaném přihlašovacími údaji (CE). `1`: spustit i před prvním odemčením (BFU), tajemství se přesunou na úložiště šifrované zařízením (DE), čitelné před odemčením. |
 | `PORT` | `2222` | Výchozí port pro naslouchání (porty jednotlivých vazeb jej mohou přepsat v `LISTEN_ADDRESSES`). |
 
 ## Naslouchání / vazby (skládatelné)
 
-Povolena je libovolná kombinace; vybrané vazby se sloučí. Pokud vše vymažeš, VD Dropbear naváže
+Povolena je libovolná kombinace, vybrané vazby se sloučí. Pokud vše vymažeš, VD Dropbear naváže
 loopback místo každého rozhraní.
 
 | Klíč | Výchozí | Význam |
 |-----|---------|---------|
 | `LISTEN_LOOPBACK` | `1` | Naslouchat jen na `127.0.0.1` / `::1`. |
-| `LISTEN_ALL` | `0` | Naslouchat na každém rozhraní (`0.0.0.0` / `::`); vystaví zařízení. |
+| `LISTEN_ALL` | `0` | Naslouchat na každém rozhraní (`0.0.0.0` / `::`), vystaví zařízení. |
 | `LISTEN_IPV4` | `1` | Zahrnout vazby IPv4. |
 | `LISTEN_IPV6` | `1` | Zahrnout vazby IPv6. |
 | `LISTEN_ADDRESSES` | `""` | Další konkrétní vazby oddělené čárkami: `addr` (použije `PORT`) nebo `addr:port`, IPv4 nebo IPv6. |
@@ -69,7 +69,7 @@ loopback místo každého rozhraní.
 
 ## Ověřování
 
-Přihlášení běží pod účtem, kterým se ověříš: ve výchozím nastavení **root**, nebo účet s nižšími oprávněními (`shell`, `system`). Klíče jsou výchozí; hesla jsou volitelná.
+Přihlášení běží pod účtem, kterým se ověříš: ve výchozím nastavení **root**, nebo účet s nižšími oprávněními (`shell`, `system`). Klíče jsou výchozí, hesla jsou volitelná.
 
 | Klíč | Výchozí | Význam |
 |-----|---------|---------|
@@ -117,4 +117,4 @@ Obsahuje hostitelský klíč, `authorized_keys` a soubor otisků `passwd`. Form�
 
 ---
 
-> _Tato dokumentace byla vytvořena pomocí Claude (Anthropic) a spravuje ji VD171. Opravy a vylepšení jsou vítány; viz [CONTRIBUTING.md](CONTRIBUTING.md)._
+> _Tato dokumentace byla vytvořena pomocí Claude (Anthropic) a spravuje ji VD171. Opravy a vylepšení jsou vítány, viz [CONTRIBUTING.md](CONTRIBUTING.md)._

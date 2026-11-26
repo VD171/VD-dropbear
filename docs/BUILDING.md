@@ -31,7 +31,7 @@
 
 VD Dropbear ships **upstream [Dropbear](https://github.com/mkj/dropbear)** (the tag pinned in
 [`UPSTREAM_VERSION`](../UPSTREAM_VERSION)) plus the small, auditable patch set in
-[`patches/`](../patches/). CI builds it; you can reproduce it locally.
+[`patches/`](../patches/). CI builds it, you can reproduce it locally.
 
 ## Quick start
 
@@ -50,9 +50,9 @@ ABIS="arm64-v8a" ./scripts/build.sh
 then cross-compiles `vddropbear` and `dropbearkey` into `module/bin/<abi>/`. The output is a
 **dynamic** ELF (`file` reports `dynamically linked, interpreter /system/bin/linker64 … for Android
 24`), linked against the bionic libc that every Android device already has. libtomcrypt stays bundled
-inside the binary; only the C library is dynamic. See [Dynamic, not static-PIE](#dynamic-not-static-pie).
+inside the binary, only the C library is dynamic. See [Dynamic, not static-PIE](#dynamic-not-static-pie).
 
-The binaries are **not committed**; they are built by CI on every tag and attached to the release.
+The binaries are **not committed**, they are built by CI on every tag and attached to the release.
 See [`.gitignore`](../.gitignore).
 
 ---
@@ -63,7 +63,7 @@ Dropbear's password authentication is written for a normal Unix host with `crypt
 `/etc/shadow`. Android has **neither**, and that collides with the build in three separate places.
 This section documents every one of them, because it is exactly the kind of thing that is painful to
 rediscover. All of it is handled by patch
-[`0003-password-file.patch`](../patches/0003-password-file.patch); nothing below is left to chance at
+[`0003-password-file.patch`](../patches/0003-password-file.patch), nothing below is left to chance at
 runtime.
 
 ### 1. bionic has no usable `crypt()`
@@ -140,7 +140,7 @@ This matters, and it was learned the hard way, **on a real device**, not in CI:
 
 - A **static-PIE** build *looks* fine (`file` reports a clean `static-pie executable`) and links without
   error, but it **SIGSEGVs the instant it runs on-device** (verified on an arm64 Android 16 phone,
-  exit 139, no useful tombstone). Static executables on Android are fragile; the reliable form is a
+  exit 139, no useful tombstone). Static executables on Android are fragile, the reliable form is a
   normal dynamic binary, which is also how every long-standing Android dropbear ships.
 - A **static, non-PIE** build does not even start: bionic rejects it with
   `executable's TLS segment is underaligned … needs to be at least 64 for ARM64 Bionic`.
@@ -157,14 +157,14 @@ wrong password rejected.)
 ## No `-E` flag
 
 The server is built `--disable-syslog`, so it always logs to stderr and the upstream `-E`
-("log to stderr") option **does not exist** in this binary; passing it prints `Invalid option -E` and
+("log to stderr") option **does not exist** in this binary, passing it prints `Invalid option -E` and
 the daemon never starts. The module's argument builder therefore does not pass `-E`.
 
 ## openpty
 
 Interactive PTY sessions use `openpty()`. bionic declares it in `<pty.h>`, and Dropbear's
 cross-`configure` detects it with the NDK (`HAVE_OPENPTY` is set, `HAVE_PTY_H 1`), so **no patch is
-needed**; PTYs work out of the box. (Non-interactive use such as exec, SFTP, rsync and port-forwarding does
+needed**, PTYs work out of the box. (Non-interactive use such as exec, SFTP, rsync and port-forwarding does
 not depend on it anyway.)
 
 ## Bundled tools: sftp-server, scp, rsync
@@ -180,7 +180,7 @@ binaries into `module/bin/<abi>/`. CI runs it right after `build.sh`.
 
 OpenSSH on Android is as finicky as the crypt() story above, because its
 `configure` mis-detects several libc functions when cross-compiling. The script
-encodes the fix; for the record, the pieces are:
+encodes the fix, for the record, the pieces are:
 
 1. **A cache seed of functions bionic lacks** but configure thinks it has, so the
    compat versions get compiled instead: `recallocarray`, `close_range`,
@@ -230,4 +230,4 @@ file ./dropbear   # -> dynamically linked, interpreter /system/bin/linker64, for
 
 ---
 
-> _This documentation was generated with Claude (Anthropic) and is maintained by VD171. Corrections and improvements are welcome; see [CONTRIBUTING.md](../CONTRIBUTING.md)._
+> _This documentation was generated with Claude (Anthropic) and is maintained by VD171. Corrections and improvements are welcome, see [CONTRIBUTING.md](../CONTRIBUTING.md)._

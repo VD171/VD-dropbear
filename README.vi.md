@@ -23,18 +23,16 @@
 -->
 
 <p align="center">
-  <img src="module/webroot/assets/logo-wordmark.svg" alt="VD Dropbear" width="540">
+  <img src="module/webroot/assets/logo-wordmark.svg" alt="VD Dropbear" width="320">
 </p>
 
 # VD Dropbear
 
-<p>
+<p align="center">
+  <a href="https://github.com/VD171/VD-dropbear/releases/latest"><img src="https://img.shields.io/github/v/release/VD171/VD-dropbear?label=release&color=36e86a" alt="Release"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-Apache--2.0-1a7f37" alt="License"></a>
-  <img src="https://img.shields.io/badge/KernelSU-%E2%9C%94-635bff" alt="KernelSU">
-  <img src="https://img.shields.io/badge/APatch-%E2%9C%94-ff7043" alt="APatch">
-  <img src="https://img.shields.io/badge/Magisk-%E2%9C%94-00af9c" alt="Magisk">
+  <a href="https://github.com/VD171/VD-dropbear/releases"><img src="https://img.shields.io/github/downloads/VD171/VD-dropbear/total?label=downloads&color=8250df" alt="Downloads"></a>
   <a href="https://github.com/VD171/VD-dropbear/stargazers"><img src="https://img.shields.io/github/stars/VD171/VD-dropbear?color=d29922" alt="Stars"></a>
-  <a href="https://github.com/VD171/VD-dropbear/releases"><img src="https://img.shields.io/github/v/release/VD171/VD-dropbear?color=1a7f37" alt="Release"></a>
 </p>
 
 <p align="center">
@@ -56,6 +54,12 @@
 > ⚠️ **Một lần đăng nhập mặc định cho một shell ROOT đầy đủ.** Hãy coi nó như chìa khóa của thiết bị:
 > ưu tiên dùng khóa công khai thay vì mật khẩu, và giữ cổng tránh xa Internet công cộng.
 
+## Ảnh chụp màn hình
+
+<p align="center">
+  <img src="screenshots/status.png" width="24%" alt="Status"> <img src="screenshots/settings.png" width="24%" alt="Settings"> <img src="screenshots/keys.png" width="24%" alt="Keys"> <img src="screenshots/passwords.png" width="24%" alt="Passwords">
+</p>
+
 ## Tại sao
 
 Cách tích hợp sẵn của Android để có được một shell trên chính điện thoại của bạn là ADB (gỡ lỗi
@@ -73,7 +77,7 @@ là của bạn, thay vì một lá cờ "tôi đang bị gỡ lỗi" mà bất 
 ## Tính năng
 
 - **Luôn chỉ một daemon.** Nó khởi động lúc boot và từ nút **Action** của trình quản lý, và bạn có
-  thể **khởi động / dừng / khởi động lại** nó từ WebUI bất cứ lúc nào; không bao giờ có quá một thể hiện.
+  thể **khởi động / dừng / khởi động lại** nó từ WebUI bất cứ lúc nào, không bao giờ có quá một thể hiện.
 - **Mọi thứ đều có thể cấu hình** từ WebUI (hoặc `/data/adb/vddropbear/config`):
   - cổng, và gắn vào loopback / tất cả / IPv4 / IPv6 / các địa chỉ cụ thể
   - **khởi động trước lần mở khóa đầu tiên (BFU) hoặc chỉ sau đó (AFU)**, chỉ một công tắc
@@ -95,7 +99,7 @@ là của bạn, thay vì một lá cờ "tôi đang bị gỡ lỗi" mà bất 
 - **SSH qua USB, không ADB.** Bật chia sẻ kết nối USB và bind daemon vào địa chỉ USB: cùng phiên qua cáp, nhanh và ổn định hơn wifi cho các lần truyền lớn.
 - **Mọi thiết bị và trình giả lập.** `arm64-v8a`, `armeabi-v7a`, `x86`, `x86_64`.
 
-## Tác nhân AI trên thiết bị của bạn
+## Tác nhân AI
 
 Một điểm cuối SSH luôn thường trực biến điện thoại của bạn thành thứ mà **một tác nhân AI tự động có
 thể vận hành trực tiếp**. Bất kỳ tác nhân nào có thể điều khiển một shell hay một kết nối SSH
@@ -113,7 +117,7 @@ Vì dự án được xây dựng để **thân thiện với AI** (một tệp 
 dạng văn bản thuần), một tác nhân có thể tự khám phá cách dùng mà không cần đoán mò.
 
 > **Mặc định là root, nên hãy đối xử với nó như root.** Một lần đăng nhập mặc định vào với quyền root,
-> và bạn cũng có thể đăng nhập bằng một tài khoản quyền thấp hơn (`shell`, `system`); xem cảnh báo bên
+> và bạn cũng có thể đăng nhập bằng một tài khoản quyền thấp hơn (`shell`, `system`), xem cảnh báo bên
 > dưới. Khi trao quyền truy cập cho một tác nhân, hãy cấp cho nó thông tin đăng nhập riêng (không phải
 > khóa cá nhân của bạn), trỏ nó tới một tài khoản quyền thấp hơn như `shell` nếu bạn muốn giới hạn phạm
 > vi của nó, giới hạn các ràng buộc vào những mạng bạn tin tưởng (loopback hoặc một VPN thay vì
@@ -126,7 +130,7 @@ Flash tệp zip của mô-đun trong trình quản lý KernelSU, APatch hoặc M
 `ksud module install` / `apd module install`), mở **WebUI** của mô-đun để đặt cổng và thêm khóa của
 bạn, rồi khởi động lại (hoặc nhấn **Action** để chạy nó ngay bây giờ).
 
-## Mô hình bảo mật
+## Bảo mật
 
 ### Bí mật nằm ở đâu: BFU so với AFU
 
@@ -136,7 +140,7 @@ bạn, rồi khởi động lại (hoặc nhấn **Action** để chạy nó nga
 (After First Unlock).
 
 - **Chế độ AFU (mặc định, `START_IN_BFU=0`):** daemon chờ mở khóa rồi đọc khóa máy chủ,
-  `authorized_keys` và các hash mật khẩu từ bộ nhớ CE. Bảo vệ tối đa; SSH chỉ hoạt động sau khi thiết
+  `authorized_keys` và các hash mật khẩu từ bộ nhớ CE. Bảo vệ tối đa, SSH chỉ hoạt động sau khi thiết
   bị đã được mở khóa ít nhất một lần kể từ lúc boot.
 - **Chế độ BFU (`START_IN_BFU=1`):** daemon khởi động trước khi mở khóa để bạn có thể SSH vào sớm (ví
   dụ, để mở khóa thiết bị từ xa). Khi đó các bí mật của nó nằm trên bộ nhớ DE và đọc được trước khi mở
@@ -144,7 +148,7 @@ bạn, rồi khởi động lại (hoặc nhấn **Action** để chạy nó nga
 
 Chúng tôi cố ý **không** thêm lớp mã hóa riêng lên trên CE: nó đã được mã hóa bằng thông tin đăng
 nhập của người dùng, và việc chồng thêm một lớp mã hóa nữa sẽ cần một khóa phải nằm ở đâu đó (trên DE
-thì nó bị phơi bày; còn dẫn xuất từ thông tin đăng nhập của người dùng thì chỉ là triển khai lại CE).
+thì nó bị phơi bày, còn dẫn xuất từ thông tin đăng nhập của người dùng thì chỉ là triển khai lại CE).
 Điều đó chỉ mang lại cảm giác an toàn giả tạo, chứ không phải sự bảo vệ thực sự.
 
 ### Mật khẩu
@@ -162,6 +166,14 @@ cùng bản sửa `openpty` của Android cho các PTY tương tác. Một workf
 và build lại, nhờ đó mô-đun luôn được cập nhật. Xem [`.github/workflows/`](.github/workflows/) và
 [`CONTRIBUTING.md`](CONTRIBUTING.md).
 
+## Cập nhật tăng dần (VDLU)
+
+VD Dropbear đi kèm engine **[VDLiveUpdate](https://github.com/VD171/VDLiveUpdate) (VDLU)** (nhúng trong `vdlu/`): mô-đun tự cập nhật bằng cách chỉ tải về những tệp đã thay đổi (blob định địa chỉ theo nội dung + một `manifest.json` đã ký), thay vì tải lại toàn bộ `.zip`. Hồ sơ **Hardened**: chữ ký ed25519 là bắt buộc và việc hạ cấp bị chặn, bản `.zip` đầy đủ vẫn hợp lệ như phương án dự phòng.
+
+- **Chỉ LIVE** (không khởi động lại): các cập nhật được áp dụng ở lần khởi động kế tiếp qua `service.sh` (`setsid`, chạy nền, không bao giờ làm nghẽn khởi động), một no-op khi không có feed nào tiếp cận được.
+- **Trạng thái** trong `/data/adb/<module>/vdlu/`, bên ngoài mô-đun, nên nó sống sót qua một lần reflash.
+- **WebUI:** một bảng **Updates** với toast tiến trình và nút hủy, tự động cập nhật là tùy chọn bật (opt-in).
+
 ## Tài liệu
 
 <!-- vd-docs -->
@@ -169,12 +181,12 @@ và build lại, nhờ đó mô-đun luôn được cập nhật. Xem [`.github/
 - **[Hướng dẫn sử dụng](https://github.com/VD171/VD-dropbear/wiki/vi-USER-GUIDE)**: cài đặt, khóa, mật khẩu, kết nối, truyền tệp, BFU/AFU.
 - **[Cấu hình](https://github.com/VD171/VD-dropbear/wiki/vi-CONFIGURATION)**: mọi thiết lập, kèm giá trị mặc định.
 - **[Kiến trúc](https://github.com/VD171/VD-dropbear/wiki/vi-ARCHITECTURE)** và **[Cấu trúc tệp](https://github.com/VD171/VD-dropbear/wiki/vi-FILE-STRUCTURE)**: cách mô-đun và daemon hoạt động, và mọi thứ nằm ở đâu.
-- **[Tác nhân AI trên thiết bị của bạn](https://github.com/VD171/VD-dropbear/wiki/vi-AI-AGENTS)**: sử dụng một tác nhân tự động qua SSH, một cách an toàn.
+- **[Tác nhân AI](https://github.com/VD171/VD-dropbear/wiki/vi-AI-AGENTS)**: sử dụng một tác nhân tự động qua SSH, một cách an toàn.
 - **[Build](https://github.com/VD171/VD-dropbear/wiki/vi-BUILDING)**: quá trình build, và câu chuyện crypt()/biên dịch chéo của Android.
 - **[Đóng góp](CONTRIBUTING.md)** và **[Bảo mật](SECURITY.md)**.
 - **[Changelog](CHANGELOG.md)** và **[Quy tắc ứng xử](CODE_OF_CONDUCT.md)**.
 
-Mỗi trang wiki cũng được dịch sang mọi ngôn ngữ trong bộ chuyển ở trên; cùng các nguồn đó nằm trong [`docs/`](docs/).
+Mỗi trang wiki cũng được dịch sang mọi ngôn ngữ trong bộ chuyển ở trên, cùng các nguồn đó nằm trong [`docs/`](docs/).
 <!-- /vd-docs -->
 
 ## Xem thêm
@@ -191,31 +203,34 @@ Mỗi trang wiki cũng được dịch sang mọi ngôn ngữ trong bộ chuyể
 
 ## Liên hệ
 
-- Site           : https://vd171.ru
-- Site           : https://vd.priv8.ru
-- Source         : https://github.com/VD171/VD-dropbear
-- GitHub         : [@VD171](https://github.com/VD171)
-- XDA-Developers : [@VD171](https://xdaforums.com/m/vd171.4699873/)
-- XDA thread     : [VD-Dropbear](https://xdaforums.com/t/VD-Dropbear.4808524/)
-- Telegram       : [@VD_Priv8](https://t.me/VD_Priv8)
-- Channel        : [@Priv8_VD](https://t.me/Priv8_VD)
-- Discord        : [@VD.Priv8](https://discord.com/users/1296831918989639721)
-- E-mail         : vd.priv8@pm.me
+- https://vd171.ru
+- https://vd.priv8.ru
+- **Telegram:** @VD_Priv8 https://t.me/VD_Priv8
+- **Channel:** @Priv8_VD https://t.me/Priv8_VD
+- **Discord:** @VD.Priv8 https://discord.com/users/1296831918989639721
+- **E-mail:** vd.priv8@pm.me
+- **XDA-Developers:** @VD171 https://xdaforums.com/m/vd171.4699873/
+- **XDA thread:** https://xdaforums.com/t/VD-Dropbear.4808524/
+- **GitHub:** @VD171 https://github.com/VD171
 
 ## Giấy phép
 
-Mã của riêng VD Dropbear theo **Apache-2.0**; xem [LICENSE](LICENSE). Mô-đun cũng đóng gói các tệp
+Mã của riêng VD Dropbear theo **Apache-2.0**, xem [LICENSE](LICENSE). Mô-đun cũng đóng gói các tệp
 nhị phân của bên thứ ba: [Dropbear](https://matt.ucc.asn.au/dropbear/) (kiểu MIT), `sftp-server` và
-`scp` của OpenSSH (BSD), và `rsync` (GPL-3.0), mỗi thứ theo giấy phép riêng của nó; xem
+`scp` của OpenSSH (BSD), và `rsync` (GPL-3.0), mỗi thứ theo giấy phép riêng của nó, xem
 [THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md), bao gồm cả cách chúng tôi tuân thủ GPL cho rsync. Mã
 Apache-2.0 của chúng tôi không bị ảnh hưởng (tệp nhị phân GPL chỉ được gộp chung, chứ không liên kết).
 
 ## Nhãn hiệu
 
 VD Dropbear là một dự án độc lập, không chính thức, không liên kết với hay được chứng thực bởi bất kỳ
-bên thứ ba nào. "Android" là nhãn hiệu của Google LLC; "SSH" là nhãn hiệu đã đăng ký của SSH
+bên thứ ba nào. "Android" là nhãn hiệu của Google LLC. "SSH" là nhãn hiệu đã đăng ký của SSH
 Communications Security. VD Dropbear chạy hoàn toàn trên thiết bị của bạn.
 
 ## Tags
 
 `SSH` `Dropbear` `KernelSU` `Magisk` `APatch` `root` `sshd` `remote-access` `openssh-alternative` `Android` `BFU` `VD-dropbear`
+
+---
+
+📣 **Tham gia kênh để nhận cập nhật:** @Priv8_VD https://t.me/Priv8_VD

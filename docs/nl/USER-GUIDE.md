@@ -54,7 +54,7 @@ Wachtwoordlogin staat standaard uit (een login is standaard root, dus sleutels v
 
 ## 4. Kies een poort en waar te luisteren
 
-Stel onder **Settings** de **Port** in en kies de binds. Standaard luistert VD Dropbear alleen op **loopback**; om het vanaf je LAN of een VPN te bereiken, schakel de interfaces in die je wilt. Vermijd **Listen on all interfaces** tenzij je de blootstelling begrijpt.
+Stel onder **Settings** de **Port** in en kies de binds. Standaard luistert VD Dropbear alleen op **loopback**, om het vanaf je LAN of een VPN te bereiken, schakel de interfaces in die je wilt. Vermijd **Listen on all interfaces** tenzij je de blootstelling begrijpt.
 
 Druk op **Save & restart** om toe te passen, en dan op **Start** als het nog niet draait.
 
@@ -102,10 +102,10 @@ Standaard start de daemon pas **nadat** je het toestel één keer ontgrendelt (A
 - **Het start niet.** Controleer `/data/adb/vddropbear/state/daemon.log`. Zorg dat **Enabled** aan staat en dat er een hostsleutel gegenereerd kon worden.
 - **Sleutel geweigerd.** Bevestig dat de regel met de publieke sleutel exact is zoals je client die aanbiedt, en dat de gebruikersnaam waarmee je inlogt er een is die het systeem herkent (meestal `root`).
 - **Kan niet verbinden vanaf een andere machine.** Je bent waarschijnlijk nog alleen aan loopback gebonden. Schakel de interface in die je nodig hebt en herstart.
-- **SFTP/scp mislukt maar de shell werkt.** Zorg dat de meegeleverde `sftp-server` voor jouw ABI is uitgeleverd; de WebUI-status toont de gedetecteerde ABI.
+- **SFTP/scp mislukt maar de shell werkt.** Zorg dat de meegeleverde `sftp-server` voor jouw ABI is uitgeleverd, de WebUI-status toont de gedetecteerde ABI.
 
 <!-- doc-footer -->
 
 ---
 
-> _Deze documentatie is gegenereerd met Claude (Anthropic) en wordt onderhouden door VD171. Correcties en verbeteringen zijn welkom; zie [CONTRIBUTING.md](CONTRIBUTING.md)._
+> _Deze documentatie is gegenereerd met Claude (Anthropic) en wordt onderhouden door VD171. Correcties en verbeteringen zijn welkom, zie [CONTRIBUTING.md](CONTRIBUTING.md)._

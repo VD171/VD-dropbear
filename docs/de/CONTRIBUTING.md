@@ -59,8 +59,8 @@ im PR begründet.
 
 ## Pull Requests
 
-- Eine logische Änderung pro PR; beschreibe die Motivation und die Sicherheitsauswirkung.
-- Halte dich an den bestehenden Shell-Stil (POSIX `sh` / Android `mksh`; keine Bashismen).
+- Eine logische Änderung pro PR, beschreibe die Motivation und die Sicherheitsauswirkung.
+- Halte dich an den bestehenden Shell-Stil (POSIX `sh` / Android `mksh`, keine Bashismen).
 - Jede Datei trägt einen kurzen SPDX-Header. Behalte ihn bei.
 - Aktualisiere [`CHANGELOG.md`](../../CHANGELOG.md) unter `[Unreleased]` bei jeder echten, für Nutzer sichtbaren Änderung.
 - Mit dem Einreichen eines PR stimmst du zu, deinen Beitrag unter der [Apache-2.0](../../LICENSE)-Lizenz des Projekts zu lizenzieren.
@@ -68,7 +68,7 @@ im PR begründet.
 ## Übersetzungen
 
 README und Dokumentation werden in vielen Sprachen gepflegt (`README.<lang>.md`). Englisch ist die
-maßgebliche Quelle; Übersetzungen folgen ihr. Wenn du eine Übersetzung verbesserst oder eine Sprache
+maßgebliche Quelle, Übersetzungen folgen ihr. Wenn du eine Übersetzung verbesserst oder eine Sprache
 hinzufügst, halte Struktur und Abschnittsanker identisch zur englischen Version.
 
 ## Fehler und Sicherheitsprobleme melden
@@ -80,4 +80,4 @@ folge [`SECURITY.md`](SECURITY.md) und melde es privat, statt ein öffentliches 
 
 ---
 
-> _Diese Dokumentation wurde mit Claude (Anthropic) erstellt und wird von VD171 gepflegt. Korrekturen und Verbesserungen sind willkommen; siehe [CONTRIBUTING.md](CONTRIBUTING.md)._
+> _Diese Dokumentation wurde mit Claude (Anthropic) erstellt und wird von VD171 gepflegt. Korrekturen und Verbesserungen sind willkommen, siehe [CONTRIBUTING.md](CONTRIBUTING.md)._

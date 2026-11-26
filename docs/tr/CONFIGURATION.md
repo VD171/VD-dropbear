@@ -30,9 +30,9 @@
 # Yapılandırma
 
 Ayarlar `/data/adb/vddropbear/config` içinde bulunur (ilk önyüklemede `module/common/config.default`
-dosyasından oluşturulur). **WebUI** bu dosyayı sizin için düzenler; elle de düzenleyebilirsiniz. Kabuk
+dosyasından oluşturulur). **WebUI** bu dosyayı sizin için düzenler, elle de düzenleyebilirsiniz. Kabuk
 olarak source edilir, bu yüzden `=` çevresinde boşluk olmadan `KEY=value` kullanın. Ayarlar sır
-değildir ve device-encrypted depoda bulunur; sırlar (host key'ler, authorized key'ler, parola
+değildir ve device-encrypted depoda bulunur, sırlar (host key'ler, authorized key'ler, parola
 karmaları) sır deposunda bulunur, asla burada değil.
 
 Değişiklikleri daemon'u yeniden başlatarak uygulayın (WebUI'nin **Save & restart**'ı bunu yapar).
@@ -42,23 +42,23 @@ Değişiklikleri daemon'u yeniden başlatarak uygulayın (WebUI'nin **Save & res
 | Key | Default | Meaning |
 |-----|---------|---------|
 | `ENABLED` | `1` | Daemon'u önyüklemede başlat. `0` onu tamamen devre dışı bırakır. |
-| `START_IN_BFU` | `0` | `0`: yalnızca ilk kilit açılışından sonra başlat (AFU); sırlar credential-encrypted (CE) depoda kalır. `1`: ilk kilit açılışından önce de başlat (BFU); sırlar device-encrypted (DE) depoya taşınır, kilit açılmadan önce okunabilir. |
+| `START_IN_BFU` | `0` | `0`: yalnızca ilk kilit açılışından sonra başlat (AFU), sırlar credential-encrypted (CE) depoda kalır. `1`: ilk kilit açılışından önce de başlat (BFU), sırlar device-encrypted (DE) depoya taşınır, kilit açılmadan önce okunabilir. |
 | `PORT` | `2222` | Varsayılan dinleme bağlantı noktası (bağlama başına bağlantı noktaları bunu `LISTEN_ADDRESSES` içinde geçersiz kılabilir). |
 
 ## Dinleme / bağlamalar (birleştirilebilir)
 
-Herhangi bir kombinasyona izin verilir; seçilen bağlamalar birleştirilir. Her şeyi temizlerseniz, VD
+Herhangi bir kombinasyona izin verilir, seçilen bağlamalar birleştirilir. Her şeyi temizlerseniz, VD
 Dropbear her arabirim yerine loopback'e bağlanır.
 
 | Key | Default | Meaning |
 |-----|---------|---------|
 | `LISTEN_LOOPBACK` | `1` | Yalnızca `127.0.0.1` / `::1` üzerinde dinle. |
-| `LISTEN_ALL` | `0` | Her arabirimde dinle (`0.0.0.0` / `::`); cihazı açığa çıkarır. |
+| `LISTEN_ALL` | `0` | Her arabirimde dinle (`0.0.0.0` / `::`), cihazı açığa çıkarır. |
 | `LISTEN_IPV4` | `1` | IPv4 bağlamalarını dahil et. |
 | `LISTEN_IPV6` | `1` | IPv6 bağlamalarını dahil et. |
 | `LISTEN_ADDRESSES` | `""` | Ek belirli bağlamalar, virgülle ayrılmış: `addr` (`PORT` kullanır) veya `addr:port`, IPv4 ya da IPv6. |
 
-> **USB üzerinden SSH (wifi yok, ADB yok).** Telefonda **USB bağlantı paylaşımı**'nı açın ve USB adresini (genellikle `192.168.42.129`) `LISTEN_ALL` kapalıyken `LISTEN_ADDRESSES`'e ekleyin. Daemon'a o zaman yalnızca kablo üzerinden ulaşılır; bu büyük aktarımlarda genelde kablosuzdan daha hızlı ve kararlıdır.
+> **USB üzerinden SSH (wifi yok, ADB yok).** Telefonda **USB bağlantı paylaşımı**'nı açın ve USB adresini (genellikle `192.168.42.129`) `LISTEN_ALL` kapalıyken `LISTEN_ADDRESSES`'e ekleyin. Daemon'a o zaman yalnızca kablo üzerinden ulaşılır, bu büyük aktarımlarda genelde kablosuzdan daha hızlı ve kararlıdır.
 
 ## Kimlik
 
@@ -69,7 +69,7 @@ Dropbear her arabirim yerine loopback'e bağlanır.
 
 ## Kimlik doğrulama
 
-Oturum açma, kimlik doğruladığınız hesap olarak çalışır: varsayılan olarak **root** veya daha düşük ayrıcalıklı bir hesap (`shell`, `system`). Anahtarlar varsayılandır; parolalar isteğe bağlıdır.
+Oturum açma, kimlik doğruladığınız hesap olarak çalışır: varsayılan olarak **root** veya daha düşük ayrıcalıklı bir hesap (`shell`, `system`). Anahtarlar varsayılandır, parolalar isteğe bağlıdır.
 
 | Key | Default | Meaning |
 |-----|---------|---------|
@@ -117,4 +117,4 @@ Host key'i, `authorized_keys`'i ve `passwd` karma dosyasını barındırır. Par
 
 ---
 
-> _Bu belgeler Claude (Anthropic) ile oluşturulmuş olup VD171 tarafından yürütülmektedir. Düzeltmeler ve iyileştirmeler memnuniyetle karşılanır; bkz. [CONTRIBUTING.md](CONTRIBUTING.md)._
+> _Bu belgeler Claude (Anthropic) ile oluşturulmuş olup VD171 tarafından yürütülmektedir. Düzeltmeler ve iyileştirmeler memnuniyetle karşılanır, bkz. [CONTRIBUTING.md](CONTRIBUTING.md)._

@@ -56,7 +56,7 @@ Konfiguration und der Zugangsdaten dieses Servers. Bitte:
 ## Unterstützte Versionen
 
 Sicherheitskorrekturen landen im neuesten Release. Die Server-Binärdatei folgt dem
-Upstream-Dropbear; Upstream-Sicherheitsreleases werden neu gebaut und ausgeliefert, sobald die CI sie
+Upstream-Dropbear, Upstream-Sicherheitsreleases werden neu gebaut und ausgeliefert, sobald die CI sie
 aufgreift.
 
 ## Eine Schwachstelle melden
@@ -75,4 +75,4 @@ Schwachstellen in Dropbear selbst melde sie bitte auch beim Upstream unter
 
 ---
 
-> _Diese Dokumentation wurde mit Claude (Anthropic) erstellt und wird von VD171 gepflegt. Korrekturen und Verbesserungen sind willkommen; siehe [CONTRIBUTING.md](CONTRIBUTING.md)._
+> _Diese Dokumentation wurde mit Claude (Anthropic) erstellt und wird von VD171 gepflegt. Korrekturen und Verbesserungen sind willkommen, siehe [CONTRIBUTING.md](CONTRIBUTING.md)._

@@ -44,6 +44,8 @@ VD Dropbear는 정확히 하나의 Dropbear SSH 데몬을 실행하는 KernelSU 
 
 `vddb_start` 는 설정을 읽고, 실행 중인 인스턴스가 있으면 멈추고, 호스트 키의 존재를 보장한 뒤 데몬 하나를 띄웁니다. 바이너리는 `vddropbear` 로 배포되므로 그 프로세스 이름이 `pgrep -x` 와 정확히 일치합니다(Android `mksh` 에는 `exec -a` 가 없습니다). `setsid` 로 실행되어 호출자의 프로세스 그룹에서 분리됩니다: 이것이 매니저의 Action이 멈추지 않게 하는 핵심입니다.
 
+`setsid` 는 cgroups 를 한 번도 다루지 않았고, 그 틈은 실제 회귀였습니다. Action 버튼과 WebUI는 매니저 앱 안에서 돌기 때문에, 둘 중 어느 쪽에서 시작된 데몬이든 앱의 freezer cgroup(`/apps/uid_<uid>/pid_<pid>`)을 물려받았습니다. Android의 `CachedAppOptimizer` 는 앱을 캐시하는 순간 그 cgroup을 얼리고, 데몬은 리스닝 소켓을 여전히 쥔 채 함께 얼어붙습니다. 백로그가 커널에 있기 때문에 TCP 연결은 계속 완료되지만 아무도 `accept()` 를 호출하지 않으므로, 클라이언트는 "Connection established ... Local version string" 에서 멈추고 양쪽 모두 오류가 나지 않으며, `/proc/<pid>/wchan` 은 `do_select` 대신 `do_freezer_trap` 을 보여 줍니다. 이제 `vddb_escape_freezer` 는 fork 전에 생성하는 셸을 루트 cgroup(freezer가 절대 건드리지 않는)으로 옮겨, 데몬이 이 종료를 물려받게 합니다. 부팅 시에는 no-op이며(이미 `/` 에 있음) freezer가 없는 플랫폼에서도 그렇습니다. 생성을 다시 맨 `setsid` 로 "단순화" 하지 마십시오.
+
 ## 시크릿 저장소(CE 대 DE, BFU 대 AFU)
 
 설정은 시크릿이 아니며 기기 암호화 저장소(`/data/adb/vddropbear`)에 있어 부팅 시 읽을 수 있습니다. 시크릿(호스트 키, `authorized_keys`, 비밀번호 해시)은 기본적으로 **자격 증명 암호화(credential-encrypted)** 저장소(`/data/misc_ce/0/vddropbear`)에 있으며, 이는 사용자가 인증한 뒤에야 잠금이 풀립니다. `START_IN_BFU` 를 켜면 시크릿이 기기 암호화 저장소로 옮겨져 데몬이 첫 잠금 해제 전에 실행될 수 있지만, 그 대가로 시크릿을 더 이른 시점에 읽을 수 있게 됩니다. 모듈은 각 부팅 단계에서 어떤 저장소를 쓸지 계산합니다.
@@ -58,7 +60,7 @@ SSH 서버는 upstream Dropbear 그대로이며, 우리의 변경은 검토 가�
 
 ## WebUI
 
-매니저 WebUI(KernelSU / APatch / WebUI-X) 안의 정적 페이지입니다. `ksu.exec` 브리지를 통해 `module/common/vddb-webui.sh` 를 구동합니다: 상태, start/stop/restart, 설정 읽기/쓰기, 키와 비밀번호 계정 관리. 모든 데이터는 base64로 인코딩되어 브리지를 건너므로 셸이 그것을 해석하지 않습니다; 비밀번호 해시는 브라우저에서 WebCrypto로 계산되므로 평문 비밀번호가 페이지를 떠나지 않습니다.
+매니저 WebUI(KernelSU / APatch / WebUI-X) 안의 정적 페이지입니다. `ksu.exec` 브리지를 통해 `module/common/vddb-webui.sh` 를 구동합니다: 상태, start/stop/restart, 설정 읽기/쓰기, 키와 비밀번호 계정 관리. 모든 데이터는 base64로 인코딩되어 브리지를 건너므로 셸이 그것을 해석하지 않습니다, 비밀번호 해시는 브라우저에서 WebCrypto로 계산되므로 평문 비밀번호가 페이지를 떠나지 않습니다.
 
 <!-- doc-footer -->
 

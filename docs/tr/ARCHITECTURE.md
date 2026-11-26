@@ -31,14 +31,14 @@
 
 VD Dropbear, tamamen yapılandırmayla sürülen, tam olarak bir Dropbear SSH daemon'u çalıştıran bir
 KernelSU / APatch / Magisk modülüdür. SSH sunucusuyla ilgili hiçbir şey tek bir cihaza sabit
-kodlanmamıştır; özgül olan her şey çalışma zamanı yapılandırması veya bir sırdır.
+kodlanmamıştır, özgül olan her şey çalışma zamanı yapılandırması veya bir sırdır.
 
 ## Parçalar
 
 - `module/common/vddropbear.sh`: çekirdek kitaplık: yapılandırmayı yükler (güvenli yerleşik
   varsayılanlarla), sır deposunu çözümler, bir host key'in var olmasını sağlar, Dropbear argüman
   vektörünü oluşturur ve tek bir daemon örneğini yönetir (başlat / durdur / durum / yeniden başlat).
-- `module/service.sh`: önyükleme girişi. BFU/AFU başlatma politikasına uyar; AFU modunda, önyüklemeyi
+- `module/service.sh`: önyükleme girişi. BFU/AFU başlatma politikasına uyar, AFU modunda, önyüklemeyi
   tıkamadan credential-encrypted deposunun kilidinin açılmasını bekler.
 - `module/action.sh`: yöneticinin **Action** düğmesi: daemon'u (yeniden) başlatır. Asla stdin okumaz
   ve daemon'u kendi oturumuna ayırır, böylece yönetici takılmaz.
@@ -54,18 +54,30 @@ olur, sonra tek bir daemon başlatır. İkili dosya `vddropbear` olarak gönderi
 başlatılır, böylece çağıranın işlem grubundan ayrılır: yöneticinin Action'ının bloke olmasını
 engelleyen şey budur.
 
+`setsid` cgroups'u hiçbir zaman kapsamadı ve bu boşluk gerçek bir gerilemeydi: Action düğmesi ve WebUI
+yönetici uygulamasının içinde çalışır, bu yüzden ikisinden herhangi biriyle başlatılan bir daemon,
+uygulamanın freezer cgroup'unu (`/apps/uid_<uid>/pid_<pid>`) devralıyordu. Android'in
+`CachedAppOptimizer`'ı uygulamayı önbelleğe alır almaz o cgroup'u dondurur ve daemon da hâlâ dinleyen
+soketini tutarken onunla birlikte donar. TCP bağlantıları tamamlanmaya devam eder çünkü backlog
+çekirdekte yaşar, ama hiçbir şey `accept()` çağırmaz, dolayısıyla istemciler iki tarafta da hata
+olmadan "Connection established ... Local version string" noktasında asılı kalır ve `/proc/<pid>/wchan`,
+`do_select` yerine `do_freezer_trap` gösterir. `vddb_escape_freezer` artık fork'tan önce başlatan
+kabuğu kök cgroup'una (freezer'ın asla dokunmadığı) taşır, böylece daemon bu çıkışı devralır.
+Önyüklemede bir no-op'tur (zaten `/` üzerindedir) ve freezer olmayan platformlarda da öyledir,
+başlatmayı tekrar çıplak bir `setsid`'e "sadeleştirmeyin".
+
 ## Sır deposu (CE'ye karşı DE, BFU'ya karşı AFU)
 
 Ayarlar sır değildir ve önyüklemede okunabilen device-encrypted depoda (`/data/adb/vddropbear`)
 bulunur. Sırlar (host key, `authorized_keys`, parola karmaları) varsayılan olarak yalnızca kullanıcı
 kimlik doğruladıktan sonra kilidi açılan **credential-encrypted** depoda
 (`/data/misc_ce/0/vddropbear`) bulunur. `START_IN_BFU`'yu açmak, daemon'un ilk kilit açılışından önce
-çalışabilmesi için sırları device-encrypted depoya taşır; bunun bedeli, o sırların daha erken
+çalışabilmesi için sırları device-encrypted depoya taşır, bunun bedeli, o sırların daha erken
 okunabilir olmasıdır. Modül, her önyükleme aşamasında hangi deponun kullanılacağını hesaplar.
 
 ## Yama kümesi
 
-SSH sunucusu upstream Dropbear olarak kalır; değişikliklerimiz birkaç incelenebilir yamadır (bkz.
+SSH sunucusu upstream Dropbear olarak kalır, değişikliklerimiz birkaç incelenebilir yamadır (bkz.
 [patches/README.md](../../patches/README.md)):
 
 - nötr, çalışma zamanında yapılandırılabilir bir kimlik banner'ı;
@@ -78,11 +90,11 @@ SSH sunucusu upstream Dropbear olarak kalır; değişikliklerimiz birkaç incele
 Yöneticinin WebUI'sinde (KernelSU / APatch / WebUI-X) statik bir sayfa. `ksu.exec` köprüsü aracılığıyla
 `module/common/vddb-webui.sh`'yi sürer: durum, başlat/durdur/yeniden başlat, yapılandırma
 okuma/yazma ve anahtarların ve parola hesaplarının yönetimi. Tüm veriler köprüyü base64 kodlanmış
-olarak geçer, böylece kabuk onu asla yorumlamaz; parola karmaları tarayıcıda WebCrypto ile hesaplanır,
+olarak geçer, böylece kabuk onu asla yorumlamaz, parola karmaları tarayıcıda WebCrypto ile hesaplanır,
 böylece açık metin parola asla sayfadan çıkmaz.
 
 <!-- doc-footer -->
 
 ---
 
-> _Bu belgeler Claude (Anthropic) ile oluşturulmuş olup VD171 tarafından yürütülmektedir. Düzeltmeler ve iyileştirmeler memnuniyetle karşılanır; bkz. [CONTRIBUTING.md](CONTRIBUTING.md)._
+> _Bu belgeler Claude (Anthropic) ile oluşturulmuş olup VD171 tarafından yürütülmektedir. Düzeltmeler ve iyileştirmeler memnuniyetle karşılanır, bkz. [CONTRIBUTING.md](CONTRIBUTING.md)._

@@ -215,7 +215,7 @@
 <!-- SETTINGS -->
 <section class="card tabpanel" id="tab-settings" role="tabpanel" aria-labelledby="tabbtn-settings" tabindex="0">
   <h2>Settings</h2>
-  <div class="sub">Changes are saved to the config; press <b>Save &amp; restart</b> to apply.</div>
+  <div class="sub">Changes are saved to the config, press <b>Save &amp; restart</b> to apply.</div>
   <div id="toggles"></div>
   <div id="fields" style="margin-top:12px"></div>
   <div class="btns">
@@ -239,7 +239,7 @@
 <section class="card tabpanel" id="tab-pw" role="tabpanel" aria-labelledby="tabbtn-pw" tabindex="0">
   <h2>Password accounts</h2>
   <div class="sub">A password login is a login for the account you pick (<b>root</b> by default). Hashes use PBKDF2-HMAC-SHA256,
-    computed in this page; the password itself never leaves it.</div>
+    computed in this page, the password itself never leaves it.</div>
   <ul class="list" id="pwList"><li class="empty">loading…</li></ul>
   <label class="field" style="margin-top:12px"><span class="lab">User</span>
     <select id="pwUser">
@@ -320,15 +320,15 @@ function hex(u8){ return Array.from(u8).map(b=>b.toString(16).padStart(2,"0")).j
 /* ---- config schema ---- */
 const TOGGLES = [
   ["ENABLED","Enabled at boot",""],
-  ["START_IN_BFU","Start before first unlock (BFU)","Off: start only after you unlock (AFU); secrets stay on encrypted CE storage. On: also run before unlock; secrets move to DE storage, readable before unlock."],
+  ["START_IN_BFU","Start before first unlock (BFU)","Off: start only after you unlock (AFU), secrets stay on encrypted CE storage. On: also run before unlock, secrets move to DE storage, readable before unlock."],
   ["LISTEN_LOOPBACK","Listen on loopback","127.0.0.1 / ::1 only."],
   ["LISTEN_ALL","Listen on all interfaces","Exposes the device on every network it is on."],
   ["LISTEN_IPV4","IPv4",""],
   ["LISTEN_IPV6","IPv6",""],
   ["HIDE_IDENT","Hide version banner","Send a neutral SSH identity so scanners cannot fingerprint the version."],
   ["PUBKEY_AUTH","Public-key login",""],
-  ["PASSWORD_AUTH","Password login","Logins default to root; keys are safer."],
-  ["PASS_ENV","Pass environment to sessions","Session inherits the daemon's platform environment (BOOTCLASSPATH, etc.). Needed for root-ops tools run over SSH that shell out to the Android framework (am, content, pm); off is leaner but breaks them silently."],
+  ["PASSWORD_AUTH","Password login","Logins default to root, keys are safer."],
+  ["PASS_ENV","Pass environment to sessions","Session inherits the daemon's platform environment (BOOTCLASSPATH, etc.). Needed for root-ops tools run over SSH that shell out to the Android framework (am, content, pm), off is leaner but breaks them silently."],
   ["ALLOW_LOCAL_FORWARD","Allow local port forwarding",""],
   ["ALLOW_REMOTE_FORWARD","Allow remote port forwarding",""],
   ["GATEWAY_PORTS","Gateway ports","Let forwarded remote ports bind to all interfaces."],

@@ -58,8 +58,8 @@ konfiguracja uruchomieniowa. Prosimy, aby nowe łatki były małe, udokumentowan
 
 ## Pull requesty
 
-- Jedna logiczna zmiana na PR; opisz motywację i wpływ na bezpieczeństwo.
-- Trzymaj się istniejącego stylu powłoki (POSIX `sh` / Android `mksh`; bez bashizmów).
+- Jedna logiczna zmiana na PR, opisz motywację i wpływ na bezpieczeństwo.
+- Trzymaj się istniejącego stylu powłoki (POSIX `sh` / Android `mksh`, bez bashizmów).
 - Każdy plik ma krótki nagłówek SPDX. Zachowaj go.
 - Zaktualizuj [`CHANGELOG.md`](../../CHANGELOG.md) w sekcji `[Unreleased]` przy każdej realnej, widocznej dla użytkownika zmianie.
 - Przesyłając PR, zgadzasz się na licencjonowanie swojego wkładu na licencji projektu [Apache-2.0](../../LICENSE).
@@ -67,7 +67,7 @@ konfiguracja uruchomieniowa. Prosimy, aby nowe łatki były małe, udokumentowan
 ## Tłumaczenia
 
 README i dokumentacja są utrzymywane w wielu językach (`README.<lang>.md`). Angielski jest źródłem
-prawdy; tłumaczenia za nim podążają. Jeśli poprawiasz tłumaczenie lub dodajesz język, zachowaj strukturę
+prawdy, tłumaczenia za nim podążają. Jeśli poprawiasz tłumaczenie lub dodajesz język, zachowaj strukturę
 i kotwice sekcji identyczne jak w wersji angielskiej.
 
 ## Zgłaszanie błędów i problemów bezpieczeństwa
@@ -80,4 +80,4 @@ otwierać publiczne zgłoszenie.
 
 ---
 
-> _Ta dokumentacja została wygenerowana za pomocą Claude (Anthropic) i jest utrzymywana przez VD171. Poprawki i ulepszenia są mile widziane; zobacz [CONTRIBUTING.md](CONTRIBUTING.md)._
+> _Ta dokumentacja została wygenerowana za pomocą Claude (Anthropic) i jest utrzymywana przez VD171. Poprawki i ulepszenia są mile widziane, zobacz [CONTRIBUTING.md](CONTRIBUTING.md)._

@@ -62,7 +62,7 @@ pernah keluar dari halaman.
 ## 4. Pilih port dan tempat mendengarkan
 
 Pada **Settings**, atur **Port** dan pilih bind-nya. Secara default VD Dropbear hanya mendengarkan di
-**loopback**; untuk menjangkaunya dari LAN atau VPN Anda, aktifkan antarmuka yang Anda inginkan. Hindari
+**loopback**, untuk menjangkaunya dari LAN atau VPN Anda, aktifkan antarmuka yang Anda inginkan. Hindari
 **Listen on all interfaces** kecuali Anda memahami paparannya.
 
 Tekan **Save & restart** untuk menerapkan, lalu **Start** jika belum berjalan.
@@ -120,10 +120,10 @@ unlock: sebuah trade-off yang disengaja dan terdokumentasi. Lihat [Security mode
 - **Tidak bisa tersambung dari mesin lain.** Anda mungkin masih melakukan bind hanya ke loopback:
   aktifkan antarmuka yang Anda perlukan dan mulai ulang.
 - **SFTP/scp gagal tetapi shell berfungsi.** Pastikan `sftp-server` yang disertakan dikirim untuk ABI
-  Anda; status WebUI menampilkan ABI yang terdeteksi.
+  Anda, status WebUI menampilkan ABI yang terdeteksi.
 
 <!-- doc-footer -->
 
 ---
 
-> _Dokumentasi ini dibuat dengan Claude (Anthropic) dan dikelola oleh VD171. Koreksi dan perbaikan dipersilakan; lihat [CONTRIBUTING.md](CONTRIBUTING.md)._
+> _Dokumentasi ini dibuat dengan Claude (Anthropic) dan dikelola oleh VD171. Koreksi dan perbaikan dipersilakan, lihat [CONTRIBUTING.md](CONTRIBUTING.md)._

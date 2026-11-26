@@ -31,7 +31,7 @@
 
 VD Dropbear mengirimkan **[Dropbear](https://github.com/mkj/dropbear) upstream** (tag yang disematkan di
 [`UPSTREAM_VERSION`](../../UPSTREAM_VERSION)) ditambah set patch kecil yang dapat diaudit di
-[`patches/`](../../patches/). CI membangunnya; Anda bisa mereproduksinya secara lokal.
+[`patches/`](../../patches/). CI membangunnya, Anda bisa mereproduksinya secara lokal.
 
 ## Mulai cepat
 
@@ -50,10 +50,10 @@ ABIS="arm64-v8a" ./scripts/build.sh
 `localoptions.h`, lalu mengompilasi silang `vddropbear` dan `dropbearkey` ke `module/bin/<abi>/`.
 Keluarannya adalah ELF **dinamis** (`file` melaporkan `dynamically linked, interpreter
 /system/bin/linker64 … for Android 24`), ditautkan terhadap libc bionic yang sudah dimiliki setiap
-perangkat Android. libtomcrypt tetap tertanam di dalam biner; hanya pustaka C yang dinamis. Lihat
+perangkat Android. libtomcrypt tetap tertanam di dalam biner, hanya pustaka C yang dinamis. Lihat
 [Dinamis, bukan static-PIE](#dinamis-bukan-static-pie).
 
-Biner **tidak di-commit**; keduanya dibangun oleh CI pada setiap tag dan dilampirkan ke rilis. Lihat
+Biner **tidak di-commit**, keduanya dibangun oleh CI pada setiap tag dan dilampirkan ke rilis. Lihat
 [`.gitignore`](../../.gitignore).
 
 ---
@@ -63,7 +63,7 @@ Biner **tidak di-commit**; keduanya dibangun oleh CI pada setiap tag dan dilampi
 Autentikasi kata sandi Dropbear ditulis untuk host Unix biasa dengan `crypt()` dan `/etc/shadow`.
 Android **tidak punya keduanya**, dan itu berbenturan dengan build di tiga tempat terpisah. Bagian ini
 mendokumentasikan masing-masing, karena ini persis jenis hal yang menyakitkan untuk ditemukan kembali.
-Semuanya ditangani oleh patch [`0003-password-file.patch`](../../patches/0003-password-file.patch); tidak
+Semuanya ditangani oleh patch [`0003-password-file.patch`](../../patches/0003-password-file.patch), tidak
 ada yang di bawah ini diserahkan pada keberuntungan saat runtime.
 
 ### 1. bionic tidak punya `crypt()` yang dapat dipakai
@@ -143,7 +143,7 @@ Ini penting, dan dipelajari dengan cara sulit, **di perangkat nyata**, bukan di 
 - Build **static-PIE** *tampak* baik-baik saja (`file` melaporkan `static-pie executable` yang bersih)
   dan menaut tanpa galat, tetapi **melakukan SIGSEGV pada saat ia berjalan di perangkat** (diverifikasi
   di ponsel arm64 Android 16, exit 139, tanpa tombstone yang berguna). Eksekutabel statis di Android
-  rapuh; bentuk yang andal adalah biner dinamis biasa, yang juga merupakan cara setiap dropbear Android
+  rapuh, bentuk yang andal adalah biner dinamis biasa, yang juga merupakan cara setiap dropbear Android
   mapan dikirimkan.
 - Build **statis, non-PIE** bahkan tidak memulai: bionic menolaknya dengan
   `executable's TLS segment is underaligned … needs to be at least 64 for ARM64 Bionic`.
@@ -160,14 +160,14 @@ kata sandi yang salah ditolak.)
 ## Tanpa flag `-E`
 
 Server dibangun dengan `--disable-syslog`, jadi ia selalu mencatat ke stderr dan opsi upstream `-E`
-("log to stderr") **tidak ada** di biner ini; meneruskannya mencetak `Invalid option -E` dan daemon tidak
+("log to stderr") **tidak ada** di biner ini, meneruskannya mencetak `Invalid option -E` dan daemon tidak
 pernah memulai. Karena itu pembangun argumen modul tidak meneruskan `-E`.
 
 ## openpty
 
 Sesi PTY interaktif memakai `openpty()`. bionic mendeklarasikannya di `<pty.h>`, dan `configure` silang
 Dropbear mendeteksinya dengan NDK (`HAVE_OPENPTY` disetel, `HAVE_PTY_H 1`), jadi **tidak ada patch yang
-diperlukan**; PTY bekerja langsung. (Penggunaan non-interaktif seperti exec, SFTP, rsync, dan penerusan
+diperlukan**, PTY bekerja langsung. (Penggunaan non-interaktif seperti exec, SFTP, rsync, dan penerusan
 port toh tidak bergantung padanya.)
 
 ## Alat bawaan: sftp-server, scp, rsync
@@ -182,7 +182,7 @@ port toh tidak bergantung padanya.)
   lebih dulu.
 
 OpenSSH di Android serewel kisah crypt() di atas, karena `configure`-nya salah mendeteksi beberapa fungsi
-libc saat kompilasi silang. Skrip mengkodekan perbaikannya; sebagai catatan, bagian-bagiannya adalah:
+libc saat kompilasi silang. Skrip mengkodekan perbaikannya, sebagai catatan, bagian-bagiannya adalah:
 
 1. **Seed cache fungsi yang tidak dimiliki bionic** tetapi configure mengira ada, agar versi compat-nya
    yang dikompilasi: `recallocarray`, `close_range`, `getentropy`, `getrandom`, `nl_langinfo`,
@@ -229,4 +229,4 @@ file ./dropbear   # -> dynamically linked, interpreter /system/bin/linker64, for
 
 ---
 
-> _Dokumentasi ini dibuat dengan Claude (Anthropic) dan dikelola oleh VD171. Koreksi dan perbaikan dipersilakan; lihat [CONTRIBUTING.md](CONTRIBUTING.md)._
+> _Dokumentasi ini dibuat dengan Claude (Anthropic) dan dikelola oleh VD171. Koreksi dan perbaikan dipersilakan, lihat [CONTRIBUTING.md](CONTRIBUTING.md)._

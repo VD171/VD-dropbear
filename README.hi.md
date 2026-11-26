@@ -23,18 +23,16 @@
 -->
 
 <p align="center">
-  <img src="module/webroot/assets/logo-wordmark.svg" alt="VD Dropbear" width="540">
+  <img src="module/webroot/assets/logo-wordmark.svg" alt="VD Dropbear" width="320">
 </p>
 
 # VD Dropbear
 
-<p>
+<p align="center">
+  <a href="https://github.com/VD171/VD-dropbear/releases/latest"><img src="https://img.shields.io/github/v/release/VD171/VD-dropbear?label=release&color=36e86a" alt="Release"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-Apache--2.0-1a7f37" alt="License"></a>
-  <img src="https://img.shields.io/badge/KernelSU-%E2%9C%94-635bff" alt="KernelSU">
-  <img src="https://img.shields.io/badge/APatch-%E2%9C%94-ff7043" alt="APatch">
-  <img src="https://img.shields.io/badge/Magisk-%E2%9C%94-00af9c" alt="Magisk">
+  <a href="https://github.com/VD171/VD-dropbear/releases"><img src="https://img.shields.io/github/downloads/VD171/VD-dropbear/total?label=downloads&color=8250df" alt="Downloads"></a>
   <a href="https://github.com/VD171/VD-dropbear/stargazers"><img src="https://img.shields.io/github/stars/VD171/VD-dropbear?color=d29922" alt="Stars"></a>
-  <a href="https://github.com/VD171/VD-dropbear/releases"><img src="https://img.shields.io/github/v/release/VD171/VD-dropbear?color=1a7f37" alt="Release"></a>
 </p>
 
 <p align="center">
@@ -56,6 +54,12 @@
 > ⚠️ **लॉगिन डिफ़ॉल्ट रूप से एक पूर्ण ROOT शेल देता है।** इसे डिवाइस की चाबियों की तरह समझें:
 > पासवर्ड के बजाय पब्लिक कीज़ को प्राथमिकता दें, और पोर्ट को सार्वजनिक इंटरनेट से दूर रखें।
 
+## स्क्रीनशॉट
+
+<p align="center">
+  <img src="screenshots/status.png" width="24%" alt="Status"> <img src="screenshots/settings.png" width="24%" alt="Settings"> <img src="screenshots/keys.png" width="24%" alt="Keys"> <img src="screenshots/passwords.png" width="24%" alt="Passwords">
+</p>
+
 ## क्यों
 
 अपने ही फ़ोन पर शेल पाने का Android का अंतर्निहित तरीका ADB (USB डिबगिंग) है, और इसे चालू करना दखल देने वाला है
@@ -72,7 +76,7 @@ rsync, बिना किसी `adb_enabled` संकेत के, बिन
 ## विशेषताएँ
 
 - **एक डेमन, हमेशा।** यह बूट पर और मैनेजर के **Action** बटन से शुरू होता है, और आप इसे WebUI से कभी भी
-  **शुरू / बंद / पुनः आरंभ** कर सकते हैं; कभी भी एक से ज़्यादा इंस्टेंस नहीं।
+  **शुरू / बंद / पुनः आरंभ** कर सकते हैं, कभी भी एक से ज़्यादा इंस्टेंस नहीं।
 - **सब कुछ कॉन्फ़िगर करने योग्य है** WebUI से (या `/data/adb/vddropbear/config` से):
   - पोर्ट, और loopback / सभी / IPv4 / IPv6 / विशिष्ट पतों से बाइंड करना
   - **पहले अनलॉक से पहले शुरू करना (BFU) या केवल उसके बाद (AFU)**, एक ही टॉगल
@@ -93,7 +97,7 @@ rsync, बिना किसी `adb_enabled` संकेत के, बिन
 - **USB से SSH, बिना ADB।** USB टेदरिंग चालू करें और डेमन को USB पते से बाइंड करें: केबल से वही सत्र, बड़े ट्रांसफर के लिए wifi से तेज़ और स्थिर।
 - **हर डिवाइस और एमुलेटर।** `arm64-v8a`, `armeabi-v7a`, `x86`, `x86_64`.
 
-## आपके डिवाइस पर AI एजेंट
+## AI एजेंट
 
 एक स्थायी SSH एंडपॉइंट आपके फ़ोन को ऐसी चीज़ बना देता है जिसे **एक स्वायत्त AI एजेंट सीधे चला सकता है**। कोई भी
 एजेंट जो शेल या SSH कनेक्शन चला सके (Claude Code, aider, लूप में LLM वाली कोई स्क्रिप्ट, आपका अपना
@@ -122,7 +126,7 @@ rsync, बिना किसी `adb_enabled` संकेत के, बिन
 `ksud module install` / `apd module install` के साथ), पोर्ट सेट करने और अपनी कीज़ जोड़ने के लिए मॉड्यूल की
 **WebUI** खोलें, फिर रीबूट करें (या अभी शुरू करने के लिए **Action** दबाएँ)।
 
-## सुरक्षा मॉडल
+## सुरक्षा
 
 ### गोपनीय डेटा कहाँ रहता है: BFU बनाम AFU
 
@@ -132,7 +136,7 @@ rsync, बिना किसी `adb_enabled` संकेत के, बिन
 (After First Unlock)।
 
 - **AFU मोड (डिफ़ॉल्ट, `START_IN_BFU=0`):** डेमन अनलॉक का इंतज़ार करता है और अपनी होस्ट की,
-  `authorized_keys` तथा पासवर्ड हैश CE स्टोरेज से पढ़ता है। अधिकतम सुरक्षा; SSH तभी काम करता है जब डिवाइस बूट
+  `authorized_keys` तथा पासवर्ड हैश CE स्टोरेज से पढ़ता है। अधिकतम सुरक्षा, SSH तभी काम करता है जब डिवाइस बूट
   के बाद एक बार अनलॉक हो चुका हो।
 - **BFU मोड (`START_IN_BFU=1`):** डेमन अनलॉक से पहले शुरू होता है ताकि आप जल्दी SSH कर सकें (उदाहरण के लिए,
   डिवाइस को दूर से अनलॉक करने के लिए)। तब उसके गोपनीय डेटा DE स्टोरेज पर रहते हैं और अनलॉक से पहले पढ़े जा सकते
@@ -140,7 +144,7 @@ rsync, बिना किसी `adb_enabled` संकेत के, बिन
 
 हम जानबूझकर CE के ऊपर अपना एन्क्रिप्शन **नहीं** जोड़ते: यह पहले से ही उपयोगकर्ता के क्रेडेंशियल से एन्क्रिप्टेड है,
 और ऊपर एक और सिफर की परत चढ़ाने के लिए एक की चाहिए होगी जिसे कहीं न कहीं रहना होगा (DE पर वह उजागर हो
-जाएगी; उपयोगकर्ता के क्रेडेंशियल से उसे प्राप्त करना तो बस CE को दोबारा लागू करना है)। इससे सुरक्षा का झूठा एहसास
+जाएगी, उपयोगकर्ता के क्रेडेंशियल से उसे प्राप्त करना तो बस CE को दोबारा लागू करना है)। इससे सुरक्षा का झूठा एहसास
 मिलेगा, असली सुरक्षा नहीं।
 
 ### पासवर्ड
@@ -157,6 +161,14 @@ rsync, बिना किसी `adb_enabled` संकेत के, बिन
 `openpty` फ़िक्स। एक शेड्यूल्ड वर्कफ़्लो अपस्ट्रीम पर नज़र रखता है और दोबारा बिल्ड करता है, ताकि मॉड्यूल अद्यतन
 बना रहे। देखें [`.github/workflows/`](.github/workflows/) और [`CONTRIBUTING.md`](CONTRIBUTING.md).
 
+## वृद्धिशील अपडेट (VDLU)
+
+VD Dropbear में **[VDLiveUpdate](https://github.com/VD171/VDLiveUpdate) (VDLU)** इंजन शामिल है (`vdlu/` में वेंडर किया गया): मॉड्यूल केवल बदली हुई फ़ाइलें लाकर खुद को अपडेट करता है (सामग्री-पते वाले ब्लॉब + एक हस्ताक्षरित `manifest.json`), पूरे `.zip` को दोबारा डाउनलोड करने के बजाय। **Hardened** प्रोफ़ाइल: ed25519 हस्ताक्षर अनिवार्य है और डाउनग्रेड अवरुद्ध हैं, पूरा `.zip` फ़ॉलबैक के रूप में मान्य रहता है।
+
+- **केवल LIVE** (कोई रिबूट नहीं): अपडेट अगले बूट पर `service.sh` के ज़रिए लागू होते हैं (`setsid`, पृष्ठभूमि में, बूट को कभी नहीं रोकता), कोई फ़ीड पहुँच में न हो तो एक no-op।
+- **स्थिति** `/data/adb/<module>/vdlu/` में, मॉड्यूल के बाहर, ताकि यह रीफ़्लैश से बची रहे।
+- **WebUI:** प्रगति टोस्ट और रद्द करने वाला एक **Updates** पैनल, स्वतः-अपडेट opt-in है।
+
 ## प्रलेखन
 
 <!-- vd-docs -->
@@ -164,12 +176,12 @@ rsync, बिना किसी `adb_enabled` संकेत के, बिन
 - **[उपयोगकर्ता गाइड](https://github.com/VD171/VD-dropbear/wiki/hi-USER-GUIDE)**: इंस्टॉल, कीज़, पासवर्ड, कनेक्ट करना, फ़ाइल ट्रांसफ़र, BFU/AFU।
 - **[कॉन्फ़िगरेशन](https://github.com/VD171/VD-dropbear/wiki/hi-CONFIGURATION)**: हर सेटिंग, डिफ़ॉल्ट मानों के साथ।
 - **[आर्किटेक्चर](https://github.com/VD171/VD-dropbear/wiki/hi-ARCHITECTURE)** और **[फ़ाइल संरचना](https://github.com/VD171/VD-dropbear/wiki/hi-FILE-STRUCTURE)**: मॉड्यूल और डेमन कैसे काम करते हैं, और हर चीज़ कहाँ रहती है।
-- **[आपके डिवाइस पर AI एजेंट](https://github.com/VD171/VD-dropbear/wiki/hi-AI-AGENTS)**: SSH पर एक स्वायत्त एजेंट का सुरक्षित उपयोग।
+- **[AI एजेंट](https://github.com/VD171/VD-dropbear/wiki/hi-AI-AGENTS)**: SSH पर एक स्वायत्त एजेंट का सुरक्षित उपयोग।
 - **[बिल्ड](https://github.com/VD171/VD-dropbear/wiki/hi-BUILDING)**: बिल्ड, और Android के crypt()/क्रॉस-कंपाइल की कहानी।
 - **[योगदान](CONTRIBUTING.md)** और **[सुरक्षा](SECURITY.md)**।
 - **[Changelog](CHANGELOG.md)** और **[आचार संहिता](CODE_OF_CONDUCT.md)**।
 
-विकी का हर पेज ऊपर दिए स्विचर की हर भाषा में भी अनूदित है; वही स्रोत [`docs/`](docs/) के अंतर्गत रहते हैं।
+विकी का हर पेज ऊपर दिए स्विचर की हर भाषा में भी अनूदित है, वही स्रोत [`docs/`](docs/) के अंतर्गत रहते हैं।
 <!-- /vd-docs -->
 
 ## यह भी देखें
@@ -186,31 +198,34 @@ rsync, बिना किसी `adb_enabled` संकेत के, बिन
 
 ## संपर्क
 
-- Site           : https://vd171.ru
-- Site           : https://vd.priv8.ru
-- Source         : https://github.com/VD171/VD-dropbear
-- GitHub         : [@VD171](https://github.com/VD171)
-- XDA-Developers : [@VD171](https://xdaforums.com/m/vd171.4699873/)
-- XDA thread     : [VD-Dropbear](https://xdaforums.com/t/VD-Dropbear.4808524/)
-- Telegram       : [@VD_Priv8](https://t.me/VD_Priv8)
-- Channel        : [@Priv8_VD](https://t.me/Priv8_VD)
-- Discord        : [@VD.Priv8](https://discord.com/users/1296831918989639721)
-- E-mail         : vd.priv8@pm.me
+- https://vd171.ru
+- https://vd.priv8.ru
+- **Telegram:** @VD_Priv8 https://t.me/VD_Priv8
+- **Channel:** @Priv8_VD https://t.me/Priv8_VD
+- **Discord:** @VD.Priv8 https://discord.com/users/1296831918989639721
+- **E-mail:** vd.priv8@pm.me
+- **XDA-Developers:** @VD171 https://xdaforums.com/m/vd171.4699873/
+- **XDA thread:** https://xdaforums.com/t/VD-Dropbear.4808524/
+- **GitHub:** @VD171 https://github.com/VD171
 
 ## लाइसेंस
 
-VD Dropbear का अपना कोड **Apache-2.0** है; देखें [LICENSE](LICENSE)। मॉड्यूल तीसरे पक्ष की बाइनरियाँ भी
+VD Dropbear का अपना कोड **Apache-2.0** है, देखें [LICENSE](LICENSE)। मॉड्यूल तीसरे पक्ष की बाइनरियाँ भी
 बंडल करता है: [Dropbear](https://matt.ucc.asn.au/dropbear/) (MIT-शैली), OpenSSH की `sftp-server` और
-`scp` (BSD), और `rsync` (GPL-3.0), हर एक अपने स्वयं के लाइसेंस के अंतर्गत; देखें
+`scp` (BSD), और `rsync` (GPL-3.0), हर एक अपने स्वयं के लाइसेंस के अंतर्गत, देखें
 [THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md), जिसमें यह भी शामिल है कि हम rsync के लिए GPL का पालन कैसे
 करते हैं। हमारा Apache-2.0 कोड अप्रभावित रहता है (GPL बाइनरी केवल समेकित है, लिंक नहीं)।
 
 ## ट्रेडमार्क
 
 VD Dropbear एक स्वतंत्र, अनौपचारिक परियोजना है, जो किसी तीसरे पक्ष से संबद्ध या उसके द्वारा अनुमोदित नहीं है।
-"Android", Google LLC का ट्रेडमार्क है; "SSH", SSH Communications Security का पंजीकृत ट्रेडमार्क है।
+"Android", Google LLC का ट्रेडमार्क है। "SSH", SSH Communications Security का पंजीकृत ट्रेडमार्क है।
 VD Dropbear पूरी तरह आपके डिवाइस पर चलता है।
 
 ## Tags
 
 `SSH` `Dropbear` `KernelSU` `Magisk` `APatch` `root` `sshd` `remote-access` `openssh-alternative` `Android` `BFU` `VD-dropbear`
+
+---
+
+📣 **अपडेट के लिए चैनल से जुड़ें:** @Priv8_VD https://t.me/Priv8_VD

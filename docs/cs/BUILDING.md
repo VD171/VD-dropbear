@@ -31,7 +31,7 @@
 
 VD Dropbear dodává **[Dropbear](https://github.com/mkj/dropbear) upstream** (tag připnutý v
 [`UPSTREAM_VERSION`](../../UPSTREAM_VERSION)) plus malou, auditovatelnou sadu patchů v
-[`patches/`](../../patches/). CI jej sestavuje; můžeš to reprodukovat lokálně.
+[`patches/`](../../patches/). CI jej sestavuje, můžeš to reprodukovat lokálně.
 
 ## Rychlý start
 
@@ -49,10 +49,10 @@ ABIS="arm64-v8a" ./scripts/build.sh
 `scripts/build.sh` naklonuje připnutý upstream tag, aplikuje `patches/*.patch` a `localoptions.h` a poté
 křížově zkompiluje `vddropbear` a `dropbearkey` do `module/bin/<abi>/`. Výstupem je **dynamický** ELF
 (`file` hlásí `dynamically linked, interpreter /system/bin/linker64 … for Android 24`), slinkovaný proti
-bionic libc, kterou každé zařízení s Androidem už má. libtomcrypt zůstává vestavěný v binárce; dynamická
+bionic libc, kterou každé zařízení s Androidem už má. libtomcrypt zůstává vestavěný v binárce, dynamická
 je jen knihovna C. Viz [Dynamický, ne static-PIE](#dynamický-ne-static-pie).
 
-Binárky se **necommitují**; sestavuje je CI při každém tagu a připojuje je k vydání. Viz
+Binárky se **necommitují**, sestavuje je CI při každém tagu a připojuje je k vydání. Viz
 [`.gitignore`](../../.gitignore).
 
 ---
@@ -62,7 +62,7 @@ Binárky se **necommitují**; sestavuje je CI při každém tagu a připojuje je
 Autentizace heslem v Dropbearu je napsaná pro běžný unixový host s `crypt()` a `/etc/shadow`. Android
 **nemá ani jedno**, a to naráží na sestavení na třech samostatných místech. Tato sekce dokumentuje každé
 z nich, protože je to přesně ten druh věci, který je bolestivé znovu objevovat. Vše řeší patch
-[`0003-password-file.patch`](../../patches/0003-password-file.patch); nic níže není za běhu ponecháno
+[`0003-password-file.patch`](../../patches/0003-password-file.patch), nic níže není za běhu ponecháno
 náhodě.
 
 ### 1. bionic nemá použitelné `crypt()`
@@ -139,7 +139,7 @@ statické. Na tom záleží a bylo to naučeno tvrdě, **na skutečném zaříze
 - Build **static-PIE** *vypadá* v pořádku (`file` hlásí čistý `static-pie executable`) a slinkuje se bez
   chyby, ale **udělá SIGSEGV v okamžiku, kdy se spustí na zařízení** (ověřeno na telefonu arm64 s
   Androidem 16, exit 139, žádný užitečný tombstone). Statické spustitelné soubory na Androidu jsou
-  křehké; spolehlivou formou je běžná dynamická binárka, což je také způsob, jakým se dodává každý
+  křehké, spolehlivou formou je běžná dynamická binárka, což je také způsob, jakým se dodává každý
   zavedený dropbear pro Android.
 - Build **statický, non-PIE** se ani nespustí: bionic jej odmítne s
   `executable's TLS segment is underaligned … needs to be at least 64 for ARM64 Bionic`.
@@ -156,14 +156,14 @@ zamítnutým chybným heslem.)
 ## Žádný flag `-E`
 
 Server je sestaven s `--disable-syslog`, takže vždy loguje do stderr a upstreamová volba `-E` ("log to
-stderr") v této binárce **neexistuje**; její předání vypíše `Invalid option -E` a daemon se nikdy
+stderr") v této binárce **neexistuje**, její předání vypíše `Invalid option -E` a daemon se nikdy
 nespustí. Builder argumentů modulu proto `-E` nepředává.
 
 ## openpty
 
 Interaktivní relace PTY používají `openpty()`. bionic jej deklaruje v `<pty.h>` a křížový `configure`
 Dropbearu jej detekuje pomocí NDK (`HAVE_OPENPTY` se nastaví, `HAVE_PTY_H 1`), takže **žádný patch není
-potřeba**; PTY fungují rovnou. (Neinteraktivní použití jako exec, SFTP, rsync a přesměrování portů na
+potřeba**, PTY fungují rovnou. (Neinteraktivní použití jako exec, SFTP, rsync a přesměrování portů na
 něm stejně nezávisí.)
 
 ## Vestavěné nástroje: sftp-server, scp, rsync
@@ -177,7 +177,7 @@ něm stejně nezávisí.)
   krypto OpenSSH pro tyto dva stačí), s malým statickým **zlib**, který tento skript sestaví jako první.
 
 OpenSSH na Androidu je stejně vybíravé jako příběh crypt() výše, protože jeho `configure` při křížové
-kompilaci špatně detekuje několik funkcí libc. Skript opravu kóduje; pro pořádek jsou díly:
+kompilaci špatně detekuje několik funkcí libc. Skript opravu kóduje, pro pořádek jsou díly:
 
 1. **Seed cache funkcí, které bionicu chybí**, ale configure si myslí, že je má, aby se místo nich
    zkompilovaly verze compat: `recallocarray`, `close_range`, `getentropy`, `getrandom`, `nl_langinfo`,
@@ -222,4 +222,4 @@ file ./dropbear   # -> dynamically linked, interpreter /system/bin/linker64, for
 
 ---
 
-> _Tato dokumentace byla vytvořena pomocí Claude (Anthropic) a spravuje ji VD171. Opravy a vylepšení jsou vítány; viz [CONTRIBUTING.md](CONTRIBUTING.md)._
+> _Tato dokumentace byla vytvořena pomocí Claude (Anthropic) a spravuje ji VD171. Opravy a vylepšení jsou vítány, viz [CONTRIBUTING.md](CONTRIBUTING.md)._

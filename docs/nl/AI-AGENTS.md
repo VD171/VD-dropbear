@@ -54,7 +54,7 @@ Dit is root, dus behandel het als root:
 
 - geef de agent zijn **eigen credential**, niet die van jou, en wijs het naar een account met minder rechten (`shell`) als je het bereik wilt beperken;
 - beperk de binds tot netwerken die je vertrouwt: loopback of een VPN in plaats van het open internet (zie [Configuration](CONFIGURATION.md));
-- houd wachtwoordauthenticatie uit; een sleutel is intrekbaar en wordt nooit ingetypt;
+- houd wachtwoordauthenticatie uit, een sleutel is intrekbaar en wordt nooit ingetypt;
 - je kunt op elk moment een sleutel intrekken of de daemon stoppen vanuit de WebUI;
 - onthoud dat een standaardverbinding een volledige root-sessie is. Geef de agent alleen de reikwijdte die die nodig heeft.
 
@@ -71,4 +71,4 @@ Via USB, zonder ADB: zet USB-tethering aan en bind aan het USB-adres voor een ve
 
 ---
 
-> _Deze documentatie is gegenereerd met Claude (Anthropic) en wordt onderhouden door VD171. Correcties en verbeteringen zijn welkom; zie [CONTRIBUTING.md](CONTRIBUTING.md)._
+> _Deze documentatie is gegenereerd met Claude (Anthropic) en wordt onderhouden door VD171. Correcties en verbeteringen zijn welkom, zie [CONTRIBUTING.md](CONTRIBUTING.md)._

@@ -31,7 +31,7 @@
 
 VD Dropbear, **[Dropbear](https://github.com/mkj/dropbear) upstream**'ini
 ([`UPSTREAM_VERSION`](../../UPSTREAM_VERSION) içinde sabitlenen etiket) ve [`patches/`](../../patches/)
-içindeki küçük, denetlenebilir yama setini sunar. CI onu derler; yerelde yeniden üretebilirsiniz.
+içindeki küçük, denetlenebilir yama setini sunar. CI onu derler, yerelde yeniden üretebilirsiniz.
 
 ## Hızlı başlangıç
 
@@ -50,9 +50,9 @@ ABIS="arm64-v8a" ./scripts/build.sh
 uygular, sonra `vddropbear` ve `dropbearkey`'i `module/bin/<abi>/` içine çapraz derler. Çıktı
 **dinamik** bir ELF'tir (`file` şunu bildirir: `dynamically linked, interpreter /system/bin/linker64 …
 for Android 24`), her Android cihazın zaten sahip olduğu bionic libc'ye bağlanmış. libtomcrypt ikili
-dosyanın içinde gömülü kalır; yalnızca C kütüphanesi dinamiktir. Bkz. [Dinamik, static-PIE değil](#dinamik-static-pie-değil).
+dosyanın içinde gömülü kalır, yalnızca C kütüphanesi dinamiktir. Bkz. [Dinamik, static-PIE değil](#dinamik-static-pie-değil).
 
-İkili dosyalar **commit edilmez**; her etikette CI tarafından derlenir ve sürüme eklenir. Bkz.
+İkili dosyalar **commit edilmez**, her etikette CI tarafından derlenir ve sürüme eklenir. Bkz.
 [`.gitignore`](../../.gitignore).
 
 ---
@@ -74,7 +74,7 @@ karşılaştıran standart parola yolu Android'de ne derlenebilir ne de çalış
 bir ikili için büyük, hantal bir bağımlılık olurdu.
 
 **Yanıtımız:** `crypt()`'i hiç kullanmamak. Parola kimlik doğrulaması, sunulan parolayı bir özet dosyası
-(`DROPBEAR_PASSWD_FILE`) karşısında **PBKDF2-HMAC-SHA256** ile doğrular; bu açık, standart, tuzlu,
+(`DROPBEAR_PASSWD_FILE`) karşısında **PBKDF2-HMAC-SHA256** ile doğrular, bu açık, standart, tuzlu,
 yinelemeli bir KDF'dir. Dosya biçimi [`patches/README.md`](../../patches/README.md) içinde belgelenmiştir.
 
 ### 2. `sysoptions.h` içindeki derleme zamanı koruması
@@ -123,7 +123,7 @@ PBKDF2-HMAC-SHA256'yı doğrudan uygular (RFC 2898; tek bir 32 baytlık çıktı
 `dkLen == hLen`). `hmac_memory`'yi kendimiz bildiririz (yukarıdakiyle aynı gizli prototip sorunu) ve
 nesne bağlama anında `libtomcrypt.a`'dan çekilir. Sonuç standart PBKDF2'dir ve dolayısıyla
 birlikte çalışabilirdir: WebUI'nin tarayıcının **WebCrypto** `deriveBits`'iyle hesapladığı özet,
-sunucunun hesapladığıyla bayt bayt aynıdır; üçüncü, bağımsız bir uygulama olarak Python'ın
+sunucunun hesapladığıyla bayt bayt aynıdır, üçüncü, bağımsız bir uygulama olarak Python'ın
 `hashlib.pbkdf2_hmac`'ine karşı doğrulanmıştır.
 
 > **Kısacası:** Android size hiçbir `crypt()` vermez ve Dropbear'ın gömülü PBKDF2'si hiçliğe derlenir.
@@ -139,7 +139,7 @@ Bu önemlidir ve zor yoldan öğrenildi, **gerçek bir cihazda**, CI'da değil:
 
 - **static-PIE** bir derleme *iyi görünür* (`file` temiz bir `static-pie executable` bildirir) ve hatasız
   bağlanır, ama **cihazda çalıştığı anda SIGSEGV verir** (bir arm64 Android 16 telefonunda doğrulandı,
-  exit 139, kullanışlı tombstone yok). Android'de statik yürütülebilirler kırılgandır; güvenilir biçim
+  exit 139, kullanışlı tombstone yok). Android'de statik yürütülebilirler kırılgandır, güvenilir biçim
   normal dinamik bir ikilidir ki bu, yerleşik her Android dropbear'ının da dağıtılma biçimidir.
 - **statik, non-PIE** bir derleme başlamaz bile: bionic onu şununla reddeder:
   `executable's TLS segment is underaligned … needs to be at least 64 for ARM64 Bionic`.
@@ -156,14 +156,14 @@ reddedildiği doğrulandı.)
 ## `-E` bayrağı yok
 
 Sunucu `--disable-syslog` ile derlenir, bu yüzden her zaman stderr'e kaydeder ve upstream'in `-E`
-seçeneği ("log to stderr") bu ikilide **yoktur**; onu geçmek `Invalid option -E` yazdırır ve daemon asla
+seçeneği ("log to stderr") bu ikilide **yoktur**, onu geçmek `Invalid option -E` yazdırır ve daemon asla
 başlamaz. Bu yüzden modülün argüman oluşturucusu `-E`'yi geçmez.
 
 ## openpty
 
 Etkileşimli PTY oturumları `openpty()` kullanır. bionic onu `<pty.h>` içinde bildirir ve Dropbear'ın
 çapraz `configure`'u onu NDK ile algılar (`HAVE_OPENPTY` ayarlanır, `HAVE_PTY_H 1`), bu yüzden **hiçbir
-yama gerekmez**; PTY'ler hemen çalışır. (exec, SFTP, rsync ve port yönlendirme gibi etkileşimsiz kullanım
+yama gerekmez**, PTY'ler hemen çalışır. (exec, SFTP, rsync ve port yönlendirme gibi etkileşimsiz kullanım
 zaten ona bağlı değildir.)
 
 ## Gömülü araçlar: sftp-server, scp, rsync
@@ -177,7 +177,7 @@ zaten ona bağlı değildir.)
   yerleşik kriptosu bu ikisi için yeterlidir), bu betiğin önce derlediği küçük, statik bir **zlib** ile.
 
 Android'de OpenSSH, yukarıdaki crypt() hikâyesi kadar müşküldür, çünkü `configure`'u çapraz derlerken
-birkaç libc işlevini yanlış algılar. Betik düzeltmeyi kodlar; kayıt için parçalar şunlardır:
+birkaç libc işlevini yanlış algılar. Betik düzeltmeyi kodlar, kayıt için parçalar şunlardır:
 
 1. **bionic'te eksik olan ama configure'un var sandığı işlevlerin bir önbellek seed'i**, böylece onların
    yerine compat sürümleri derlenir: `recallocarray`, `close_range`, `getentropy`, `getrandom`,
@@ -225,4 +225,4 @@ file ./dropbear   # -> dynamically linked, interpreter /system/bin/linker64, for
 
 ---
 
-> _Bu belgeler Claude (Anthropic) ile oluşturulmuş olup VD171 tarafından yürütülmektedir. Düzeltmeler ve iyileştirmeler memnuniyetle karşılanır; bkz. [CONTRIBUTING.md](CONTRIBUTING.md)._
+> _Bu belgeler Claude (Anthropic) ile oluşturulmuş olup VD171 tarafından yürütülmektedir. Düzeltmeler ve iyileştirmeler memnuniyetle karşılanır, bkz. [CONTRIBUTING.md](CONTRIBUTING.md)._

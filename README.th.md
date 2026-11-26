@@ -23,18 +23,16 @@
 -->
 
 <p align="center">
-  <img src="module/webroot/assets/logo-wordmark.svg" alt="VD Dropbear" width="540">
+  <img src="module/webroot/assets/logo-wordmark.svg" alt="VD Dropbear" width="320">
 </p>
 
 # VD Dropbear
 
-<p>
+<p align="center">
+  <a href="https://github.com/VD171/VD-dropbear/releases/latest"><img src="https://img.shields.io/github/v/release/VD171/VD-dropbear?label=release&color=36e86a" alt="Release"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-Apache--2.0-1a7f37" alt="License"></a>
-  <img src="https://img.shields.io/badge/KernelSU-%E2%9C%94-635bff" alt="KernelSU">
-  <img src="https://img.shields.io/badge/APatch-%E2%9C%94-ff7043" alt="APatch">
-  <img src="https://img.shields.io/badge/Magisk-%E2%9C%94-00af9c" alt="Magisk">
+  <a href="https://github.com/VD171/VD-dropbear/releases"><img src="https://img.shields.io/github/downloads/VD171/VD-dropbear/total?label=downloads&color=8250df" alt="Downloads"></a>
   <a href="https://github.com/VD171/VD-dropbear/stargazers"><img src="https://img.shields.io/github/stars/VD171/VD-dropbear?color=d29922" alt="Stars"></a>
-  <a href="https://github.com/VD171/VD-dropbear/releases"><img src="https://img.shields.io/github/v/release/VD171/VD-dropbear?color=1a7f37" alt="Release"></a>
 </p>
 
 <p align="center">
@@ -56,6 +54,12 @@
 > ⚠️ **การเข้าสู่ระบบจะได้ ROOT shell เต็มรูปแบบโดยค่าเริ่มต้น** ให้ปฏิบัติกับมันเหมือนเป็นกุญแจของเครื่อง:
 > เลือกใช้คีย์สาธารณะแทนรหัสผ่าน และอย่าเปิดพอร์ตนี้ออกสู่อินเทอร์เน็ตสาธารณะ
 
+## ภาพหน้าจอ
+
+<p align="center">
+  <img src="screenshots/status.png" width="24%" alt="Status"> <img src="screenshots/settings.png" width="24%" alt="Settings"> <img src="screenshots/keys.png" width="24%" alt="Keys"> <img src="screenshots/passwords.png" width="24%" alt="Passwords">
+</p>
+
 ## ทำไม
 
 วิธีในตัวของ Android ที่จะเข้าถึง shell บนโทรศัพท์ของคุณเองคือ ADB (การดีบักผ่าน USB) และการเปิดใช้งานมัน
@@ -72,7 +76,7 @@ SFTP และ rsync ผ่านเครือข่าย โดยไม่�
 ## คุณสมบัติ
 
 - **มีเดมอนเดียวเสมอ** มันเริ่มทำงานตอนบูตและจากปุ่ม **Action** ของตัวจัดการ และคุณสามารถ
-  **เริ่ม / หยุด / รีสตาร์ต** มันได้จาก WebUI ตลอดเวลา; ไม่มีทางเกินหนึ่งอินสแตนซ์
+  **เริ่ม / หยุด / รีสตาร์ต** มันได้จาก WebUI ตลอดเวลา, ไม่มีทางเกินหนึ่งอินสแตนซ์
 - **ทุกอย่างปรับแต่งได้** จาก WebUI (หรือ `/data/adb/vddropbear/config`):
   - พอร์ต และการผูกกับ loopback / ทั้งหมด / IPv4 / IPv6 / ที่อยู่เฉพาะ
   - **เริ่มก่อนการปลดล็อกครั้งแรก (BFU) หรือเฉพาะหลังจากนั้น (AFU)** สวิตช์เดียวจบ
@@ -94,7 +98,7 @@ SFTP และ rsync ผ่านเครือข่าย โดยไม่�
   ไคลเอนต์แบบ GUI และการสำรองข้อมูลทั้งหมดจึงทำงานผ่านการเชื่อมต่อเดียวกันได้
 - **ทุกเครื่องและทุกอีมูเลเตอร์** `arm64-v8a`, `armeabi-v7a`, `x86`, `x86_64`
 
-## เอเจนต์ AI บนเครื่องของคุณ
+## เอเจนต์ AI
 
 จุดปลาย SSH ที่เปิดค้างไว้เปลี่ยนโทรศัพท์ของคุณให้กลายเป็นสิ่งที่ **เอเจนต์ AI อิสระสามารถควบคุมได้โดยตรง**
 เอเจนต์ใดก็ตามที่สามารถขับเคลื่อน shell หรือการเชื่อมต่อ SSH ได้ (Claude Code, aider, สคริปต์ที่มี LLM อยู่
@@ -123,7 +127,7 @@ SFTP และ rsync ผ่านเครือข่าย โดยไม่�
 `ksud module install` / `apd module install`), เปิด **WebUI** ของโมดูลเพื่อตั้งค่าพอร์ตและเพิ่มคีย์ของคุณ
 จากนั้นรีบูต (หรือกด **Action** เพื่อเริ่มมันทันที)
 
-## โมเดลความปลอดภัย
+## ความปลอดภัย
 
 ### ความลับอยู่ที่ไหน: BFU กับ AFU
 
@@ -133,14 +137,14 @@ SFTP และ rsync ผ่านเครือข่าย โดยไม่�
 จะปลดล็อก (หลังปลดล็อกครั้งแรก, After First Unlock)
 
 - **โหมด AFU (ค่าเริ่มต้น, `START_IN_BFU=0`):** เดมอนรอการปลดล็อกแล้วอ่าน host key, `authorized_keys`
-  และแฮชของรหัสผ่านจากพื้นที่จัดเก็บ CE การป้องกันสูงสุด; SSH จะทำงานได้ก็ต่อเมื่อเครื่องถูกปลดล็อกอย่างน้อย
+  และแฮชของรหัสผ่านจากพื้นที่จัดเก็บ CE การป้องกันสูงสุด, SSH จะทำงานได้ก็ต่อเมื่อเครื่องถูกปลดล็อกอย่างน้อย
   หนึ่งครั้งนับตั้งแต่บูต
 - **โหมด BFU (`START_IN_BFU=1`):** เดมอนเริ่มทำงานก่อนการปลดล็อก เพื่อให้คุณ SSH เข้ามาได้แต่เนิ่น ๆ
   (เช่น เพื่อปลดล็อกเครื่องจากระยะไกล) ความลับของมันจึงไปอยู่บนพื้นที่จัดเก็บ DE และอ่านได้ก่อนปลดล็อก ซึ่ง
   เป็นการแลกเปลี่ยนที่จงใจและมีการบันทึกไว้ เปิดใช้งานมันเฉพาะเมื่อคุณจำเป็นต้องใช้ SSH ก่อนปลดล็อกเท่านั้น
 
 เราจงใจ**ไม่**เพิ่มการเข้ารหัสของเราเองซ้อนทับ CE: มันถูกเข้ารหัสด้วยข้อมูลประจำตัวของผู้ใช้อยู่แล้ว และการซ้อน
-รหัสอีกชั้นจะต้องใช้คีย์ที่ต้องเก็บไว้ที่ใดที่หนึ่ง (บน DE มันจะถูกเปิดเผย; ส่วนการสืบทอดมันจากข้อมูลประจำตัวของ
+รหัสอีกชั้นจะต้องใช้คีย์ที่ต้องเก็บไว้ที่ใดที่หนึ่ง (บน DE มันจะถูกเปิดเผย, ส่วนการสืบทอดมันจากข้อมูลประจำตัวของ
 ผู้ใช้ก็เป็นเพียงการนำ CE มาทำซ้ำ) นั่นจะให้แค่ความรู้สึกปลอดภัยจอมปลอม ไม่ใช่การป้องกันที่แท้จริง
 
 ### รหัสผ่าน
@@ -156,6 +160,14 @@ SFTP และ rsync ผ่านเครือข่าย โดยไม่�
 โต้ตอบ เวิร์กโฟลว์ตามกำหนดการจะติดตามอัปสตรีมและบิลด์ใหม่ เพื่อให้โมดูลทันสมัยอยู่เสมอ ดู
 [`.github/workflows/`](.github/workflows/) และ [`CONTRIBUTING.md`](CONTRIBUTING.md)
 
+## การอัปเดตแบบเพิ่มหน่วย (VDLU)
+
+VD Dropbear มาพร้อมเอนจิน **[VDLiveUpdate](https://github.com/VD171/VDLiveUpdate) (VDLU)** (ฝังไว้ใน `vdlu/`): โมดูลอัปเดตตัวเองโดยดึงเฉพาะไฟล์ที่เปลี่ยนแปลง (บล็อบที่กำหนดที่อยู่ตามเนื้อหา + `manifest.json` ที่เซ็นแล้ว) แทนที่จะดาวน์โหลด `.zip` ทั้งก้อนใหม่ โปรไฟล์ **Hardened**: ลายเซ็น ed25519 เป็นข้อบังคับและการดาวน์เกรดถูกบล็อก ส่วน `.zip` แบบเต็มยังคงใช้ได้เป็นทางเลือกสำรอง
+
+- **LIVE เท่านั้น** (ไม่ต้องรีบูต): การอัปเดตจะมีผลในการบูตครั้งถัดไปผ่าน `service.sh` (`setsid` ทำงานเบื้องหลัง ไม่เคยทำให้การบูตค้าง) และเป็น no-op เมื่อไม่มีฟีดที่เข้าถึงได้
+- **สถานะ** อยู่ใน `/data/adb/<module>/vdlu/` นอกโมดูล เพื่อให้รอดจากการรีแฟลช
+- **WebUI:** แผง **Updates** พร้อมทอสต์ความคืบหน้าและปุ่มยกเลิก การอัปเดตอัตโนมัติเป็นแบบ opt-in
+
 ## เอกสาร
 
 <!-- vd-docs -->
@@ -163,12 +175,12 @@ SFTP และ rsync ผ่านเครือข่าย โดยไม่�
 - **[คู่มือผู้ใช้](https://github.com/VD171/VD-dropbear/wiki/th-USER-GUIDE)**: การติดตั้ง, คีย์, รหัสผ่าน, การเชื่อมต่อ, การถ่ายโอนไฟล์, BFU/AFU.
 - **[การตั้งค่า](https://github.com/VD171/VD-dropbear/wiki/th-CONFIGURATION)**: ทุกการตั้งค่า พร้อมค่าเริ่มต้น.
 - **[สถาปัตยกรรม](https://github.com/VD171/VD-dropbear/wiki/th-ARCHITECTURE)** และ **[โครงสร้างไฟล์](https://github.com/VD171/VD-dropbear/wiki/th-FILE-STRUCTURE)**: โมดูลและเดมอนทำงานอย่างไร และทุกอย่างอยู่ที่ใด.
-- **[เอเจนต์ AI บนเครื่องของคุณ](https://github.com/VD171/VD-dropbear/wiki/th-AI-AGENTS)**: การใช้เอเจนต์อัตโนมัติผ่าน SSH อย่างปลอดภัย.
+- **[เอเจนต์ AI](https://github.com/VD171/VD-dropbear/wiki/th-AI-AGENTS)**: การใช้เอเจนต์อัตโนมัติผ่าน SSH อย่างปลอดภัย.
 - **[การบิลด์](https://github.com/VD171/VD-dropbear/wiki/th-BUILDING)**: การบิลด์ และเรื่องราวของ crypt()/การคอมไพล์ข้ามแพลตฟอร์มบน Android.
 - **[การร่วมพัฒนา](CONTRIBUTING.md)** และ **[ความปลอดภัย](SECURITY.md)**.
 - **[Changelog](CHANGELOG.md)** และ **[หลักจรรยาบรรณ](CODE_OF_CONDUCT.md)**.
 
-ทุกหน้าของวิกิยังได้รับการแปลเป็นแต่ละภาษาในตัวสลับด้านบนด้วย; แหล่งข้อมูลเดียวกันอยู่ภายใต้ [`docs/`](docs/).
+ทุกหน้าของวิกิยังได้รับการแปลเป็นแต่ละภาษาในตัวสลับด้านบนด้วย, แหล่งข้อมูลเดียวกันอยู่ภายใต้ [`docs/`](docs/).
 <!-- /vd-docs -->
 
 ## ดูเพิ่มเติม
@@ -185,31 +197,34 @@ SFTP และ rsync ผ่านเครือข่าย โดยไม่�
 
 ## ติดต่อ
 
-- Site           : https://vd171.ru
-- Site           : https://vd.priv8.ru
-- Source         : https://github.com/VD171/VD-dropbear
-- GitHub         : [@VD171](https://github.com/VD171)
-- XDA-Developers : [@VD171](https://xdaforums.com/m/vd171.4699873/)
-- XDA thread     : [VD-Dropbear](https://xdaforums.com/t/VD-Dropbear.4808524/)
-- Telegram       : [@VD_Priv8](https://t.me/VD_Priv8)
-- Channel        : [@Priv8_VD](https://t.me/Priv8_VD)
-- Discord        : [@VD.Priv8](https://discord.com/users/1296831918989639721)
-- E-mail         : vd.priv8@pm.me
+- https://vd171.ru
+- https://vd.priv8.ru
+- **Telegram:** @VD_Priv8 https://t.me/VD_Priv8
+- **Channel:** @Priv8_VD https://t.me/Priv8_VD
+- **Discord:** @VD.Priv8 https://discord.com/users/1296831918989639721
+- **E-mail:** vd.priv8@pm.me
+- **XDA-Developers:** @VD171 https://xdaforums.com/m/vd171.4699873/
+- **XDA thread:** https://xdaforums.com/t/VD-Dropbear.4808524/
+- **GitHub:** @VD171 https://github.com/VD171
 
 ## สัญญาอนุญาต
 
 โค้ดของ VD Dropbear เองเป็น **Apache-2.0** ดู [LICENSE](LICENSE) โมดูลนี้ยังรวมไบนารีของบุคคลภายนอกมาด้วย:
 [Dropbear](https://matt.ucc.asn.au/dropbear/) (แบบ MIT), `sftp-server` และ `scp` ของ OpenSSH (BSD),
-และ `rsync` (GPL-3.0) แต่ละตัวอยู่ภายใต้สัญญาอนุญาตของตัวเอง; ดู [THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md)
+และ `rsync` (GPL-3.0) แต่ละตัวอยู่ภายใต้สัญญาอนุญาตของตัวเอง, ดู [THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md)
 รวมถึงวิธีที่เราปฏิบัติตาม GPL สำหรับ rsync โค้ด Apache-2.0 ของเราไม่ได้รับผลกระทบ (ไบนารี GPL เพียงถูกนำมา
 รวมไว้ด้วยกัน ไม่ได้ลิงก์เข้าด้วยกัน)
 
 ## เครื่องหมายการค้า
 
 VD Dropbear เป็นโปรเจกต์อิสระที่ไม่เป็นทางการ ไม่ได้มีส่วนเกี่ยวข้องกับหรือได้รับการรับรองจากบุคคลภายนอกใด ๆ
-"Android" เป็นเครื่องหมายการค้าของ Google LLC; "SSH" เป็นเครื่องหมายการค้าจดทะเบียนของ SSH Communications
+"Android" เป็นเครื่องหมายการค้าของ Google LLC "SSH" เป็นเครื่องหมายการค้าจดทะเบียนของ SSH Communications
 Security VD Dropbear ทำงานบนเครื่องของคุณทั้งหมด
 
 ## Tags
 
 `SSH` `Dropbear` `KernelSU` `Magisk` `APatch` `root` `sshd` `remote-access` `openssh-alternative` `Android` `BFU` `VD-dropbear`
+
+---
+
+📣 **เข้าร่วมช่องเพื่อรับการอัปเดต:** @Priv8_VD https://t.me/Priv8_VD

@@ -31,7 +31,7 @@
 
 O VD Dropbear entrega o **[Dropbear](https://github.com/mkj/dropbear) upstream** (a tag fixada em
 [`UPSTREAM_VERSION`](../../UPSTREAM_VERSION)) mais o conjunto de patches pequeno e auditável em
-[`patches/`](../../patches/). A CI o compila; você pode reproduzi-lo localmente.
+[`patches/`](../../patches/). A CI o compila, você pode reproduzi-lo localmente.
 
 ## Início rápido
 
@@ -50,9 +50,9 @@ O `scripts/build.sh` clona a tag upstream fixada, aplica `patches/*.patch` e `lo
 e então faz a compilação cruzada de `vddropbear` e `dropbearkey` em `module/bin/<abi>/`. A saída é um
 ELF **dinâmico** (`file` relata `dynamically linked, interpreter /system/bin/linker64 … for Android
 24`), ligado contra a libc bionic que todo dispositivo Android já tem. O libtomcrypt fica embutido
-dentro do binário; só a biblioteca C é dinâmica. Veja [Dinâmico, não static-PIE](#dinâmico-não-static-pie).
+dentro do binário, só a biblioteca C é dinâmica. Veja [Dinâmico, não static-PIE](#dinâmico-não-static-pie).
 
-Os binários **não são commitados**; são compilados pela CI a cada tag e anexados à release.
+Os binários **não são commitados**, são compilados pela CI a cada tag e anexados à release.
 Veja [`.gitignore`](../../.gitignore).
 
 ---
@@ -63,7 +63,7 @@ A autenticação por senha do Dropbear é escrita para um host Unix normal com `
 `/etc/shadow`. O Android **não tem nenhum dos dois**, e isso colide com a compilação em três lugares
 distintos. Esta seção documenta cada um deles, porque é exatamente o tipo de coisa dolorosa de
 redescobrir. Tudo isso é tratado pelo patch
-[`0003-password-file.patch`](../../patches/0003-password-file.patch); nada abaixo é deixado ao acaso em
+[`0003-password-file.patch`](../../patches/0003-password-file.patch), nada abaixo é deixado ao acaso em
 tempo de execução.
 
 ### 1. a bionic não tem um `crypt()` utilizável
@@ -143,7 +143,7 @@ estáticos. Isso importa, e foi aprendido do jeito difícil, **num aparelho real
 
 - Uma compilação **static-PIE** *parece* boa (`file` relata um `static-pie executable` limpo) e liga
   sem erro, mas **dá SIGSEGV no instante em que roda no aparelho** (verificado num celular arm64
-  Android 16, exit 139, sem tombstone útil). Executáveis estáticos no Android são frágeis; a forma
+  Android 16, exit 139, sem tombstone útil). Executáveis estáticos no Android são frágeis, a forma
   confiável é um binário dinâmico normal, que também é como todo dropbear de Android consolidado é
   entregue.
 - Uma compilação **estática, não-PIE** nem inicia: a bionic a rejeita com
@@ -160,14 +160,14 @@ confirmado como bem-sucedido, com uma senha errada rejeitada.)
 ## Sem a flag `-E`
 
 O servidor é compilado com `--disable-syslog`, então ele sempre loga no stderr e a opção `-E` do
-upstream ("log to stderr") **não existe** neste binário; passá-la imprime `Invalid option -E` e o
+upstream ("log to stderr") **não existe** neste binário, passá-la imprime `Invalid option -E` e o
 daemon nunca inicia. Por isso o construtor de argumentos do módulo não passa `-E`.
 
 ## openpty
 
 Sessões PTY interativas usam `openpty()`. A bionic o declara em `<pty.h>`, e o `configure` cruzado do
 Dropbear o detecta com o NDK (`HAVE_OPENPTY` é setado, `HAVE_PTY_H 1`), então **nenhum patch é
-necessário**; os PTYs funcionam de imediato. (Usos não interativos como exec, SFTP, rsync e
+necessário**, os PTYs funcionam de imediato. (Usos não interativos como exec, SFTP, rsync e
 encaminhamento de portas não dependem dele de qualquer forma.)
 
 ## Ferramentas embutidas: sftp-server, scp, rsync
@@ -182,7 +182,7 @@ como binários dinâmicos em `module/bin/<abi>/`. A CI o roda logo depois do `bu
   primeiro.
 
 O OpenSSH no Android é tão delicado quanto a história do crypt() acima, porque o `configure` dele
-detecta errado várias funções da libc ao compilar cruzado. O script codifica a correção; para
+detecta errado várias funções da libc ao compilar cruzado. O script codifica a correção, para
 registro, as peças são:
 
 1. **Um seed de cache das funções que a bionic não tem** mas que o configure acha que tem, para que as
@@ -232,4 +232,4 @@ file ./dropbear   # -> dynamically linked, interpreter /system/bin/linker64, for
 
 ---
 
-> _Esta documentação foi gerada com o Claude (Anthropic) e é mantida por VD171. Correções e melhorias são bem-vindas; veja [CONTRIBUTING.md](CONTRIBUTING.md)._
+> _Esta documentação foi gerada com o Claude (Anthropic) e é mantida por VD171. Correções e melhorias são bem-vindas, veja [CONTRIBUTING.md](CONTRIBUTING.md)._

@@ -31,7 +31,7 @@
 
 VD Dropbear liefert das **[Dropbear](https://github.com/mkj/dropbear)-Upstream** (das in
 [`UPSTREAM_VERSION`](../../UPSTREAM_VERSION) fixierte Tag) plus das kleine, prüfbare Patch-Set in
-[`patches/`](../../patches/). Die CI baut es; du kannst es lokal reproduzieren.
+[`patches/`](../../patches/). Die CI baut es, du kannst es lokal reproduzieren.
 
 ## Schnellstart
 
@@ -50,9 +50,9 @@ ABIS="arm64-v8a" ./scripts/build.sh
 cross-kompiliert dann `vddropbear` und `dropbearkey` nach `module/bin/<abi>/`. Die Ausgabe ist eine
 **dynamische** ELF (`file` meldet `dynamically linked, interpreter /system/bin/linker64 … for Android
 24`), gegen die bionic-libc gelinkt, die jedes Android-Gerät bereits hat. libtomcrypt bleibt im Binary
-eingebettet; nur die C-Bibliothek ist dynamisch. Siehe [Dynamisch, nicht static-PIE](#dynamisch-nicht-static-pie).
+eingebettet, nur die C-Bibliothek ist dynamisch. Siehe [Dynamisch, nicht static-PIE](#dynamisch-nicht-static-pie).
 
-Die Binaries werden **nicht committet**; sie werden von der CI bei jedem Tag gebaut und an das Release
+Die Binaries werden **nicht committet**, sie werden von der CI bei jedem Tag gebaut und an das Release
 angehängt. Siehe [`.gitignore`](../../.gitignore).
 
 ---
@@ -63,7 +63,7 @@ Die Passwort-Authentifizierung von Dropbear ist für einen normalen Unix-Host mi
 `/etc/shadow` geschrieben. Android hat **keines von beidem**, und das kollidiert an drei getrennten
 Stellen mit dem Build. Dieser Abschnitt dokumentiert jede davon, weil es genau die Art Sache ist, die
 schmerzhaft neu zu entdecken ist. All das übernimmt der Patch
-[`0003-password-file.patch`](../../patches/0003-password-file.patch); nichts davon ist zur Laufzeit dem
+[`0003-password-file.patch`](../../patches/0003-password-file.patch), nichts davon ist zur Laufzeit dem
 Zufall überlassen.
 
 ### 1. bionic hat kein brauchbares `crypt()`
@@ -145,7 +145,7 @@ in der CI:
 - Ein **static-PIE**-Build *sieht* in Ordnung aus (`file` meldet ein sauberes `static-pie executable`)
   und linkt fehlerfrei, aber **macht in dem Moment, in dem er auf dem Gerät läuft, einen SIGSEGV**
   (verifiziert auf einem arm64-Android-16-Telefon, exit 139, kein nützlicher Tombstone). Statische
-  Executables auf Android sind fragil; die verlässliche Form ist ein normales dynamisches Binary, was
+  Executables auf Android sind fragil, die verlässliche Form ist ein normales dynamisches Binary, was
   auch die Art ist, wie jedes etablierte Android-Dropbear ausgeliefert wird.
 - Ein **statischer, non-PIE**-Build startet nicht einmal: bionic weist ihn ab mit
   `executable's TLS segment is underaligned … needs to be at least 64 for ARM64 Bionic`.
@@ -161,14 +161,14 @@ gestartet und ein Passwort-Login als erfolgreich bestätigt, ein falsches Passwo
 ## Keine `-E`-Flag
 
 Der Server wird mit `--disable-syslog` gebaut, loggt also immer nach stderr, und die Upstream-Option
-`-E` („log to stderr") **existiert nicht** in diesem Binary; sie zu übergeben gibt `Invalid option -E`
+`-E` („log to stderr") **existiert nicht** in diesem Binary, sie zu übergeben gibt `Invalid option -E`
 aus und der Daemon startet nie. Der Argument-Builder des Moduls übergibt `-E` daher nicht.
 
 ## openpty
 
 Interaktive PTY-Sitzungen nutzen `openpty()`. bionic deklariert es in `<pty.h>`, und Dropbears
 Cross-`configure` erkennt es mit dem NDK (`HAVE_OPENPTY` wird gesetzt, `HAVE_PTY_H 1`), also ist **kein
-Patch nötig**; PTYs funktionieren sofort. (Nicht-interaktive Nutzung wie exec, SFTP, rsync und
+Patch nötig**, PTYs funktionieren sofort. (Nicht-interaktive Nutzung wie exec, SFTP, rsync und
 Port-Forwarding hängt ohnehin nicht davon ab.)
 
 ## Eingebettete Tools: sftp-server, scp, rsync
@@ -183,7 +183,7 @@ Port-Forwarding hängt ohnehin nicht davon ab.)
   zuerst baut.
 
 OpenSSH auf Android ist so heikel wie die crypt()-Geschichte oben, weil sein `configure` beim
-Cross-Kompilieren mehrere libc-Funktionen falsch erkennt. Das Skript kodiert die Korrektur; fürs
+Cross-Kompilieren mehrere libc-Funktionen falsch erkennt. Das Skript kodiert die Korrektur, fürs
 Protokoll sind die Teile:
 
 1. **Ein Cache-Seed der Funktionen, die bionic fehlen**, die configure aber zu haben glaubt, damit
@@ -233,4 +233,4 @@ file ./dropbear   # -> dynamically linked, interpreter /system/bin/linker64, for
 
 ---
 
-> _Diese Dokumentation wurde mit Claude (Anthropic) erstellt und wird von VD171 gepflegt. Korrekturen und Verbesserungen sind willkommen; siehe [CONTRIBUTING.md](CONTRIBUTING.md)._
+> _Diese Dokumentation wurde mit Claude (Anthropic) erstellt und wird von VD171 gepflegt. Korrekturen und Verbesserungen sind willkommen, siehe [CONTRIBUTING.md](CONTRIBUTING.md)._

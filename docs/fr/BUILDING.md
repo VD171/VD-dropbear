@@ -31,7 +31,7 @@
 
 VD Dropbear livre le **[Dropbear](https://github.com/mkj/dropbear) upstream** (le tag figé dans
 [`UPSTREAM_VERSION`](../../UPSTREAM_VERSION)) plus le petit jeu de patches auditable dans
-[`patches/`](../../patches/). La CI le compile ; vous pouvez le reproduire localement.
+[`patches/`](../../patches/). La CI le compile, vous pouvez le reproduire localement.
 
 ## Démarrage rapide
 
@@ -50,9 +50,9 @@ ABIS="arm64-v8a" ./scripts/build.sh
 cross-compile `vddropbear` et `dropbearkey` dans `module/bin/<abi>/`. La sortie est un ELF
 **dynamique** (`file` rapporte `dynamically linked, interpreter /system/bin/linker64 … for Android
 24`), lié contre la libc bionic que tout appareil Android possède déjà. libtomcrypt reste intégré dans
-le binaire ; seule la bibliothèque C est dynamique. Voir [Dynamique, pas static-PIE](#dynamique-pas-static-pie).
+le binaire, seule la bibliothèque C est dynamique. Voir [Dynamique, pas static-PIE](#dynamique-pas-static-pie).
 
-Les binaires **ne sont pas commités** ; ils sont compilés par la CI à chaque tag et joints à la
+Les binaires **ne sont pas commités**, ils sont compilés par la CI à chaque tag et joints à la
 release. Voir [`.gitignore`](../../.gitignore).
 
 ---
@@ -63,7 +63,7 @@ L'authentification par mot de passe de Dropbear est écrite pour un hôte Unix n
 `/etc/shadow`. Android **n'a ni l'un ni l'autre**, et cela entre en conflit avec la compilation à trois
 endroits distincts. Cette section documente chacun d'eux, car c'est exactement le genre de chose
 pénible à redécouvrir. Tout cela est géré par le patch
-[`0003-password-file.patch`](../../patches/0003-password-file.patch) ; rien de ce qui suit n'est laissé au
+[`0003-password-file.patch`](../../patches/0003-password-file.patch), rien de ce qui suit n'est laissé au
 hasard à l'exécution.
 
 ### 1. bionic n'a pas de `crypt()` utilisable
@@ -144,7 +144,7 @@ statiques. Cela compte, et cela a été appris à la dure, **sur un vrai apparei
 - Une compilation **static-PIE** *paraît* bonne (`file` rapporte un `static-pie executable` propre) et
   lie sans erreur, mais **fait un SIGSEGV à l'instant où elle tourne sur l'appareil** (vérifié sur un
   téléphone arm64 Android 16, exit 139, aucun tombstone utile). Les exécutables statiques sur Android
-  sont fragiles ; la forme fiable est un binaire dynamique normal, qui est aussi la façon dont tout
+  sont fragiles, la forme fiable est un binaire dynamique normal, qui est aussi la façon dont tout
   dropbear Android établi est livré.
 - Une compilation **statique, non-PIE** ne démarre même pas : bionic la rejette avec
   `executable's TLS segment is underaligned … needs to be at least 64 for ARM64 Bionic`.
@@ -160,14 +160,14 @@ par mot de passe a été confirmée comme réussie, un mauvais mot de passe éta
 ## Pas de flag `-E`
 
 Le serveur est compilé `--disable-syslog`, donc il journalise toujours sur stderr et l'option `-E` de
-l'upstream (« log to stderr ») **n'existe pas** dans ce binaire ; la passer affiche `Invalid option -E`
+l'upstream (« log to stderr ») **n'existe pas** dans ce binaire, la passer affiche `Invalid option -E`
 et le daemon ne démarre jamais. Le constructeur d'arguments du module ne passe donc pas `-E`.
 
 ## openpty
 
 Les sessions PTY interactives utilisent `openpty()`. bionic le déclare dans `<pty.h>`, et le
 `configure` croisé de Dropbear le détecte avec le NDK (`HAVE_OPENPTY` est défini, `HAVE_PTY_H 1`), donc
-**aucun patch n'est nécessaire** ; les PTY fonctionnent d'emblée. (L'usage non interactif comme exec,
+**aucun patch n'est nécessaire**, les PTY fonctionnent d'emblée. (L'usage non interactif comme exec,
 SFTP, rsync et le port-forwarding n'en dépend de toute façon pas.)
 
 ## Outils intégrés : sftp-server, scp, rsync
@@ -232,4 +232,4 @@ file ./dropbear   # -> dynamically linked, interpreter /system/bin/linker64, for
 
 ---
 
-> _Cette documentation a été générée avec Claude (Anthropic) et est maintenue par VD171. Les corrections et améliorations sont les bienvenues ; voir [CONTRIBUTING.md](CONTRIBUTING.md)._
+> _Cette documentation a été générée avec Claude (Anthropic) et est maintenue par VD171. Les corrections et améliorations sont les bienvenues, voir [CONTRIBUTING.md](CONTRIBUTING.md)._

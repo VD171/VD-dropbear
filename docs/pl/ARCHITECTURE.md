@@ -31,14 +31,14 @@
 
 VD Dropbear to moduł KernelSU / APatch / Magisk, który uruchamia dokładnie jednego demona SSH
 Dropbear, sterowanego w całości konfiguracją. Nic w serwerze SSH nie jest zakodowane na stałe pod
-jedno urządzenie; wszystko, co specyficzne, to konfiguracja uruchomieniowa lub sekret.
+jedno urządzenie, wszystko, co specyficzne, to konfiguracja uruchomieniowa lub sekret.
 
 ## Elementy
 
 - `module/common/vddropbear.sh`: główna biblioteka: wczytanie konfiguracji (z bezpiecznymi
   wbudowanymi wartościami domyślnymi), ustalenie magazynu sekretów, zapewnienie klucza hosta, zbudowanie
   wektora argumentów Dropbeara i zarządzanie pojedynczą instancją demona (start / stop / status / restart).
-- `module/service.sh`: punkt wejścia przy starcie. Respektuje politykę uruchamiania BFU/AFU; w trybie
+- `module/service.sh`: punkt wejścia przy starcie. Respektuje politykę uruchamiania BFU/AFU, w trybie
   AFU czeka na odblokowanie magazynu szyfrowanego poświadczeniami, nie blokując rozruchu.
 - `module/action.sh`: przycisk **Action** menedżera: (ponowne) uruchomienie demona. Nigdy nie czyta
   stdin i odłącza demona do jego własnej sesji, więc menedżer się nie zawiesza.
@@ -54,6 +54,17 @@ nazwa procesu dokładnie pasuje do `pgrep -x` (androidowy `mksh` nie ma `exec -a
 przez `setsid`, dzięki czemu odłącza się od grupy procesów wywołującego. I właśnie to sprawia, że
 przycisk Action menedżera się nie blokuje.
 
+`setsid` nigdy nie obejmował cgroups, a ta luka była prawdziwą regresją: przycisk Action i WebUI
+działają wewnątrz aplikacji menedżera, więc demon uruchomiony z któregokolwiek z nich dziedziczył
+freezer cgroup aplikacji (`/apps/uid_<uid>/pid_<pid>`). Androidowy `CachedAppOptimizer` zamraża tę
+cgroup, gdy tylko zbuforuje aplikację, a demon zostaje zamrożony razem z nią, wciąż trzymając swój
+nasłuchujący socket. Połączenia TCP wciąż się kończą, bo backlog żyje w jądrze, ale nic nie wywołuje
+`accept()`, więc klienci zawisają na "Connection established ... Local version string" bez błędu po
+żadnej ze stron, a `/proc/<pid>/wchan` pokazuje `do_freezer_trap` zamiast `do_select`. Teraz
+`vddb_escape_freezer` przenosi powłokę uruchamiającą do głównej cgroup (której freezer nigdy nie
+dotyka) przed forkiem, dzięki czemu demon dziedziczy to wyjście. Przy starcie to no-op (już jest na
+`/`) i na platformach bez freezera, nie "upraszczaj" uruchamiania z powrotem do gołego `setsid`.
+
 ## Magazyn sekretów (CE a DE, BFU a AFU)
 
 Ustawienia nie są sekretem i znajdują się w magazynie szyfrowanym na poziomie urządzenia
@@ -66,7 +77,7 @@ którego magazynu użyć.
 
 ## Zestaw łatek
 
-Serwer SSH pozostaje oryginalnym Dropbearem; nasze zmiany to kilka łatek do przejrzenia (zobacz
+Serwer SSH pozostaje oryginalnym Dropbearem, nasze zmiany to kilka łatek do przejrzenia (zobacz
 [patches/README.md](../../patches/README.md)):
 
 - neutralny, konfigurowalny w czasie działania banner tożsamości;
@@ -79,11 +90,11 @@ Serwer SSH pozostaje oryginalnym Dropbearem; nasze zmiany to kilka łatek do prz
 Statyczna strona w WebUI menedżera (KernelSU / APatch / WebUI-X). Steruje ona
 `module/common/vddb-webui.sh` poprzez most `ksu.exec`: status, start/stop/restart, odczyt/zapis
 konfiguracji oraz zarządzanie kluczami i kontami hasłowymi. Wszystkie dane przechodzą przez most
-zakodowane w base64, więc powłoka nigdy ich nie interpretuje; hashe haseł są obliczane w przeglądarce za
+zakodowane w base64, więc powłoka nigdy ich nie interpretuje, hashe haseł są obliczane w przeglądarce za
 pomocą WebCrypto, więc hasło w postaci jawnej nigdy nie opuszcza strony.
 
 <!-- doc-footer -->
 
 ---
 
-> _Ta dokumentacja została wygenerowana za pomocą Claude (Anthropic) i jest utrzymywana przez VD171. Poprawki i ulepszenia są mile widziane; zobacz [CONTRIBUTING.md](CONTRIBUTING.md)._
+> _Ta dokumentacja została wygenerowana za pomocą Claude (Anthropic) i jest utrzymywana przez VD171. Poprawki i ulepszenia są mile widziane, zobacz [CONTRIBUTING.md](CONTRIBUTING.md)._

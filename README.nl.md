@@ -23,18 +23,16 @@
 -->
 
 <p align="center">
-  <img src="module/webroot/assets/logo-wordmark.svg" alt="VD Dropbear" width="540">
+  <img src="module/webroot/assets/logo-wordmark.svg" alt="VD Dropbear" width="320">
 </p>
 
 # VD Dropbear
 
-<p>
+<p align="center">
+  <a href="https://github.com/VD171/VD-dropbear/releases/latest"><img src="https://img.shields.io/github/v/release/VD171/VD-dropbear?label=release&color=36e86a" alt="Release"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-Apache--2.0-1a7f37" alt="License"></a>
-  <img src="https://img.shields.io/badge/KernelSU-%E2%9C%94-635bff" alt="KernelSU">
-  <img src="https://img.shields.io/badge/APatch-%E2%9C%94-ff7043" alt="APatch">
-  <img src="https://img.shields.io/badge/Magisk-%E2%9C%94-00af9c" alt="Magisk">
+  <a href="https://github.com/VD171/VD-dropbear/releases"><img src="https://img.shields.io/github/downloads/VD171/VD-dropbear/total?label=downloads&color=8250df" alt="Downloads"></a>
   <a href="https://github.com/VD171/VD-dropbear/stargazers"><img src="https://img.shields.io/github/stars/VD171/VD-dropbear?color=d29922" alt="Stars"></a>
-  <a href="https://github.com/VD171/VD-dropbear/releases"><img src="https://img.shields.io/github/v/release/VD171/VD-dropbear?color=1a7f37" alt="Release"></a>
 </p>
 
 <p align="center">
@@ -56,6 +54,12 @@ verpakt als een KernelSU-/APatch-/Magisk-module. Hij start op eigen kracht en is
 > ⚠️ **Een login geeft standaard een volledige ROOT-shell.** Behandel dit als de sleutels tot
 > het toestel: geef de voorkeur aan publieke sleutels boven wachtwoorden en houd de poort weg van het publieke internet.
 
+## Schermafbeeldingen
+
+<p align="center">
+  <img src="screenshots/status.png" width="24%" alt="Status"> <img src="screenshots/settings.png" width="24%" alt="Settings"> <img src="screenshots/keys.png" width="24%" alt="Keys"> <img src="screenshots/passwords.png" width="24%" alt="Passwords">
+</p>
+
 ## Waarom
 
 De ingebouwde manier van Android om een shell op je eigen telefoon te krijgen is ADB (USB-debugging), en
@@ -72,7 +76,7 @@ wereldwijd leesbare "ik word gedebugd"-vlag die alles op het toestel kan uitleze
 ## Functies
 
 - **Eén daemon, altijd.** Hij start bij het opstarten en vanaf de **Action**-knop van de manager, en je kunt
-  hem op elk moment **starten / stoppen / herstarten** vanuit de WebUI; nooit meer dan één instantie.
+  hem op elk moment **starten / stoppen / herstarten** vanuit de WebUI, nooit meer dan één instantie.
 - **Alles is configureerbaar** vanuit de WebUI (of `/data/adb/vddropbear/config`):
   - poort, en bind op loopback / all / IPv4 / IPv6 / specifieke adressen
   - **starten vóór de eerste ontgrendeling (BFU) of pas erna (AFU)**, één enkele schakelaar
@@ -94,7 +98,7 @@ wereldwijd leesbare "ik word gedebugd"-vlag die alles op het toestel kan uitleze
 - **SSH via USB, zonder ADB.** Zet USB-tethering aan en bind de daemon aan het USB-adres: dezelfde sessie via de kabel, sneller en stabieler dan wifi voor grote overdrachten.
 - **Elk toestel en elke emulator.** `arm64-v8a`, `armeabi-v7a`, `x86`, `x86_64`.
 
-## AI-agents op je toestel
+## AI-agents
 
 Een permanent SSH-eindpunt maakt van je telefoon iets wat een **autonome AI-agent rechtstreeks kan bedienen**.
 Elke agent die een shell of SSH-verbinding kan aansturen (Claude Code, aider, een script met een LLM in de lus,
@@ -111,7 +115,7 @@ runtime-[env-contract](patches/README.md), voorspelbare paden en status in platt
 ontdekken hoe hij het gebruikt zonder te gissen.
 
 > **Standaard root, dus behandel het als root.** Een standaardlogin komt binnen als root, en je kunt je ook
-> aanmelden met een account met minder rechten (`shell`, `system`); zie de
+> aanmelden met een account met minder rechten (`shell`, `system`), zie de
 > waarschuwing hieronder. Wanneer je toegang aan een agent geeft, geef hem zijn eigen inloggegevens (niet je
 > persoonlijke sleutel), wijs hem naar een account met minder rechten zoals `shell` als je zijn bereik wilt
 > beperken, beperk de binds tot de netwerken die je vertrouwt (loopback of een VPN in plaats van het open internet), houd
@@ -124,7 +128,7 @@ Flash de module-zip in de KernelSU-, APatch- of Magisk-manager (of vanaf de opdr
 `ksud module install` / `apd module install`), open de **WebUI** van de module om de poort in te stellen en je
 sleutels toe te voegen, en start daarna opnieuw op (of druk op **Action** om hem nu te starten).
 
-## Beveiligingsmodel
+## Beveiliging
 
 ### Waar geheimen leven: BFU vs AFU
 
@@ -133,7 +137,7 @@ ontgrendelt (Before First Unlock), dus alles daar is vóór ontgrendeling leesba
 **credential-encrypted (CE)**: Android houdt het versleuteld totdat de gebruiker ontgrendelt (After First Unlock).
 
 - **AFU-modus (standaard, `START_IN_BFU=0`):** de daemon wacht op ontgrendeling en leest zijn host key,
-  `authorized_keys` en wachtwoord-hashes uit CE-opslag. Maximale bescherming; SSH werkt pas nadat het toestel
+  `authorized_keys` en wachtwoord-hashes uit CE-opslag. Maximale bescherming, SSH werkt pas nadat het toestel
   sinds het opstarten één keer is ontgrendeld.
 - **BFU-modus (`START_IN_BFU=1`):** de daemon start vóór ontgrendeling zodat je vroeg via SSH kunt inloggen
   (bijvoorbeeld om het toestel op afstand te ontgrendelen). Zijn geheimen staan dan op DE-opslag en zijn vóór
@@ -142,7 +146,7 @@ ontgrendelt (Before First Unlock), dus alles daar is vóór ontgrendeling leesba
 
 We voegen bewust **geen** eigen versleuteling bovenop CE toe: het is al versleuteld met de inloggegevens van de
 gebruiker, en er nog een cijfer overheen leggen zou een sleutel vereisen die ergens moet staan (op DE zou die
-worden blootgesteld; hem afleiden uit de inloggegevens van de gebruiker is slechts CE opnieuw implementeren). Dat
+worden blootgesteld, hem afleiden uit de inloggegevens van de gebruiker is slechts CE opnieuw implementeren). Dat
 koopt een vals gevoel van veiligheid, geen echte bescherming.
 
 ### Wachtwoorden
@@ -158,6 +162,14 @@ config-gestuurde paden voor `authorized_keys` en het wachtwoordbestand, en de An
 interactieve PTY's. Een geplande workflow volgt upstream en bouwt opnieuw, zodat de module actueel blijft. Zie
 [`.github/workflows/`](.github/workflows/) en [`CONTRIBUTING.md`](CONTRIBUTING.md).
 
+## Incrementele updates (VDLU)
+
+VD Dropbear levert de **[VDLiveUpdate](https://github.com/VD171/VDLiveUpdate) (VDLU)**-engine mee (ingebed in `vdlu/`): de module werkt zichzelf bij door alleen de gewijzigde bestanden op te halen (inhoudsgeadresseerde blobs + een ondertekende `manifest.json`), in plaats van de hele `.zip` opnieuw te downloaden. **Hardened**-profiel: de ed25519-handtekening is verplicht en downgrades worden geblokkeerd, de volledige `.zip` blijft geldig als fallback.
+
+- **Alleen LIVE** (geen reboot): updates worden toegepast bij de volgende boot via `service.sh` (`setsid`, op de achtergrond, blokkeert de boot nooit), een no-op wanneer geen enkele feed bereikbaar is.
+- **Status** in `/data/adb/<module>/vdlu/`, buiten de module, zodat die een reflash overleeft.
+- **WebUI:** een **Updates**-paneel met een voortgangstoast en annuleren, automatisch bijwerken is opt-in.
+
 ## Documentatie
 
 <!-- vd-docs -->
@@ -165,12 +177,12 @@ interactieve PTY's. Een geplande workflow volgt upstream en bouwt opnieuw, zodat
 - **[Gebruikershandleiding](https://github.com/VD171/VD-dropbear/wiki/nl-USER-GUIDE)**: installatie, sleutels, wachtwoorden, verbinden, bestandsoverdracht, BFU/AFU.
 - **[Configuratie](https://github.com/VD171/VD-dropbear/wiki/nl-CONFIGURATION)**: elke instelling, met standaardwaarden.
 - **[Architectuur](https://github.com/VD171/VD-dropbear/wiki/nl-ARCHITECTURE)** en **[Bestandsstructuur](https://github.com/VD171/VD-dropbear/wiki/nl-FILE-STRUCTURE)**: hoe de module en de daemon werken, en waar alles staat.
-- **[AI-agents op je toestel](https://github.com/VD171/VD-dropbear/wiki/nl-AI-AGENTS)**: een autonome agent veilig gebruiken via SSH.
+- **[AI-agents](https://github.com/VD171/VD-dropbear/wiki/nl-AI-AGENTS)**: een autonome agent veilig gebruiken via SSH.
 - **[Bouwen](https://github.com/VD171/VD-dropbear/wiki/nl-BUILDING)**: de build en het verhaal van crypt()/cross-compileren op Android.
 - **[Bijdragen](CONTRIBUTING.md)** en **[Beveiliging](SECURITY.md)**.
 - **[Changelog](CHANGELOG.md)** en **[Gedragscode](CODE_OF_CONDUCT.md)**.
 
-Elke wikipagina is ook vertaald naar elke taal in de schakelaar hierboven; dezelfde bronnen staan onder [`docs/`](docs/).
+Elke wikipagina is ook vertaald naar elke taal in de schakelaar hierboven, dezelfde bronnen staan onder [`docs/`](docs/).
 <!-- /vd-docs -->
 
 ## Zie ook
@@ -187,31 +199,34 @@ Elke wikipagina is ook vertaald naar elke taal in de schakelaar hierboven; dezel
 
 ## Contacten
 
-- Site           : https://vd171.ru
-- Site           : https://vd.priv8.ru
-- Source         : https://github.com/VD171/VD-dropbear
-- GitHub         : [@VD171](https://github.com/VD171)
-- XDA-Developers : [@VD171](https://xdaforums.com/m/vd171.4699873/)
-- XDA thread     : [VD-Dropbear](https://xdaforums.com/t/VD-Dropbear.4808524/)
-- Telegram       : [@VD_Priv8](https://t.me/VD_Priv8)
-- Channel        : [@Priv8_VD](https://t.me/Priv8_VD)
-- Discord        : [@VD.Priv8](https://discord.com/users/1296831918989639721)
-- E-mail         : vd.priv8@pm.me
+- https://vd171.ru
+- https://vd.priv8.ru
+- **Telegram:** @VD_Priv8 https://t.me/VD_Priv8
+- **Channel:** @Priv8_VD https://t.me/Priv8_VD
+- **Discord:** @VD.Priv8 https://discord.com/users/1296831918989639721
+- **E-mail:** vd.priv8@pm.me
+- **XDA-Developers:** @VD171 https://xdaforums.com/m/vd171.4699873/
+- **XDA thread:** https://xdaforums.com/t/VD-Dropbear.4808524/
+- **GitHub:** @VD171 https://github.com/VD171
 
 ## Licentie
 
-De eigen code van VD Dropbear is **Apache-2.0**; zie [LICENSE](LICENSE). De module bundelt ook binaries van
+De eigen code van VD Dropbear is **Apache-2.0**, zie [LICENSE](LICENSE). De module bundelt ook binaries van
 derden: [Dropbear](https://matt.ucc.asn.au/dropbear/) (MIT-stijl), OpenSSH's `sftp-server` en `scp` (BSD), en
-`rsync` (GPL-3.0), elk onder zijn eigen licentie; zie [THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md), inclusief
+`rsync` (GPL-3.0), elk onder zijn eigen licentie, zie [THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md), inclusief
 hoe we voor rsync aan de GPL voldoen. Onze Apache-2.0-code blijft hierdoor onaangetast (de GPL-binary wordt enkel
 geaggregeerd, niet gelinkt).
 
 ## Handelsmerken
 
 VD Dropbear is een onafhankelijk, niet-officieel project, niet gelieerd aan of onderschreven door enige derde
-partij. "Android" is een handelsmerk van Google LLC; "SSH" is een geregistreerd handelsmerk van SSH Communications
+partij. "Android" is een handelsmerk van Google LLC. "SSH" is een geregistreerd handelsmerk van SSH Communications
 Security. VD Dropbear draait volledig op je toestel.
 
 ## Tags
 
 `SSH` `Dropbear` `KernelSU` `Magisk` `APatch` `root` `sshd` `remote-access` `openssh-alternative` `Android` `BFU` `VD-dropbear`
+
+---
+
+📣 **Word lid van het kanaal voor updates:** @Priv8_VD https://t.me/Priv8_VD

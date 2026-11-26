@@ -23,18 +23,16 @@
 -->
 
 <p align="center">
-  <img src="module/webroot/assets/logo-wordmark.svg" alt="VD Dropbear" width="540">
+  <img src="module/webroot/assets/logo-wordmark.svg" alt="VD Dropbear" width="320">
 </p>
 
 # VD Dropbear
 
-<p>
+<p align="center">
+  <a href="https://github.com/VD171/VD-dropbear/releases/latest"><img src="https://img.shields.io/github/v/release/VD171/VD-dropbear?label=release&color=36e86a" alt="Release"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-Apache--2.0-1a7f37" alt="License"></a>
-  <img src="https://img.shields.io/badge/KernelSU-%E2%9C%94-635bff" alt="KernelSU">
-  <img src="https://img.shields.io/badge/APatch-%E2%9C%94-ff7043" alt="APatch">
-  <img src="https://img.shields.io/badge/Magisk-%E2%9C%94-00af9c" alt="Magisk">
+  <a href="https://github.com/VD171/VD-dropbear/releases"><img src="https://img.shields.io/github/downloads/VD171/VD-dropbear/total?label=downloads&color=8250df" alt="Downloads"></a>
   <a href="https://github.com/VD171/VD-dropbear/stargazers"><img src="https://img.shields.io/github/stars/VD171/VD-dropbear?color=d29922" alt="Stars"></a>
-  <a href="https://github.com/VD171/VD-dropbear/releases"><img src="https://img.shields.io/github/v/release/VD171/VD-dropbear?color=1a7f37" alt="Release"></a>
 </p>
 
 <p align="center">
@@ -56,6 +54,12 @@ dikemas sebagai modul KernelSU / APatch / Magisk. Ia berjalan sendiri dan tidak 
 > ⚠️ **Sebuah login secara bawaan memberikan shell ROOT penuh.** Perlakukan ini seperti
 > kunci perangkat Anda: utamakan kunci publik daripada kata sandi, dan jauhkan port dari Internet publik.
 
+## Tangkapan layar
+
+<p align="center">
+  <img src="screenshots/status.png" width="24%" alt="Status"> <img src="screenshots/settings.png" width="24%" alt="Settings"> <img src="screenshots/keys.png" width="24%" alt="Keys"> <img src="screenshots/passwords.png" width="24%" alt="Passwords">
+</p>
+
 ## Mengapa
 
 Cara bawaan Android untuk mendapatkan shell di ponsel Anda sendiri adalah ADB (USB debugging), dan
@@ -73,7 +77,7 @@ tetap milik Anda, bukan sebuah flag "saya sedang di-debug" yang dapat dibaca sec
 ## Fitur
 
 - **Satu daemon, selalu.** Ia mulai saat boot dan dari tombol **Action** di manajer, dan Anda dapat
-  **start / stop / restart** dari WebUI kapan saja; tidak pernah lebih dari satu instance.
+  **start / stop / restart** dari WebUI kapan saja, tidak pernah lebih dari satu instance.
 - **Semuanya dapat dikonfigurasi** dari WebUI (atau `/data/adb/vddropbear/config`):
   - port, dan bind ke loopback / all / IPv4 / IPv6 / alamat tertentu
   - **mulai sebelum first unlock (BFU) atau hanya setelahnya (AFU)**, satu sakelar saja
@@ -95,7 +99,7 @@ tetap milik Anda, bukan sebuah flag "saya sedang di-debug" yang dapat dibaca sec
 - **SSH lewat USB, tanpa ADB.** Nyalakan tethering USB dan ikat daemon ke alamat USB: sesi yang sama lewat kabel, lebih cepat dan stabil daripada wifi untuk transfer besar.
 - **Setiap perangkat dan emulator.** `arm64-v8a`, `armeabi-v7a`, `x86`, `x86_64`.
 
-## Agen AI di perangkat Anda
+## Agen AI
 
 Sebuah endpoint SSH yang selalu siap mengubah ponsel Anda menjadi sesuatu yang **dapat dioperasikan
 langsung oleh agen AI otonom**. Agen apa pun yang bisa menjalankan shell atau koneksi SSH (Claude Code,
@@ -113,7 +117,7 @@ Karena proyek ini dibangun agar **ramah AI** (berkas konfigurasi yang terdokumen
 teks-biasa), sebuah agen dapat menemukan cara memakainya tanpa menebak-nebak.
 
 > **Root secara bawaan, jadi perlakukan seperti root.** Sebuah login bawaan masuk sebagai root, dan Anda
-> juga bisa masuk sebagai akun dengan hak lebih rendah (`shell`, `system`); lihat peringatan di bawah.
+> juga bisa masuk sebagai akun dengan hak lebih rendah (`shell`, `system`), lihat peringatan di bawah.
 > Ketika Anda menyerahkan akses kepada sebuah agen, berikan kredensialnya sendiri (bukan kunci pribadi
 > Anda), arahkan ke akun dengan hak lebih rendah seperti `shell` jika Anda ingin membatasi jangkauannya,
 > batasi bind ke jaringan yang Anda percayai (loopback atau VPN alih-alih
@@ -126,7 +130,7 @@ Flash zip modul di manajer KernelSU, APatch, atau Magisk (atau dari baris perint
 `ksud module install` / `apd module install`), buka **WebUI** modul untuk mengatur port dan
 menambahkan kunci Anda, lalu reboot (atau tekan **Action** untuk menjalankannya sekarang).
 
-## Model keamanan
+## Keamanan
 
 ### Di mana rahasia berada: BFU vs AFU
 
@@ -135,7 +139,7 @@ ponsel (Before First Unlock), jadi apa pun di sana dapat dibaca sebelum unlock. 
 **credential-encrypted (CE)**: Android menjaganya tetap terenkripsi sampai pengguna membuka kunci (After First Unlock).
 
 - **Mode AFU (bawaan, `START_IN_BFU=0`):** daemon menunggu unlock dan membaca host key-nya,
-  `authorized_keys`, serta hash kata sandi dari penyimpanan CE. Perlindungan maksimal; SSH hanya bekerja
+  `authorized_keys`, serta hash kata sandi dari penyimpanan CE. Perlindungan maksimal, SSH hanya bekerja
   setelah perangkat dibuka kuncinya sekali sejak boot.
 - **Mode BFU (`START_IN_BFU=1`):** daemon mulai sebelum unlock sehingga Anda bisa SSH masuk lebih awal
   (misalnya, untuk membuka kunci perangkat dari jarak jauh). Rahasianya lalu berada di penyimpanan DE dan
@@ -144,7 +148,7 @@ ponsel (Before First Unlock), jadi apa pun di sana dapat dibaca sebelum unlock. 
 
 Kami sengaja **tidak** menambahkan enkripsi kami sendiri di atas CE: ia sudah terenkripsi dengan
 kredensial pengguna, dan melapisi cipher lain akan membutuhkan kunci yang harus disimpan di suatu tempat
-(di DE ia akan terbuka; menurunkannya dari kredensial pengguna hanya mengimplementasikan ulang CE). Itu
+(di DE ia akan terbuka, menurunkannya dari kredensial pengguna hanya mengimplementasikan ulang CE). Itu
 hanya akan memberi rasa aman yang palsu, bukan perlindungan yang sebenarnya.
 
 ### Kata sandi
@@ -162,6 +166,14 @@ sandi, serta perbaikan `openpty` Android untuk PTY interaktif. Sebuah workflow t
 dan membangun ulang, sehingga modul tetap mutakhir. Lihat [`.github/workflows/`](.github/workflows/) dan
 [`CONTRIBUTING.md`](CONTRIBUTING.md).
 
+## Pembaruan inkremental (VDLU)
+
+VD Dropbear menyertakan mesin **[VDLiveUpdate](https://github.com/VD171/VDLiveUpdate) (VDLU)** (tertanam di `vdlu/`): modul memperbarui dirinya sendiri dengan hanya mengambil berkas yang berubah (blob beralamat konten + `manifest.json` bertanda tangan), alih-alih mengunduh ulang seluruh `.zip`. Profil **Hardened**: tanda tangan ed25519 wajib dan downgrade diblokir, `.zip` penuh tetap valid sebagai cadangan.
+
+- **Hanya LIVE** (tanpa reboot): pembaruan diterapkan pada boot berikutnya melalui `service.sh` (`setsid`, berjalan di latar, tidak pernah menghambat boot), no-op bila tidak ada feed yang terjangkau.
+- **Status** di `/data/adb/<module>/vdlu/`, di luar modul, sehingga bertahan dari reflash.
+- **WebUI:** panel **Updates** dengan toast kemajuan dan batal, pembaruan otomatis bersifat opt-in.
+
 ## Dokumentasi
 
 <!-- vd-docs -->
@@ -169,12 +181,12 @@ dan membangun ulang, sehingga modul tetap mutakhir. Lihat [`.github/workflows/`]
 - **[Panduan pengguna](https://github.com/VD171/VD-dropbear/wiki/id-USER-GUIDE)**: instalasi, kunci, kata sandi, menghubungkan, transfer file, BFU/AFU.
 - **[Konfigurasi](https://github.com/VD171/VD-dropbear/wiki/id-CONFIGURATION)**: setiap pengaturan, beserta nilai bawaannya.
 - **[Arsitektur](https://github.com/VD171/VD-dropbear/wiki/id-ARCHITECTURE)** dan **[Struktur file](https://github.com/VD171/VD-dropbear/wiki/id-FILE-STRUCTURE)**: cara kerja modul dan daemon, serta lokasi setiap berkas.
-- **[Agen AI di perangkat Anda](https://github.com/VD171/VD-dropbear/wiki/id-AI-AGENTS)**: menggunakan agen otonom melalui SSH, dengan aman.
+- **[Agen AI](https://github.com/VD171/VD-dropbear/wiki/id-AI-AGENTS)**: menggunakan agen otonom melalui SSH, dengan aman.
 - **[Build](https://github.com/VD171/VD-dropbear/wiki/id-BUILDING)**: proses build, dan kisah crypt()/kompilasi silang di Android.
 - **[Berkontribusi](CONTRIBUTING.md)** dan **[Keamanan](SECURITY.md)**.
 - **[Changelog](CHANGELOG.md)** dan **[Pedoman Perilaku](CODE_OF_CONDUCT.md)**.
 
-Setiap halaman wiki juga diterjemahkan ke setiap bahasa pada pengalih di atas; sumber yang sama berada di bawah [`docs/`](docs/).
+Setiap halaman wiki juga diterjemahkan ke setiap bahasa pada pengalih di atas, sumber yang sama berada di bawah [`docs/`](docs/).
 <!-- /vd-docs -->
 
 ## Lihat juga
@@ -191,31 +203,34 @@ Setiap halaman wiki juga diterjemahkan ke setiap bahasa pada pengalih di atas; s
 
 ## Kontak
 
-- Site           : https://vd171.ru
-- Site           : https://vd.priv8.ru
-- Source         : https://github.com/VD171/VD-dropbear
-- GitHub         : [@VD171](https://github.com/VD171)
-- XDA-Developers : [@VD171](https://xdaforums.com/m/vd171.4699873/)
-- XDA thread     : [VD-Dropbear](https://xdaforums.com/t/VD-Dropbear.4808524/)
-- Telegram       : [@VD_Priv8](https://t.me/VD_Priv8)
-- Channel        : [@Priv8_VD](https://t.me/Priv8_VD)
-- Discord        : [@VD.Priv8](https://discord.com/users/1296831918989639721)
-- E-mail         : vd.priv8@pm.me
+- https://vd171.ru
+- https://vd.priv8.ru
+- **Telegram:** @VD_Priv8 https://t.me/VD_Priv8
+- **Channel:** @Priv8_VD https://t.me/Priv8_VD
+- **Discord:** @VD.Priv8 https://discord.com/users/1296831918989639721
+- **E-mail:** vd.priv8@pm.me
+- **XDA-Developers:** @VD171 https://xdaforums.com/m/vd171.4699873/
+- **XDA thread:** https://xdaforums.com/t/VD-Dropbear.4808524/
+- **GitHub:** @VD171 https://github.com/VD171
 
 ## Lisensi
 
-Kode milik VD Dropbear sendiri adalah **Apache-2.0**; lihat [LICENSE](LICENSE). Modul ini juga
+Kode milik VD Dropbear sendiri adalah **Apache-2.0**, lihat [LICENSE](LICENSE). Modul ini juga
 menyertakan biner pihak ketiga: [Dropbear](https://matt.ucc.asn.au/dropbear/) (gaya MIT), `sftp-server`
-dan `scp` dari OpenSSH (BSD), serta `rsync` (GPL-3.0), masing-masing di bawah lisensinya sendiri; lihat
+dan `scp` dari OpenSSH (BSD), serta `rsync` (GPL-3.0), masing-masing di bawah lisensinya sendiri, lihat
 [THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md), termasuk bagaimana kami mematuhi GPL untuk rsync. Kode
 Apache-2.0 kami tidak terpengaruh (biner GPL hanya diagregasi, bukan di-link).
 
 ## Merek dagang
 
 VD Dropbear adalah proyek independen dan tidak resmi, tidak berafiliasi dengan atau didukung oleh pihak
-ketiga mana pun. "Android" adalah merek dagang Google LLC; "SSH" adalah merek dagang terdaftar SSH
+ketiga mana pun. "Android" adalah merek dagang Google LLC. "SSH" adalah merek dagang terdaftar SSH
 Communications Security. VD Dropbear berjalan sepenuhnya di perangkat Anda.
 
 ## Tags
 
 `SSH` `Dropbear` `KernelSU` `Magisk` `APatch` `root` `sshd` `remote-access` `openssh-alternative` `Android` `BFU` `VD-dropbear`
+
+---
+
+📣 **Gabung ke channel untuk pembaruan:** @Priv8_VD https://t.me/Priv8_VD

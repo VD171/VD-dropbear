@@ -62,7 +62,7 @@ o usuário de login. O hash é calculado no seu navegador com PBKDF2; a senha em
 ## 4. Escolher uma porta e onde escutar
 
 Em **Settings**, defina a **Port** e escolha os binds. Por padrão o VD Dropbear escuta apenas no
-**loopback**; para alcançá-lo a partir da sua LAN ou de uma VPN, habilite as interfaces que quiser.
+**loopback**, para alcançá-lo a partir da sua LAN ou de uma VPN, habilite as interfaces que quiser.
 Evite **Listen on all interfaces**, a menos que compreenda a exposição.
 
 Pressione **Save & restart** para aplicar e então **Start**, se ainda não estiver em execução.
@@ -122,10 +122,10 @@ documentado. Veja [Modelo de segurança](#) no README.
 - **Não consigo conectar de outra máquina.** Você provavelmente ainda está vinculado apenas ao loopback.
   Habilite a interface de que precisa e reinicie.
 - **SFTP/scp falha, mas o shell funciona.** Verifique se o `sftp-server` incluído foi distribuído para
-  o seu ABI; o status da WebUI mostra o ABI detectado.
+  o seu ABI, o status da WebUI mostra o ABI detectado.
 
 <!-- doc-footer -->
 
 ---
 
-> _Esta documentação foi gerada com o Claude (Anthropic) e é mantida por VD171. Correções e melhorias são bem-vindas; veja [CONTRIBUTING.md](CONTRIBUTING.md)._
+> _Esta documentação foi gerada com o Claude (Anthropic) e é mantida por VD171. Correções e melhorias são bem-vindas, veja [CONTRIBUTING.md](CONTRIBUTING.md)._

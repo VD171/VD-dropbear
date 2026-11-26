@@ -23,18 +23,16 @@
 -->
 
 <p align="center">
-  <img src="module/webroot/assets/logo-wordmark.svg" alt="VD Dropbear" width="540">
+  <img src="module/webroot/assets/logo-wordmark.svg" alt="VD Dropbear" width="320">
 </p>
 
 # VD Dropbear
 
-<p>
+<p align="center">
+  <a href="https://github.com/VD171/VD-dropbear/releases/latest"><img src="https://img.shields.io/github/v/release/VD171/VD-dropbear?label=release&color=36e86a" alt="Release"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-Apache--2.0-1a7f37" alt="License"></a>
-  <img src="https://img.shields.io/badge/KernelSU-%E2%9C%94-635bff" alt="KernelSU">
-  <img src="https://img.shields.io/badge/APatch-%E2%9C%94-ff7043" alt="APatch">
-  <img src="https://img.shields.io/badge/Magisk-%E2%9C%94-00af9c" alt="Magisk">
+  <a href="https://github.com/VD171/VD-dropbear/releases"><img src="https://img.shields.io/github/downloads/VD171/VD-dropbear/total?label=downloads&color=8250df" alt="Downloads"></a>
   <a href="https://github.com/VD171/VD-dropbear/stargazers"><img src="https://img.shields.io/github/stars/VD171/VD-dropbear?color=d29922" alt="Stars"></a>
-  <a href="https://github.com/VD171/VD-dropbear/releases"><img src="https://img.shields.io/github/v/release/VD171/VD-dropbear?color=1a7f37" alt="Release"></a>
 </p>
 
 <p align="center">
@@ -56,6 +54,12 @@ zabalený jako modul pro KernelSU / APatch / Magisk. Spouští se sám a nezávi
 > ⚠️ **Přihlášení ve výchozím nastavení dává plný ROOT shell.** Ber to jako klíče od zařízení:
 > dávej přednost veřejným klíčům před hesly a nenech port vystavený do veřejného internetu.
 
+## Snímky obrazovky
+
+<p align="center">
+  <img src="screenshots/status.png" width="24%" alt="Status"> <img src="screenshots/settings.png" width="24%" alt="Settings"> <img src="screenshots/keys.png" width="24%" alt="Keys"> <img src="screenshots/passwords.png" width="24%" alt="Passwords">
+</p>
+
 ## Proč
 
 Vestavěný způsob, jak v Androidu získat shell na vlastním telefonu, je ADB (ladění přes USB), a jeho
@@ -73,7 +77,7 @@ zůstává tvůj, místo globálně čitelného příznaku „jsem laděn", kter
 ## Funkce
 
 - **Jeden démon, vždy.** Spouští se při startu a tlačítkem **Action** ve správci a kdykoli jej můžeš
-  **spustit / zastavit / restartovat** z WebUI; nikdy neběží víc než jedna instance.
+  **spustit / zastavit / restartovat** z WebUI, nikdy neběží víc než jedna instance.
 - **Vše je konfigurovatelné** z WebUI (nebo `/data/adb/vddropbear/config`):
   - port a vazba na loopback / vše / IPv4 / IPv6 / konkrétní adresy
   - **start před prvním odemčením (BFU), nebo až po něm (AFU)**, jediný přepínač
@@ -95,7 +99,7 @@ zůstává tvůj, místo globálně čitelného příznaku „jsem laděn", kter
 - **SSH přes USB, bez ADB.** Zapněte USB tethering a navažte daemon na USB adresu: stejné sezení přes kabel, rychlejší a stabilnější než wifi u velkých přenosů.
 - **Každé zařízení i emulátor.** `arm64-v8a`, `armeabi-v7a`, `x86`, `x86_64`.
 
-## AI agenti na tvém zařízení
+## AI agenti
 
 Stálý SSH endpoint promění tvůj telefon v něco, co může **autonomní AI agent řídit přímo**. Jakýkoli
 agent schopný ovládat shell nebo SSH připojení (Claude Code, aider, skript se smyčkou LLM, tvoje
@@ -112,7 +116,7 @@ explicitní [kontrakt prostředí](patches/README.md) za běhu, předvídatelné
 textu), agent dokáže zjistit, jak jej používat, bez dohadů.
 
 > **Ve výchozím nastavení root, tak s tím zacházej jako s rootem.** Výchozí přihlášení přistane jako
-> root, ale přihlásit se můžeš i pod účtem s nižšími oprávněními (`shell`, `system`); viz varování
+> root, ale přihlásit se můžeš i pod účtem s nižšími oprávněními (`shell`, `system`), viz varování
 > níže. Když předáváš přístup agentovi, dej mu vlastní přihlašovací údaje (ne svůj osobní klíč),
 > nasměruj ho na účet s nižšími oprávněními, například `shell`, pokud chceš omezit jeho dosah, omez
 > vazby na sítě, kterým důvěřuješ (loopback nebo VPN místo otevřeného internetu), nech ověřování
@@ -124,7 +128,7 @@ Nahraj zip modulu ve správci KernelSU, APatch nebo Magisk (nebo z příkazové 
 `ksud module install` / `apd module install`), otevři **WebUI** modulu, nastav port a přidej své
 klíče, pak restartuj (nebo stiskni **Action** a spusť jej hned).
 
-## Bezpečnostní model
+## Bezpečnost
 
 ### Kde žijí tajné údaje: BFU vs AFU
 
@@ -134,7 +138,7 @@ je **šifrované přihlašovacím údajem (CE)**: Android jej drží zašifrovan
 (After First Unlock).
 
 - **Režim AFU (výchozí, `START_IN_BFU=0`):** démon počká na odemčení a svůj hostitelský klíč,
-  `authorized_keys` a hashe hesel načte z úložiště CE. Maximální ochrana; SSH funguje až poté, co bylo
+  `authorized_keys` a hashe hesel načte z úložiště CE. Maximální ochrana, SSH funguje až poté, co bylo
   zařízení od startu alespoň jednou odemčeno.
 - **Režim BFU (`START_IN_BFU=1`):** démon se spustí před odemčením, aby ses mohl připojit přes SSH
   brzy (například abys zařízení odemkl na dálku). Jeho tajné údaje pak žijí na úložišti DE a jsou
@@ -160,6 +164,14 @@ auditovatelnou sadou patchů (viz [`patches/`](patches/)): neutrální/konfiguro
 pro interaktivní PTY. Naplánovaný workflow sleduje upstream a sestavuje znovu, takže modul zůstává
 aktuální. Viz [`.github/workflows/`](.github/workflows/) a [`CONTRIBUTING.md`](CONTRIBUTING.md).
 
+## Přírůstkové aktualizace (VDLU)
+
+VD Dropbear dodává engine **[VDLiveUpdate](https://github.com/VD171/VDLiveUpdate) (VDLU)** (vestavěný v `vdlu/`): modul se aktualizuje sám tím, že stahuje jen změněné soubory (obsahově adresované bloby + podepsaný `manifest.json`), místo opětovného stažení celého `.zip`. Profil **Hardened**: podpis ed25519 je povinný a downgrady jsou blokovány, úplný `.zip` zůstává platný jako záloha.
+
+- **Pouze LIVE** (bez restartu): aktualizace se použijí při příštím startu přes `service.sh` (`setsid`, na pozadí, nikdy neblokuje start), no-op, když není dostupný žádný kanál.
+- **Stav** v `/data/adb/<module>/vdlu/`, mimo modul, takže přežije reflash.
+- **WebUI:** panel **Updates** s toastem průběhu a zrušením, automatická aktualizace je opt-in.
+
 ## Dokumentace
 
 <!-- vd-docs -->
@@ -167,12 +179,12 @@ aktuální. Viz [`.github/workflows/`](.github/workflows/) a [`CONTRIBUTING.md`]
 - **[Uživatelská příručka](https://github.com/VD171/VD-dropbear/wiki/cs-USER-GUIDE)**: instalace, klíče, hesla, připojení, přenos souborů, BFU/AFU.
 - **[Konfigurace](https://github.com/VD171/VD-dropbear/wiki/cs-CONFIGURATION)**: každé nastavení, s výchozími hodnotami.
 - **[Architektura](https://github.com/VD171/VD-dropbear/wiki/cs-ARCHITECTURE)** a **[Struktura souborů](https://github.com/VD171/VD-dropbear/wiki/cs-FILE-STRUCTURE)**: jak modul a démon fungují a kde se co nachází.
-- **[AI agenti na tvém zařízení](https://github.com/VD171/VD-dropbear/wiki/cs-AI-AGENTS)**: bezpečné používání autonomního agenta přes SSH.
+- **[AI agenti](https://github.com/VD171/VD-dropbear/wiki/cs-AI-AGENTS)**: bezpečné používání autonomního agenta přes SSH.
 - **[Sestavení](https://github.com/VD171/VD-dropbear/wiki/cs-BUILDING)**: sestavení a příběh crypt()/cross-compile na Androidu.
 - **[Přispívání](CONTRIBUTING.md)** a **[Zabezpečení](SECURITY.md)**.
 - **[Changelog](CHANGELOG.md)** a **[Kodex chování](CODE_OF_CONDUCT.md)**.
 
-Každá stránka wiki je také přeložena do každého jazyka v přepínači výše; tytéž zdroje jsou ve složce [`docs/`](docs/).
+Každá stránka wiki je také přeložena do každého jazyka v přepínači výše, tytéž zdroje jsou ve složce [`docs/`](docs/).
 <!-- /vd-docs -->
 
 ## Viz také
@@ -189,31 +201,34 @@ Každá stránka wiki je také přeložena do každého jazyka v přepínači v�
 
 ## Kontakty
 
-- Site           : https://vd171.ru
-- Site           : https://vd.priv8.ru
-- Source         : https://github.com/VD171/VD-dropbear
-- GitHub         : [@VD171](https://github.com/VD171)
-- XDA-Developers : [@VD171](https://xdaforums.com/m/vd171.4699873/)
-- XDA thread     : [VD-Dropbear](https://xdaforums.com/t/VD-Dropbear.4808524/)
-- Telegram       : [@VD_Priv8](https://t.me/VD_Priv8)
-- Channel        : [@Priv8_VD](https://t.me/Priv8_VD)
-- Discord        : [@VD.Priv8](https://discord.com/users/1296831918989639721)
-- E-mail         : vd.priv8@pm.me
+- https://vd171.ru
+- https://vd.priv8.ru
+- **Telegram:** @VD_Priv8 https://t.me/VD_Priv8
+- **Channel:** @Priv8_VD https://t.me/Priv8_VD
+- **Discord:** @VD.Priv8 https://discord.com/users/1296831918989639721
+- **E-mail:** vd.priv8@pm.me
+- **XDA-Developers:** @VD171 https://xdaforums.com/m/vd171.4699873/
+- **XDA thread:** https://xdaforums.com/t/VD-Dropbear.4808524/
+- **GitHub:** @VD171 https://github.com/VD171
 
 ## Licence
 
-Vlastní kód VD Dropbear je pod **Apache-2.0**; viz [LICENSE](LICENSE). Modul rovněž přibaluje binárky
+Vlastní kód VD Dropbear je pod **Apache-2.0**, viz [LICENSE](LICENSE). Modul rovněž přibaluje binárky
 třetích stran: [Dropbear](https://matt.ucc.asn.au/dropbear/) (styl MIT), `sftp-server` a `scp` z
-OpenSSH (BSD) a `rsync` (GPL-3.0), každou pod vlastní licencí; viz
+OpenSSH (BSD) a `rsync` (GPL-3.0), každou pod vlastní licencí, viz
 [THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md), včetně toho, jak u rsync dodržujeme GPL. Náš kód pod
 Apache-2.0 tím není dotčen (binárka pod GPL je jen agregovaná, nikoli linkovaná).
 
 ## Ochranné známky
 
 VD Dropbear je nezávislý, neoficiální projekt, nijak nespojený s žádnou třetí stranou ani jí
-podporovaný. „Android" je ochranná známka společnosti Google LLC; „SSH" je registrovaná ochranná
+podporovaný. „Android" je ochranná známka společnosti Google LLC. „SSH" je registrovaná ochranná
 známka společnosti SSH Communications Security. VD Dropbear běží zcela na tvém zařízení.
 
 ## Tags
 
 `SSH` `Dropbear` `KernelSU` `Magisk` `APatch` `root` `sshd` `remote-access` `openssh-alternative` `Android` `BFU` `VD-dropbear`
+
+---
+
+📣 **Připojte se ke kanálu pro aktualizace:** @Priv8_VD https://t.me/Priv8_VD

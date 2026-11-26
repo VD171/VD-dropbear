@@ -62,7 +62,7 @@ heslo nikdy stránku neopustí.
 ## 4. Zvol port a kde naslouchat
 
 Pod **Settings** nastav **Port** a vyber vazby. VD Dropbear ve výchozím stavu naslouchá jen na
-**loopbacku**; abys k němu dosáhl ze své LAN nebo VPN, povol rozhraní, která chceš. Vyhni se
+**loopbacku**, abys k němu dosáhl ze své LAN nebo VPN, povol rozhraní, která chceš. Vyhni se
 **Listen on all interfaces**, pokud nerozumíš tomu, co tím vystavuješ.
 
 Stiskni **Save & restart** pro uplatnění a poté **Start**, pokud už neběží.
@@ -120,10 +120,10 @@ odemčením (například abys zařízení po restartu odemkl na dálku), zapni
 - **Nejde se připojit z jiného stroje.** Nejspíš jsi stále navázán jen na loopback: povol potřebné
   rozhraní a restartuj.
 - **SFTP/scp selhává, ale shell funguje.** Ujisti se, že přibalený `sftp-server` byl dodán pro tvou
-  ABI; stav ve WebUI ukazuje zjištěnou ABI.
+  ABI, stav ve WebUI ukazuje zjištěnou ABI.
 
 <!-- doc-footer -->
 
 ---
 
-> _Tato dokumentace byla vytvořena pomocí Claude (Anthropic) a spravuje ji VD171. Opravy a vylepšení jsou vítány; viz [CONTRIBUTING.md](CONTRIBUTING.md)._
+> _Tato dokumentace byla vytvořena pomocí Claude (Anthropic) a spravuje ji VD171. Opravy a vylepšení jsou vítány, viz [CONTRIBUTING.md](CONTRIBUTING.md)._

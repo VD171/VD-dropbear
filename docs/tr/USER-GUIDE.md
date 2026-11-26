@@ -63,7 +63,7 @@ parolanın kendisi asla sayfadan çıkmaz.
 ## 4. Bir bağlantı noktası ve nerede dinleneceğini seç
 
 **Settings** altında, **Port**'u ayarlayın ve bağlamaları seçin. Varsayılan olarak VD Dropbear yalnızca
-**loopback** üzerinde dinler; ona LAN'ınızdan veya bir VPN'den erişmek için istediğiniz arabirimleri
+**loopback** üzerinde dinler, ona LAN'ınızdan veya bir VPN'den erişmek için istediğiniz arabirimleri
 etkinleştirin. Maruziyeti anlamadıkça **Listen on all interfaces**'ten kaçının.
 
 Uygulamak için **Save & restart**'a basın, sonra zaten çalışmıyorsa **Start**'a basın.
@@ -86,7 +86,7 @@ Hiç ağ olmadan daha hızlı ve kararlı aktarımlar için daemon'a USB kablosu
 
 1. Kabloyu takın, ardından telefonda **USB bağlantı paylaşımı**'nı açın (Ayarlar -> Ağ -> Erişim noktası ve bağlantı paylaşımı).
 2. Telefon yalnızca USB'den oluşan küçük bir ağa katılır, genellikle `192.168.42.129` adresinde.
-3. Yukarıdaki 4. adımda bu adresi **belirli bağlamalara** (`LISTEN_ADDRESSES`) ekleyin ve **tüm arabirimler**'i kapalı bırakın; böylece daemon yalnızca kablo üzerinden yanıt verir.
+3. Yukarıdaki 4. adımda bu adresi **belirli bağlamalara** (`LISTEN_ADDRESSES`) ekleyin ve **tüm arabirimler**'i kapalı bırakın, böylece daemon yalnızca kablo üzerinden yanıt verir.
 
 Sonra kablosuz adres yerine USB adresine bağlanın:
 
@@ -121,10 +121,10 @@ bilinçli, belgelenmiş bir takas. README'deki [Güvenlik modeli](#) bölümüne
 - **Başka bir makineden bağlanamıyorum.** Muhtemelen hâlâ yalnızca loopback'e bağlısınız. İhtiyacınız
   olan arabirimi etkinleştirin ve yeniden başlatın.
 - **SFTP/scp başarısız oluyor ama kabuk çalışıyor.** Paket içindeki `sftp-server`'ın ABI'niz için
-  gönderildiğinden emin olun; WebUI durumu algılanan ABI'yi gösterir.
+  gönderildiğinden emin olun, WebUI durumu algılanan ABI'yi gösterir.
 
 <!-- doc-footer -->
 
 ---
 
-> _Bu belgeler Claude (Anthropic) ile oluşturulmuş olup VD171 tarafından yürütülmektedir. Düzeltmeler ve iyileştirmeler memnuniyetle karşılanır; bkz. [CONTRIBUTING.md](CONTRIBUTING.md)._
+> _Bu belgeler Claude (Anthropic) ile oluşturulmuş olup VD171 tarafından yürütülmektedir. Düzeltmeler ve iyileştirmeler memnuniyetle karşılanır, bkz. [CONTRIBUTING.md](CONTRIBUTING.md)._

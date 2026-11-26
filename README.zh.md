@@ -23,18 +23,16 @@
 -->
 
 <p align="center">
-  <img src="module/webroot/assets/logo-wordmark.svg" alt="VD Dropbear" width="540">
+  <img src="module/webroot/assets/logo-wordmark.svg" alt="VD Dropbear" width="320">
 </p>
 
 # VD Dropbear
 
-<p>
+<p align="center">
+  <a href="https://github.com/VD171/VD-dropbear/releases/latest"><img src="https://img.shields.io/github/v/release/VD171/VD-dropbear?label=release&color=36e86a" alt="Release"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-Apache--2.0-1a7f37" alt="License"></a>
-  <img src="https://img.shields.io/badge/KernelSU-%E2%9C%94-635bff" alt="KernelSU">
-  <img src="https://img.shields.io/badge/APatch-%E2%9C%94-ff7043" alt="APatch">
-  <img src="https://img.shields.io/badge/Magisk-%E2%9C%94-00af9c" alt="Magisk">
+  <a href="https://github.com/VD171/VD-dropbear/releases"><img src="https://img.shields.io/github/downloads/VD171/VD-dropbear/total?label=downloads&color=8250df" alt="Downloads"></a>
   <a href="https://github.com/VD171/VD-dropbear/stargazers"><img src="https://img.shields.io/github/stars/VD171/VD-dropbear?color=d29922" alt="Stars"></a>
-  <a href="https://github.com/VD171/VD-dropbear/releases"><img src="https://img.shields.io/github/v/release/VD171/VD-dropbear?color=1a7f37" alt="Release"></a>
 </p>
 
 <p align="center">
@@ -55,6 +53,12 @@ APatch / Magisk 模块的形式打包。它独立启动，不依赖任何其他�
 
 > ⚠️ **登录默认会得到一个完整的 ROOT shell。** 请把它当作设备的钥匙来对待：优先使用公钥而非
 > 密码，并让端口远离公网。
+
+## 截图
+
+<p align="center">
+  <img src="screenshots/status.png" width="24%" alt="Status"> <img src="screenshots/settings.png" width="24%" alt="Settings"> <img src="screenshots/keys.png" width="24%" alt="Keys"> <img src="screenshots/passwords.png" width="24%" alt="Passwords">
+</p>
 
 ## 为什么
 
@@ -90,7 +94,7 @@ shell、SFTP 和 rsync，没有 `adb_enabled` 这一破绽，没有 USB 调试�
   备份都能在同一个连接上运行。
 - **兼容每一款设备和模拟器。** `arm64-v8a`、`armeabi-v7a`、`x86`、`x86_64`。
 
-## 你设备上的 AI 智能体
+## AI 智能体
 
 一个常驻的 SSH 端点，会把你的手机变成**自主 AI 智能体可以直接操作**的东西。任何能够驱动 shell 或 SSH
 连接的智能体（Claude Code、aider、循环中带有 LLM 的脚本、你自己的自动化）都能通过网络在设备上获得一个
@@ -115,7 +119,7 @@ shell，并且可以：
 在 KernelSU、APatch 或 Magisk 管理器中刷入模块 zip（或在命令行用 `ksud module install` /
 `apd module install`），打开模块的 **WebUI** 以设置端口并添加你的密钥，然后重启（或按 **Action** 立即启动它）。
 
-## 安全模型
+## 安全
 
 ### 机密存放在哪里：BFU 对比 AFU
 
@@ -145,6 +149,14 @@ shell，并且可以：
 配置驱动的路径，以及用于交互式 PTY 的 Android `openpty` 修复。一个计划任务工作流会跟踪上游并重新构建，使
 模块保持最新。见 [`.github/workflows/`](.github/workflows/) 和 [`CONTRIBUTING.md`](CONTRIBUTING.md)。
 
+## 增量更新（VDLU）
+
+VD Dropbear 内置 **[VDLiveUpdate](https://github.com/VD171/VDLiveUpdate) (VDLU)** 引擎（随附于 `vdlu/`）：模块只拉取发生变化的文件来更新自身（按内容寻址的 blob + 一个带签名的 `manifest.json`），而不是重新下载整个 `.zip`。**Hardened** 配置：ed25519 签名为强制项，降级被阻止，完整的 `.zip` 仍作为回退保持有效。
+
+- **仅 LIVE**（无需重启）：更新在下次开机时通过 `service.sh` 应用（`setsid`，后台运行，绝不拖慢开机），当没有任何 feed 可达时为 no-op。
+- **状态**位于 `/data/adb/<module>/vdlu/`，在模块之外，因而可在刷入后保留。
+- **WebUI：** 一个带进度提示和取消的 **Updates** 面板，自动更新为可选开启（opt-in）。
+
 ## 文档
 
 <!-- vd-docs -->
@@ -152,7 +164,7 @@ shell，并且可以：
 - **[用户指南](https://github.com/VD171/VD-dropbear/wiki/zh-USER-GUIDE)**：安装、密钥、密码、连接、文件传输、BFU/AFU。
 - **[配置](https://github.com/VD171/VD-dropbear/wiki/zh-CONFIGURATION)**：每一项设置及其默认值。
 - **[架构](https://github.com/VD171/VD-dropbear/wiki/zh-ARCHITECTURE)** 和 **[文件结构](https://github.com/VD171/VD-dropbear/wiki/zh-FILE-STRUCTURE)**：模块与守护进程如何工作，以及各文件的位置。
-- **[你设备上的 AI 智能体](https://github.com/VD171/VD-dropbear/wiki/zh-AI-AGENTS)**：安全地通过 SSH 使用自主智能体。
+- **[AI 智能体](https://github.com/VD171/VD-dropbear/wiki/zh-AI-AGENTS)**：安全地通过 SSH 使用自主智能体。
 - **[构建](https://github.com/VD171/VD-dropbear/wiki/zh-BUILDING)**：构建，以及 Android crypt()/交叉编译的故事。
 - **[贡献](CONTRIBUTING.md)** 和 **[安全](SECURITY.md)**。
 - **[Changelog](CHANGELOG.md)** 和 **[行为准则](CODE_OF_CONDUCT.md)**。
@@ -174,29 +186,32 @@ shell，并且可以：
 
 ## 联系方式
 
-- Site           : https://vd171.ru
-- Site           : https://vd.priv8.ru
-- Source         : https://github.com/VD171/VD-dropbear
-- GitHub         : [@VD171](https://github.com/VD171)
-- XDA-Developers : [@VD171](https://xdaforums.com/m/vd171.4699873/)
-- XDA thread     : [VD-Dropbear](https://xdaforums.com/t/VD-Dropbear.4808524/)
-- Telegram       : [@VD_Priv8](https://t.me/VD_Priv8)
-- Channel        : [@Priv8_VD](https://t.me/Priv8_VD)
-- Discord        : [@VD.Priv8](https://discord.com/users/1296831918989639721)
-- E-mail         : vd.priv8@pm.me
+- https://vd171.ru
+- https://vd.priv8.ru
+- **Telegram:** @VD_Priv8 https://t.me/VD_Priv8
+- **Channel:** @Priv8_VD https://t.me/Priv8_VD
+- **Discord:** @VD.Priv8 https://discord.com/users/1296831918989639721
+- **E-mail:** vd.priv8@pm.me
+- **XDA-Developers:** @VD171 https://xdaforums.com/m/vd171.4699873/
+- **XDA thread:** https://xdaforums.com/t/VD-Dropbear.4808524/
+- **GitHub:** @VD171 https://github.com/VD171
 
 ## 许可证
 
 VD Dropbear 自身的代码采用 **Apache-2.0**，见 [LICENSE](LICENSE)。该模块还捆绑了第三方二进制文件：
 [Dropbear](https://matt.ucc.asn.au/dropbear/)（MIT 风格）、OpenSSH 的 `sftp-server` 和 `scp`（BSD），
-以及 `rsync`（GPL-3.0），各自遵循其自身的许可证；见 [THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md)，
+以及 `rsync`（GPL-3.0），各自遵循其自身的许可证，见 [THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md)，
 其中包括我们如何为 rsync 遵守 GPL。我们的 Apache-2.0 代码不受影响（GPL 二进制文件只是聚合在一起，并未链接）。
 
 ## 商标
 
-VD Dropbear 是一个独立的非官方项目，不隶属于任何第三方，也未获其背书。「Android」是 Google LLC 的商标；
+VD Dropbear 是一个独立的非官方项目，不隶属于任何第三方，也未获其背书。「Android」是 Google LLC 的商标。
 「SSH」是 SSH Communications Security 的注册商标。VD Dropbear 完全在你的设备上运行。
 
 ## Tags
 
 `SSH` `Dropbear` `KernelSU` `Magisk` `APatch` `root` `sshd` `remote-access` `openssh-alternative` `Android` `BFU` `VD-dropbear`
+
+---
+
+📣 **加入频道以获取更新：** @Priv8_VD https://t.me/Priv8_VD

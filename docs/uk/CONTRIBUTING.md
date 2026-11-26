@@ -59,8 +59,8 @@ scripts/build.sh            # fetches the tracked upstream, applies patches, bui
 
 ## Pull requests
 
-- Одна логічна зміна на PR; опишіть мотивацію та вплив на безпеку.
-- Дотримуйтеся наявного стилю оболонки (POSIX `sh` / Android `mksh`; без bashisms).
+- Одна логічна зміна на PR, опишіть мотивацію та вплив на безпеку.
+- Дотримуйтеся наявного стилю оболонки (POSIX `sh` / Android `mksh`, без bashisms).
 - Кожен файл містить короткий SPDX-заголовок. Зберігайте його.
 - Оновлюйте [`CHANGELOG.md`](../../CHANGELOG.md) у розділі `[Unreleased]` для будь-якої реальної
   зміни, видимої користувачу.
@@ -83,4 +83,4 @@ issue.
 
 ---
 
-> _Ця документація створена за допомогою Claude (Anthropic) і підтримується VD171. Виправлення та покращення вітаються; див. [CONTRIBUTING.md](CONTRIBUTING.md)._
+> _Ця документація створена за допомогою Claude (Anthropic) і підтримується VD171. Виправлення та покращення вітаються, див. [CONTRIBUTING.md](CONTRIBUTING.md)._

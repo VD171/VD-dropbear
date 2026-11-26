@@ -23,18 +23,16 @@
 -->
 
 <p align="center">
-  <img src="module/webroot/assets/logo-wordmark.svg" alt="VD Dropbear" width="540">
+  <img src="module/webroot/assets/logo-wordmark.svg" alt="VD Dropbear" width="320">
 </p>
 
 # VD Dropbear
 
-<p>
+<p align="center">
+  <a href="https://github.com/VD171/VD-dropbear/releases/latest"><img src="https://img.shields.io/github/v/release/VD171/VD-dropbear?label=release&color=36e86a" alt="Release"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-Apache--2.0-1a7f37" alt="License"></a>
-  <img src="https://img.shields.io/badge/KernelSU-%E2%9C%94-635bff" alt="KernelSU">
-  <img src="https://img.shields.io/badge/APatch-%E2%9C%94-ff7043" alt="APatch">
-  <img src="https://img.shields.io/badge/Magisk-%E2%9C%94-00af9c" alt="Magisk">
+  <a href="https://github.com/VD171/VD-dropbear/releases"><img src="https://img.shields.io/github/downloads/VD171/VD-dropbear/total?label=downloads&color=8250df" alt="Downloads"></a>
   <a href="https://github.com/VD171/VD-dropbear/stargazers"><img src="https://img.shields.io/github/stars/VD171/VD-dropbear?color=d29922" alt="Stars"></a>
-  <a href="https://github.com/VD171/VD-dropbear/releases"><img src="https://img.shields.io/github/v/release/VD171/VD-dropbear?color=1a7f37" alt="Release"></a>
 </p>
 
 <p align="center">
@@ -55,6 +53,12 @@
 
 > ⚠️ **ورود به‌صورت پیش‌فرض یک شل ROOT کامل می‌دهد.** با آن مانند کلیدهای دستگاه رفتار کن:
 > کلیدهای عمومی را به رمز عبور ترجیح بده و پورت را از اینترنت عمومی دور نگه دار.
+
+## اسکرین‌شات‌ها
+
+<p align="center">
+  <img src="screenshots/status.png" width="24%" alt="Status"> <img src="screenshots/settings.png" width="24%" alt="Settings"> <img src="screenshots/keys.png" width="24%" alt="Keys"> <img src="screenshots/passwords.png" width="24%" alt="Passwords">
+</p>
 
 ## چرا
 
@@ -94,7 +98,7 @@ rsync روی شبکه، بدون نشانه‌ی `adb_enabled`، بدون پرچ
 - **‏SSH از طریق USB، بدون ADB.** اشتراک اینترنت USB را روشن کنید و دیمن را به نشانی USB بایند کنید: همان نشست از طریق کابل، برای انتقال‌های بزرگ سریع‌تر و پایدارتر از بی‌سیم.
 - **هر دستگاه و شبیه‌ساز.** `arm64-v8a`، `armeabi-v7a`، `x86`، `x86_64`.
 
-## عامل‌های هوش مصنوعی روی دستگاه تو
+## عامل‌های هوش مصنوعی
 
 یک نقطه‌ی اتصال SSH همیشگی، گوشی‌ات را به چیزی بدل می‌کند که **یک عامل هوش مصنوعی خودمختار می‌تواند
 مستقیماً آن را به کار بگیرد**. هر عاملی که بتواند یک شل یا یک اتصال SSH را براند (Claude Code، aider،
@@ -125,7 +129,7 @@ rsync روی شبکه، بدون نشانه‌ی `adb_enabled`، بدون پرچ
 `ksud module install` / `apd module install`)، **WebUI** ماژول را باز کن تا پورت را تنظیم کرده و
 کلیدهایت را بیفزایی، سپس ری‌بوت کن (یا **Action** را فشار بده تا همین حالا راه بیفتد).
 
-## مدل امنیتی
+## امنیت
 
 ### رازها کجا زندگی می‌کنند: BFU در برابر AFU
 
@@ -160,6 +164,14 @@ rsync روی شبکه، بدون نشانه‌ی `adb_enabled`، بدون پرچ
 تعاملی. یک گردش‌کار زمان‌بندی‌شده آپستریم را دنبال و بازسازی می‌کند، پس ماژول به‌روز می‌ماند. نگاه کن به
 [`.github/workflows/`](.github/workflows/) و [`CONTRIBUTING.md`](CONTRIBUTING.md).
 
+## به‌روزرسانی‌های افزایشی (VDLU)
+
+VD Dropbear موتور **[VDLiveUpdate](https://github.com/VD171/VDLiveUpdate) (VDLU)** را همراه دارد (جاسازی‌شده در `vdlu/`): ماژول خودش را با دریافت تنها فایل‌های تغییریافته به‌روز می‌کند (بلاب‌های نشانی‌گذاری‌شده با محتوا + یک `manifest.json` امضاشده)، به‌جای دانلود دوبارهٔ کل `.zip`. نمایهٔ **Hardened**: امضای ed25519 اجباری است و تنزل نسخه مسدود می‌شود، و `.zip` کامل به‌عنوان جایگزین معتبر می‌ماند.
+
+- **فقط LIVE** (بدون راه‌اندازی مجدد): به‌روزرسانی‌ها در بوت بعدی از طریق `service.sh` اعمال می‌شوند (`setsid`، در پس‌زمینه، هرگز بوت را متوقف نمی‌کند)، یک no-op وقتی هیچ فیدی در دسترس نیست.
+- **وضعیت** در `/data/adb/<module>/vdlu/`، بیرون از ماژول، تا از یک ری‌فلش جان سالم به در ببرد.
+- **WebUI:** یک پنل **Updates** با توست پیشرفت و لغو، به‌روزرسانی خودکار اختیاری (opt-in) است.
+
 ## مستندات
 
 <!-- vd-docs -->
@@ -167,7 +179,7 @@ rsync روی شبکه، بدون نشانه‌ی `adb_enabled`، بدون پرچ
 - **[راهنمای کاربر](https://github.com/VD171/VD-dropbear/wiki/fa-USER-GUIDE)**: نصب، کلیدها، رمزهای عبور، اتصال، انتقال فایل، BFU/AFU.
 - **[پیکربندی](https://github.com/VD171/VD-dropbear/wiki/fa-CONFIGURATION)**: هر تنظیم، همراه با مقادیر پیش‌فرض.
 - **[معماری](https://github.com/VD171/VD-dropbear/wiki/fa-ARCHITECTURE)** و **[ساختار فایل](https://github.com/VD171/VD-dropbear/wiki/fa-FILE-STRUCTURE)**: نحوه‌ی کار ماژول و دیمِن، و اینکه هر چیزی کجا قرار دارد.
-- **[عامل‌های هوش مصنوعی روی دستگاه تو](https://github.com/VD171/VD-dropbear/wiki/fa-AI-AGENTS)**: استفاده از یک عامل خودمختار روی SSH، با امنیت.
+- **[عامل‌های هوش مصنوعی](https://github.com/VD171/VD-dropbear/wiki/fa-AI-AGENTS)**: استفاده از یک عامل خودمختار روی SSH، با امنیت.
 - **[ساخت](https://github.com/VD171/VD-dropbear/wiki/fa-BUILDING)**: ساخت، و داستان crypt()/کامپایل متقابل در اندروید.
 - **[مشارکت](CONTRIBUTING.md)** و **[امنیت](SECURITY.md)**.
 - **[Changelog](CHANGELOG.md)** و **[آیین‌نامه رفتار](CODE_OF_CONDUCT.md)**.
@@ -189,31 +201,34 @@ rsync روی شبکه، بدون نشانه‌ی `adb_enabled`، بدون پرچ
 
 ## تماس‌ها
 
-- Site           : https://vd171.ru
-- Site           : https://vd.priv8.ru
-- Source         : https://github.com/VD171/VD-dropbear
-- GitHub         : [@VD171](https://github.com/VD171)
-- XDA-Developers : [@VD171](https://xdaforums.com/m/vd171.4699873/)
-- XDA thread     : [VD-Dropbear](https://xdaforums.com/t/VD-Dropbear.4808524/)
-- Telegram       : [@VD_Priv8](https://t.me/VD_Priv8)
-- Channel        : [@Priv8_VD](https://t.me/Priv8_VD)
-- Discord        : [@VD.Priv8](https://discord.com/users/1296831918989639721)
-- E-mail         : vd.priv8@pm.me
+- https://vd171.ru
+- https://vd.priv8.ru
+- **Telegram:** @VD_Priv8 https://t.me/VD_Priv8
+- **Channel:** @Priv8_VD https://t.me/Priv8_VD
+- **Discord:** @VD.Priv8 https://discord.com/users/1296831918989639721
+- **E-mail:** vd.priv8@pm.me
+- **XDA-Developers:** @VD171 https://xdaforums.com/m/vd171.4699873/
+- **XDA thread:** https://xdaforums.com/t/VD-Dropbear.4808524/
+- **GitHub:** @VD171 https://github.com/VD171
 
 ## مجوز
 
-کد خودِ VD Dropbear با **Apache-2.0** است؛ نگاه کن به [LICENSE](LICENSE). این ماژول همچنین باینری‌های
+کد خودِ VD Dropbear با **Apache-2.0** است، نگاه کن به [LICENSE](LICENSE). این ماژول همچنین باینری‌های
 شخص ثالث را همراه دارد: [Dropbear](https://matt.ucc.asn.au/dropbear/) (سبک MIT)، `sftp-server` و
-`scp` از OpenSSH (BSD)، و `rsync` (GPL-3.0)، هرکدام زیر مجوز خودش؛ نگاه کن به
+`scp` از OpenSSH (BSD)، و `rsync` (GPL-3.0)، هرکدام زیر مجوز خودش، نگاه کن به
 [THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md)، از جمله اینکه چگونه برای rsync با GPL همخوانی داریم.
 کد Apache-2.0 ما از این بابت تأثیری نمی‌پذیرد (باینری GPL صرفاً تجمیع شده، نه پیوند).
 
 ## علامت‌های تجاری
 
 VD Dropbear یک پروژه‌ی مستقل و غیررسمی است، بدون وابستگی یا تأیید از سوی هیچ شخص ثالثی. «Android» یک
-علامت تجاری Google LLC است؛ «SSH» یک علامت تجاری ثبت‌شده‌ی SSH Communications Security است. VD Dropbear
+علامت تجاری Google LLC است. «SSH» یک علامت تجاری ثبت‌شده‌ی SSH Communications Security است. VD Dropbear
 به‌طور کامل روی دستگاه تو اجرا می‌شود.
 
 ## Tags
 
 `SSH` `Dropbear` `KernelSU` `Magisk` `APatch` `root` `sshd` `remote-access` `openssh-alternative` `Android` `BFU` `VD-dropbear`
+
+---
+
+📣 **برای دریافت به‌روزرسانی‌ها به کانال بپیوندید:** @Priv8_VD https://t.me/Priv8_VD

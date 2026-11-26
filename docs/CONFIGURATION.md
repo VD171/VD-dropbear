@@ -30,9 +30,9 @@
 # Configuration
 
 Settings live in `/data/adb/vddropbear/config` (seeded from `module/common/config.default` on first
-boot). The **WebUI** edits this file for you; you can also edit it by hand. It is sourced as shell, so
+boot). The **WebUI** edits this file for you, you can also edit it by hand. It is sourced as shell, so
 use `KEY=value` with no spaces around `=`. Settings are not secret and live on device-encrypted
-storage; secrets (host keys, authorized keys, password hashes) live in the secret store, never here.
+storage, secrets (host keys, authorized keys, password hashes) live in the secret store, never here.
 
 Apply changes by restarting the daemon (the WebUI's **Save & restart** does this).
 
@@ -41,18 +41,18 @@ Apply changes by restarting the daemon (the WebUI's **Save & restart** does this
 | Key | Default | Meaning |
 |-----|---------|---------|
 | `ENABLED` | `1` | Start the daemon at boot. `0` disables it entirely. |
-| `START_IN_BFU` | `0` | `0`: start only after first unlock (AFU); secrets stay on credential-encrypted (CE) storage. `1`: also start before first unlock (BFU); secrets move to device-encrypted (DE) storage, readable before unlock. |
+| `START_IN_BFU` | `0` | `0`: start only after first unlock (AFU), secrets stay on credential-encrypted (CE) storage. `1`: also start before first unlock (BFU), secrets move to device-encrypted (DE) storage, readable before unlock. |
 | `PORT` | `2222` | Default listening port (per-bind ports can override it in `LISTEN_ADDRESSES`). |
 
 ## Listening / binds (composable)
 
-Any combination is allowed; the selected binds are merged. If you clear everything, VD Dropbear binds
+Any combination is allowed, the selected binds are merged. If you clear everything, VD Dropbear binds
 loopback rather than every interface.
 
 | Key | Default | Meaning |
 |-----|---------|---------|
 | `LISTEN_LOOPBACK` | `1` | Listen on `127.0.0.1` / `::1` only. |
-| `LISTEN_ALL` | `0` | Listen on every interface (`0.0.0.0` / `::`); exposes the device. |
+| `LISTEN_ALL` | `0` | Listen on every interface (`0.0.0.0` / `::`), exposes the device. |
 | `LISTEN_IPV4` | `1` | Include IPv4 binds. |
 | `LISTEN_IPV6` | `1` | Include IPv6 binds. |
 | `LISTEN_ADDRESSES` | `""` | Extra specific binds, comma-separated: `addr` (uses `PORT`) or `addr:port`, IPv4 or IPv6. |
@@ -70,7 +70,7 @@ loopback rather than every interface.
 
 ## Authentication
 
-A login runs as the account you authenticate as: **root** by default, or a lower-privilege account (`shell`, `system`). Keys are the default; passwords are opt-in.
+A login runs as the account you authenticate as: **root** by default, or a lower-privilege account (`shell`, `system`). Keys are the default, passwords are opt-in.
 
 | Key | Default | Meaning |
 |-----|---------|---------|
@@ -105,7 +105,7 @@ A login runs as the account you authenticate as: **root** by default, or a lower
 
 ## The secret store
 
-Not configured here; resolved from `START_IN_BFU`:
+Not configured here, resolved from `START_IN_BFU`:
 
 - **AFU (default):** `/data/misc_ce/0/vddropbear/secret`, credential-encrypted, available only after
   you unlock the device.
@@ -118,4 +118,4 @@ It holds the host key, `authorized_keys`, and the `passwd` hash file. See
 
 ---
 
-> _This documentation was generated with Claude (Anthropic) and is maintained by VD171. Corrections and improvements are welcome; see [CONTRIBUTING.md](../CONTRIBUTING.md)._
+> _This documentation was generated with Claude (Anthropic) and is maintained by VD171. Corrections and improvements are welcome, see [CONTRIBUTING.md](../CONTRIBUTING.md)._

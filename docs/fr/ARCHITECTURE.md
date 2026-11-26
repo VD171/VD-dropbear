@@ -39,7 +39,7 @@ tout ce qui est spécifique est de la configuration à l'exécution ou un secret
   par défaut intégrées et sûres), résoudre le magasin de secrets, garantir une host key, construire le
   vecteur d'arguments de Dropbear et gérer une unique instance du démon (start / stop / status /
   restart).
-- `module/service.sh` : point d'entrée au démarrage. Respecte la politique de démarrage BFU/AFU ; en
+- `module/service.sh` : point d'entrée au démarrage. Respecte la politique de démarrage BFU/AFU, en
   mode AFU, il attend que le stockage chiffré par identifiants se déverrouille sans bloquer le démarrage.
 - `module/action.sh`, le bouton **Action** du gestionnaire : (re)lancer le démon. Il ne lit jamais
   stdin et détache le démon dans sa propre session, de sorte que le gestionnaire ne se fige pas.
@@ -55,6 +55,18 @@ processus correspond exactement à `pgrep -x` (le `mksh` d'Android n'a pas `exec
 `setsid` pour se détacher du groupe de processus de l'appelant : c'est ce qui empêche l'Action du
 gestionnaire de se bloquer.
 
+`setsid` n'a jamais couvert les cgroups, et cette lacune était une vraie régression : le bouton Action
+et la WebUI s'exécutent dans l'app du gestionnaire, de sorte qu'un démon lancé depuis l'un ou l'autre
+héritait du freezer cgroup de l'app (`/apps/uid_<uid>/pid_<pid>`). Le `CachedAppOptimizer` d'Android
+gèle ce cgroup dès qu'il met l'app en cache, et le démon est gelé avec lui alors qu'il tient encore
+son socket d'écoute. Les connexions TCP continuent d'aboutir parce que le backlog vit dans le noyau,
+mais rien n'appelle `accept()`, si bien que les clients restent bloqués sur
+"Connection established ... Local version string" sans erreur d'aucun côté, et `/proc/<pid>/wchan`
+indique `do_freezer_trap` au lieu de `do_select`. `vddb_escape_freezer` déplace désormais le shell qui
+fait le spawn vers le cgroup racine (que le freezer ne touche jamais) avant le fork, de sorte que le
+démon hérite de cette sortie. C'est un no-op au démarrage (déjà sur `/`) et sur les plateformes sans
+freezer, ne "simplifiez" pas le spawn en un simple `setsid`.
+
 ## Le magasin de secrets (CE vs DE, BFU vs AFU)
 
 Les réglages ne sont pas secrets et résident dans un stockage chiffré par appareil
@@ -67,7 +79,7 @@ magasin utiliser à chaque étape du démarrage.
 
 ## Le jeu de correctifs
 
-Le serveur SSH reste Dropbear upstream ; nos modifications se limitent à quelques correctifs relisibles
+Le serveur SSH reste Dropbear upstream, nos modifications se limitent à quelques correctifs relisibles
 (voir [patches/README.md](../../patches/README.md)) :
 
 - une bannière d'identité neutre, configurable à l'exécution ;
@@ -81,7 +93,7 @@ Le serveur SSH reste Dropbear upstream ; nos modifications se limitent à quelqu
 Une page statique dans la WebUI du gestionnaire (KernelSU / APatch / WebUI-X). Elle pilote
 `module/common/vddb-webui.sh` via le pont `ksu.exec` : état, start/stop/restart, lecture/écriture de la
 configuration, et gestion des clés et des comptes avec mot de passe. Toutes les données traversent le
-pont encodées en base64, de sorte que le shell ne les interprète jamais ; les hachages de mots de passe
+pont encodées en base64, de sorte que le shell ne les interprète jamais, les hachages de mots de passe
 sont calculés dans le navigateur avec WebCrypto, si bien que le mot de passe en clair ne quitte jamais la
 page.
 
@@ -89,4 +101,4 @@ page.
 
 ---
 
-> _Cette documentation a été générée avec Claude (Anthropic) et est maintenue par VD171. Les corrections et améliorations sont les bienvenues ; voir [CONTRIBUTING.md](CONTRIBUTING.md)._
+> _Cette documentation a été générée avec Claude (Anthropic) et est maintenue par VD171. Les corrections et améliorations sont les bienvenues, voir [CONTRIBUTING.md](CONTRIBUTING.md)._

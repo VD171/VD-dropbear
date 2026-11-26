@@ -63,7 +63,7 @@ en tu navegador con PBKDF2; la contraseña en sí nunca sale de la página.
 ## 4. Elegir un puerto y dónde escuchar
 
 Bajo **Settings**, establece el **Port** y elige los binds. Por defecto VD Dropbear escucha solo en
-**loopback**; para llegar a él desde tu LAN o una VPN, habilita las interfaces que quieras. Evita
+**loopback**, para llegar a él desde tu LAN o una VPN, habilita las interfaces que quieras. Evita
 **Listen on all interfaces** salvo que entiendas la exposición que supone.
 
 Pulsa **Save & restart** para aplicar, luego **Start** si no está ya en marcha.
@@ -123,10 +123,10 @@ dispositivo, que es legible antes del desbloqueo: un compromiso deliberado y doc
 - **No puedo conectar desde otra máquina.** Probablemente sigues con el bind solo a loopback: habilita
   la interfaz que necesites y reinicia.
 - **SFTP/scp falla pero la shell funciona.** Asegúrate de que el `sftp-server` incluido se distribuyó
-  para tu ABI; el estado de la WebUI muestra la ABI detectada.
+  para tu ABI, el estado de la WebUI muestra la ABI detectada.
 
 <!-- doc-footer -->
 
 ---
 
-> _Esta documentación se generó con Claude (Anthropic) y la mantiene VD171. Las correcciones y mejoras son bienvenidas; consulta [CONTRIBUTING.md](CONTRIBUTING.md)._
+> _Esta documentación se generó con Claude (Anthropic) y la mantiene VD171. Las correcciones y mejoras son bienvenidas, consulta [CONTRIBUTING.md](CONTRIBUTING.md)._

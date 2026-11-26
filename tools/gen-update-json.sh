@@ -33,7 +33,7 @@ cat > module/update.json <<EOF
   "version": "$ver",
   "versionCode": $vc,
   "zipUrl": "https://github.com/VD171/VD-dropbear/releases/download/$ver/VD-dropbear-$ver.zip",
-  "changelog": "https://raw.githubusercontent.com/VD171/VD-dropbear/master/CHANGELOG.md"
+  "changelog": "https://raw.githubusercontent.com/VD171/VD-dropbear/main/CHANGELOG.md"
 }
 EOF
 echo "module/update.json generated: $ver ($vc)"

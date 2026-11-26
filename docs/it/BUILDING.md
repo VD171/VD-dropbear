@@ -31,7 +31,7 @@
 
 VD Dropbear distribuisce il **[Dropbear](https://github.com/mkj/dropbear) upstream** (il tag fissato in
 [`UPSTREAM_VERSION`](../../UPSTREAM_VERSION)) più il piccolo set di patch verificabile in
-[`patches/`](../../patches/). La CI lo compila; puoi riprodurlo in locale.
+[`patches/`](../../patches/). La CI lo compila, puoi riprodurlo in locale.
 
 ## Avvio rapido
 
@@ -49,10 +49,10 @@ ABIS="arm64-v8a" ./scripts/build.sh
 `scripts/build.sh` clona il tag upstream fissato, applica `patches/*.patch` e `localoptions.h`, poi
 cross-compila `vddropbear` e `dropbearkey` in `module/bin/<abi>/`. L'output è un ELF **dinamico** (`file`
 riporta `dynamically linked, interpreter /system/bin/linker64 … for Android 24`), collegato alla libc
-bionic che ogni dispositivo Android ha già. libtomcrypt resta incorporato nel binario; solo la libreria
+bionic che ogni dispositivo Android ha già. libtomcrypt resta incorporato nel binario, solo la libreria
 C è dinamica. Vedi [Dinamico, non static-PIE](#dinamico-non-static-pie).
 
-I binari **non vengono committati**; li compila la CI a ogni tag e vengono allegati alla release. Vedi
+I binari **non vengono committati**, li compila la CI a ogni tag e vengono allegati alla release. Vedi
 [`.gitignore`](../../.gitignore).
 
 ---
@@ -63,7 +63,7 @@ L'autenticazione con password di Dropbear è scritta per un normale host Unix co
 `/etc/shadow`. Android **non ha né l'uno né l'altro**, e questo si scontra con la build in tre punti
 distinti. Questa sezione documenta ciascuno di essi, perché è esattamente il tipo di cosa doloroso da
 riscoprire. Tutto è gestito dalla patch
-[`0003-password-file.patch`](../../patches/0003-password-file.patch); nulla di quanto segue è lasciato al
+[`0003-password-file.patch`](../../patches/0003-password-file.patch), nulla di quanto segue è lasciato al
 caso a runtime.
 
 ### 1. bionic non ha un `crypt()` utilizzabile
@@ -143,7 +143,7 @@ Questo conta, ed è stato imparato nel modo duro, **su un dispositivo reale**, n
 - Una build **static-PIE** *sembra* a posto (`file` riporta un `static-pie executable` pulito) e
   collega senza errori, ma **va in SIGSEGV nell'istante in cui gira sul dispositivo** (verificato su un
   telefono arm64 Android 16, exit 139, nessun tombstone utile). Gli eseguibili statici su Android sono
-  fragili; la forma affidabile è un normale binario dinamico, che è anche il modo in cui viene
+  fragili, la forma affidabile è un normale binario dinamico, che è anche il modo in cui viene
   distribuito ogni dropbear Android consolidato.
 - Una build **statica, non-PIE** non parte nemmeno: bionic la rifiuta con
   `executable's TLS segment is underaligned … needs to be at least 64 for ARM64 Bionic`.
@@ -159,14 +159,14 @@ un login con password è stato confermato come riuscito, con una password sbagli
 ## Nessun flag `-E`
 
 Il server è compilato con `--disable-syslog`, quindi logga sempre su stderr e l'opzione `-E`
-dell'upstream ("log to stderr") **non esiste** in questo binario; passarla stampa `Invalid option -E` e
+dell'upstream ("log to stderr") **non esiste** in questo binario, passarla stampa `Invalid option -E` e
 il daemon non parte mai. Perciò il costruttore di argomenti del modulo non passa `-E`.
 
 ## openpty
 
 Le sessioni PTY interattive usano `openpty()`. bionic lo dichiara in `<pty.h>`, e il `configure`
 cross di Dropbear lo rileva con l'NDK (`HAVE_OPENPTY` viene impostato, `HAVE_PTY_H 1`), quindi **nessuna
-patch è necessaria**; i PTY funzionano da subito. (L'uso non interattivo come exec, SFTP, rsync e
+patch è necessaria**, i PTY funzionano da subito. (L'uso non interattivo come exec, SFTP, rsync e
 port-forwarding comunque non ne dipende.)
 
 ## Strumenti incorporati: sftp-server, scp, rsync
@@ -181,7 +181,7 @@ port-forwarding comunque non ne dipende.)
   compila per primo.
 
 OpenSSH su Android è pignolo quanto la storia di crypt() qui sopra, perché il suo `configure` rileva
-male diverse funzioni della libc in cross-compilazione. Lo script codifica la correzione; per
+male diverse funzioni della libc in cross-compilazione. Lo script codifica la correzione, per
 memoria, i pezzi sono:
 
 1. **Un seed di cache delle funzioni che bionic non ha** ma che configure crede di avere, così che al
@@ -229,4 +229,4 @@ file ./dropbear   # -> dynamically linked, interpreter /system/bin/linker64, for
 
 ---
 
-> _Questa documentazione è stata generata con Claude (Anthropic) ed è gestita da VD171. Correzioni e miglioramenti sono benvenuti; vedi [CONTRIBUTING.md](CONTRIBUTING.md)._
+> _Questa documentazione è stata generata con Claude (Anthropic) ed è gestita da VD171. Correzioni e miglioramenti sono benvenuti, vedi [CONTRIBUTING.md](CONTRIBUTING.md)._

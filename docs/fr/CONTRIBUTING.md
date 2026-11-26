@@ -59,8 +59,8 @@ petits, documentés et justifiés dans la PR.
 
 ## Pull requests
 
-- Un changement logique par PR ; décrivez la motivation et l'impact sur la sécurité.
-- Respectez le style de shell existant (POSIX `sh` / `mksh` d'Android ; pas de bashismes).
+- Un changement logique par PR, décrivez la motivation et l'impact sur la sécurité.
+- Respectez le style de shell existant (POSIX `sh` / `mksh` d'Android, pas de bashismes).
 - Chaque fichier porte un court en-tête SPDX. Conservez-le.
 - Mettez à jour [`CHANGELOG.md`](../../CHANGELOG.md) sous `[Unreleased]` pour tout changement réel et visible par l'utilisateur.
 - En soumettant une PR, vous acceptez de licencier votre contribution sous la licence [Apache-2.0](../../LICENSE) du projet.
@@ -68,7 +68,7 @@ petits, documentés et justifiés dans la PR.
 ## Traductions
 
 Le README et la documentation sont maintenus dans de nombreuses langues (`README.<lang>.md`). L'anglais
-est la source de vérité ; les traductions le suivent. Si vous améliorez une traduction ou ajoutez une
+est la source de vérité, les traductions le suivent. Si vous améliorez une traduction ou ajoutez une
 langue, gardez la structure et les ancres de section identiques à la version anglaise.
 
 ## Signaler des bugs et des problèmes de sécurité
@@ -81,4 +81,4 @@ d'ouvrir un ticket public.
 
 ---
 
-> _Cette documentation a été générée avec Claude (Anthropic) et est maintenue par VD171. Les corrections et améliorations sont les bienvenues ; voir [CONTRIBUTING.md](CONTRIBUTING.md)._
+> _Cette documentation a été générée avec Claude (Anthropic) et est maintenue par VD171. Les corrections et améliorations sont les bienvenues, voir [CONTRIBUTING.md](CONTRIBUTING.md)._

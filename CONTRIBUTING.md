@@ -58,16 +58,16 @@ configuration. Please keep new patches small, documented, and justified in the P
 
 ## Pull requests
 
-- One logical change per PR; describe the motivation and the security impact.
-- Match the existing shell style (POSIX `sh` / Android `mksh`; no bashisms).
-- Every file carries a short SPDX header; keep it.
+- One logical change per PR, describe the motivation and the security impact.
+- Match the existing shell style (POSIX `sh` / Android `mksh`, no bashisms).
+- Every file carries a short SPDX header, keep it.
 - Update [`CHANGELOG.md`](CHANGELOG.md) under `[Unreleased]` for any real, user-visible change.
 - By submitting a PR you agree to license your contribution under the project's [Apache-2.0](LICENSE) license.
 
 ## Translations
 
 The README and docs are maintained in many languages (`README.<lang>.md`). English is the source of
-truth; translations follow it. If you improve a translation or add a language, keep the structure and
+truth, translations follow it. If you improve a translation or add a language, keep the structure and
 section anchors identical to the English version.
 
 ## Reporting bugs and security issues
@@ -79,4 +79,4 @@ follow [`SECURITY.md`](SECURITY.md) and report privately instead of opening a pu
 
 ---
 
-> _This documentation was generated with Claude (Anthropic) and is maintained by VD171. Corrections and improvements are welcome; see [CONTRIBUTING.md](CONTRIBUTING.md)._
+> _This documentation was generated with Claude (Anthropic) and is maintained by VD171. Corrections and improvements are welcome, see [CONTRIBUTING.md](CONTRIBUTING.md)._

@@ -8,7 +8,7 @@ VD Dropbear ships the **[VDLiveUpdate](https://github.com/VD171/VDLiveUpdate) (V
 `keyring/`) with the **hardened** profile: a signed manifest is mandatory, and an unsigned, tampered or
 downgraded manifest is refused. Producing a release means packing the assembled module tree into a
 content addressed store, signing the manifest, and publishing it to the module feed. The flashable
-`.zip` stays the install and fallback path; VDLU is additive.
+`.zip` stays the install and fallback path, VDLU is additive.
 
 The producer tools live in the VDLiveUpdate repo (https://github.com/VD171/VDLiveUpdate) (`producer/vdlu-pack`, `producer/vdlu-sign`,
 `producer/vdlu-keygen`). They run on the PC, never on device.
@@ -48,8 +48,8 @@ SCHEME=minor .github/scripts/version.sh bump   # feature bump; rewrites module/m
 
    It reads the version from `module/module.prop`; `--out` also stages the feed (`manifest.json` + `blobs/`).
 
-   The manual equivalent (`<versionCode>` is `versionCode` from `module.prop`; monotonic, hardened blocks
-   downgrades; `--prev` is the previous release manifest so paths gone since then land in `delete[]`):
+   The manual equivalent (`<versionCode>` is `versionCode` from `module.prop`, monotonic, hardened blocks
+   downgrades, `--prev` is the previous release manifest so paths gone since then land in `delete[]`):
 
    ```sh
    vdlu-pack  module  out  vddropbear  <versionCode> \
@@ -70,6 +70,17 @@ SCHEME=minor .github/scripts/version.sh bump   # feature bump; rewrites module/m
    at a missing blob. Push to the VD-Modules Pages repo in one spaced batch, never a burst (GitHub spam
    flag).
 
+5. **MANDATORY after the push (HARD, STANDARDS 7.2):** prove the LIVE feed head actually advanced, else a
+   stale feed downgrades devices on boot. Run:
+
+   ```
+   .github/scripts/verify-live-feed.sh VD-dropbear <versionCode>
+   ```
+
+   `verify-live-feed` curls the live `manifest.json` and FAILS if its head != the released `versionCode`.
+   The feed-name is the VD-Modules DIR name `VD-dropbear`, NOT the module id `vddropbear` (they diverge).
+   A 0 exit is the only proof the feed moved, do not declare the release done until it passes.
+
 ## Retention (prune orphan blobs)
 
 Blobs are content-addressed and immutable: the packer dedups by sha256 and only ever ADDS, so `blobs/`
@@ -88,8 +99,8 @@ cp "$FEED/manifest.json" "$FEED/manifests/<versionCode>.json"   # archive the SI
 
 Retention is by REFERENCE, not age: GC keeps the union of sha256 over the current manifest plus the last 3
 archived versions, and never removes a blob a retained release still needs (fail-safe: it refuses to run
-with no retained manifest). Deleting a blob frees the Pages site but not git history - keep the public feed
-on a dedicated, squashable/orphan branch; blobs are reproducible from the tagged commit by `vdlu-pack`, so
+with no retained manifest). Deleting a blob frees the Pages site but not git history, keep the public feed
+on a dedicated, squashable/orphan branch, blobs are reproducible from the tagged commit by `vdlu-pack`, so
 resetting the feed branch loses nothing.
 
 ## Key rotation
@@ -101,7 +112,7 @@ old one so installs that predate the rotation still verify), and sign new manife
 
 ## Device runtime tools (hardened)
 
-The engine self-locates its tools. The **slim** profile ships no on-device crypto toolchain of its own; it
+The engine self-locates its tools. The **slim** profile ships no on-device crypto toolchain of its own, it
 leans on one tiny vendored verifier, the system toybox, and a static `curl` fetched on demand:
 
 | tool | used for | where it comes from |
@@ -118,9 +129,9 @@ unverified), so the failure mode is a no op, never a corrupted module. The stati
 and caches it under `vdlu-tools/<abi>/`. Covers `arm64-v8a`, `armeabi-v7a`, `x86_64` and `x86`.
 
 > The slim release also seeds `module/vdlu/baseline.json` (a copy of the signed manifest, so a fresh
-> install is born "current" and never phantom-regresses to a full download); the packer excludes
+> install is born "current" and never phantom-regresses to a full download), the packer excludes
 > `baseline.json` from the manifest. The authoritative producer steps live in the canonical
-> `VDLiveUpdate` repo (`producer/README.md`); follow them when cutting the feed.
+> `VDLiveUpdate` repo (`producer/README.md`), follow them when cutting the feed.
 
 ## Packaging
 

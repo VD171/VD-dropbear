@@ -31,14 +31,14 @@
 
 O VD Dropbear é um módulo KernelSU / APatch / Magisk que executa exatamente um daemon SSH Dropbear,
 controlado inteiramente por configuração. Nada no servidor SSH está fixado no código para um único
-dispositivo; tudo o que é específico é configuração de execução ou um segredo.
+dispositivo, tudo o que é específico é configuração de execução ou um segredo.
 
 ## Peças
 
 - `module/common/vddropbear.sh`: a biblioteca central: carregar a configuração (com padrões internos
   seguros), resolver o cofre de segredos, garantir uma chave de host, montar o vetor de argumentos do
   Dropbear e gerenciar uma única instância do daemon (start / stop / status / restart).
-- `module/service.sh`: entrada de boot. Respeita a política de início BFU/AFU; no modo AFU, aguarda o
+- `module/service.sh`: entrada de boot. Respeita a política de início BFU/AFU, no modo AFU, aguarda o
   armazenamento criptografado por credencial desbloquear sem travar o boot.
 - `module/action.sh`: o botão **Action** do gerenciador: (re)iniciar o daemon. Ele nunca lê o stdin e
   desacopla o daemon em sua própria sessão, para que o gerenciador não trave.
@@ -54,6 +54,17 @@ processo corresponde exatamente a `pgrep -x` (o `mksh` do Android não tem `exec
 com `setsid` para se desacoplar do grupo de processos do chamador: é isso que impede que o botão
 Action do gerenciador bloqueie.
 
+`setsid` nunca cobriu os cgroups, e essa lacuna era uma regressão de verdade: o botão Action e a WebUI
+rodam dentro do app do gerenciador, então um daemon iniciado por qualquer um dos dois herdava o
+freezer cgroup do app (`/apps/uid_<uid>/pid_<pid>`). O `CachedAppOptimizer` do Android congela esse
+cgroup assim que coloca o app em cache, e o daemon é congelado junto enquanto ainda segura seu socket
+de escuta. As conexões TCP continuam se completando porque o backlog vive no kernel, mas nada chama
+`accept()`, de modo que os clientes travam em "Connection established ... Local version string" sem
+erro em nenhum dos lados, e `/proc/<pid>/wchan` mostra `do_freezer_trap` em vez de `do_select`. Agora o
+`vddb_escape_freezer` move o shell que faz o spawn para o cgroup raiz (que o freezer nunca toca) antes
+do fork, para que o daemon herde essa saída. É um no-op no boot (já está em `/`) e em plataformas sem o
+freezer, não "simplifique" o spawn de volta para um `setsid` pelado.
+
 ## O cofre de segredos (CE vs DE, BFU vs AFU)
 
 As configurações não são segredo e ficam no armazenamento criptografado por dispositivo
@@ -66,7 +77,7 @@ módulo calcula qual cofre usar em cada etapa do boot.
 
 ## O conjunto de patches
 
-O servidor SSH continua sendo o Dropbear upstream; nossas mudanças são alguns patches revisáveis (veja
+O servidor SSH continua sendo o Dropbear upstream, nossas mudanças são alguns patches revisáveis (veja
 [patches/README.md](../../patches/README.md)):
 
 - um banner de identidade neutro e configurável em tempo de execução;
@@ -79,11 +90,11 @@ O servidor SSH continua sendo o Dropbear upstream; nossas mudanças são alguns 
 Uma página estática na WebUI do gerenciador (KernelSU / APatch / WebUI-X). Ela controla
 `module/common/vddb-webui.sh` por meio da ponte `ksu.exec`: status, start/stop/restart, leitura/escrita
 de configuração e gerenciamento de chaves e contas de senha. Todos os dados cruzam a ponte codificados
-em base64, de modo que o shell nunca os interpreta; os hashes de senha são calculados no navegador com
+em base64, de modo que o shell nunca os interpreta, os hashes de senha são calculados no navegador com
 WebCrypto, de modo que a senha em texto claro nunca sai da página.
 
 <!-- doc-footer -->
 
 ---
 
-> _Esta documentação foi gerada com o Claude (Anthropic) e é mantida por VD171. Correções e melhorias são bem-vindas; veja [CONTRIBUTING.md](CONTRIBUTING.md)._
+> _Esta documentação foi gerada com o Claude (Anthropic) e é mantida por VD171. Correções e melhorias são bem-vindas, veja [CONTRIBUTING.md](CONTRIBUTING.md)._

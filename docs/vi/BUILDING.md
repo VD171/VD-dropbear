@@ -31,7 +31,7 @@
 
 VD Dropbear cung cấp **[Dropbear](https://github.com/mkj/dropbear) upstream** (tag được ghim trong
 [`UPSTREAM_VERSION`](../../UPSTREAM_VERSION)) cùng bộ patch nhỏ, có thể kiểm toán trong
-[`patches/`](../../patches/). CI biên dịch nó; bạn có thể tái tạo cục bộ.
+[`patches/`](../../patches/). CI biên dịch nó, bạn có thể tái tạo cục bộ.
 
 ## Bắt đầu nhanh
 
@@ -49,10 +49,10 @@ ABIS="arm64-v8a" ./scripts/build.sh
 `scripts/build.sh` clone tag upstream được ghim, áp dụng `patches/*.patch` và `localoptions.h`, rồi biên
 dịch chéo `vddropbear` và `dropbearkey` vào `module/bin/<abi>/`. Đầu ra là một ELF **động** (`file` báo
 `dynamically linked, interpreter /system/bin/linker64 … for Android 24`), liên kết với libc bionic mà
-mọi thiết bị Android đã có sẵn. libtomcrypt vẫn được nhúng bên trong tệp nhị phân; chỉ thư viện C là
+mọi thiết bị Android đã có sẵn. libtomcrypt vẫn được nhúng bên trong tệp nhị phân, chỉ thư viện C là
 động. Xem [Động, không phải static-PIE](#động-không-phải-static-pie).
 
-Các tệp nhị phân **không được commit**; chúng được CI biên dịch ở mỗi tag và đính kèm vào bản phát hành.
+Các tệp nhị phân **không được commit**, chúng được CI biên dịch ở mỗi tag và đính kèm vào bản phát hành.
 Xem [`.gitignore`](../../.gitignore).
 
 ---
@@ -62,7 +62,7 @@ Xem [`.gitignore`](../../.gitignore).
 Xác thực bằng mật khẩu của Dropbear được viết cho một máy chủ Unix thông thường với `crypt()` và
 `/etc/shadow`. Android **không có cả hai**, và điều đó xung đột với quá trình biên dịch ở ba chỗ riêng
 biệt. Phần này ghi lại từng chỗ, vì đây đúng là loại việc gây đau đớn khi phải khám phá lại. Tất cả được
-xử lý bởi patch [`0003-password-file.patch`](../../patches/0003-password-file.patch); không có gì bên dưới
+xử lý bởi patch [`0003-password-file.patch`](../../patches/0003-password-file.patch), không có gì bên dưới
 bị phó mặc cho may rủi lúc chạy.
 
 ### 1. bionic không có `crypt()` dùng được
@@ -137,7 +137,7 @@ Các tệp nhị phân là **động** (liên kết với bionic hệ thống qu
 
 - Một bản build **static-PIE** *trông* ổn (`file` báo một `static-pie executable` sạch sẽ) và liên kết
   không lỗi, nhưng **SIGSEGV ngay khoảnh khắc nó chạy trên thiết bị** (được kiểm chứng trên điện thoại
-  arm64 Android 16, exit 139, không có tombstone hữu ích). Tệp thực thi tĩnh trên Android dễ vỡ; dạng
+  arm64 Android 16, exit 139, không có tombstone hữu ích). Tệp thực thi tĩnh trên Android dễ vỡ, dạng
   đáng tin cậy là một tệp nhị phân động thông thường, cũng là cách mọi dropbear Android lâu đời được phân
   phối.
 - Một bản build **tĩnh, non-PIE** thậm chí không khởi động: bionic từ chối nó với
@@ -154,7 +154,7 @@ mật khẩu được xác nhận là thành công, với mật khẩu sai bị 
 ## Không có cờ `-E`
 
 Máy chủ được build với `--disable-syslog`, nên nó luôn ghi log ra stderr và tùy chọn `-E` của upstream
-("log to stderr") **không tồn tại** trong tệp nhị phân này; truyền nó in ra `Invalid option -E` và daemon
+("log to stderr") **không tồn tại** trong tệp nhị phân này, truyền nó in ra `Invalid option -E` và daemon
 không bao giờ khởi động. Vì vậy bộ dựng đối số của module không truyền `-E`.
 
 ## openpty
@@ -175,7 +175,7 @@ phụ thuộc vào nó.)
   của OpenSSH là đủ cho hai cái này), với một **zlib** tĩnh nhỏ mà script này build trước.
 
 OpenSSH trên Android khó tính y như câu chuyện crypt() ở trên, vì `configure` của nó phát hiện sai vài
-hàm libc khi biên dịch chéo. Script mã hóa bản sửa; để ghi nhận, các mảnh là:
+hàm libc khi biên dịch chéo. Script mã hóa bản sửa, để ghi nhận, các mảnh là:
 
 1. **Một seed cache của các hàm mà bionic thiếu** nhưng configure tưởng là có, để thay vào đó các phiên
    bản compat được biên dịch: `recallocarray`, `close_range`, `getentropy`, `getrandom`, `nl_langinfo`,
@@ -221,4 +221,4 @@ file ./dropbear   # -> dynamically linked, interpreter /system/bin/linker64, for
 
 ---
 
-> _Tài liệu này được tạo bằng Claude (Anthropic) và được duy trì bởi VD171. Chúng tôi hoan nghênh các chỉnh sửa và cải tiến; xem [CONTRIBUTING.md](CONTRIBUTING.md)._
+> _Tài liệu này được tạo bằng Claude (Anthropic) và được duy trì bởi VD171. Chúng tôi hoan nghênh các chỉnh sửa và cải tiến, xem [CONTRIBUTING.md](CONTRIBUTING.md)._

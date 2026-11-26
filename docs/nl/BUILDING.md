@@ -31,7 +31,7 @@
 
 VD Dropbear levert de **[Dropbear](https://github.com/mkj/dropbear) upstream** (de tag vastgezet in
 [`UPSTREAM_VERSION`](../../UPSTREAM_VERSION)) plus de kleine, controleerbare patchset in
-[`patches/`](../../patches/). De CI bouwt het; je kunt het lokaal reproduceren.
+[`patches/`](../../patches/). De CI bouwt het, je kunt het lokaal reproduceren.
 
 ## Snel starten
 
@@ -50,9 +50,9 @@ ABIS="arm64-v8a" ./scripts/build.sh
 cross-compileert dan `vddropbear` en `dropbearkey` naar `module/bin/<abi>/`. De uitvoer is een
 **dynamische** ELF (`file` meldt `dynamically linked, interpreter /system/bin/linker64 … for Android
 24`), gelinkt tegen de bionic-libc die elk Android-toestel al heeft. libtomcrypt blijft ingebed in het
-binary; alleen de C-bibliotheek is dynamisch. Zie [Dynamisch, geen static-PIE](#dynamisch-geen-static-pie).
+binary, alleen de C-bibliotheek is dynamisch. Zie [Dynamisch, geen static-PIE](#dynamisch-geen-static-pie).
 
-De binaries worden **niet gecommit**; ze worden bij elke tag door de CI gebouwd en aan de release
+De binaries worden **niet gecommit**, ze worden bij elke tag door de CI gebouwd en aan de release
 gehecht. Zie [`.gitignore`](../../.gitignore).
 
 ---
@@ -63,7 +63,7 @@ De wachtwoordauthenticatie van Dropbear is geschreven voor een normale Unix-host
 `/etc/shadow`. Android heeft **geen van beide**, en dat botst op drie aparte plekken met de build. Dit
 deel documenteert ze allemaal, want het is precies het soort ding dat pijnlijk is om opnieuw te
 ontdekken. Alles wordt afgehandeld door patch
-[`0003-password-file.patch`](../../patches/0003-password-file.patch); niets hieronder wordt tijdens runtime
+[`0003-password-file.patch`](../../patches/0003-password-file.patch), niets hieronder wordt tijdens runtime
 aan het toeval overgelaten.
 
 ### 1. bionic heeft geen bruikbare `crypt()`
@@ -144,7 +144,7 @@ de CI:
 - Een **static-PIE**-build *lijkt* in orde (`file` meldt een schone `static-pie executable`) en linkt
   foutloos, maar **doet een SIGSEGV op het moment dat hij op het toestel draait** (geverifieerd op een
   arm64 Android 16-telefoon, exit 139, geen bruikbare tombstone). Statische executables op Android zijn
-  broos; de betrouwbare vorm is een normaal dynamisch binary, wat ook de manier is waarop elke gevestigde
+  broos, de betrouwbare vorm is een normaal dynamisch binary, wat ook de manier is waarop elke gevestigde
   Android-dropbear wordt geleverd.
 - Een **statische, non-PIE**-build start niet eens: bionic weigert hem met
   `executable's TLS segment is underaligned … needs to be at least 64 for ARM64 Bionic`.
@@ -161,14 +161,14 @@ als geslaagd, met een fout wachtwoord afgewezen.)
 ## Geen `-E`-flag
 
 De server wordt met `--disable-syslog` gebouwd, dus logt hij altijd naar stderr en de upstream-optie
-`-E` ("log to stderr") **bestaat niet** in dit binary; hem meegeven print `Invalid option -E` en de
+`-E` ("log to stderr") **bestaat niet** in dit binary, hem meegeven print `Invalid option -E` en de
 daemon start nooit. De argumentenbouwer van de module geeft `-E` daarom niet mee.
 
 ## openpty
 
 Interactieve PTY-sessies gebruiken `openpty()`. bionic declareert het in `<pty.h>`, en Dropbears
 cross-`configure` detecteert het met de NDK (`HAVE_OPENPTY` wordt gezet, `HAVE_PTY_H 1`), dus is **geen
-patch nodig**; PTY's werken meteen. (Niet-interactief gebruik zoals exec, SFTP, rsync en port-forwarding
+patch nodig**, PTY's werken meteen. (Niet-interactief gebruik zoals exec, SFTP, rsync en port-forwarding
 hangt er sowieso niet van af.)
 
 ## Ingebedde tools: sftp-server, scp, rsync
@@ -183,7 +183,7 @@ hangt er sowieso niet van af.)
   bouwt.
 
 OpenSSH op Android is net zo lastig als het crypt()-verhaal hierboven, omdat zijn `configure`
-verscheidene libc-functies verkeerd detecteert bij cross-compileren. Het script codeert de fix; voor
+verscheidene libc-functies verkeerd detecteert bij cross-compileren. Het script codeert de fix, voor
 de volledigheid zijn de onderdelen:
 
 1. **Een cache-seed van functies die bionic mist** maar die configure denkt te hebben, zodat in plaats
@@ -233,4 +233,4 @@ file ./dropbear   # -> dynamically linked, interpreter /system/bin/linker64, for
 
 ---
 
-> _Deze documentatie is gegenereerd met Claude (Anthropic) en wordt onderhouden door VD171. Correcties en verbeteringen zijn welkom; zie [CONTRIBUTING.md](CONTRIBUTING.md)._
+> _Deze documentatie is gegenereerd met Claude (Anthropic) en wordt onderhouden door VD171. Correcties en verbeteringen zijn welkom, zie [CONTRIBUTING.md](CONTRIBUTING.md)._

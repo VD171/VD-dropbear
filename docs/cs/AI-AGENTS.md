@@ -65,7 +65,7 @@ Tohle je root, tak s tím zacházej jako s rootem:
 - dej agentovi **vlastní přihlašovací údaj**, ne ten svůj osobní, a nasměruj ho na účet s nižšími oprávněními (`shell`), pokud chceš omezit jeho dosah;
 - omez vazby na sítě, kterým důvěřuješ: loopback nebo VPN místo otevřeného internetu
   (viz [Konfigurace](CONFIGURATION.md));
-- nech ověřování heslem vypnuté; klíč lze odvolat a nikdy se nepíše;
+- nech ověřování heslem vypnuté, klíč lze odvolat a nikdy se nepíše;
 - klíč můžeš kdykoli odvolat nebo démona zastavit z WebUI;
 - pamatuj, že výchozí spojení je plná root relace: dej agentovi jen takový dosah, jaký potřebuje.
 
@@ -82,4 +82,4 @@ Přes USB, bez ADB: zapněte USB tethering a navažte na USB adresu pro spojení
 
 ---
 
-> _Tato dokumentace byla vytvořena pomocí Claude (Anthropic) a spravuje ji VD171. Opravy a vylepšení jsou vítány; viz [CONTRIBUTING.md](CONTRIBUTING.md)._
+> _Tato dokumentace byla vytvořena pomocí Claude (Anthropic) a spravuje ji VD171. Opravy a vylepšení jsou vítány, viz [CONTRIBUTING.md](CONTRIBUTING.md)._

@@ -29,7 +29,7 @@
 
 # Configuratie
 
-Instellingen staan in `/data/adb/vddropbear/config` (bij de eerste keer opstarten aangemaakt vanuit `module/common/config.default`). De **WebUI** bewerkt dit bestand voor je; je kunt het ook met de hand bewerken. Het wordt als shell ingelezen, dus gebruik `KEY=value` zonder spaties rond `=`. Instellingen zijn niet geheim en staan op device-encrypted opslag; geheimen (hostsleutels, authorized keys, wachtwoordhashes) staan in de geheimenopslag, nooit hier.
+Instellingen staan in `/data/adb/vddropbear/config` (bij de eerste keer opstarten aangemaakt vanuit `module/common/config.default`). De **WebUI** bewerkt dit bestand voor je, je kunt het ook met de hand bewerken. Het wordt als shell ingelezen, dus gebruik `KEY=value` zonder spaties rond `=`. Instellingen zijn niet geheim en staan op device-encrypted opslag, geheimen (hostsleutels, authorized keys, wachtwoordhashes) staan in de geheimenopslag, nooit hier.
 
 Pas wijzigingen toe door de daemon te herstarten (de **Save & restart** van de WebUI doet dit).
 
@@ -38,17 +38,17 @@ Pas wijzigingen toe door de daemon te herstarten (de **Save & restart** van de W
 | Key | Default | Betekenis |
 |-----|---------|---------|
 | `ENABLED` | `1` | Start de daemon bij het opstarten. `0` schakelt die volledig uit. |
-| `START_IN_BFU` | `0` | `0`: start pas na de eerste ontgrendeling (AFU); geheimen blijven op credential-encrypted (CE) opslag. `1`: start ook vóór de eerste ontgrendeling (BFU); geheimen verhuizen naar device-encrypted (DE) opslag, leesbaar vóór ontgrendeling. |
+| `START_IN_BFU` | `0` | `0`: start pas na de eerste ontgrendeling (AFU), geheimen blijven op credential-encrypted (CE) opslag. `1`: start ook vóór de eerste ontgrendeling (BFU), geheimen verhuizen naar device-encrypted (DE) opslag, leesbaar vóór ontgrendeling. |
 | `PORT` | `2222` | Standaard luisterpoort (poorten per bind kunnen die overschrijven in `LISTEN_ADDRESSES`). |
 
 ## Luisteren / binds (combineerbaar)
 
-Elke combinatie is toegestaan; de gekozen binds worden samengevoegd. Als je alles leegmaakt, bindt VD Dropbear aan loopback in plaats van aan elke interface.
+Elke combinatie is toegestaan, de gekozen binds worden samengevoegd. Als je alles leegmaakt, bindt VD Dropbear aan loopback in plaats van aan elke interface.
 
 | Key | Default | Betekenis |
 |-----|---------|---------|
 | `LISTEN_LOOPBACK` | `1` | Luister alleen op `127.0.0.1` / `::1`. |
-| `LISTEN_ALL` | `0` | Luister op elke interface (`0.0.0.0` / `::`); stelt het toestel bloot. |
+| `LISTEN_ALL` | `0` | Luister op elke interface (`0.0.0.0` / `::`), stelt het toestel bloot. |
 | `LISTEN_IPV4` | `1` | Neem IPv4-binds op. |
 | `LISTEN_IPV6` | `1` | Neem IPv6-binds op. |
 | `LISTEN_ADDRESSES` | `""` | Extra specifieke binds, door komma's gescheiden: `addr` (gebruikt `PORT`) of `addr:port`, IPv4 of IPv6. |
@@ -64,7 +64,7 @@ Elke combinatie is toegestaan; de gekozen binds worden samengevoegd. Als je alle
 
 ## Authenticatie
 
-Een login draait als het account waarmee je je authenticeert: standaard **root**, of een account met minder rechten (`shell`, `system`). Sleutels zijn de standaard; wachtwoorden zijn opt-in.
+Een login draait als het account waarmee je je authenticeert: standaard **root**, of een account met minder rechten (`shell`, `system`). Sleutels zijn de standaard, wachtwoorden zijn opt-in.
 
 | Key | Default | Betekenis |
 |-----|---------|---------|
@@ -110,4 +110,4 @@ Die bevat de hostsleutel, `authorized_keys`, en het `passwd`-hashbestand. Zie [B
 
 ---
 
-> _Deze documentatie is gegenereerd met Claude (Anthropic) en wordt onderhouden door VD171. Correcties en verbeteringen zijn welkom; zie [CONTRIBUTING.md](CONTRIBUTING.md)._
+> _Deze documentatie is gegenereerd met Claude (Anthropic) en wordt onderhouden door VD171. Correcties en verbeteringen zijn welkom, zie [CONTRIBUTING.md](CONTRIBUTING.md)._

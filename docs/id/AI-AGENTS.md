@@ -65,7 +65,7 @@ Ini adalah root, jadi perlakukan seperti root:
 - berikan agen **kredensialnya sendiri**, bukan milik pribadi Anda, dan arahkan ke akun dengan privilese lebih rendah (`shell`) jika Anda ingin membatasi jangkauannya;
 - batasi bind hanya ke jaringan yang Anda percayai: loopback atau VPN alih-alih Internet terbuka
   (lihat [Configuration](CONFIGURATION.md));
-- biarkan autentikasi kata sandi tetap mati; sebuah kunci dapat dicabut dan tidak pernah diketik;
+- biarkan autentikasi kata sandi tetap mati, sebuah kunci dapat dicabut dan tidak pernah diketik;
 - Anda dapat mencabut kunci atau menghentikan daemon kapan saja dari WebUI;
 - ingat koneksi default adalah sesi root penuh: berikan agen hanya jangkauan yang ia butuhkan.
 
@@ -82,4 +82,4 @@ Lewat USB, tanpa ADB: nyalakan tethering USB dan ikat ke alamat USB untuk tautan
 
 ---
 
-> _Dokumentasi ini dibuat dengan Claude (Anthropic) dan dikelola oleh VD171. Koreksi dan perbaikan dipersilakan; lihat [CONTRIBUTING.md](CONTRIBUTING.md)._
+> _Dokumentasi ini dibuat dengan Claude (Anthropic) dan dikelola oleh VD171. Koreksi dan perbaikan dipersilakan, lihat [CONTRIBUTING.md](CONTRIBUTING.md)._

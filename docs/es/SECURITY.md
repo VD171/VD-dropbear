@@ -56,7 +56,7 @@ credenciales de este servidor. Por favor:
 ## Versiones compatibles
 
 Las correcciones de seguridad llegan a la última versión. El binario del servidor sigue a Dropbear
-upstream; las versiones de seguridad de upstream se recompilan y se distribuyen en cuanto la CI las
+upstream, las versiones de seguridad de upstream se recompilan y se distribuyen en cuanto la CI las
 recoge.
 
 ## Reportar una vulnerabilidad
@@ -74,4 +74,4 @@ Dropbear mismo, repórtalas también a upstream en <https://matt.ucc.asn.au/drop
 
 ---
 
-> _Esta documentación se generó con Claude (Anthropic) y la mantiene VD171. Las correcciones y mejoras son bienvenidas; consulta [CONTRIBUTING.md](CONTRIBUTING.md)._
+> _Esta documentación se generó con Claude (Anthropic) y la mantiene VD171. Las correcciones y mejoras son bienvenidas, consulta [CONTRIBUTING.md](CONTRIBUTING.md)._

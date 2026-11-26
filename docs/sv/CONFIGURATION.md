@@ -30,9 +30,9 @@
 # Konfiguration
 
 Inställningarna ligger i `/data/adb/vddropbear/config` (skapas från `module/common/config.default` vid
-första uppstarten). **WebUI:n** redigerar den här filen åt dig; du kan också redigera den för hand. Den
+första uppstarten). **WebUI:n** redigerar den här filen åt dig, du kan också redigera den för hand. Den
 läses in som skal, så använd `KEY=value` utan mellanslag runt `=`. Inställningar är inte hemliga och
-ligger på device-encrypted lagring; hemligheter (värdnycklar, authorized keys, lösenordshashar) ligger
+ligger på device-encrypted lagring, hemligheter (värdnycklar, authorized keys, lösenordshashar) ligger
 i hemlighetslagret, aldrig här.
 
 Tillämpa ändringar genom att starta om daemonen (WebUI:ns **Save & restart** gör detta).
@@ -42,18 +42,18 @@ Tillämpa ändringar genom att starta om daemonen (WebUI:ns **Save & restart** g
 | Key | Default | Meaning |
 |-----|---------|---------|
 | `ENABLED` | `1` | Starta daemonen vid uppstart. `0` inaktiverar den helt. |
-| `START_IN_BFU` | `0` | `0`: starta först efter första upplåsningen (AFU); hemligheter stannar på credential-encrypted (CE) lagring. `1`: starta även före första upplåsningen (BFU); hemligheter flyttas till device-encrypted (DE) lagring, läsbar före upplåsning. |
+| `START_IN_BFU` | `0` | `0`: starta först efter första upplåsningen (AFU), hemligheter stannar på credential-encrypted (CE) lagring. `1`: starta även före första upplåsningen (BFU), hemligheter flyttas till device-encrypted (DE) lagring, läsbar före upplåsning. |
 | `PORT` | `2222` | Standardport att lyssna på (portar per bindning kan åsidosätta den i `LISTEN_ADDRESSES`). |
 
 ## Lyssning / bindningar (kombinerbara)
 
-Vilken kombination som helst är tillåten; de valda bindningarna slås samman. Om du rensar allt binder
+Vilken kombination som helst är tillåten, de valda bindningarna slås samman. Om du rensar allt binder
 VD Dropbear loopback i stället för varje gränssnitt.
 
 | Key | Default | Meaning |
 |-----|---------|---------|
 | `LISTEN_LOOPBACK` | `1` | Lyssna endast på `127.0.0.1` / `::1`. |
-| `LISTEN_ALL` | `0` | Lyssna på varje gränssnitt (`0.0.0.0` / `::`); exponerar enheten. |
+| `LISTEN_ALL` | `0` | Lyssna på varje gränssnitt (`0.0.0.0` / `::`), exponerar enheten. |
 | `LISTEN_IPV4` | `1` | Inkludera IPv4-bindningar. |
 | `LISTEN_IPV6` | `1` | Inkludera IPv6-bindningar. |
 | `LISTEN_ADDRESSES` | `""` | Extra specifika bindningar, kommaseparerade: `addr` (använder `PORT`) eller `addr:port`, IPv4 eller IPv6. |
@@ -69,7 +69,7 @@ VD Dropbear loopback i stället för varje gränssnitt.
 
 ## Autentisering
 
-En inloggning körs som det konto du autentiserar dig som: **root** som standard, eller ett konto med lägre behörighet (`shell`, `system`). Nycklar är standard; lösenord är tillval.
+En inloggning körs som det konto du autentiserar dig som: **root** som standard, eller ett konto med lägre behörighet (`shell`, `system`). Nycklar är standard, lösenord är tillval.
 
 | Key | Default | Meaning |
 |-----|---------|---------|
@@ -117,4 +117,4 @@ Det innehåller värdnyckeln, `authorized_keys` och `passwd`-hashfilen. Se
 
 ---
 
-> _Denna dokumentation genererades med Claude (Anthropic) och underhålls av VD171. Rättelser och förbättringar välkomnas; se [CONTRIBUTING.md](CONTRIBUTING.md)._
+> _Denna dokumentation genererades med Claude (Anthropic) och underhålls av VD171. Rättelser och förbättringar välkomnas, se [CONTRIBUTING.md](CONTRIBUTING.md)._

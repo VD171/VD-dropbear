@@ -31,7 +31,7 @@
 
 VD Dropbear dostarcza **[Dropbear](https://github.com/mkj/dropbear) upstream** (tag przypięty w
 [`UPSTREAM_VERSION`](../../UPSTREAM_VERSION)) oraz mały, audytowalny zestaw łatek w
-[`patches/`](../../patches/). CI go buduje; możesz to odtworzyć lokalnie.
+[`patches/`](../../patches/). CI go buduje, możesz to odtworzyć lokalnie.
 
 ## Szybki start
 
@@ -50,9 +50,9 @@ ABIS="arm64-v8a" ./scripts/build.sh
 następnie kompiluje skrośnie `vddropbear` i `dropbearkey` do `module/bin/<abi>/`. Wyjściem jest
 **dynamiczny** ELF (`file` zgłasza `dynamically linked, interpreter /system/bin/linker64 … for Android
 24`), zlinkowany z libc bionic, którą ma już każde urządzenie z Androidem. libtomcrypt pozostaje wbudowany
-w binarkę; dynamiczna jest tylko biblioteka C. Zobacz [Dynamiczny, nie static-PIE](#dynamiczny-nie-static-pie).
+w binarkę, dynamiczna jest tylko biblioteka C. Zobacz [Dynamiczny, nie static-PIE](#dynamiczny-nie-static-pie).
 
-Binarki **nie są commitowane**; buduje je CI przy każdym tagu i dołącza do wydania. Zobacz
+Binarki **nie są commitowane**, buduje je CI przy każdym tagu i dołącza do wydania. Zobacz
 [`.gitignore`](../../.gitignore).
 
 ---
@@ -62,7 +62,7 @@ Binarki **nie są commitowane**; buduje je CI przy każdym tagu i dołącza do w
 Uwierzytelnianie hasłem w Dropbear jest napisane dla zwykłego hosta Unix z `crypt()` i `/etc/shadow`.
 Android **nie ma żadnego z nich**, i to koliduje z budowaniem w trzech osobnych miejscach. Ten rozdział
 dokumentuje każde z nich, bo to dokładnie ten rodzaj rzeczy, który boli przy ponownym odkrywaniu.
-Wszystkim zajmuje się łatka [`0003-password-file.patch`](../../patches/0003-password-file.patch); nic
+Wszystkim zajmuje się łatka [`0003-password-file.patch`](../../patches/0003-password-file.patch), nic
 poniżej nie jest zostawione przypadkowi w czasie działania.
 
 ### 1. bionic nie ma użytecznego `crypt()`
@@ -141,7 +141,7 @@ To ma znaczenie i zostało nauczone w trudny sposób, **na prawdziwym urządzeni
 - Build **static-PIE** *wygląda* dobrze (`file` zgłasza czysty `static-pie executable`) i linkuje się
   bez błędu, ale **robi SIGSEGV w chwili, gdy uruchamia się na urządzeniu** (zweryfikowane na telefonie
   arm64 z Androidem 16, exit 139, brak użytecznego tombstone). Statyczne pliki wykonywalne na Androidzie
-  są kruche; niezawodną formą jest zwykła dynamiczna binarka, co jest również sposobem, w jaki dostarczany
+  są kruche, niezawodną formą jest zwykła dynamiczna binarka, co jest również sposobem, w jaki dostarczany
   jest każdy utrwalony dropbear na Androida.
 - Build **statyczny, non-PIE** nawet się nie uruchamia: bionic go odrzuca z
   `executable's TLS segment is underaligned … needs to be at least 64 for ARM64 Bionic`.
@@ -157,14 +157,14 @@ zostało potwierdzone jako udane, z odrzuconym błędnym hasłem.)
 ## Brak flagi `-E`
 
 Serwer jest budowany z `--disable-syslog`, więc zawsze loguje do stderr, a opcja `-E` z upstream ("log
-to stderr") **nie istnieje** w tej binarce; przekazanie jej wypisuje `Invalid option -E` i daemon nigdy
+to stderr") **nie istnieje** w tej binarce, przekazanie jej wypisuje `Invalid option -E` i daemon nigdy
 się nie uruchamia. Dlatego budowniczy argumentów modułu nie przekazuje `-E`.
 
 ## openpty
 
 Interaktywne sesje PTY używają `openpty()`. bionic deklaruje je w `<pty.h>`, a skrośny `configure`
 Dropbear wykrywa je z NDK (`HAVE_OPENPTY` jest ustawiane, `HAVE_PTY_H 1`), więc **żadna łatka nie jest
-potrzebna**; PTY działają od razu. (Użycie nieinteraktywne, jak exec, SFTP, rsync i przekazywanie
+potrzebna**, PTY działają od razu. (Użycie nieinteraktywne, jak exec, SFTP, rsync i przekazywanie
 portów, i tak od tego nie zależy.)
 
 ## Wbudowane narzędzia: sftp-server, scp, rsync
@@ -179,7 +179,7 @@ portów, i tak od tego nie zależy.)
   pierwszy.
 
 OpenSSH na Androidzie jest tak samo kapryśny jak historia crypt() powyżej, bo jego `configure` błędnie
-wykrywa kilka funkcji libc przy kompilacji skrośnej. Skrypt koduje poprawkę; dla porządku, elementy to:
+wykrywa kilka funkcji libc przy kompilacji skrośnej. Skrypt koduje poprawkę, dla porządku, elementy to:
 
 1. **Seed cache funkcji, których bionic nie ma**, ale configure sądzi, że je ma, aby zamiast nich
    kompilowane były wersje compat: `recallocarray`, `close_range`, `getentropy`, `getrandom`,
@@ -226,4 +226,4 @@ file ./dropbear   # -> dynamically linked, interpreter /system/bin/linker64, for
 
 ---
 
-> _Ta dokumentacja została wygenerowana za pomocą Claude (Anthropic) i jest utrzymywana przez VD171. Poprawki i ulepszenia są mile widziane; zobacz [CONTRIBUTING.md](CONTRIBUTING.md)._
+> _Ta dokumentacja została wygenerowana za pomocą Claude (Anthropic) i jest utrzymywana przez VD171. Poprawki i ulepszenia są mile widziane, zobacz [CONTRIBUTING.md](CONTRIBUTING.md)._

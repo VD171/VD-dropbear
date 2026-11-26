@@ -23,18 +23,16 @@
 -->
 
 <p align="center">
-  <img src="module/webroot/assets/logo-wordmark.svg" alt="VD Dropbear" width="540">
+  <img src="module/webroot/assets/logo-wordmark.svg" alt="VD Dropbear" width="320">
 </p>
 
 # VD Dropbear
 
-<p>
+<p align="center">
+  <a href="https://github.com/VD171/VD-dropbear/releases/latest"><img src="https://img.shields.io/github/v/release/VD171/VD-dropbear?label=release&color=36e86a" alt="Release"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-Apache--2.0-1a7f37" alt="License"></a>
-  <img src="https://img.shields.io/badge/KernelSU-%E2%9C%94-635bff" alt="KernelSU">
-  <img src="https://img.shields.io/badge/APatch-%E2%9C%94-ff7043" alt="APatch">
-  <img src="https://img.shields.io/badge/Magisk-%E2%9C%94-00af9c" alt="Magisk">
+  <a href="https://github.com/VD171/VD-dropbear/releases"><img src="https://img.shields.io/github/downloads/VD171/VD-dropbear/total?label=downloads&color=8250df" alt="Downloads"></a>
   <a href="https://github.com/VD171/VD-dropbear/stargazers"><img src="https://img.shields.io/github/stars/VD171/VD-dropbear?color=d29922" alt="Stars"></a>
-  <a href="https://github.com/VD171/VD-dropbear/releases"><img src="https://img.shields.io/github/v/release/VD171/VD-dropbear?color=1a7f37" alt="Release"></a>
 </p>
 
 <p align="center">
@@ -55,6 +53,12 @@
 
 > ⚠️ **يمنح تسجيل الدخول افتراضيًا صدفة ROOT كاملة.** تعامل مع هذا كأنه مفاتيح الجهاز:
 > فضّل المفاتيح العامة على كلمات المرور، وأبقِ المنفذ بعيدًا عن شبكة الإنترنت العامة.
+
+## لقطات الشاشة
+
+<p align="center">
+  <img src="screenshots/status.png" width="24%" alt="Status"> <img src="screenshots/settings.png" width="24%" alt="Settings"> <img src="screenshots/keys.png" width="24%" alt="Keys"> <img src="screenshots/passwords.png" width="24%" alt="Passwords">
+</p>
 
 ## لماذا
 
@@ -93,7 +97,7 @@ VD Dropbear هو البديل الخاص. على جهاز مروّت يمنحك 
 - **‏SSH عبر USB، بدون ADB.** فعّل مشاركة الاتصال عبر USB واربط الخادم بعنوان USB: الجلسة نفسها عبر الكابل، أسرع وأكثر استقرارًا من اللاسلكي لعمليات النقل الكبيرة.
 - **كل جهاز ومحاكٍ.** `arm64-v8a` و`armeabi-v7a` و`x86` و`x86_64`.
 
-## وكلاء الذكاء الاصطناعي على جهازك
+## وكلاء الذكاء الاصطناعي
 
 نقطة وصول SSH دائمة تحوّل هاتفك إلى شيء يستطيع **وكيل ذكاء اصطناعي مستقل تشغيله مباشرة**. أي وكيل
 يستطيع قيادة صدفة أو اتصال SSH (Claude Code أو aider أو سكربت يعمل بحلقة LLM أو أتمتتك الخاصة)
@@ -122,7 +126,7 @@ VD Dropbear هو البديل الخاص. على جهاز مروّت يمنحك 
 `ksud module install` / `apd module install`)، ثم افتح **واجهة الويب** للوحدة لضبط المنفذ وإضافة
 مفاتيحك، ثم أعد الإقلاع (أو اضغط **Action** لتشغيلها الآن).
 
-## نموذج الأمان
+## الأمان
 
 ### أين تعيش الأسرار: BFU مقابل AFU
 
@@ -154,6 +158,14 @@ VD Dropbear هو البديل الخاص. على جهاز مروّت يمنحك 
 PTY التفاعلية. يتتبع سير عمل مجدول المصدر ويعيد البناء، فتبقى الوحدة محدَّثة. راجع
 [`.github/workflows/`](.github/workflows/) و[`CONTRIBUTING.md`](CONTRIBUTING.md).
 
+## التحديثات التزايدية (VDLU)
+
+يتضمّن VD Dropbear محرّك **[VDLiveUpdate](https://github.com/VD171/VDLiveUpdate) (VDLU)** (مُضمَّن في `vdlu/`): تحدّث الوحدة نفسها بجلب الملفات المتغيّرة فقط (كتل مُعنونة بالمحتوى + ملف `manifest.json` موقّع)، بدلاً من إعادة تنزيل ملف `.zip` بالكامل. ملف التعريف **Hardened**: توقيع ed25519 إلزامي والتخفيضات محظورة، ويبقى ملف `.zip` الكامل صالحاً كبديل احتياطي.
+
+- **LIVE فقط** (بدون إعادة تشغيل): تُطبَّق التحديثات عند الإقلاع التالي عبر `service.sh` (`setsid`، في الخلفية، دون أن يعطّل الإقلاع أبداً)، وهي عملية لا أثر لها عندما لا يتوفّر أي مصدر.
+- **الحالة** في `/data/adb/<module>/vdlu/`، خارج الوحدة، لكي تنجو من إعادة الفلاش.
+- **WebUI:** لوحة **Updates** مع إشعار تقدّم وإلغاء، والتحديث التلقائي اختياري (opt-in).
+
 ## التوثيق
 
 <!-- vd-docs -->
@@ -161,7 +173,7 @@ PTY التفاعلية. يتتبع سير عمل مجدول المصدر ويع�
 - **[دليل المستخدم](https://github.com/VD171/VD-dropbear/wiki/ar-USER-GUIDE)**: التثبيت والمفاتيح وكلمات المرور والاتصال ونقل الملفات وBFU/AFU.
 - **[الإعداد](https://github.com/VD171/VD-dropbear/wiki/ar-CONFIGURATION)**: كل إعداد، مع القيم الافتراضية.
 - **[البنية](https://github.com/VD171/VD-dropbear/wiki/ar-ARCHITECTURE)** و**[بنية الملفات](https://github.com/VD171/VD-dropbear/wiki/ar-FILE-STRUCTURE)**: كيف تعمل الوحدة والداعم، وأين يوجد كل شيء.
-- **[وكلاء الذكاء الاصطناعي على جهازك](https://github.com/VD171/VD-dropbear/wiki/ar-AI-AGENTS)**: استخدام وكيل مستقل عبر SSH بأمان.
+- **[وكلاء الذكاء الاصطناعي](https://github.com/VD171/VD-dropbear/wiki/ar-AI-AGENTS)**: استخدام وكيل مستقل عبر SSH بأمان.
 - **[البناء](https://github.com/VD171/VD-dropbear/wiki/ar-BUILDING)**: البناء، وقصة crypt()/الترجمة المتقاطعة على أندرويد.
 - **[المساهمة](CONTRIBUTING.md)** و**[الأمان](SECURITY.md)**.
 - **[Changelog](CHANGELOG.md)** و**[مدونة قواعد السلوك](CODE_OF_CONDUCT.md)**.
@@ -183,31 +195,34 @@ PTY التفاعلية. يتتبع سير عمل مجدول المصدر ويع�
 
 ## جهات الاتصال
 
-- Site           : https://vd171.ru
-- Site           : https://vd.priv8.ru
-- Source         : https://github.com/VD171/VD-dropbear
-- GitHub         : [@VD171](https://github.com/VD171)
-- XDA-Developers : [@VD171](https://xdaforums.com/m/vd171.4699873/)
-- XDA thread     : [VD-Dropbear](https://xdaforums.com/t/VD-Dropbear.4808524/)
-- Telegram       : [@VD_Priv8](https://t.me/VD_Priv8)
-- Channel        : [@Priv8_VD](https://t.me/Priv8_VD)
-- Discord        : [@VD.Priv8](https://discord.com/users/1296831918989639721)
-- E-mail         : vd.priv8@pm.me
+- https://vd171.ru
+- https://vd.priv8.ru
+- **Telegram:** @VD_Priv8 https://t.me/VD_Priv8
+- **Channel:** @Priv8_VD https://t.me/Priv8_VD
+- **Discord:** @VD.Priv8 https://discord.com/users/1296831918989639721
+- **E-mail:** vd.priv8@pm.me
+- **XDA-Developers:** @VD171 https://xdaforums.com/m/vd171.4699873/
+- **XDA thread:** https://xdaforums.com/t/VD-Dropbear.4808524/
+- **GitHub:** @VD171 https://github.com/VD171
 
 ## الترخيص
 
-كود VD Dropbear الخاص هو **Apache-2.0**؛ راجع [LICENSE](LICENSE). تحزم الوحدة أيضًا ملفات ثنائية
+كود VD Dropbear الخاص هو **Apache-2.0**، راجع [LICENSE](LICENSE). تحزم الوحدة أيضًا ملفات ثنائية
 من أطراف خارجية: [Dropbear](https://matt.ucc.asn.au/dropbear/) (بأسلوب MIT)، و`sftp-server`
-و`scp` من OpenSSH (BSD)، و`rsync` (GPL-3.0)، كلٌّ تحت ترخيصه الخاص؛ راجع
+و`scp` من OpenSSH (BSD)، و`rsync` (GPL-3.0)، كلٌّ تحت ترخيصه الخاص، راجع
 [THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md)، بما في ذلك كيفية امتثالنا لرخصة GPL الخاصة بـ rsync.
 كودنا بترخيص Apache-2.0 غير متأثر (الملف الثنائي بترخيص GPL مُجمَّع فقط، وليس مرتبطًا).
 
 ## العلامات التجارية
 
 VD Dropbear مشروع مستقل وغير رسمي، وغير مرتبط بأي طرف خارجي أو معتمد منه. "Android" علامة تجارية
-لشركة Google LLC؛ و"SSH" علامة تجارية مسجّلة لشركة SSH Communications Security. يعمل VD Dropbear
+لشركة Google LLC، و"SSH" علامة تجارية مسجّلة لشركة SSH Communications Security. يعمل VD Dropbear
 بالكامل على جهازك.
 
 ## Tags
 
 `SSH` `Dropbear` `KernelSU` `Magisk` `APatch` `root` `sshd` `remote-access` `openssh-alternative` `Android` `BFU` `VD-dropbear`
+
+---
+
+📣 **انضم إلى القناة للتحديثات:** @Priv8_VD https://t.me/Priv8_VD

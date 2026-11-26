@@ -31,7 +31,7 @@
 
 VD Dropbear es un módulo de KernelSU / APatch / Magisk que ejecuta exactamente un daemon SSH Dropbear,
 gobernado por completo mediante configuración. Nada del servidor SSH está fijado en el código para un
-dispositivo concreto; todo lo específico es configuración en tiempo de ejecución o un secreto.
+dispositivo concreto, todo lo específico es configuración en tiempo de ejecución o un secreto.
 
 ## Piezas
 
@@ -39,7 +39,7 @@ dispositivo concreto; todo lo específico es configuración en tiempo de ejecuci
   defecto integrados y seguros), resuelve el almacén de secretos, garantiza una host key, construye el
   vector de argumentos de Dropbear y gestiona una única instancia del daemon (start / stop / status /
   restart).
-- `module/service.sh`: punto de entrada en el arranque. Respeta la política de inicio BFU/AFU; en modo
+- `module/service.sh`: punto de entrada en el arranque. Respeta la política de inicio BFU/AFU, en modo
   AFU espera a que se desbloquee el almacenamiento cifrado por credenciales sin bloquear el arranque.
 - `module/action.sh`, el botón **Action** del gestor: (re)lanza el daemon. Nunca lee stdin y separa el
   daemon en su propia sesión, de modo que el gestor no se queda colgado.
@@ -55,6 +55,18 @@ nombre de proceso coincide exactamente con `pgrep -x` (el `mksh` de Android no t
 lanza con `setsid` para que se separe del grupo de procesos de quien lo invoca: eso es lo que evita
 que el botón Action del gestor se bloquee.
 
+`setsid` nunca cubrió los cgroups, y esa carencia fue una regresión real: el botón Action y la WebUI
+corren dentro de la app del gestor, así que un daemon arrancado desde cualquiera de los dos heredaba
+el freezer cgroup de la app (`/apps/uid_<uid>/pid_<pid>`). El `CachedAppOptimizer` de Android congela
+ese cgroup en cuanto cachea la app, y el daemon queda congelado con él mientras aún retiene su socket
+de escucha. Las conexiones TCP siguen completándose porque el backlog vive en el kernel, pero nada
+llama a `accept()`, de modo que los clientes se quedan colgados en
+"Connection established ... Local version string" sin error en ninguno de los dos lados, y
+`/proc/<pid>/wchan` muestra `do_freezer_trap` en lugar de `do_select`. Ahora `vddb_escape_freezer`
+mueve el shell que hace el spawn al cgroup raíz (que el freezer nunca toca) antes del fork, de forma
+que el daemon hereda esa salida. Es un no-op en el arranque (ya está en `/`) y en plataformas sin
+freezer, no "simplifiques" el spawn de vuelta a un `setsid` pelado.
+
 ## El almacén de secretos (CE vs DE, BFU vs AFU)
 
 Los ajustes no son secretos y residen en almacenamiento cifrado por dispositivo
@@ -67,7 +79,7 @@ calcula qué almacén usar en cada etapa del arranque.
 
 ## El conjunto de parches
 
-El servidor SSH se mantiene como Dropbear upstream; nuestros cambios son unos pocos parches revisables
+El servidor SSH se mantiene como Dropbear upstream, nuestros cambios son unos pocos parches revisables
 (consulta [patches/README.md](../../patches/README.md)):
 
 - un banner de identidad neutro y configurable en tiempo de ejecución;
@@ -81,11 +93,11 @@ El servidor SSH se mantiene como Dropbear upstream; nuestros cambios son unos po
 Una página estática en la WebUI del gestor (KernelSU / APatch / WebUI-X). Gobierna
 `module/common/vddb-webui.sh` a través del puente `ksu.exec`: estado, start/stop/restart, lectura y
 escritura de la configuración, y gestión de claves y cuentas con contraseña. Todos los datos cruzan el
-puente codificados en base64, de modo que la shell nunca los interpreta; los hashes de contraseña se
+puente codificados en base64, de modo que la shell nunca los interpreta, los hashes de contraseña se
 calculan en el navegador con WebCrypto, así que la contraseña en texto claro nunca sale de la página.
 
 <!-- doc-footer -->
 
 ---
 
-> _Esta documentación se generó con Claude (Anthropic) y la mantiene VD171. Las correcciones y mejoras son bienvenidas; consulta [CONTRIBUTING.md](CONTRIBUTING.md)._
+> _Esta documentación se generó con Claude (Anthropic) y la mantiene VD171. Las correcciones y mejoras son bienvenidas, consulta [CONTRIBUTING.md](CONTRIBUTING.md)._

@@ -23,18 +23,16 @@
 -->
 
 <p align="center">
-  <img src="module/webroot/assets/logo-wordmark.svg" alt="VD Dropbear" width="540">
+  <img src="module/webroot/assets/logo-wordmark.svg" alt="VD Dropbear" width="320">
 </p>
 
 # VD Dropbear
 
-<p>
+<p align="center">
+  <a href="https://github.com/VD171/VD-dropbear/releases/latest"><img src="https://img.shields.io/github/v/release/VD171/VD-dropbear?label=release&color=36e86a" alt="Release"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-Apache--2.0-1a7f37" alt="License"></a>
-  <img src="https://img.shields.io/badge/KernelSU-%E2%9C%94-635bff" alt="KernelSU">
-  <img src="https://img.shields.io/badge/APatch-%E2%9C%94-ff7043" alt="APatch">
-  <img src="https://img.shields.io/badge/Magisk-%E2%9C%94-00af9c" alt="Magisk">
+  <a href="https://github.com/VD171/VD-dropbear/releases"><img src="https://img.shields.io/github/downloads/VD171/VD-dropbear/total?label=downloads&color=8250df" alt="Downloads"></a>
   <a href="https://github.com/VD171/VD-dropbear/stargazers"><img src="https://img.shields.io/github/stars/VD171/VD-dropbear?color=d29922" alt="Stars"></a>
-  <a href="https://github.com/VD171/VD-dropbear/releases"><img src="https://img.shields.io/github/v/release/VD171/VD-dropbear?color=1a7f37" alt="Release"></a>
 </p>
 
 <p align="center">
@@ -56,6 +54,12 @@ empacotado como módulo KernelSU / APatch / Magisk. Ele sobe por conta própria 
 > ⚠️ **Por padrão, um login dá um shell ROOT completo.** Trate isso como as chaves do
 > aparelho: prefira chaves públicas a senhas e mantenha a porta fora da Internet pública.
 
+## Capturas de tela
+
+<p align="center">
+  <img src="screenshots/status.png" width="24%" alt="Status"> <img src="screenshots/settings.png" width="24%" alt="Settings"> <img src="screenshots/keys.png" width="24%" alt="Keys"> <img src="screenshots/passwords.png" width="24%" alt="Passwords">
+</p>
+
 ## Por quê
 
 A maneira nativa do Android de obter um shell no próprio celular é o ADB (depuração USB), e ligá-lo é
@@ -72,7 +76,7 @@ flag "estou sendo depurado", legível globalmente, que qualquer coisa no aparelh
 ## Recursos
 
 - **Um daemon, sempre.** Ele inicia no boot e pelo botão **Action** do gerenciador, e você pode
-  **iniciar / parar / reiniciar** pela WebUI a qualquer momento; nunca mais de uma instância.
+  **iniciar / parar / reiniciar** pela WebUI a qualquer momento, nunca mais de uma instância.
 - **Tudo é configurável** pela WebUI (ou por `/data/adb/vddropbear/config`):
   - porta, e bind em loopback / all / IPv4 / IPv6 / endereços específicos
   - **iniciar antes do primeiro desbloqueio (BFU) ou só depois dele (AFU)**, um único botão
@@ -93,7 +97,7 @@ flag "estou sendo depurado", legível globalmente, que qualquer coisa no aparelh
 - **SSH por USB, sem ADB.** Ative o tethering USB e faça o bind do daemon no endereço USB: a mesma sessão pelo cabo, mais rápida e estável que o wifi para transferências grandes.
 - **Todo aparelho e emulador.** `arm64-v8a`, `armeabi-v7a`, `x86`, `x86_64`.
 
-## Agentes de IA no seu aparelho
+## Agentes de IA
 
 Um endpoint SSH permanente transforma seu celular em algo que um **agente de IA autônomo pode operar
 diretamente**. Qualquer agente capaz de conduzir um shell ou uma conexão SSH (Claude Code, aider, um script
@@ -111,7 +115,7 @@ Como o projeto é feito para ser **amigável a IA** (um arquivo de configuraçã
 agente consegue descobrir como usá-lo sem ter que adivinhar.
 
 > **Root por padrão, então trate como root.** Um login padrão entra como root, e você também pode entrar como
-> uma conta de menor privilégio (`shell`, `system`); veja o aviso abaixo. Quando entregar o acesso a um agente,
+> uma conta de menor privilégio (`shell`, `system`), veja o aviso abaixo. Quando entregar o acesso a um agente,
 > dê a ele uma credencial própria (não a sua chave pessoal), aponte-o para uma conta de menor privilégio como
 > `shell` se quiser limitar seu alcance, restrinja os binds às
 > redes em que você confia (loopback ou uma VPN, em vez da internet aberta), mantenha a autenticação por senha
@@ -123,7 +127,7 @@ Instale o zip do módulo no gerenciador do KernelSU, APatch ou Magisk (ou pela l
 `ksud module install` / `apd module install`), abra a **WebUI** do módulo para definir a porta e adicionar suas
 chaves, e então reinicie (ou aperte **Action** para iniciá-lo agora).
 
-## Modelo de segurança
+## Segurança
 
 ### Onde os segredos vivem: BFU vs AFU
 
@@ -132,7 +136,7 @@ o celular (Before First Unlock), então qualquer coisa ali é legível antes do 
 **credential-encrypted (CE)**: o Android o mantém criptografado até o usuário desbloquear (After First Unlock).
 
 - **Modo AFU (padrão, `START_IN_BFU=0`):** o daemon espera o desbloqueio e lê sua host key, o
-  `authorized_keys` e os hashes de senha a partir do armazenamento CE. Proteção máxima; o SSH só funciona
+  `authorized_keys` e os hashes de senha a partir do armazenamento CE. Proteção máxima, o SSH só funciona
   depois que o aparelho tiver sido desbloqueado ao menos uma vez desde o boot.
 - **Modo BFU (`START_IN_BFU=1`):** o daemon inicia antes do desbloqueio para você poder entrar via SSH cedo
   (por exemplo, para desbloquear o aparelho remotamente). Seus segredos passam então a ficar no armazenamento DE
@@ -141,7 +145,7 @@ o celular (Before First Unlock), então qualquer coisa ali é legível antes do 
 
 Deliberadamente **não** adicionamos criptografia nossa por cima do CE: ele já está criptografado com a
 credencial do usuário, e sobrepor outra cifra exigiria uma chave que teria que morar em algum lugar (no DE ela
-ficaria exposta; derivá-la da credencial do usuário apenas reimplementa o CE). Isso compraria uma falsa sensação
+ficaria exposta, derivá-la da credencial do usuário apenas reimplementa o CE). Isso compraria uma falsa sensação
 de segurança, não proteção de verdade.
 
 ### Senhas
@@ -158,6 +162,14 @@ correção `openpty` do Android para PTYs interativas. Um workflow agendado acom
 modo que o módulo se mantém atualizado. Veja [`.github/workflows/`](.github/workflows/) e
 [`CONTRIBUTING.md`](CONTRIBUTING.md).
 
+## Atualizações incrementais (VDLU)
+
+O VD Dropbear embarca o motor **[VDLiveUpdate](https://github.com/VD171/VDLiveUpdate) (VDLU)** (vendorado em `vdlu/`): o módulo se atualiza sozinho baixando apenas os arquivos que mudaram (blobs endereçados por conteúdo + um `manifest.json` assinado), em vez de baixar de novo o `.zip` inteiro. Perfil **Hardened**: a assinatura ed25519 é obrigatória e os downgrades são bloqueados, o `.zip` completo continua válido como fallback.
+
+- **Só LIVE** (sem reboot): as atualizações se aplicam no próximo boot via `service.sh` (`setsid`, em segundo plano, nunca travando o boot), um no-op quando nenhum feed está acessível.
+- **Estado** em `/data/adb/<module>/vdlu/`, fora do módulo, para que sobreviva a um reflash.
+- **WebUI:** um painel **Updates** com um toast de progresso e cancelar, a atualização automática é opt-in.
+
 ## Documentação
 
 <!-- vd-docs -->
@@ -165,12 +177,12 @@ modo que o módulo se mantém atualizado. Veja [`.github/workflows/`](.github/wo
 - **[Guia do usuário](https://github.com/VD171/VD-dropbear/wiki/pt-USER-GUIDE)**: instalação, chaves, senhas, conexão, transferência de arquivos, BFU/AFU.
 - **[Configuração](https://github.com/VD171/VD-dropbear/wiki/pt-CONFIGURATION)**: cada ajuste, com os valores padrão.
 - **[Arquitetura](https://github.com/VD171/VD-dropbear/wiki/pt-ARCHITECTURE)** e **[Estrutura de arquivos](https://github.com/VD171/VD-dropbear/wiki/pt-FILE-STRUCTURE)**: como o módulo e o daemon funcionam, e onde cada coisa fica.
-- **[Agentes de IA no seu aparelho](https://github.com/VD171/VD-dropbear/wiki/pt-AI-AGENTS)**: usar um agente autônomo por SSH, com segurança.
+- **[Agentes de IA](https://github.com/VD171/VD-dropbear/wiki/pt-AI-AGENTS)**: usar um agente autônomo por SSH, com segurança.
 - **[Compilação](https://github.com/VD171/VD-dropbear/wiki/pt-BUILDING)**: o build e a história do crypt()/compilação cruzada no Android.
 - **[Como contribuir](CONTRIBUTING.md)** e **[Segurança](SECURITY.md)**.
 - **[Changelog](CHANGELOG.md)** e **[Código de Conduta](CODE_OF_CONDUCT.md)**.
 
-Cada página da wiki também é traduzida para todos os idiomas do seletor acima; as mesmas fontes ficam em [`docs/`](docs/).
+Cada página da wiki também é traduzida para todos os idiomas do seletor acima, as mesmas fontes ficam em [`docs/`](docs/).
 <!-- /vd-docs -->
 
 ## Veja também
@@ -187,31 +199,34 @@ Cada página da wiki também é traduzida para todos os idiomas do seletor acima
 
 ## Contatos
 
-- Site           : https://vd171.ru
-- Site           : https://vd.priv8.ru
-- Source         : https://github.com/VD171/VD-dropbear
-- GitHub         : [@VD171](https://github.com/VD171)
-- XDA-Developers : [@VD171](https://xdaforums.com/m/vd171.4699873/)
-- XDA thread     : [VD-Dropbear](https://xdaforums.com/t/VD-Dropbear.4808524/)
-- Telegram       : [@VD_Priv8](https://t.me/VD_Priv8)
-- Channel        : [@Priv8_VD](https://t.me/Priv8_VD)
-- Discord        : [@VD.Priv8](https://discord.com/users/1296831918989639721)
-- E-mail         : vd.priv8@pm.me
+- https://vd171.ru
+- https://vd.priv8.ru
+- **Telegram:** @VD_Priv8 https://t.me/VD_Priv8
+- **Channel:** @Priv8_VD https://t.me/Priv8_VD
+- **Discord:** @VD.Priv8 https://discord.com/users/1296831918989639721
+- **E-mail:** vd.priv8@pm.me
+- **XDA-Developers:** @VD171 https://xdaforums.com/m/vd171.4699873/
+- **XDA thread:** https://xdaforums.com/t/VD-Dropbear.4808524/
+- **GitHub:** @VD171 https://github.com/VD171
 
 ## Licença
 
-O código próprio do VD Dropbear é **Apache-2.0**; veja [LICENSE](LICENSE). O módulo também empacota binários de
+O código próprio do VD Dropbear é **Apache-2.0**, veja [LICENSE](LICENSE). O módulo também empacota binários de
 terceiros: [Dropbear](https://matt.ucc.asn.au/dropbear/) (estilo MIT), o `sftp-server` e o `scp` do OpenSSH
-(BSD), e o `rsync` (GPL-3.0), cada um sob sua própria licença; veja
+(BSD), e o `rsync` (GPL-3.0), cada um sob sua própria licença, veja
 [THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md), inclusive como cumprimos a GPL do rsync. Nosso código
 Apache-2.0 não é afetado (o binário GPL é apenas agregado, não linkado).
 
 ## Marcas registradas
 
 O VD Dropbear é um projeto independente e não oficial, sem afiliação ou endosso de qualquer terceiro. "Android"
-é marca registrada da Google LLC; "SSH" é marca registrada da SSH Communications Security. O VD Dropbear roda
+é marca registrada da Google LLC. "SSH" é marca registrada da SSH Communications Security. O VD Dropbear roda
 inteiramente no seu aparelho.
 
 ## Tags
 
 `SSH` `Dropbear` `KernelSU` `Magisk` `APatch` `root` `sshd` `remote-access` `openssh-alternative` `Android` `BFU` `VD-dropbear`
+
+---
+
+📣 **Entre no canal para receber atualizações:** @Priv8_VD https://t.me/Priv8_VD

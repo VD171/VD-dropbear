@@ -31,12 +31,19 @@
 <p>O jeito nativo do Android de ter um shell no seu próprio aparelho é o ADB (depuração USB), e ligá-lo é <b>invasivo e auto-expositor</b>. <code>adb_enabled</code> e <code>development_settings_enabled</code> são settings legíveis por qualquer um; qualquer app, SDK ou biblioteca anti-fraude/RASP lê, a conexão fica logada, e não há forma suportada de esconder que o ADB está, ou esteve, ligado. A exposição te segue até num aparelho de fábrica, não-rooted: pra ter um shell, você tem que se anunciar.</p>
 <p><b>O VD Dropbear é a alternativa privada.</b> Num aparelho rooted ele te dá um servidor SSH de verdade (shell root, SFTP e rsync pela rede) sem o tell do <code>adb_enabled</code>, sem o flag de depuração USB, com um banner de versão que não revela nada, e credenciais que você controla. Seu acesso continua seu, em vez de um flag "estou sendo depurado" que qualquer coisa no aparelho lê.</p>
 
+<h3>Download</h3>
+<ul>
+<li><a href="https://github.com/VD171/VD-dropbear/releases/download/v1.14/VD-dropbear-v1.14.zip"><b>VD Dropbear v1.14 (módulo, ZIP)</b></a>: flashe no seu manager root (KernelSU, APatch ou Magisk) e abra a WebUI pra definir a porta e adicionar suas chaves.</li>
+<li>Todos os releases: <a href="https://github.com/VD171/VD-dropbear/releases">github.com/VD171/VD-dropbear/releases</a></li>
+</ul>
+
 <h3>Recursos</h3>
 <ul>
 <li><b>Um daemon, sempre</b>: inicia / reinicia no boot ou pelo botão Action do manager; nunca mais de uma instância.</li>
 <li><b>Tudo configurável</b> pela WebUI: porta; bind em loopback / tudo / IPv4 / IPv6 / endereços específicos; autenticação por chave e/ou senha; máximo de tentativas; shell de login, HOME, ambiente extra; idle timeout, keepalive; port forwarding local / remoto e gateway ports (tudo desligado por padrão); tipo de host key (ed25519 / rsa / ecdsa).</li>
 <li><b>Banner de versão escondido</b>: o protocolo SSH exige um banner, então não dá pra removê-lo, mas o VD Dropbear o troca por um sem informação, pra que scanners não identifiquem o servidor/versão exatos e mirem ataques de versão conhecida.</li>
 <li><b>Traga suas credenciais</b>: adicione conjuntos usuário + chave e usuário + senha; a WebUI exige uma força mínima de senha e nunca guarda senha em texto puro.</li>
+<li><b>SSH por USB, sem ADB</b>: ligue o tethering USB e faça o bind do daemon no endereço USB pra ter a mesma sessão pelo cabo, mais rápida e estável que o wifi pra transferências grandes.</li>
 <li><b>Todo aparelho e emulador</b>: arm64-v8a, armeabi-v7a, x86 e x86_64.</li>
 </ul>
 
@@ -51,25 +58,44 @@
 </ul>
 
 <h3>Instalar e configurar</h3>
-<p>Flashe o módulo no manager do KernelSU ou Magisk, abra a <b>WebUI</b> pra definir a porta e adicionar suas chaves, e reinicie (ou aperte Action pra subir agora).</p>
+<p>Flashe o módulo no manager do KernelSU, APatch ou Magisk, abra a <b>WebUI</b> pra definir a porta e adicionar suas chaves, e reinicie (ou aperte Action pra subir agora).</p>
 
-<h3>Download</h3>
-<p>O primeiro release público e o código-fonte completo estão sendo finalizados. O download vai ser postado aqui e no GitHub; <b>acompanhe este tópico</b>. Fonte e releases: <a href="https://github.com/VD171/VD-dropbear">github.com/VD171/VD-dropbear</a></p>
+<h3>Se atualiza sozinho, sem reflash</h3>
+<p>Entre releases o VD Dropbear busca e aplica só os arquivos que mudaram (uma atualização incremental assinada e verificada) em vez de rebaixar o zip inteiro. A assinatura é obrigatória e downgrades são recusados; o zip completo continua disponível como fallback, e um painel de Updates na WebUI mostra o progresso.</p>
+
+<h3>Requisitos</h3>
+<ul>
+<li>Root, via KernelSU, APatch ou Magisk.</li>
+</ul>
+
+<h3>Documentação e fonte</h3>
+<ul>
+<li><a href="https://github.com/VD171/VD-dropbear">github.com/VD171/VD-dropbear</a></li>
+<li><a href="https://github.com/VD171/VD-dropbear/wiki"><b>Documentação e wiki</b></a>, disponível em 22 idiomas</li>
+<li>Licença: Apache-2.0</li>
+</ul>
 
 <h3>Veja também</h3>
-<p>Projetos irmãos do mesmo autor:</p>
 <ul>
-<li><b>VDInfos</b>: um debugger de métodos do aparelho que lê cada item por todos os métodos que conseguem lê-lo e compara lado a lado.</li>
-<li><b>VDGoogle</b>: seus serviços Google (RCS, Wallet, atestações do Play Integrity), lidos no seu aparelho sem internet.</li>
+<li><b>COPG-VD</b>: spoofing global de fingerprint e Play Integrity do aparelho, por aparelho inteiro com escopo por app e uma WebUI.</li>
 <li><b>VDBackup</b>: backup e restauração completos de apps e dados como root, tudo por uma WebUI.</li>
-<li><b>COPG-VD</b>: um spoofer global de fingerprint e build do aparelho.</li>
+<li><b>VDGoogle</b>: seus serviços Google (RCS, Wallet, atestações do Play Integrity), lidos no seu aparelho sem internet.</li>
+<li><b>VDInstaller</b>: um instalador root de sideload sem fricção para APKs únicos, em lote e split, com toggle do verificador do Play Protect e spoofing da fonte de instalação.</li>
+<li><b>VDInfos</b>: um debugger de métodos do aparelho que lê cada item por todos os métodos que conseguem lê-lo e compara lado a lado.</li>
+<li><b>VDLiveUpdate</b>: um motor de auto-update flashless e incremental embarcado em módulos KernelSU, APatch e Magisk.</li>
+<li><b>VD-Modules</b>: nosso repositório de módulos MMRL e WebUI-X.</li>
+<li><b>build.prop (@VictorGabriel7Dev)</b>: um dataset de fingerprints de build.prop de Pixel.</li>
+<li><b>mtproto-store (@VictorGabriel7Dev)</b>: use o Telegram como object store a partir de um CLI Go pequeno.</li>
 </ul>
 
 <h3>Contatos</h3>
 <ul>
+<li><a href="https://vd171.ru">vd171.ru</a></li>
+<li><a href="https://vd.priv8.ru">vd.priv8.ru</a></li>
 <li>Telegram: <a href="https://t.me/VD_Priv8">@VD_Priv8</a></li>
-<li>GitHub: <a href="https://github.com/VD171">@VD171</a> &middot; E-mail: vd.priv8@pm.me</li>
-<li>Licença: Apache-2.0</li>
+<li>E-mail: vd.priv8@pm.me</li>
+<li>XDA-Developers: <a href="https://xdaforums.com/m/vd171.4699873/">@VD171</a></li>
+<li>GitHub: <a href="https://github.com/VD171">@VD171</a></li>
 </ul>
 
 <p><i>O VD Dropbear é independente e não-oficial. Ele empacota o Dropbear do Matt Johnston e as ferramentas OpenSSH/rsync sob as licenças próprias delas. Um login cai num shell root completo por padrão; proteja de acordo.</i></p>

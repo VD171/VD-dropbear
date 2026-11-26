@@ -47,7 +47,7 @@ VD Dropbear start een SSH-server, en **elke verbinding die zich met succes authe
 
 ## Ondersteunde versies
 
-Beveiligingsfixes landen op de nieuwste release. De serverbinary volgt upstream Dropbear; upstream beveiligingsreleases worden herbouwd en uitgeleverd zodra de CI ze oppikt.
+Beveiligingsfixes landen op de nieuwste release. De serverbinary volgt upstream Dropbear, upstream beveiligingsreleases worden herbouwd en uitgeleverd zodra de CI ze oppikt.
 
 ## Een kwetsbaarheid melden
 
@@ -62,4 +62,4 @@ Vermeld de versie, een beschrijving, en (idealiter) een reproductie. Je krijgt e
 
 ---
 
-> _Deze documentatie is gegenereerd met Claude (Anthropic) en wordt onderhouden door VD171. Correcties en verbeteringen zijn welkom; zie [CONTRIBUTING.md](CONTRIBUTING.md)._
+> _Deze documentatie is gegenereerd met Claude (Anthropic) en wordt onderhouden door VD171. Correcties en verbeteringen zijn welkom, zie [CONTRIBUTING.md](CONTRIBUTING.md)._

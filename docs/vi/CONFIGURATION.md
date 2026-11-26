@@ -30,9 +30,9 @@
 # Cấu hình
 
 Các thiết lập nằm trong `/data/adb/vddropbear/config` (được tạo mầm từ `module/common/config.default`
-ở lần khởi động đầu tiên). **WebUI** chỉnh sửa tệp này giúp bạn; bạn cũng có thể chỉnh sửa nó bằng tay.
+ở lần khởi động đầu tiên). **WebUI** chỉnh sửa tệp này giúp bạn, bạn cũng có thể chỉnh sửa nó bằng tay.
 Nó được source như shell, nên hãy dùng `KEY=value` không có khoảng trắng quanh `=`. Các thiết lập không
-phải là secret và nằm trên kho device-encrypted; các secret (host keys, authorized keys, các hash mật
+phải là secret và nằm trên kho device-encrypted, các secret (host keys, authorized keys, các hash mật
 khẩu) nằm trong kho secret, không bao giờ ở đây.
 
 Áp dụng thay đổi bằng cách khởi động lại daemon (**Save & restart** của WebUI làm điều này).
@@ -42,18 +42,18 @@ khẩu) nằm trong kho secret, không bao giờ ở đây.
 | Key | Default | Meaning |
 |-----|---------|---------|
 | `ENABLED` | `1` | Khởi động daemon khi boot. `0` vô hiệu hóa nó hoàn toàn. |
-| `START_IN_BFU` | `0` | `0`: chỉ khởi động sau lần mở khóa đầu tiên (AFU); các secret vẫn ở kho credential-encrypted (CE). `1`: cũng khởi động trước lần mở khóa đầu tiên (BFU); các secret chuyển sang kho device-encrypted (DE), đọc được trước khi mở khóa. |
+| `START_IN_BFU` | `0` | `0`: chỉ khởi động sau lần mở khóa đầu tiên (AFU), các secret vẫn ở kho credential-encrypted (CE). `1`: cũng khởi động trước lần mở khóa đầu tiên (BFU), các secret chuyển sang kho device-encrypted (DE), đọc được trước khi mở khóa. |
 | `PORT` | `2222` | Cổng lắng nghe mặc định (các cổng theo từng bind có thể ghi đè nó trong `LISTEN_ADDRESSES`). |
 
 ## Lắng nghe / bind (kết hợp được)
 
-Cho phép bất kỳ tổ hợp nào; các bind được chọn sẽ được gộp lại. Nếu bạn xóa hết, VD Dropbear bind
+Cho phép bất kỳ tổ hợp nào, các bind được chọn sẽ được gộp lại. Nếu bạn xóa hết, VD Dropbear bind
 loopback thay vì mọi giao diện.
 
 | Key | Default | Meaning |
 |-----|---------|---------|
 | `LISTEN_LOOPBACK` | `1` | Chỉ lắng nghe trên `127.0.0.1` / `::1`. |
-| `LISTEN_ALL` | `0` | Lắng nghe trên mọi giao diện (`0.0.0.0` / `::`); phơi bày thiết bị. |
+| `LISTEN_ALL` | `0` | Lắng nghe trên mọi giao diện (`0.0.0.0` / `::`), phơi bày thiết bị. |
 | `LISTEN_IPV4` | `1` | Bao gồm các bind IPv4. |
 | `LISTEN_IPV6` | `1` | Bao gồm các bind IPv6. |
 | `LISTEN_ADDRESSES` | `""` | Các bind cụ thể bổ sung, phân tách bằng dấu phẩy: `addr` (dùng `PORT`) hoặc `addr:port`, IPv4 hoặc IPv6. |
@@ -69,7 +69,7 @@ loopback thay vì mọi giao diện.
 
 ## Xác thực
 
-Một lần đăng nhập chạy dưới tài khoản mà bạn xác thực: mặc định là **root**, hoặc một tài khoản có đặc quyền thấp hơn (`shell`, `system`). Khóa là mặc định; mật khẩu là tùy chọn bật thêm.
+Một lần đăng nhập chạy dưới tài khoản mà bạn xác thực: mặc định là **root**, hoặc một tài khoản có đặc quyền thấp hơn (`shell`, `system`). Khóa là mặc định, mật khẩu là tùy chọn bật thêm.
 
 | Key | Default | Meaning |
 |-----|---------|---------|
@@ -117,4 +117,4 @@ Nó chứa host key, `authorized_keys`, và tệp hash `passwd`. Xem [BUILDING.m
 
 ---
 
-> _Tài liệu này được tạo bằng Claude (Anthropic) và được duy trì bởi VD171. Chúng tôi hoan nghênh các chỉnh sửa và cải tiến; xem [CONTRIBUTING.md](CONTRIBUTING.md)._
+> _Tài liệu này được tạo bằng Claude (Anthropic) và được duy trì bởi VD171. Chúng tôi hoan nghênh các chỉnh sửa và cải tiến, xem [CONTRIBUTING.md](CONTRIBUTING.md)._

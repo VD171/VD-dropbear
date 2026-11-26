@@ -31,7 +31,7 @@
 
 VD Dropbear levererar **[Dropbear](https://github.com/mkj/dropbear) upstream** (taggen som är fäst i
 [`UPSTREAM_VERSION`](../../UPSTREAM_VERSION)) plus den lilla, granskningsbara patchuppsättningen i
-[`patches/`](../../patches/). CI bygger det; du kan reproducera det lokalt.
+[`patches/`](../../patches/). CI bygger det, du kan reproducera det lokalt.
 
 ## Snabbstart
 
@@ -52,7 +52,7 @@ och korskompilerar sedan `vddropbear` och `dropbearkey` till `module/bin/<abi>/`
 24`), länkad mot bionic-libc som varje Android-enhet redan har. libtomcrypt förblir inbäddat i binären;
 endast C-biblioteket är dynamiskt. Se [Dynamisk, inte static-PIE](#dynamisk-inte-static-pie).
 
-Binärerna **committas inte**; de byggs av CI vid varje tagg och bifogas till releasen. Se
+Binärerna **committas inte**, de byggs av CI vid varje tagg och bifogas till releasen. Se
 [`.gitignore`](../../.gitignore).
 
 ---
@@ -62,7 +62,7 @@ Binärerna **committas inte**; de byggs av CI vid varje tagg och bifogas till re
 Dropbears lösenordsautentisering är skriven för en vanlig Unix-värd med `crypt()` och `/etc/shadow`.
 Android har **ingetdera**, och det krockar med bygget på tre separata ställen. Det här avsnittet
 dokumenterar var och en av dem, för det är precis den sortens sak som är smärtsam att återupptäcka. Allt
-hanteras av patchen [`0003-password-file.patch`](../../patches/0003-password-file.patch); inget nedan
+hanteras av patchen [`0003-password-file.patch`](../../patches/0003-password-file.patch), inget nedan
 lämnas åt slumpen vid körning.
 
 ### 1. bionic har inget användbart `crypt()`
@@ -139,7 +139,7 @@ spelar roll, och det lärdes på det hårda sättet, **på en riktig enhet**, in
 
 - Ett **static-PIE**-bygge *ser* bra ut (`file` rapporterar en ren `static-pie executable`) och länkar
   utan fel, men **gör en SIGSEGV i samma stund som det körs på enheten** (verifierat på en arm64 Android
-  16-telefon, exit 139, ingen användbar tombstone). Statiska körbara filer på Android är sköra; den
+  16-telefon, exit 139, ingen användbar tombstone). Statiska körbara filer på Android är sköra, den
   pålitliga formen är en vanlig dynamisk binär, vilket också är hur varje etablerad Android-dropbear
   levereras.
 - Ett **statiskt, non-PIE**-bygge startar inte ens: bionic avvisar det med
@@ -157,7 +157,7 @@ felaktigt lösenord avvisat.)
 ## Ingen `-E`-flagga
 
 Servern byggs med `--disable-syslog`, så den loggar alltid till stderr och upstream-alternativet `-E`
-("log to stderr") **finns inte** i denna binär; att skicka det skriver ut `Invalid option -E` och
+("log to stderr") **finns inte** i denna binär, att skicka det skriver ut `Invalid option -E` och
 daemonen startar aldrig. Modulens argumentbyggare skickar därför inte `-E`.
 
 ## openpty
@@ -178,7 +178,7 @@ inte beroende av det.)
   inbyggda krypto räcker för dessa två), med ett litet statiskt **zlib** som detta skript bygger först.
 
 OpenSSH på Android är lika kinkigt som crypt()-historien ovan, eftersom dess `configure` feldetekterar
-flera libc-funktioner vid korskompilering. Skriptet kodar fixen; för protokollet är delarna:
+flera libc-funktioner vid korskompilering. Skriptet kodar fixen, för protokollet är delarna:
 
 1. **Ett cache-seed av funktioner som bionic saknar** men som configure tror att det har, så att
    compat-versionerna kompileras istället: `recallocarray`, `close_range`, `getentropy`, `getrandom`,
@@ -225,4 +225,4 @@ file ./dropbear   # -> dynamically linked, interpreter /system/bin/linker64, for
 
 ---
 
-> _Denna dokumentation genererades med Claude (Anthropic) och underhålls av VD171. Rättelser och förbättringar välkomnas; se [CONTRIBUTING.md](CONTRIBUTING.md)._
+> _Denna dokumentation genererades med Claude (Anthropic) och underhålls av VD171. Rättelser och förbättringar välkomnas, se [CONTRIBUTING.md](CONTRIBUTING.md)._

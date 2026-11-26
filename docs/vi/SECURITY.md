@@ -56,7 +56,7 @@ thực của máy chủ này. Vui lòng:
 
 ## Các phiên bản được hỗ trợ
 
-Các bản sửa bảo mật đến với bản phát hành mới nhất. Tệp nhị phân máy chủ bám theo Dropbear upstream; các
+Các bản sửa bảo mật đến với bản phát hành mới nhất. Tệp nhị phân máy chủ bám theo Dropbear upstream, các
 bản phát hành bảo mật upstream được build lại và phát hành ngay khi CI nhận được chúng.
 
 ## Báo cáo một lỗ hổng
@@ -74,4 +74,4 @@ vui lòng cũng báo cáo lên upstream tại <https://matt.ucc.asn.au/dropbear/
 
 ---
 
-> _Tài liệu này được tạo bằng Claude (Anthropic) và được duy trì bởi VD171. Chúng tôi hoan nghênh các chỉnh sửa và cải tiến; xem [CONTRIBUTING.md](CONTRIBUTING.md)._
+> _Tài liệu này được tạo bằng Claude (Anthropic) và được duy trì bởi VD171. Chúng tôi hoan nghênh các chỉnh sửa và cải tiến, xem [CONTRIBUTING.md](CONTRIBUTING.md)._

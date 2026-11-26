@@ -31,7 +31,7 @@
 
 ## Taahhüdümüz
 
-Bu projeye katılımın; yaş, beden, engellilik, etnik köken, cinsiyet özellikleri, cinsiyet kimliği ve
+Bu projeye katılımın, yaş, beden, engellilik, etnik köken, cinsiyet özellikleri, cinsiyet kimliği ve
 ifadesi, deneyim düzeyi, eğitim, sosyoekonomik durum, uyruk, kişisel görünüm, ırk, din veya cinsel
 kimlik ve yönelim fark etmeksizin herkes için tacizden arındırılmış bir deneyim olmasını istiyoruz.
 
@@ -71,4 +71,4 @@ katkıda bulunanları yasaklayabilir.
 
 ---
 
-> _Bu belgeler Claude (Anthropic) ile oluşturulmuş olup VD171 tarafından yürütülmektedir. Düzeltmeler ve iyileştirmeler memnuniyetle karşılanır; bkz. [CONTRIBUTING.md](CONTRIBUTING.md)._
+> _Bu belgeler Claude (Anthropic) ile oluşturulmuş olup VD171 tarafından yürütülmektedir. Düzeltmeler ve iyileştirmeler memnuniyetle karşılanır, bkz. [CONTRIBUTING.md](CONTRIBUTING.md)._

@@ -59,15 +59,15 @@ tutun.
 
 ## Pull request'ler
 
-- PR başına bir mantıksal değişiklik; motivasyonu ve güvenlik etkisini açıklayın.
-- Mevcut kabuk stiline uyun (POSIX `sh` / Android `mksh`; bashism yok).
+- PR başına bir mantıksal değişiklik, motivasyonu ve güvenlik etkisini açıklayın.
+- Mevcut kabuk stiline uyun (POSIX `sh` / Android `mksh`, bashism yok).
 - Her dosya kısa bir SPDX başlığı taşır. Onu koruyun.
 - Gerçek, kullanıcıya görünür her değişiklik için [`CHANGELOG.md`](../../CHANGELOG.md)'yi `[Unreleased]` altında güncelleyin.
 - Bir PR göndererek, katkınızı projenin [Apache-2.0](../../LICENSE) lisansı altında lisanslamayı kabul edersiniz.
 
 ## Çeviriler
 
-README ve belgeler birçok dilde tutulur (`README.<lang>.md`). İngilizce gerçeğin kaynağıdır; çeviriler
+README ve belgeler birçok dilde tutulur (`README.<lang>.md`). İngilizce gerçeğin kaynağıdır, çeviriler
 onu izler. Bir çeviriyi geliştirir veya bir dil eklerseniz, yapıyı ve bölüm bağlantı noktalarını
 İngilizce sürümle aynı tutun.
 
@@ -81,4 +81,4 @@ bildirin.
 
 ---
 
-> _Bu belgeler Claude (Anthropic) ile oluşturulmuş olup VD171 tarafından yürütülmektedir. Düzeltmeler ve iyileştirmeler memnuniyetle karşılanır; bkz. [CONTRIBUTING.md](CONTRIBUTING.md)._
+> _Bu belgeler Claude (Anthropic) ile oluşturulmuş olup VD171 tarafından yürütülmektedir. Düzeltmeler ve iyileştirmeler memnuniyetle karşılanır, bkz. [CONTRIBUTING.md](CONTRIBUTING.md)._

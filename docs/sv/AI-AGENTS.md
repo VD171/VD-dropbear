@@ -64,7 +64,7 @@ Det här är root, så behandla det som root:
 - ge agenten sin **egen autentiseringsuppgift**, inte din personliga, och peka den mot ett konto med lägre behörighet (`shell`) om du vill begränsa dess räckvidd;
 - begränsa bindningarna till nätverk du litar på: loopback eller ett VPN snarare än det öppna
   internet (se [Konfiguration](CONFIGURATION.md));
-- håll lösenordsautentisering avstängd; en nyckel går att återkalla och skrivs aldrig in;
+- håll lösenordsautentisering avstängd, en nyckel går att återkalla och skrivs aldrig in;
 - du kan återkalla en nyckel eller stoppa daemonen när som helst från WebUI;
 - kom ihåg att en standardanslutning är en fullständig root-session. Ge agenten bara den räckvidd den behöver.
 
@@ -81,4 +81,4 @@ Det här är root, så behandla det som root:
 
 ---
 
-> _Denna dokumentation genererades med Claude (Anthropic) och underhålls av VD171. Rättelser och förbättringar välkomnas; se [CONTRIBUTING.md](CONTRIBUTING.md)._
+> _Denna dokumentation genererades med Claude (Anthropic) och underhålls av VD171. Rättelser och förbättringar välkomnas, se [CONTRIBUTING.md](CONTRIBUTING.md)._

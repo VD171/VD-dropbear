@@ -30,7 +30,7 @@
 # Architecture
 
 VD Dropbear is a KernelSU / APatch / Magisk module that runs exactly one Dropbear SSH daemon, driven
-entirely by configuration. Nothing about the SSH server is hard-coded to one device; everything
+entirely by configuration. Nothing about the SSH server is hard-coded to one device, everything
 specific is runtime config or a secret.
 
 ## Pieces
@@ -38,7 +38,7 @@ specific is runtime config or a secret.
 - `module/common/vddropbear.sh` is the core library: load config (with safe built-in defaults),
   resolve the secret store, ensure a host key, build the Dropbear argument vector, and manage a single
   daemon instance (start / stop / status / restart).
-- `module/service.sh`: boot entry. Honours the BFU/AFU start policy; in AFU mode it waits for
+- `module/service.sh`: boot entry. Honours the BFU/AFU start policy, in AFU mode it waits for
   credential-encrypted storage to unlock without stalling boot.
 - `module/action.sh` is the manager's **Action** button: (re)launch the daemon. It never reads stdin
   and detaches the daemon into its own session, so the manager does not hang.
@@ -58,10 +58,10 @@ inside the manager app, so a daemon started from either inherited the app's free
 (`/apps/uid_<uid>/pid_<pid>`). Android's `CachedAppOptimizer` freezes that cgroup once it caches the
 app, and the daemon is frozen with it while still holding its listening socket. TCP connects keep
 completing because the backlog lives in the kernel, but nothing calls `accept()`, so clients hang at
-"Connection established ... Local version string" with no error on either side; `/proc/<pid>/wchan`
+"Connection established ... Local version string" with no error on either side, `/proc/<pid>/wchan`
 reads `do_freezer_trap` instead of `do_select`. `vddb_escape_freezer` now moves the spawning shell to
 the root cgroup (which the freezer never touches) before the fork, so the daemon inherits the exit. It
-is a no-op at boot (already at `/`) and on platforms without the freezer - do not "simplify" the spawn
+is a no-op at boot (already at `/`) and on platforms without the freezer, do not "simplify" the spawn
 back to a bare `setsid`.
 
 ## The secret store (CE vs DE, BFU vs AFU)
@@ -75,7 +75,7 @@ each boot stage.
 
 ## The patch set
 
-The SSH server stays upstream Dropbear; our changes are a few reviewable patches (see
+The SSH server stays upstream Dropbear, our changes are a few reviewable patches (see
 [patches/README.md](../patches/README.md)):
 
 - a neutral, runtime-configurable identity banner;
@@ -88,11 +88,11 @@ The SSH server stays upstream Dropbear; our changes are a few reviewable patches
 A static page in the manager's WebUI (KernelSU / APatch / WebUI-X). It drives
 `module/common/vddb-webui.sh` through the `ksu.exec` bridge: status, start/stop/restart, config
 read/write, and management of keys and password accounts. All data crosses the bridge base64-encoded,
-so the shell never interprets it; password hashes are computed in the browser with WebCrypto, so the
+so the shell never interprets it, password hashes are computed in the browser with WebCrypto, so the
 clear-text password never leaves the page.
 
 <!-- doc-footer -->
 
 ---
 
-> _This documentation was generated with Claude (Anthropic) and is maintained by VD171. Corrections and improvements are welcome; see [CONTRIBUTING.md](../CONTRIBUTING.md)._
+> _This documentation was generated with Claude (Anthropic) and is maintained by VD171. Corrections and improvements are welcome, see [CONTRIBUTING.md](../CONTRIBUTING.md)._

@@ -61,7 +61,7 @@ user. The hash is computed in your browser with PBKDF2; the password itself neve
 ## 4. Pick a port and where to listen
 
 Under **Settings**, set the **Port** and choose the binds. By default VD Dropbear listens only on
-**loopback**; to reach it from your LAN or a VPN, enable the interfaces you want. Avoid
+**loopback**, to reach it from your LAN or a VPN, enable the interfaces you want. Avoid
 **Listen on all interfaces** unless you understand the exposure.
 
 Press **Save & restart** to apply, then **Start** if it is not already running.
@@ -118,13 +118,13 @@ device-encrypted storage, which is readable before unlock: a deliberate, documen
   and a host key could be generated.
 - **Key rejected.** Confirm the public key line is exactly as your client offers it, and that the
   username you log in as is one the system resolves (usually `root`).
-- **Can't connect from another machine.** You are probably still bound to loopback only; enable the
+- **Can't connect from another machine.** You are probably still bound to loopback only, enable the
   interface you need and restart.
-- **SFTP/scp fails but shell works.** Make sure the bundled `sftp-server` shipped for your ABI; the
+- **SFTP/scp fails but shell works.** Make sure the bundled `sftp-server` shipped for your ABI, the
   WebUI status shows the detected ABI.
 
 <!-- doc-footer -->
 
 ---
 
-> _This documentation was generated with Claude (Anthropic) and is maintained by VD171. Corrections and improvements are welcome; see [CONTRIBUTING.md](../CONTRIBUTING.md)._
+> _This documentation was generated with Claude (Anthropic) and is maintained by VD171. Corrections and improvements are welcome, see [CONTRIBUTING.md](../CONTRIBUTING.md)._

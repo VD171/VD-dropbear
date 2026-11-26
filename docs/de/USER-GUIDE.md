@@ -60,12 +60,12 @@ cat ~/.ssh/id_ed25519.pub     # paste this into the WebUI
 Die Passwortanmeldung ist standardmäßig aus (eine Anmeldung ist standardmäßig root, daher werden Schlüssel
 bevorzugt). Zum Aktivieren schalte in den Einstellungen **Password login** ein und setze dann unter
 **Password accounts** ein Passwort für den Anmeldebenutzer. Der Hash wird in deinem Browser mit
-PBKDF2 berechnet; das Passwort selbst verlässt die Seite nie.
+PBKDF2 berechnet, das Passwort selbst verlässt die Seite nie.
 
 ## 4. Einen Port und das Lauschziel wählen
 
 Setze unter **Settings** den **Port** und wähle die Bindungen. Standardmäßig lauscht VD Dropbear nur
-auf **Loopback**; um es aus deinem LAN oder einem VPN zu erreichen, aktiviere die gewünschten
+auf **Loopback**, um es aus deinem LAN oder einem VPN zu erreichen, aktiviere die gewünschten
 Schnittstellen. Vermeide **Listen on all interfaces**, es sei denn, du verstehst die damit
 verbundene Exponierung.
 
@@ -126,10 +126,10 @@ Kompromiss. Siehe [Sicherheitsmodell](#) in der README.
 - **Keine Verbindung von einem anderen Rechner.** Wahrscheinlich bist du noch nur an Loopback
   gebunden: aktiviere die benötigte Schnittstelle und starte neu.
 - **SFTP/scp schlägt fehl, aber die Shell funktioniert.** Stelle sicher, dass der mitgelieferte
-  `sftp-server` für deine ABI ausgeliefert wurde; der WebUI-Status zeigt die erkannte ABI.
+  `sftp-server` für deine ABI ausgeliefert wurde, der WebUI-Status zeigt die erkannte ABI.
 
 <!-- doc-footer -->
 
 ---
 
-> _Diese Dokumentation wurde mit Claude (Anthropic) erstellt und wird von VD171 gepflegt. Korrekturen und Verbesserungen sind willkommen; siehe [CONTRIBUTING.md](CONTRIBUTING.md)._
+> _Diese Dokumentation wurde mit Claude (Anthropic) erstellt und wird von VD171 gepflegt. Korrekturen und Verbesserungen sind willkommen, siehe [CONTRIBUTING.md](CONTRIBUTING.md)._

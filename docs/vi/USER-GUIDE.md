@@ -62,7 +62,7 @@ bao giờ rời khỏi trang.
 ## 4. Chọn một cổng và nơi lắng nghe
 
 Dưới mục **Settings**, đặt **Port** và chọn các bind. Theo mặc định VD Dropbear chỉ lắng nghe trên
-**loopback**; để truy cập nó từ LAN hoặc một VPN của bạn, hãy bật các giao diện bạn muốn. Tránh
+**loopback**, để truy cập nó từ LAN hoặc một VPN của bạn, hãy bật các giao diện bạn muốn. Tránh
 **Listen on all interfaces** trừ khi bạn hiểu mức độ phơi bày.
 
 Nhấn **Save & restart** để áp dụng, rồi **Start** nếu nó chưa chạy.
@@ -121,10 +121,10 @@ liệu. Xem [Mô hình bảo mật](#) trong README.
 - **Không thể kết nối từ máy khác.** Có lẽ bạn vẫn chỉ đang bind vào loopback. Hãy bật giao diện bạn
   cần và khởi động lại.
 - **SFTP/scp thất bại nhưng shell hoạt động.** Hãy chắc chắn `sftp-server` đóng gói kèm theo đã được
-  phát hành cho ABI của bạn; trạng thái WebUI hiển thị ABI được phát hiện.
+  phát hành cho ABI của bạn, trạng thái WebUI hiển thị ABI được phát hiện.
 
 <!-- doc-footer -->
 
 ---
 
-> _Tài liệu này được tạo bằng Claude (Anthropic) và được duy trì bởi VD171. Chúng tôi hoan nghênh các chỉnh sửa và cải tiến; xem [CONTRIBUTING.md](CONTRIBUTING.md)._
+> _Tài liệu này được tạo bằng Claude (Anthropic) và được duy trì bởi VD171. Chúng tôi hoan nghênh các chỉnh sửa và cải tiến, xem [CONTRIBUTING.md](CONTRIBUTING.md)._

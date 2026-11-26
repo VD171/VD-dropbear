@@ -38,7 +38,7 @@ VD Dropbear เป็นโมดูล KernelSU / APatch / Magisk ที่ร�
 - `module/common/vddropbear.sh`: ไลบรารีแกนหลัก: โหลดการกำหนดค่า (พร้อมค่าเริ่มต้นในตัวที่ปลอดภัย)
   ระบุที่เก็บความลับ รับประกันว่ามี host key สร้าง argument vector ของ Dropbear
   และจัดการ daemon เพียงอินสแตนซ์เดียว (start / stop / status / restart)
-- `module/service.sh`: จุดเริ่มต้นเมื่อบูต ทำตามนโยบายการเริ่ม BFU/AFU; ในโหมด AFU
+- `module/service.sh`: จุดเริ่มต้นเมื่อบูต ทำตามนโยบายการเริ่ม BFU/AFU, ในโหมด AFU
   มันจะรอให้ที่เก็บแบบ credential-encrypted ปลดล็อกโดยไม่ทำให้การบูตค้าง
 - `module/action.sh`: ปุ่ม **Action** ของตัวจัดการ: (เริ่มใหม่) daemon มันไม่อ่าน stdin เลย
   และแยก daemon ออกไปเป็นเซสชันของตัวเอง ดังนั้นตัวจัดการจึงไม่ค้าง
@@ -53,6 +53,16 @@ VD Dropbear เป็นโมดูล KernelSU / APatch / Magisk ที่ร�
 `pgrep -x` พอดี (`mksh` ของ Android ไม่มี `exec -a`) มันถูกเรียกใช้ด้วย `setsid` เพื่อให้แยกออกจากกลุ่มโปรเซสของผู้เรียก:
 นั่นคือสิ่งที่ทำให้ Action ของตัวจัดการไม่ถูกบล็อก
 
+`setsid` ไม่เคยครอบคลุม cgroups และช่องว่างนั้นเป็นการถดถอยที่เกิดขึ้นจริง: ปุ่ม Action และ WebUI ทำงานอยู่ภายในแอปตัวจัดการ
+ดังนั้น daemon ที่เริ่มจากอันใดอันหนึ่งจึงรับสืบทอด freezer cgroup ของแอป (`/apps/uid_<uid>/pid_<pid>`) มา
+`CachedAppOptimizer` ของ Android จะแช่แข็ง cgroup นั้นทันทีที่แคชแอป และ daemon ก็ถูกแช่แข็งไปด้วยทั้งที่ยังถือ listening
+socket ของมันอยู่ การเชื่อมต่อ TCP ยังคงสำเร็จต่อไปเพราะ backlog อยู่ในเคอร์เนล แต่ไม่มีอะไรเรียก `accept()`
+ไคลเอนต์จึงค้างอยู่ที่ "Connection established ... Local version string" โดยไม่มีข้อผิดพลาดที่ฝั่งใดเลย และ
+`/proc/<pid>/wchan` อ่านค่าได้เป็น `do_freezer_trap` แทนที่จะเป็น `do_select` ตอนนี้ `vddb_escape_freezer`
+จะย้ายเชลล์ที่ทำการ spawn ไปยัง root cgroup (ที่ freezer ไม่เคยแตะต้อง) ก่อน fork เพื่อให้ daemon รับสืบทอดการออกนี้
+มันเป็น no-op ตอนบูต (อยู่ที่ `/` อยู่แล้ว) และบนแพลตฟอร์มที่ไม่มี freezer อย่า "ทำให้ง่ายขึ้น" โดยเปลี่ยนการ spawn
+กลับไปเป็น `setsid` เปล่า ๆ
+
 ## ที่เก็บความลับ (CE กับ DE, BFU กับ AFU)
 
 การตั้งค่าไม่ใช่ความลับและอยู่บนที่เก็บแบบ device-encrypted (`/data/adb/vddropbear`) ซึ่งอ่านได้ตอนบูต
@@ -63,7 +73,7 @@ VD Dropbear เป็นโมดูล KernelSU / APatch / Magisk ที่ร�
 
 ## ชุดแพตช์
 
-SSH server ยังคงเป็น upstream Dropbear; การเปลี่ยนแปลงของเราเป็นแพตช์ที่ตรวจทานได้ไม่กี่รายการ (ดู
+SSH server ยังคงเป็น upstream Dropbear, การเปลี่ยนแปลงของเราเป็นแพตช์ที่ตรวจทานได้ไม่กี่รายการ (ดู
 [patches/README.md](../../patches/README.md)):
 
 - แบนเนอร์ระบุตัวตนที่เป็นกลางและกำหนดค่าได้ขณะรันไทม์;
@@ -76,7 +86,7 @@ SSH server ยังคงเป็น upstream Dropbear; การเปลี�
 หน้าแบบสแตติกใน WebUI ของตัวจัดการ (KernelSU / APatch / WebUI-X) มันขับเคลื่อน
 `module/common/vddb-webui.sh` ผ่านบริดจ์ `ksu.exec`: สถานะ, start/stop/restart, การอ่าน/เขียนการกำหนดค่า
 และการจัดการคีย์และบัญชีรหัสผ่าน ข้อมูลทั้งหมดข้ามบริดจ์ในรูปแบบ base64
-ดังนั้นเชลล์จึงไม่เคยตีความมัน; แฮชรหัสผ่านถูกคำนวณในเบราว์เซอร์ด้วย WebCrypto
+ดังนั้นเชลล์จึงไม่เคยตีความมัน, แฮชรหัสผ่านถูกคำนวณในเบราว์เซอร์ด้วย WebCrypto
 ดังนั้นรหัสผ่านแบบข้อความธรรมดาจึงไม่เคยออกจากหน้านี้
 
 <!-- doc-footer -->

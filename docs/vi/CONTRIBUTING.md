@@ -59,8 +59,8 @@ trong PR.
 
 ## Pull request
 
-- Mỗi PR một thay đổi logic; mô tả động cơ và tác động bảo mật.
-- Khớp với phong cách shell hiện có (POSIX `sh` / Android `mksh`; không dùng bashisms).
+- Mỗi PR một thay đổi logic, mô tả động cơ và tác động bảo mật.
+- Khớp với phong cách shell hiện có (POSIX `sh` / Android `mksh`, không dùng bashisms).
 - Mỗi tệp mang một header SPDX ngắn. Hãy giữ nó.
 - Cập nhật [`CHANGELOG.md`](../../CHANGELOG.md) dưới mục `[Unreleased]` cho bất kỳ thay đổi thực sự, hữu
   hình với người dùng nào.
@@ -69,7 +69,7 @@ trong PR.
 
 ## Bản dịch
 
-README và tài liệu được duy trì bằng nhiều ngôn ngữ (`README.<lang>.md`). Tiếng Anh là nguồn chuẩn; các
+README và tài liệu được duy trì bằng nhiều ngôn ngữ (`README.<lang>.md`). Tiếng Anh là nguồn chuẩn, các
 bản dịch bám theo nó. Nếu bạn cải thiện một bản dịch hoặc thêm một ngôn ngữ, hãy giữ cấu trúc và các neo
 mục giống hệt phiên bản tiếng Anh.
 
@@ -82,4 +82,4 @@ theo [`SECURITY.md`](SECURITY.md) và báo cáo riêng tư thay vì mở một i
 
 ---
 
-> _Tài liệu này được tạo bằng Claude (Anthropic) và được duy trì bởi VD171. Chúng tôi hoan nghênh các chỉnh sửa và cải tiến; xem [CONTRIBUTING.md](CONTRIBUTING.md)._
+> _Tài liệu này được tạo bằng Claude (Anthropic) và được duy trì bởi VD171. Chúng tôi hoan nghênh các chỉnh sửa và cải tiến, xem [CONTRIBUTING.md](CONTRIBUTING.md)._

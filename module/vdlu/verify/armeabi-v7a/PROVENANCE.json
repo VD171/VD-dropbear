@@ -1,0 +1,18 @@
+{
+  "_comment": "Per-ABI provenance for ed25519-mini beside this file (STANDARDS.md 8, HARD). tooling/provenance-check.sh enforces that binaries[].file names the binary. The aggregate vdlu/verify/PROVENANCE.json carries the shared crypto/build context.",
+  "module": "vddropbear",
+  "abi": "armeabi-v7a",
+  "binaries": [
+    {
+      "file": "ed25519-mini",
+      "source": "https://tweetnacl.cr.yp.to/20140427/tweetnacl.c",
+      "version": "TweetNaCl 20140427",
+      "license": "public domain",
+      "sha256": "868a7cdc934ecdd6d502522c8c21f5fb0b1f0e2d0aabf0f59b6bad4552bf795f",
+      "bytes": 25336,
+      "build_flags": "-O2 -ffunction-sections -fdata-sections -Wl,--gc-sections, then llvm-strip",
+      "toolchain": "Android NDK r29 clang, API 28",
+      "reproduce": "build.sh (wrapper main.c over TweetNaCl crypto_sign_open)"
+    }
+  ]
+}

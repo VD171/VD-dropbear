@@ -26,8 +26,20 @@
 # Changelog
 
 All notable, real and significant changes to **VD Dropbear** are recorded here.
-The format follows [Keep a Changelog](https://keepachangelog.com/); versions are tagged in the
+The format follows [Keep a Changelog](https://keepachangelog.com/), versions are tagged in the
 module (`module.prop`) and on GitHub Releases.
+
+## [v1.14] (2026-11-26)
+
+### Changed
+- **Updated the flashless updater engine to ENGINE_VERSION 8.** Incremental updates now trim the
+  download plan per ABI (a pruned, single-ABI install drops the other ABIs' additions instead of
+  re-fetching the full universal tree), and the engine never reverts a module that is already ahead
+  of its feed, with a boot-time self-heal of a stale downgrade plan. The SSH daemon is unchanged.
+
+### Documentation
+- Canonicalized the READMEs across all 22 languages, added WebUI screenshots, and translated the
+  app-freezer-cgroup architecture note into every language.
 
 ## [v1.13] (2026-11-25)
 
@@ -56,7 +68,7 @@ module (`module.prop`) and on GitHub Releases.
 - **Stopping or restarting the daemon no longer deletes the `/dev/null` device node.** The daemon ran with
   `-P /dev/null`, and Dropbear unlinks its pid file when it exits, so every stop/restart removed the
   `/dev/null` character device. The next root-side `> /dev/null` redirect then recreated it as a regular
-  `0644` file, and from then on every process that opened `/dev/null` failed with `EACCES` - the zygote
+  `0644` file, and from then on every process that opened `/dev/null` failed with `EACCES`, the zygote
   aborted and apps died at launch with no crash record until a reboot. The pid file now lives in the module
   state dir. Reported and fixed by Konstantin Nikiforov (@helllamer, GitHub PR #2).
 
@@ -88,11 +100,11 @@ module (`module.prop`) and on GitHub Releases.
 - **Hardened the flashless updater's manifest verification.** The signature-profile check now fails closed on
   any unexpected value (a corrupted or malformed `profile` no longer degrades to best-effort verification), and
   every manifest is now bound to its own module id, so a manifest signed for a different module cannot be applied
-  to this one. The normal update path was already signature-checked; these close edge cases around a corrupted
+  to this one. The normal update path was already signature-checked, these close edge cases around a corrupted
   config value and cross-module or MITM feed scenarios.
 
 ### Added
-- **`PASS_ENV` setting (on by default) - the SSH session inherits the daemon's environment.** With it on
+- **`PASS_ENV` setting (on by default), the SSH session inherits the daemon's environment.** With it on
   (dropbear `-e`), a login session sees the platform environment the module service was started with, so tools
   run over SSH that shell out to the Android framework (`am`, `content`, `pm`) work instead of failing silently
   with empty output. Turn it off for a leaner, bare login environment. Settable from the WebUI Settings tab.
@@ -106,7 +118,7 @@ module (`module.prop`) and on GitHub Releases.
 
 ### Fixed
 - **Number inputs are legible again in the WebUI.** The boot-retry fields in the Updates tab used unstyled
-  number inputs that rendered with poor contrast on some devices; they now match the other form controls.
+  number inputs that rendered with poor contrast on some devices, they now match the other form controls.
 
 ### Changed
 - Added an Apache-2.0 SPDX and copyright header to the flashless updater engine and the WebUI widget, in
@@ -119,12 +131,12 @@ module (`module.prop`) and on GitHub Releases.
   in the WebUI Updates tab) decides when the updater is allowed to fetch: `any` (Wi-Fi or mobile, the default
   and the previous behaviour), `wifi` (only on Wi-Fi), or `mobile` (only on mobile data). It classifies the
   active route with a kernel routing-table lookup, so it costs no packet and wakes no radio, and it gates only
-  the download (and the boot retry probe); checking for a new version still works on any network, and a fetch
+  the download (and the boot retry probe), checking for a new version still works on any network, and a fetch
   on a disallowed network is simply deferred and resumed later.
 
 ### Changed
 - **`net_policy` replaces `allow_metered`.** The old `allow_metered` flag was never actually consulted by the
-  updater; `net_policy` is the real, three-way control that supersedes it.
+  updater, `net_policy` is the real, three-way control that supersedes it.
 
 ## [v1.06] (2026-11-16)
 
@@ -134,7 +146,7 @@ module (`module.prop`) and on GitHub Releases.
   and no wakelock, so it costs essentially no battery while it waits. It only spends a fetch once a cheap
   routing-table probe shows the network is actually up (no blind radio wake-ups), and a connect timeout keeps
   it from hanging on a captive portal. Because nothing is pinned, the cap is now generous: **`boot_retry_minutes`
-  defaults to 1440** (24 hours of awake-time, so it simply catches you the next time you connect; `0` still
+  defaults to 1440** (24 hours of awake-time, so it simply catches you the next time you connect, `0` still
   turns it off). `boot_retry_interval` stays 30s.
 
 ## [v1.05] (2026-11-16)
@@ -165,15 +177,15 @@ module (`module.prop`) and on GitHub Releases.
 
 ### Fixed
 - **The Updates panel no longer gets stuck on "preparing updater".** A finished update run that left no
-  terminal journal entry kept the progress toast spinning; the updater widget now detects a stalled run and
+  terminal journal entry kept the progress toast spinning, the updater widget now detects a stalled run and
   clears it or offers to resume.
 - **A check no longer reports "check failed" when the device is newer than the feed.** Being ahead of the
-  published update is a benign state; the updater now shows "newer than the feed" instead of an error (more
+  published update is a benign state, the updater now shows "newer than the feed" instead of an error (more
   visible now that the open-the-WebUI check is on by default).
 
 ### Changed
 - **Checking for updates when the WebUI opens is now on by default.** New installs enable
-  `auto_on_webui_open`, so the module looks for a flashless update each time you open its WebUI; existing
+  `auto_on_webui_open`, so the module looks for a flashless update each time you open its WebUI, existing
   installs keep whatever they had. Turn it off in the config if you prefer manual checks.
 
 ## [v1.03] (2026-11-15)
@@ -181,8 +193,8 @@ module (`module.prop`) and on GitHub Releases.
 ### Added
 - **Flashless incremental updates (VD Live Update).** Between releases the module can update itself by
   fetching only the files that changed, each verified against a signed manifest, without reflashing the
-  full zip. The signature check uses a tiny vendored `ed25519-mini` verifier (TweetNaCl); blobs are
-  decompressed with the device's toybox `gzip`; the one network tool, a static `curl`, is fetched on
+  full zip. The signature check uses a tiny vendored `ed25519-mini` verifier (TweetNaCl), blobs are
+  decompressed with the device's toybox `gzip`, the one network tool, a static `curl`, is fetched on
   demand from a signed tools-feed rather than shipped. The flashable zip stays the install and fallback
   path, so the updater is always optional.
 
@@ -205,7 +217,7 @@ module (`module.prop`) and on GitHub Releases.
   legacy protocol was unaffected: its path never calls `pwcopy`.) The bundle build now patches
   `pwcopy()` to null-coalesce `pw_gecos`.
 - **The public-key login toggle now takes effect.** With `PUBKEY_AUTH` off, no `authorized_keys` file is
-  exported, so no key authenticates; before, the toggle did nothing.
+  exported, so no key authenticates, before, the toggle did nothing.
 - **Config values are validated before they reach the daemon.** `HOSTKEY_TYPE` and `RECEIVE_WINDOW` are
   checked (type against the allowed set, window numeric), so a value with a space can no longer split
   into extra daemon flags.
@@ -225,7 +237,7 @@ module (`module.prop`) and on GitHub Releases.
 ### Removed
 - **`LOGIN_USER` setting.** It never reached the daemon (the session account follows the SSH login name
   the client presents, resolved via `getpwnam`), so it was a no-op knob. Removed from the config, the
-  WebUI and the docs; the account is set by the password/key entry and the username on connection.
+  WebUI and the docs, the account is set by the password/key entry and the username on connection.
 
 ## [v1.01] (2026-11-13)
 
@@ -243,9 +255,9 @@ First public release.
 
 ### Added
 - Initial module scaffold: a config-driven, single-daemon launcher, independent of any other module.
-- Core library (`common/vddropbear.sh`): configuration load with safe built-in defaults; secret-store
+- Core library (`common/vddropbear.sh`): configuration load with safe built-in defaults, secret-store
   resolution (credential-encrypted `/data/misc_ce` by default, device-encrypted `/data/adb` only in the
-  opt-in BFU mode); single-instance daemon lifecycle (start / stop / status / restart); and a Dropbear
+  opt-in BFU mode), single-instance daemon lifecycle (start / stop / status / restart), and a Dropbear
   argument vector built entirely from the configuration.
 - `service.sh`: boot entry that honours the BFU/AFU start policy and, in AFU mode, waits for the user's
   credential-encrypted storage to unlock without stalling boot.
@@ -257,11 +269,11 @@ First public release.
 - **Four-ABI support**: `arm64-v8a`, `armeabi-v7a`, `x86`, `x86_64`, covering every device and
   emulator.
 - Build pipeline: `scripts/build.sh` and `scripts/build-bundles.sh` cross-compile **dynamic** binaries
-  (linked against bionic) for all ABIs; a CI workflow rebuilds, packages the module zip, names the
+  (linked against bionic) for all ABIs, a CI workflow rebuilds, packages the module zip, names the
   artifact with the version, publishes a GitHub Release on a `v*` tag (with a per-file sha256 list),
   and tracks upstream. The auditable patch set is documented in `patches/`.
 - **Composable listen/bind model**: loopback, all interfaces, IPv4/IPv6 family filters and specific
-  addresses (each with an optional per-bind port) can be mixed freely; a safety net binds loopback
+  addresses (each with an optional per-bind port) can be mixed freely, a safety net binds loopback
   rather than every interface if the user clears all options.
 - **Bundled file-transfer tools**: `sftp-server`, `scp` and `rsync`, so SFTP, sshfs, GUI clients and
   backups work over the same connection.
@@ -277,24 +289,24 @@ First public release.
     documented format with no obfuscation.
 - **WebUI** (`module/webroot/index.html` + `common/vddb-webui.sh` backend): live status and daemon
   **start / stop / restart**, the **BFU/AFU start toggle**, every setting, authorized-key management,
-  and password accounts whose PBKDF2 hashes are computed in the page with WebCrypto; the clear-text
+  and password accounts whose PBKDF2 hashes are computed in the page with WebCrypto, the clear-text
   password never leaves the browser. Data crosses the `ksu.exec` bridge base64-encoded.
 - **AI-agents use case** documented: a standing SSH root endpoint lets an autonomous agent operate the
   device over the network, with none of ADB's tether or self-exposing debug flags.
 - Project logos (`webroot/assets/logo-{icon,wordmark}.svg`).
 - **Documentation**: a `docs/` set (User guide, Configuration, Architecture, File structure, AI agents,
-  Building), a Code of Conduct and GitHub issue/PR templates; the README and docs are translated into
+  Building), a Code of Conduct and GitHub issue/PR templates, the README and docs are translated into
   **21 languages**, and the project wiki is kept in sync from `docs/` automatically.
 
 ### Security
-- Password login is disabled at runtime by default; keys are the default. When enabled, only a salted,
+- Password login is disabled at runtime by default, keys are the default. When enabled, only a salted,
   high-iteration PBKDF2 hash is stored, never the password.
-- Secrets default to credential-encrypted storage; the device-encrypted fallback is opt-in (BFU) and
+- Secrets default to credential-encrypted storage, the device-encrypted fallback is opt-in (BFU) and
   documented as an exposure trade-off.
 
 ### Notes
 - Runs on KernelSU, APatch and Magisk.
-- Binaries are **dynamic** (linked against bionic); static-PIE binaries SIGSEGV on-device. Interactive
+- Binaries are **dynamic** (linked against bionic), static-PIE binaries SIGSEGV on-device. Interactive
   PTYs need no patch (`openpty` is auto-detected), and the `-E` flag is dropped (the server is built
   `--disable-syslog`). Validated end-to-end on a real arm64 device: password login succeeds and a wrong
   password is rejected.
@@ -303,4 +315,4 @@ First public release.
 
 ---
 
-> _This documentation was generated with Claude (Anthropic) and is maintained by VD171. Corrections and improvements are welcome; see [CONTRIBUTING.md](CONTRIBUTING.md)._
+> _This documentation was generated with Claude (Anthropic) and is maintained by VD171. Corrections and improvements are welcome, see [CONTRIBUTING.md](CONTRIBUTING.md)._

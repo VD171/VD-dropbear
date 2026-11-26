@@ -65,7 +65,7 @@ C'est du root, alors traitez-le comme du root :
 - donnez à l'agent son **propre identifiant**, pas le vôtre, et dirigez-le vers un compte à privilèges réduits (`shell`) si vous voulez limiter sa portée ;
 - limitez les binds aux réseaux de confiance : loopback ou un VPN plutôt que l'Internet ouvert
   (voir [Configuration](CONFIGURATION.md)) ;
-- laissez l'authentification par mot de passe désactivée ; une clé est révocable et ne se tape jamais ;
+- laissez l'authentification par mot de passe désactivée, une clé est révocable et ne se tape jamais ;
 - vous pouvez révoquer une clé ou arrêter le démon à tout moment depuis la WebUI ;
 - rappelez-vous que une connexion par défaut est une session root complète : ne donnez à l'agent que la portée dont il a besoin.
 
@@ -82,4 +82,4 @@ Par USB, sans ADB : activez le partage de connexion USB et liez le démon à son
 
 ---
 
-> _Cette documentation a été générée avec Claude (Anthropic) et est maintenue par VD171. Les corrections et améliorations sont les bienvenues ; voir [CONTRIBUTING.md](CONTRIBUTING.md)._
+> _Cette documentation a été générée avec Claude (Anthropic) et est maintenue par VD171. Les corrections et améliorations sont les bienvenues, voir [CONTRIBUTING.md](CONTRIBUTING.md)._

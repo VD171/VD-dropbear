@@ -30,9 +30,9 @@
 # Configurazione
 
 Le impostazioni risiedono in `/data/adb/vddropbear/config` (inizializzate da
-`module/common/config.default` al primo avvio). La **WebUI** modifica questo file al posto tuo; puoi
+`module/common/config.default` al primo avvio). La **WebUI** modifica questo file al posto tuo, puoi
 anche modificarlo a mano. Viene caricato come shell, quindi usa `KEY=value` senza spazi attorno a `=`.
-Le impostazioni non sono secret e risiedono sullo storage device-encrypted; i secret (host key,
+Le impostazioni non sono secret e risiedono sullo storage device-encrypted, i secret (host key,
 authorized keys, hash delle password) risiedono nel secret store, mai qui.
 
 Applica le modifiche riavviando il daemon (il **Save & restart** della WebUI fa questo).
@@ -42,18 +42,18 @@ Applica le modifiche riavviando il daemon (il **Save & restart** della WebUI fa 
 | Key | Default | Significato |
 |-----|---------|---------|
 | `ENABLED` | `1` | Avvia il daemon all'avvio. `0` lo disabilita del tutto. |
-| `START_IN_BFU` | `0` | `0`: avvia solo dopo il primo sblocco (AFU); i secret restano sullo storage credential-encrypted (CE). `1`: avvia anche prima del primo sblocco (BFU); i secret passano allo storage device-encrypted (DE), leggibili prima dello sblocco. |
+| `START_IN_BFU` | `0` | `0`: avvia solo dopo il primo sblocco (AFU), i secret restano sullo storage credential-encrypted (CE). `1`: avvia anche prima del primo sblocco (BFU), i secret passano allo storage device-encrypted (DE), leggibili prima dello sblocco. |
 | `PORT` | `2222` | Porta di ascolto predefinita (le porte per-bind possono sovrascriverla in `LISTEN_ADDRESSES`). |
 
 ## Ascolto / bind (componibili)
 
-È ammessa qualsiasi combinazione; i bind selezionati vengono uniti. Se cancelli tutto, VD Dropbear fa
+È ammessa qualsiasi combinazione, i bind selezionati vengono uniti. Se cancelli tutto, VD Dropbear fa
 il bind su loopback anziché su ogni interfaccia.
 
 | Key | Default | Significato |
 |-----|---------|---------|
 | `LISTEN_LOOPBACK` | `1` | Ascolta solo su `127.0.0.1` / `::1`. |
-| `LISTEN_ALL` | `0` | Ascolta su ogni interfaccia (`0.0.0.0` / `::`); espone il dispositivo. |
+| `LISTEN_ALL` | `0` | Ascolta su ogni interfaccia (`0.0.0.0` / `::`), espone il dispositivo. |
 | `LISTEN_IPV4` | `1` | Includi i bind IPv4. |
 | `LISTEN_IPV6` | `1` | Includi i bind IPv6. |
 | `LISTEN_ADDRESSES` | `""` | Bind specifici aggiuntivi, separati da virgola: `addr` (usa `PORT`) o `addr:port`, IPv4 o IPv6. |
@@ -69,7 +69,7 @@ il bind su loopback anziché su ogni interfaccia.
 
 ## Autenticazione
 
-Un accesso viene eseguito con l'account con cui ti autentichi: **root** per impostazione predefinita, oppure un account con privilegi inferiori (`shell`, `system`). Le chiavi sono il default; le password sono opzionali.
+Un accesso viene eseguito con l'account con cui ti autentichi: **root** per impostazione predefinita, oppure un account con privilegi inferiori (`shell`, `system`). Le chiavi sono il default, le password sono opzionali.
 
 | Key | Default | Significato |
 |-----|---------|---------|
@@ -117,4 +117,4 @@ Contiene la host key, `authorized_keys` e il file di hash `passwd`. Vedi
 
 ---
 
-> _Questa documentazione è stata generata con Claude (Anthropic) ed è gestita da VD171. Correzioni e miglioramenti sono benvenuti; vedi [CONTRIBUTING.md](CONTRIBUTING.md)._
+> _Questa documentazione è stata generata con Claude (Anthropic) ed è gestita da VD171. Correzioni e miglioramenti sono benvenuti, vedi [CONTRIBUTING.md](CONTRIBUTING.md)._

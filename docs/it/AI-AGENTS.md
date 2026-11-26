@@ -65,7 +65,7 @@ Questo è root, quindi trattalo come root:
 - assegna all'agente una **credenziale propria**, non quella personale, e indirizzalo a un account con privilegi inferiori (`shell`) se vuoi limitarne la portata;
 - limita i bind alle reti di cui ti fidi: loopback o una VPN anziché l'Internet aperto
   (vedi [Configuration](CONFIGURATION.md));
-- tieni disattivata l'autenticazione con password; una chiave è revocabile e non viene mai digitata;
+- tieni disattivata l'autenticazione con password, una chiave è revocabile e non viene mai digitata;
 - puoi revocare una chiave o fermare il daemon in qualsiasi momento dalla WebUI;
 - ricorda che una connessione predefinita è una sessione root completa: concedi all'agente solo la portata di cui ha bisogno.
 
@@ -82,4 +82,4 @@ Via USB, senza ADB: attiva il tethering USB e lega all'indirizzo USB per un coll
 
 ---
 
-> _Questa documentazione è stata generata con Claude (Anthropic) ed è gestita da VD171. Correzioni e miglioramenti sono benvenuti; vedi [CONTRIBUTING.md](CONTRIBUTING.md)._
+> _Questa documentazione è stata generata con Claude (Anthropic) ed è gestita da VD171. Correzioni e miglioramenti sono benvenuti, vedi [CONTRIBUTING.md](CONTRIBUTING.md)._

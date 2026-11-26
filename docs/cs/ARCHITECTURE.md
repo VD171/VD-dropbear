@@ -30,7 +30,7 @@
 # Architektura
 
 VD Dropbear je modul pro KernelSU / APatch / Magisk, který spouští přesně jeden démon Dropbear SSH,
-řízený výhradně konfigurací. Na serveru SSH není nic napevno svázáno s jedním zařízením; vše
+řízený výhradně konfigurací. Na serveru SSH není nic napevno svázáno s jedním zařízením, vše
 specifické je buď běhová konfigurace, nebo tajemství.
 
 ## Součásti
@@ -38,7 +38,7 @@ specifické je buď běhová konfigurace, nebo tajemství.
 - `module/common/vddropbear.sh`, základní knihovna: načte konfiguraci (s bezpečnými vestavěnými
   výchozími hodnotami), určí úložiště tajemství, zajistí hostitelský klíč, sestaví vektor argumentů
   Dropbearu a spravuje jedinou instanci démona (start / stop / stav / restart).
-- `module/service.sh`: vstupní bod při startu. Respektuje politiku spuštění BFU/AFU; v režimu AFU
+- `module/service.sh`: vstupní bod při startu. Respektuje politiku spuštění BFU/AFU, v režimu AFU
   čeká na odemčení úložiště šifrovaného přihlašovacími údaji, aniž by blokoval start.
 - `module/action.sh`, tlačítko **Action** ve správci: (znovu)spustí démona. Nikdy nečte stdin
   a odpojí démona do vlastní relace, takže se správce nezasekne.
@@ -53,6 +53,17 @@ klíče a poté spustí jednoho démona. Binárka se dodává jako `vddropbear`,
 přesně odpovídá `pgrep -x` (Android `mksh` nemá `exec -a`). Spouští se přes `setsid`, aby se odpojila
 od skupiny procesů volajícího: právě to brání tomu, aby se tlačítko Action ve správci zablokovalo.
 
+`setsid` nikdy nepokrýval cgroups a ta mezera byla skutečná regrese: tlačítko Action i WebUI běží
+uvnitř aplikace správce, takže démon spuštěný z kteréhokoli z nich zdědil freezer cgroup aplikace
+(`/apps/uid_<uid>/pid_<pid>`). Android `CachedAppOptimizer` tuto cgroup zmrazí, jakmile aplikaci uloží
+do mezipaměti, a démon je zmražen s ní, přestože stále drží svůj naslouchající soket. TCP spojení se
+dál dokončují, protože backlog žije v jádře, ale nic nevolá `accept()`, takže klienti uvíznou na
+"Connection established ... Local version string" bez chyby na kterékoli straně a `/proc/<pid>/wchan`
+ukazuje `do_freezer_trap` místo `do_select`. `vddb_escape_freezer` nyní před forkem přesune spouštěcí
+shell do kořenové cgroup (které se freezer nikdy nedotkne), takže démon zdědí tento odchod. Při startu
+jde o no-op (už je na `/`) i na platformách bez freezeru, nezjednodušujte spouštění zpět na holý
+`setsid`.
+
 ## Úložiště tajemství (CE vs DE, BFU vs AFU)
 
 Nastavení nejsou tajná a leží na úložišti šifrovaném zařízením (`/data/adb/vddropbear`), čitelném při
@@ -64,7 +75,7 @@ fázi startu určí, které úložiště použít.
 
 ## Sada záplat
 
-Server SSH zůstává upstreamovým Dropbearem; naše změny jsou jen několik přezkoumatelných záplat (viz
+Server SSH zůstává upstreamovým Dropbearem, naše změny jsou jen několik přezkoumatelných záplat (viz
 [patches/README.md](../../patches/README.md)):
 
 - neutrální banner identity konfigurovatelný za běhu;
@@ -77,11 +88,11 @@ Server SSH zůstává upstreamovým Dropbearem; naše změny jsou jen několik p
 Statická stránka ve WebUI správce (KernelSU / APatch / WebUI-X). Řídí
 `module/common/vddb-webui.sh` přes most `ksu.exec`: stav, start/stop/restart, čtení/zápis konfigurace
 a správu klíčů a účtů s heslem. Všechna data procházejí mostem zakódovaná v base64, takže je shell
-nikdy neinterpretuje; otisky hesel se počítají v prohlížeči pomocí WebCrypto, takže heslo v čitelné
+nikdy neinterpretuje, otisky hesel se počítají v prohlížeči pomocí WebCrypto, takže heslo v čitelné
 podobě nikdy stránku neopustí.
 
 <!-- doc-footer -->
 
 ---
 
-> _Tato dokumentace byla vytvořena pomocí Claude (Anthropic) a spravuje ji VD171. Opravy a vylepšení jsou vítány; viz [CONTRIBUTING.md](CONTRIBUTING.md)._
+> _Tato dokumentace byla vytvořena pomocí Claude (Anthropic) a spravuje ji VD171. Opravy a vylepšení jsou vítány, viz [CONTRIBUTING.md](CONTRIBUTING.md)._
