@@ -1,62 +1,62 @@
 {
-  "_comment": "Per-ABI provenance for the bundled, pre-compiled binaries beside this file (STANDARDS.md 8, HARD). Each binary's filename appears under binaries[].file; tooling/provenance-check.sh enforces presence. The aggregate module/bin/PROVENANCE.json carries the shared upstream/build context.",
-  "module": "vddropbear",
-  "abi": "armeabi-v7a",
-  "binaries": [
-    {
-      "file": "vddropbear",
-      "source": "https://github.com/mkj/dropbear",
-      "version": "DROPBEAR_2026.94",
-      "license": "MIT-style",
-      "sha256": "be680caf7aea83c9fc54fb9232967204842a1b23ce2412171202d4eb1db32fbd",
-      "bytes": 238308,
-      "build_flags": "dynamic against bionic (no static-pie); patched (ident/authkeys/password-file); libtomcrypt+libtommath vendored in dropbear",
-      "toolchain": "Android NDK r27 (27.0.12077973), API 24",
-      "reproduce": "NDK=r27 bash scripts/build.sh"
-    },
-    {
-      "file": "dropbearkey",
-      "source": "https://github.com/mkj/dropbear",
-      "version": "DROPBEAR_2026.94",
-      "license": "MIT-style",
-      "sha256": "cb6a01b0bac92257b351a4ce78b36487995906b0f52e3698c910aec024d6adb6",
-      "bytes": 114300,
-      "build_flags": "dynamic against bionic (no static-pie); host/user keygen from the same dropbear build",
-      "toolchain": "Android NDK r27 (27.0.12077973), API 24",
-      "reproduce": "NDK=r27 bash scripts/build.sh"
-    },
-    {
-      "file": "sftp-server",
-      "source": "https://github.com/openssh/openssh-portable",
-      "version": "9.9p2",
-      "license": "BSD-style",
-      "sha256": "08cb10e72a1773aefd81c78b3f299551e328403105331fe1aaffa2a2d0a5c98b",
-      "bytes": 137952,
-      "build_flags": "dynamic against bionic (no static-pie); built --without-openssl (builtin crypto), pw_gecos null-coalesce patch",
-      "toolchain": "Android NDK r27 (27.0.12077973), API 28",
-      "reproduce": "NDK=r27 bash scripts/build-bundles.sh"
-    },
-    {
-      "file": "scp",
-      "source": "https://github.com/openssh/openssh-portable",
-      "version": "9.9p2",
-      "license": "BSD-style",
-      "sha256": "5a1d7955146d76d7626149c86dc63abdd036b15675e2012f0257b27fc46ac852",
-      "bytes": 187188,
-      "build_flags": "dynamic against bionic (no static-pie); built --without-openssl",
-      "toolchain": "Android NDK r27 (27.0.12077973), API 28",
-      "reproduce": "NDK=r27 bash scripts/build-bundles.sh"
-    },
-    {
-      "file": "rsync",
-      "source": "https://github.com/RsyncProject/rsync",
-      "version": "3.4.1",
-      "license": "GPL-3.0-or-later",
-      "sha256": "4eac3ed460e7c9700b05e6b440077e68507be3f2802475729908fad5d94745bf",
-      "bytes": 511352,
-      "build_flags": "dynamic against bionic (no static-pie); --with-included-popt --with-included-zlib; GPL binary, mere aggregation",
-      "toolchain": "Android NDK r27 (27.0.12077973), API 28",
-      "reproduce": "NDK=r27 bash scripts/build-bundles.sh"
-    }
-  ]
+ "_comment": "Per-ABI provenance for the bundled, pre-compiled binaries beside this file (STANDARDS.md 8, HARD). Each binary's filename appears under binaries[].file; tooling/provenance-check.sh enforces presence. The aggregate module/bin/PROVENANCE.json carries the shared upstream/build context.",
+ "module": "vddropbear",
+ "abi": "armeabi-v7a",
+ "binaries": [
+  {
+   "file": "vddropbear",
+   "source": "https://github.com/mkj/dropbear",
+   "version": "DROPBEAR_2026.94",
+   "license": "MIT-style",
+   "sha256": "07551dcd2088de2344df5b6fa2ed19c546be7f80a2e63d5423cedce3a241514e",
+   "bytes": 236612,
+   "build_flags": "dynamic against bionic (no static-pie); patched (ident/authkeys/password-file/home); libtomcrypt+libtommath vendored in dropbear",
+   "toolchain": "Android NDK r29 (14206865), API 24",
+   "reproduce": "NDK=r29 bash scripts/build.sh"
+  },
+  {
+   "file": "dropbearkey",
+   "source": "https://github.com/mkj/dropbear",
+   "version": "DROPBEAR_2026.94",
+   "license": "MIT-style",
+   "sha256": "c8462ea665bbf7742c6f6d1209e612276bf5a72c62a0c0a9769fb3aca6d42ec0",
+   "bytes": 113496,
+   "build_flags": "dynamic against bionic (no static-pie); host/user keygen from the same dropbear build",
+   "toolchain": "Android NDK r29 (14206865), API 24",
+   "reproduce": "NDK=r29 bash scripts/build.sh"
+  },
+  {
+   "file": "sftp-server",
+   "source": "https://github.com/openssh/openssh-portable",
+   "version": "9.9p2",
+   "license": "BSD-style",
+   "sha256": "08cb10e72a1773aefd81c78b3f299551e328403105331fe1aaffa2a2d0a5c98b",
+   "bytes": 137952,
+   "build_flags": "dynamic against bionic (no static-pie); built --without-openssl (builtin crypto), pw_gecos null-coalesce patch",
+   "toolchain": "Android NDK r27 (27.0.12077973), API 28",
+   "reproduce": "NDK=r27 bash scripts/build-bundles.sh"
+  },
+  {
+   "file": "scp",
+   "source": "https://github.com/openssh/openssh-portable",
+   "version": "9.9p2",
+   "license": "BSD-style",
+   "sha256": "5a1d7955146d76d7626149c86dc63abdd036b15675e2012f0257b27fc46ac852",
+   "bytes": 187188,
+   "build_flags": "dynamic against bionic (no static-pie); built --without-openssl",
+   "toolchain": "Android NDK r27 (27.0.12077973), API 28",
+   "reproduce": "NDK=r27 bash scripts/build-bundles.sh"
+  },
+  {
+   "file": "rsync",
+   "source": "https://github.com/RsyncProject/rsync",
+   "version": "3.4.1",
+   "license": "GPL-3.0-or-later",
+   "sha256": "4eac3ed460e7c9700b05e6b440077e68507be3f2802475729908fad5d94745bf",
+   "bytes": 511352,
+   "build_flags": "dynamic against bionic (no static-pie); --with-included-popt --with-included-zlib; GPL binary, mere aggregation",
+   "toolchain": "Android NDK r27 (27.0.12077973), API 28",
+   "reproduce": "NDK=r27 bash scripts/build-bundles.sh"
+  }
+ ]
 }

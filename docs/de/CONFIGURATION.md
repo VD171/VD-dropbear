@@ -82,9 +82,9 @@ Eine Anmeldung läuft unter dem Konto, mit dem du dich authentifizierst: standar
 
 | Schlüssel | Standard | Bedeutung |
 |-----|---------|---------|
-| `LOGIN_SHELL` | `""` | Shell für die Sitzung. Leer nutzt den Standard des Kontos. |
-| `HOME_DIR` | `""` | `HOME` für die Sitzung. Leer nutzt das Modulverzeichnis. |
-| `EXTRA_ENV` | `""` | Zusätzliche Umgebung, `K=V;K2=V2`. |
+| `LOGIN_SHELL` | `""` | Login-Shell (absoluter Pfad). Leer nutzt den Standard des Kontos. |
+| `HOME_DIR` | `/data/adb` | `HOME` und Startverzeichnis der Sitzung (absoluter Pfad). Leer nutzt das Home von root (`/`). |
+| `EXTRA_ENV` | `""` | Zusätzliche Umgebung, `K=V;K2=V2` (benötigt aktives `PASS_ENV`). |
 | `IDLE_TIMEOUT` | `0` | Nach N Leerlaufsekunden trennen. `0` deaktiviert. |
 | `KEEPALIVE` | `0` | Alle N Sekunden ein Keepalive senden. `0` deaktiviert. |
 | `RECEIVE_WINDOW` | `""` | Größe des Dropbear-Empfangsfensters. Leer nutzt den Standard. |
@@ -101,7 +101,9 @@ Eine Anmeldung läuft unter dem Konto, mit dem du dich authentifizierst: standar
 
 | Schlüssel | Standard | Bedeutung |
 |-----|---------|---------|
-| `HOSTKEY_TYPE` | `ed25519` | Host-Schlüsseltyp: `ed25519`, `rsa` oder `ecdsa`. Wird beim ersten Start in den Geheimnisspeicher erzeugt. |
+| `HOSTKEY_TYPE` | `ed25519` | Host-Schlüsseltyp: `ed25519` oder `ecdsa`. Wird beim ersten Start in den Geheimnisspeicher erzeugt. |
+
+> **RSA wurde als Host-Schlüsseltyp entfernt**: seine veralteten `ssh-rsa`-Signaturen (SHA-1) sind unsicher, und `ed25519` und `ECDSA` sind modern, deutlich stärker und schneller.
 
 ## Der Geheimnisspeicher
 

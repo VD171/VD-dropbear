@@ -115,7 +115,7 @@ vddb_load_config() {
     [ -f "$VDDB_CONFIG" ] && . "$VDDB_CONFIG"
     # Normalise the values that flow unquoted into the daemon argv.
     [ "$PORT" -gt 0 ] 2>/dev/null || PORT=2222
-    case "$HOSTKEY_TYPE" in ed25519|rsa|ecdsa) ;; *) HOSTKEY_TYPE=ed25519 ;; esac
+    case "$HOSTKEY_TYPE" in ed25519|ecdsa) ;; *) HOSTKEY_TYPE=ed25519 ;; esac
     case "$RECEIVE_WINDOW" in *[!0-9]*) RECEIVE_WINDOW= ;; esac
 }
 
@@ -222,6 +222,9 @@ vddb_build_args() {
 vddb_export_env() {
     _sdir="$(vddb_secret_dir)"
     export HOME="${HOME_DIR:-$MODDIR}"
+    # Session HOME + starting dir come from DROPBEAR_HOME (dropbear patch 0004): an
+    # absolute HOME_DIR overrides root's passwd home (/); blank keeps /. Absolute only.
+    case "$HOME_DIR" in /*) export DROPBEAR_HOME="$HOME_DIR" ;; *) unset DROPBEAR_HOME ;; esac
     # the bundled tools (scp/rsync/sftp-server) live under the module's stable bin dir
     export PATH="$VDDB_DATA/bin:${PATH:-/system/bin:/system/xbin}"
     # Public-key auth: point dropbear at the keys file only when the toggle is on.
@@ -229,11 +232,15 @@ vddb_export_env() {
     if [ "$PUBKEY_AUTH" = "1" ]; then
         export DROPBEAR_AUTHKEYS="$(vddb_authkeys_link "$_sdir/authorized_keys")"
     else
-        unset DROPBEAR_AUTHKEYS
+        # Off = off: point at a keys file that does not exist, so dropbear's built-in
+        # ~/.ssh/authorized_keys fallback cannot authenticate either (true disable).
+        export DROPBEAR_AUTHKEYS="$_sdir/.pubkey-disabled"
     fi
     export DROPBEAR_PASSWD_FILE="$_sdir/passwd"         # honoured by the VD patch
     [ "$HIDE_IDENT" = "1" ] && export DROPBEAR_IDENT="${IDENT_STRING:-SSH-2.0-}"
-    [ -n "$LOGIN_SHELL" ] && export SHELL="$LOGIN_SHELL"
+    # Login shell: DROPBEAR_SHELL (dropbear patch 0004) overrides the account shell
+    # for the SHELL env and the exec'd shell. Absolute path only; blank keeps default.
+    case "$LOGIN_SHELL" in /*) export DROPBEAR_SHELL="$LOGIN_SHELL" ;; *) unset DROPBEAR_SHELL ;; esac
     # extra "K=V;K2=V2" pairs
     if [ -n "$EXTRA_ENV" ]; then
         _IFS="$IFS"; IFS=';'

@@ -81,9 +81,9 @@ Một lần đăng nhập chạy dưới tài khoản mà bạn xác thực: m�
 
 | Key | Default | Meaning |
 |-----|---------|---------|
-| `LOGIN_SHELL` | `""` | Shell cho phiên. Để trống thì dùng mặc định của tài khoản. |
-| `HOME_DIR` | `""` | `HOME` cho phiên. Để trống thì dùng thư mục của mô-đun. |
-| `EXTRA_ENV` | `""` | Môi trường bổ sung, `K=V;K2=V2`. |
+| `LOGIN_SHELL` | `""` | Shell đăng nhập (đường dẫn tuyệt đối). Để trống thì dùng mặc định của tài khoản. |
+| `HOME_DIR` | `/data/adb` | `HOME` và thư mục khởi đầu của phiên (đường dẫn tuyệt đối). Để trống thì dùng home của root (`/`). |
+| `EXTRA_ENV` | `""` | Môi trường bổ sung, `K=V;K2=V2` (cần bật `PASS_ENV`). |
 | `IDLE_TIMEOUT` | `0` | Ngắt kết nối sau N giây không hoạt động. `0` vô hiệu hóa. |
 | `KEEPALIVE` | `0` | Gửi một keepalive mỗi N giây. `0` vô hiệu hóa. |
 | `RECEIVE_WINDOW` | `""` | Kích thước cửa sổ nhận của Dropbear. Để trống thì dùng mặc định. |
@@ -100,7 +100,9 @@ Một lần đăng nhập chạy dưới tài khoản mà bạn xác thực: m�
 
 | Key | Default | Meaning |
 |-----|---------|---------|
-| `HOSTKEY_TYPE` | `ed25519` | Loại host key: `ed25519`, `rsa` hoặc `ecdsa`. Được tạo ở lần khởi động đầu tiên vào kho secret. |
+| `HOSTKEY_TYPE` | `ed25519` | Loại host key: `ed25519` hoặc `ecdsa`. Được tạo ở lần khởi động đầu tiên vào kho secret. |
+
+> **RSA đã bị loại bỏ khỏi các loại host key**: chữ ký `ssh-rsa` (SHA-1) cũ không an toàn, và `ed25519` và `ECDSA` hiện đại, mạnh hơn và nhanh hơn nhiều.
 
 ## Kho secret
 

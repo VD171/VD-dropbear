@@ -29,6 +29,25 @@ All notable, real and significant changes to **VD Dropbear** are recorded here.
 The format follows [Keep a Changelog](https://keepachangelog.com/), versions are tagged in the
 module (`module.prop`) and on GitHub Releases.
 
+## [v1.15] (2026-11-26)
+
+### Added
+- **The `HOME_DIR` and `LOGIN_SHELL` settings now take effect.** A new auditable Dropbear patch lets an
+  absolute `HOME_DIR` set the session's `HOME` and starting directory, and an absolute `LOGIN_SHELL` set
+  the login shell (both the `SHELL` variable and the shell actually run). Android's bionic ships no
+  `/etc/passwd`, so Dropbear forced root's home to `/` and a fixed shell, which silently ignored both
+  settings. `HOME_DIR` now defaults to `/data/adb`; blank keeps the account default (`/` for root).
+
+### Changed
+- **Dropped RSA from the host-key types, for security.** Only `ed25519` and `ECDSA` are offered now:
+  RSA's legacy `ssh-rsa` (SHA-1) signatures are insecure, and these two are modern, much stronger and
+  faster. (RSA is not swept from the codebase: client keys using the secure `rsa-sha2` signatures still
+  authenticate; only the host-key option was removed.)
+
+### Fixed
+- **Turning public-key login off now fully disables it.** It no longer falls back to Dropbear's built-in
+  `~/.ssh/authorized_keys`, so off means off.
+
 ## [v1.14] (2026-11-26)
 
 ### Changed

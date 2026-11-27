@@ -38,6 +38,7 @@ patch, these patches only make the server **able** to be configured on Android.
 | `0001-neutral-configurable-ident.patch` | Default the SSH identity banner to a neutral string, overridable at runtime via `DROPBEAR_IDENT`. | The SSH protocol requires a banner, this one reveals no product or version, so scanners cannot fingerprint and target a known version. |
 | `0002-authorized-keys-path.patch` | Read `authorized_keys` from `DROPBEAR_AUTHKEYS` when set (falls back to the account default). | Lets the module place keys on credential-encrypted (CE) or device-encrypted (DE) storage, independent of Android's account model. |
 | `0003-password-file.patch` | Verify passwords against a hash file given by `DROPBEAR_PASSWD_FILE` using **PBKDF2-HMAC-SHA256** (Dropbear's own libtomcrypt), instead of the system shadow. | Android's bionic has no usable `crypt()`/shadow, this is a clean, documented replacement: a public, standard KDF, **no obfuscation**. |
+| `0004-session-home-shell.patch` | Let an absolute `DROPBEAR_HOME` set the session's `HOME` and starting directory, and an absolute `DROPBEAR_SHELL` set the login shell (both the `SHELL` env and the shell actually run); blank keeps the account default. | Android's bionic ships no `/etc/passwd`, so root's home is always `/` and its shell a fixed default. Without this the module's `HOME_DIR` and `LOGIN_SHELL` settings silently did nothing. |
 
 Interactive PTY sessions need no patch: bionic declares `openpty()` in `<pty.h>`, and Dropbear's
 cross-`configure` detects it (`HAVE_OPENPTY`) with the NDK, so PTYs work out of the box.
@@ -54,6 +55,8 @@ The module's `common/vddropbear.sh` sets these before launching the daemon:
 - `DROPBEAR_IDENT`: the identity banner (omitted to use the neutral built-in default).
 - `DROPBEAR_AUTHKEYS`: absolute path to `authorized_keys`.
 - `DROPBEAR_PASSWD_FILE`: absolute path to the password hash file.
+- `DROPBEAR_HOME`: absolute path for the session `HOME` and starting directory (omitted keeps the passwd home, `/` for root).
+- `DROPBEAR_SHELL`: absolute path to the login shell (omitted keeps the account default).
 
 Port, binds, auth toggles, forwarding, timeouts and the host key are passed as ordinary command-line
 options, so they need no patches at all.

@@ -81,9 +81,9 @@ Um login é executado como a conta com a qual você se autentica: **root** por p
 
 | Key | Default | Meaning |
 |-----|---------|---------|
-| `LOGIN_SHELL` | `""` | Shell da sessão. Vazio usa o padrão da conta. |
-| `HOME_DIR` | `""` | `HOME` da sessão. Vazio usa o diretório do módulo. |
-| `EXTRA_ENV` | `""` | Ambiente extra, `K=V;K2=V2`. |
+| `LOGIN_SHELL` | `""` | Shell de login (caminho absoluto). Vazio usa o padrão da conta. |
+| `HOME_DIR` | `/data/adb` | `HOME` e diretório inicial da sessão (caminho absoluto). Vazio usa o home do root (`/`). |
+| `EXTRA_ENV` | `""` | Ambiente extra, `K=V;K2=V2` (requer `PASS_ENV` ligado). |
 | `IDLE_TIMEOUT` | `0` | Desconecta após N segundos ociosos. `0` desativa. |
 | `KEEPALIVE` | `0` | Envia um keepalive a cada N segundos. `0` desativa. |
 | `RECEIVE_WINDOW` | `""` | Tamanho da janela de recepção do Dropbear. Vazio usa o padrão. |
@@ -100,7 +100,9 @@ Um login é executado como a conta com a qual você se autentica: **root** por p
 
 | Key | Default | Meaning |
 |-----|---------|---------|
-| `HOSTKEY_TYPE` | `ed25519` | Tipo da chave de host: `ed25519`, `rsa` ou `ecdsa`. Gerada no primeiro início dentro do cofre de segredos. |
+| `HOSTKEY_TYPE` | `ed25519` | Tipo da chave de host: `ed25519` ou `ecdsa`. Gerada no primeiro início dentro do cofre de segredos. |
+
+> **RSA foi removido como tipo de chave de host**: suas assinaturas `ssh-rsa` (SHA-1) legadas são inseguras, e `ed25519` e `ECDSA` são modernas, muito mais fortes e rápidas.
 
 ## O cofre de segredos
 

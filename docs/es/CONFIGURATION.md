@@ -81,9 +81,9 @@ Un inicio de sesión se ejecuta como la cuenta con la que te autenticas: **root*
 
 | Key | Default | Significado |
 |-----|---------|---------|
-| `LOGIN_SHELL` | `""` | Shell para la sesión. Si está vacía, usa la de la cuenta por defecto. |
-| `HOME_DIR` | `""` | `HOME` para la sesión. Si está vacío, usa el directorio del módulo. |
-| `EXTRA_ENV` | `""` | Entorno adicional, `K=V;K2=V2`. |
+| `LOGIN_SHELL` | `""` | Shell de inicio de sesión (ruta absoluta). Si está vacía, usa la de la cuenta por defecto. |
+| `HOME_DIR` | `/data/adb` | `HOME` y directorio inicial de la sesión (ruta absoluta). Si está vacío, usa el home de root (`/`). |
+| `EXTRA_ENV` | `""` | Entorno adicional, `K=V;K2=V2` (requiere `PASS_ENV` activado). |
 | `IDLE_TIMEOUT` | `0` | Desconecta tras N segundos de inactividad. `0` lo deshabilita. |
 | `KEEPALIVE` | `0` | Envía un keepalive cada N segundos. `0` lo deshabilita. |
 | `RECEIVE_WINDOW` | `""` | Tamaño de la ventana de recepción de Dropbear. Si está vacío, usa el valor por defecto. |
@@ -100,7 +100,9 @@ Un inicio de sesión se ejecuta como la cuenta con la que te autenticas: **root*
 
 | Key | Default | Significado |
 |-----|---------|---------|
-| `HOSTKEY_TYPE` | `ed25519` | Tipo de host key: `ed25519`, `rsa` o `ecdsa`. Se genera en el primer inicio dentro del almacén de secretos. |
+| `HOSTKEY_TYPE` | `ed25519` | Tipo de host key: `ed25519` o `ecdsa`. Se genera en el primer inicio dentro del almacén de secretos. |
+
+> **RSA se eliminó como tipo de clave de host**: sus firmas heredadas `ssh-rsa` (SHA-1) son inseguras, y `ed25519` y `ECDSA` son modernas, mucho más fuertes y rápidas.
 
 ## El almacén de secretos
 

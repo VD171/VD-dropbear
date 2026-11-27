@@ -82,9 +82,9 @@ A login runs as the account you authenticate as: **root** by default, or a lower
 
 | Key | Default | Meaning |
 |-----|---------|---------|
-| `LOGIN_SHELL` | `""` | Shell for the session. Empty uses the account default. |
-| `HOME_DIR` | `""` | `HOME` for the session. Empty uses the module directory. |
-| `EXTRA_ENV` | `""` | Extra environment, `K=V;K2=V2`. |
+| `LOGIN_SHELL` | `""` | Login shell (absolute path). Blank = account default. |
+| `HOME_DIR` | `/data/adb` | Session `HOME` and starting directory (absolute path). Blank = root's home (`/`). |
+| `EXTRA_ENV` | `""` | Extra environment, `K=V;K2=V2` (needs `PASS_ENV` on). |
 | `IDLE_TIMEOUT` | `0` | Disconnect after N idle seconds. `0` disables. |
 | `KEEPALIVE` | `0` | Send a keepalive every N seconds. `0` disables. |
 | `RECEIVE_WINDOW` | `""` | Dropbear receive window size. Empty uses the default. |
@@ -101,7 +101,9 @@ A login runs as the account you authenticate as: **root** by default, or a lower
 
 | Key | Default | Meaning |
 |-----|---------|---------|
-| `HOSTKEY_TYPE` | `ed25519` | Host-key type: `ed25519`, `rsa` or `ecdsa`. Generated on first start into the secret store. |
+| `HOSTKEY_TYPE` | `ed25519` | Host-key type: `ed25519` or `ecdsa`. Generated on first start into the secret store. |
+
+> **RSA was dropped as a host-key type**: its legacy `ssh-rsa` (SHA-1) signatures are insecure, and `ed25519` and `ECDSA` are modern, much stronger and faster.
 
 ## The secret store
 

@@ -79,9 +79,9 @@
 
 | Key | Default | Meaning |
 |-----|---------|---------|
-| `LOGIN_SHELL` | `""` | 会话使用的 shell。留空则使用账户默认值。 |
-| `HOME_DIR` | `""` | 会话的 `HOME`。留空则使用模块目录。 |
-| `EXTRA_ENV` | `""` | 额外环境变量，`K=V;K2=V2`。 |
+| `LOGIN_SHELL` | `""` | 登录 shell（绝对路径）。留空则使用账户默认值。 |
+| `HOME_DIR` | `/data/adb` | 会话的 `HOME` 和起始目录（绝对路径）。留空则使用 root 的主目录（`/`）。 |
+| `EXTRA_ENV` | `""` | 额外环境变量，`K=V;K2=V2`（需开启 `PASS_ENV`）。 |
 | `IDLE_TIMEOUT` | `0` | 空闲 N 秒后断开连接。`0` 表示禁用。 |
 | `KEEPALIVE` | `0` | 每 N 秒发送一次 keepalive。`0` 表示禁用。 |
 | `RECEIVE_WINDOW` | `""` | Dropbear 接收窗口大小。留空则使用默认值。 |
@@ -98,7 +98,9 @@
 
 | Key | Default | Meaning |
 |-----|---------|---------|
-| `HOSTKEY_TYPE` | `ed25519` | host key 类型：`ed25519`、`rsa` 或 `ecdsa`。首次启动时生成到 secret 存储中。 |
+| `HOSTKEY_TYPE` | `ed25519` | host key 类型：`ed25519` 或 `ecdsa`。首次启动时生成到 secret 存储中。 |
+
+> **RSA 已不再作为 host key 类型**：其旧式 `ssh-rsa`（SHA-1）签名不安全，而 `ed25519` 和 `ECDSA` 更现代，强度和速度都高得多。
 
 ## secret 存储
 

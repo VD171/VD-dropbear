@@ -80,7 +80,8 @@ MAX_AUTH_TRIES=3
 
 # --- Session ---------------------------------------------------------------
 LOGIN_SHELL=
-HOME_DIR=
+# Session HOME and starting directory (absolute path). Blank = root's home (/).
+HOME_DIR=/data/adb
 EXTRA_ENV=
 # Pass the daemon's own process environment on to login sessions (dropbear -e).
 #   1 = (default) the session inherits the platform environment the module
@@ -101,7 +102,7 @@ GATEWAY_PORTS=0
 RECEIVE_WINDOW=
 
 # --- Host key --------------------------------------------------------------
-# ed25519 (recommended) | rsa | ecdsa
+# ed25519 (recommended) | ecdsa
 HOSTKEY_TYPE=ed25519
 
 # --- Secret store (informational, not a setting) ---------------------------

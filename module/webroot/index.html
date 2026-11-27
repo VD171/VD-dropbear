@@ -338,13 +338,13 @@ const FIELDS = [
   ["LISTEN_ADDRESSES","Extra binds","text","Comma-separated: addr or addr:port (IPv4 or IPv6)."],
   ["IDENT_STRING","Custom identity","text","Blank = neutral built-in default."],
   ["MAX_AUTH_TRIES","Max auth tries","number"],
-  ["LOGIN_SHELL","Login shell","text","Blank = account default."],
-  ["HOME_DIR","HOME","text","Blank = the module directory."],
-  ["EXTRA_ENV","Extra environment","text","K=V;K2=V2"],
+  ["LOGIN_SHELL","Login shell","text","Absolute path. Blank = account default (root: /system/bin/sh)."],
+  ["HOME_DIR","HOME","text","Session HOME + start dir (absolute). Blank = root's home (/)."],
+  ["EXTRA_ENV","Extra environment","text","K=V;K2=V2 (needs Pass environment on)."],
   ["IDLE_TIMEOUT","Idle timeout (s)","number"],
   ["KEEPALIVE","Keepalive (s)","number"],
   ["RECEIVE_WINDOW","Receive window","text","Blank = Dropbear default."],
-  ["HOSTKEY_TYPE","Host-key type","select",["ed25519","rsa","ecdsa"]],
+  ["HOSTKEY_TYPE","Host-key type","select",["ed25519","ecdsa"]],
 ];
 let CFG = {};
 

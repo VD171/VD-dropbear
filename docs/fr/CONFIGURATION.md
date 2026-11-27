@@ -82,9 +82,9 @@ Une connexion s'exécute sous le compte avec lequel vous vous authentifiez : **r
 
 | Key | Default | Signification |
 |-----|---------|---------|
-| `LOGIN_SHELL` | `""` | Shell de la session. Vide, utilise celui du compte par défaut. |
-| `HOME_DIR` | `""` | `HOME` de la session. Vide, utilise le répertoire du module. |
-| `EXTRA_ENV` | `""` | Environnement supplémentaire, `K=V;K2=V2`. |
+| `LOGIN_SHELL` | `""` | Shell de connexion (chemin absolu). Vide, utilise celui du compte par défaut. |
+| `HOME_DIR` | `/data/adb` | `HOME` et répertoire de départ de la session (chemin absolu). Vide, utilise le home de root (`/`). |
+| `EXTRA_ENV` | `""` | Environnement supplémentaire, `K=V;K2=V2` (nécessite `PASS_ENV` activé). |
 | `IDLE_TIMEOUT` | `0` | Déconnecte après N secondes d'inactivité. `0` désactive. |
 | `KEEPALIVE` | `0` | Envoie un keepalive toutes les N secondes. `0` désactive. |
 | `RECEIVE_WINDOW` | `""` | Taille de la fenêtre de réception de Dropbear. Vide, utilise la valeur par défaut. |
@@ -101,7 +101,9 @@ Une connexion s'exécute sous le compte avec lequel vous vous authentifiez : **r
 
 | Key | Default | Signification |
 |-----|---------|---------|
-| `HOSTKEY_TYPE` | `ed25519` | Type de host key : `ed25519`, `rsa` ou `ecdsa`. Générée au premier démarrage dans le magasin de secrets. |
+| `HOSTKEY_TYPE` | `ed25519` | Type de host key : `ed25519` ou `ecdsa`. Générée au premier démarrage dans le magasin de secrets. |
+
+> **RSA a été abandonné comme type de clé d'hôte** : ses signatures `ssh-rsa` héritées (SHA-1) ne sont pas sûres, et `ed25519` et `ECDSA` sont modernes, bien plus robustes et rapides.
 
 ## Le magasin de secrets
 

@@ -1,0 +1,73 @@
+--- a/src/svr-chansession.c
++++ b/src/svr-chansession.c
+@@ -971,6 +971,29 @@ static void execchild(const void *user_data) {
+ 		cp = m_strdup(envcp);
+ 	}
+ 
++	/* VD Dropbear: an absolute $DROPBEAR_HOME overrides the passwd home for the
++	   session (both the HOME env var and the initial chdir). The module sets it
++	   from a user-chosen directory; empty/unset keeps the passwd home (/ for root
++	   on bionic, which ships no /etc/passwd). Captured before a possible clearenv. */
++	char *vd_home = NULL;
++	{
++		const char *vd_h = getenv("DROPBEAR_HOME");
++		if (vd_h != NULL && vd_h[0] == '/') {
++			vd_home = m_strdup(vd_h);
++		}
++	}
++
++	/* VD Dropbear: an absolute $DROPBEAR_SHELL overrides the account login shell,
++	   for both the SHELL env var and the shell actually exec'd; empty/unset keeps
++	   the passwd shell. Lets the module's "Login shell" setting take effect. */
++	char *vd_shell = NULL;
++	{
++		const char *vd_s = getenv("DROPBEAR_SHELL");
++		if (vd_s != NULL && vd_s[0] == '/') {
++			vd_shell = m_strdup(vd_s);
++		}
++	}
++
+ 	/* with uClinux we'll have vfork()ed, so don't want to overwrite the
+ 	 * hostkey. can't think of a workaround to clear it */
+ #if !DROPBEAR_VFORK
+@@ -1005,8 +1028,8 @@ static void execchild(const void *user_data) {
+ 	/* set env vars */
+ 	addnewvar("USER", ses.authstate.pw_name);
+ 	addnewvar("LOGNAME", ses.authstate.pw_name);
+-	addnewvar("HOME", ses.authstate.pw_dir);
+-	addnewvar("SHELL", get_user_shell());
++	addnewvar("HOME", vd_home != NULL ? vd_home : ses.authstate.pw_dir);
++	addnewvar("SHELL", vd_shell != NULL ? vd_shell : get_user_shell());
+ 	if (getuid() == 0) {
+ 		addnewvar("PATH", DEFAULT_ROOT_PATH);
+ 	} else {
+@@ -1043,12 +1066,15 @@ static void execchild(const void *user_data) {
+ #endif
+ 
+ 	/* change directory */
+-	if (chdir(ses.authstate.pw_dir) < 0) {
+-		int e = errno;
+-		if (chdir("/") < 0) {
+-			dropbear_exit("chdir(\"/\") failed");
++	{
++		const char *vd_cwd = vd_home != NULL ? vd_home : ses.authstate.pw_dir;
++		if (chdir(vd_cwd) < 0) {
++			int e = errno;
++			if (chdir("/") < 0) {
++				dropbear_exit("chdir(\"/\") failed");
++			}
++			fprintf(stderr, "Failed chdir '%s': %s\n", vd_cwd, strerror(e));
+ 		}
+-		fprintf(stderr, "Failed chdir '%s': %s\n", ses.authstate.pw_dir, strerror(e));
+ 	}
+ 
+ 
+@@ -1061,7 +1087,7 @@ static void execchild(const void *user_data) {
+ 	svr_agentset(chansess);
+ #endif
+ 
+-	usershell = m_strdup(get_user_shell());
++	usershell = m_strdup(vd_shell != NULL ? vd_shell : get_user_shell());
+ 	run_shell_command(chansess->cmd, ses.maxfd, usershell);
+ 
+ 	/* only reached on error */

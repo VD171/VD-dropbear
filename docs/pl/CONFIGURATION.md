@@ -81,9 +81,9 @@ Logowanie działa na koncie, którym się uwierzytelniasz: domyślnie **root** l
 
 | Key | Default | Meaning |
 |-----|---------|---------|
-| `LOGIN_SHELL` | `""` | Powłoka dla sesji. Pusta wartość używa domyślnej dla konta. |
-| `HOME_DIR` | `""` | `HOME` dla sesji. Pusta wartość używa katalogu modułu. |
-| `EXTRA_ENV` | `""` | Dodatkowe środowisko, `K=V;K2=V2`. |
+| `LOGIN_SHELL` | `""` | Powłoka logowania (ścieżka bezwzględna). Pusta wartość używa domyślnej dla konta. |
+| `HOME_DIR` | `/data/adb` | `HOME` i katalog startowy sesji (ścieżka bezwzględna). Pusta wartość używa katalogu domowego roota (`/`). |
+| `EXTRA_ENV` | `""` | Dodatkowe środowisko, `K=V;K2=V2` (wymaga włączonego `PASS_ENV`). |
 | `IDLE_TIMEOUT` | `0` | Rozłącz po N sekundach bezczynności. `0` wyłącza. |
 | `KEEPALIVE` | `0` | Wysyłaj keepalive co N sekund. `0` wyłącza. |
 | `RECEIVE_WINDOW` | `""` | Rozmiar okna odbioru Dropbeara. Pusta wartość używa domyślnego. |
@@ -100,7 +100,9 @@ Logowanie działa na koncie, którym się uwierzytelniasz: domyślnie **root** l
 
 | Key | Default | Meaning |
 |-----|---------|---------|
-| `HOSTKEY_TYPE` | `ed25519` | Typ klucza hosta: `ed25519`, `rsa` lub `ecdsa`. Generowany przy pierwszym uruchomieniu do magazynu sekretów. |
+| `HOSTKEY_TYPE` | `ed25519` | Typ klucza hosta: `ed25519` lub `ecdsa`. Generowany przy pierwszym uruchomieniu do magazynu sekretów. |
+
+> **RSA został usunięty jako typ klucza hosta**: jego przestarzałe podpisy `ssh-rsa` (SHA-1) są niebezpieczne, a `ed25519` i `ECDSA` są nowoczesne, znacznie silniejsze i szybsze.
 
 ## Magazyn sekretów
 

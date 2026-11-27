@@ -1,146 +1,146 @@
 {
-  "component": "VD Dropbear bundled binaries",
-  "purpose": "The SSH product tools shipped in the module zip. Committed (not CI-built at release) so the VDLU feed manifest hashes the exact shipped bytes and the release is reproducible from the repo.",
-  "built_by": {
-    "toolchain": "Android NDK r27 (27.0.12077973)",
-    "scripts": [
-      "scripts/build.sh (dropbear)",
-      "scripts/build-bundles.sh (sftp-server, scp, rsync, zlib)"
-    ],
-    "linkage": "dynamic against bionic (linker64/linker); static-pie segfaults on device, so dynamic by design",
-    "reproduce": "NDK=<r27> bash scripts/build.sh && NDK=<r27> bash scripts/build-bundles.sh"
-  },
-  "upstream": {
-    "dropbear": "https://github.com/mkj/dropbear (DROPBEAR_2026.94)",
-    "openssh": "https://github.com/openssh/openssh-portable (9.9p2)",
-    "rsync": "https://github.com/RsyncProject/rsync (3.4.1)",
-    "zlib": "https://github.com/madler/zlib (1.3.1, static dep for OpenSSH; not shipped standalone)"
-  },
-  "binaries": {
-    "vddropbear": {
-      "upstream": "mkj/dropbear",
-      "version": "DROPBEAR_2026.94",
-      "license": "MIT-style",
-      "api": 24,
-      "note": "patched (ident/authkeys/password-file); libtomcrypt+libtommath vendored in dropbear",
-      "abi": {
-        "arm64-v8a": {
-          "sha256": "e8b8ec6710077844deb27d5ff71acadb4129005dfa40b08e8e632e2f59f71491",
-          "bytes": 279584
-        },
-        "armeabi-v7a": {
-          "sha256": "be680caf7aea83c9fc54fb9232967204842a1b23ce2412171202d4eb1db32fbd",
-          "bytes": 238308
-        },
-        "x86": {
-          "sha256": "676df887192e1883fd705c0b743b734cb435820f5a1ce232c0f0d0a46896be49",
-          "bytes": 337476
-        },
-        "x86_64": {
-          "sha256": "e414661b522f0ebe0392e0bf483de8dfde258974f8a51f29319bed44b200c0f0",
-          "bytes": 286832
-        }
-      }
+ "component": "VD Dropbear bundled binaries",
+ "purpose": "The SSH product tools shipped in the module zip. Committed (not CI-built at release) so the VDLU feed manifest hashes the exact shipped bytes and the release is reproducible from the repo.",
+ "built_by": {
+  "toolchain": "Android NDK r27 (27.0.12077973)",
+  "scripts": [
+   "scripts/build.sh (dropbear)",
+   "scripts/build-bundles.sh (sftp-server, scp, rsync, zlib)"
+  ],
+  "linkage": "dynamic against bionic (linker64/linker); static-pie segfaults on device, so dynamic by design",
+  "reproduce": "NDK=<r27> bash scripts/build.sh && NDK=<r27> bash scripts/build-bundles.sh"
+ },
+ "upstream": {
+  "dropbear": "https://github.com/mkj/dropbear (DROPBEAR_2026.94)",
+  "openssh": "https://github.com/openssh/openssh-portable (9.9p2)",
+  "rsync": "https://github.com/RsyncProject/rsync (3.4.1)",
+  "zlib": "https://github.com/madler/zlib (1.3.1, static dep for OpenSSH; not shipped standalone)"
+ },
+ "binaries": {
+  "vddropbear": {
+   "upstream": "mkj/dropbear",
+   "version": "DROPBEAR_2026.94",
+   "license": "MIT-style",
+   "api": 24,
+   "note": "patched (ident/authkeys/password-file/home); libtomcrypt+libtommath vendored in dropbear",
+   "abi": {
+    "arm64-v8a": {
+     "sha256": "e4296a21194cf8b598cad28b1642843158e1c0d7c8a47b509902ae0d34928ebc",
+     "bytes": 276416
     },
-    "dropbearkey": {
-      "upstream": "mkj/dropbear",
-      "version": "DROPBEAR_2026.94",
-      "license": "MIT-style",
-      "api": 24,
-      "note": "host/user keygen from the same dropbear build",
-      "abi": {
-        "arm64-v8a": {
-          "sha256": "345443c0a7f96817f7e9915b0ddc8fcf276ba7d37138bf9646e4e2b8872876a8",
-          "bytes": 134936
-        },
-        "armeabi-v7a": {
-          "sha256": "cb6a01b0bac92257b351a4ce78b36487995906b0f52e3698c910aec024d6adb6",
-          "bytes": 114300
-        },
-        "x86": {
-          "sha256": "6ecdb6eb43cba2588d2615ea6ed3f021083fbc9749f720e51a3f55b7403d081e",
-          "bytes": 155740
-        },
-        "x86_64": {
-          "sha256": "7af0c35888ed8b997f5f283bd0246a8be612e71400757c6d0133bcad3e965fe8",
-          "bytes": 135400
-        }
-      }
+    "armeabi-v7a": {
+     "sha256": "07551dcd2088de2344df5b6fa2ed19c546be7f80a2e63d5423cedce3a241514e",
+     "bytes": 236612
     },
-    "sftp-server": {
-      "upstream": "openssh/openssh-portable",
-      "version": "9.9p2",
-      "license": "BSD-style",
-      "api": 28,
-      "note": "built --without-openssl (builtin crypto), pw_gecos null-coalesce patch",
-      "abi": {
-        "arm64-v8a": {
-          "sha256": "0c8508cb3c71efb3fbd177644d29d385cf24422a1166dd4ad37d5d0a2a15016d",
-          "bytes": 153384
-        },
-        "armeabi-v7a": {
-          "sha256": "08cb10e72a1773aefd81c78b3f299551e328403105331fe1aaffa2a2d0a5c98b",
-          "bytes": 137952
-        },
-        "x86": {
-          "sha256": "b3b4569f90ec0b9afe131222d276e5a9d91bc803c8803c85e2d416048b7710bc",
-          "bytes": 160492
-        },
-        "x86_64": {
-          "sha256": "3093a922b8e2a69e213c7091ed2e700bdec59f859b9cf83bb6e693cb5a6bce7c",
-          "bytes": 152752
-        }
-      }
+    "x86": {
+     "sha256": "e0e7dd3126ef7ff222a2fbcef9701d56874320eeb80d1eff43dbcc526b2a835a",
+     "bytes": 306352
     },
-    "scp": {
-      "upstream": "openssh/openssh-portable",
-      "version": "9.9p2",
-      "license": "BSD-style",
-      "api": 28,
-      "note": "built --without-openssl",
-      "abi": {
-        "arm64-v8a": {
-          "sha256": "f064233627ff25612f357c680bfc41bfab13dca45211a5048ff3afe6d146260b",
-          "bytes": 200112
-        },
-        "armeabi-v7a": {
-          "sha256": "5a1d7955146d76d7626149c86dc63abdd036b15675e2012f0257b27fc46ac852",
-          "bytes": 187188
-        },
-        "x86": {
-          "sha256": "f4d53980e643719f2f6251b5a1212bfb286806ca3fa189923fdef5de5a9953f4",
-          "bytes": 227648
-        },
-        "x86_64": {
-          "sha256": "4e22075e3aa4cdca68300e06ddb1d3273387fb7af327116013d8d7e0bc3b80d0",
-          "bytes": 207560
-        }
-      }
-    },
-    "rsync": {
-      "upstream": "RsyncProject/rsync",
-      "version": "3.4.1",
-      "license": "GPL-3.0-or-later",
-      "api": 28,
-      "note": "--with-included-popt --with-included-zlib; GPL binary, mere aggregation",
-      "abi": {
-        "arm64-v8a": {
-          "sha256": "39c0fe7408edbc091f740809b2ebc3274301ddd6c5799345e0061be4d199b825",
-          "bytes": 531920
-        },
-        "armeabi-v7a": {
-          "sha256": "4eac3ed460e7c9700b05e6b440077e68507be3f2802475729908fad5d94745bf",
-          "bytes": 511352
-        },
-        "x86": {
-          "sha256": "f5234ab52dc2efa31bfffdc130223287063f5da008eab743a57c27d8605ea4fb",
-          "bytes": 589300
-        },
-        "x86_64": {
-          "sha256": "2d1ea0c7b3eb6dec8b6b5df42afd107ea85a77c74b0db031a71072dfc3347c14",
-          "bytes": 535056
-        }
-      }
+    "x86_64": {
+     "sha256": "49e0a2e0f3481f850a10b262da16a596235555fa08044e973398aa93cfc0cb3d",
+     "bytes": 286976
     }
+   }
+  },
+  "dropbearkey": {
+   "upstream": "mkj/dropbear",
+   "version": "DROPBEAR_2026.94",
+   "license": "MIT-style",
+   "api": 24,
+   "note": "host/user keygen from the same dropbear build",
+   "abi": {
+    "arm64-v8a": {
+     "sha256": "d48663132f42d97d9206dd5a74bd43a9bbb97273a2d21879208681a97a969ce3",
+     "bytes": 133696
+    },
+    "armeabi-v7a": {
+     "sha256": "c8462ea665bbf7742c6f6d1209e612276bf5a72c62a0c0a9769fb3aca6d42ec0",
+     "bytes": 113496
+    },
+    "x86": {
+     "sha256": "31393e8da271321b160c4467595b1baf8f3b729239cbdbd468a79d5440b78588",
+     "bytes": 139704
+    },
+    "x86_64": {
+     "sha256": "5ec14e8119092b2901bae714562932ccc7669d6ab5a5140379e84dddc102906b",
+     "bytes": 135000
+    }
+   }
+  },
+  "sftp-server": {
+   "upstream": "openssh/openssh-portable",
+   "version": "9.9p2",
+   "license": "BSD-style",
+   "api": 28,
+   "note": "built --without-openssl (builtin crypto), pw_gecos null-coalesce patch",
+   "abi": {
+    "arm64-v8a": {
+     "sha256": "0c8508cb3c71efb3fbd177644d29d385cf24422a1166dd4ad37d5d0a2a15016d",
+     "bytes": 153384
+    },
+    "armeabi-v7a": {
+     "sha256": "08cb10e72a1773aefd81c78b3f299551e328403105331fe1aaffa2a2d0a5c98b",
+     "bytes": 137952
+    },
+    "x86": {
+     "sha256": "b3b4569f90ec0b9afe131222d276e5a9d91bc803c8803c85e2d416048b7710bc",
+     "bytes": 160492
+    },
+    "x86_64": {
+     "sha256": "3093a922b8e2a69e213c7091ed2e700bdec59f859b9cf83bb6e693cb5a6bce7c",
+     "bytes": 152752
+    }
+   }
+  },
+  "scp": {
+   "upstream": "openssh/openssh-portable",
+   "version": "9.9p2",
+   "license": "BSD-style",
+   "api": 28,
+   "note": "built --without-openssl",
+   "abi": {
+    "arm64-v8a": {
+     "sha256": "f064233627ff25612f357c680bfc41bfab13dca45211a5048ff3afe6d146260b",
+     "bytes": 200112
+    },
+    "armeabi-v7a": {
+     "sha256": "5a1d7955146d76d7626149c86dc63abdd036b15675e2012f0257b27fc46ac852",
+     "bytes": 187188
+    },
+    "x86": {
+     "sha256": "f4d53980e643719f2f6251b5a1212bfb286806ca3fa189923fdef5de5a9953f4",
+     "bytes": 227648
+    },
+    "x86_64": {
+     "sha256": "4e22075e3aa4cdca68300e06ddb1d3273387fb7af327116013d8d7e0bc3b80d0",
+     "bytes": 207560
+    }
+   }
+  },
+  "rsync": {
+   "upstream": "RsyncProject/rsync",
+   "version": "3.4.1",
+   "license": "GPL-3.0-or-later",
+   "api": 28,
+   "note": "--with-included-popt --with-included-zlib; GPL binary, mere aggregation",
+   "abi": {
+    "arm64-v8a": {
+     "sha256": "39c0fe7408edbc091f740809b2ebc3274301ddd6c5799345e0061be4d199b825",
+     "bytes": 531920
+    },
+    "armeabi-v7a": {
+     "sha256": "4eac3ed460e7c9700b05e6b440077e68507be3f2802475729908fad5d94745bf",
+     "bytes": 511352
+    },
+    "x86": {
+     "sha256": "f5234ab52dc2efa31bfffdc130223287063f5da008eab743a57c27d8605ea4fb",
+     "bytes": 589300
+    },
+    "x86_64": {
+     "sha256": "2d1ea0c7b3eb6dec8b6b5df42afd107ea85a77c74b0db031a71072dfc3347c14",
+     "bytes": 535056
+    }
+   }
   }
+ }
 }

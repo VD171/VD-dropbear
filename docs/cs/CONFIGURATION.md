@@ -81,9 +81,9 @@ Přihlášení běží pod účtem, kterým se ověříš: ve výchozím nastave
 
 | Klíč | Výchozí | Význam |
 |-----|---------|---------|
-| `LOGIN_SHELL` | `""` | Shell pro relaci. Prázdná hodnota použije výchozí účtu. |
-| `HOME_DIR` | `""` | `HOME` pro relaci. Prázdná hodnota použije adresář modulu. |
-| `EXTRA_ENV` | `""` | Další prostředí, `K=V;K2=V2`. |
+| `LOGIN_SHELL` | `""` | Přihlašovací shell (absolutní cesta). Prázdná hodnota použije výchozí účtu. |
+| `HOME_DIR` | `/data/adb` | `HOME` a počáteční adresář relace (absolutní cesta). Prázdná hodnota použije domovský adresář roota (`/`). |
+| `EXTRA_ENV` | `""` | Další prostředí, `K=V;K2=V2` (vyžaduje zapnuté `PASS_ENV`). |
 | `IDLE_TIMEOUT` | `0` | Odpojit po N sekundách nečinnosti. `0` vypíná. |
 | `KEEPALIVE` | `0` | Posílat keepalive každých N sekund. `0` vypíná. |
 | `RECEIVE_WINDOW` | `""` | Velikost přijímacího okna Dropbearu. Prázdná hodnota použije výchozí. |
@@ -100,7 +100,9 @@ Přihlášení běží pod účtem, kterým se ověříš: ve výchozím nastave
 
 | Klíč | Výchozí | Význam |
 |-----|---------|---------|
-| `HOSTKEY_TYPE` | `ed25519` | Typ hostitelského klíče: `ed25519`, `rsa` nebo `ecdsa`. Vygeneruje se při prvním spuštění do úložiště tajemství. |
+| `HOSTKEY_TYPE` | `ed25519` | Typ hostitelského klíče: `ed25519` nebo `ecdsa`. Vygeneruje se při prvním spuštění do úložiště tajemství. |
+
+> **RSA byl vyřazen jako typ hostitelského klíče**: jeho zastaralé podpisy `ssh-rsa` (SHA-1) jsou nebezpečné, zatímco `ed25519` a `ECDSA` jsou moderní, mnohem silnější a rychlejší.
 
 ## Úložiště tajemství
 

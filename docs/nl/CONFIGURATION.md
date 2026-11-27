@@ -76,9 +76,9 @@ Een login draait als het account waarmee je je authenticeert: standaard **root**
 
 | Key | Default | Betekenis |
 |-----|---------|---------|
-| `LOGIN_SHELL` | `""` | Shell voor de sessie. Leeg gebruikt de standaard van het account. |
-| `HOME_DIR` | `""` | `HOME` voor de sessie. Leeg gebruikt de modulemap. |
-| `EXTRA_ENV` | `""` | Extra omgeving, `K=V;K2=V2`. |
+| `LOGIN_SHELL` | `""` | Login-shell (absoluut pad). Leeg gebruikt de standaard van het account. |
+| `HOME_DIR` | `/data/adb` | `HOME` en startmap van de sessie (absoluut pad). Leeg gebruikt de home van root (`/`). |
+| `EXTRA_ENV` | `""` | Extra omgeving, `K=V;K2=V2` (vereist `PASS_ENV` aan). |
 | `IDLE_TIMEOUT` | `0` | Verbreek na N seconden inactiviteit. `0` schakelt dit uit. |
 | `KEEPALIVE` | `0` | Stuur elke N seconden een keepalive. `0` schakelt dit uit. |
 | `RECEIVE_WINDOW` | `""` | Grootte van het Dropbear-ontvangstvenster. Leeg gebruikt de standaard. |
@@ -95,7 +95,9 @@ Een login draait als het account waarmee je je authenticeert: standaard **root**
 
 | Key | Default | Betekenis |
 |-----|---------|---------|
-| `HOSTKEY_TYPE` | `ed25519` | Type hostsleutel: `ed25519`, `rsa` of `ecdsa`. Wordt bij de eerste start in de geheimenopslag gegenereerd. |
+| `HOSTKEY_TYPE` | `ed25519` | Type hostsleutel: `ed25519` of `ecdsa`. Wordt bij de eerste start in de geheimenopslag gegenereerd. |
+
+> **RSA is als hostsleuteltype geschrapt**: de verouderde `ssh-rsa`-handtekeningen (SHA-1) zijn onveilig, en `ed25519` en `ECDSA` zijn modern, veel sterker en sneller.
 
 ## De geheimenopslag
 

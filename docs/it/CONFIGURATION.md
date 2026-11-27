@@ -81,9 +81,9 @@ Un accesso viene eseguito con l'account con cui ti autentichi: **root** per impo
 
 | Key | Default | Significato |
 |-----|---------|---------|
-| `LOGIN_SHELL` | `""` | Shell per la sessione. Vuota usa il default dell'account. |
-| `HOME_DIR` | `""` | `HOME` per la sessione. Vuota usa la directory del modulo. |
-| `EXTRA_ENV` | `""` | Environment aggiuntivo, `K=V;K2=V2`. |
+| `LOGIN_SHELL` | `""` | Shell di login (percorso assoluto). Vuota usa il default dell'account. |
+| `HOME_DIR` | `/data/adb` | `HOME` e directory iniziale della sessione (percorso assoluto). Vuota usa la home di root (`/`). |
+| `EXTRA_ENV` | `""` | Environment aggiuntivo, `K=V;K2=V2` (richiede `PASS_ENV` attivo). |
 | `IDLE_TIMEOUT` | `0` | Disconnetti dopo N secondi di inattività. `0` disabilita. |
 | `KEEPALIVE` | `0` | Invia un keepalive ogni N secondi. `0` disabilita. |
 | `RECEIVE_WINDOW` | `""` | Dimensione della receive window di Dropbear. Vuota usa il default. |
@@ -100,7 +100,9 @@ Un accesso viene eseguito con l'account con cui ti autentichi: **root** per impo
 
 | Key | Default | Significato |
 |-----|---------|---------|
-| `HOSTKEY_TYPE` | `ed25519` | Tipo di host key: `ed25519`, `rsa` o `ecdsa`. Generata al primo avvio nel secret store. |
+| `HOSTKEY_TYPE` | `ed25519` | Tipo di host key: `ed25519` o `ecdsa`. Generata al primo avvio nel secret store. |
+
+> **RSA è stato rimosso come tipo di host key**: le sue firme `ssh-rsa` legacy (SHA-1) non sono sicure, e `ed25519` ed `ECDSA` sono moderne, molto più robuste e veloci.
 
 ## Il secret store
 

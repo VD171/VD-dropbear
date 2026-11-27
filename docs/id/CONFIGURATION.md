@@ -81,9 +81,9 @@ Sebuah login berjalan sebagai akun yang Anda gunakan untuk autentikasi: **root**
 
 | Key | Default | Makna |
 |-----|---------|---------|
-| `LOGIN_SHELL` | `""` | Shell untuk sesi. Kosong berarti memakai default akun. |
-| `HOME_DIR` | `""` | `HOME` untuk sesi. Kosong berarti memakai direktori modul. |
-| `EXTRA_ENV` | `""` | Environment tambahan, `K=V;K2=V2`. |
+| `LOGIN_SHELL` | `""` | Shell login (jalur absolut). Kosong berarti memakai default akun. |
+| `HOME_DIR` | `/data/adb` | `HOME` dan direktori awal sesi (jalur absolut). Kosong berarti memakai home root (`/`). |
+| `EXTRA_ENV` | `""` | Environment tambahan, `K=V;K2=V2` (perlu `PASS_ENV` aktif). |
 | `IDLE_TIMEOUT` | `0` | Putuskan setelah N detik tidak aktif. `0` menonaktifkan. |
 | `KEEPALIVE` | `0` | Kirim keepalive setiap N detik. `0` menonaktifkan. |
 | `RECEIVE_WINDOW` | `""` | Ukuran receive window Dropbear. Kosong berarti memakai default. |
@@ -100,7 +100,9 @@ Sebuah login berjalan sebagai akun yang Anda gunakan untuk autentikasi: **root**
 
 | Key | Default | Makna |
 |-----|---------|---------|
-| `HOSTKEY_TYPE` | `ed25519` | Tipe host key: `ed25519`, `rsa` atau `ecdsa`. Dibuat saat start pertama ke dalam secret store. |
+| `HOSTKEY_TYPE` | `ed25519` | Tipe host key: `ed25519` atau `ecdsa`. Dibuat saat start pertama ke dalam secret store. |
+
+> **RSA dihapus sebagai tipe host key**: tanda tangan `ssh-rsa` (SHA-1) lama tidak aman, dan `ed25519` serta `ECDSA` modern, jauh lebih kuat dan cepat.
 
 ## Secret store
 

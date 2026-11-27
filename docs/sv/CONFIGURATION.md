@@ -81,9 +81,9 @@ En inloggning körs som det konto du autentiserar dig som: **root** som standard
 
 | Key | Default | Meaning |
 |-----|---------|---------|
-| `LOGIN_SHELL` | `""` | Skal för sessionen. Tom använder kontots standard. |
-| `HOME_DIR` | `""` | `HOME` för sessionen. Tom använder modulens katalog. |
-| `EXTRA_ENV` | `""` | Extra miljö, `K=V;K2=V2`. |
+| `LOGIN_SHELL` | `""` | Inloggningsskal (absolut sökväg). Tom använder kontots standard. |
+| `HOME_DIR` | `/data/adb` | Sessionens `HOME` och startkatalog (absolut sökväg). Tom använder roots hem (`/`). |
+| `EXTRA_ENV` | `""` | Extra miljö, `K=V;K2=V2` (kräver att `PASS_ENV` är på). |
 | `IDLE_TIMEOUT` | `0` | Koppla ner efter N sekunders inaktivitet. `0` inaktiverar. |
 | `KEEPALIVE` | `0` | Skicka en keepalive var N:e sekund. `0` inaktiverar. |
 | `RECEIVE_WINDOW` | `""` | Storlek på Dropbears mottagningsfönster. Tom använder standardvärdet. |
@@ -100,7 +100,9 @@ En inloggning körs som det konto du autentiserar dig som: **root** som standard
 
 | Key | Default | Meaning |
 |-----|---------|---------|
-| `HOSTKEY_TYPE` | `ed25519` | Typ av värdnyckel: `ed25519`, `rsa` eller `ecdsa`. Genereras vid första starten till hemlighetslagret. |
+| `HOSTKEY_TYPE` | `ed25519` | Typ av värdnyckel: `ed25519` eller `ecdsa`. Genereras vid första starten till hemlighetslagret. |
+
+> **RSA togs bort som värdnyckeltyp**: dess föråldrade `ssh-rsa`-signaturer (SHA-1) är osäkra, och `ed25519` och `ECDSA` är moderna, mycket starkare och snabbare.
 
 ## Hemlighetslagret
 

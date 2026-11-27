@@ -81,9 +81,9 @@ Oturum açma, kimlik doğruladığınız hesap olarak çalışır: varsayılan o
 
 | Key | Default | Meaning |
 |-----|---------|---------|
-| `LOGIN_SHELL` | `""` | Oturumun kabuğu. Boş bırakılırsa hesabın varsayılanı kullanılır. |
-| `HOME_DIR` | `""` | Oturum için `HOME`. Boş bırakılırsa modül dizini kullanılır. |
-| `EXTRA_ENV` | `""` | Ek ortam, `K=V;K2=V2`. |
+| `LOGIN_SHELL` | `""` | Oturum açma kabuğu (mutlak yol). Boş bırakılırsa hesabın varsayılanı kullanılır. |
+| `HOME_DIR` | `/data/adb` | Oturumun `HOME` değeri ve başlangıç dizini (mutlak yol). Boş bırakılırsa root'un ev dizini (`/`) kullanılır. |
+| `EXTRA_ENV` | `""` | Ek ortam, `K=V;K2=V2` (`PASS_ENV` açık olmalı). |
 | `IDLE_TIMEOUT` | `0` | N saniye boşta kaldıktan sonra bağlantıyı kes. `0` devre dışı bırakır. |
 | `KEEPALIVE` | `0` | Her N saniyede bir keepalive gönder. `0` devre dışı bırakır. |
 | `RECEIVE_WINDOW` | `""` | Dropbear alım penceresi boyutu. Boş bırakılırsa varsayılan kullanılır. |
@@ -100,7 +100,9 @@ Oturum açma, kimlik doğruladığınız hesap olarak çalışır: varsayılan o
 
 | Key | Default | Meaning |
 |-----|---------|---------|
-| `HOSTKEY_TYPE` | `ed25519` | Host key türü: `ed25519`, `rsa` veya `ecdsa`. İlk başlatmada sır deposuna oluşturulur. |
+| `HOSTKEY_TYPE` | `ed25519` | Host key türü: `ed25519` veya `ecdsa`. İlk başlatmada sır deposuna oluşturulur. |
+
+> **RSA, host key türü olarak kaldırıldı**: eski `ssh-rsa` (SHA-1) imzaları güvensizdir, `ed25519` ve `ECDSA` ise moderndir, çok daha güçlü ve hızlıdır.
 
 ## Sır deposu
 
